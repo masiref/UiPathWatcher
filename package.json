@@ -1,0 +1,38 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "devDependencies": {
+        "axios": "^0.19.2",
+        "bulma": "^0.8.0",
+        "cross-env": "^5.1",
+        "laravel-mix": "^5.0.1",
+        "lodash": "^4.17.13",
+        "resolve-url-loader": "^2.3.1",
+        "sass": "^1.25.0",
+        "sass-loader": "^8.0.0",
+        "vue-template-compiler": "^2.6.11"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.12.1",
+        "animate.css": "^3.7.2",
+        "bulma-calendar": "^6.0.7",
+        "bulma-pageloader": "^0.3.0",
+        "bulma-tooltip": "^3.0.2",
+        "datatables-bulma": "^1.0.1",
+        "datatables.net": "^1.10.20",
+        "jquery": "^3.4.1",
+        "moment": "^2.24.0",
+        "node-sass": "^4.13.1",
+        "sweetalert2": "^9.8.2",
+        "toastr": "^2.1.4",
+        "typechecker": "^6.3.0"
+    }
+}

@@ -1,0 +1,27 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Bulma
+@import 'bulma';
+@import '~bulma-tooltip';
+@import '~bulma-pageloader';
+@import '~bulma-calendar';
+@import '~datatables-bulma/css/dataTables.bulma.css';
+
+// Animate.css
+@import '~animate.css/animate.css';
+
+// Toastr
+@import 'toastr';
+
+// Icons
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+// Custom styles
+@import './_global.scss';
+@import './_nav.css';
+@import './_spacing';

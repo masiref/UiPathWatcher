@@ -1,0 +1,10 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/css/dashboard.css": "/css/dashboard.css",
+    "/css/login.css": "/css/login.css",
+    "/resources/js/jquery.dataTables.min.js": "/resources/js/jquery.dataTables.min.js",
+    "/resources/js/dataTables.bulma.min.js": "/resources/js/dataTables.bulma.min.js",
+    "/js/jquery.dataTables.min.js": "/js/jquery.dataTables.min.js",
+    "/js/dataTables.bulma.min.js": "/js/dataTables.bulma.min.js"
+}
