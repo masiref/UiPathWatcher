@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Client;
+use App\UiPathOrchestrator;
 use Illuminate\Support\Facades\Auth;
 
 class LayoutController extends Controller
@@ -29,6 +30,7 @@ class LayoutController extends Controller
 
         return view('layouts.menu', [
             'clients' => $clients,
+            'orchestratorsCount' => UiPathOrchestrator::all()->count(),
             'page' => $page
         ]);
     }
@@ -44,6 +46,7 @@ class LayoutController extends Controller
 
         return view('layouts.sidebar', [
             'clients' => $clients,
+            'orchestratorsCount' => UiPathOrchestrator::all()->count(),
             'page' => $page
         ]);
     }

@@ -1,10 +1,13 @@
 import './bootstrap';
 import * as _base from './views/base';
 import * as dashboardController from './views/dashboard/index';
+import * as uiPathOrchestratorController from './views/ui-path-orchestrator/index';
 
 const url = window.location.href;
 if (_base.isDashboardRelatedURL(url)) {
     dashboardController.init();
+} else if (_base.isConfigurationOrchestratorRelatedURL(url)) {
+    uiPathOrchestratorController.init();
 }
 
 // DataTables

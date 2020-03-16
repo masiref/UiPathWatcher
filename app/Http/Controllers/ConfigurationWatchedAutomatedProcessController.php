@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Client;
 use App\WatchedAutomatedProcess;
+use App\UiPathOrchestrator;
 use App\UiPathRobot;
 use App\Alert;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +41,8 @@ class ConfigurationWatchedAutomatedProcessController extends Controller
             'robotsCount' => UiPathRobot::all()->count(),
             'openedAlertsCount' => Alert::where('closed', false)->count(),
             'underRevisionAlertsCount' => Alert::where('under_revision', true)->count(),
-            'closedAlertsCount' => Alert::where('closed', true)->count()
+            'closedAlertsCount' => Alert::where('closed', true)->count(),
+            'orchestratorsCount' => UiPathOrchestrator::all()->count()
         ]);
     }
 }

@@ -5,20 +5,22 @@ import * as _base from '../base';
 import * as base from './base';
 import * as view from './view';
 
-export const updateAll = async () => {
+export const updateAll = async (dashboard) => {
+    const watchedAutomatedProcesses = document.querySelectorAll(base.selectors.boxes);
     try {
-        const watchedAutomatedProcesses = document.querySelectorAll(base.selectors.boxes);
-        let promises = [];
+        const client = dashboard.getClient();
         watchedAutomatedProcesses.forEach(box => {
             _base.renderLoader(box);
-            let watchedAutomatedProcess = new WatchedAutomatedProcess(box.dataset.id);
-            promises.push(
-                watchedAutomatedProcess.update().then(res => {
-                    view.update(box.dataset.id, watchedAutomatedProcess.markup);
+        });
+        return new Promise((resolve, reject) => {
+            resolve(
+                client.updateWatchedAutomatedProcesses().then(res => {
+                    client.watchedAutomatedProcesses.forEach(watchedAutomatedProcess => {
+                        view.update(watchedAutomatedProcess[0], watchedAutomatedProcess[1]);
+                    });
                 })
             );
         });
-        return Promise.all(promises);
     } catch (error) {
         console.log(error);
         watchedAutomatedProcesses.forEach(box => {

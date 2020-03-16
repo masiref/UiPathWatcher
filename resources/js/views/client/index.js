@@ -1,27 +1,28 @@
 import Client from '../../models/Client';
 
 import * as _base from '../base';
-import * as base from '../client/base';
-import * as view from '../client/view';
+import * as base from './base';
+import * as view from './view';
 
-export const updateAll = async () => {
+export const updateAll = async (dashboard) => {
+    const clients = document.querySelectorAll(base.selectors.boxes);
     try {
-        const clients = document.querySelectorAll(base.selectors.boxes);
-        let promises = [];
-        clients.forEach(box => {
-            _base.renderLoader(box);
-            let client = new Client(box.dataset.id);
-            promises.push(
-                client.update().then(res => {
-                    view.update(box.dataset.id, client.markup);
+        clients.forEach(client => {
+            _base.renderLoader(client);
+        });
+        return new Promise((resolve, reject) => {
+            resolve(
+                dashboard.updateClients().then(res => {
+                    dashboard.clients.forEach(client => {
+                        view.update(client[0], client[1]);
+                    });
                 })
             );
         });
-        return Promise.all(promises);
     } catch (error) {
-        console.log(error);
-        clients.forEach(box => {
-            _base.clearLoader(box);
+        clients.forEach(client => {
+            _base.clearLoader(client);
         });
+        console.log(error);
     }
 };

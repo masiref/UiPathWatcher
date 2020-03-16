@@ -1,9 +1,8 @@
-export const strings = {
-
-};
+export const strings = {};
 
 export const selectors = {
     dashboard: '.dashboard',
+    tiles: '.tile.is-parent',
     clientTile: '.tile.client',
     clientsTile: '.tile.clients',
     watchedAutomatedProcessesTile: '.tile.watched-automated-processes',

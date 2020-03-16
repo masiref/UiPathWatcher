@@ -7,6 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class UiPathOrchestrator extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'url', 'tenant', 'api_user_username', 'api_user_password',
+        'kibana_url', 'kibana_index'
+    ];
+
+    /**
      * Get the clients for the orchestrator.
      */
     public function clients()

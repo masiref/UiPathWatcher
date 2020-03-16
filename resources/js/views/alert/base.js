@@ -26,7 +26,6 @@ export const selectors = {
     ignoranceCalendar: '#ignorance_calendar',
     ignoranceDescriptionTextarea: '#ignorance_description',
     table: '#alerts-table',
-    tableDataTablesWrapper: '.dataTables_wrapper',
     pendingTable: '#pending-alerts-table',
     closedTable: '#closed-alerts-table'
 };
@@ -38,7 +37,5 @@ export const elements = {
     },
     row: id => {
         return document.getElementById(strings.row + id);
-    },
-    pendingTable: document.querySelector(selectors.pendingTable),
-    closedTable: document.querySelector(selectors.closedTable)
+    }
 };

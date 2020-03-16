@@ -9,10 +9,25 @@ export default class Layout {
         this.page = page;
     }
 
+    async update() {
+        try {
+            return Promise.all([
+                this.updateMenu(),
+                this.updateSidebar()
+            ]);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async updateMenu() {
         try {
-            return axios.get(`/layout/menu/${this.page}`).then(response => {
-                this.menu = response.data;
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(`/layout/menu/${this.page}`).then(response => {
+                        this.menu = response.data;
+                    })
+                );
             });
         } catch (error) {
             console.log(error);
@@ -21,8 +36,12 @@ export default class Layout {
 
     async updateSidebar() {
         try {
-            return axios.get(`/layout/sidebar/${this.page}`).then(response => {
-                this.sidebar = response.data;
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(`/layout/sidebar/${this.page}`).then(response => {
+                        this.sidebar = response.data;
+                    })
+                );
             });
         } catch (error) {
             console.log(error);

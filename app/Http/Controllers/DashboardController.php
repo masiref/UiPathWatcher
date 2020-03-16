@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Client;
 use App\WatchedAutomatedProcess;
+use App\UiPathOrchestrator;
 use App\UiPathRobot;
 use App\Alert;
 use Illuminate\Support\Facades\Auth;
@@ -42,64 +43,74 @@ class DashboardController extends Controller
             'robotsCount' => UiPathRobot::all()->count(),
             'openedAlertsCount' => Alert::where('closed', false)->count(),
             'underRevisionAlertsCount' => Alert::where('under_revision', true)->count(),
-            'closedAlertsCount' => Alert::where('closed', true)->count()
+            'closedAlertsCount' => Alert::where('closed', true)->count(),
+            'orchestratorsCount' => UiPathOrchestrator::all()->count()
         ]);
     }
 
-    /**
-     * Show a information tile in application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function tile(Request $request, $label, Client $client = null) {
-        $value;
-        $parameter;
+    public function tiles(Request $request, Client $client = null) {
+        $tiles = [
+            'watched-automated-processes',
+            'robots',
+            'alerts-not-closed',
+            'alerts-under-revision', 
+            'alerts-closed'
+        ];
+
         $alerts = Alert::all();
         if ($client) {
+            array_push($tiles, 'client');
             $alerts = Alert::whereHas('watchedAutomatedProcess', function($query) use($client) {
                 $query->where('client_id', $client->id);
             })->get();
+        } else {
+            array_push($tiles, 'clients');
         }
-        switch ($label) {
-            case 'client':
-            $value = $client;
-            $parameter = 'client';
-            break;
+        
+        $result = array();
+        foreach ($tiles as $tile) {
+            switch ($tile) {
+                case 'client':
+                $value = $client;
+                $parameter = 'client';
+                break;
 
-            case 'clients':
-            $value = Client::all()->count();
-            $parameter = 'clientsCount';
-            break;
+                case 'clients':
+                $value = Client::all()->count();
+                $parameter = 'clientsCount';
+                break;
 
-            case 'watched-automated-processes':
-            $value = WatchedAutomatedProcess::all()->count();
-            if ($client) {
-                $value = WatchedAutomatedProcess::where('client_id', $client->id)->count();
+                case 'watched-automated-processes':
+                $value = WatchedAutomatedProcess::all()->count();
+                if ($client) {
+                    $value = WatchedAutomatedProcess::where('client_id', $client->id)->count();
+                }
+                $parameter = 'watchedAutomatedProcessesCount';
+                break;
+
+                case 'robots':
+                $value = UiPathRobot::all()->count();
+                $parameter = 'robotsCount';
+                break;
+
+                case 'alerts-not-closed':
+                $value = $alerts->where('closed', false)->count();
+                $parameter = 'openedAlertsCount';
+                break;
+
+                case 'alerts-under-revision':
+                $value = $alerts->where('under_revision', true)->count();
+                $parameter = 'underRevisionAlertsCount';
+                break;
+
+                case 'alerts-closed':
+                $value = $alerts->where('closed', true)->count();
+                $parameter = 'closedAlertsCount';
+                break;
             }
-            $parameter = 'watchedAutomatedProcessesCount';
-            break;
-
-            case 'robots':
-            $value = UiPathRobot::all()->count();
-            $parameter = 'robotsCount';
-            break;
-
-            case 'alerts-not-closed':
-            $value = $alerts->where('closed', false)->count();
-            $parameter = 'openedAlertsCount';
-            break;
-
-            case 'alerts-under-revision':
-            $value = $alerts->where('under_revision', true)->count();
-            $parameter = 'underRevisionAlertsCount';
-            break;
-
-            case 'alerts-closed':
-            $value = $alerts->where('closed', true)->count();
-            $parameter = 'closedAlertsCount';
-            break;
+            $result[ $tile ] = view("dashboard.tiles.$tile")->with($parameter, $value)->render();
         }
-        return view("dashboard.tiles.$label")->with($parameter, $value);
+        return $result;
     }
 
     /**

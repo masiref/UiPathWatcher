@@ -20,5 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResources([
     'alerts' => 'API\AlertController',
     'clients' => 'API\ClientController',
-    'watched-automated-processes' => 'API\WatchedAutomatedProcessController'
+    'watched-automated-processes' => 'API\WatchedAutomatedProcessController',
+    'ui-path-orchestrator' => 'API\UiPathOrchestratorController'
 ]);

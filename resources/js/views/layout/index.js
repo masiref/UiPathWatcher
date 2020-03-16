@@ -3,24 +3,36 @@ import * as _base from '../base';
 import * as base from './base';
 import * as view from './view';
 
-export const updateMenu = async (dashboard) => {
+export const update = async (layout) => {
     try {
-        return dashboard.layout.updateMenu().then(res => {
-            base.elements.menu = view.updateMenu(dashboard.layout.menu);
+        _base.renderLoader(base.elements.sidebar);
+        return layout.update().then(res => {
+            base.elements.menu = view.updateMenu(layout.menu);
+            base.elements.sidebar = view.updateSidebar(layout.sidebar);
+        });
+    } catch (error) {
+        _base.clearLoader(base.elements.menu);
+        _base.clearLoader(base.elements.sidebar);
+    }
+};
+
+export const updateMenu = async (layout) => {
+    try {
+        return layout.updateMenu().then(res => {
+            base.elements.menu = view.updateMenu(layout.menu);
         });
     } catch (error) {
         _base.clearLoader(base.elements.menu);
     }
 };
 
-export const updateSidebar = async (dashboard) => {
+export const updateSidebar = async (layout) => {
     try {
         _base.renderLoader(base.elements.sidebar);
-        return dashboard.layout.updateSidebar().then(res => {
-            base.elements.sidebar = view.updateSidebar(dashboard.layout.sidebar);
+        return layout.updateSidebar().then(res => {
+            base.elements.sidebar = view.updateSidebar(layout.sidebar);
         });
     } catch (error) {
-        console.log(error);
         _base.clearLoader(base.elements.sidebar);
     }
 };

@@ -1,5 +1,6 @@
 import * as axios from 'axios';
 import Layout from './Layout';
+import Client from './Client';
 
 export default class Dashboard {
     constructor() {
@@ -9,8 +10,15 @@ export default class Dashboard {
     setClientID(id) {
         if (id) {
             this.clientID = id;
-            this.layout.setPage('dashboard.client.index' + id);
+            this.layout.setPage('dashboard.client.index.' + id);
         }
+    }
+
+    getClient() {
+        if (this.clientID) {
+            return new Client(this.clientID);
+        }
+        return null;
     }
 
     setUserRelated(userRelated) {
@@ -20,87 +28,45 @@ export default class Dashboard {
         }
     }
 
-    async updateTile(label) {
+    async updateTiles() {
         try {
             let url = '';
             if (this.userRelated) {
-                url = `/dashboard/user/tile/${label}`;
+                url = `/dashboard/user/tiles`;
             } else {
-                url = `/dashboard/tile/${label}`;
+                url = `/dashboard/tiles`;
                 if (this.clientID) {
                     url = `${url}/${this.clientID}`;
                 }
             }
-            return axios.get(url);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async updateClientTile() {
-        try {
-            return this.updateTile('client').then(response => {
-                this.clientTile = response.data;
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(url).then(response => {
+                        this.clientTile = response.data.client;
+                        this.clientsTile = response.data.clients;
+                        this.watchedAutomatedProcessesTile = response.data['watched-automated-processes'];
+                        this.robotsTile = response.data.robots;
+                        this.notClosedAlertsTile = response.data['alerts-not-closed'];
+                        this.underRevisionAlertsTile = response.data['alerts-under-revision'];
+                        this.closedAlertsTile = response.data['alerts-closed'];
+                    })
+                );
             });
         } catch (error) {
             console.log(error);
         }
     }
-
-    async updateClientsTile() {
+    
+    async updateClients() {
         try {
-            return this.updateTile('clients').then(response => {
-                this.clientsTile = response.data;
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async updateWatchedAutomatedProcessesTile() {
-        try {
-            return this.updateTile('watched-automated-processes').then(response => {
-                this.watchedAutomatedProcessesTile = response.data;
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async updateRobotsTile() {
-        try {
-            return this.updateTile('robots').then(response => {
-                this.robotsTile = response.data;
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async updateNotClosedAlertsTile() {
-        try {
-            return this.updateTile('alerts-not-closed').then(response => {
-                this.notClosedAlertsTile = response.data;
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async updateUnderRevisionAlertsTile() {
-        try {
-            return this.updateTile('alerts-under-revision').then(response => {
-                this.underRevisionAlertsTile = response.data;
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async updateClosedAlertsTile() {
-        try {
-            return this.updateTile('alerts-closed').then(response => {
-                this.closedAlertsTile = response.data;
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(`/dashboard/client/elements`).then(response => {
+                        this.clients = Object.keys(response.data).map(key => {
+                            return [ Number(key), response.data[key] ];
+                        });
+                    })
+                );
             });
         } catch (error) {
             console.log(error);
@@ -118,12 +84,16 @@ export default class Dashboard {
                     url = `/dashboard/user/alert/table/${closed}/${id}`;
                 }
             }
-            return axios.get(url).then(response => {
-                if (!closed) {
-                    this.pendingAlertsTable = response.data;
-                } else {
-                    this.closedAlertsTable = response.data;
-                }
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(url).then(response => {
+                        if (!closed) {
+                            this.pendingAlertsTable = response.data;
+                        } else {
+                            this.closedAlertsTable = response.data;
+                        }
+                    })
+                );
             });
         } catch (error) {
             console.log(error);

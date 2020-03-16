@@ -3,7 +3,8 @@ import Swal from 'sweetalert2';
 export const selectors = {
     closeModalTriggers: '.modal button.delete, .modal button.cancel, .modal button.cancel *',
     validateModalButton: '.modal button.validate',
-    validateModalButtonChildren: '.modal button.validate *'
+    validateModalButtonChildren: '.modal button.validate *',
+    tableDataTablesWrapper: '.dataTables_wrapper'
 };
 
 export const elements = {
@@ -92,3 +93,18 @@ export const isUserRelatedURL = url => {
     let locationIsUserRelated = /.*\/user$/;
     return locationIsUserRelated.test(url);
 };
+
+export const isConfigurationOrchestratorRelatedURL = url => {
+    let locationIsConfigurationOrchestratorRelated = /.*\/configuration\/orchestrator$/;
+    return locationIsConfigurationOrchestratorRelated.test(url);
+}
+
+export const validURL = str => {
+    const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+        '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(str);
+}

@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ClientsTableSeeder::class);
         $this->call(WatchedAutomatedProcessesTableSeeder::class);
         $this->call(AlertsTableSeeder::class);
+        $this->call(UiPathOrchestratorsTableSeeder::class);
     }
 }

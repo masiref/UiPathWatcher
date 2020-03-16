@@ -10,8 +10,8 @@ const renderLoaderOnBox = (id) => {
 };
 
 const renderLoaderOnTables = () => {
-    _base.renderLoader(elements.pendingTable);
-    _base.renderLoader(elements.closedTable);
+    _base.renderLoader(document.querySelector(selectors.pendingTable));
+    _base.renderLoader(document.querySelector(selectors.closedTable));
 };
 
 export const renderLoaders = (id) => {
@@ -23,14 +23,14 @@ const clearLoaderOnBox = (id) => {
     _base.clearLoader(elements.box(id));
 };
 
-const clearLoaderOnTable = () => {
-    _base.clearLoader(elements.pendingTable);
-    _base.clearLoader(elements.closedTable);
+const clearLoaderOnTables = () => {
+    _base.clearLoader(document.querySelector(selectors.pendingTable));
+    _base.clearLoader(document.querySelector(selectors.closedTable));
 };
 
 export const clearLoaders = (id) => {
     clearLoaderOnBox(id);
-    clearLoaderOnTable();
+    clearLoaderOnTables();
 };
 
 export const update = (id, markup) => {
@@ -55,11 +55,21 @@ export const remove = (id) => {
 };
 
 export const updatePendingTable = markup => {
-    return _base.update(elements.pendingTable.closest(selectors.tableDataTablesWrapper), markup);
+    const table = _base.update(
+        document.querySelector(selectors.pendingTable).closest(_base.selectors.tableDataTablesWrapper),
+        markup
+    );
+    $(selectors.pendingTable).DataTable();
+    return table;
 };
 
 export const updateClosedTable = markup => {
-    return _base.update(elements.closedTable.closest(selectors.tableDataTablesWrapper), markup);
+    const table = _base.update(
+        document.querySelector(selectors.closedTable).closest(_base.selectors.tableDataTablesWrapper),
+        markup
+    );
+    $(selectors.closedTable).DataTable();
+    return table;
 };
 
 export const updateRow = (id, markup) => {

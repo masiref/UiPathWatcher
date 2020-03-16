@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Alert;
 use App\Client;
+use App\UiPathOrchestrator;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardUserController extends Controller
@@ -38,36 +39,39 @@ class DashboardUserController extends Controller
             'clients' => $clients,
             'openedAlertsCount' => $pendingAlerts->count(),
             'underRevisionAlertsCount' => $pendingAlerts->where('under_revision', true)->count(),
-            'closedAlertsCount' => $closedAlerts->count()
+            'closedAlertsCount' => $closedAlerts->count(),
+            'orchestratorsCount' => UiPathOrchestrator::all()->count()
         ]);
     }
 
-    /**
-     * Show a information tile in application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function tile(Request $request, $label) {
+    public function tiles(Request $request) {
+        $tiles = [ 'alerts-not-closed', 'alerts-under-revision', 'alerts-closed' ];
+
         $count;
         $parameter;
         $alerts = Alert::all()->where('reviewer_id', Auth::user()->id);
-        switch ($label) {
-            case 'alerts-not-closed':
-            $count = $alerts->where('closed', false)->count();
-            $parameter = 'openedAlertsCount';
-            break;
+        
+        $result = array();
+        foreach ($tiles as $tile) {
+            switch ($tile) {
+                case 'alerts-not-closed':
+                $count = $alerts->where('closed', false)->count();
+                $parameter = 'openedAlertsCount';
+                break;
 
-            case 'alerts-under-revision':
-            $count = $alerts->where('under_revision', true)->count();
-            $parameter = 'underRevisionAlertsCount';
-            break;
+                case 'alerts-under-revision':
+                $count = $alerts->where('under_revision', true)->count();
+                $parameter = 'underRevisionAlertsCount';
+                break;
 
-            case 'alerts-closed':
-            $count = $alerts->where('closed', true)->count();
-            $parameter = 'closedAlertsCount';
-            break;
+                case 'alerts-closed':
+                $count = $alerts->where('closed', true)->count();
+                $parameter = 'closedAlertsCount';
+                break;
+            }
+            $result[ $tile ] = view("dashboard.user.tiles.$tile")->with($parameter, $count)->render();
         }
-        return view("dashboard.user.tiles.$label")->with($parameter, $count);
+        return $result;
     }
 
     /**

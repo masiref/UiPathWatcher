@@ -49,32 +49,36 @@
                         </a>
 
                         <div class="navbar-dropdown">
-                            <a class="navbar-item {{ $page === 'configuration.orchestrator.index' ? 'is-active' : '' }}" href="{{ route('configuration.orchestrator') }}">
+                            <a class="navbar-item {{ $page === 'configuration.orchestrator.index' ? 'is-active' : '' }}"
+                                href="{{ route('configuration.orchestrator') }}">
                                 <span class="icon"><i class="fas fa-server"></i></span>
                                 <span>
                                     &nbsp;Orchestrators
-                                    &nbsp;<span class="tag">99</span>
+                                    &nbsp;<span class="tag is-primary">{{ $orchestratorsCount }}</span>
                                 </span>
                             </a>
-                            <a class="navbar-item {{ $page === 'configuration.client.index' ? 'is-active' : '' }}" href="{{ route('configuration.client') }}">
+                            <a class="navbar-item {{ $page === 'configuration.client.index' ? 'is-active' : '' }}"
+                                href="{{ route('configuration.client') }}">
                                 <span class="icon"><i class="fas fa-building"></i></span>
                                 <span>
                                     &nbsp;Clients
-                                    &nbsp;<span class="tag">99</span>
+                                    &nbsp;<span class="tag is-primary">99</span>
                                 </span>
                             </a>
-                            <a class="navbar-item {{ $page === 'configuration.watched-automated-process.index' ? 'is-active' : '' }}" href="{{ route('configuration.watched-automated-process') }}">
+                            <a class="navbar-item {{ $page === 'configuration.watched-automated-process.index' ? 'is-active' : '' }}"
+                                href="{{ route('configuration.watched-automated-process') }}">
                                 <span class="icon"><i class="fas fa-binoculars"></i></span>
                                 <span>
                                     &nbsp;Watched processes
-                                    &nbsp;<span class="tag">99</span>
+                                    &nbsp;<span class="tag is-primary">99</span>
                                 </span>
                             </a>
-                            <a class="navbar-item {{ $page === 'configuration.alert-trigger.index' ? 'is-active' : '' }}" href="{{ route('configuration.alert-trigger') }}">
+                            <a class="navbar-item {{ $page === 'configuration.alert-trigger.index' ? 'is-active' : '' }}"
+                                href="{{ route('configuration.alert-trigger') }}">
                                 <span class="icon"><i class="fas fa-dragon"></i></span>
                                 <span>
                                     &nbsp;Alert triggers
-                                    &nbsp;<span class="tag">99</span>
+                                    &nbsp;<span class="tag is-primary">99</span>
                                 </span>
                             </a>
                         </div>
