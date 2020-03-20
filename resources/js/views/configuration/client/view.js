@@ -1,5 +1,5 @@
 import { strings, elements, selectors } from './base';
-import * as _base from '../base';
+import * as _base from '../../base';
 
 export const updateTable = markup => {
     const table = _base.update(

@@ -12,8 +12,13 @@ class Client extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'code'
+        'name', 'code', 'orchestrator_id'
     ];
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * The relationships that should always be loaded.

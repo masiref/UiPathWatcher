@@ -53,8 +53,16 @@ Route::get('/dashboard/watched-automated-process/element/{watchedAutomatedProces
 // Configuration controller
 Route::get('/configuration/orchestrator', 'ConfigurationOrchestratorController@index')->name('configuration.orchestrator');
 Route::get('/configuration/orchestrator/table', 'ConfigurationOrchestratorController@table')->name('configuration.orchestrator.table');
+Route::get('/configuration/orchestrator/processes/{client}', 'ConfigurationOrchestratorController@processes')->name('configuration.orchestrator.processes');
 
 Route::get('/configuration/client', 'ConfigurationClientController@index')->name('configuration.client');
+Route::get('/configuration/client/table', 'ConfigurationClientController@table')->name('configuration.client.table');
+
 Route::get('/configuration/watched-automated-process', 'ConfigurationWatchedAutomatedProcessController@index')
     ->name('configuration.watched-automated-process');
+Route::get(
+    '/configuration/watched-automated-process/table',
+    'ConfigurationWatchedAutomatedProcessController@table'
+)->name('configuration.watched-automated-process.table');
+
 Route::get('/configuration/alert-triggers', 'ConfigurationAlertTriggerController@index')->name('configuration.alert-trigger');

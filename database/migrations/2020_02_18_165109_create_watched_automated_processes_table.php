@@ -21,6 +21,15 @@ class CreateWatchedAutomatedProcessesTable extends Migration
             $table->string('operational_handbook_page_url')->nullable(true);
             $table->string('kibana_dashboard_url')->nullable(true);
             $table->text('additional_information')->nullable(true);
+            $table->boolean('running_period_monday');
+            $table->boolean('running_period_tuesday');
+            $table->boolean('running_period_wednesday');
+            $table->boolean('running_period_thursday');
+            $table->boolean('running_period_friday');
+            $table->boolean('running_period_saturday');
+            $table->boolean('running_period_sunday');
+            $table->time('running_period_time_from');
+            $table->time('running_period_time_until');
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');

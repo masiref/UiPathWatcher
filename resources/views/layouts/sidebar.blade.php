@@ -61,7 +61,7 @@
                 <span class="icon"><i class="fas fa-building"></i></span>
                 <span>
                     Clients
-                    &nbsp;<span class="tag is-primary">99</span>
+                    &nbsp;<span class="tag is-primary">{{ $clientsCount }}</span>
                 </span>
             </a>
         </li>
@@ -71,7 +71,7 @@
                 <span class="icon"><i class="fas fa-binoculars"></i></span>
                 <span>
                     Watched processes
-                    &nbsp;<span class="tag is-primary">99</span>
+                    &nbsp;<span class="tag is-primary">{{ $watchedAutomatedProcessesCount }}</span>
                 </span>
             </a>
         </li>

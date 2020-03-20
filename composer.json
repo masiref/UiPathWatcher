@@ -14,6 +14,7 @@
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
+        "guzzlehttp/guzzle": "~6.0",
         "laravel-frontend-presets/bulma": "^3.0",
         "laravel/framework": "^6.2",
         "laravel/passport": "^8.4",

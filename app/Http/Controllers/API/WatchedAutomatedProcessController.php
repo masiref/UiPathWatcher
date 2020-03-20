@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\WatchedAutomatedProcess;
+use App\UiPathProcess;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,7 +38,25 @@ class WatchedAutomatedProcessController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $wap = WatchedAutomatedProcess::create($request->all());
+        if ($wap->save()) {
+            $processes = $request->get('involved_processes');
+            $orchestrator = $wap->client->orchestrator;
+            $uiPathProcesses = array();
+            foreach ($processes as $process) {
+                $uiPathProcess = UiPathProcess::where('external_id', $process['external_id'])->where('ui_path_orchestrator_id', $orchestrator->id)->first();
+                if (!$uiPathProcess) {
+                    $process['ui_path_orchestrator_id'] = $orchestrator->id;
+                    $uiPathProcess = UiPathProcess::create($process);
+                }
+                array_push($uiPathProcesses, $uiPathProcess->id);
+            }
+            $uiPathProcesses = UiPathProcess::find($uiPathProcesses);
+            $wap->processes()->attach($uiPathProcesses);
+        } else {
+            return null;
+        }
+        return $wap;
     }
 
     /**

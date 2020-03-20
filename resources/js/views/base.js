@@ -4,7 +4,11 @@ export const selectors = {
     closeModalTriggers: '.modal button.delete, .modal button.cancel, .modal button.cancel *',
     validateModalButton: '.modal button.validate',
     validateModalButtonChildren: '.modal button.validate *',
-    tableDataTablesWrapper: '.dataTables_wrapper'
+    tableDataTablesWrapper: '.dataTables_wrapper',
+    dateTimeCalendarWrapper: '.datetimepicker-dummy',
+    dateTimeCalendarFromInput: 'input.datetimepicker-dummy-input[placeholder="From"]',
+    dateTimeCalendarToInput: 'input.datetimepicker-dummy-input[placeholder="To"]',
+    dateTimeFooterCancelButton: 'button.datetimepicker-footer-cancel'
 };
 
 export const elements = {
@@ -77,27 +81,37 @@ export const swalWithBulmaButtons = Swal.mixin({
 });
 
 export const isDashboardRelatedURL = url => {
-    let locationIsDashboardRelated = /.*\/dashboard\/.*|.*\/$/;
-    return locationIsDashboardRelated.test(url);
+    let isRelated = /.*\/dashboard\/.*|.*\/$/;
+    return isRelated.test(url);
 };
 
 export const getClientIDFromURL = url => {
-    let locationHasClient = /.*\/client\/(\d)$/;
-    if (locationHasClient.test(url)) {
-        return url.match(locationHasClient)[1];
+    let isRelated = /.*\/client\/(\d)$/;
+    if (isRelated.test(url)) {
+        return url.match(isRelated)[1];
     }
     return null;
 };
 
 export const isUserRelatedURL = url => {
-    let locationIsUserRelated = /.*\/user$/;
-    return locationIsUserRelated.test(url);
+    let isRelated = /.*\/user$/;
+    return isRelated.test(url);
 };
 
 export const isConfigurationOrchestratorRelatedURL = url => {
-    let locationIsConfigurationOrchestratorRelated = /.*\/configuration\/orchestrator$/;
-    return locationIsConfigurationOrchestratorRelated.test(url);
-}
+    let isRelated = /.*\/configuration\/orchestrator$/;
+    return isRelated.test(url);
+};
+
+export const isConfigurationClientRelatedURL = url => {
+    let isRelated = /.*\/configuration\/client$/;
+    return isRelated.test(url);
+};
+
+export const isConfigurationWatchedAutomatedProcessRelatedURL = url => {
+    let isRelated = /.*\/configuration\/watched-automated-process$/;
+    return isRelated.test(url);
+};
 
 export const validURL = str => {
     const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
@@ -107,4 +121,22 @@ export const validURL = str => {
         '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
         '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
     return !!pattern.test(str);
-}
+};
+
+export const toggleSuccessDangerState = (element, success, isText = false) => {
+    const classNames = [
+        isText ? 'has-text-success' : 'is-success',
+        isText ? 'has-text-danger' : 'is-danger'
+    ];
+    if (success) {
+        element.classList.remove(classNames[1]);
+        element.classList.add(classNames[0]);
+    } else {
+        element.classList.add(classNames[1]);
+        element.classList.remove(classNames[0]);
+    }
+};
+
+export const removeStates = element => {
+    element.classList.remove('is-success', 'is-danger', 'has-text-success', 'has-text-danger');
+};

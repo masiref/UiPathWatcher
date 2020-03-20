@@ -36,6 +36,7 @@ class ConfigurationClientController extends Controller
             'page' => 'configuration.client.index',
             'alerts' => $alerts,
             'clients' => $clients,
+            'orchestrators' => UiPathOrchestrator::all(),
             'clientsCount' => $clients->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
             'robotsCount' => UiPathRobot::all()->count(),
@@ -44,5 +45,17 @@ class ConfigurationClientController extends Controller
             'closedAlertsCount' => Alert::where('closed', true)->count(),
             'orchestratorsCount' => UiPathOrchestrator::all()->count()
         ]);
+    }
+
+    /**
+     * Show the clients as table.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function table(Request $request)
+    {
+        $clients = Client::all();
+        return view('configuration.client.table')
+            ->with('clients', $clients);
     }
 }

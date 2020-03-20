@@ -62,7 +62,7 @@
                                 <span class="icon"><i class="fas fa-building"></i></span>
                                 <span>
                                     &nbsp;Clients
-                                    &nbsp;<span class="tag is-primary">99</span>
+                                    &nbsp;<span class="tag is-primary">{{ $clientsCount }}</span>
                                 </span>
                             </a>
                             <a class="navbar-item {{ $page === 'configuration.watched-automated-process.index' ? 'is-active' : '' }}"
@@ -70,7 +70,7 @@
                                 <span class="icon"><i class="fas fa-binoculars"></i></span>
                                 <span>
                                     &nbsp;Watched processes
-                                    &nbsp;<span class="tag is-primary">99</span>
+                                    &nbsp;<span class="tag is-primary">{{ $watchedAutomatedProcessesCount }}</span>
                                 </span>
                             </a>
                             <a class="navbar-item {{ $page === 'configuration.alert-trigger.index' ? 'is-active' : '' }}"

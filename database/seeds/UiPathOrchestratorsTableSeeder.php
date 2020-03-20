@@ -14,19 +14,21 @@ class UiPathOrchestratorsTableSeeder extends Seeder
     {
         DB::table('ui_path_orchestrators')->insert([
             'name' => 'Natixis Payments',
-            'url' => 'https://nps.qua.orchestrator.intranatixis.com',
+            'code' => 'NPS',
+            'url' => 'https://uipath.dev.mycloud.intranatixis.com/',
             'tenant' => 'Default',
             'api_user_username' => 'api_user',
-            'api_user_password' => 'louloute',
+            'api_user_password' => 'apiuser2019!',
             'kibana_url' => 'http://nps-kibana.bench.mycloud.intranatixis.com/',
             'kibana_index' => 'nps*'
         ]);
         DB::table('ui_path_orchestrators')->insert([
             'name' => 'Natixis Lease',
-            'url' => 'https://nl.qua.orchestrator.intranatixis.com',
+            'code' => 'NL',
+            'url' => 'https://uipath.dev.mycloud.intranatixis.com/',
             'tenant' => 'Default',
             'api_user_username' => 'api_user',
-            'api_user_password' => 'louloute',
+            'api_user_password' => 'apiuser2019!',
             'kibana_url' => 'http://nl.qua.kibana.intranatixis.com/',
             'kibana_index' => 'lease*'
         ]);

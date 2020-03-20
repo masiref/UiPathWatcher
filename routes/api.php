@@ -21,5 +21,5 @@ Route::apiResources([
     'alerts' => 'API\AlertController',
     'clients' => 'API\ClientController',
     'watched-automated-processes' => 'API\WatchedAutomatedProcessController',
-    'ui-path-orchestrator' => 'API\UiPathOrchestratorController'
+    'ui-path-orchestrators' => 'API\UiPathOrchestratorController'
 ]);

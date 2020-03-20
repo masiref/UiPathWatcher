@@ -1,18 +1,19 @@
 import * as axios from 'axios';
 
-export default class UiPathOrchestrator {
+export default class Orchestrator {
     constructor(id = null) {
         if (id) {
             this.id = id;
         }
     }
 
-    async save(name, url, tenant, apiUserUsername, apiUserPassword, kibanaUrl, kibanaIndex) {
+    async save(name, code, url, tenant, apiUserUsername, apiUserPassword, kibanaUrl, kibanaIndex) {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.post('/api/ui-path-orchestrator', {
+                    axios.post('/api/ui-path-orchestrators', {
                         'name': name,
+                        'code': code,
                         'url': url,
                         'tenant': tenant,
                         'api_user_username': apiUserUsername,

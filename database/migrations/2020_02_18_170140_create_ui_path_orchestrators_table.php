@@ -16,6 +16,7 @@ class CreateUiPathOrchestratorsTable extends Migration
         Schema::create('ui_path_orchestrators', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('code');
             $table->string('url');
             $table->string('tenant');
             $table->string('api_user_username');

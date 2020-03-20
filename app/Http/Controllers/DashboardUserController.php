@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Alert;
 use App\Client;
 use App\UiPathOrchestrator;
+use App\WatchedAutomatedProcess;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardUserController extends Controller
@@ -37,10 +38,12 @@ class DashboardUserController extends Controller
             'pendingAlerts' => $pendingAlerts,
             'closedAlerts' => $closedAlerts,
             'clients' => $clients,
+            'clientsCount' => $clients->count(),
+            'orchestratorsCount' => UiPathOrchestrator::all()->count(),
+            'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
             'openedAlertsCount' => $pendingAlerts->count(),
             'underRevisionAlertsCount' => $pendingAlerts->where('under_revision', true)->count(),
-            'closedAlertsCount' => $closedAlerts->count(),
-            'orchestratorsCount' => UiPathOrchestrator::all()->count()
+            'closedAlertsCount' => $closedAlerts->count()
         ]);
     }
 

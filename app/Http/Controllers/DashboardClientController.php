@@ -51,12 +51,14 @@ class DashboardClientController extends Controller
             'pendingAlerts' => $pendingAlerts,
             'closedAlerts' => $closedAlerts,
             'clients' => $clients,
-            'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::where('client_id', $client->id)->count(),
+            'clientsCount' => $clients->count(),
+            'orchestratorsCount' => UiPathOrchestrator::all()->count(),
+            'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
+            'clientWatchedAutomatedProcessesCount' => WatchedAutomatedProcess::where('client_id', $client->id)->count(),
             'robotsCount' => UiPathRobot::all()->count(),
             'openedAlertsCount' => $pendingAlerts->count(),
             'underRevisionAlertsCount' => $underRevisionAlerts->count(),
-            'closedAlertsCount' => $closedAlerts->count(),
-            'orchestratorsCount' => UiPathOrchestrator::all()->count()
+            'closedAlertsCount' => $closedAlerts->count()
         ]);
     }
 

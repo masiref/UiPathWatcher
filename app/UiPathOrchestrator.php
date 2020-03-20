@@ -12,9 +12,14 @@ class UiPathOrchestrator extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'url', 'tenant', 'api_user_username', 'api_user_password',
+        'name', 'code', 'url', 'tenant', 'api_user_username', 'api_user_password',
         'kibana_url', 'kibana_index'
     ];
+
+    public function __toString()
+    {
+        return $this->name . " | " . $this->url . " | " . $this->tenant . " tenant";
+    }
 
     /**
      * Get the clients for the orchestrator.
@@ -30,14 +35,6 @@ class UiPathOrchestrator extends Model
     public function processes()
     {
         return $this->hasMany('App\UiPathProcess');
-    }
-
-    /**
-     * Get the environments for the orchestrator.
-     */
-    public function environments()
-    {
-        return $this->hasMany('App\UiPathEnvironment');
     }
 
     /**

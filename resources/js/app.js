@@ -1,17 +1,25 @@
 import './bootstrap';
 import * as _base from './views/base';
 import * as dashboardController from './views/dashboard/index';
-import * as uiPathOrchestratorController from './views/ui-path-orchestrator/index';
+import * as orchestratorConfigurationController from './views/configuration/orchestrator/index';
+import * as clientConfigurationController from './views/configuration/client/index';
+import * as watchedAutomatedProcessConfigurationController from './views/configuration/watched-automated-process/index';
 
 const url = window.location.href;
 if (_base.isDashboardRelatedURL(url)) {
     dashboardController.init();
 } else if (_base.isConfigurationOrchestratorRelatedURL(url)) {
-    uiPathOrchestratorController.init();
+    orchestratorConfigurationController.init();
+} else if (_base.isConfigurationClientRelatedURL(url)) {
+    clientConfigurationController.init();
+} else if (_base.isConfigurationWatchedAutomatedProcessRelatedURL(url)) {
+    watchedAutomatedProcessConfigurationController.init();
 }
 
 // DataTables
-$('.table').DataTable();
+$('.table').DataTable({
+    responsive: true
+});
 
 // Bulma NavBar Burger Script
 document.addEventListener('DOMContentLoaded', function () {

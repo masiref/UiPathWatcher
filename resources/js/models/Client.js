@@ -1,8 +1,10 @@
 import * as axios from 'axios';
 
 export default class Client {
-    constructor(id) {
-        this.id = id;
+    constructor(id = null) {
+        if (id) {
+            this.id = id;
+        }
     }
 
     async updateMarkup() {
@@ -43,6 +45,38 @@ export default class Client {
                             return [ Number(key), response.data[key] ];
                         });
                     })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async save(name, code, orchestrator) {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.post('/api/clients', {
+                        'name': name,
+                        'code': code,
+                        'orchestrator_id': orchestrator
+                    }).then(response => {
+                        if (response.data) {
+                            this.id = response.data.id;
+                        }
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getProcessesFromOrchestrator() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(`/configuration/orchestrator/processes/${this.id}`)
                 );
             });
         } catch (error) {

@@ -2,6 +2,8 @@ import * as axios from 'axios';
 import jquery from 'jquery';
 import './jquery.dataTables.min';
 import './dataTables.bulma.min';
+import './dataTables.select.min';
+import './dataTables.responsive.min';
 
 window.jQuery = jquery;
 window.$ = jquery;

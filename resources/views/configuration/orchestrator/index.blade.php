@@ -9,7 +9,7 @@
         @include('configuration.orchestrator.table')
         <hr>
 
-        <h1 class="title">Add orchestrator</h1>
+        <h1 class="title">Add a new orchestrator</h1>
         @include('configuration.orchestrator.add-form')
     </div>
 @endsection

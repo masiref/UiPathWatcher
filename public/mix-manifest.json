@@ -6,5 +6,9 @@
     "/resources/js/jquery.dataTables.min.js": "/resources/js/jquery.dataTables.min.js",
     "/resources/js/dataTables.bulma.min.js": "/resources/js/dataTables.bulma.min.js",
     "/js/jquery.dataTables.min.js": "/js/jquery.dataTables.min.js",
-    "/js/dataTables.bulma.min.js": "/js/dataTables.bulma.min.js"
+    "/js/dataTables.bulma.min.js": "/js/dataTables.bulma.min.js",
+    "/resources/js/dataTables.select.min.js": "/resources/js/dataTables.select.min.js",
+    "/js/dataTables.select.min.js": "/js/dataTables.select.min.js",
+    "/resources/js/dataTables.responsive.min.js": "/resources/js/dataTables.responsive.min.js",
+    "/js/dataTables.responsive.min.js": "/js/dataTables.responsive.min.js"
 }

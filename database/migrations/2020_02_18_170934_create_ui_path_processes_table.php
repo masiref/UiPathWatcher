@@ -19,6 +19,9 @@ class CreateUiPathProcessesTable extends Migration
             $table->string('name');
             $table->string('description')->nullable(true);
             $table->string('version');
+            $table->bigInteger('external_id');
+            $table->string('environment_name');
+            $table->bigInteger('external_environment_id');
             $table->timestamps();
             
             $table->foreign('ui_path_orchestrator_id')->references('id')->on('ui_path_orchestrators');

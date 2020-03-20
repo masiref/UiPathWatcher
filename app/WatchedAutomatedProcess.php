@@ -7,6 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class WatchedAutomatedProcess extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'client_id', 'name', 'code', 'operational_handbook_page_url',
+        'kibana_dashboard_url', 'additional_information', 'running_period_monday',
+        'running_period_tuesday', 'running_period_wednesday', 'running_period_thursday',
+        'running_period_friday', 'running_period_saturday', 'running_period_sunday',
+        'running_period_time_from', 'running_period_time_until'
+    ];
+
+    /**
      * The relationships that should always be loaded.
      *
      * @var array
@@ -80,5 +93,32 @@ class WatchedAutomatedProcess extends Model
             return 'info';
 
         return 'success';
+    }
+
+    public function runningDays()
+    {
+        $days = '';
+        if ($this->running_period_monday) {
+            $days.= 'Monday';
+        }
+        if ($this->running_period_tuesday) {
+            $days.= ($days === '' ? '' : ', ') . 'Tuesday';
+        }
+        if ($this->running_period_wednesday) {
+            $days.= ($days === '' ? '' : ', ') . 'Wednesday';
+        }
+        if ($this->running_period_thursday) {
+            $days.= ($days === '' ? '' : ', ') . 'Thursday';
+        }
+        if ($this->running_period_friday) {
+            $days.= ($days === '' ? '' : ', ') . 'Friday';
+        }
+        if ($this->running_period_saturday) {
+            $days.= ($days === '' ? '' : ', ') . 'Saturday';
+        }
+        if ($this->running_period_sunday) {
+            $days.= ($days === '' ? '' : ', ') . 'Sunday';
+        }
+        return $days;
     }
 }
