@@ -15,7 +15,7 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('orchestrator_id');
+            $table->unsignedBigInteger('ui_path_orchestrator_id');
             $table->string('name');
             $table->string('code');
             $table->timestamps();

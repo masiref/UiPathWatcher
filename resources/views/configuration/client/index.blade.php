@@ -5,11 +5,20 @@
 
 @section('content')
     <div class="configuration">
-        <h1 class="title">Clients</h1>
+        @include('layouts.title', [
+            'title' => 'Clients',
+            'icon' => 'building',
+            'color' => 'link'
+        ])
         @include('configuration.client.table')
-        <hr>
+        
+        <div class="is-divider"></div>
 
-        <h1 class="title">Add a new client</h1>
+        @include('layouts.title', [
+            'title' => 'Add a new client',
+            'icon' => 'plus-circle',
+            'color' => 'primary'
+        ])
         @include('configuration.client.add-form')
     </div>
 @endsection

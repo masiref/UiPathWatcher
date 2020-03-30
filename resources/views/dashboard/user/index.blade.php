@@ -6,17 +6,25 @@
 
 @section('content')
     @include('dashboard.user.tiles.index')
-    <hr>
+    <div class="is-divider"></div>
     
     <div class="dashboard">
-        <h1 class="title">My pending alerts</h1>
+        @include('layouts.title', [
+            'title' => 'My pending alerts',
+            'icon' => 'fire',
+            'color' => 'dark'
+        ])
         @include('dashboard.alert.table', [
             'tableID' => 'pending-alerts-table',
             'alerts' => $pendingAlerts,
             'options' => [ 'closed' => false ]
         ])
-        <hr>
-        <h1 class="title">My closed alerts</h1>
+
+        @include('layouts.title', [
+            'title' => 'My closed alerts',
+            'icon' => 'dumpster-fire',
+            'color' => 'grey-light'
+        ])
         @include('dashboard.alert.table', [
             'tableID' => 'closed-alerts-table',
             'alerts' => $closedAlerts,

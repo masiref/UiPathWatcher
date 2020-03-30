@@ -22036,6 +22036,17 @@ var defaultOptions = {
 
 /***/ }),
 
+/***/ "./node_modules/bulma-steps/dist/js/bulma-steps.min.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/bulma-steps/dist/js/bulma-steps.min.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(t,e){ true?module.exports=e():undefined}("undefined"!=typeof self?self:this,function(){return function(n){var s={};function i(t){if(s[t])return s[t].exports;var e=s[t]={i:t,l:!1,exports:{}};return n[t].call(e.exports,e,e.exports,i),e.l=!0,e.exports}return i.m=n,i.c=s,i.d=function(t,e,n){i.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:n})},i.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return i.d(e,"a",e),e},i.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},i.p="",i(i.s=0)}([function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var s=n(1),o=n(2),r=Object.assign||function(t){for(var e=1;e<arguments.length;e++){var n=arguments[e];for(var s in n)Object.prototype.hasOwnProperty.call(n,s)&&(t[s]=n[s])}return t},l=function(){function s(t,e){for(var n=0;n<e.length;n++){var s=e[n];s.enumerable=s.enumerable||!1,s.configurable=!0,"value"in s&&(s.writable=!0),Object.defineProperty(t,s.key,s)}}return function(t,e,n){return e&&s(t.prototype,e),n&&s(t,n),t}}();var a=Symbol("onStepsPrevious"),u=Symbol("onStepsNext"),i=function(t){function i(t){var e=1<arguments.length&&void 0!==arguments[1]?arguments[1]:{};!function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this,i);var n=function(t,e){if(!t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!e||"object"!=typeof e&&"function"!=typeof e?t:e}(this,(i.__proto__||Object.getPrototypeOf(i)).call(this));if(n.element="string"==typeof t?document.querySelector(t):t,!n.element)throw new Error("An invalid selector or non-DOM node has been provided.");return n._clickEvents=["click"],n.options=r({},o.a,e),n[a]=n[a].bind(n),n[u]=n[u].bind(n),n.init(),n}return function(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function, not "+typeof e);t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,enumerable:!1,writable:!0,configurable:!0}}),e&&(Object.setPrototypeOf?Object.setPrototypeOf(t,e):t.__proto__=e)}(i,s["a"]),l(i,[{key:"init",value:function(){this._id="bulmaSteps"+(new Date).getTime()+Math.floor(Math.random()*Math.floor(9999)),this.steps=this.element.querySelectorAll(this.options.selector),this.contents=this.element.querySelectorAll(this.options.selector_content),this.previous_btn=this.element.querySelector(this.options.previous_selector),this.next_btn=this.element.querySelector(this.options.next_selector),[].forEach.call(this.steps,function(t,e){t.setAttribute("data-step-id",e)}),this.steps&&this.steps.length&&(this.activate_step(0),this.updateActions(this.steps[0])),this._bindEvents(),this.emit("bulmasteps:ready",this.element.value)}},{key:"_bindEvents",value:function(){var n=this;null!=this.previous_btn&&this._clickEvents.forEach(function(t){n.previous_btn.addEventListener(t,n[a],!1)}),null!=this.next_btn&&this._clickEvents.forEach(function(t){n.next_btn.addEventListener(t,n[u],!1)}),this.options.stepClickable&&[].forEach.call(this.steps,function(t,e){n._clickEvents.forEach(function(t){for(;e>n.current_id;)n[u](t);for(;e<n.current_id;)n[a](t)})})}},{key:a,value:function(t){t.preventDefault(),t.target.getAttribute("disabled")||this.previous_step()}},{key:u,value:function(t){t.preventDefault(),t.target.getAttribute("disabled")||this.next_step()}},{key:"get_current_step_id",value:function(){for(var t=0;t<this.steps.length;t++){var e=this.steps[t];if(e.classList.contains(this.options.active_class))return parseInt(e.getAttribute("data-step-id"))}return null}},{key:"updateActions",value:function(t){var e=parseInt(t.getAttribute("data-step-id"));0==e?(null!=this.previous_btn&&this.previous_btn.setAttribute("disabled","disabled"),null!=this.next_btn&&this.next_btn.removeAttribute("disabled","disabled")):e==this.steps.length-1?(null!=this.previous_btn&&this.previous_btn.removeAttribute("disabled","disabled"),null!=this.next_btn&&this.next_btn.setAttribute("disabled","disabled")):(null!=this.previous_btn&&this.previous_btn.removeAttribute("disabled","disabled"),null!=this.next_btn&&this.next_btn.removeAttribute("disabled","disabled"))}},{key:"next_step",value:function(){var t=this.get_current_step_id();if(null!=t){var e=t+1,n=[];if(void 0!==this.options.beforeNext&&null!=this.options.beforeNext&&this.options.beforeNext&&(n=this.options.beforeNext(t)),this.emit("bulmasteps:before:next",t),void 0===n&&(n=[]),0<n.length){this.emit("bulmasteps:errors",n);for(var s=0;s<n.length;s++)void 0!==this.options.onError&&null!=this.options.onError&&this.options.onError&&this.options.onError(n[s])}else e>=this.steps.length?(void 0!==this.options.onFinish&&null!=this.options.onFinish&&this.options.onFinish&&this.options.onFinish(t),this.emit("bulmasteps:finish",t),this.deactivate_step(t)):(this.complete_step(t),this.activate_step(e))}}},{key:"previous_step",value:function(){var t=this.get_current_step_id();null!=t&&(this.uncomplete_step(t-1),this.activate_step(t-1))}},{key:"activate_step",value:function(t){this.updateActions(this.steps[t]);for(var e=0;e<this.steps.length;e++){this.steps[e]!=this.steps[t]&&this.deactivate_step(e)}this.steps[t].classList.add(this.options.active_class),void 0!==this.contents[t]&&this.contents[t].classList.add(this.options.active_class),void 0!==this.options.onShow&&null!=this.options.onShow&&this.options.onShow&&this.options.onShow(t),this.emit("bulmasteps:step:show",t)}},{key:"complete_step",value:function(t){this.steps[t].classList.add(this.options.completed_class),this.emit("bulmasteps:step:completed",t)}},{key:"uncomplete_step",value:function(t){this.steps[t].classList.remove(this.options.completed_class),this.emit("bulmasteps:step:uncompleted",t)}},{key:"deactivate_step",value:function(t){this.steps[t].classList.remove(this.options.active_class),void 0!==this.contents[t]&&this.contents[t].classList.remove(this.options.active_class)}}],[{key:"attach",value:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:".steps",e=1<arguments.length&&void 0!==arguments[1]?arguments[1]:{},n=new Array,s=document.querySelectorAll(t);return[].forEach.call(s,function(t){setTimeout(function(){n.push(new i(t,e))},100)}),n}}]),i}();e.default=i},function(t,e,n){"use strict";var s=function(){function s(t,e){for(var n=0;n<e.length;n++){var s=e[n];s.enumerable=s.enumerable||!1,s.configurable=!0,"value"in s&&(s.writable=!0),Object.defineProperty(t,s.key,s)}}return function(t,e,n){return e&&s(t.prototype,e),n&&s(t,n),t}}();var i=function(){function e(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:[];!function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this,e),this._listeners=new Map(t),this._middlewares=new Map}return s(e,[{key:"listenerCount",value:function(t){return this._listeners.has(t)?this._listeners.get(t).length:0}},{key:"removeListeners",value:function(){var e=this,t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:null,n=1<arguments.length&&void 0!==arguments[1]&&arguments[1];null!==t?Array.isArray(t)?name.forEach(function(t){return e.removeListeners(t,n)}):(this._listeners.delete(t),n&&this.removeMiddleware(t)):this._listeners=new Map}},{key:"middleware",value:function(t,e){var n=this;Array.isArray(t)?name.forEach(function(t){return n.middleware(t,e)}):(Array.isArray(this._middlewares.get(t))||this._middlewares.set(t,[]),this._middlewares.get(t).push(e))}},{key:"removeMiddleware",value:function(){var e=this,t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:null;null!==t?Array.isArray(t)?name.forEach(function(t){return e.removeMiddleware(t)}):this._middlewares.delete(t):this._middlewares=new Map}},{key:"on",value:function(t,e){var n=this,s=2<arguments.length&&void 0!==arguments[2]&&arguments[2];if(Array.isArray(t))t.forEach(function(t){return n.on(t,e)});else{var i=(t=t.toString()).split(/,|, | /);1<i.length?i.forEach(function(t){return n.on(t,e)}):(Array.isArray(this._listeners.get(t))||this._listeners.set(t,[]),this._listeners.get(t).push({once:s,callback:e}))}}},{key:"once",value:function(t,e){this.on(t,e,!0)}},{key:"emit",value:function(n,s){var i=this,o=2<arguments.length&&void 0!==arguments[2]&&arguments[2];n=n.toString();var r=this._listeners.get(n),l=null,a=0,u=o;if(Array.isArray(r))for(r.forEach(function(t,e){o||(l=i._middlewares.get(n),Array.isArray(l)?(l.forEach(function(t){t(s,function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:null;null!==t&&(s=t),a++},n)}),a>=l.length&&(u=!0)):u=!0),u&&(t.once&&(r[e]=null),t.callback(s))});-1!==r.indexOf(null);)r.splice(r.indexOf(null),1)}}]),e}();e.a=i},function(t,e,n){"use strict";e.a={selector:".step-item",selector_content:".step-content",previous_selector:'[data-nav="previous"]',next_selector:'[data-nav="next"]',active_class:"is-active",completed_class:"is-completed",stepClickable:!1,beforeNext:null,onShow:null,onFinish:null,onError:null}}]).default});
+
+/***/ }),
+
 /***/ "./node_modules/datatables.net/js/jquery.dataTables.js":
 /*!*************************************************************!*\
   !*** ./node_modules/datatables.net/js/jquery.dataTables.js ***!
@@ -65087,6 +65098,2097 @@ return jQuery;
 
 /***/ }),
 
+/***/ "./node_modules/lucene-query-parser/lib/lucene-query-parser.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/lucene-query-parser/lib/lucene-query-parser.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
+ * Generated by PEG.js 0.10.0.
+ *
+ * http://pegjs.org/
+ */
+(function(root, factory) {
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+})(this, function() {
+  "use strict";
+
+  function peg$subclass(child, parent) {
+    function ctor() { this.constructor = child; }
+    ctor.prototype = parent.prototype;
+    child.prototype = new ctor();
+  }
+
+  function peg$SyntaxError(message, expected, found, location) {
+    this.message  = message;
+    this.expected = expected;
+    this.found    = found;
+    this.location = location;
+    this.name     = "SyntaxError";
+
+    if (typeof Error.captureStackTrace === "function") {
+      Error.captureStackTrace(this, peg$SyntaxError);
+    }
+  }
+
+  peg$subclass(peg$SyntaxError, Error);
+
+  peg$SyntaxError.buildMessage = function(expected, found) {
+    var DESCRIBE_EXPECTATION_FNS = {
+          literal: function(expectation) {
+            return "\"" + literalEscape(expectation.text) + "\"";
+          },
+
+          "class": function(expectation) {
+            var escapedParts = "",
+                i;
+
+            for (i = 0; i < expectation.parts.length; i++) {
+              escapedParts += expectation.parts[i] instanceof Array
+                ? classEscape(expectation.parts[i][0]) + "-" + classEscape(expectation.parts[i][1])
+                : classEscape(expectation.parts[i]);
+            }
+
+            return "[" + (expectation.inverted ? "^" : "") + escapedParts + "]";
+          },
+
+          any: function(expectation) {
+            return "any character";
+          },
+
+          end: function(expectation) {
+            return "end of input";
+          },
+
+          other: function(expectation) {
+            return expectation.description;
+          }
+        };
+
+    function hex(ch) {
+      return ch.charCodeAt(0).toString(16).toUpperCase();
+    }
+
+    function literalEscape(s) {
+      return s
+        .replace(/\\/g, '\\\\')
+        .replace(/"/g,  '\\"')
+        .replace(/\0/g, '\\0')
+        .replace(/\t/g, '\\t')
+        .replace(/\n/g, '\\n')
+        .replace(/\r/g, '\\r')
+        .replace(/[\x00-\x0F]/g,          function(ch) { return '\\x0' + hex(ch); })
+        .replace(/[\x10-\x1F\x7F-\x9F]/g, function(ch) { return '\\x'  + hex(ch); });
+    }
+
+    function classEscape(s) {
+      return s
+        .replace(/\\/g, '\\\\')
+        .replace(/\]/g, '\\]')
+        .replace(/\^/g, '\\^')
+        .replace(/-/g,  '\\-')
+        .replace(/\0/g, '\\0')
+        .replace(/\t/g, '\\t')
+        .replace(/\n/g, '\\n')
+        .replace(/\r/g, '\\r')
+        .replace(/[\x00-\x0F]/g,          function(ch) { return '\\x0' + hex(ch); })
+        .replace(/[\x10-\x1F\x7F-\x9F]/g, function(ch) { return '\\x'  + hex(ch); });
+    }
+
+    function describeExpectation(expectation) {
+      return DESCRIBE_EXPECTATION_FNS[expectation.type](expectation);
+    }
+
+    function describeExpected(expected) {
+      var descriptions = new Array(expected.length),
+          i, j;
+
+      for (i = 0; i < expected.length; i++) {
+        descriptions[i] = describeExpectation(expected[i]);
+      }
+
+      descriptions.sort();
+
+      if (descriptions.length > 0) {
+        for (i = 1, j = 1; i < descriptions.length; i++) {
+          if (descriptions[i - 1] !== descriptions[i]) {
+            descriptions[j] = descriptions[i];
+            j++;
+          }
+        }
+        descriptions.length = j;
+      }
+
+      switch (descriptions.length) {
+        case 1:
+          return descriptions[0];
+
+        case 2:
+          return descriptions[0] + " or " + descriptions[1];
+
+        default:
+          return descriptions.slice(0, -1).join(", ")
+            + ", or "
+            + descriptions[descriptions.length - 1];
+      }
+    }
+
+    function describeFound(found) {
+      return found ? "\"" + literalEscape(found) + "\"" : "end of input";
+    }
+
+    return "Expected " + describeExpected(expected) + " but " + describeFound(found) + " found.";
+  };
+
+  function peg$parse(input, options) {
+    options = options !== void 0 ? options : {};
+
+    var peg$FAILED = {},
+
+        peg$startRuleFunctions = { start: peg$parsestart },
+        peg$startRuleFunction  = peg$parsestart,
+
+        peg$c0 = function(node) {
+                return node[0];
+            },
+        peg$c1 = function() {
+                return {};
+            },
+        peg$c2 = function(operator) {
+                return {
+                    'operator': operator
+                    };
+            },
+        peg$c3 = function(operator, right) {
+                return right;
+            },
+        peg$c4 = function(left, operator, right) {
+                var node= {
+                    'left':left
+                    };
+
+                var right =
+                        right.length == 0
+                        ? null
+                        : right[0]['right'] == null
+                            ? right[0]['left']
+                            : right[0];
+
+                if (right != null)
+                {
+                    node['operator'] = operator=='' || operator==undefined ? '<implicit>' : operator[0];
+                    node['right'] = right;
+                }
+
+                return node;
+            },
+        peg$c5 = function(field_exp) {
+                return field_exp;
+            },
+        peg$c6 = "(",
+        peg$c7 = peg$literalExpectation("(", false),
+        peg$c8 = ")",
+        peg$c9 = peg$literalExpectation(")", false),
+        peg$c10 = function(fieldname, range) {
+                range['field'] =
+                    fieldname == '' || fieldname == undefined
+                        ? "<implicit>"
+                        : fieldname;
+
+                return range;
+            },
+        peg$c11 = function(fieldname, node) {
+                node['field']= fieldname;
+                return node;
+            },
+        peg$c12 = function(fieldname, term) {
+                var fieldexp = {
+                    'field':
+                        fieldname == '' || fieldname == undefined
+                            ? "<implicit>"
+                            : fieldname
+                    };
+
+                for(var key in term)
+                    fieldexp[key] = term[key];
+
+                return fieldexp;
+            },
+        peg$c13 = /^[:]/,
+        peg$c14 = peg$classExpectation([":"], false, false),
+        peg$c15 = function(fieldname) {
+                return fieldname;
+            },
+        peg$c16 = function(op, term, proximity, boost) {
+                var result = { 'term': term };
+
+                if('' != proximity)
+                {
+                    result['proximity'] = proximity;
+                }
+                if('' != boost)
+                {
+                    result['boost'] = boost;
+                }
+                if('' != op)
+                {
+                    result['prefix'] = op;
+                }
+
+                return result;
+            },
+        peg$c17 = function(op, term, similarity, boost) {
+                var result = { 'term': term };
+                if('' != similarity)
+                {
+                    result['similarity'] = similarity;
+                }
+                if('' != boost)
+                {
+                    result['boost'] = boost;
+                }
+                if('' != op)
+                {
+                    result['prefix'] = op;
+                }
+                return result;
+            },
+        peg$c18 = function(op, term, boost) {
+                  var result = { 'term': term, 'regexpr': true };
+                  if('' != boost)
+                  {
+                      result['boost'] = boost;
+                  }
+                  if('' != op)
+                  {
+                      result['prefix'] = op;
+                  }
+                  return result;
+              },
+        peg$c19 = function(term_start, term) {
+                var res = term_start + term.join('');
+                if (/^(?:AND|OR|NOT|\|\||&&)$/.test(res)) {
+                  var e = new Error('Term can not be AND, OR, NOT, ||, &&')
+                  e.name = 'SyntaxError'
+                  e.column = location
+                  throw e
+                }
+                return res
+            },
+        peg$c20 = ".",
+        peg$c21 = peg$literalExpectation(".", false),
+        peg$c22 = /^[^: \t\r\n\f{}()"+-\/\^~[\]]/,
+        peg$c23 = peg$classExpectation([":", " ", "\t", "\r", "\n", "\f", "{", "}", "(", ")", "\"", ["+", "/"], "^", "~", "[", "]"], true, false),
+        peg$c24 = "\\",
+        peg$c25 = peg$literalExpectation("\\", false),
+        peg$c26 = /^[: \t\r\n\f{}()"\/\^~[\]]/,
+        peg$c27 = peg$classExpectation([":", " ", "\t", "\r", "\n", "\f", "{", "}", "(", ")", "\"", "/", "^", "~", "[", "]"], false, false),
+        peg$c28 = function(escaping_char) {
+                return '\\' + escaping_char;
+            },
+        peg$c29 = "+",
+        peg$c30 = peg$literalExpectation("+", false),
+        peg$c31 = "-",
+        peg$c32 = peg$literalExpectation("-", false),
+        peg$c33 = "/",
+        peg$c34 = peg$literalExpectation("/", false),
+        peg$c35 = function(term) {
+                return term.join('').replace('\\/', '/');
+            },
+        peg$c36 = "\\/",
+        peg$c37 = peg$literalExpectation("\\/", false),
+        peg$c38 = /^[^\/]/,
+        peg$c39 = peg$classExpectation(["/"], true, false),
+        peg$c40 = "\"",
+        peg$c41 = peg$literalExpectation("\"", false),
+        peg$c42 = /^[^"]/,
+        peg$c43 = peg$classExpectation(["\""], true, false),
+        peg$c44 = function(term) {
+                return term.join('');
+            },
+        peg$c45 = "~",
+        peg$c46 = peg$literalExpectation("~", false),
+        peg$c47 = function(proximity) {
+                return proximity;
+            },
+        peg$c48 = "^",
+        peg$c49 = peg$literalExpectation("^", false),
+        peg$c50 = function(boost) {
+                return boost;
+            },
+        peg$c51 = function(fuzziness) {
+                return fuzziness == '' || fuzziness == undefined ? 0.5 : fuzziness;
+            },
+        peg$c52 = "0.",
+        peg$c53 = peg$literalExpectation("0.", false),
+        peg$c54 = /^[0-9]/,
+        peg$c55 = peg$classExpectation([["0", "9"]], false, false),
+        peg$c56 = function(val) {
+                return parseFloat("0." + val.join(''));
+            },
+        peg$c57 = function(val) {
+                return parseInt(val.join(''));
+            },
+        peg$c58 = "[",
+        peg$c59 = peg$literalExpectation("[", false),
+        peg$c60 = "TO",
+        peg$c61 = peg$literalExpectation("TO", false),
+        peg$c62 = "]",
+        peg$c63 = peg$literalExpectation("]", false),
+        peg$c64 = function(term_min, term_max) {
+                return {
+                    'term_min': term_min,
+                    'term_max': term_max,
+                    'inclusive': true,
+                    'inclusive_min': true,
+                    'inclusive_max': true
+                };
+            },
+        peg$c65 = "{",
+        peg$c66 = peg$literalExpectation("{", false),
+        peg$c67 = "}",
+        peg$c68 = peg$literalExpectation("}", false),
+        peg$c69 = function(term_min, term_max) {
+                return {
+                    'term_min': term_min,
+                    'term_max': term_max,
+                    'inclusive': false,
+                    'inclusive_min': false,
+                    'inclusive_max': false
+                };
+            },
+        peg$c70 = function(term_min, term_max) {
+                return {
+                    'term_min': term_min,
+                    'term_max': term_max,
+                    'inclusive': false,
+                    'inclusive_min': false,
+                    'inclusive_max': true
+                };
+            },
+        peg$c71 = function(term_min, term_max) {
+                return {
+                    'term_min': term_min,
+                    'term_max': term_max,
+                    'inclusive': false,
+                    'inclusive_min': true,
+                    'inclusive_max': false
+                };
+            },
+        peg$c72 = function(operator) {
+                return operator;
+            },
+        peg$c73 = "OR",
+        peg$c74 = peg$literalExpectation("OR", false),
+        peg$c75 = "AND",
+        peg$c76 = peg$literalExpectation("AND", false),
+        peg$c77 = "NOT",
+        peg$c78 = peg$literalExpectation("NOT", false),
+        peg$c79 = "||",
+        peg$c80 = peg$literalExpectation("||", false),
+        peg$c81 = function() { return 'OR'; },
+        peg$c82 = "&&",
+        peg$c83 = peg$literalExpectation("&&", false),
+        peg$c84 = function() { return 'AND'; },
+        peg$c85 = "!",
+        peg$c86 = peg$literalExpectation("!", false),
+        peg$c87 = function() { return 'NOT'},
+        peg$c88 = peg$otherExpectation("whitespace"),
+        peg$c89 = /^[ \t\r\n\f]/,
+        peg$c90 = peg$classExpectation([" ", "\t", "\r", "\n", "\f"], false, false),
+        peg$c91 = peg$anyExpectation(),
+
+        peg$currPos          = 0,
+        peg$savedPos         = 0,
+        peg$posDetailsCache  = [{ line: 1, column: 1 }],
+        peg$maxFailPos       = 0,
+        peg$maxFailExpected  = [],
+        peg$silentFails      = 0,
+
+        peg$result;
+
+    if ("startRule" in options) {
+      if (!(options.startRule in peg$startRuleFunctions)) {
+        throw new Error("Can't start parsing from rule \"" + options.startRule + "\".");
+      }
+
+      peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
+    }
+
+    function text() {
+      return input.substring(peg$savedPos, peg$currPos);
+    }
+
+    function location() {
+      return peg$computeLocation(peg$savedPos, peg$currPos);
+    }
+
+    function expected(description, location) {
+      location = location !== void 0 ? location : peg$computeLocation(peg$savedPos, peg$currPos)
+
+      throw peg$buildStructuredError(
+        [peg$otherExpectation(description)],
+        input.substring(peg$savedPos, peg$currPos),
+        location
+      );
+    }
+
+    function error(message, location) {
+      location = location !== void 0 ? location : peg$computeLocation(peg$savedPos, peg$currPos)
+
+      throw peg$buildSimpleError(message, location);
+    }
+
+    function peg$literalExpectation(text, ignoreCase) {
+      return { type: "literal", text: text, ignoreCase: ignoreCase };
+    }
+
+    function peg$classExpectation(parts, inverted, ignoreCase) {
+      return { type: "class", parts: parts, inverted: inverted, ignoreCase: ignoreCase };
+    }
+
+    function peg$anyExpectation() {
+      return { type: "any" };
+    }
+
+    function peg$endExpectation() {
+      return { type: "end" };
+    }
+
+    function peg$otherExpectation(description) {
+      return { type: "other", description: description };
+    }
+
+    function peg$computePosDetails(pos) {
+      var details = peg$posDetailsCache[pos], p;
+
+      if (details) {
+        return details;
+      } else {
+        p = pos - 1;
+        while (!peg$posDetailsCache[p]) {
+          p--;
+        }
+
+        details = peg$posDetailsCache[p];
+        details = {
+          line:   details.line,
+          column: details.column
+        };
+
+        while (p < pos) {
+          if (input.charCodeAt(p) === 10) {
+            details.line++;
+            details.column = 1;
+          } else {
+            details.column++;
+          }
+
+          p++;
+        }
+
+        peg$posDetailsCache[pos] = details;
+        return details;
+      }
+    }
+
+    function peg$computeLocation(startPos, endPos) {
+      var startPosDetails = peg$computePosDetails(startPos),
+          endPosDetails   = peg$computePosDetails(endPos);
+
+      return {
+        start: {
+          offset: startPos,
+          line:   startPosDetails.line,
+          column: startPosDetails.column
+        },
+        end: {
+          offset: endPos,
+          line:   endPosDetails.line,
+          column: endPosDetails.column
+        }
+      };
+    }
+
+    function peg$fail(expected) {
+      if (peg$currPos < peg$maxFailPos) { return; }
+
+      if (peg$currPos > peg$maxFailPos) {
+        peg$maxFailPos = peg$currPos;
+        peg$maxFailExpected = [];
+      }
+
+      peg$maxFailExpected.push(expected);
+    }
+
+    function peg$buildSimpleError(message, location) {
+      return new peg$SyntaxError(message, null, null, location);
+    }
+
+    function peg$buildStructuredError(expected, found, location) {
+      return new peg$SyntaxError(
+        peg$SyntaxError.buildMessage(expected, found),
+        expected,
+        found,
+        location
+      );
+    }
+
+    function peg$parsestart() {
+      var s0, s1, s2, s3;
+
+      s0 = peg$currPos;
+      s1 = [];
+      s2 = peg$parse_();
+      while (s2 !== peg$FAILED) {
+        s1.push(s2);
+        s2 = peg$parse_();
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = [];
+        s3 = peg$parsenode();
+        if (s3 !== peg$FAILED) {
+          while (s3 !== peg$FAILED) {
+            s2.push(s3);
+            s3 = peg$parsenode();
+          }
+        } else {
+          s2 = peg$FAILED;
+        }
+        if (s2 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c0(s2);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+      if (s0 === peg$FAILED) {
+        s0 = peg$currPos;
+        s1 = [];
+        s2 = peg$parse_();
+        while (s2 !== peg$FAILED) {
+          s1.push(s2);
+          s2 = peg$parse_();
+        }
+        if (s1 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c1();
+        }
+        s0 = s1;
+        if (s0 === peg$FAILED) {
+          s0 = peg$currPos;
+          s1 = peg$parseEOF();
+          if (s1 !== peg$FAILED) {
+            peg$savedPos = s0;
+            s1 = peg$c1();
+          }
+          s0 = s1;
+        }
+      }
+
+      return s0;
+    }
+
+    function peg$parsenode() {
+      var s0, s1, s2, s3, s4;
+
+      s0 = peg$currPos;
+      s1 = peg$parseoperator_exp();
+      if (s1 !== peg$FAILED) {
+        s2 = peg$parseEOF();
+        if (s2 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c2(s1);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+      if (s0 === peg$FAILED) {
+        s0 = peg$currPos;
+        s1 = peg$parseoperator_exp();
+        if (s1 !== peg$FAILED) {
+          s2 = peg$parsenode();
+          if (s2 !== peg$FAILED) {
+            peg$savedPos = s0;
+            s1 = peg$c3(s1, s2);
+            s0 = s1;
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+        if (s0 === peg$FAILED) {
+          s0 = peg$currPos;
+          s1 = peg$parsegroup_exp();
+          if (s1 !== peg$FAILED) {
+            s2 = [];
+            s3 = peg$parseoperator_exp();
+            while (s3 !== peg$FAILED) {
+              s2.push(s3);
+              s3 = peg$parseoperator_exp();
+            }
+            if (s2 !== peg$FAILED) {
+              s3 = [];
+              s4 = peg$parsenode();
+              while (s4 !== peg$FAILED) {
+                s3.push(s4);
+                s4 = peg$parsenode();
+              }
+              if (s3 !== peg$FAILED) {
+                peg$savedPos = s0;
+                s1 = peg$c4(s1, s2, s3);
+                s0 = s1;
+              } else {
+                peg$currPos = s0;
+                s0 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        }
+      }
+
+      return s0;
+    }
+
+    function peg$parsegroup_exp() {
+      var s0, s1, s2, s3;
+
+      s0 = peg$currPos;
+      s1 = peg$parsefield_exp();
+      if (s1 !== peg$FAILED) {
+        s2 = [];
+        s3 = peg$parse_();
+        while (s3 !== peg$FAILED) {
+          s2.push(s3);
+          s3 = peg$parse_();
+        }
+        if (s2 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c5(s1);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+      if (s0 === peg$FAILED) {
+        s0 = peg$parseparen_exp();
+      }
+
+      return s0;
+    }
+
+    function peg$parseparen_exp() {
+      var s0, s1, s2, s3, s4, s5;
+
+      s0 = peg$currPos;
+      if (input.charCodeAt(peg$currPos) === 40) {
+        s1 = peg$c6;
+        peg$currPos++;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c7); }
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = [];
+        s3 = peg$parsenode();
+        if (s3 !== peg$FAILED) {
+          while (s3 !== peg$FAILED) {
+            s2.push(s3);
+            s3 = peg$parsenode();
+          }
+        } else {
+          s2 = peg$FAILED;
+        }
+        if (s2 !== peg$FAILED) {
+          if (input.charCodeAt(peg$currPos) === 41) {
+            s3 = peg$c8;
+            peg$currPos++;
+          } else {
+            s3 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c9); }
+          }
+          if (s3 !== peg$FAILED) {
+            s4 = [];
+            s5 = peg$parse_();
+            while (s5 !== peg$FAILED) {
+              s4.push(s5);
+              s5 = peg$parse_();
+            }
+            if (s4 !== peg$FAILED) {
+              peg$savedPos = s0;
+              s1 = peg$c0(s2);
+              s0 = s1;
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    function peg$parsefield_exp() {
+      var s0, s1, s2;
+
+      s0 = peg$currPos;
+      s1 = peg$parsefieldname();
+      if (s1 === peg$FAILED) {
+        s1 = null;
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = peg$parserange_operator_exp();
+        if (s2 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c10(s1, s2);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+      if (s0 === peg$FAILED) {
+        s0 = peg$currPos;
+        s1 = peg$parsefieldname();
+        if (s1 !== peg$FAILED) {
+          s2 = peg$parseparen_exp();
+          if (s2 !== peg$FAILED) {
+            peg$savedPos = s0;
+            s1 = peg$c11(s1, s2);
+            s0 = s1;
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+        if (s0 === peg$FAILED) {
+          s0 = peg$currPos;
+          s1 = peg$parsefieldname();
+          if (s1 === peg$FAILED) {
+            s1 = null;
+          }
+          if (s1 !== peg$FAILED) {
+            s2 = peg$parseterm();
+            if (s2 !== peg$FAILED) {
+              peg$savedPos = s0;
+              s1 = peg$c12(s1, s2);
+              s0 = s1;
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        }
+      }
+
+      return s0;
+    }
+
+    function peg$parsefieldname() {
+      var s0, s1, s2, s3, s4, s5;
+
+      s0 = peg$currPos;
+      s1 = peg$parseunquoted_term();
+      if (s1 !== peg$FAILED) {
+        s2 = [];
+        s3 = peg$parse_();
+        while (s3 !== peg$FAILED) {
+          s2.push(s3);
+          s3 = peg$parse_();
+        }
+        if (s2 !== peg$FAILED) {
+          if (peg$c13.test(input.charAt(peg$currPos))) {
+            s3 = input.charAt(peg$currPos);
+            peg$currPos++;
+          } else {
+            s3 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c14); }
+          }
+          if (s3 !== peg$FAILED) {
+            s4 = [];
+            s5 = peg$parse_();
+            while (s5 !== peg$FAILED) {
+              s4.push(s5);
+              s5 = peg$parse_();
+            }
+            if (s4 !== peg$FAILED) {
+              peg$savedPos = s0;
+              s1 = peg$c15(s1);
+              s0 = s1;
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    function peg$parseterm() {
+      var s0, s1, s2, s3, s4, s5, s6;
+
+      s0 = peg$currPos;
+      s1 = peg$parseprefix_operator_exp();
+      if (s1 === peg$FAILED) {
+        s1 = null;
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = peg$parsequoted_term();
+        if (s2 !== peg$FAILED) {
+          s3 = peg$parseproximity_modifier();
+          if (s3 === peg$FAILED) {
+            s3 = null;
+          }
+          if (s3 !== peg$FAILED) {
+            s4 = peg$parseboost_modifier();
+            if (s4 === peg$FAILED) {
+              s4 = null;
+            }
+            if (s4 !== peg$FAILED) {
+              s5 = [];
+              s6 = peg$parse_();
+              while (s6 !== peg$FAILED) {
+                s5.push(s6);
+                s6 = peg$parse_();
+              }
+              if (s5 !== peg$FAILED) {
+                peg$savedPos = s0;
+                s1 = peg$c16(s1, s2, s3, s4);
+                s0 = s1;
+              } else {
+                peg$currPos = s0;
+                s0 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+      if (s0 === peg$FAILED) {
+        s0 = peg$currPos;
+        s1 = peg$parseprefix_operator_exp();
+        if (s1 === peg$FAILED) {
+          s1 = null;
+        }
+        if (s1 !== peg$FAILED) {
+          s2 = peg$parseunquoted_term();
+          if (s2 !== peg$FAILED) {
+            s3 = peg$parsefuzzy_modifier();
+            if (s3 === peg$FAILED) {
+              s3 = null;
+            }
+            if (s3 !== peg$FAILED) {
+              s4 = peg$parseboost_modifier();
+              if (s4 === peg$FAILED) {
+                s4 = null;
+              }
+              if (s4 !== peg$FAILED) {
+                s5 = [];
+                s6 = peg$parse_();
+                while (s6 !== peg$FAILED) {
+                  s5.push(s6);
+                  s6 = peg$parse_();
+                }
+                if (s5 !== peg$FAILED) {
+                  peg$savedPos = s0;
+                  s1 = peg$c17(s1, s2, s3, s4);
+                  s0 = s1;
+                } else {
+                  peg$currPos = s0;
+                  s0 = peg$FAILED;
+                }
+              } else {
+                peg$currPos = s0;
+                s0 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+        if (s0 === peg$FAILED) {
+          s0 = peg$currPos;
+          s1 = peg$parseprefix_operator_exp();
+          if (s1 === peg$FAILED) {
+            s1 = null;
+          }
+          if (s1 !== peg$FAILED) {
+            s2 = peg$parseregexpr_term();
+            if (s2 !== peg$FAILED) {
+              s3 = peg$parseboost_modifier();
+              if (s3 === peg$FAILED) {
+                s3 = null;
+              }
+              if (s3 !== peg$FAILED) {
+                s4 = [];
+                s5 = peg$parse_();
+                while (s5 !== peg$FAILED) {
+                  s4.push(s5);
+                  s5 = peg$parse_();
+                }
+                if (s4 !== peg$FAILED) {
+                  peg$savedPos = s0;
+                  s1 = peg$c18(s1, s2, s3);
+                  s0 = s1;
+                } else {
+                  peg$currPos = s0;
+                  s0 = peg$FAILED;
+                }
+              } else {
+                peg$currPos = s0;
+                s0 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        }
+      }
+
+      return s0;
+    }
+
+    function peg$parseunquoted_term() {
+      var s0, s1, s2, s3;
+
+      s0 = peg$currPos;
+      s1 = peg$parseterm_start_char();
+      if (s1 !== peg$FAILED) {
+        s2 = [];
+        s3 = peg$parseterm_char();
+        while (s3 !== peg$FAILED) {
+          s2.push(s3);
+          s3 = peg$parseterm_char();
+        }
+        if (s2 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c19(s1, s2);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    function peg$parseterm_start_char() {
+      var s0;
+
+      if (input.charCodeAt(peg$currPos) === 46) {
+        s0 = peg$c20;
+        peg$currPos++;
+      } else {
+        s0 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c21); }
+      }
+      if (s0 === peg$FAILED) {
+        s0 = peg$parseterm_escaping_char();
+        if (s0 === peg$FAILED) {
+          if (peg$c22.test(input.charAt(peg$currPos))) {
+            s0 = input.charAt(peg$currPos);
+            peg$currPos++;
+          } else {
+            s0 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c23); }
+          }
+        }
+      }
+
+      return s0;
+    }
+
+    function peg$parseterm_escaping_char() {
+      var s0, s1, s2;
+
+      s0 = peg$currPos;
+      if (input.charCodeAt(peg$currPos) === 92) {
+        s1 = peg$c24;
+        peg$currPos++;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c25); }
+      }
+      if (s1 !== peg$FAILED) {
+        if (peg$c26.test(input.charAt(peg$currPos))) {
+          s2 = input.charAt(peg$currPos);
+          peg$currPos++;
+        } else {
+          s2 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c27); }
+        }
+        if (s2 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c28(s2);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    function peg$parseterm_char() {
+      var s0;
+
+      if (input.charCodeAt(peg$currPos) === 43) {
+        s0 = peg$c29;
+        peg$currPos++;
+      } else {
+        s0 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c30); }
+      }
+      if (s0 === peg$FAILED) {
+        if (input.charCodeAt(peg$currPos) === 45) {
+          s0 = peg$c31;
+          peg$currPos++;
+        } else {
+          s0 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c32); }
+        }
+        if (s0 === peg$FAILED) {
+          s0 = peg$parseterm_escaping_char();
+          if (s0 === peg$FAILED) {
+            s0 = peg$parseterm_start_char();
+          }
+        }
+      }
+
+      return s0;
+    }
+
+    function peg$parseregexpr_term() {
+      var s0, s1, s2, s3;
+
+      s0 = peg$currPos;
+      if (input.charCodeAt(peg$currPos) === 47) {
+        s1 = peg$c33;
+        peg$currPos++;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c34); }
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = [];
+        s3 = peg$parseregexpr_char();
+        if (s3 !== peg$FAILED) {
+          while (s3 !== peg$FAILED) {
+            s2.push(s3);
+            s3 = peg$parseregexpr_char();
+          }
+        } else {
+          s2 = peg$FAILED;
+        }
+        if (s2 !== peg$FAILED) {
+          if (input.charCodeAt(peg$currPos) === 47) {
+            s3 = peg$c33;
+            peg$currPos++;
+          } else {
+            s3 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c34); }
+          }
+          if (s3 !== peg$FAILED) {
+            peg$savedPos = s0;
+            s1 = peg$c35(s2);
+            s0 = s1;
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    function peg$parseregexpr_char() {
+      var s0;
+
+      if (input.charCodeAt(peg$currPos) === 46) {
+        s0 = peg$c20;
+        peg$currPos++;
+      } else {
+        s0 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c21); }
+      }
+      if (s0 === peg$FAILED) {
+        if (input.substr(peg$currPos, 2) === peg$c36) {
+          s0 = peg$c36;
+          peg$currPos += 2;
+        } else {
+          s0 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c37); }
+        }
+        if (s0 === peg$FAILED) {
+          if (peg$c38.test(input.charAt(peg$currPos))) {
+            s0 = input.charAt(peg$currPos);
+            peg$currPos++;
+          } else {
+            s0 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c39); }
+          }
+        }
+      }
+
+      return s0;
+    }
+
+    function peg$parsequoted_term() {
+      var s0, s1, s2, s3;
+
+      s0 = peg$currPos;
+      if (input.charCodeAt(peg$currPos) === 34) {
+        s1 = peg$c40;
+        peg$currPos++;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c41); }
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = [];
+        if (peg$c42.test(input.charAt(peg$currPos))) {
+          s3 = input.charAt(peg$currPos);
+          peg$currPos++;
+        } else {
+          s3 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c43); }
+        }
+        if (s3 !== peg$FAILED) {
+          while (s3 !== peg$FAILED) {
+            s2.push(s3);
+            if (peg$c42.test(input.charAt(peg$currPos))) {
+              s3 = input.charAt(peg$currPos);
+              peg$currPos++;
+            } else {
+              s3 = peg$FAILED;
+              if (peg$silentFails === 0) { peg$fail(peg$c43); }
+            }
+          }
+        } else {
+          s2 = peg$FAILED;
+        }
+        if (s2 !== peg$FAILED) {
+          if (input.charCodeAt(peg$currPos) === 34) {
+            s3 = peg$c40;
+            peg$currPos++;
+          } else {
+            s3 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c41); }
+          }
+          if (s3 !== peg$FAILED) {
+            peg$savedPos = s0;
+            s1 = peg$c44(s2);
+            s0 = s1;
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    function peg$parseproximity_modifier() {
+      var s0, s1, s2;
+
+      s0 = peg$currPos;
+      if (input.charCodeAt(peg$currPos) === 126) {
+        s1 = peg$c45;
+        peg$currPos++;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c46); }
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = peg$parseint_exp();
+        if (s2 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c47(s2);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    function peg$parseboost_modifier() {
+      var s0, s1, s2;
+
+      s0 = peg$currPos;
+      if (input.charCodeAt(peg$currPos) === 94) {
+        s1 = peg$c48;
+        peg$currPos++;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c49); }
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = peg$parsedecimal_or_int_exp();
+        if (s2 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c50(s2);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    function peg$parsefuzzy_modifier() {
+      var s0, s1, s2;
+
+      s0 = peg$currPos;
+      if (input.charCodeAt(peg$currPos) === 126) {
+        s1 = peg$c45;
+        peg$currPos++;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c46); }
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = peg$parsedecimal_exp();
+        if (s2 === peg$FAILED) {
+          s2 = null;
+        }
+        if (s2 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c51(s2);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    function peg$parsedecimal_or_int_exp() {
+      var s0;
+
+      s0 = peg$parsedecimal_exp();
+      if (s0 === peg$FAILED) {
+        s0 = peg$parseint_exp();
+      }
+
+      return s0;
+    }
+
+    function peg$parsedecimal_exp() {
+      var s0, s1, s2, s3;
+
+      s0 = peg$currPos;
+      if (input.substr(peg$currPos, 2) === peg$c52) {
+        s1 = peg$c52;
+        peg$currPos += 2;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c53); }
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = [];
+        if (peg$c54.test(input.charAt(peg$currPos))) {
+          s3 = input.charAt(peg$currPos);
+          peg$currPos++;
+        } else {
+          s3 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c55); }
+        }
+        if (s3 !== peg$FAILED) {
+          while (s3 !== peg$FAILED) {
+            s2.push(s3);
+            if (peg$c54.test(input.charAt(peg$currPos))) {
+              s3 = input.charAt(peg$currPos);
+              peg$currPos++;
+            } else {
+              s3 = peg$FAILED;
+              if (peg$silentFails === 0) { peg$fail(peg$c55); }
+            }
+          }
+        } else {
+          s2 = peg$FAILED;
+        }
+        if (s2 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c56(s2);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    function peg$parseint_exp() {
+      var s0, s1, s2;
+
+      s0 = peg$currPos;
+      s1 = [];
+      if (peg$c54.test(input.charAt(peg$currPos))) {
+        s2 = input.charAt(peg$currPos);
+        peg$currPos++;
+      } else {
+        s2 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c55); }
+      }
+      if (s2 !== peg$FAILED) {
+        while (s2 !== peg$FAILED) {
+          s1.push(s2);
+          if (peg$c54.test(input.charAt(peg$currPos))) {
+            s2 = input.charAt(peg$currPos);
+            peg$currPos++;
+          } else {
+            s2 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c55); }
+          }
+        }
+      } else {
+        s1 = peg$FAILED;
+      }
+      if (s1 !== peg$FAILED) {
+        peg$savedPos = s0;
+        s1 = peg$c57(s1);
+      }
+      s0 = s1;
+
+      return s0;
+    }
+
+    function peg$parserange_operator_exp() {
+      var s0, s1, s2, s3, s4, s5, s6, s7;
+
+      s0 = peg$currPos;
+      if (input.charCodeAt(peg$currPos) === 91) {
+        s1 = peg$c58;
+        peg$currPos++;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c59); }
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = peg$parseunquoted_term();
+        if (s2 !== peg$FAILED) {
+          s3 = [];
+          s4 = peg$parse_();
+          while (s4 !== peg$FAILED) {
+            s3.push(s4);
+            s4 = peg$parse_();
+          }
+          if (s3 !== peg$FAILED) {
+            if (input.substr(peg$currPos, 2) === peg$c60) {
+              s4 = peg$c60;
+              peg$currPos += 2;
+            } else {
+              s4 = peg$FAILED;
+              if (peg$silentFails === 0) { peg$fail(peg$c61); }
+            }
+            if (s4 !== peg$FAILED) {
+              s5 = [];
+              s6 = peg$parse_();
+              if (s6 !== peg$FAILED) {
+                while (s6 !== peg$FAILED) {
+                  s5.push(s6);
+                  s6 = peg$parse_();
+                }
+              } else {
+                s5 = peg$FAILED;
+              }
+              if (s5 !== peg$FAILED) {
+                s6 = peg$parseunquoted_term();
+                if (s6 !== peg$FAILED) {
+                  if (input.charCodeAt(peg$currPos) === 93) {
+                    s7 = peg$c62;
+                    peg$currPos++;
+                  } else {
+                    s7 = peg$FAILED;
+                    if (peg$silentFails === 0) { peg$fail(peg$c63); }
+                  }
+                  if (s7 !== peg$FAILED) {
+                    peg$savedPos = s0;
+                    s1 = peg$c64(s2, s6);
+                    s0 = s1;
+                  } else {
+                    peg$currPos = s0;
+                    s0 = peg$FAILED;
+                  }
+                } else {
+                  peg$currPos = s0;
+                  s0 = peg$FAILED;
+                }
+              } else {
+                peg$currPos = s0;
+                s0 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+      if (s0 === peg$FAILED) {
+        s0 = peg$currPos;
+        if (input.charCodeAt(peg$currPos) === 123) {
+          s1 = peg$c65;
+          peg$currPos++;
+        } else {
+          s1 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c66); }
+        }
+        if (s1 !== peg$FAILED) {
+          s2 = peg$parseunquoted_term();
+          if (s2 !== peg$FAILED) {
+            s3 = [];
+            s4 = peg$parse_();
+            while (s4 !== peg$FAILED) {
+              s3.push(s4);
+              s4 = peg$parse_();
+            }
+            if (s3 !== peg$FAILED) {
+              if (input.substr(peg$currPos, 2) === peg$c60) {
+                s4 = peg$c60;
+                peg$currPos += 2;
+              } else {
+                s4 = peg$FAILED;
+                if (peg$silentFails === 0) { peg$fail(peg$c61); }
+              }
+              if (s4 !== peg$FAILED) {
+                s5 = [];
+                s6 = peg$parse_();
+                if (s6 !== peg$FAILED) {
+                  while (s6 !== peg$FAILED) {
+                    s5.push(s6);
+                    s6 = peg$parse_();
+                  }
+                } else {
+                  s5 = peg$FAILED;
+                }
+                if (s5 !== peg$FAILED) {
+                  s6 = peg$parseunquoted_term();
+                  if (s6 !== peg$FAILED) {
+                    if (input.charCodeAt(peg$currPos) === 125) {
+                      s7 = peg$c67;
+                      peg$currPos++;
+                    } else {
+                      s7 = peg$FAILED;
+                      if (peg$silentFails === 0) { peg$fail(peg$c68); }
+                    }
+                    if (s7 !== peg$FAILED) {
+                      peg$savedPos = s0;
+                      s1 = peg$c69(s2, s6);
+                      s0 = s1;
+                    } else {
+                      peg$currPos = s0;
+                      s0 = peg$FAILED;
+                    }
+                  } else {
+                    peg$currPos = s0;
+                    s0 = peg$FAILED;
+                  }
+                } else {
+                  peg$currPos = s0;
+                  s0 = peg$FAILED;
+                }
+              } else {
+                peg$currPos = s0;
+                s0 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+        if (s0 === peg$FAILED) {
+          s0 = peg$currPos;
+          if (input.charCodeAt(peg$currPos) === 123) {
+            s1 = peg$c65;
+            peg$currPos++;
+          } else {
+            s1 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c66); }
+          }
+          if (s1 !== peg$FAILED) {
+            s2 = peg$parseunquoted_term();
+            if (s2 !== peg$FAILED) {
+              s3 = [];
+              s4 = peg$parse_();
+              while (s4 !== peg$FAILED) {
+                s3.push(s4);
+                s4 = peg$parse_();
+              }
+              if (s3 !== peg$FAILED) {
+                if (input.substr(peg$currPos, 2) === peg$c60) {
+                  s4 = peg$c60;
+                  peg$currPos += 2;
+                } else {
+                  s4 = peg$FAILED;
+                  if (peg$silentFails === 0) { peg$fail(peg$c61); }
+                }
+                if (s4 !== peg$FAILED) {
+                  s5 = [];
+                  s6 = peg$parse_();
+                  if (s6 !== peg$FAILED) {
+                    while (s6 !== peg$FAILED) {
+                      s5.push(s6);
+                      s6 = peg$parse_();
+                    }
+                  } else {
+                    s5 = peg$FAILED;
+                  }
+                  if (s5 !== peg$FAILED) {
+                    s6 = peg$parseunquoted_term();
+                    if (s6 !== peg$FAILED) {
+                      if (input.charCodeAt(peg$currPos) === 93) {
+                        s7 = peg$c62;
+                        peg$currPos++;
+                      } else {
+                        s7 = peg$FAILED;
+                        if (peg$silentFails === 0) { peg$fail(peg$c63); }
+                      }
+                      if (s7 !== peg$FAILED) {
+                        peg$savedPos = s0;
+                        s1 = peg$c70(s2, s6);
+                        s0 = s1;
+                      } else {
+                        peg$currPos = s0;
+                        s0 = peg$FAILED;
+                      }
+                    } else {
+                      peg$currPos = s0;
+                      s0 = peg$FAILED;
+                    }
+                  } else {
+                    peg$currPos = s0;
+                    s0 = peg$FAILED;
+                  }
+                } else {
+                  peg$currPos = s0;
+                  s0 = peg$FAILED;
+                }
+              } else {
+                peg$currPos = s0;
+                s0 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+          if (s0 === peg$FAILED) {
+            s0 = peg$currPos;
+            if (input.charCodeAt(peg$currPos) === 91) {
+              s1 = peg$c58;
+              peg$currPos++;
+            } else {
+              s1 = peg$FAILED;
+              if (peg$silentFails === 0) { peg$fail(peg$c59); }
+            }
+            if (s1 !== peg$FAILED) {
+              s2 = peg$parseunquoted_term();
+              if (s2 !== peg$FAILED) {
+                s3 = [];
+                s4 = peg$parse_();
+                while (s4 !== peg$FAILED) {
+                  s3.push(s4);
+                  s4 = peg$parse_();
+                }
+                if (s3 !== peg$FAILED) {
+                  if (input.substr(peg$currPos, 2) === peg$c60) {
+                    s4 = peg$c60;
+                    peg$currPos += 2;
+                  } else {
+                    s4 = peg$FAILED;
+                    if (peg$silentFails === 0) { peg$fail(peg$c61); }
+                  }
+                  if (s4 !== peg$FAILED) {
+                    s5 = [];
+                    s6 = peg$parse_();
+                    if (s6 !== peg$FAILED) {
+                      while (s6 !== peg$FAILED) {
+                        s5.push(s6);
+                        s6 = peg$parse_();
+                      }
+                    } else {
+                      s5 = peg$FAILED;
+                    }
+                    if (s5 !== peg$FAILED) {
+                      s6 = peg$parseunquoted_term();
+                      if (s6 !== peg$FAILED) {
+                        if (input.charCodeAt(peg$currPos) === 125) {
+                          s7 = peg$c67;
+                          peg$currPos++;
+                        } else {
+                          s7 = peg$FAILED;
+                          if (peg$silentFails === 0) { peg$fail(peg$c68); }
+                        }
+                        if (s7 !== peg$FAILED) {
+                          peg$savedPos = s0;
+                          s1 = peg$c71(s2, s6);
+                          s0 = s1;
+                        } else {
+                          peg$currPos = s0;
+                          s0 = peg$FAILED;
+                        }
+                      } else {
+                        peg$currPos = s0;
+                        s0 = peg$FAILED;
+                      }
+                    } else {
+                      peg$currPos = s0;
+                      s0 = peg$FAILED;
+                    }
+                  } else {
+                    peg$currPos = s0;
+                    s0 = peg$FAILED;
+                  }
+                } else {
+                  peg$currPos = s0;
+                  s0 = peg$FAILED;
+                }
+              } else {
+                peg$currPos = s0;
+                s0 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          }
+        }
+      }
+
+      return s0;
+    }
+
+    function peg$parseoperator_exp() {
+      var s0, s1, s2, s3, s4;
+
+      s0 = peg$currPos;
+      s1 = [];
+      s2 = peg$parse_();
+      while (s2 !== peg$FAILED) {
+        s1.push(s2);
+        s2 = peg$parse_();
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = peg$parseoperator();
+        if (s2 !== peg$FAILED) {
+          s3 = [];
+          s4 = peg$parse_();
+          if (s4 !== peg$FAILED) {
+            while (s4 !== peg$FAILED) {
+              s3.push(s4);
+              s4 = peg$parse_();
+            }
+          } else {
+            s3 = peg$FAILED;
+          }
+          if (s3 !== peg$FAILED) {
+            peg$savedPos = s0;
+            s1 = peg$c72(s2);
+            s0 = s1;
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+      if (s0 === peg$FAILED) {
+        s0 = peg$currPos;
+        s1 = [];
+        s2 = peg$parse_();
+        while (s2 !== peg$FAILED) {
+          s1.push(s2);
+          s2 = peg$parse_();
+        }
+        if (s1 !== peg$FAILED) {
+          s2 = peg$parseoperator();
+          if (s2 !== peg$FAILED) {
+            s3 = peg$parseEOF();
+            if (s3 !== peg$FAILED) {
+              peg$savedPos = s0;
+              s1 = peg$c72(s2);
+              s0 = s1;
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      }
+
+      return s0;
+    }
+
+    function peg$parseoperator() {
+      var s0, s1;
+
+      if (input.substr(peg$currPos, 2) === peg$c73) {
+        s0 = peg$c73;
+        peg$currPos += 2;
+      } else {
+        s0 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c74); }
+      }
+      if (s0 === peg$FAILED) {
+        if (input.substr(peg$currPos, 3) === peg$c75) {
+          s0 = peg$c75;
+          peg$currPos += 3;
+        } else {
+          s0 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c76); }
+        }
+        if (s0 === peg$FAILED) {
+          if (input.substr(peg$currPos, 3) === peg$c77) {
+            s0 = peg$c77;
+            peg$currPos += 3;
+          } else {
+            s0 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c78); }
+          }
+          if (s0 === peg$FAILED) {
+            s0 = peg$currPos;
+            if (input.substr(peg$currPos, 2) === peg$c79) {
+              s1 = peg$c79;
+              peg$currPos += 2;
+            } else {
+              s1 = peg$FAILED;
+              if (peg$silentFails === 0) { peg$fail(peg$c80); }
+            }
+            if (s1 !== peg$FAILED) {
+              peg$savedPos = s0;
+              s1 = peg$c81();
+            }
+            s0 = s1;
+            if (s0 === peg$FAILED) {
+              s0 = peg$currPos;
+              if (input.substr(peg$currPos, 2) === peg$c82) {
+                s1 = peg$c82;
+                peg$currPos += 2;
+              } else {
+                s1 = peg$FAILED;
+                if (peg$silentFails === 0) { peg$fail(peg$c83); }
+              }
+              if (s1 !== peg$FAILED) {
+                peg$savedPos = s0;
+                s1 = peg$c84();
+              }
+              s0 = s1;
+              if (s0 === peg$FAILED) {
+                s0 = peg$currPos;
+                if (input.charCodeAt(peg$currPos) === 33) {
+                  s1 = peg$c85;
+                  peg$currPos++;
+                } else {
+                  s1 = peg$FAILED;
+                  if (peg$silentFails === 0) { peg$fail(peg$c86); }
+                }
+                if (s1 !== peg$FAILED) {
+                  peg$savedPos = s0;
+                  s1 = peg$c87();
+                }
+                s0 = s1;
+              }
+            }
+          }
+        }
+      }
+
+      return s0;
+    }
+
+    function peg$parseprefix_operator_exp() {
+      var s0, s1, s2;
+
+      s0 = peg$currPos;
+      s1 = [];
+      s2 = peg$parse_();
+      while (s2 !== peg$FAILED) {
+        s1.push(s2);
+        s2 = peg$parse_();
+      }
+      if (s1 !== peg$FAILED) {
+        s2 = peg$parseprefix_operator();
+        if (s2 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c72(s2);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    function peg$parseprefix_operator() {
+      var s0;
+
+      if (input.charCodeAt(peg$currPos) === 43) {
+        s0 = peg$c29;
+        peg$currPos++;
+      } else {
+        s0 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c30); }
+      }
+      if (s0 === peg$FAILED) {
+        if (input.charCodeAt(peg$currPos) === 45) {
+          s0 = peg$c31;
+          peg$currPos++;
+        } else {
+          s0 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c32); }
+        }
+      }
+
+      return s0;
+    }
+
+    function peg$parse_() {
+      var s0, s1;
+
+      peg$silentFails++;
+      s0 = [];
+      if (peg$c89.test(input.charAt(peg$currPos))) {
+        s1 = input.charAt(peg$currPos);
+        peg$currPos++;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c90); }
+      }
+      if (s1 !== peg$FAILED) {
+        while (s1 !== peg$FAILED) {
+          s0.push(s1);
+          if (peg$c89.test(input.charAt(peg$currPos))) {
+            s1 = input.charAt(peg$currPos);
+            peg$currPos++;
+          } else {
+            s1 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c90); }
+          }
+        }
+      } else {
+        s0 = peg$FAILED;
+      }
+      peg$silentFails--;
+      if (s0 === peg$FAILED) {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c88); }
+      }
+
+      return s0;
+    }
+
+    function peg$parseEOF() {
+      var s0, s1;
+
+      s0 = peg$currPos;
+      peg$silentFails++;
+      if (input.length > peg$currPos) {
+        s1 = input.charAt(peg$currPos);
+        peg$currPos++;
+      } else {
+        s1 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c91); }
+      }
+      peg$silentFails--;
+      if (s1 === peg$FAILED) {
+        s0 = void 0;
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+
+      return s0;
+    }
+
+    peg$result = peg$startRuleFunction();
+
+    if (peg$result !== peg$FAILED && peg$currPos === input.length) {
+      return peg$result;
+    } else {
+      if (peg$result !== peg$FAILED && peg$currPos < input.length) {
+        peg$fail(peg$endExpectation());
+      }
+
+      throw peg$buildStructuredError(
+        peg$maxFailExpected,
+        peg$maxFailPos < input.length ? input.charAt(peg$maxFailPos) : null,
+        peg$maxFailPos < input.length
+          ? peg$computeLocation(peg$maxFailPos, peg$maxFailPos + 1)
+          : peg$computeLocation(peg$maxFailPos, peg$maxFailPos)
+      );
+    }
+  }
+
+  return {
+    SyntaxError: peg$SyntaxError,
+    parse:       peg$parse
+  };
+});
+
+
+/***/ }),
+
 /***/ "./node_modules/moment/locale sync recursive ^\\.\\/.*$":
 /*!**************************************************!*\
   !*** ./node_modules/moment/locale sync ^\.\/.*$ ***!
@@ -87264,6 +89366,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_configuration_orchestrator_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/configuration/orchestrator/index */ "./resources/js/views/configuration/orchestrator/index.js");
 /* harmony import */ var _views_configuration_client_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/configuration/client/index */ "./resources/js/views/configuration/client/index.js");
 /* harmony import */ var _views_configuration_watched_automated_process_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./views/configuration/watched-automated-process/index */ "./resources/js/views/configuration/watched-automated-process/index.js");
+/* harmony import */ var _views_configuration_alert_trigger_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./views/configuration/alert-trigger/index */ "./resources/js/views/configuration/alert-trigger/index.js");
+
 
 
 
@@ -87280,6 +89384,8 @@ if (_views_base__WEBPACK_IMPORTED_MODULE_1__["isDashboardRelatedURL"](url)) {
   _views_configuration_client_index__WEBPACK_IMPORTED_MODULE_4__["init"]();
 } else if (_views_base__WEBPACK_IMPORTED_MODULE_1__["isConfigurationWatchedAutomatedProcessRelatedURL"](url)) {
   _views_configuration_watched_automated_process_index__WEBPACK_IMPORTED_MODULE_5__["init"]();
+} else if (_views_base__WEBPACK_IMPORTED_MODULE_1__["isConfigurationAlertTriggerRelatedURL"](url)) {
+  _views_configuration_alert_trigger_index__WEBPACK_IMPORTED_MODULE_6__["init"]();
 } // DataTables
 
 
@@ -87372,6 +89478,11 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+
+String.prototype.capitalize = function () {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+};
 
 /***/ }),
 
@@ -93444,6 +95555,88 @@ function () {
 
 /***/ }),
 
+/***/ "./resources/js/models/AlertDefinition.js":
+/*!************************************************!*\
+  !*** ./resources/js/models/AlertDefinition.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AlertDefinition; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var AlertDefinition =
+/*#__PURE__*/
+function () {
+  function AlertDefinition(rank) {
+    _classCallCheck(this, AlertDefinition);
+
+    this.rank = rank;
+    this.level = 'info';
+    this.rules = [];
+  }
+
+  _createClass(AlertDefinition, [{
+    key: "findRule",
+    value: function findRule(rank) {
+      return this.rules.find(function (item) {
+        return item.rank === rank;
+      });
+    }
+  }, {
+    key: "removeRule",
+    value: function removeRule(rank) {
+      this.rules = this.rules.filter(function (item) {
+        return item.rank !== rank;
+      }); // change rank of all items when > rank
+
+      this.rules = this.rules.map(function (item) {
+        if (item.rank > rank) {
+          item.rank = item.rank - 1;
+        }
+
+        return item;
+      });
+    }
+  }]);
+
+  return AlertDefinition;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/js/models/AlertRule.js":
+/*!******************************************!*\
+  !*** ./resources/js/models/AlertRule.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AlertRule; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var AlertRule = function AlertRule(rank) {
+  _classCallCheck(this, AlertRule);
+
+  this.rank = rank;
+  this.type = 'none';
+  this.parameters = {};
+};
+
+
+
+/***/ }),
+
 /***/ "./resources/js/models/Client.js":
 /*!***************************************!*\
   !*** ./resources/js/models/Client.js ***!
@@ -93524,9 +95717,9 @@ function () {
       return updateMarkup;
     }()
   }, {
-    key: "update",
+    key: "get",
     value: function () {
-      var _update = _asyncToGenerator(
+      var _get = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var _this2 = this;
@@ -93539,7 +95732,6 @@ function () {
                 return _context2.abrupt("return", new Promise(function (resolve, reject) {
                   resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/api/clients/".concat(_this2.id)).then(function (response) {
                     _this2.data = response.data;
-                    return _this2.updateMarkup();
                   }));
                 }));
 
@@ -93556,16 +95748,16 @@ function () {
         }, _callee2, null, [[0, 4]]);
       }));
 
-      function update() {
-        return _update.apply(this, arguments);
+      function get() {
+        return _get.apply(this, arguments);
       }
 
-      return update;
+      return get;
     }()
   }, {
-    key: "updateWatchedAutomatedProcesses",
+    key: "update",
     value: function () {
-      var _updateWatchedAutomatedProcesses = _asyncToGenerator(
+      var _update = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var _this3 = this;
@@ -93576,10 +95768,8 @@ function () {
               case 0:
                 _context3.prev = 0;
                 return _context3.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/dashboard/client/".concat(_this3.id, "/watched-automated-process/elements/1")).then(function (response) {
-                    _this3.watchedAutomatedProcesses = Object.keys(response.data).map(function (key) {
-                      return [Number(key), response.data[key]];
-                    });
+                  resolve(_this3.get().then(function (response) {
+                    return _this3.updateMarkup();
                   }));
                 }));
 
@@ -93596,18 +95786,18 @@ function () {
         }, _callee3, null, [[0, 4]]);
       }));
 
-      function updateWatchedAutomatedProcesses() {
-        return _updateWatchedAutomatedProcesses.apply(this, arguments);
+      function update() {
+        return _update.apply(this, arguments);
       }
 
-      return updateWatchedAutomatedProcesses;
+      return update;
     }()
   }, {
-    key: "save",
+    key: "updateWatchedAutomatedProcesses",
     value: function () {
-      var _save = _asyncToGenerator(
+      var _updateWatchedAutomatedProcesses = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(name, code, orchestrator) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
         var _this4 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
@@ -93616,14 +95806,10 @@ function () {
               case 0:
                 _context4.prev = 0;
                 return _context4.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["post"]('/api/clients', {
-                    'name': name,
-                    'code': code,
-                    'orchestrator_id': orchestrator
-                  }).then(function (response) {
-                    if (response.data) {
-                      _this4.id = response.data.id;
-                    }
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/dashboard/client/".concat(_this4.id, "/watched-automated-process/elements/1")).then(function (response) {
+                    _this4.watchedAutomatedProcesses = Object.keys(response.data).map(function (key) {
+                      return [Number(key), response.data[key]];
+                    });
                   }));
                 }));
 
@@ -93640,18 +95826,18 @@ function () {
         }, _callee4, null, [[0, 4]]);
       }));
 
-      function save(_x, _x2, _x3) {
-        return _save.apply(this, arguments);
+      function updateWatchedAutomatedProcesses() {
+        return _updateWatchedAutomatedProcesses.apply(this, arguments);
       }
 
-      return save;
+      return updateWatchedAutomatedProcesses;
     }()
   }, {
-    key: "getProcessesFromOrchestrator",
+    key: "save",
     value: function () {
-      var _getProcessesFromOrchestrator = _asyncToGenerator(
+      var _save = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(name, code, orchestrator) {
         var _this5 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
@@ -93660,7 +95846,15 @@ function () {
               case 0:
                 _context5.prev = 0;
                 return _context5.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/orchestrator/processes/".concat(_this5.id)));
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["post"]('/api/clients', {
+                    'name': name,
+                    'code': code,
+                    'orchestrator_id': orchestrator
+                  }).then(function (response) {
+                    if (response.data) {
+                      _this5.id = response.data.id;
+                    }
+                  }));
                 }));
 
               case 4:
@@ -93676,11 +95870,119 @@ function () {
         }, _callee5, null, [[0, 4]]);
       }));
 
+      function save(_x, _x2, _x3) {
+        return _save.apply(this, arguments);
+      }
+
+      return save;
+    }()
+  }, {
+    key: "getProcessesFromOrchestrator",
+    value: function () {
+      var _getProcessesFromOrchestrator = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+        var _this6 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _context6.prev = 0;
+                return _context6.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/orchestrator/processes/".concat(_this6.id)));
+                }));
+
+              case 4:
+                _context6.prev = 4;
+                _context6.t0 = _context6["catch"](0);
+                console.log(_context6.t0);
+
+              case 7:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, null, [[0, 4]]);
+      }));
+
       function getProcessesFromOrchestrator() {
         return _getProcessesFromOrchestrator.apply(this, arguments);
       }
 
       return getProcessesFromOrchestrator;
+    }()
+  }, {
+    key: "getRobotsFromOrchestrator",
+    value: function () {
+      var _getRobotsFromOrchestrator = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+        var _this7 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _context7.prev = 0;
+                return _context7.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/orchestrator/robots/".concat(_this7.id)));
+                }));
+
+              case 4:
+                _context7.prev = 4;
+                _context7.t0 = _context7["catch"](0);
+                console.log(_context7.t0);
+
+              case 7:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, null, [[0, 4]]);
+      }));
+
+      function getRobotsFromOrchestrator() {
+        return _getRobotsFromOrchestrator.apply(this, arguments);
+      }
+
+      return getRobotsFromOrchestrator;
+    }()
+  }, {
+    key: "getQueuesFromOrchestrator",
+    value: function () {
+      var _getQueuesFromOrchestrator = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
+        var _this8 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _context8.prev = 0;
+                return _context8.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/orchestrator/queues/".concat(_this8.id)));
+                }));
+
+              case 4:
+                _context8.prev = 4;
+                _context8.t0 = _context8["catch"](0);
+                console.log(_context8.t0);
+
+              case 7:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, null, [[0, 4]]);
+      }));
+
+      function getQueuesFromOrchestrator() {
+        return _getQueuesFromOrchestrator.apply(this, arguments);
+      }
+
+      return getQueuesFromOrchestrator;
     }()
   }]);
 
@@ -93843,6 +96145,111 @@ function () {
       }
 
       return updateWatchedAutomatedProcessesTable;
+    }()
+  }, {
+    key: "getAlertTriggersDefaultAlertTriggerDetails",
+    value: function () {
+      var _getAlertTriggersDefaultAlertTriggerDetails = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(watchedAutomatedProcessId) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                return _context4.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/alert-trigger/default-alert-trigger-details/".concat(watchedAutomatedProcessId)));
+                }));
+
+              case 4:
+                _context4.prev = 4;
+                _context4.t0 = _context4["catch"](0);
+                console.log(_context4.t0);
+
+              case 7:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 4]]);
+      }));
+
+      function getAlertTriggersDefaultAlertTriggerDetails(_x) {
+        return _getAlertTriggersDefaultAlertTriggerDetails.apply(this, arguments);
+      }
+
+      return getAlertTriggersDefaultAlertTriggerDetails;
+    }()
+  }, {
+    key: "getAlertTriggersDefaultAlertTriggerDefinition",
+    value: function () {
+      var _getAlertTriggersDefaultAlertTriggerDefinition = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(rank) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                return _context5.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/alert-trigger/default-alert-trigger-definition/".concat(rank)));
+                }));
+
+              case 4:
+                _context5.prev = 4;
+                _context5.t0 = _context5["catch"](0);
+                console.log(_context5.t0);
+
+              case 7:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, null, [[0, 4]]);
+      }));
+
+      function getAlertTriggersDefaultAlertTriggerDefinition(_x2) {
+        return _getAlertTriggersDefaultAlertTriggerDefinition.apply(this, arguments);
+      }
+
+      return getAlertTriggersDefaultAlertTriggerDefinition;
+    }()
+  }, {
+    key: "getAlertTriggersDefaultAlertTriggerRule",
+    value: function () {
+      var _getAlertTriggersDefaultAlertTriggerRule = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(watchedAutomatedProcess, rank) {
+        var type,
+            _args6 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                type = _args6.length > 2 && _args6[2] !== undefined ? _args6[2] : 'none';
+                _context6.prev = 1;
+                return _context6.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/alert-trigger/default-alert-trigger-rule/".concat(watchedAutomatedProcess, "/").concat(rank, "/").concat(type)));
+                }));
+
+              case 5:
+                _context6.prev = 5;
+                _context6.t0 = _context6["catch"](1);
+                console.log(_context6.t0);
+
+              case 8:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, null, [[1, 5]]);
+      }));
+
+      function getAlertTriggersDefaultAlertTriggerRule(_x3, _x4) {
+        return _getAlertTriggersDefaultAlertTriggerRule.apply(this, arguments);
+      }
+
+      return getAlertTriggersDefaultAlertTriggerRule;
     }()
   }]);
 
@@ -94286,7 +96693,7 @@ function () {
     value: function () {
       var _save = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(name, code, url, tenant, apiUserUsername, apiUserPassword, kibanaUrl, kibanaIndex) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(name, code, url, tenant, apiUserUsername, apiUserPassword, elasticSearchUrl, elasticSearchIndex) {
         var _this = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
@@ -94302,8 +96709,8 @@ function () {
                     'tenant': tenant,
                     'api_user_username': apiUserUsername,
                     'api_user_password': apiUserPassword,
-                    'kibana_url': kibanaUrl,
-                    'kibana_index': kibanaIndex
+                    'elastic_search_url': elasticSearchUrl,
+                    'elastic_search_index': elasticSearchIndex
                   }).then(function (response) {
                     if (response.data) {
                       _this.id = response.data.id;
@@ -94419,9 +96826,9 @@ function () {
       return updateMarkup;
     }()
   }, {
-    key: "update",
+    key: "get",
     value: function () {
-      var _update = _asyncToGenerator(
+      var _get = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var _this2 = this;
@@ -94434,7 +96841,6 @@ function () {
                 return _context2.abrupt("return", new Promise(function (resolve, reject) {
                   resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/api/watched-automated-processes/".concat(_this2.id)).then(function (response) {
                     _this2.data = response.data;
-                    return _this2.updateMarkup();
                   }));
                 }));
 
@@ -94451,18 +96857,18 @@ function () {
         }, _callee2, null, [[0, 4]]);
       }));
 
-      function update() {
-        return _update.apply(this, arguments);
+      function get() {
+        return _get.apply(this, arguments);
       }
 
-      return update;
+      return get;
     }()
   }, {
-    key: "save",
+    key: "update",
     value: function () {
-      var _save = _asyncToGenerator(
+      var _update = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(client, name, code, operationalHandbookPageURL, kibanaDashboardURL, additionalInformation, runningPeriodMonday, runningPeriodTuesday, runningPeriodWednesday, runningPeriodThursday, runningPeriodFriday, runningPeriodSaturday, runningPeriodSunday, runningTimePeriodFrom, runningTimePeriodUntil, involvedProcesses) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var _this3 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
@@ -94471,27 +96877,8 @@ function () {
               case 0:
                 _context3.prev = 0;
                 return _context3.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["post"]('/api/watched-automated-processes', {
-                    'client_id': client,
-                    'name': name,
-                    'code': code,
-                    'operational_handbook_page_url': operationalHandbookPageURL,
-                    'kibana_dashboard_url': kibanaDashboardURL,
-                    'additional_information': additionalInformation,
-                    'running_period_monday': runningPeriodMonday ? 1 : 0,
-                    'running_period_tuesday': runningPeriodTuesday ? 1 : 0,
-                    'running_period_wednesday': runningPeriodWednesday ? 1 : 0,
-                    'running_period_thursday': runningPeriodThursday ? 1 : 0,
-                    'running_period_friday': runningPeriodFriday ? 1 : 0,
-                    'running_period_saturday': runningPeriodSaturday ? 1 : 0,
-                    'running_period_sunday': runningPeriodSunday ? 1 : 0,
-                    'running_period_time_from': runningTimePeriodFrom,
-                    'running_period_time_until': runningTimePeriodUntil,
-                    'involved_processes': involvedProcesses
-                  }).then(function (response) {
-                    if (response.data) {
-                      _this3.id = response.data.id;
-                    }
+                  resolve(_this3.get().then(function (response) {
+                    return _this3.updateMarkup();
                   }));
                 }));
 
@@ -94508,7 +96895,66 @@ function () {
         }, _callee3, null, [[0, 4]]);
       }));
 
-      function save(_x, _x2, _x3, _x4, _x5, _x6, _x7, _x8, _x9, _x10, _x11, _x12, _x13, _x14, _x15, _x16) {
+      function update() {
+        return _update.apply(this, arguments);
+      }
+
+      return update;
+    }()
+  }, {
+    key: "save",
+    value: function () {
+      var _save = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(client, name, code, operationalHandbookPageURL, kibanaDashboardURL, additionalInformation, runningPeriodMonday, runningPeriodTuesday, runningPeriodWednesday, runningPeriodThursday, runningPeriodFriday, runningPeriodSaturday, runningPeriodSunday, runningTimePeriodFrom, runningTimePeriodUntil, involvedProcesses, involvedRobots, involvedQueues) {
+        var _this4 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                return _context4.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["post"]('/api/watched-automated-processes', {
+                    'client_id': client,
+                    'name': name,
+                    'code': code,
+                    'operational_handbook_page_url': operationalHandbookPageURL,
+                    'kibana_dashboard_url': kibanaDashboardURL,
+                    'additional_information': additionalInformation,
+                    'running_period_monday': runningPeriodMonday ? 1 : 0,
+                    'running_period_tuesday': runningPeriodTuesday ? 1 : 0,
+                    'running_period_wednesday': runningPeriodWednesday ? 1 : 0,
+                    'running_period_thursday': runningPeriodThursday ? 1 : 0,
+                    'running_period_friday': runningPeriodFriday ? 1 : 0,
+                    'running_period_saturday': runningPeriodSaturday ? 1 : 0,
+                    'running_period_sunday': runningPeriodSunday ? 1 : 0,
+                    'running_period_time_from': runningTimePeriodFrom,
+                    'running_period_time_until': runningTimePeriodUntil,
+                    'involved_processes': involvedProcesses,
+                    'involved_robots': involvedRobots,
+                    'involved_queues': involvedQueues
+                  }).then(function (response) {
+                    if (response.data) {
+                      _this4.id = response.data.id;
+                    }
+                  }));
+                }));
+
+              case 4:
+                _context4.prev = 4;
+                _context4.t0 = _context4["catch"](0);
+                console.log(_context4.t0);
+
+              case 7:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 4]]);
+      }));
+
+      function save(_x, _x2, _x3, _x4, _x5, _x6, _x7, _x8, _x9, _x10, _x11, _x12, _x13, _x14, _x15, _x16, _x17, _x18) {
         return _save.apply(this, arguments);
       }
 
@@ -94593,7 +97039,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var markup = function markup(elementID, alert) {
-  return "\n        <div id=\"".concat(elementID, "\" class=\"modal\">\n            <div class=\"modal-background\"></div>\n            <div class=\"modal-card modal-content\">\n                ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["header"])('Alert closing', alert), "\n                <section class=\"modal-card-body\">\n                    <form class=\"alert-closing-form\" method=\"POST\">\n                        ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["titleBlock"])(alert), "\n                        ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["underRevisionBlock"])(alert), "\n                        <div class=\"field\">\n                            <div class=\"control\">\n                                <label class=\"checkbox\">\n                                    <input type=\"checkbox\" id=\"false_positive\" name=\"false_positive\">\n                                    It is a false positive\n                                </label>\n                            </div>\n                        </div>\n                        <div class=\"field\">\n                            <div class=\"control\">\n                                <textarea class=\"textarea\"\n                                    id=\"closing_description\"\n                                    name=\"closing_description\"\n                                    placeholder=\"Resolution description\"\n                                    required></textarea>\n                            </div>\n                        </div>\n                    </form>\n                </section>\n                ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["footer"])('Put out the fire!', 'fire-extinguisher'), "\n            </div>\n        </div>\n    ");
+  return "\n        <div id=\"".concat(elementID, "\" class=\"modal\">\n            <div class=\"modal-background\"></div>\n            <div class=\"modal-card modal-content\">\n                ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["header"])('Alert closing', alert), "\n                <section class=\"modal-card-body\">\n                    <form class=\"alert-closing-form\" method=\"POST\">\n                        ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["titleBlock"])(alert), "\n                        ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["underRevisionBlock"])(alert), "\n                        <div class=\"field\">\n                            <div class=\"control\">\n                                <input type=\"checkbox\" id=\"false_positive\" name=\"false_positive\" class=\"switch is-rounded\">\n                                <label for=\"false_positive\" class=\"checkbox\">\n                                    It is a false positive\n                                </label>\n                            </div>\n                        </div>\n                        <div class=\"field\">\n                            <div class=\"control\">\n                                <textarea class=\"textarea\"\n                                    id=\"closing_description\"\n                                    name=\"closing_description\"\n                                    placeholder=\"Resolution description\"\n                                    required></textarea>\n                            </div>\n                        </div>\n                    </form>\n                </section>\n                ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["footer"])('Put out the fire!', 'fire-extinguisher'), "\n            </div>\n        </div>\n    ");
 };
 
 /***/ }),
@@ -95489,7 +97935,7 @@ var removeIgnoranceFormModal = function removeIgnoranceFormModal() {
 /*!************************************!*\
   !*** ./resources/js/views/base.js ***!
   \************************************/
-/*! exports provided: selectors, elements, update, htmlToElement, htmlToElements, renderLoader, clearLoader, animateCSS, showModal, closeModal, swalWithBulmaButtons, isDashboardRelatedURL, getClientIDFromURL, isUserRelatedURL, isConfigurationOrchestratorRelatedURL, isConfigurationClientRelatedURL, isConfigurationWatchedAutomatedProcessRelatedURL, validURL, toggleSuccessDangerState, removeStates */
+/*! exports provided: selectors, elements, update, htmlToElement, htmlToElements, renderLoader, clearLoader, animateCSS, showModal, closeModal, swalWithBulmaButtons, isDashboardRelatedURL, getClientIDFromURL, isUserRelatedURL, isConfigurationOrchestratorRelatedURL, isConfigurationClientRelatedURL, isConfigurationWatchedAutomatedProcessRelatedURL, isConfigurationAlertTriggerRelatedURL, validURL, toggleSuccessDangerState, toggleFormControlTooltip, removeStates, removeSelectOptions, isNormalInteger, timeStringToFloat, isValidLuceneString */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -95511,11 +97957,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isConfigurationOrchestratorRelatedURL", function() { return isConfigurationOrchestratorRelatedURL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isConfigurationClientRelatedURL", function() { return isConfigurationClientRelatedURL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isConfigurationWatchedAutomatedProcessRelatedURL", function() { return isConfigurationWatchedAutomatedProcessRelatedURL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isConfigurationAlertTriggerRelatedURL", function() { return isConfigurationAlertTriggerRelatedURL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "validURL", function() { return validURL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleSuccessDangerState", function() { return toggleSuccessDangerState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleFormControlTooltip", function() { return toggleFormControlTooltip; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeStates", function() { return removeStates; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeSelectOptions", function() { return removeSelectOptions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNormalInteger", function() { return isNormalInteger; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "timeStringToFloat", function() { return timeStringToFloat; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidLuceneString", function() { return isValidLuceneString; });
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var luceneParser = __webpack_require__(/*! lucene-query-parser */ "./node_modules/lucene-query-parser/lib/lucene-query-parser.js");
 
 var selectors = {
   closeModalTriggers: '.modal button.delete, .modal button.cancel, .modal button.cancel *',
@@ -95525,7 +97980,8 @@ var selectors = {
   dateTimeCalendarWrapper: '.datetimepicker-dummy',
   dateTimeCalendarFromInput: 'input.datetimepicker-dummy-input[placeholder="From"]',
   dateTimeCalendarToInput: 'input.datetimepicker-dummy-input[placeholder="To"]',
-  dateTimeFooterCancelButton: 'button.datetimepicker-footer-cancel'
+  dateTimeFooterCancelButton: 'button.datetimepicker-footer-cancel',
+  formControlWrapper: '.control'
 };
 var elements = {};
 var update = function update(old, markup) {
@@ -95613,6 +98069,10 @@ var isConfigurationWatchedAutomatedProcessRelatedURL = function isConfigurationW
   var isRelated = /.*\/configuration\/watched-automated-process$/;
   return isRelated.test(url);
 };
+var isConfigurationAlertTriggerRelatedURL = function isConfigurationAlertTriggerRelatedURL(url) {
+  var isRelated = /.*\/configuration\/alert-trigger$/;
+  return isRelated.test(url);
+};
 var validURL = function validURL(str) {
   var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
   '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
@@ -95635,8 +98095,45 @@ var toggleSuccessDangerState = function toggleSuccessDangerState(element, succes
     element.classList.remove(classNames[0]);
   }
 };
+var toggleFormControlTooltip = function toggleFormControlTooltip(element, success) {
+  var formControlWrapper = element.closest(selectors.formControlWrapper);
+
+  if (success) {
+    formControlWrapper.classList.remove('has-tooltip-active');
+  } else {
+    formControlWrapper.classList.add('has-tooltip-active');
+  }
+};
 var removeStates = function removeStates(element) {
-  element.classList.remove('is-success', 'is-danger', 'has-text-success', 'has-text-danger');
+  element.classList.remove('is-success', 'is-info', 'is-warning', 'is-danger', 'has-text-success', 'has-text-info', 'has-text-warning', 'has-text-danger');
+};
+var removeSelectOptions = function removeSelectOptions(element) {
+  var keepFirst = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var last = element.options.length - 1;
+
+  for (var i = last; i >= (keepFirst ? 1 : 0); i--) {
+    element.remove(i);
+  }
+};
+var isNormalInteger = function isNormalInteger(str) {
+  var n = Math.floor(Number(str));
+  return n !== Infinity && String(n) === str && n >= 0;
+};
+var timeStringToFloat = function timeStringToFloat(time) {
+  var hoursMinutes = time.split(/[.:]/);
+  var hours = parseInt(hoursMinutes[0], 10);
+  var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
+  return hours + minutes / 60;
+};
+var isValidLuceneString = function isValidLuceneString(str) {
+  var valid = false;
+
+  try {
+    luceneParser.parse(str);
+    valid = true;
+  } catch (error) {}
+
+  return valid;
 };
 
 /***/ }),
@@ -95762,6 +98259,1329 @@ var update = function update(id, markup) {
 var remove = function remove(id) {
   var box = _base__WEBPACK_IMPORTED_MODULE_0__["elements"].box(id);
   if (box) box.parentNode.removeChild(box);
+};
+
+/***/ }),
+
+/***/ "./resources/js/views/configuration/alert-trigger/base.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/views/configuration/alert-trigger/base.js ***!
+  \****************************************************************/
+/*! exports provided: strings, selectors, elements */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "strings", function() { return strings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectors", function() { return selectors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "elements", function() { return elements; });
+var strings = {
+  addForm: 'add-form'
+};
+var selectors = {
+  table: 'table.alert-triggers',
+  addForm: '#add-form',
+  steps: '.steps',
+  activeStepContent: '.step-content.is-active',
+  processSelection: {
+    clientSelect: 'select#client',
+    watchedProcessSelect: 'select#watched-automated-process'
+  },
+  details: {
+    title: 'input.trigger-details--title-input',
+    alertDefinition: {
+      section: '.alert-definitions-section',
+      list: '.alert-definitions-list',
+      count: '#alert-definitions-section-title p.title span.tag',
+      item: '.alert-definition-item',
+      title: '.alert-definition-item .title-level p.title',
+      titleIcon: '.alert-definition-item .title-level span.icon',
+      titleRank: 'span.trigger-details--alert-definition--rank',
+      addButton: 'button.trigger-details--alert-definition--add-button',
+      addButtonChildren: 'button.trigger-details--alert-definition--add-button *',
+      deleteButton: 'button.trigger-details--alert-definition--delete-button',
+      deleteButtonChildren: 'button.trigger-details--alert-definition--delete-button *',
+      levelSelect: 'select.trigger-details--alert-definition--level-select',
+      rule: {
+        list: '.rules-list',
+        item: '.rule-item',
+        itemChildren: '.rule-item *',
+        title: '.rule-item .title-level p.title',
+        titleIcon: '.rule-item .title-level span.icon',
+        titleRank: 'span.trigger-details--alert-rule--rank',
+        addButton: 'button.trigger-details--alert-definition--add-rule-button',
+        addButtonChildren: 'button.trigger-details--alert-definition--add-rule-button *',
+        deleteButton: 'button.trigger-details--alert-definition--delete-rule-button',
+        deleteButtonChildren: 'button.trigger-details--alert-definition--delete-rule-button *',
+        typeSelect: 'select.trigger-details--alert-definition--rule--type-select',
+        parameter: '.trigger-details--alert-definition--rule--parameter',
+        timeSlotInput: 'input.trigger-details--alert-definition--rule--time-slot-input',
+        relativeTimeSlotInput: 'input.trigger-details--alert-definition--rule--relative-time-slot-input',
+        jobsDurationControls: {
+          minimalDurationInput: 'input.trigger-details--alert-definition--jobs-duration-rule--minimal-duration-input',
+          maximalDurationInput: 'input.trigger-details--alert-definition--jobs-duration-rule--maximal-duration-input'
+        },
+        faultedJobsPercentageControls: {
+          minimalPercentageInput: 'input.trigger-details--alert-definition--faulted-jobs-percentage-rule--minimal-percentage-input'
+        },
+        failedQueueItemsPercentageControls: {
+          minimalPercentageInput: 'input.trigger-details--alert-definition--failed-queue-items-percentage-rule--minimal-percentage-input'
+        },
+        elasticSearchQueryControls: {
+          searchQueryInput: 'input.trigger-details--alert-definition--elastic-search-query-rule--search-query-input',
+          lowerCountInput: 'input.trigger-details--alert-definition--elastic-search-query-rule--lower-count-input',
+          higherCountInput: 'input.trigger-details--alert-definition--elastic-search-query-rule--higher-count-input'
+        },
+
+        /*kibanaMetricVisualizationControls: {
+            metricVisualizationSelect: 'select.trigger-details--alert-definition--kibana-metric-visualization-rule--metric-visualization-select',
+            lowerCountInput: 'input.trigger-details--alert-definition--kibana-metric-visualization-rule--lower-count-input',
+            higherCountInput: 'input.trigger-details--alert-definition--kibana-metric-visualization-rule--higher-count-input'
+        },*/
+        involvedEntitiesControls: {
+          processes: {
+            title: 'div.involved-processes-section .title-level p.title',
+            titleIcon: 'div.involved-processes-section .title-level span.icon',
+            count: 'div.involved-processes-section .title-level p.title span.tag',
+            "switch": 'input.trigger-details--alert-definition--involved-processes--process-switch'
+          },
+          robots: {
+            title: 'div.involved-robots-section .title-level p.title',
+            titleIcon: 'div.involved-robots-section .title-level span.icon',
+            count: 'div.involved-robots-section .title-level p.title span.tag',
+            "switch": 'input.trigger-details--alert-definition--involved-robots--robot-switch'
+          },
+          queues: {
+            title: 'div.involved-queues-section .title-level p.title',
+            titleIcon: 'div.involved-queues-section .title-level span.icon',
+            count: 'div.involved-queues-section .title-level p.title span.tag',
+            "switch": 'input.trigger-details--alert-definition--involved-queues--queue-switch'
+          }
+        }
+      }
+    }
+  }
+};
+var elements = {
+  table: document.querySelector(selectors.table),
+  addForm: document.querySelector(selectors.addForm),
+  steps: document.querySelector(selectors.steps),
+  processSelection: {
+    clientSelect: document.querySelector(selectors.processSelection.clientSelect),
+    watchedProcessSelect: document.querySelector(selectors.processSelection.watchedProcessSelect)
+  },
+  details: {
+    alertDefinition: {
+      item: function item(rank) {
+        return document.querySelector("".concat(selectors.details.alertDefinition.item, "[data-rank=\"").concat(rank, "\"]"));
+      },
+      rule: {
+        item: function item(alertDefinitionItem, rank) {
+          return alertDefinitionItem.querySelector("".concat(selectors.details.alertDefinition.rule.item, "[data-rank=\"").concat(rank, "\"]"));
+        }
+      }
+    }
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/views/configuration/alert-trigger/index.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/views/configuration/alert-trigger/index.js ***!
+  \*****************************************************************/
+/*! exports provided: init */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "init", function() { return init; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(toastr__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var bulma_steps__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bulma-steps */ "./node_modules/bulma-steps/dist/js/bulma-steps.min.js");
+/* harmony import */ var bulma_steps__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bulma_steps__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _models_Configuration__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../models/Configuration */ "./resources/js/models/Configuration.js");
+/* harmony import */ var _models_Client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../models/Client */ "./resources/js/models/Client.js");
+/* harmony import */ var _models_WatchedAutomatedProcess__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../models/WatchedAutomatedProcess */ "./resources/js/models/WatchedAutomatedProcess.js");
+/* harmony import */ var _models_AlertDefinition__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../models/AlertDefinition */ "./resources/js/models/AlertDefinition.js");
+/* harmony import */ var _models_AlertRule__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../models/AlertRule */ "./resources/js/models/AlertRule.js");
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../base */ "./resources/js/views/base.js");
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./base */ "./resources/js/views/configuration/alert-trigger/base.js");
+/* harmony import */ var _view__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./view */ "./resources/js/views/configuration/alert-trigger/view.js");
+/* harmony import */ var _layout_index__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../layout/index */ "./resources/js/views/layout/index.js");
+
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+
+
+
+
+
+
+
+
+var BS_TRIGGER_DETAILS_STEP_ACCESS_REFUSED_BY_USER = 'trigger-details-step-access-refused-by-user';
+var bulmaStepsHiddenErrors = [BS_TRIGGER_DETAILS_STEP_ACCESS_REFUSED_BY_USER];
+var configuration = new _models_Configuration__WEBPACK_IMPORTED_MODULE_3__["default"]('configuration.alert-trigger.index');
+var processSelection = {
+  clientSelect: _base__WEBPACK_IMPORTED_MODULE_9__["elements"].processSelection.clientSelect,
+  watchedProcessSelect: _base__WEBPACK_IMPORTED_MODULE_9__["elements"].processSelection.watchedProcessSelect
+};
+var details = {
+  alertDefinitions: {
+    list: [],
+    find: function find(rank) {
+      return details.alertDefinitions.list.find(function (item) {
+        return item.rank === rank;
+      });
+    },
+    remove: function remove(rank) {
+      details.alertDefinitions.list = details.alertDefinitions.list.filter(function (item) {
+        return item.rank !== rank;
+      }); // change rank of all items when > rank
+
+      details.alertDefinitions.list = details.alertDefinitions.list.map(function (item) {
+        if (item.rank > rank) {
+          item.rank = item.rank - 1;
+        }
+
+        return item;
+      });
+    }
+  }
+};
+var init = function init() {
+  try {
+    var steps = bulma_steps__WEBPACK_IMPORTED_MODULE_2___default.a.attach(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].steps, {
+      onShow: function onShow(id) {
+        switch (id) {
+          case 0:
+            validateProcessSelectionForm();
+            break;
+
+          case 1:
+            if (!(previousWatchedAutomatedProcess && previousWatchedAutomatedProcess.id === processSelection.watchedProcessSelect.value)) {
+              details.alertDefinitions.list = [];
+              loadDefaultAlertTriggerDetails(processSelection.watchedProcessSelect.value).then(function (response) {
+                initAlertTriggerDetails();
+              });
+            }
+
+            break;
+        }
+      },
+      beforeNext: function () {
+        var _beforeNext = _asyncToGenerator(
+        /*#__PURE__*/
+        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(id) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.t0 = id;
+                  _context.next = _context.t0 === 0 ? 3 : 4;
+                  break;
+
+                case 3:
+                  return _context.abrupt("return", validateProcessSelectionForm());
+
+                case 4:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        function beforeNext(_x) {
+          return _beforeNext.apply(this, arguments);
+        }
+
+        return beforeNext;
+      }(),
+      onError: function onError(error) {
+        if (!bulmaStepsHiddenErrors.includes(error)) {
+          toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error(error, null, {
+            positionClass: 'toast-bottom-center'
+          });
+        }
+      }
+    });
+    initProcessSelection();
+  } catch (error) {
+    console.log("Unable to init alert trigger controller: ".concat(error));
+  }
+};
+
+var initProcessSelection = function initProcessSelection() {
+  try {
+    processSelection.clientSelect.addEventListener('change',
+    /*#__PURE__*/
+    function () {
+      var _ref = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return loadProcesses(e);
+
+              case 2:
+                validateProcessSelectionForm();
+
+              case 3:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      return function (_x2) {
+        return _ref.apply(this, arguments);
+      };
+    }());
+    processSelection.watchedProcessSelect.addEventListener('change',
+    /*#__PURE__*/
+    function () {
+      var _ref2 = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(e) {
+        var alert;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                validateProcessSelectionForm(e);
+
+                if (!(previousWatchedAutomatedProcess && previousWatchedAutomatedProcess.id !== processSelection.watchedProcessSelect.value && details.alertDefinitions.list.length > 0)) {
+                  _context3.next = 5;
+                  break;
+                }
+
+                _context3.next = 4;
+                return _base__WEBPACK_IMPORTED_MODULE_8__["swalWithBulmaButtons"].fire({
+                  title: 'New automated watched process selection detected',
+                  text: "You selected a new automated watched process but you already defined ".concat(details.alertDefinitions.list.length, "\n                    trigger for process ").concat(previousWatchedAutomatedProcess.data.name, " of client ").concat(previousClient.data.name, ".\n                    Select the previously watched automated process or all changes will be lost!"),
+                  icon: 'warning',
+                  showCancelButton: false,
+                  confirmButtonText: 'I got it!'
+                });
+
+              case 4:
+                alert = _context3.sent;
+
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }));
+
+      return function (_x3) {
+        return _ref2.apply(this, arguments);
+      };
+    }());
+  } catch (error) {
+    console.log("Unable to init process selection step: ".concat(error));
+  }
+};
+
+var initAlertTriggerDetails = function initAlertTriggerDetails() {
+  try {
+    var title = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.title);
+    title.addEventListener('change', validateTriggerDetailsForm);
+    title.addEventListener('keyup', validateTriggerDetailsForm);
+    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.section).addEventListener('click', function (e) {
+      var target = e.target;
+
+      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.addButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.addButtonChildren))) {
+        addDefaultAlertTriggerAlertDefinition();
+        console.log(details);
+      }
+
+      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.deleteButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.deleteButtonChildren))) {
+        var item = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.item);
+        var rank = parseInt(item.dataset.rank);
+        _view__WEBPACK_IMPORTED_MODULE_10__["details"].deleteAlertDefinition(item);
+        details.alertDefinitions.remove(rank);
+        _view__WEBPACK_IMPORTED_MODULE_10__["details"].updateAlertDefinitionsCount(details.alertDefinitions.list.length);
+        console.log(details);
+      }
+
+      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.addButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.addButtonChildren))) {
+        var _item = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.item);
+
+        var _rank = parseInt(_item.dataset.rank);
+
+        var alertDefinition = details.alertDefinitions.find(_rank);
+        addDefaultAlertTriggerRule(processSelection.watchedProcessSelect.value, alertDefinition, _item);
+        console.log(details);
+      }
+
+      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.deleteButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.deleteButtonChildren))) {
+        var alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.item);
+        var alertDefinitionRank = parseInt(alertDefinitionItem.dataset.rank);
+        var ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.item);
+        var ruleItemRank = parseInt(ruleItem.dataset.rank);
+
+        var _alertDefinition = details.alertDefinitions.find(alertDefinitionRank);
+
+        _view__WEBPACK_IMPORTED_MODULE_10__["details"].deleteAlertRule(alertDefinitionItem, ruleItem);
+
+        _alertDefinition.removeRule(ruleItemRank);
+
+        console.log(details);
+      }
+    });
+    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.section).addEventListener('change', function (e) {
+      var target = e.target;
+
+      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.levelSelect)) {
+        var level = target.value;
+        var item = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.item);
+        var rank = parseInt(item.dataset.rank);
+        _view__WEBPACK_IMPORTED_MODULE_10__["details"].updateAlertDefinitionLevel(item, level);
+        var alertDefinition = details.alertDefinitions.find(rank);
+        alertDefinition.level = level;
+        console.log(details);
+      }
+
+      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.typeSelect)) {
+        var type = target.value;
+        var alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.item);
+        var alertDefinitionRank = parseInt(alertDefinitionItem.dataset.rank);
+        var ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.item);
+        var ruleItemRank = parseInt(ruleItem.dataset.rank);
+        var rule = details.alertDefinitions.find(alertDefinitionRank).findRule(ruleItemRank);
+        updateAlertTriggerRuleType(processSelection.watchedProcessSelect.value, rule, ruleItem, type).then(function (response) {
+          var newRuleItem = _base__WEBPACK_IMPORTED_MODULE_9__["elements"].details.alertDefinition.rule.item(alertDefinitionItem, ruleItemRank);
+
+          if (type !== 'none') {
+            var timeSlotInput = newRuleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.timeSlotInput);
+            timeSlotInput.bulmaCalendar.on('select clear', function () {
+              validateAlertTriggerRuleForm(rule, newRuleItem);
+            });
+            newRuleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_8__["selectors"].dateTimeFooterCancelButton).addEventListener('click', validateAlertTriggerRuleForm(rule, newRuleItem));
+          }
+        });
+        console.log(details);
+      }
+
+      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.parameter)) {
+        var _alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.item);
+
+        var _alertDefinitionRank = parseInt(_alertDefinitionItem.dataset.rank);
+
+        var _ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.item);
+
+        var _ruleItemRank = parseInt(_ruleItem.dataset.rank);
+
+        var _alertDefinition2 = details.alertDefinitions.find(_alertDefinitionRank);
+
+        var _rule = _alertDefinition2.findRule(_ruleItemRank);
+
+        validateAlertTriggerRuleForm(_rule, _ruleItem);
+        console.log(details);
+      }
+    });
+    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.section).addEventListener('keyup', function (e) {
+      var target = e.target;
+
+      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.parameter)) {
+        var alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.item);
+        var alertDefinitionRank = parseInt(alertDefinitionItem.dataset.rank);
+        var ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.item);
+        var ruleItemRank = parseInt(ruleItem.dataset.rank);
+        var alertDefinition = details.alertDefinitions.find(alertDefinitionRank);
+        var rule = alertDefinition.findRule(ruleItemRank);
+        validateAlertTriggerRuleForm(rule, ruleItem);
+        console.log(details);
+      }
+    });
+  } catch (error) {
+    console.log("Unable to init trigger details step: ".concat(error));
+  }
+};
+
+var validateProcessSelectionForm = function validateProcessSelectionForm() {
+  var errors = [];
+  var clientSelectValid = !(processSelection.clientSelect.value === "0");
+
+  _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](processSelection.clientSelect.parentNode, clientSelectValid);
+
+  if (!clientSelectValid) {
+    errors.push('You need to select a Client');
+  }
+
+  var watchedProcessSelectValid = !(processSelection.watchedProcessSelect.value === "0");
+
+  if (!processSelection.watchedProcessSelect.disabled) {
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](processSelection.watchedProcessSelect.parentNode, watchedProcessSelectValid);
+
+    if (!watchedProcessSelectValid) {
+      errors.push('You need to select a Watched process');
+    }
+  } else {
+    _base__WEBPACK_IMPORTED_MODULE_8__["removeStates"](processSelection.watchedProcessSelect.parentNode);
+  }
+
+  return errors;
+};
+
+var validateTriggerDetailsForm = function validateTriggerDetailsForm(e) {
+  var errors = [];
+  var titleValid = !(e.target.value.trim() === '');
+
+  _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](e.target, titleValid);
+
+  if (!titleValid) {
+    errors.push('You need to enter a Title');
+  }
+
+  return errors;
+};
+
+var loadProcesses =
+/*#__PURE__*/
+function () {
+  var _ref3 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(e) {
+    var activeStepContent, id, client;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].activeStepContent);
+            _context4.prev = 1;
+
+            _base__WEBPACK_IMPORTED_MODULE_8__["renderLoader"](activeStepContent);
+
+            _base__WEBPACK_IMPORTED_MODULE_8__["removeSelectOptions"](processSelection.watchedProcessSelect, true);
+
+            id = e.target.value.trim();
+
+            if (!(id !== "0")) {
+              _context4.next = 10;
+              break;
+            }
+
+            client = new _models_Client__WEBPACK_IMPORTED_MODULE_4__["default"](id);
+            return _context4.abrupt("return", new Promise(function (resolve, reject) {
+              resolve(client.get().then(function (response) {
+                var processes = client.data.watched_automated_processes;
+                _view__WEBPACK_IMPORTED_MODULE_10__["processSelection"].updateProcesses(processes);
+
+                _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+              }));
+            }));
+
+          case 10:
+            processSelection.watchedProcessSelect.disabled = true;
+
+            _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+
+          case 12:
+            _context4.next = 18;
+            break;
+
+          case 14:
+            _context4.prev = 14;
+            _context4.t0 = _context4["catch"](1);
+
+            _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+
+            console.log(_context4.t0);
+
+          case 18:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, null, [[1, 14]]);
+  }));
+
+  return function loadProcesses(_x4) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+var previousWatchedAutomatedProcess;
+var previousClient;
+
+var loadDefaultAlertTriggerDetails =
+/*#__PURE__*/
+function () {
+  var _ref4 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(watchedAutomatedProcessId) {
+    var activeStepContent;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].activeStepContent);
+            _context6.prev = 1;
+
+            _base__WEBPACK_IMPORTED_MODULE_8__["renderLoader"](activeStepContent);
+
+            return _context6.abrupt("return", new Promise(function (resolve, reject) {
+              resolve(configuration.getAlertTriggersDefaultAlertTriggerDetails(watchedAutomatedProcessId).then(
+              /*#__PURE__*/
+              function () {
+                var _ref5 = _asyncToGenerator(
+                /*#__PURE__*/
+                _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(response) {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+                    while (1) {
+                      switch (_context5.prev = _context5.next) {
+                        case 0:
+                          _view__WEBPACK_IMPORTED_MODULE_10__["updateActiveStepContent"](response.data);
+                          previousWatchedAutomatedProcess = new _models_WatchedAutomatedProcess__WEBPACK_IMPORTED_MODULE_5__["default"](watchedAutomatedProcessId);
+                          _context5.next = 4;
+                          return previousWatchedAutomatedProcess.get();
+
+                        case 4:
+                          previousClient = new _models_Client__WEBPACK_IMPORTED_MODULE_4__["default"](previousWatchedAutomatedProcess.data.client_id);
+                          _context5.next = 7;
+                          return previousClient.get();
+
+                        case 7:
+                          _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+
+                        case 8:
+                        case "end":
+                          return _context5.stop();
+                      }
+                    }
+                  }, _callee5);
+                }));
+
+                return function (_x6) {
+                  return _ref5.apply(this, arguments);
+                };
+              }()));
+            }));
+
+          case 6:
+            _context6.prev = 6;
+            _context6.t0 = _context6["catch"](1);
+
+            _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+
+            console.log(_context6.t0);
+
+          case 10:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6, null, [[1, 6]]);
+  }));
+
+  return function loadDefaultAlertTriggerDetails(_x5) {
+    return _ref4.apply(this, arguments);
+  };
+}();
+
+var addDefaultAlertTriggerAlertDefinition =
+/*#__PURE__*/
+function () {
+  var _ref6 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+    var activeStepContent;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].activeStepContent);
+            _context7.prev = 1;
+
+            _base__WEBPACK_IMPORTED_MODULE_8__["renderLoader"](activeStepContent);
+
+            return _context7.abrupt("return", new Promise(function (resolve, reject) {
+              var rank = details.alertDefinitions.list.length + 1;
+              resolve(configuration.getAlertTriggersDefaultAlertTriggerDefinition(rank).then(function (response) {
+                _view__WEBPACK_IMPORTED_MODULE_10__["details"].addAlertDefinition(response.data);
+                _view__WEBPACK_IMPORTED_MODULE_10__["details"].updateAlertDefinitionsCount(rank);
+                var alertDefinition = new _models_AlertDefinition__WEBPACK_IMPORTED_MODULE_6__["default"](rank);
+                details.alertDefinitions.list.push(alertDefinition);
+
+                _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+              }));
+            }));
+
+          case 6:
+            _context7.prev = 6;
+            _context7.t0 = _context7["catch"](1);
+
+            _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+
+            console.log(_context7.t0);
+
+          case 10:
+          case "end":
+            return _context7.stop();
+        }
+      }
+    }, _callee7, null, [[1, 6]]);
+  }));
+
+  return function addDefaultAlertTriggerAlertDefinition() {
+    return _ref6.apply(this, arguments);
+  };
+}();
+
+var addDefaultAlertTriggerRule =
+/*#__PURE__*/
+function () {
+  var _ref7 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8(watchedAutomatedProcessId, alertDefinition, alertDefinitionItem) {
+    var activeStepContent;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+      while (1) {
+        switch (_context8.prev = _context8.next) {
+          case 0:
+            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].activeStepContent);
+            _context8.prev = 1;
+
+            _base__WEBPACK_IMPORTED_MODULE_8__["renderLoader"](activeStepContent);
+
+            return _context8.abrupt("return", new Promise(function (resolve, reject) {
+              var rank = alertDefinition.rules.length + 1;
+              resolve(configuration.getAlertTriggersDefaultAlertTriggerRule(watchedAutomatedProcessId, rank).then(function (response) {
+                _view__WEBPACK_IMPORTED_MODULE_10__["details"].addAlertRule(alertDefinitionItem, response.data);
+                var alertRule = new _models_AlertRule__WEBPACK_IMPORTED_MODULE_7__["default"](rank);
+                alertDefinition.rules.push(alertRule);
+
+                _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+              }));
+            }));
+
+          case 6:
+            _context8.prev = 6;
+            _context8.t0 = _context8["catch"](1);
+
+            _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+
+            console.log(_context8.t0);
+
+          case 10:
+          case "end":
+            return _context8.stop();
+        }
+      }
+    }, _callee8, null, [[1, 6]]);
+  }));
+
+  return function addDefaultAlertTriggerRule(_x7, _x8, _x9) {
+    return _ref7.apply(this, arguments);
+  };
+}();
+
+var updateAlertTriggerRuleType =
+/*#__PURE__*/
+function () {
+  var _ref8 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9(watchedAutomatedProcessId, rule, ruleItem, type) {
+    var activeStepContent;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
+      while (1) {
+        switch (_context9.prev = _context9.next) {
+          case 0:
+            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].activeStepContent);
+            _context9.prev = 1;
+
+            _base__WEBPACK_IMPORTED_MODULE_8__["renderLoader"](activeStepContent);
+
+            return _context9.abrupt("return", new Promise(function (resolve, reject) {
+              var rank = rule.rank;
+              resolve(configuration.getAlertTriggersDefaultAlertTriggerRule(watchedAutomatedProcessId, rank, type).then(function (response) {
+                _view__WEBPACK_IMPORTED_MODULE_10__["details"].updateAlertRule(ruleItem, response.data, type);
+                rule.type = type;
+
+                _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+              }));
+            }));
+
+          case 6:
+            _context9.prev = 6;
+            _context9.t0 = _context9["catch"](1);
+
+            _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+
+            console.log(_context9.t0);
+
+          case 10:
+          case "end":
+            return _context9.stop();
+        }
+      }
+    }, _callee9, null, [[1, 6]]);
+  }));
+
+  return function updateAlertTriggerRuleType(_x10, _x11, _x12, _x13) {
+    return _ref8.apply(this, arguments);
+  };
+}();
+
+var validateAlertTriggerRuleForm = function validateAlertTriggerRuleForm(rule, ruleItem) {
+  try {
+    var valid = false;
+    var rank = ruleItem.dataset.rank;
+    var type = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.typeSelect).value;
+    var title = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.title);
+    var titleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.titleIcon);
+
+    if (type === 'jobs-duration') {
+      valid = validateAlertTriggerJobsDurationRule(rule, ruleItem);
+    } else if (type === 'faulted-jobs-percentage') {
+      valid = validateAlertTriggerFaultedJobsPercentageRule(rule, ruleItem);
+    } else if (type === 'failed-queue-items-percentage') {
+      valid = validateAlertTriggerFailedQueueItemsPercentageRule(rule, ruleItem);
+    } else if (type === 'elastic-search-query') {
+      valid = validateAlertTriggerElasticSearchQueryRule(rule, ruleItem);
+    }
+    /* else if (type === 'kibana-metric-visualization') {
+        valid = validateAlertTriggerKibanaMetricVisualization(rule, ruleItem);
+    }*/
+
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](title, valid, true);
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](titleIcon, valid, true);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+var validateAlertTriggerJobsDurationRule = function validateAlertTriggerJobsDurationRule(rule, ruleItem) {
+  var valid = false;
+  var parameters = {
+    specific: {},
+    standard: {
+      timeSlot: {},
+      involvedEntities: {}
+    }
+  };
+
+  try {
+    var minimalDurationInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.jobsDurationControls.minimalDurationInput);
+    var maximalDurationInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.jobsDurationControls.maximalDurationInput);
+
+    var minimalDurationInputValid = minimalDurationInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["isNormalInteger"](minimalDurationInput.value);
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](minimalDurationInput, minimalDurationInputValid); //_base.toggleFormControlTooltip(minimalDurationInput, minimalDurationInputValid);
+
+
+    var maximalDurationInputValid = maximalDurationInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["isNormalInteger"](maximalDurationInput.value) && minimalDurationInputValid && parseInt(minimalDurationInput.value) < parseInt(maximalDurationInput.value);
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](maximalDurationInput, maximalDurationInputValid); //_base.toggleFormControlTooltip(maximalDurationInput, maximalDurationInputValid);
+
+
+    if (minimalDurationInputValid && maximalDurationInputValid) {
+      parameters.specific = {
+        minimalDuration: parseInt(minimalDurationInput.value),
+        maximalDuration: parseInt(maximalDurationInput.value)
+      };
+    }
+
+    var timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
+    var involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
+    var involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
+    rule.parameters = parameters;
+    valid = minimalDurationInputValid && maximalDurationInputValid && timeSlotInputValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
+  } catch (error) {
+    console.log(error);
+  }
+
+  return valid;
+};
+
+var validateAlertTriggerFaultedJobsPercentageRule = function validateAlertTriggerFaultedJobsPercentageRule(rule, ruleItem) {
+  var valid = false;
+  var parameters = {
+    specific: {},
+    standard: {
+      timeSlot: {},
+      involvedEntities: {}
+    }
+  };
+
+  try {
+    var minimalPercentageInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.faultedJobsPercentageControls.minimalPercentageInput);
+
+    var minimalPercentageInputValid = minimalPercentageInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["isNormalInteger"](minimalPercentageInput.value);
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](minimalPercentageInput, minimalPercentageInputValid); //_base.toggleFormControlTooltip(minimalPercentageInput, minimalPercentageInputValid);
+
+
+    if (minimalPercentageInputValid) {
+      parameters.specific = {
+        minimalPercentage: parseInt(minimalPercentageInput.value)
+      };
+    }
+
+    var timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
+    var relativeTimeSlotInputValid = validateAlertTriggerRuleRelativeTimeSlotControls(ruleItem, parameters);
+    var involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
+    var involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
+    rule.parameters = parameters;
+    valid = minimalPercentageInputValid && timeSlotInputValid && relativeTimeSlotInputValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
+  } catch (error) {
+    console.log(error);
+  }
+
+  return valid;
+};
+
+var validateAlertTriggerFailedQueueItemsPercentageRule = function validateAlertTriggerFailedQueueItemsPercentageRule(rule, ruleItem) {
+  var valid = false;
+  var parameters = {
+    specific: {},
+    standard: {
+      timeSlot: {},
+      involvedEntities: {}
+    }
+  };
+
+  try {
+    var minimalPercentageInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.failedQueueItemsPercentageControls.minimalPercentageInput);
+
+    var minimalPercentageInputValid = minimalPercentageInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["isNormalInteger"](minimalPercentageInput.value);
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](minimalPercentageInput, minimalPercentageInputValid); //_base.toggleFormControlTooltip(minimalPercentageInput, minimalPercentageInputValid);
+
+
+    if (minimalPercentageInputValid) {
+      parameters.specific = {
+        minimalPercentage: parseInt(minimalPercentageInput.value)
+      };
+    }
+
+    var timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
+    var relativeTimeSlotInputValid = validateAlertTriggerRuleRelativeTimeSlotControls(ruleItem, parameters);
+    var involvedQueuesSelectionValid = validateAlertTriggerRuleInvolvedQueuesSelectionControls(ruleItem, parameters);
+    rule.parameters = parameters;
+    valid = minimalPercentageInputValid && timeSlotInputValid && relativeTimeSlotInputValid && involvedQueuesSelectionValid;
+  } catch (error) {
+    console.log(error);
+  }
+
+  return valid;
+};
+
+var validateAlertTriggerElasticSearchQueryRule = function validateAlertTriggerElasticSearchQueryRule(rule, ruleItem) {
+  var valid = false;
+  var parameters = {
+    specific: {},
+    standard: {
+      timeSlot: {},
+      involvedEntities: {}
+    }
+  };
+
+  try {
+    var searchQueryInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.elasticSearchQueryControls.searchQueryInput);
+    var lowerCountInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.elasticSearchQueryControls.lowerCountInput);
+    var higherCountInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.elasticSearchQueryControls.higherCountInput);
+
+    var searchQueryInputValid = searchQueryInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["isValidLuceneString"]("'".concat(searchQueryInput.value.trim(), "'"));
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](searchQueryInput, searchQueryInputValid); //_base.toggleFormControlTooltip(searchQueryInput, searchQueryInputValid);
+
+
+    var lowerCountInputValid = lowerCountInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["isNormalInteger"](lowerCountInput.value);
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](lowerCountInput, lowerCountInputValid); //_base.toggleFormControlTooltip(lowerCountInput, lowerCountInputValid);
+
+
+    var higherCountInputValid = higherCountInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["isNormalInteger"](higherCountInput.value) && lowerCountInputValid && parseInt(lowerCountInput.value) < parseInt(higherCountInput.value);
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](higherCountInput, higherCountInputValid); //_base.toggleFormControlTooltip(higherCountInput, higherCountInputValid);
+
+
+    if (lowerCountInputValid && higherCountInputValid) {
+      parameters.specific = {
+        searchQuery: searchQueryInput.value.trim(),
+        lowerCount: parseInt(lowerCountInput.value),
+        higherCount: parseInt(higherCountInput.value)
+      };
+    }
+
+    var timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
+    var relativeTimeSlotInputValid = validateAlertTriggerRuleRelativeTimeSlotControls(ruleItem, parameters);
+    var involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
+    var involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
+    rule.parameters = parameters;
+    valid = searchQueryInputValid && lowerCountInputValid && higherCountInputValid && timeSlotInputValid && relativeTimeSlotInputValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
+  } catch (error) {
+    console.log(error);
+  }
+
+  return valid;
+};
+/*
+const validateAlertTriggerKibanaMetricVisualization = (rule, ruleItem) => {
+    let valid = false;
+    let parameters = {
+        specific: {},
+        standard: {
+            timeSlot: {},
+            involvedEntities: {}
+        }
+    };
+
+    try {
+        const metricVisualizationSelect = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.kibanaMetricVisualizationControls.metricVisualizationSelect);
+        const lowerCountInput = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.kibanaMetricVisualizationControls.lowerCountInput);
+        const higherCountInput = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.kibanaMetricVisualizationControls.higherCountInput);
+
+        const metricVisualizationSelectValid = metricVisualizationSelect.value !== 'none';
+        _base.toggleSuccessDangerState(metricVisualizationSelect.parentNode, metricVisualizationSelectValid);
+        //_base.toggleFormControlTooltip(metricVisualizationSelect.parentNode, metricVisualizationSelectValid);
+
+        const lowerCountInputValid = lowerCountInput.value.trim() !== '' && _base.isNormalInteger(lowerCountInput.value);
+        _base.toggleSuccessDangerState(lowerCountInput, lowerCountInputValid);
+        //_base.toggleFormControlTooltip(lowerCountInput, lowerCountInputValid);
+
+        const higherCountInputValid = higherCountInput.value.trim() !== '' && _base.isNormalInteger(higherCountInput.value)
+            && lowerCountInputValid && parseInt(lowerCountInput.value) < parseInt(higherCountInput.value);
+        _base.toggleSuccessDangerState(higherCountInput, higherCountInputValid);
+        //_base.toggleFormControlTooltip(higherCountInput, higherCountInputValid);
+        
+        if (lowerCountInputValid && higherCountInputValid) {
+            parameters.specific = {
+                metricVisualization: metricVisualizationSelect.value,
+                lowerCount: parseInt(lowerCountInput.value),
+                higherCount: parseInt(higherCountInput.value)
+            };
+        }
+        
+        const timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
+        const relativeTimeSlotInputValid = validateAlertTriggerRuleRelativeTimeSlotControls(ruleItem, parameters);
+        const involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
+        const involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
+
+        rule.parameters = parameters;
+
+        valid = metricVisualizationSelectValid && lowerCountInputValid && higherCountInputValid && timeSlotInputValid
+            && relativeTimeSlotInputValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
+    } catch (error) {
+        console.log(error);
+    }
+
+    return valid;
+};
+*/
+
+
+var validateAlertTriggerRuleTimeSlotControls = function validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters) {
+  var valid = false;
+
+  try {
+    var timeSlotInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.timeSlotInput);
+    var minStart = timeSlotInput.dataset.startTime;
+    var maxEnd = timeSlotInput.dataset.endTime;
+    var timeSlotInputFrom = timeSlotInput.parentNode.querySelector(_base__WEBPACK_IMPORTED_MODULE_8__["selectors"].dateTimeCalendarFromInput);
+    var timeSlotInputTo = timeSlotInput.parentNode.querySelector(_base__WEBPACK_IMPORTED_MODULE_8__["selectors"].dateTimeCalendarToInput);
+    valid = timeSlotInputFrom.value.trim() !== '' && timeSlotInputTo.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["timeStringToFloat"](timeSlotInputFrom.value.trim()) >= _base__WEBPACK_IMPORTED_MODULE_8__["timeStringToFloat"](minStart) && _base__WEBPACK_IMPORTED_MODULE_8__["timeStringToFloat"](timeSlotInputTo.value.trim()) <= _base__WEBPACK_IMPORTED_MODULE_8__["timeStringToFloat"](maxEnd) && _base__WEBPACK_IMPORTED_MODULE_8__["timeStringToFloat"](timeSlotInputFrom.value.trim()) < _base__WEBPACK_IMPORTED_MODULE_8__["timeStringToFloat"](timeSlotInputTo.value.trim());
+
+    if (valid) {
+      var calendar = timeSlotInput.bulmaCalendar;
+      parameters.standard.timeSlot = {
+        from: calendar.startTime.toTimeString(),
+        to: calendar.endTime.toTimeString()
+      };
+    }
+
+    var timeSlotInputWrapper = timeSlotInput.closest(_base__WEBPACK_IMPORTED_MODULE_8__["selectors"].dateTimeCalendarWrapper);
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](timeSlotInputWrapper, valid); //_base.toggleFormControlTooltip(timeSlotInput, valid);
+
+  } catch (error) {
+    console.log(error);
+  }
+
+  return valid;
+};
+
+var validateAlertTriggerRuleRelativeTimeSlotControls = function validateAlertTriggerRuleRelativeTimeSlotControls(ruleItem, parameters) {
+  var valid = false;
+
+  try {
+    var relativeTimeSlotInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.relativeTimeSlotInput);
+    valid = relativeTimeSlotInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["isNormalInteger"](relativeTimeSlotInput.value) || relativeTimeSlotInput.value.trim() === '';
+
+    if (valid) {
+      parameters.standard.relativeTimeSlot = relativeTimeSlotInput.value.trim() !== '' ? parseInt(relativeTimeSlotInput.value) : null;
+    }
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](relativeTimeSlotInput, valid); //_base.toggleFormControlTooltip(relativeTimeSlotInput, valid);
+
+  } catch (error) {
+    console.log(error);
+  }
+
+  return valid;
+};
+
+var validateAlertTriggerRuleInvolvedProcessesSelectionControls = function validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters) {
+  var valid = false;
+
+  try {
+    var involvedProcessesTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes.title);
+    var involvedProcessesTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes.titleIcon);
+    var involvedProcessesCount = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes.count);
+
+    var selectedProcesses = _toConsumableArray(ruleItem.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes["switch"])).filter(function (item) {
+      return item.checked;
+    });
+
+    var selectedProcessesCount = selectedProcesses.length;
+    involvedProcessesCount.innerHTML = selectedProcessesCount;
+    valid = selectedProcessesCount > 0;
+
+    if (valid) {
+      parameters.standard.involvedEntities.processes = selectedProcesses.map(function (item) {
+        return item.dataset.id;
+      });
+    }
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedProcessesTitle, valid, true);
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedProcessesTitleIcon, valid, true);
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedProcessesCount, valid);
+  } catch (error) {
+    console.log(error);
+  }
+
+  return valid;
+};
+
+var validateAlertTriggerRuleInvolvedRobotsSelectionControls = function validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters) {
+  var valid = false;
+
+  try {
+    var involvedRobotsTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots.title);
+    var involvedRobotsTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots.titleIcon);
+    var involvedRobotsCount = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots.count);
+
+    var selectedRobots = _toConsumableArray(ruleItem.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots["switch"])).filter(function (item) {
+      return item.checked;
+    });
+
+    var selectedRobotsCount = selectedRobots.length;
+    involvedRobotsCount.innerHTML = selectedRobotsCount;
+    valid = selectedRobotsCount > 0;
+
+    if (valid) {
+      parameters.standard.involvedEntities.robots = selectedRobots.map(function (item) {
+        return item.dataset.id;
+      });
+    }
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedRobotsTitle, valid, true);
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedRobotsTitleIcon, valid, true);
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedRobotsCount, valid);
+  } catch (error) {
+    console.log(error);
+  }
+
+  return valid;
+};
+
+var validateAlertTriggerRuleInvolvedQueuesSelectionControls = function validateAlertTriggerRuleInvolvedQueuesSelectionControls(ruleItem, parameters) {
+  var valid = false;
+
+  try {
+    var involvedQueuesTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues.title);
+    var involvedQueuesTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues.titleIcon);
+    var involvedQueuesCount = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues.count);
+
+    var selectedQueues = _toConsumableArray(ruleItem.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues["switch"])).filter(function (item) {
+      return item.checked;
+    });
+
+    var selectedQueuesCount = selectedQueues.length;
+    involvedQueuesCount.innerHTML = selectedQueuesCount;
+    valid = selectedQueuesCount > 0;
+
+    if (valid) {
+      parameters.standard.involvedEntities.queues = selectedQueues.map(function (item) {
+        return item.dataset.id;
+      });
+    }
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedQueuesTitle, valid, true);
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedQueuesTitleIcon, valid, true);
+
+    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedQueuesCount, valid);
+  } catch (error) {
+    console.log(error);
+  }
+
+  return valid;
+};
+
+var resetForm = function resetForm() {
+  try {} catch (error) {
+    console.log(error);
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/views/configuration/alert-trigger/view.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/views/configuration/alert-trigger/view.js ***!
+  \****************************************************************/
+/*! exports provided: updateTable, updateActiveStepContent, processSelection, details */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTable", function() { return updateTable; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateActiveStepContent", function() { return updateActiveStepContent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "processSelection", function() { return processSelection; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "details", function() { return details; });
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./resources/js/views/configuration/alert-trigger/base.js");
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../base */ "./resources/js/views/base.js");
+/* harmony import */ var bulma_calendar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bulma-calendar */ "./node_modules/bulma-calendar/dist/js/bulma-calendar.js");
+/* harmony import */ var bulma_calendar__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bulma_calendar__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+var updateTable = function updateTable(markup) {
+  var table = _base__WEBPACK_IMPORTED_MODULE_1__["update"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].table).closest(_base__WEBPACK_IMPORTED_MODULE_1__["selectors"].tableDataTablesWrapper), markup);
+
+  $(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].table).DataTable();
+  return table;
+};
+var updateActiveStepContent = function updateActiveStepContent(markup) {
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].activeStepContent).innerHTML = markup;
+};
+var processSelection = {
+  updateProcesses: function updateProcesses(processes) {
+    processes.forEach(function (process_) {
+      var option = document.createElement('option');
+      option.text = process_['name'];
+      option.value = process_['id'];
+      _base__WEBPACK_IMPORTED_MODULE_0__["elements"].processSelection.watchedProcessSelect.add(option);
+    });
+    _base__WEBPACK_IMPORTED_MODULE_0__["elements"].processSelection.watchedProcessSelect.disabled = false;
+  }
+};
+var details = {
+  updateAlertDefinitionsCount: function updateAlertDefinitionsCount(count) {
+    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.count).innerHTML = count;
+  },
+  addAlertDefinition: function addAlertDefinition(markup) {
+    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.list).appendChild(_base__WEBPACK_IMPORTED_MODULE_1__["htmlToElement"](markup));
+  },
+  deleteAlertDefinition: function deleteAlertDefinition(alertDefinitionItem) {
+    var rank = parseInt(alertDefinitionItem.dataset.rank);
+    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.list).removeChild(alertDefinitionItem); // change rank of all alert definition items when > rank
+
+    var alertDefinitionItems = document.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.item);
+    alertDefinitionItems.forEach(function (alertDefinitionItem) {
+      var alertDefinitionItemRank = parseInt(alertDefinitionItem.dataset.rank);
+
+      if (alertDefinitionItemRank > rank) {
+        alertDefinitionItem.dataset.rank = alertDefinitionItemRank - 1;
+        alertDefinitionItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.titleRank).innerHTML = alertDefinitionItemRank - 1;
+      }
+    });
+  },
+  updateAlertDefinitionLevel: function updateAlertDefinitionLevel(alertDefinitionItem, level) {
+    var state = "is-".concat(level);
+    var textState = "has-text-".concat(level);
+    var title = alertDefinitionItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.title);
+    var titleIcon = alertDefinitionItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.titleIcon);
+
+    _base__WEBPACK_IMPORTED_MODULE_1__["removeStates"](alertDefinitionItem);
+
+    _base__WEBPACK_IMPORTED_MODULE_1__["removeStates"](title);
+
+    _base__WEBPACK_IMPORTED_MODULE_1__["removeStates"](titleIcon);
+
+    alertDefinitionItem.classList.add(state);
+    title.classList.add(textState);
+    titleIcon.classList.add(textState);
+  },
+  addAlertRule: function addAlertRule(alertDefinitionItem, markup) {
+    alertDefinitionItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.list).appendChild(_base__WEBPACK_IMPORTED_MODULE_1__["htmlToElement"](markup));
+  },
+  deleteAlertRule: function deleteAlertRule(alertDefinitionItem, ruleItem) {
+    var rank = parseInt(ruleItem.dataset.rank);
+    alertDefinitionItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.list).removeChild(ruleItem); // change rank of all rule items when > rank
+
+    var ruleItems = alertDefinitionItem.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.item);
+    ruleItems.forEach(function (ruleItem) {
+      var ruleItemRank = parseInt(ruleItem.dataset.rank);
+
+      if (ruleItemRank > rank) {
+        ruleItem.dataset.rank = ruleItemRank - 1;
+        ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.titleRank).innerHTML = ruleItemRank - 1;
+      }
+    });
+  },
+  updateAlertRule: function updateAlertRule(ruleItem, markup, ruleType) {
+    ruleItem = _base__WEBPACK_IMPORTED_MODULE_1__["update"](ruleItem, markup);
+    var title = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.title);
+    var titleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.titleIcon);
+
+    _base__WEBPACK_IMPORTED_MODULE_1__["toggleSuccessDangerState"](title, false, true);
+
+    _base__WEBPACK_IMPORTED_MODULE_1__["toggleSuccessDangerState"](titleIcon, false, true);
+
+    if (ruleType !== 'none') {
+      var calendarSelector = "\n                ".concat(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.item, "[data-rank=\"").concat(ruleItem.dataset.rank, "\"] ").concat(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.timeSlotInput, "\n            ");
+      var startTime = document.querySelector(calendarSelector).dataset.startTime.split(':');
+      var endTime = document.querySelector(calendarSelector).dataset.endTime.split(':');
+      bulma_calendar__WEBPACK_IMPORTED_MODULE_2___default.a.attach(calendarSelector, {
+        type: 'time',
+        lang: 'en',
+        isRange: true,
+        headerPosition: 'bottom',
+        labelFrom: 'From',
+        labelTo: 'To',
+        timeFormat: 'HH:mm',
+        showFooter: true,
+        start: new Date(1970, 1, 1, startTime[0], startTime[1], 0),
+        end: new Date(1970, 1, 1, endTime[0], endTime[1], 0)
+      });
+    }
+
+    return ruleItem;
+  }
 };
 
 /***/ }),
@@ -96056,8 +99876,8 @@ var selectors = {
   tenantInput: 'input#tenant',
   apiUserUsernameInput: 'input#api-user-username',
   apiUserPasswordInput: 'input#api-user-password',
-  kibanaUrlInput: 'input#kibana-url',
-  kibanaIndexInput: 'input#kibana-index',
+  elasticSearchUrlInput: 'input#elastic-search-url',
+  elasticSearchIndexInput: 'input#elastic-search-index',
   createButton: 'button.create',
   createButtonChildren: 'button.create *',
   resetButton: 'button.reset',
@@ -96112,8 +99932,8 @@ var urlInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["select
 var tenantInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
 var apiUserUsernameInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
 var apiUserPasswordInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
-var kibanaUrlInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].kibanaUrlInput);
-var kibanaIndexInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].kibanaIndexInput);
+var elasticSearchUrlInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
+var elasticSearchIndexInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
 var createButton = _base__WEBPACK_IMPORTED_MODULE_5__["elements"].createButton;
 var resetButton = _base__WEBPACK_IMPORTED_MODULE_5__["elements"].resetButton;
 var init = function init() {
@@ -96168,8 +99988,8 @@ var checkForm = function checkForm(e) {
   var tenantInputValid = false;
   var apiUserUsernameInputValid = false;
   var apiUserPasswordInputValid = false;
-  var kibanaUrlInputValid = false;
-  var kibanaIndexInputValid = false;
+  var elasticSearchUrlInputValid = false;
+  var elasticSearchIndexInputValid = false;
   nameInputValid = !(nameInput.value.trim() === '');
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](nameInput, nameInputValid);
@@ -96194,15 +100014,15 @@ var checkForm = function checkForm(e) {
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](apiUserPasswordInput, apiUserPasswordInputValid);
 
-  kibanaUrlInputValid = !(kibanaUrlInput.value.trim() === '' || !_base__WEBPACK_IMPORTED_MODULE_4__["validURL"](kibanaUrlInput.value));
+  elasticSearchUrlInputValid = !(elasticSearchUrlInput.value.trim() === '' || !_base__WEBPACK_IMPORTED_MODULE_4__["validURL"](elasticSearchUrlInput.value));
 
-  _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](kibanaUrlInput, kibanaUrlInputValid);
+  _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](elasticSearchUrlInput, elasticSearchUrlInputValid);
 
-  kibanaIndexInputValid = !(kibanaIndexInput.value.trim() === '');
+  elasticSearchIndexInputValid = !(elasticSearchIndexInput.value.trim() === '');
 
-  _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](kibanaIndexInput, kibanaIndexInputValid);
+  _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](elasticSearchIndexInput, elasticSearchIndexInputValid);
 
-  var formValid = nameInputValid && codeInputValid && urlInputValid && tenantInputValid && apiUserUsernameInputValid && apiUserPasswordInputValid && kibanaUrlInputValid && kibanaIndexInputValid;
+  var formValid = nameInputValid && codeInputValid && urlInputValid && tenantInputValid && apiUserUsernameInputValid && apiUserPasswordInputValid && elasticSearchUrlInputValid && elasticSearchIndexInputValid;
   createButton.disabled = !formValid;
 };
 
@@ -96224,7 +100044,7 @@ function () {
 
             return _context2.abrupt("return", new Promise(function (resolve, reject) {
               var orchestrator = new _models_Orchestrator__WEBPACK_IMPORTED_MODULE_3__["default"]();
-              resolve(orchestrator.save(nameInput.value.trim(), codeInput.value.trim(), urlInput.value.trim(), tenantInput.value.trim(), apiUserUsernameInput.value.trim(), apiUserUsernameInput.value, kibanaUrlInput.value.trim(), kibanaIndexInput.value.trim()).then(function (res) {
+              resolve(orchestrator.save(nameInput.value.trim(), codeInput.value.trim(), urlInput.value.trim(), tenantInput.value.trim(), apiUserUsernameInput.value.trim(), apiUserPasswordInput.value, elasticSearchUrlInput.value.trim(), elasticSearchIndexInput.value.trim()).then(function (res) {
                 resetForm();
 
                 _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](addForm);
@@ -96314,9 +100134,9 @@ var resetForm = function resetForm() {
 
     _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](apiUserPasswordInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](kibanaUrlInput);
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](elasticSearchUrlInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](kibanaIndexInput);
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](elasticSearchIndexInput);
   } catch (error) {
     console.log(error);
   }
@@ -96371,12 +100191,9 @@ var selectors = {
   operationalHandbookPageURLInput: 'input#operational_handbook_page_url',
   kibanaDashboardURLInput: 'input#kibana_dashboard_url',
   additionalInformationTextarea: 'textarea#additional_information',
-  involvedProcessesSection: 'div.involved-processes-section',
-  involvedProcessesSectionTitle: 'div.involved-processes-section h1.subtitle',
-  involvedProcessesCount: 'div.involved-processes-section span.tag',
-  involvedProcessesTable: 'table.involved-processes-table',
   runningPeriodSection: 'div.running-period-section',
-  runningPeriodSectionTitle: 'div.running-period-section h1.subtitle',
+  runningPeriodSectionTitle: 'div.running-period-section .subtitle-level h1',
+  runningPeriodSectionTitleIcon: 'div.running-period-section .subtitle-level span.icon',
   runningPeriodCalendar: 'input#running_period_times',
   runningPeriodMondayCheckbox: 'input#running_period_monday',
   runningPeriodTuesdayCheckbox: 'input#running_period_tuesday',
@@ -96385,6 +100202,21 @@ var selectors = {
   runningPeriodFridayCheckbox: 'input#running_period_friday',
   runningPeriodSaturdayCheckbox: 'input#running_period_saturday',
   runningPeriodSundayCheckbox: 'input#running_period_sunday',
+  involvedProcessesSection: 'div.involved-processes-section',
+  involvedProcessesSectionTitle: 'div.involved-processes-section .subtitle-level h1',
+  involvedProcessesSectionTitleIcon: 'div.involved-processes-section .subtitle-level span.icon',
+  involvedProcessesCount: 'div.involved-processes-section span.tag',
+  involvedProcessesTable: 'table.involved-processes-table',
+  involvedRobotsSection: 'div.involved-robots-section',
+  involvedRobotsSectionTitle: 'div.involved-robots-section .subtitle-level h1',
+  involvedRobotsSectionTitleIcon: 'div.involved-robots-section .subtitle-level span.icon',
+  involvedRobotsCount: 'div.involved-robots-section span.tag',
+  involvedRobotsTable: 'table.involved-robots-table',
+  involvedQueuesSection: 'div.involved-queues-section',
+  involvedQueuesSectionTitle: 'div.involved-queues-section .subtitle-level h1',
+  involvedQueuesSectionTitleIcon: 'div.involved-queues-section .subtitle-level span.icon',
+  involvedQueuesCount: 'div.involved-queues-section span.tag',
+  involvedQueuesTable: 'table.involved-queues-table',
   createButton: 'button.create',
   createButtonChildren: 'button.create *',
   resetButton: 'button.reset',
@@ -96395,9 +100227,19 @@ var elements = {
   addForm: document.querySelector(selectors.addForm),
   runningPeriodSection: document.querySelector(selectors.runningPeriodSection),
   runningPeriodSectionTitle: document.querySelector(selectors.runningPeriodSectionTitle),
+  runningPeriodSectionTitleIcon: document.querySelector(selectors.runningPeriodSectionTitleIcon),
   involvedProcessesSection: document.querySelector(selectors.involvedProcessesSection),
   involvedProcessesSectionTitle: document.querySelector(selectors.involvedProcessesSectionTitle),
+  involvedProcessesSectionTitleIcon: document.querySelector(selectors.involvedProcessesSectionTitleIcon),
   involvedProcessesCount: document.querySelector(selectors.involvedProcessesCount),
+  involvedRobotsSection: document.querySelector(selectors.involvedRobotsSection),
+  involvedRobotsSectionTitle: document.querySelector(selectors.involvedRobotsSectionTitle),
+  involvedRobotsSectionTitleIcon: document.querySelector(selectors.involvedRobotsSectionTitleIcon),
+  involvedRobotsCount: document.querySelector(selectors.involvedRobotsCount),
+  involvedQueuesSection: document.querySelector(selectors.involvedQueuesSection),
+  involvedQueuesSectionTitle: document.querySelector(selectors.involvedQueuesSectionTitle),
+  involvedQueuesSectionTitleIcon: document.querySelector(selectors.involvedQueuesSectionTitleIcon),
+  involvedQueuesCount: document.querySelector(selectors.involvedQueuesCount),
   createButton: document.querySelector(selectors.createButton),
   resetButton: document.querySelector(selectors.resetButton)
 };
@@ -96450,6 +100292,7 @@ var operationalHandbookPageURLInput = document.querySelector(_base__WEBPACK_IMPO
 var kibanaDashboardURLInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].kibanaDashboardURLInput);
 var additionalInformationTextarea = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].additionalInformationTextarea);
 var runningPeriodSectionTitle = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].runningPeriodSectionTitle;
+var runningPeriodSectionTitleIcon = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].runningPeriodSectionTitleIcon;
 var runningPeriodMondayCheckbox = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodMondayCheckbox);
 var runningPeriodTuesdayCheckbox = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodTuesdayCheckbox);
 var runningPeriodWednesdayCheckbox = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodWednesdayCheckbox);
@@ -96468,17 +100311,23 @@ var runningPeriodCalendar = bulma_calendar__WEBPACK_IMPORTED_MODULE_2___default.
   showFooter: true
 });
 var involvedProcessesSectionTitle = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedProcessesSectionTitle;
+var involvedProcessesSectionTitleIcon = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedProcessesSectionTitleIcon;
 var involvedProcessesCount = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedProcessesCount;
+var involvedRobotsSectionTitle = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsSectionTitle;
+var involvedRobotsSectionTitleIcon = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsSectionTitleIcon;
+var involvedRobotsCount = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsCount;
+var involvedQueuesSectionTitle = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedQueuesSectionTitle;
+var involvedQueuesSectionTitleIcon = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedQueuesSectionTitleIcon;
+var involvedQueuesCount = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedQueuesCount;
 var createButton = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].createButton;
 var resetButton = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].resetButton;
 var init = function init() {
   try {
-    _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.addEventListener('keyup', checkForm);
-    _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.addEventListener('change', checkForm);
-    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar).bulmaCalendar.on('select clear', checkForm);
-    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].dateTimeFooterCancelButton).addEventListener('click', checkForm);
-    clientSelect.addEventListener('change', loadScripts);
-    _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.addEventListener('click',
+    _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.addEventListener('keyup', validateForm);
+    _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.addEventListener('change', validateForm);
+    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar).bulmaCalendar.on('select clear', validateForm);
+    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].dateTimeFooterCancelButton).addEventListener('click', validateForm);
+    clientSelect.addEventListener('change',
     /*#__PURE__*/
     function () {
       var _ref = _asyncToGenerator(
@@ -96487,6 +100336,32 @@ var init = function init() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
+              case 0:
+                loadProcesses(e);
+                loadRobots(e);
+                loadQueues(e);
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }());
+    _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.addEventListener('click',
+    /*#__PURE__*/
+    function () {
+      var _ref2 = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].createButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].createButtonChildren)) && !createButton.disabled) {
                   create().then(function (res) {
@@ -96504,14 +100379,14 @@ var init = function init() {
 
               case 2:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }));
 
-      return function (_x) {
-        return _ref.apply(this, arguments);
+      return function (_x2) {
+        return _ref2.apply(this, arguments);
       };
     }());
   } catch (error) {
@@ -96519,7 +100394,7 @@ var init = function init() {
   }
 };
 
-var checkForm = function checkForm(e) {
+var validateForm = function validateForm() {
   var clientSelectValid = !(clientSelect.value === "0");
 
   _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](clientSelect.parentNode, clientSelectValid);
@@ -96551,37 +100426,75 @@ var checkForm = function checkForm(e) {
 
   _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](runningPeriodSectionTitle, runningPeriodDaysValid && runningPeriodCalendarValid, true);
 
-  var count = 0;
+  _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](runningPeriodSectionTitleIcon, runningPeriodDaysValid && runningPeriodCalendarValid, true);
+
+  var selectedProcessesCount = 0;
 
   if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)) {
-    count = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable).DataTable().rows({
+    selectedProcessesCount = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable).DataTable().rows({
       selected: true
     }).count();
   }
 
-  involvedProcessesCount.innerHTML = count;
-  var involvedProcessesTableValid = count > 0;
+  involvedProcessesCount.innerHTML = selectedProcessesCount;
+  var involvedProcessesTableValid = selectedProcessesCount > 0;
 
   _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](involvedProcessesSectionTitle, involvedProcessesTableValid, true);
 
+  _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](involvedProcessesSectionTitleIcon, involvedProcessesTableValid, true);
+
   _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](involvedProcessesCount, involvedProcessesTableValid);
+
+  var selectedRobotsCount = 0;
+
+  if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)) {
+    selectedRobotsCount = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).DataTable().rows({
+      selected: true
+    }).count();
+  }
+
+  involvedRobotsCount.innerHTML = selectedRobotsCount;
+  var involvedRobotsTableValid = selectedRobotsCount > 0;
+
+  _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](involvedRobotsSectionTitle, involvedRobotsTableValid, true);
+
+  _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](involvedRobotsSectionTitleIcon, involvedRobotsTableValid, true);
+
+  _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](involvedRobotsCount, involvedRobotsTableValid);
+
+  var selectedQueuesCount = 0;
+
+  if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)) {
+    selectedQueuesCount = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).DataTable().rows({
+      selected: true
+    }).count();
+  }
+
+  involvedQueuesCount.innerHTML = selectedQueuesCount;
+  var involvedQueuesTableValid = selectedQueuesCount > 0;
+
+  _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](involvedQueuesSectionTitle, involvedQueuesTableValid, true);
+
+  _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](involvedQueuesSectionTitleIcon, involvedQueuesTableValid, true);
+
+  _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](involvedQueuesCount, involvedQueuesTableValid);
 
   _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](additionalInformationTextarea, true);
 
-  var formValid = nameInputValid && codeInputValid && clientSelectValid && operationalHandbookPageURLInputValid && kibanaDashboardURLInputValid && runningPeriodDaysValid && runningPeriodCalendarValid && involvedProcessesTableValid;
+  var formValid = nameInputValid && codeInputValid && clientSelectValid && operationalHandbookPageURLInputValid && kibanaDashboardURLInputValid && runningPeriodDaysValid && runningPeriodCalendarValid && involvedProcessesTableValid && involvedRobotsTableValid && involvedQueuesTableValid;
   createButton.disabled = !formValid;
 };
 
-var loadScripts =
+var loadProcesses =
 /*#__PURE__*/
 function () {
-  var _ref2 = _asyncToGenerator(
+  var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(e) {
     var id, client;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context3.prev = _context3.next) {
           case 0:
             try {
               _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedProcessesSection);
@@ -96596,7 +100509,7 @@ function () {
                   var selected = [];
 
                   if (data.error) {
-                    toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error(data.error, null, {
+                    toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Unable to load processes: ".concat(data.error), null, {
                       positionClass: 'toast-bottom-center'
                     });
 
@@ -96626,8 +100539,11 @@ function () {
                         title: 'Environment',
                         data: 'EnvironmentName'
                       }]
-                    }).on('select deselect', checkForm);
-                    checkForm(null);
+                    }).on('select deselect', function () {
+                      validateForm();
+                      refreshInvolvedRobotsTable();
+                    });
+                    validateForm();
                   }
 
                   _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedProcessesSection);
@@ -96636,6 +100552,8 @@ function () {
                 if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)) {
                   $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable).DataTable().clear().draw();
                 }
+
+                _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedProcessesSection);
               }
             } catch (error) {
               _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedProcessesSection);
@@ -96645,30 +100563,268 @@ function () {
 
           case 1:
           case "end":
-            return _context2.stop();
+            return _context3.stop();
         }
       }
-    }, _callee2);
+    }, _callee3);
   }));
 
-  return function loadScripts(_x2) {
-    return _ref2.apply(this, arguments);
+  return function loadProcesses(_x3) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+var involvedRobotsTableData;
+
+var loadRobots =
+/*#__PURE__*/
+function () {
+  var _ref4 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(e) {
+    var id, client;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            try {
+              _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsSection);
+
+              id = e.target.value.trim();
+
+              if (id !== "0") {
+                client = new _models_Client__WEBPACK_IMPORTED_MODULE_5__["default"](id);
+                client.getRobotsFromOrchestrator().then(function (response) {
+                  var data = response.data;
+                  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).classList.add('table');
+                  var selected = [];
+
+                  if (data.error) {
+                    toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Unable to load robots: ".concat(data.error), null, {
+                      positionClass: 'toast-bottom-center'
+                    });
+
+                    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)) {
+                      $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).DataTable().clear().draw();
+                    }
+                  } else {
+                    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)) {
+                      $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).DataTable().destroy();
+                    }
+
+                    $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).DataTable({
+                      select: {
+                        style: 'multi',
+                        className: 'is-selected',
+                        info: false
+                      },
+                      rowId: 'Id',
+                      data: data,
+                      columns: [{
+                        title: 'Name',
+                        data: 'Name'
+                      }, {
+                        title: 'Description',
+                        data: 'Description'
+                      }, {
+                        title: 'Username',
+                        data: 'Username'
+                      }, {
+                        title: 'Type',
+                        data: 'Type'
+                      }, {
+                        title: 'Environments',
+                        data: 'RobotEnvironments'
+                      }]
+                    }).on('select deselect', validateForm);
+                    involvedRobotsTableData = data;
+                    validateForm();
+                  }
+
+                  _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsSection);
+                });
+              } else {
+                if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)) {
+                  $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).DataTable().clear().draw();
+                }
+
+                _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsSection);
+              }
+            } catch (error) {
+              _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsSection);
+
+              console.log(error);
+            }
+
+          case 1:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+
+  return function loadRobots(_x4) {
+    return _ref4.apply(this, arguments);
+  };
+}();
+
+var refreshInvolvedRobotsTable = function refreshInvolvedRobotsTable() {
+  try {
+    _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedProcessesTable);
+
+    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)) {
+      var involvedProcessesRows = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable).DataTable().rows({
+        selected: true
+      }).data();
+      var involvedProcessesEnvironments = [];
+
+      for (var i = 0; i < involvedProcessesRows.length; i++) {
+        var environment = involvedProcessesRows[i]['EnvironmentName'];
+
+        if (involvedProcessesEnvironments.indexOf(environment) < 0) {
+          involvedProcessesEnvironments.push(environment);
+        }
+      }
+
+      if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)) {
+        var table = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).DataTable();
+        var previouslySelectedRows = table.rows({
+          selected: true
+        }).data();
+        table.clear().rows.add(involvedRobotsTableData);
+
+        if (involvedProcessesRows.length > 0) {
+          table.rows(function (index, data, node) {
+            var environments = data['RobotEnvironments'].split(',').map(function (item) {
+              return item.trim();
+            });
+            return environments.some(function (item) {
+              return involvedProcessesEnvironments.indexOf(item) < 0;
+            });
+          }).remove();
+        }
+
+        table.draw(); // reselect previously selected rows
+
+        table.rows(function (index, data, node) {
+          return previouslySelectedRows.map(function (item) {
+            return item['Id'];
+          }).indexOf(data['Id']) >= 0;
+        }).select();
+      }
+
+      validateForm();
+    }
+
+    _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsTable);
+  } catch (error) {
+    _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsTable);
+
+    console.log(error);
+  }
+};
+
+var loadQueues =
+/*#__PURE__*/
+function () {
+  var _ref5 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(e) {
+    var id, client;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            try {
+              _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedQueuesSection);
+
+              id = e.target.value.trim();
+
+              if (id !== "0") {
+                client = new _models_Client__WEBPACK_IMPORTED_MODULE_5__["default"](id);
+                client.getQueuesFromOrchestrator().then(function (response) {
+                  var data = response.data;
+                  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).classList.add('table');
+                  var selected = [];
+
+                  if (data.error) {
+                    toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Unable to load queues: ".concat(data.error), null, {
+                      positionClass: 'toast-bottom-center'
+                    });
+
+                    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)) {
+                      $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).DataTable().clear().draw();
+                    }
+                  } else {
+                    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)) {
+                      $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).DataTable().destroy();
+                    }
+
+                    $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).DataTable({
+                      select: {
+                        style: 'multi',
+                        className: 'is-selected',
+                        info: false
+                      },
+                      rowId: 'Id',
+                      data: data,
+                      columns: [{
+                        title: 'Name',
+                        data: 'Name'
+                      }, {
+                        title: 'Description',
+                        data: 'Description'
+                      }]
+                    }).on('select deselect', validateForm);
+                    validateForm();
+                  }
+
+                  _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedQueuesSection);
+                });
+              } else {
+                if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)) {
+                  $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).DataTable().clear().draw();
+                }
+
+                _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedQueuesSection);
+              }
+            } catch (error) {
+              _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedQueuesSection);
+
+              console.log(error);
+            }
+
+          case 1:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5);
+  }));
+
+  return function loadQueues(_x5) {
+    return _ref5.apply(this, arguments);
   };
 }();
 
 var create =
 /*#__PURE__*/
 function () {
-  var _ref3 = _asyncToGenerator(
+  var _ref6 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-    var addForm, involvedProcessesRows, involvedProcesses, i, involvedProcess;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+    var addForm, involvedProcessesRows, involvedProcesses, i, involvedProcess, involvedRobotsRows, involvedRobots, _i, involvedRobot, involvedQueuesRows, involvedQueues, _i2, involvedQueue;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
       while (1) {
-        switch (_context3.prev = _context3.next) {
+        switch (_context6.prev = _context6.next) {
           case 0:
             addForm = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm;
-            _context3.prev = 1;
+            _context6.prev = 1;
+
+            _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](addForm);
+
             involvedProcessesRows = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable).DataTable().rows({
               selected: true
             }).data();
@@ -96686,58 +100842,87 @@ function () {
               involvedProcesses.push(involvedProcess);
             }
 
-            _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](addForm);
+            involvedRobotsRows = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).DataTable().rows({
+              selected: true
+            }).data();
+            involvedRobots = [];
 
-            return _context3.abrupt("return", new Promise(function (resolve, reject) {
+            for (_i = 0; _i < involvedRobotsRows.length; _i++) {
+              involvedRobot = {
+                name: involvedRobotsRows[_i]['Name'],
+                machine_name: involvedRobotsRows[_i]['MachineName'],
+                description: involvedRobotsRows[_i]['Description'],
+                username: involvedRobotsRows[_i]['Username'],
+                type: involvedRobotsRows[_i]['Type'],
+                external_id: involvedRobotsRows[_i]['Id']
+              };
+              involvedRobots.push(involvedRobot);
+            }
+
+            involvedQueuesRows = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).DataTable().rows({
+              selected: true
+            }).data();
+            involvedQueues = [];
+
+            for (_i2 = 0; _i2 < involvedQueuesRows.length; _i2++) {
+              involvedQueue = {
+                name: involvedQueuesRows[_i2]['Name'],
+                description: involvedQueuesRows[_i2]['Description'],
+                external_id: involvedQueuesRows[_i2]['Id']
+              };
+              involvedQueues.push(involvedQueue);
+            }
+
+            return _context6.abrupt("return", new Promise(function (resolve, reject) {
               var watchedAutomatedProcess = new _models_WatchedAutomatedProcess__WEBPACK_IMPORTED_MODULE_4__["default"]();
               var calendar = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar).bulmaCalendar;
-              resolve(watchedAutomatedProcess.save(clientSelect.value.trim(), nameInput.value.trim(), codeInput.value.trim(), operationalHandbookPageURLInput.value.trim(), kibanaDashboardURLInput.value.trim(), additionalInformationTextarea.value.trim(), runningPeriodMondayCheckbox.checked, runningPeriodTuesdayCheckbox.checked, runningPeriodWednesdayCheckbox.checked, runningPeriodThursdayCheckbox.checked, runningPeriodFridayCheckbox.checked, runningPeriodSaturdayCheckbox.checked, runningPeriodSundayCheckbox.checked, calendar.startTime.toTimeString().split(' ')[0], calendar.endTime.toTimeString().split(' ')[0], involvedProcesses).then(function (res) {
+              resolve(watchedAutomatedProcess.save(clientSelect.value.trim(), nameInput.value.trim(), codeInput.value.trim(), operationalHandbookPageURLInput.value.trim(), kibanaDashboardURLInput.value.trim(), additionalInformationTextarea.value.trim(), runningPeriodMondayCheckbox.checked, runningPeriodTuesdayCheckbox.checked, runningPeriodWednesdayCheckbox.checked, runningPeriodThursdayCheckbox.checked, runningPeriodFridayCheckbox.checked, runningPeriodSaturdayCheckbox.checked, runningPeriodSundayCheckbox.checked, calendar.startTime.toTimeString().split(' ')[0], calendar.endTime.toTimeString().split(' ')[0], involvedProcesses, involvedRobots, involvedQueues).then(function (res) {
                 resetForm();
 
                 _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](addForm);
               }));
             }));
 
-          case 9:
-            _context3.prev = 9;
-            _context3.t0 = _context3["catch"](1);
-            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Watched automated process not added due to application exception: ".concat(_context3.t0), null, {
+          case 15:
+            _context6.prev = 15;
+            _context6.t0 = _context6["catch"](1);
+            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Watched automated process not added due to application exception: ".concat(_context6.t0), null, {
               positionClass: 'toast-bottom-center'
             });
-            console.log(_context3.t0);
+            console.log(_context6.t0);
 
             _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](addForm);
 
-          case 14:
+          case 20:
           case "end":
-            return _context3.stop();
+            return _context6.stop();
         }
       }
-    }, _callee3, null, [[1, 9]]);
+    }, _callee6, null, [[1, 15]]);
   }));
 
   return function create() {
-    return _ref3.apply(this, arguments);
+    return _ref6.apply(this, arguments);
   };
 }();
 
 var updateTable =
 /*#__PURE__*/
 function () {
-  var _ref4 = _asyncToGenerator(
+  var _ref7 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
     var table;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
       while (1) {
-        switch (_context4.prev = _context4.next) {
+        switch (_context7.prev = _context7.next) {
           case 0:
             table = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].table;
-            _context4.prev = 1;
+            _context7.prev = 1;
 
             _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](table);
 
-            return _context4.abrupt("return", new Promise(function (resolve, reject) {
+            return _context7.abrupt("return", new Promise(function (resolve, reject) {
               resolve(configuration.updateWatchedAutomatedProcessesTable().then(function (res) {
                 _view__WEBPACK_IMPORTED_MODULE_8__["updateTable"](configuration.watchedAutomatedProcessesTable);
 
@@ -96746,22 +100931,22 @@ function () {
             }));
 
           case 6:
-            _context4.prev = 6;
-            _context4.t0 = _context4["catch"](1);
-            console.log(_context4.t0);
+            _context7.prev = 6;
+            _context7.t0 = _context7["catch"](1);
+            console.log(_context7.t0);
 
             _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](table);
 
           case 10:
           case "end":
-            return _context4.stop();
+            return _context7.stop();
         }
       }
-    }, _callee4, null, [[1, 6]]);
+    }, _callee7, null, [[1, 6]]);
   }));
 
   return function updateTable() {
-    return _ref4.apply(this, arguments);
+    return _ref7.apply(this, arguments);
   };
 }();
 
@@ -96771,6 +100956,14 @@ var resetForm = function resetForm() {
 
     if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)) {
       $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable).DataTable().clear().draw();
+    }
+
+    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)) {
+      $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).DataTable().clear().draw();
+    }
+
+    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)) {
+      $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).DataTable().clear().draw();
     }
 
     _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.reset();
@@ -96789,6 +100982,8 @@ var resetForm = function resetForm() {
 
     _base__WEBPACK_IMPORTED_MODULE_6__["removeStates"](runningPeriodSectionTitle);
 
+    _base__WEBPACK_IMPORTED_MODULE_6__["removeStates"](runningPeriodSectionTitleIcon);
+
     runningPeriodMondayCheckbox.checked = false;
     runningPeriodTuesdayCheckbox.checked = false;
     runningPeriodWednesdayCheckbox.checked = false;
@@ -96803,9 +100998,27 @@ var resetForm = function resetForm() {
 
     _base__WEBPACK_IMPORTED_MODULE_6__["removeStates"](involvedProcessesSectionTitle);
 
+    _base__WEBPACK_IMPORTED_MODULE_6__["removeStates"](involvedProcessesSectionTitleIcon);
+
     _base__WEBPACK_IMPORTED_MODULE_6__["removeStates"](involvedProcessesCount);
 
     involvedProcessesCount.innerHTML = 0;
+
+    _base__WEBPACK_IMPORTED_MODULE_6__["removeStates"](involvedRobotsSectionTitle);
+
+    _base__WEBPACK_IMPORTED_MODULE_6__["removeStates"](involvedRobotsSectionTitleIcon);
+
+    _base__WEBPACK_IMPORTED_MODULE_6__["removeStates"](involvedRobotsCount);
+
+    involvedRobotsCount.innerHTML = 0;
+
+    _base__WEBPACK_IMPORTED_MODULE_6__["removeStates"](involvedQueuesSectionTitle);
+
+    _base__WEBPACK_IMPORTED_MODULE_6__["removeStates"](involvedQueuesSectionTitleIcon);
+
+    _base__WEBPACK_IMPORTED_MODULE_6__["removeStates"](involvedQueuesCount);
+
+    involvedQueuesCount.innerHTML = 0;
   } catch (error) {
     console.log(error);
   }

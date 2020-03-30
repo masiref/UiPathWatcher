@@ -4,8 +4,8 @@
         <th>Name</th>
         <th>Code</th>
         <th>Processes</th>
-        {{--<th>Operational handbook</th>
-        <th>Kibana dashboard</th>--}}
+        <th>Robots</th>
+        <th>Queues</th>
         <th>More</th>
     </thead>
     <tbody>
@@ -23,20 +23,28 @@
                         </ul>
                     @endif
                 </td>
-                {{--<td>
-                    <a href="{{ $wap->operational_handbook_page_url }}" target="about:blank">
-                        {{ $wap->operational_handbook_page_url }}
-                    </a>
+                <td>
+                    @if (count($wap->robots) > 0)
+                        <ul>
+                            @foreach ($wap->robots as $robot)
+                                <li>{{ $robot }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
                 </td>
                 <td>
-                    <a href="{{ $wap->kibana_dashboard_url }}" target="about:blank">
-                        {{ $wap->kibana_dashboard_url }}
-                    </a>
-                </td>--}}
+                    @if (count($wap->queues) > 0)
+                        <ul>
+                            @foreach ($wap->queues as $queue)
+                                <li>{{ $queue }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </td>
                 <td>
                     <div class="buttons is-right">
                         <button class="button is-link has-tooltip-left is-small"
-                            data-tooltip="{{ $wap->additional_information ? $wap->additional_information . ' | ' : '' }}Running from {{ $wap->running_period_time_from }} until {{ $wap->running_period_time_until }} on {{ $wap->runningDays() }}">
+                            data-tooltip="{{ ($wap->additional_information ? $wap->additional_information . ' | ' : '') . $wap->runningPeriod() }}">
                             <span class="icon">
                                 <i class="fas fa-info"></i>
                             </span>

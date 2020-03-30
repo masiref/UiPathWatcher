@@ -8,10 +8,11 @@ use App\WatchedAutomatedProcess;
 use App\UiPathOrchestrator;
 use App\UiPathRobot;
 use App\Alert;
+use App\AlertTrigger;
+use App\Library\Services\UiPathOrchestratorService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use GuzzleHttp\Client as Guzzle;
-use GuzzleHttp\Exception\RequestException;
 
 class ConfigurationOrchestratorController extends Controller
 {
@@ -40,10 +41,11 @@ class ConfigurationOrchestratorController extends Controller
             'page' => 'configuration.orchestrator.index',
             'alerts' => $alerts,
             'clients' => $clients,
-            'orchestrators' => $orchestrators,
+            'orchestrators' => $orchestrators->sortBy('name'),
             'clientsCount' => $clients->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
             'robotsCount' => UiPathRobot::all()->count(),
+            'alertTriggersCount' => AlertTrigger::all()->count(),
             'openedAlertsCount' => Alert::where('closed', false)->count(),
             'underRevisionAlertsCount' => Alert::where('under_revision', true)->count(),
             'closedAlertsCount' => Alert::where('closed', true)->count(),
@@ -63,50 +65,69 @@ class ConfigurationOrchestratorController extends Controller
             ->with('orchestrators', $orchestrators);
     }
 
-    public function processes(Request $request, Client $client)
+    /**
+     * Get processes from UiPath Orchestrator API.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function processes(Request $request, Client $client, UiPathOrchestratorService $orchestratorService)
     {
         $orchestrator = $client->orchestrator;
-        $url = $orchestrator->url;
-        $tenant = $orchestrator->tenant;
-        $username = $orchestrator->api_user_username;
-        $password = $orchestrator->api_user_password;
-        
-        $guzzle = new Guzzle([
-            'base_uri' => "$url"
-        ]);
-        $result = array();
-        try {
-            $response = $guzzle->request('POST', 'api/account/authenticate', [
-                'json' => [
-                    'tenancyName' => $tenant,
-                    'usernameOrEmailAddress' => $username,
-                    'password' => $password
-                ]
-            ]);
-            $token = json_decode($response->getBody(), true)['result'];
-            $headers = [
-                'Authorization' => 'Bearer ' . $token,        
-                'Accept'        => 'application/json',
-            ];
-            $environments = json_decode(
-                $guzzle->request('GET', 'odata/Environments', [
-                    'headers' => $headers
-                ])->getBody(),
-                true
-            )['value'];
-            foreach ($environments as $env) {
-                $id = $env['Id'];
-                $releases = json_decode(
-                    $guzzle->request('GET', "odata/Releases?\$filter=EnvironmentId%20eq%20$id", [
-                        'headers' => $headers
-                    ])->getBody(),
-                    true
-                )['value'];
-                $result = array_merge($result, $releases);
+        $result = $orchestratorService->authenticate($orchestrator);
+        if ($result['error']) {
+            return ['error' => $result['errorMessage']];
+        } else {
+            $token = $result['token'];
+            $result = $orchestratorService->getReleases($orchestrator, $token);
+            if ($result['error']) {
+                return ['error' => $result['errorMessage']];
+            } else {
+                return $result['releases'];
             }
-        } catch (RequestException $e) {
-            return [ 'error' => 'Impossible to connect to orchestrator' ];
         }
-        return $result;
+    }
+
+    /**
+     * Get robots from UiPath Orchestrator API.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function robots(Request $request, Client $client, UiPathOrchestratorService $orchestratorService)
+    {
+        $orchestrator = $client->orchestrator;
+        $result = $orchestratorService->authenticate($orchestrator);
+        if ($result['error']) {
+            return ['error' => $result['errorMessage']];
+        } else {
+            $token = $result['token'];
+            $result = $orchestratorService->getRobots($orchestrator, $token);
+            if ($result['error']) {
+                return ['error' => $result['errorMessage']];
+            } else {
+                return $result['robots'];
+            }
+        }
+    }
+
+    /**
+     * Get queues from UiPath Orchestrator API.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function queues(Request $request, Client $client, UiPathOrchestratorService $orchestratorService)
+    {
+        $orchestrator = $client->orchestrator;
+        $result = $orchestratorService->authenticate($orchestrator);
+        if ($result['error']) {
+            return ['error' => $result['errorMessage']];
+        } else {
+            $token = $result['token'];
+            $result = $orchestratorService->getQueues($orchestrator, $token);
+            if ($result['error']) {
+                return ['error' => $result['errorMessage']];
+            } else {
+                return $result['queues'];
+            }
+        }
     }
 }

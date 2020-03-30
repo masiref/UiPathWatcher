@@ -17,7 +17,6 @@ class CreateUiPathProcessWatchedAutomatedProcessTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('ui_path_process_id');
             $table->unsignedBigInteger('watched_automated_process_id');
-            $table->timestamps();
         });
     }
 

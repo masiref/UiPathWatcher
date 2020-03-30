@@ -47,4 +47,40 @@ export default class Configuration {
             console.log(error);
         }
     }
+
+    async getAlertTriggersDefaultAlertTriggerDetails(watchedAutomatedProcessId) {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(`/configuration/alert-trigger/default-alert-trigger-details/${watchedAutomatedProcessId}`)
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getAlertTriggersDefaultAlertTriggerDefinition(rank) {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(`/configuration/alert-trigger/default-alert-trigger-definition/${rank}`)
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getAlertTriggersDefaultAlertTriggerRule(watchedAutomatedProcess, rank, type = 'none') {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(`/configuration/alert-trigger/default-alert-trigger-rule/${watchedAutomatedProcess}/${rank}/${type}`)
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }

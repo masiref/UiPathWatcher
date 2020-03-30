@@ -5,11 +5,20 @@
 
 @section('content')
     <div class="configuration">
-        <h1 class="title">Watched processes</h1>
+        @include('layouts.title', [
+            'title' => 'Watched processes',
+            'icon' => 'binoculars',
+            'color' => 'link'
+        ])
         @include('configuration.watched-automated-process.table')
-        <hr>
+        
+        <div class="is-divider"></div>
 
-        <h1 class="title">Watch a new process</h1>
+        @include('layouts.title', [
+            'title' => 'Watch a new process',
+            'icon' => 'plus-circle',
+            'color' => 'primary'
+        ])
         @include('configuration.watched-automated-process.add-form')
     </div>
 @endsection

@@ -21,8 +21,8 @@ class CreateUiPathOrchestratorsTable extends Migration
             $table->string('tenant');
             $table->string('api_user_username');
             $table->string('api_user_password');
-            $table->string('kibana_url');
-            $table->string('kibana_index');
+            $table->string('elastic_search_url');
+            $table->string('elastic_search_index');
             $table->timestamps();
         });
     }

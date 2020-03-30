@@ -8,7 +8,11 @@ use App\WatchedAutomatedProcess;
 use App\UiPathOrchestrator;
 use App\UiPathRobot;
 use App\Alert;
+use App\AlertTrigger;
+use App\Library\Services\UiPathOrchestratorService;
 use Illuminate\Support\Facades\Auth;
+use GuzzleHttp\Client as Guzzle;
+use GuzzleHttp\Exception\RequestException;
 
 class DashboardController extends Controller
 {
@@ -35,20 +39,22 @@ class DashboardController extends Controller
 
         return view('dashboard.index', [
             'page' => 'dashboard.index',
+            'orchestratorsCount' => UiPathOrchestrator::all()->count(),
             'pendingAlerts' => $pendingAlerts,
             'closedAlerts' => $closedAlerts,
             'clients' => $clients,
             'clientsCount' => $clients->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
             'robotsCount' => UiPathRobot::all()->count(),
+            'alertTriggersCount' => AlertTrigger::all()->count(),
             'openedAlertsCount' => Alert::where('closed', false)->count(),
             'underRevisionAlertsCount' => Alert::where('under_revision', true)->count(),
-            'closedAlertsCount' => Alert::where('closed', true)->count(),
-            'orchestratorsCount' => UiPathOrchestrator::all()->count()
+            'closedAlertsCount' => Alert::where('closed', true)->count()
         ]);
     }
 
-    public function tiles(Request $request, Client $client = null) {
+    public function tiles(Request $request, Client $client = null)
+    {
         $tiles = [
             'watched-automated-processes',
             'robots',
@@ -81,15 +87,20 @@ class DashboardController extends Controller
                 break;
 
                 case 'watched-automated-processes':
-                $value = WatchedAutomatedProcess::all()->count();
                 if ($client) {
                     $value = WatchedAutomatedProcess::where('client_id', $client->id)->count();
+                } else {
+                    $value = WatchedAutomatedProcess::all()->count();
                 }
                 $parameter = 'watchedAutomatedProcessesCount';
                 break;
 
                 case 'robots':
-                $value = UiPathRobot::all()->count();
+                if ($client) {
+                    $value = UiPathRobot::where('ui_path_orchestrator_id', $client->orchestrator->id)->count();
+                } else {
+                    $value = UiPathRobot::all()->count();
+                }
                 $parameter = 'robotsCount';
                 break;
 
@@ -160,5 +171,61 @@ class DashboardController extends Controller
         return view('dashboard.watched-automated-process.element')
             ->with('watchedAutomatedProcess', $watchedAutomatedProcess)
             ->with('autonomous', $autonomous);
+    }
+
+    public function debug(UiPathOrchestratorService $service)
+    {
+        $guzzle = new Guzzle([
+            'base_uri' => 'http://swdcfregb705:9200/'
+        ]);
+
+        try {
+            $json = '
+                {
+                    "sort":[
+                        {
+                            "timestamp":{
+                                "order":"desc",
+                                "unmapped_type":"boolean"
+                            }
+                        }
+                    ],
+                    "query":{
+                        "bool":{
+                            "must":[
+                                {
+                                    "query_string":{
+                                        "query":"DestCountry: IT",
+                                        "analyze_wildcard":true
+                                    }
+                                }
+                            ],
+                            "filter":[
+                                {
+                                    "range":{
+                                        "timestamp":{
+                                            "format":"strict_date_optional_time",
+                                            "gte":"2020-03-30T20:41:23.862Z",
+                                            "lte":"2020-03-30T20:56:23.863Z"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            ';
+            $response = $guzzle->request('POST', 'kibana_sample_data_flights/_search', [
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json'
+                ],
+                'body' => $json
+            ]);
+            return json_decode($response->getBody(), true)['hits']['total']['value'];
+        } catch (RequestException $e) {
+            return $e;
+        }
+        return null;
     }
 }

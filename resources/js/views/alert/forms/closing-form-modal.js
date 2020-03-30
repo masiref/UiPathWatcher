@@ -13,8 +13,8 @@ export const markup = (elementID, alert) => {
                         ${underRevisionBlock(alert)}
                         <div class="field">
                             <div class="control">
-                                <label class="checkbox">
-                                    <input type="checkbox" id="false_positive" name="false_positive">
+                                <input type="checkbox" id="false_positive" name="false_positive" class="switch is-rounded">
+                                <label for="false_positive" class="checkbox">
                                     It is a false positive
                                 </label>
                             </div>

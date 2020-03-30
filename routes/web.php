@@ -19,6 +19,9 @@ use App\UiPathRobot;
 // Authentication routes
 Auth::routes();
 
+// Debug
+Route::get('/debug', 'DashboardController@debug')->name('debug');
+
 // Home
 Route::get('/', 'DashboardController@index')->name('dashboard');
 
@@ -54,6 +57,8 @@ Route::get('/dashboard/watched-automated-process/element/{watchedAutomatedProces
 Route::get('/configuration/orchestrator', 'ConfigurationOrchestratorController@index')->name('configuration.orchestrator');
 Route::get('/configuration/orchestrator/table', 'ConfigurationOrchestratorController@table')->name('configuration.orchestrator.table');
 Route::get('/configuration/orchestrator/processes/{client}', 'ConfigurationOrchestratorController@processes')->name('configuration.orchestrator.processes');
+Route::get('/configuration/orchestrator/robots/{client}', 'ConfigurationOrchestratorController@robots')->name('configuration.orchestrator.robots');
+Route::get('/configuration/orchestrator/queues/{client}', 'ConfigurationOrchestratorController@queues')->name('configuration.orchestrator.queues');
 
 Route::get('/configuration/client', 'ConfigurationClientController@index')->name('configuration.client');
 Route::get('/configuration/client/table', 'ConfigurationClientController@table')->name('configuration.client.table');
@@ -65,4 +70,10 @@ Route::get(
     'ConfigurationWatchedAutomatedProcessController@table'
 )->name('configuration.watched-automated-process.table');
 
-Route::get('/configuration/alert-triggers', 'ConfigurationAlertTriggerController@index')->name('configuration.alert-trigger');
+Route::get('/configuration/alert-trigger', 'ConfigurationAlertTriggerController@index')->name('configuration.alert-trigger');
+Route::get('/configuration/alert-trigger/default-alert-trigger-details/{watchedAutomatedProcess}/{title?}', 'ConfigurationAlertTriggerController@defaultAlertTriggerDetails')
+    ->name('configuration.alert-trigger.default-alert-trigger-details');
+Route::get('/configuration/alert-trigger/default-alert-trigger-definition/{rank}', 'ConfigurationAlertTriggerController@defaultAlertTriggerDefinition')
+    ->name('configuration.alert-trigger.default-alert-trigger-definition');
+Route::get('/configuration/alert-trigger/default-alert-trigger-rule/{watchedAutomatedProcess}/{rank}/{type}', 'ConfigurationAlertTriggerController@defaultAlertTriggerRule')
+    ->name('configuration.alert-trigger.default-alert-trigger-rule');

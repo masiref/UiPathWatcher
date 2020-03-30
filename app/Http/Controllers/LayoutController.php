@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Client;
 use App\UiPathOrchestrator;
 use App\WatchedAutomatedProcess;
+use App\AlertTrigger;
 use Illuminate\Support\Facades\Auth;
 
 class LayoutController extends Controller
@@ -34,6 +35,7 @@ class LayoutController extends Controller
             'clientsCount' => $clients->count(),
             'orchestratorsCount' => UiPathOrchestrator::all()->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
+            'alertTriggersCount' => AlertTrigger::all()->count(),
             'page' => $page
         ]);
     }
@@ -52,6 +54,7 @@ class LayoutController extends Controller
             'clientsCount' => $clients->count(),
             'orchestratorsCount' => UiPathOrchestrator::all()->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
+            'alertTriggersCount' => AlertTrigger::all()->count(),
             'page' => $page
         ]);
     }

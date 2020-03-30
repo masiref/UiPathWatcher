@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Carbon\Carbon;
 
 class WatchedAutomatedProcess extends Model
 {
@@ -26,6 +28,20 @@ class WatchedAutomatedProcess extends Model
      */
     protected $with = ['alerts'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('name');
+        });
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * Get the client that owns the watched automated process.
      */
@@ -40,6 +56,22 @@ class WatchedAutomatedProcess extends Model
     public function processes()
     {
         return $this->belongsToMany('App\UiPathProcess');
+    }
+
+    /**
+     * The robots that belong to the watched automated process.
+     */
+    public function robots()
+    {
+        return $this->belongsToMany('App\UiPathRobot');
+    }
+
+    /**
+     * The queues that belong to the watched automated process.
+     */
+    public function queues()
+    {
+        return $this->belongsToMany('App\UiPathQueue');
     }
 
     /**
@@ -98,27 +130,63 @@ class WatchedAutomatedProcess extends Model
     public function runningDays()
     {
         $days = '';
-        if ($this->running_period_monday) {
-            $days.= 'Monday';
-        }
-        if ($this->running_period_tuesday) {
-            $days.= ($days === '' ? '' : ', ') . 'Tuesday';
-        }
-        if ($this->running_period_wednesday) {
-            $days.= ($days === '' ? '' : ', ') . 'Wednesday';
-        }
-        if ($this->running_period_thursday) {
-            $days.= ($days === '' ? '' : ', ') . 'Thursday';
-        }
-        if ($this->running_period_friday) {
-            $days.= ($days === '' ? '' : ', ') . 'Friday';
-        }
-        if ($this->running_period_saturday) {
-            $days.= ($days === '' ? '' : ', ') . 'Saturday';
-        }
-        if ($this->running_period_sunday) {
-            $days.= ($days === '' ? '' : ', ') . 'Sunday';
+        if (
+            $this->running_period_monday &&
+            $this->running_period_tuesday &&
+            $this->running_period_wednesday &&
+            $this->running_period_thursday &&
+            $this->running_period_friday &&
+            $this->running_period_saturday &&
+            $this->running_period_sunday
+        ) {
+            $days = 'all days';
+        } else if (
+            $this->running_period_monday &&
+            $this->running_period_tuesday &&
+            $this->running_period_wednesday &&
+            $this->running_period_thursday &&
+            $this->running_period_friday
+        ) {
+            $days = 'week days';
+        } else if (
+            $this->running_period_saturday &&
+            $this->running_period_sunday
+        ) {
+            $days = 'weekend';
+        } else {
+            if ($this->running_period_monday) {
+                $days.= 'Monday';
+            }
+            if ($this->running_period_tuesday) {
+                $days.= ($days === '' ? '' : ', ') . 'Tuesday';
+            }
+            if ($this->running_period_wednesday) {
+                $days.= ($days === '' ? '' : ', ') . 'Wednesday';
+            }
+            if ($this->running_period_thursday) {
+                $days.= ($days === '' ? '' : ', ') . 'Thursday';
+            }
+            if ($this->running_period_friday) {
+                $days.= ($days === '' ? '' : ', ') . 'Friday';
+            }
+            if ($this->running_period_saturday) {
+                $days.= ($days === '' ? '' : ', ') . 'Saturday';
+            }
+            if ($this->running_period_sunday) {
+                $days.= ($days === '' ? '' : ', ') . 'Sunday';
+            }
+            $search = ',';
+            $replace = ', and';
+            $days = strrev(implode(strrev($replace), explode(strrev($search), strrev($days), 2)));
         }
         return $days;
+    }
+
+    public function runningPeriod()
+    {
+        $days = $this->runningDays();
+        $timeFrom = Carbon::createFromTimeString($this->running_period_time_from)->format('g:i A');
+        $timeUntil = Carbon::createFromTimeString($this->running_period_time_until)->format('g:i A');
+        return "Running from $timeFrom until $timeUntil on $days";
     }
 }

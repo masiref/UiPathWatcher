@@ -6,29 +6,42 @@
 
 @section('content')
     @include('dashboard.tiles.index')
-    <hr>
-    
-    <div class="dashboard">
-        <div class="columns is-multiline">
-            @foreach($clients as $client)
-                <div class="column is-6">
-                    @include('dashboard.client.element')
-                </div>
-            @endforeach
+    @if ($alertTriggersCount <= 1)
+        @include('dashboard.welcome-message')
+    @endif
+    @if ($clients->count() > 0)        
+        <div class="dashboard">
+            <div class="is-divider" data-content="TABLE VIEW"></div>
+            @include('layouts.title', [
+                'title' => 'Pending alerts',
+                'icon' => 'fire',
+                'color' => 'dark'
+            ])
+            @include('dashboard.alert.table', [
+                'tableID' => 'pending-alerts-table',
+                'alerts' => $pendingAlerts,
+                'options' => [ 'closed' => false ]
+            ])
+
+            @include('layouts.title', [
+                'title' => 'Closed alerts',
+                'icon' => 'dumpster-fire',
+                'color' => 'grey-light'
+            ])
+            @include('dashboard.alert.table', [
+                'tableID' => 'closed-alerts-table',
+                'alerts' => $closedAlerts,
+                'options' => [ 'closed' => true ]
+            ])
+
+            <div class="is-divider" data-content="DETAILED VIEW"></div>
+            <div class="columns is-multiline">
+                @foreach($clients as $client)
+                    <div class="column is-6">
+                        @include('dashboard.client.element')
+                    </div>
+                @endforeach
+            </div>
         </div>
-        <hr>
-        <h1 class="title">Pending alerts</h1>
-        @include('dashboard.alert.table', [
-            'tableID' => 'pending-alerts-table',
-            'alerts' => $pendingAlerts,
-            'options' => [ 'closed' => false ]
-        ])
-        <hr>
-        <h1 class="title">Closed alerts</h1>
-        @include('dashboard.alert.table', [
-            'tableID' => 'closed-alerts-table',
-            'alerts' => $closedAlerts,
-            'options' => [ 'closed' => true ]
-        ])
-    </div>
+    @endif
 @endsection

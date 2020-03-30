@@ -15,17 +15,17 @@ class Client extends Model
         'name', 'code', 'orchestrator_id'
     ];
 
-    public function __toString()
-    {
-        return $this->name;
-    }
-
     /**
      * The relationships that should always be loaded.
      *
      * @var array
      */
     protected $with = ['watchedAutomatedProcesses', 'orchestrator'];
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * Get the watched automated processes for the client.
@@ -40,7 +40,7 @@ class Client extends Model
      */
     public function orchestrator()
     {
-        return $this->belongsTo('App\UiPathOrchestrator');
+        return $this->belongsTo('App\UiPathOrchestrator', 'ui_path_orchestrator_id');
     }
 
     /**

@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th>Level</th>
-            <th>ID</th>
+            <th>#</th>
             <th>Client</th>
             <th><abbr title="Automated process">A. Pr.</abbr></th>
             <th>Title</th>

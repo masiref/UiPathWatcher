@@ -10,33 +10,37 @@
                 <span class="icon"><i class="fas fa-globe"></i></span>
                 <span>Global</span>
             </a>
-            <ul>
-                @foreach($clients as $client)
-                    <li>
-                        <a class="{{ $page === 'dashboard.client.index.' . $client->id ? 'is-active' : '' }}"
-                            href="{{ route('dashboard.client', ['client' => $client->id ]) }}">
-                            <span class="icon"><i class="fas fa-building"></i></span>
-                            <span>
-                                {{ $client->code }} ({{ $client->name }})
-                                &nbsp;<span class="tag is-{{ $client->higherAlertLevel() }}">{{ $client->openedAlertsCount() }}</span>
-                            </span>
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
+            @if ($clients->count() > 0)
+                <ul>
+                    @foreach($clients as $client)
+                        <li>
+                            <a class="{{ $page === 'dashboard.client.index.' . $client->id ? 'is-active' : '' }}"
+                                href="{{ route('dashboard.client', ['client' => $client->id ]) }}">
+                                <span class="icon"><i class="fas fa-building"></i></span>
+                                <span>
+                                    {{ $client->name }}
+                                    &nbsp;<span class="tag is-{{ $client->higherAlertLevel() }}">{{ $client->openedAlertsCount() }}</span>
+                                </span>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
         </li>
-        <li>
-            <a class="{{ $page === 'dashboard.user.index' ? 'is-active' : '' }}" href="{{ route('dashboard.user') }}">
-                <span class="icon"><i class="fas fa-burn"></i></span>
-                <span>
-                    My alerts
-                    &nbsp;
-                    <span class="tag is-{{ auth()->user()->higherAlertLevel() }}">
-                        {{ auth()->user()->openedAlerts()->count() }}
+        @if (auth()->user()->alerts->count() > 0)
+            <li>
+                <a class="{{ $page === 'dashboard.user.index' ? 'is-active' : '' }}" href="{{ route('dashboard.user') }}">
+                    <span class="icon"><i class="fas fa-burn"></i></span>
+                    <span>
+                        My alerts
+                        &nbsp;
+                        <span class="tag is-{{ auth()->user()->higherAlertLevel() }}">
+                            {{ auth()->user()->openedAlerts()->count() }}
+                        </span>
                     </span>
-                </span>
-            </a>
-        </li>
+                </a>
+            </li>
+        @endif
     </ul>
 
     <!-- Configuration menu -->
@@ -81,7 +85,7 @@
                 <span class="icon"><i class="fas fa-dragon"></i></span>
                 <span>
                     Alert triggers
-                    &nbsp;<span class="tag is-primary">99</span>
+                    &nbsp;<span class="tag is-primary">{{ $alertTriggersCount }}</span>
                 </span>
             </a>
         </li>

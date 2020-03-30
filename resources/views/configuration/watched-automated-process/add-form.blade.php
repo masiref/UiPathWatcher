@@ -67,88 +67,102 @@
             </div>
         </div>
     </div>
-    <hr>
+        
+    <div class="is-divider"></div>
     <div class="running-period-section p-b-md">
-        <h1 class="subtitle">Running period</h1>
+        @include('layouts.subtitle', [
+            'title' => 'Execution time slot',
+            'icon' => 'play'
+        ])
         <div class="field is-horizontal">
             <div class="field-body">
                 <div class="field">
                     <div class="columns">
                         <div class="column">
                             <p class="control">
-                                <label class="checkbox">
-                                    <input type="checkbox" id="running_period_monday">
-                                    Monday
-                                </label>
+                                <input type="checkbox" id="running_period_monday" class="switch is-small is-rounded">
+                                <label for="running_period_monday" class="checkbox">Monday</label>
                             </p>
                         </div>
                         <div class="column">
                             <p class="control">
-                                <label class="checkbox">
-                                    <input type="checkbox" id="running_period_tuesday">
-                                    Tuesday
-                                </label>
+                                <input type="checkbox" id="running_period_tuesday" class="switch is-small is-rounded">
+                                <label for="running_period_tuesday" class="checkbox">Tuesday</label>
                             </p>
                         </div>
                         <div class="column">
                             <p class="control">
-                                <label class="checkbox">
-                                    <input type="checkbox" id="running_period_wednesday">
-                                    Wednesday
-                                </label>
+                                <input type="checkbox" id="running_period_wednesday" class="switch is-small is-rounded">
+                                <label for="running_period_wednesday" class="checkbox">Wednesday</label>
                             </p>
                         </div>
                         <div class="column">
                             <p class="control">
-                                <label class="checkbox">
-                                    <input type="checkbox" id="running_period_thursday">
-                                    Thursday
-                                </label>
+                                <input type="checkbox" id="running_period_thursday" class="switch is-small is-rounded">
+                                <label for="running_period_thursday" class="checkbox">Thursday</label>
                             </p>
                         </div>
                         <div class="column">
                             <p class="control">
-                                <label class="checkbox">
-                                    <input type="checkbox" id="running_period_friday">
-                                    Friday
-                                </label>
+                                <input type="checkbox" id="running_period_friday" class="switch is-small is-rounded">
+                                <label for="running_period_friday" class="checkbox">Friday</label>
                             </p>
                         </div>
                         <div class="column">
                             <p class="control">
-                                <label class="checkbox">
-                                    <input type="checkbox" id="running_period_saturday">
-                                    Saturday
-                                </label>
+                                <input type="checkbox" id="running_period_saturday" class="switch is-small is-rounded">
+                                <label for="running_period_saturday" class="checkbox">Saturday</label>
                             </p>
                         </div>
                         <div class="column">
                             <p class="control">
-                                <label class="checkbox">
-                                    <input type="checkbox" id="running_period_sunday">
-                                    Sunday
-                                </label>
+                                <input type="checkbox" id="running_period_sunday" class="switch is-small is-rounded">
+                                <label for="running_period_sunday" class="checkbox">Sunday</label>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="field is-horizontal">
-        <div class="field-body">
-            <div class="field">
-                <div class="control">
-                    <input type="date" class="datetime" id="running_period_times">
+
+        <div class="field is-horizontal">
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input type="date" class="datetime" id="running_period_times">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <hr>
+
+    <div class="is-divider"></div>
     <div class="involved-processes-section p-b-md">
-        <h1 class="subtitle">Involved UiPath processes &nbsp;<span class="tag is-rounded">0</span></h1>
+        @include('layouts.subtitle', [
+            'title' => 'Involved UiPath processes &nbsp;<span class="tag is-rounded">0</span>',
+            'icon' => 'sitemap'
+        ])
         <table class="is-fullwidth is-striped is-hoverable involved-processes-table"></table>
     </div>
+
+    <div class="is-divider"></div>
+    <div class="involved-robots-section p-b-md">
+        @include('layouts.subtitle', [
+            'title' => 'Involved UiPath robots &nbsp;<span class="tag is-rounded">0</span>',
+            'icon' => 'robot'
+        ])
+        <table class="is-fullwidth is-striped is-hoverable involved-robots-table"></table>
+    </div>
+
+    <div class="is-divider"></div>
+    <div class="involved-queues-section p-b-md">
+        @include('layouts.subtitle', [
+            'title' => 'Involved UiPath queues &nbsp;<span class="tag is-rounded">0</span>',
+            'icon' => 'layer-group'
+        ])
+        <table class="is-fullwidth is-striped is-hoverable involved-queues-table"></table>
+    </div>
+
     <div class="field is-horizontal">
         <div class="field-body">
             <div class="field">

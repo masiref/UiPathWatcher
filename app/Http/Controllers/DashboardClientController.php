@@ -8,6 +8,7 @@ use App\WatchedAutomatedProcess;
 use App\UiPathOrchestrator;
 use App\UiPathRobot;
 use App\Alert;
+use App\AlertTrigger;
 
 class DashboardClientController extends Controller
 {
@@ -50,12 +51,13 @@ class DashboardClientController extends Controller
             'client' => $client,
             'pendingAlerts' => $pendingAlerts,
             'closedAlerts' => $closedAlerts,
+            'orchestratorsCount' => UiPathOrchestrator::all()->count(),
             'clients' => $clients,
             'clientsCount' => $clients->count(),
-            'orchestratorsCount' => UiPathOrchestrator::all()->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
             'clientWatchedAutomatedProcessesCount' => WatchedAutomatedProcess::where('client_id', $client->id)->count(),
-            'robotsCount' => UiPathRobot::all()->count(),
+            'robotsCount' => UiPathRobot::where('ui_path_orchestrator_id', $client->orchestrator->id)->count(),
+            'alertTriggersCount' => AlertTrigger::all()->count(),
             'openedAlertsCount' => $pendingAlerts->count(),
             'underRevisionAlertsCount' => $underRevisionAlerts->count(),
             'closedAlertsCount' => $closedAlerts->count()

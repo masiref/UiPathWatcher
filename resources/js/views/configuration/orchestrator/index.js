@@ -17,8 +17,8 @@ const urlInput = document.querySelector(base.selectors.urlInput);
 const tenantInput = document.querySelector(base.selectors.tenantInput);
 const apiUserUsernameInput = document.querySelector(base.selectors.apiUserUsernameInput);
 const apiUserPasswordInput = document.querySelector(base.selectors.apiUserPasswordInput);
-const kibanaUrlInput = document.querySelector(base.selectors.kibanaUrlInput);
-const kibanaIndexInput = document.querySelector(base.selectors.kibanaIndexInput);
+const elasticSearchUrlInput = document.querySelector(base.selectors.elasticSearchUrlInput);
+const elasticSearchIndexInput = document.querySelector(base.selectors.elasticSearchIndexInput);
 const createButton = base.elements.createButton;
 const resetButton = base.elements.resetButton;
 
@@ -56,8 +56,8 @@ const checkForm = e => {
     let tenantInputValid = false;
     let apiUserUsernameInputValid = false;
     let apiUserPasswordInputValid = false;
-    let kibanaUrlInputValid = false;
-    let kibanaIndexInputValid = false;
+    let elasticSearchUrlInputValid = false;
+    let elasticSearchIndexInputValid = false;
 
     nameInputValid = !(nameInput.value.trim() === '');
     _base.toggleSuccessDangerState(nameInput, nameInputValid);
@@ -77,14 +77,14 @@ const checkForm = e => {
     apiUserPasswordInputValid = !(apiUserPasswordInput.value.trim() === '');
     _base.toggleSuccessDangerState(apiUserPasswordInput, apiUserPasswordInputValid);
 
-    kibanaUrlInputValid = !(kibanaUrlInput.value.trim() === '' || !_base.validURL(kibanaUrlInput.value));
-    _base.toggleSuccessDangerState(kibanaUrlInput, kibanaUrlInputValid);
+    elasticSearchUrlInputValid = !(elasticSearchUrlInput.value.trim() === '' || !_base.validURL(elasticSearchUrlInput.value));
+    _base.toggleSuccessDangerState(elasticSearchUrlInput, elasticSearchUrlInputValid);
 
-    kibanaIndexInputValid = !(kibanaIndexInput.value.trim() === '');
-    _base.toggleSuccessDangerState(kibanaIndexInput, kibanaIndexInputValid);
+    elasticSearchIndexInputValid = !(elasticSearchIndexInput.value.trim() === '');
+    _base.toggleSuccessDangerState(elasticSearchIndexInput, elasticSearchIndexInputValid);
     
     const formValid = nameInputValid && codeInputValid && urlInputValid && tenantInputValid && apiUserUsernameInputValid &&
-        apiUserPasswordInputValid && kibanaUrlInputValid && kibanaIndexInputValid;
+        apiUserPasswordInputValid && elasticSearchUrlInputValid && elasticSearchIndexInputValid;
 
     createButton.disabled = !formValid;
 };
@@ -102,9 +102,9 @@ const create = async () => {
                     urlInput.value.trim(),
                     tenantInput.value.trim(),
                     apiUserUsernameInput.value.trim(),
-                    apiUserUsernameInput.value,
-                    kibanaUrlInput.value.trim(),
-                    kibanaIndexInput.value.trim()
+                    apiUserPasswordInput.value,
+                    elasticSearchUrlInput.value.trim(),
+                    elasticSearchIndexInput.value.trim()
                 ).then(res => {
                     resetForm();
                     _base.clearLoader(addForm);
@@ -147,8 +147,8 @@ const resetForm = () => {
         _base.removeStates(tenantInput);
         _base.removeStates(apiUserUsernameInput);
         _base.removeStates(apiUserPasswordInput);
-        _base.removeStates(kibanaUrlInput);
-        _base.removeStates(kibanaIndexInput);
+        _base.removeStates(elasticSearchUrlInput);
+        _base.removeStates(elasticSearchIndexInput);
     } catch (error) {
         console.log(error);
     }

@@ -21,12 +21,25 @@ export default class WatchedAutomatedProcess {
         }
     }
 
-    async update() {
+    async get() {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
                     axios.get(`/api/watched-automated-processes/${this.id}`).then(response => {
                         this.data = response.data;
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async update() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    this.get().then(response => {
                         return this.updateMarkup();
                     })
                 );
@@ -40,7 +53,7 @@ export default class WatchedAutomatedProcess {
         client, name, code, operationalHandbookPageURL, kibanaDashboardURL, additionalInformation,
         runningPeriodMonday, runningPeriodTuesday, runningPeriodWednesday, runningPeriodThursday,
         runningPeriodFriday, runningPeriodSaturday, runningPeriodSunday, runningTimePeriodFrom,
-        runningTimePeriodUntil, involvedProcesses) {
+        runningTimePeriodUntil, involvedProcesses, involvedRobots, involvedQueues) {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
@@ -60,7 +73,9 @@ export default class WatchedAutomatedProcess {
                         'running_period_sunday': runningPeriodSunday ? 1 : 0,
                         'running_period_time_from': runningTimePeriodFrom,
                         'running_period_time_until': runningTimePeriodUntil,
-                        'involved_processes': involvedProcesses
+                        'involved_processes': involvedProcesses,
+                        'involved_robots': involvedRobots,
+                        'involved_queues': involvedQueues
                     }).then(response => {
                         if (response.data) {
                             this.id = response.data.id;

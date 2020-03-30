@@ -13,7 +13,7 @@ class UiPathOrchestrator extends Model
      */
     protected $fillable = [
         'name', 'code', 'url', 'tenant', 'api_user_username', 'api_user_password',
-        'kibana_url', 'kibana_index'
+        'elastic_search_url', 'elastic_search_index'
     ];
 
     public function __toString()

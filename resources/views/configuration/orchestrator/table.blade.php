@@ -5,8 +5,8 @@
         <th>URL</th>
         <th>Tenant</th>
         <th>Username</th>
-        <th>Kibana URL</th>
-        <th>Kibana Index</th>
+        <th>ElasticSearch URL</th>
+        <th>ElasticSearch Index</th>
     </thead>
     <tbody>
         @foreach($orchestrators as $orchestrator)
@@ -21,11 +21,11 @@
                 <td>{{ $orchestrator->tenant }}</td>
                 <td>{{ $orchestrator->api_user_username }}</td>
                 <td>
-                    <a href="{{ $orchestrator->kibana_url }}" target="about:blank">
-                        {{ $orchestrator->kibana_url }}
+                    <a href="{{ $orchestrator->elastic_search_url }}" target="about:blank">
+                        {{ $orchestrator->elastic_search_url }}
                     </a>
                 </td>
-                <td>{{ $orchestrator->kibana_index }}</td>
+                <td>{{ $orchestrator->elastic_search_index }}</td>
             </tr>
         @endforeach
     </tbody>

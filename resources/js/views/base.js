@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2';
+const luceneParser = require('lucene-query-parser');
 
 export const selectors = {
     closeModalTriggers: '.modal button.delete, .modal button.cancel, .modal button.cancel *',
@@ -8,7 +9,8 @@ export const selectors = {
     dateTimeCalendarWrapper: '.datetimepicker-dummy',
     dateTimeCalendarFromInput: 'input.datetimepicker-dummy-input[placeholder="From"]',
     dateTimeCalendarToInput: 'input.datetimepicker-dummy-input[placeholder="To"]',
-    dateTimeFooterCancelButton: 'button.datetimepicker-footer-cancel'
+    dateTimeFooterCancelButton: 'button.datetimepicker-footer-cancel',
+    formControlWrapper: '.control'
 };
 
 export const elements = {
@@ -113,6 +115,11 @@ export const isConfigurationWatchedAutomatedProcessRelatedURL = url => {
     return isRelated.test(url);
 };
 
+export const isConfigurationAlertTriggerRelatedURL = url => {
+    let isRelated = /.*\/configuration\/alert-trigger$/;
+    return isRelated.test(url);
+};
+
 export const validURL = str => {
     const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
         '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
@@ -137,6 +144,45 @@ export const toggleSuccessDangerState = (element, success, isText = false) => {
     }
 };
 
+export const toggleFormControlTooltip = (element, success) => {
+    const formControlWrapper = element.closest(selectors.formControlWrapper);
+    if (success) {
+        formControlWrapper.classList.remove('has-tooltip-active');
+    } else {
+        formControlWrapper.classList.add('has-tooltip-active');
+    }
+};
+
 export const removeStates = element => {
-    element.classList.remove('is-success', 'is-danger', 'has-text-success', 'has-text-danger');
+    element.classList.remove('is-success', 'is-info', 'is-warning', 'is-danger', 'has-text-success', 'has-text-info', 'has-text-warning', 'has-text-danger');
+};
+
+export const removeSelectOptions = (element, keepFirst = false) => {
+    let last = element.options.length - 1;
+    for (let i = last; i >= (keepFirst ? 1 : 0); i--) {
+        element.remove(i);
+    }
+};
+
+export const isNormalInteger = str => {
+    var n = Math.floor(Number(str));
+    return n !== Infinity && String(n) === str && n >= 0;
+};
+
+export const timeStringToFloat = time => {
+    var hoursMinutes = time.split(/[.:]/);
+    var hours = parseInt(hoursMinutes[0], 10);
+    var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
+    return hours + minutes / 60;
+};
+
+export const isValidLuceneString = str => {
+    let valid = false;
+
+    try {
+        luceneParser.parse(str);
+        valid = true;
+    } catch (error) {}
+
+    return valid;
 };

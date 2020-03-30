@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddOrchestratorForeignKeyToClientsTable extends Migration
+class AddUiPathOrchestratorForeignKeyToClientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddOrchestratorForeignKeyToClientsTable extends Migration
     public function up()
     {
         Schema::table('clients', function (Blueprint $table) {
-            $table->foreign('orchestrator_id')
+            $table->foreign('ui_path_orchestrator_id')
                 ->references('id')
                 ->on('ui_path_orchestrators')
                 ->onDelete('cascade');
@@ -29,7 +29,7 @@ class AddOrchestratorForeignKeyToClientsTable extends Migration
     public function down()
     {
         Schema::table('clients', function (Blueprint $table) {
-            $table->dropForeign('clients_orchestrator_id_foreign');
+            $table->dropForeign('clients_ui_path_orchestrator_id_foreign');
         });
     }
 }

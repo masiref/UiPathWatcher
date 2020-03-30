@@ -6,6 +6,15 @@ html, body {
   background: #ECF0F3 !important;
 }
 
+.hero.welcome.is-info {
+  background: #36D1DC;
+  background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);
+  background: linear-gradient(to right, #5B86E5, #36D1DC);
+}
+.hero.welcome .title, .hero.welcome .subtitle {
+  color: hsl(192, 17%, 99%);
+}
+
 .table {
   font-size: 0.8em;
 }
@@ -36,22 +45,34 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, 
 }
 
 * {
-    &.is-loading {
-        position: relative;
-        pointer-events: none;
-        opacity: 0.5;
-        &:after {
-            @include loader;
-            position: absolute;
-            top: calc(50% - 2.5em);
-            left: calc(50% - 2.5em);
-            width: 5em;
-            height: 5em;
-            border-width: 0.25em;
-        }
+  &.is-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.5;
+    &:after {
+      @include loader;
+      position: absolute;
+      top: calc(50% - 2.5em);
+      left: calc(50% - 2.5em);
+      width: 5em;
+      height: 5em;
+      border-width: 0.25em;
     }
+  }
 }
 
 .configuration {
-    margin-top: 1rem;
+  margin-top: 1rem;
+}
+
+.datetimepicker {
+  z-index: 5;
+}
+
+.alert-definition-item .rule-item {
+  border-radius: inherit;
+  background: -moz-linear-gradient(-45deg, rgba(255,255,255,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, rgba(255,255,255,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, rgba(255,255,255,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6ffffff', endColorstr='#00000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }

@@ -7,7 +7,7 @@ export default class Orchestrator {
         }
     }
 
-    async save(name, code, url, tenant, apiUserUsername, apiUserPassword, kibanaUrl, kibanaIndex) {
+    async save(name, code, url, tenant, apiUserUsername, apiUserPassword, elasticSearchUrl, elasticSearchIndex) {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
@@ -18,8 +18,8 @@ export default class Orchestrator {
                         'tenant': tenant,
                         'api_user_username': apiUserUsername,
                         'api_user_password': apiUserPassword,
-                        'kibana_url': kibanaUrl,
-                        'kibana_index': kibanaIndex
+                        'elastic_search_url': elasticSearchUrl,
+                        'elastic_search_index': elasticSearchIndex
                     }).then(response => {
                         if (response.data) {
                             this.id = response.data.id;

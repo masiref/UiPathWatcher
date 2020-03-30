@@ -16,6 +16,30 @@ class Alert extends Model
     protected $with = ['reviewer'];
 
     /**
+     * Get the alert trigger that owns the alert.
+     */
+    public function trigger()
+    {
+        return $this->belongsTo('App\AlertTrigger', 'alert_trigger_id');
+    }
+
+    /**
+     * Get the watched automated process that owns the alert.
+     */
+    public function watchedAutomatedProcess()
+    {
+        return $this->belongsTo('App\WatchedAutomatedProcess');
+    }
+
+    /**
+     * Get the user that is reviewing the alert.
+     */
+    public function reviewer()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    /**
      * Turn alert under revision
      */
     public function enterRevisionMode(User $reviewer)
@@ -60,31 +84,16 @@ class Alert extends Model
     {
         $this->closed_at = Carbon::now();
         $this->under_revision = false;
-        $this->ignored_from = Carbon::createFromFormat('Y-m-d H:i:s', "$from $fromTime");
+        $this->trigger->ignored_from = Carbon::createFromFormat('Y-m-d H:i:s', "$from $fromTime");
         if ($to !== null && $toTime !== null) {
-            $this->ignored_until = Carbon::createFromFormat('Y-m-d H:i:s', "$to $toTime");
+            $this->trigger->ignored_until = Carbon::createFromFormat('Y-m-d H:i:s', "$to $toTime");
         }
+        $this->trigger->ignored = true;
         $this->ignored = true;
         $this->closed = true;
         $this->ignorance_description = $description;
         
         return $this->save();
-    }
-
-    /**
-     * Get the watched automated process that owns the alert.
-     */
-    public function watchedAutomatedProcess()
-    {
-        return $this->belongsTo('App\WatchedAutomatedProcess');
-    }
-
-    /**
-     * Get the user that is reviewing the alert.
-     */
-    public function reviewer()
-    {
-        return $this->belongsTo('App\User');
     }
 
     /**

@@ -15,6 +15,7 @@ class CreateAlertsTable extends Migration
     {
         Schema::create('alerts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('alert_trigger_id');
             $table->unsignedBigInteger('watched_automated_process_id');
             $table->unsignedBigInteger('reviewer_id')->nullable(true);
             $table->string('label');
@@ -26,8 +27,6 @@ class CreateAlertsTable extends Migration
             $table->text('closing_description')->nullable(true);
             $table->boolean('false_positive')->default(false);
             $table->boolean('ignored')->default(false);
-            $table->dateTime('ignored_from')->nullable(true);
-            $table->dateTime('ignored_until')->nullable(true);
             $table->text('ignorance_description')->nullable(true);
             $table->timestamps();
 

@@ -8,6 +8,7 @@ use App\WatchedAutomatedProcess;
 use App\UiPathOrchestrator;
 use App\UiPathRobot;
 use App\Alert;
+use App\AlertTrigger;
 use Illuminate\Support\Facades\Auth;
 
 class ConfigurationClientController extends Controller
@@ -35,11 +36,12 @@ class ConfigurationClientController extends Controller
         return view('configuration.client.index', [
             'page' => 'configuration.client.index',
             'alerts' => $alerts,
-            'clients' => $clients,
-            'orchestrators' => UiPathOrchestrator::all(),
+            'clients' => $clients->sortBy('name'),
+            'orchestrators' => UiPathOrchestrator::orderBy('name')->get(),
             'clientsCount' => $clients->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
             'robotsCount' => UiPathRobot::all()->count(),
+            'alertTriggersCount' => AlertTrigger::all()->count(),
             'openedAlertsCount' => Alert::where('closed', false)->count(),
             'underRevisionAlertsCount' => Alert::where('under_revision', true)->count(),
             'closedAlertsCount' => Alert::where('closed', true)->count(),

@@ -2,6 +2,25 @@
     <div class="field is-horizontal">
         <div class="field-body">
             <div class="field">
+                <div class="control has-icons-left">
+                    <div class="select is-fullwidth">
+                        <select id="orchestrator">
+                            <option value="0">Select an orchestrator</option>
+                            @foreach ($orchestrators as $orchestrator)
+                                <option value="{{ $orchestrator->id }}">{{ $orchestrator }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-server"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="field is-horizontal">
+        <div class="field-body">
+            <div class="field">
                 <p class="control is-expanded has-icons-left">
                     <input class="input" id="name" type="text" placeholder="Name">
                     <span class="icon is-small is-left">
@@ -16,25 +35,6 @@
                         <i class="fas fa-barcode"></i>
                     </span>
                 </p>
-            </div>
-        </div>
-    </div>
-    <div class="field is-horizontal">
-        <div class="field-body">
-            <div class="field">
-                <div class="control has-icons-left">
-                    <div class="select is-fullwidth">
-                        <select id="orchestrator">
-                            <option value="0">Select an orchestrator</option>
-                            @foreach ($orchestrators as $orchestrator)
-                                <option value="{{ $orchestrator->id }}">{{ $orchestrator }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-server"></i>
-                    </span>
-                </div>
             </div>
         </div>
     </div>

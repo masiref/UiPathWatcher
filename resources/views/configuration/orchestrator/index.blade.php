@@ -5,11 +5,20 @@
 
 @section('content')
     <div class="configuration">
-        <h1 class="title">Orchestrators</h1>
+        @include('layouts.title', [
+            'title' => 'Orchestrators',
+            'icon' => 'server',
+            'color' => 'link'
+        ])
         @include('configuration.orchestrator.table')
-        <hr>
+        
+        <div class="is-divider"></div>
 
-        <h1 class="title">Add a new orchestrator</h1>
+        @include('layouts.title', [
+            'title' => 'Add a new orchestrator',
+            'icon' => 'plus-circle',
+            'color' => 'primary'
+        ])
         @include('configuration.orchestrator.add-form')
     </div>
 @endsection

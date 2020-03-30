@@ -63,17 +63,17 @@
         <div class="field-body">
             <div class="field">
                 <p class="control is-expanded has-icons-left">
-                    <input class="input" id="kibana-url" type="text" placeholder="Kibana URL">
+                    <input class="input" id="elastic-search-url" type="text" placeholder="ElasticSearch URL">
                     <span class="icon is-small is-left">
-                        <i class="fas fa-link"></i>
+                        <i class="fas fa-chart-bar"></i>
                     </span>
                 </p>
             </div>
             <div class="field">
                 <p class="control is-expanded has-icons-left">
-                    <input class="input" id="kibana-index" type="text" placeholder="Kibana Index">
+                    <input class="input" id="elastic-search-index" type="text" placeholder="ElasticSearch Index">
                     <span class="icon is-small is-left">
-                        <i class="fas fa-marker"></i>
+                        <i class="fas fa-bookmark"></i>
                     </span>
                 </p>
             </div>

@@ -4,6 +4,7 @@ import * as dashboardController from './views/dashboard/index';
 import * as orchestratorConfigurationController from './views/configuration/orchestrator/index';
 import * as clientConfigurationController from './views/configuration/client/index';
 import * as watchedAutomatedProcessConfigurationController from './views/configuration/watched-automated-process/index';
+import * as alertTriggerConfigurationController from './views/configuration/alert-trigger/index';
 
 const url = window.location.href;
 if (_base.isDashboardRelatedURL(url)) {
@@ -14,6 +15,8 @@ if (_base.isDashboardRelatedURL(url)) {
     clientConfigurationController.init();
 } else if (_base.isConfigurationWatchedAutomatedProcessRelatedURL(url)) {
     watchedAutomatedProcessConfigurationController.init();
+} else if (_base.isConfigurationAlertTriggerRelatedURL(url)) {
+    alertTriggerConfigurationController.init();
 }
 
 // DataTables

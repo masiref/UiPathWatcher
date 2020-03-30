@@ -10,19 +10,46 @@
                 </span>
                 <strong>{{ $watchedAutomatedProcess->name }}</strong>
             </p>
-        </div>
-        @if ($watchedAutomatedProcess->additional_information
-            || $watchedAutomatedProcess->operational_handbook_page_url
-            || $watchedAutomatedProcess->kibana_dashboard_url)
-            <article class="message is-primary is-small">
-                <div class="message-body">
-                    @if ($watchedAutomatedProcess->additional_information)
-                        {{ $watchedAutomatedProcess->additional_information }}
+            @if ($watchedAutomatedProcess->additional_information
+                || $watchedAutomatedProcess->operational_handbook_page_url
+                || $watchedAutomatedProcess->kibana_dashboard_url)
+                <article class="message is-primary is-small">
+                    <div class="message-body">
+                        @if ($watchedAutomatedProcess->additional_information)
+                            {{ $watchedAutomatedProcess->additional_information }}
+                        @endif
+                        @include('dashboard.watched-automated-process.buttons')
+                    </div>
+                </article>
+            @endif
+            @if ($watchedAutomatedProcess->robots->count() > 0)
+                @foreach($watchedAutomatedProcess->robots as $robot)
+                    @if ($loop->iteration % 4 === 0)
+                            </div>
+                        </div>
                     @endif
-                    @include('dashboard.watched-automated-process.buttons')
-                </div>
-            </article>
-        @endif
+                    @if ($loop->iteration % 4 === 0 || $loop->first)
+                        <div class="level">
+                            <div class="level-left">
+                    @endif
+                    <div class="level-item has-text-centered p-sm">
+                        <div>
+                            <p class="heading has-text-weight-bold">{{ $robot }}</p>
+                            <p class="title has-tooltip-bottom has-text-{{ $robot->level() }}"
+                                data-tooltip="{{ $robot->username }} {{ $robot->description ? '(' . $robot->description . ')' : '' }}">
+                                <span class="icon is-small">
+                                    <i class="fas fa-robot"></i>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    @if ($loop->iteration % 4 === 0 || $loop->last)
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            @endif
+        </div>
         @foreach($watchedAutomatedProcess->openedAlerts() as $alert)
             @include('dashboard.alert.element')
         @endforeach

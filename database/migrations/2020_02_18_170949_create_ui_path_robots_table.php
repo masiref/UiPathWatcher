@@ -16,11 +16,20 @@ class CreateUiPathRobotsTable extends Migration
         Schema::create('ui_path_robots', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('ui_path_orchestrator_id');
+            $table->string('name');
             $table->string('machine_name');
             $table->string('description')->nullable(true);
+            $table->string('username')->nullable(true);
+            $table->string('type');
+            $table->boolean('is_online')->default(false);
+            $table->boolean('is_logging')->default(false);
+            $table->bigInteger('external_id');
             $table->timestamps();
             
-            $table->foreign('ui_path_orchestrator_id')->references('id')->on('ui_path_orchestrators');
+            $table->foreign('ui_path_orchestrator_id')
+                ->references('id')
+                ->on('ui_path_orchestrators')
+                ->onDelete('cascade');
         });
     }
 

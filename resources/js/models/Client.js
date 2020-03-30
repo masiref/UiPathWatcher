@@ -21,12 +21,25 @@ export default class Client {
         }
     }
 
-    async update() {
+    async get() {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
                     axios.get(`/api/clients/${this.id}`).then(response => {
                         this.data = response.data;
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async update() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    this.get().then(response => {
                         return this.updateMarkup();
                     })
                 );
@@ -77,6 +90,30 @@ export default class Client {
             return new Promise((resolve, reject) => {
                 resolve(
                     axios.get(`/configuration/orchestrator/processes/${this.id}`)
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getRobotsFromOrchestrator() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(`/configuration/orchestrator/robots/${this.id}`)
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getQueuesFromOrchestrator() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(`/configuration/orchestrator/queues/${this.id}`)
                 );
             });
         } catch (error) {

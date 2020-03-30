@@ -7,6 +7,7 @@ use App\Alert;
 use App\Client;
 use App\UiPathOrchestrator;
 use App\WatchedAutomatedProcess;
+use App\AlertTrigger;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardUserController extends Controller
@@ -37,10 +38,11 @@ class DashboardUserController extends Controller
             'page' => 'dashboard.user.index',
             'pendingAlerts' => $pendingAlerts,
             'closedAlerts' => $closedAlerts,
+            'orchestratorsCount' => UiPathOrchestrator::all()->count(),
             'clients' => $clients,
             'clientsCount' => $clients->count(),
-            'orchestratorsCount' => UiPathOrchestrator::all()->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
+            'alertTriggersCount' => AlertTrigger::all()->count(),
             'openedAlertsCount' => $pendingAlerts->count(),
             'underRevisionAlertsCount' => $pendingAlerts->where('under_revision', true)->count(),
             'closedAlertsCount' => $closedAlerts->count()

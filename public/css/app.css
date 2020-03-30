@@ -3235,16 +3235,6 @@ nav.navbar {
 
 /* modified path import of other modules */
 
-@-webkit-keyframes spinAround {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(359deg);
-  }
-}
-
 @keyframes spinAround {
   from {
     transform: rotate(0deg);
@@ -19741,6 +19731,1793 @@ label.panel-block:hover {
   overflow-y: auto;
 }
 
+@-webkit-keyframes spinAround {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes spinAround {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.switch[type=checkbox] {
+  outline: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: inline-block;
+  position: absolute;
+  opacity: 0;
+}
+
+.switch[type=checkbox]:focus + label::after,
+.switch[type=checkbox]:focus + label::before,
+.switch[type=checkbox]:focus + label:after,
+.switch[type=checkbox]:focus + label:before {
+  outline: 1px dotted #b5b5b5;
+}
+
+.switch[type=checkbox][disabled] {
+  cursor: not-allowed;
+}
+
+.switch[type=checkbox][disabled] + label {
+  opacity: .5;
+}
+
+.switch[type=checkbox][disabled] + label::before,
+.switch[type=checkbox][disabled] + label:before {
+  opacity: .5;
+}
+
+.switch[type=checkbox][disabled] + label::after,
+.switch[type=checkbox][disabled] + label:after {
+  opacity: .5;
+}
+
+.switch[type=checkbox][disabled] + label:hover {
+  cursor: not-allowed;
+}
+
+.switch[type=checkbox] + label {
+  position: relative;
+  display: initial;
+  font-size: 1rem;
+  line-height: initial;
+  padding-left: 3.5rem;
+  padding-top: .2rem;
+  cursor: pointer;
+}
+
+.switch[type=checkbox] + label::before,
+.switch[type=checkbox] + label:before {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 3rem;
+  height: 1.5rem;
+  border: .1rem solid transparent;
+  border-radius: 4px;
+  background: #b5b5b5;
+  content: '';
+}
+
+.switch[type=checkbox] + label::after,
+.switch[type=checkbox] + label:after {
+  display: block;
+  position: absolute;
+  top: .25rem;
+  left: .25rem;
+  width: 1rem;
+  height: 1rem;
+  transform: translate3d(0, 0, 0);
+  border-radius: 4px;
+  background: #fff;
+  transition: all .25s ease-out;
+  content: '';
+}
+
+.switch[type=checkbox].is-rtl + label {
+  padding-left: 0;
+  padding-right: 3.5rem;
+}
+
+.switch[type=checkbox].is-rtl + label::before,
+.switch[type=checkbox].is-rtl + label:before {
+  left: auto;
+  right: 0;
+}
+
+.switch[type=checkbox].is-rtl + label::after,
+.switch[type=checkbox].is-rtl + label:after {
+  left: auto;
+  right: .25rem;
+}
+
+.switch[type=checkbox]:checked + label::before,
+.switch[type=checkbox]:checked + label:before {
+  background: #00d1b2;
+}
+
+.switch[type=checkbox]:checked + label::after {
+  left: 1.625rem;
+}
+
+.switch[type=checkbox]:checked.is-rtl + label::after,
+.switch[type=checkbox]:checked.is-rtl + label:after {
+  left: auto;
+  right: 1.625rem;
+}
+
+.switch[type=checkbox].is-outlined + label::before,
+.switch[type=checkbox].is-outlined + label:before {
+  background-color: transparent;
+  border-color: #b5b5b5;
+}
+
+.switch[type=checkbox].is-outlined + label::after,
+.switch[type=checkbox].is-outlined + label:after {
+  background: #b5b5b5;
+}
+
+.switch[type=checkbox].is-outlined:checked + label::before,
+.switch[type=checkbox].is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: #00d1b2;
+}
+
+.switch[type=checkbox].is-outlined:checked + label::after,
+.switch[type=checkbox].is-outlined:checked + label:after {
+  background: #00d1b2;
+}
+
+.switch[type=checkbox].is-thin + label::before,
+.switch[type=checkbox].is-thin + label:before {
+  top: .54545rem;
+  height: .375rem;
+}
+
+.switch[type=checkbox].is-thin + label::after,
+.switch[type=checkbox].is-thin + label:after {
+  box-shadow: 0 0 3px #7a7a7a;
+}
+
+.switch[type=checkbox].is-rounded + label::before,
+.switch[type=checkbox].is-rounded + label:before {
+  border-radius: 24px;
+}
+
+.switch[type=checkbox].is-rounded + label::after,
+.switch[type=checkbox].is-rounded + label:after {
+  border-radius: 50%;
+}
+
+.switch[type=checkbox].is-small + label {
+  position: relative;
+  display: initial;
+  font-size: .75rem;
+  line-height: initial;
+  padding-left: 2.75rem;
+  padding-top: .2rem;
+  cursor: pointer;
+}
+
+.switch[type=checkbox].is-small + label::before,
+.switch[type=checkbox].is-small + label:before {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 2.25rem;
+  height: 1.125rem;
+  border: .1rem solid transparent;
+  border-radius: 4px;
+  background: #b5b5b5;
+  content: '';
+}
+
+.switch[type=checkbox].is-small + label::after,
+.switch[type=checkbox].is-small + label:after {
+  display: block;
+  position: absolute;
+  top: .25rem;
+  left: .25rem;
+  width: .625rem;
+  height: .625rem;
+  transform: translate3d(0, 0, 0);
+  border-radius: 4px;
+  background: #fff;
+  transition: all .25s ease-out;
+  content: '';
+}
+
+.switch[type=checkbox].is-small.is-rtl + label {
+  padding-left: 0;
+  padding-right: 2.75rem;
+}
+
+.switch[type=checkbox].is-small.is-rtl + label::before,
+.switch[type=checkbox].is-small.is-rtl + label:before {
+  left: auto;
+  right: 0;
+}
+
+.switch[type=checkbox].is-small.is-rtl + label::after,
+.switch[type=checkbox].is-small.is-rtl + label:after {
+  left: auto;
+  right: .25rem;
+}
+
+.switch[type=checkbox].is-small:checked + label::before,
+.switch[type=checkbox].is-small:checked + label:before {
+  background: #00d1b2;
+}
+
+.switch[type=checkbox].is-small:checked + label::after {
+  left: 1.25rem;
+}
+
+.switch[type=checkbox].is-small:checked.is-rtl + label::after,
+.switch[type=checkbox].is-small:checked.is-rtl + label:after {
+  left: auto;
+  right: 1.25rem;
+}
+
+.switch[type=checkbox].is-small.is-outlined + label::before,
+.switch[type=checkbox].is-small.is-outlined + label:before {
+  background-color: transparent;
+  border-color: #b5b5b5;
+}
+
+.switch[type=checkbox].is-small.is-outlined + label::after,
+.switch[type=checkbox].is-small.is-outlined + label:after {
+  background: #b5b5b5;
+}
+
+.switch[type=checkbox].is-small.is-outlined:checked + label::before,
+.switch[type=checkbox].is-small.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: #00d1b2;
+}
+
+.switch[type=checkbox].is-small.is-outlined:checked + label::after,
+.switch[type=checkbox].is-small.is-outlined:checked + label:after {
+  background: #00d1b2;
+}
+
+.switch[type=checkbox].is-small.is-thin + label::before,
+.switch[type=checkbox].is-small.is-thin + label:before {
+  top: .40909rem;
+  height: .28125rem;
+}
+
+.switch[type=checkbox].is-small.is-thin + label::after,
+.switch[type=checkbox].is-small.is-thin + label:after {
+  box-shadow: 0 0 3px #7a7a7a;
+}
+
+.switch[type=checkbox].is-small.is-rounded + label::before,
+.switch[type=checkbox].is-small.is-rounded + label:before {
+  border-radius: 24px;
+}
+
+.switch[type=checkbox].is-small.is-rounded + label::after,
+.switch[type=checkbox].is-small.is-rounded + label:after {
+  border-radius: 50%;
+}
+
+.switch[type=checkbox].is-medium + label {
+  position: relative;
+  display: initial;
+  font-size: 1.25rem;
+  line-height: initial;
+  padding-left: 4.25rem;
+  padding-top: .2rem;
+  cursor: pointer;
+}
+
+.switch[type=checkbox].is-medium + label::before,
+.switch[type=checkbox].is-medium + label:before {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 3.75rem;
+  height: 1.875rem;
+  border: .1rem solid transparent;
+  border-radius: 4px;
+  background: #b5b5b5;
+  content: '';
+}
+
+.switch[type=checkbox].is-medium + label::after,
+.switch[type=checkbox].is-medium + label:after {
+  display: block;
+  position: absolute;
+  top: .25rem;
+  left: .25rem;
+  width: 1.375rem;
+  height: 1.375rem;
+  transform: translate3d(0, 0, 0);
+  border-radius: 4px;
+  background: #fff;
+  transition: all .25s ease-out;
+  content: '';
+}
+
+.switch[type=checkbox].is-medium.is-rtl + label {
+  padding-left: 0;
+  padding-right: 4.25rem;
+}
+
+.switch[type=checkbox].is-medium.is-rtl + label::before,
+.switch[type=checkbox].is-medium.is-rtl + label:before {
+  left: auto;
+  right: 0;
+}
+
+.switch[type=checkbox].is-medium.is-rtl + label::after,
+.switch[type=checkbox].is-medium.is-rtl + label:after {
+  left: auto;
+  right: .25rem;
+}
+
+.switch[type=checkbox].is-medium:checked + label::before,
+.switch[type=checkbox].is-medium:checked + label:before {
+  background: #00d1b2;
+}
+
+.switch[type=checkbox].is-medium:checked + label::after {
+  left: 2rem;
+}
+
+.switch[type=checkbox].is-medium:checked.is-rtl + label::after,
+.switch[type=checkbox].is-medium:checked.is-rtl + label:after {
+  left: auto;
+  right: 2rem;
+}
+
+.switch[type=checkbox].is-medium.is-outlined + label::before,
+.switch[type=checkbox].is-medium.is-outlined + label:before {
+  background-color: transparent;
+  border-color: #b5b5b5;
+}
+
+.switch[type=checkbox].is-medium.is-outlined + label::after,
+.switch[type=checkbox].is-medium.is-outlined + label:after {
+  background: #b5b5b5;
+}
+
+.switch[type=checkbox].is-medium.is-outlined:checked + label::before,
+.switch[type=checkbox].is-medium.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: #00d1b2;
+}
+
+.switch[type=checkbox].is-medium.is-outlined:checked + label::after,
+.switch[type=checkbox].is-medium.is-outlined:checked + label:after {
+  background: #00d1b2;
+}
+
+.switch[type=checkbox].is-medium.is-thin + label::before,
+.switch[type=checkbox].is-medium.is-thin + label:before {
+  top: .68182rem;
+  height: .46875rem;
+}
+
+.switch[type=checkbox].is-medium.is-thin + label::after,
+.switch[type=checkbox].is-medium.is-thin + label:after {
+  box-shadow: 0 0 3px #7a7a7a;
+}
+
+.switch[type=checkbox].is-medium.is-rounded + label::before,
+.switch[type=checkbox].is-medium.is-rounded + label:before {
+  border-radius: 24px;
+}
+
+.switch[type=checkbox].is-medium.is-rounded + label::after,
+.switch[type=checkbox].is-medium.is-rounded + label:after {
+  border-radius: 50%;
+}
+
+.switch[type=checkbox].is-large + label {
+  position: relative;
+  display: initial;
+  font-size: 1.5rem;
+  line-height: initial;
+  padding-left: 5rem;
+  padding-top: .2rem;
+  cursor: pointer;
+}
+
+.switch[type=checkbox].is-large + label::before,
+.switch[type=checkbox].is-large + label:before {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 4.5rem;
+  height: 2.25rem;
+  border: .1rem solid transparent;
+  border-radius: 4px;
+  background: #b5b5b5;
+  content: '';
+}
+
+.switch[type=checkbox].is-large + label::after,
+.switch[type=checkbox].is-large + label:after {
+  display: block;
+  position: absolute;
+  top: .25rem;
+  left: .25rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  transform: translate3d(0, 0, 0);
+  border-radius: 4px;
+  background: #fff;
+  transition: all .25s ease-out;
+  content: '';
+}
+
+.switch[type=checkbox].is-large.is-rtl + label {
+  padding-left: 0;
+  padding-right: 5rem;
+}
+
+.switch[type=checkbox].is-large.is-rtl + label::before,
+.switch[type=checkbox].is-large.is-rtl + label:before {
+  left: auto;
+  right: 0;
+}
+
+.switch[type=checkbox].is-large.is-rtl + label::after,
+.switch[type=checkbox].is-large.is-rtl + label:after {
+  left: auto;
+  right: .25rem;
+}
+
+.switch[type=checkbox].is-large:checked + label::before,
+.switch[type=checkbox].is-large:checked + label:before {
+  background: #00d1b2;
+}
+
+.switch[type=checkbox].is-large:checked + label::after {
+  left: 2.375rem;
+}
+
+.switch[type=checkbox].is-large:checked.is-rtl + label::after,
+.switch[type=checkbox].is-large:checked.is-rtl + label:after {
+  left: auto;
+  right: 2.375rem;
+}
+
+.switch[type=checkbox].is-large.is-outlined + label::before,
+.switch[type=checkbox].is-large.is-outlined + label:before {
+  background-color: transparent;
+  border-color: #b5b5b5;
+}
+
+.switch[type=checkbox].is-large.is-outlined + label::after,
+.switch[type=checkbox].is-large.is-outlined + label:after {
+  background: #b5b5b5;
+}
+
+.switch[type=checkbox].is-large.is-outlined:checked + label::before,
+.switch[type=checkbox].is-large.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: #00d1b2;
+}
+
+.switch[type=checkbox].is-large.is-outlined:checked + label::after,
+.switch[type=checkbox].is-large.is-outlined:checked + label:after {
+  background: #00d1b2;
+}
+
+.switch[type=checkbox].is-large.is-thin + label::before,
+.switch[type=checkbox].is-large.is-thin + label:before {
+  top: .81818rem;
+  height: .5625rem;
+}
+
+.switch[type=checkbox].is-large.is-thin + label::after,
+.switch[type=checkbox].is-large.is-thin + label:after {
+  box-shadow: 0 0 3px #7a7a7a;
+}
+
+.switch[type=checkbox].is-large.is-rounded + label::before,
+.switch[type=checkbox].is-large.is-rounded + label:before {
+  border-radius: 24px;
+}
+
+.switch[type=checkbox].is-large.is-rounded + label::after,
+.switch[type=checkbox].is-large.is-rounded + label:after {
+  border-radius: 50%;
+}
+
+.switch[type=checkbox].is-white:checked + label::before,
+.switch[type=checkbox].is-white:checked + label:before {
+  background: #fff;
+}
+
+.switch[type=checkbox].is-white.is-outlined:checked + label::before,
+.switch[type=checkbox].is-white.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: #fff !important;
+}
+
+.switch[type=checkbox].is-white.is-outlined:checked + label::after,
+.switch[type=checkbox].is-white.is-outlined:checked + label:after {
+  background: #fff;
+}
+
+.switch[type=checkbox].is-white.is-thin.is-outlined + label::after,
+.switch[type=checkbox].is-white.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+
+.switch[type=checkbox].is-unchecked-white + label::before,
+.switch[type=checkbox].is-unchecked-white + label:before {
+  background: #fff;
+}
+
+.switch[type=checkbox].is-unchecked-white.is-outlined + label::before,
+.switch[type=checkbox].is-unchecked-white.is-outlined + label:before {
+  background-color: transparent;
+  border-color: #fff !important;
+}
+
+.switch[type=checkbox].is-unchecked-white.is-outlined + label::after,
+.switch[type=checkbox].is-unchecked-white.is-outlined + label:after {
+  background: #fff;
+}
+
+.switch[type=checkbox].is-black:checked + label::before,
+.switch[type=checkbox].is-black:checked + label:before {
+  background: #0a0a0a;
+}
+
+.switch[type=checkbox].is-black.is-outlined:checked + label::before,
+.switch[type=checkbox].is-black.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: #0a0a0a !important;
+}
+
+.switch[type=checkbox].is-black.is-outlined:checked + label::after,
+.switch[type=checkbox].is-black.is-outlined:checked + label:after {
+  background: #0a0a0a;
+}
+
+.switch[type=checkbox].is-black.is-thin.is-outlined + label::after,
+.switch[type=checkbox].is-black.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+
+.switch[type=checkbox].is-unchecked-black + label::before,
+.switch[type=checkbox].is-unchecked-black + label:before {
+  background: #0a0a0a;
+}
+
+.switch[type=checkbox].is-unchecked-black.is-outlined + label::before,
+.switch[type=checkbox].is-unchecked-black.is-outlined + label:before {
+  background-color: transparent;
+  border-color: #0a0a0a !important;
+}
+
+.switch[type=checkbox].is-unchecked-black.is-outlined + label::after,
+.switch[type=checkbox].is-unchecked-black.is-outlined + label:after {
+  background: #0a0a0a;
+}
+
+.switch[type=checkbox].is-light:checked + label::before,
+.switch[type=checkbox].is-light:checked + label:before {
+  background: #f5f5f5;
+}
+
+.switch[type=checkbox].is-light.is-outlined:checked + label::before,
+.switch[type=checkbox].is-light.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: #f5f5f5 !important;
+}
+
+.switch[type=checkbox].is-light.is-outlined:checked + label::after,
+.switch[type=checkbox].is-light.is-outlined:checked + label:after {
+  background: #f5f5f5;
+}
+
+.switch[type=checkbox].is-light.is-thin.is-outlined + label::after,
+.switch[type=checkbox].is-light.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+
+.switch[type=checkbox].is-unchecked-light + label::before,
+.switch[type=checkbox].is-unchecked-light + label:before {
+  background: #f5f5f5;
+}
+
+.switch[type=checkbox].is-unchecked-light.is-outlined + label::before,
+.switch[type=checkbox].is-unchecked-light.is-outlined + label:before {
+  background-color: transparent;
+  border-color: #f5f5f5 !important;
+}
+
+.switch[type=checkbox].is-unchecked-light.is-outlined + label::after,
+.switch[type=checkbox].is-unchecked-light.is-outlined + label:after {
+  background: #f5f5f5;
+}
+
+.switch[type=checkbox].is-dark:checked + label::before,
+.switch[type=checkbox].is-dark:checked + label:before {
+  background: #363636;
+}
+
+.switch[type=checkbox].is-dark.is-outlined:checked + label::before,
+.switch[type=checkbox].is-dark.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: #363636 !important;
+}
+
+.switch[type=checkbox].is-dark.is-outlined:checked + label::after,
+.switch[type=checkbox].is-dark.is-outlined:checked + label:after {
+  background: #363636;
+}
+
+.switch[type=checkbox].is-dark.is-thin.is-outlined + label::after,
+.switch[type=checkbox].is-dark.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+
+.switch[type=checkbox].is-unchecked-dark + label::before,
+.switch[type=checkbox].is-unchecked-dark + label:before {
+  background: #363636;
+}
+
+.switch[type=checkbox].is-unchecked-dark.is-outlined + label::before,
+.switch[type=checkbox].is-unchecked-dark.is-outlined + label:before {
+  background-color: transparent;
+  border-color: #363636 !important;
+}
+
+.switch[type=checkbox].is-unchecked-dark.is-outlined + label::after,
+.switch[type=checkbox].is-unchecked-dark.is-outlined + label:after {
+  background: #363636;
+}
+
+.switch[type=checkbox].is-primary:checked + label::before,
+.switch[type=checkbox].is-primary:checked + label:before {
+  background: #00d1b2;
+}
+
+.switch[type=checkbox].is-primary.is-outlined:checked + label::before,
+.switch[type=checkbox].is-primary.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: #00d1b2 !important;
+}
+
+.switch[type=checkbox].is-primary.is-outlined:checked + label::after,
+.switch[type=checkbox].is-primary.is-outlined:checked + label:after {
+  background: #00d1b2;
+}
+
+.switch[type=checkbox].is-primary.is-thin.is-outlined + label::after,
+.switch[type=checkbox].is-primary.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+
+.switch[type=checkbox].is-unchecked-primary + label::before,
+.switch[type=checkbox].is-unchecked-primary + label:before {
+  background: #00d1b2;
+}
+
+.switch[type=checkbox].is-unchecked-primary.is-outlined + label::before,
+.switch[type=checkbox].is-unchecked-primary.is-outlined + label:before {
+  background-color: transparent;
+  border-color: #00d1b2 !important;
+}
+
+.switch[type=checkbox].is-unchecked-primary.is-outlined + label::after,
+.switch[type=checkbox].is-unchecked-primary.is-outlined + label:after {
+  background: #00d1b2;
+}
+
+.switch[type=checkbox].is-link:checked + label::before,
+.switch[type=checkbox].is-link:checked + label:before {
+  background: #3273dc;
+}
+
+.switch[type=checkbox].is-link.is-outlined:checked + label::before,
+.switch[type=checkbox].is-link.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: #3273dc !important;
+}
+
+.switch[type=checkbox].is-link.is-outlined:checked + label::after,
+.switch[type=checkbox].is-link.is-outlined:checked + label:after {
+  background: #3273dc;
+}
+
+.switch[type=checkbox].is-link.is-thin.is-outlined + label::after,
+.switch[type=checkbox].is-link.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+
+.switch[type=checkbox].is-unchecked-link + label::before,
+.switch[type=checkbox].is-unchecked-link + label:before {
+  background: #3273dc;
+}
+
+.switch[type=checkbox].is-unchecked-link.is-outlined + label::before,
+.switch[type=checkbox].is-unchecked-link.is-outlined + label:before {
+  background-color: transparent;
+  border-color: #3273dc !important;
+}
+
+.switch[type=checkbox].is-unchecked-link.is-outlined + label::after,
+.switch[type=checkbox].is-unchecked-link.is-outlined + label:after {
+  background: #3273dc;
+}
+
+.switch[type=checkbox].is-info:checked + label::before,
+.switch[type=checkbox].is-info:checked + label:before {
+  background: #209cee;
+}
+
+.switch[type=checkbox].is-info.is-outlined:checked + label::before,
+.switch[type=checkbox].is-info.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: #209cee !important;
+}
+
+.switch[type=checkbox].is-info.is-outlined:checked + label::after,
+.switch[type=checkbox].is-info.is-outlined:checked + label:after {
+  background: #209cee;
+}
+
+.switch[type=checkbox].is-info.is-thin.is-outlined + label::after,
+.switch[type=checkbox].is-info.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+
+.switch[type=checkbox].is-unchecked-info + label::before,
+.switch[type=checkbox].is-unchecked-info + label:before {
+  background: #209cee;
+}
+
+.switch[type=checkbox].is-unchecked-info.is-outlined + label::before,
+.switch[type=checkbox].is-unchecked-info.is-outlined + label:before {
+  background-color: transparent;
+  border-color: #209cee !important;
+}
+
+.switch[type=checkbox].is-unchecked-info.is-outlined + label::after,
+.switch[type=checkbox].is-unchecked-info.is-outlined + label:after {
+  background: #209cee;
+}
+
+.switch[type=checkbox].is-success:checked + label::before,
+.switch[type=checkbox].is-success:checked + label:before {
+  background: #23d160;
+}
+
+.switch[type=checkbox].is-success.is-outlined:checked + label::before,
+.switch[type=checkbox].is-success.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: #23d160 !important;
+}
+
+.switch[type=checkbox].is-success.is-outlined:checked + label::after,
+.switch[type=checkbox].is-success.is-outlined:checked + label:after {
+  background: #23d160;
+}
+
+.switch[type=checkbox].is-success.is-thin.is-outlined + label::after,
+.switch[type=checkbox].is-success.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+
+.switch[type=checkbox].is-unchecked-success + label::before,
+.switch[type=checkbox].is-unchecked-success + label:before {
+  background: #23d160;
+}
+
+.switch[type=checkbox].is-unchecked-success.is-outlined + label::before,
+.switch[type=checkbox].is-unchecked-success.is-outlined + label:before {
+  background-color: transparent;
+  border-color: #23d160 !important;
+}
+
+.switch[type=checkbox].is-unchecked-success.is-outlined + label::after,
+.switch[type=checkbox].is-unchecked-success.is-outlined + label:after {
+  background: #23d160;
+}
+
+.switch[type=checkbox].is-warning:checked + label::before,
+.switch[type=checkbox].is-warning:checked + label:before {
+  background: #ffdd57;
+}
+
+.switch[type=checkbox].is-warning.is-outlined:checked + label::before,
+.switch[type=checkbox].is-warning.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: #ffdd57 !important;
+}
+
+.switch[type=checkbox].is-warning.is-outlined:checked + label::after,
+.switch[type=checkbox].is-warning.is-outlined:checked + label:after {
+  background: #ffdd57;
+}
+
+.switch[type=checkbox].is-warning.is-thin.is-outlined + label::after,
+.switch[type=checkbox].is-warning.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+
+.switch[type=checkbox].is-unchecked-warning + label::before,
+.switch[type=checkbox].is-unchecked-warning + label:before {
+  background: #ffdd57;
+}
+
+.switch[type=checkbox].is-unchecked-warning.is-outlined + label::before,
+.switch[type=checkbox].is-unchecked-warning.is-outlined + label:before {
+  background-color: transparent;
+  border-color: #ffdd57 !important;
+}
+
+.switch[type=checkbox].is-unchecked-warning.is-outlined + label::after,
+.switch[type=checkbox].is-unchecked-warning.is-outlined + label:after {
+  background: #ffdd57;
+}
+
+.switch[type=checkbox].is-danger:checked + label::before,
+.switch[type=checkbox].is-danger:checked + label:before {
+  background: #ff3860;
+}
+
+.switch[type=checkbox].is-danger.is-outlined:checked + label::before,
+.switch[type=checkbox].is-danger.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: #ff3860 !important;
+}
+
+.switch[type=checkbox].is-danger.is-outlined:checked + label::after,
+.switch[type=checkbox].is-danger.is-outlined:checked + label:after {
+  background: #ff3860;
+}
+
+.switch[type=checkbox].is-danger.is-thin.is-outlined + label::after,
+.switch[type=checkbox].is-danger.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+
+.switch[type=checkbox].is-unchecked-danger + label::before,
+.switch[type=checkbox].is-unchecked-danger + label:before {
+  background: #ff3860;
+}
+
+.switch[type=checkbox].is-unchecked-danger.is-outlined + label::before,
+.switch[type=checkbox].is-unchecked-danger.is-outlined + label:before {
+  background-color: transparent;
+  border-color: #ff3860 !important;
+}
+
+.switch[type=checkbox].is-unchecked-danger.is-outlined + label::after,
+.switch[type=checkbox].is-unchecked-danger.is-outlined + label:after {
+  background: #ff3860;
+}
+
+@-webkit-keyframes spinAround {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes spinAround {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.is-divider,
+.is-divider-vertical {
+  display: block;
+  position: relative;
+  border-top: .1rem solid #dbdbdb;
+  height: .1rem;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.is-divider-vertical[data-content]::after,
+.is-divider[data-content]::after {
+  background: #fff;
+  color: #b5b5b5;
+  content: attr(data-content);
+  display: inline-block;
+  font-size: .75rem;
+  padding: .4rem .8rem;
+  transform: translateY(-1.1rem);
+  text-align: center;
+}
+
+@media screen and (min-width: 769px), print {
+  .is-divider-vertical {
+    display: block;
+    flex: none;
+    width: auto;
+    height: auto;
+    padding: 2rem;
+    margin: 0;
+    position: relative;
+    border-top: none;
+    min-height: 2rem;
+  }
+
+  .is-divider-vertical::before {
+    border-left: .1rem solid #dbdbdb;
+    bottom: 1rem;
+    content: "";
+    display: block;
+    left: 50%;
+    position: absolute;
+    top: 1rem;
+    transform: translateX(-50%);
+  }
+
+  .is-divider-vertical[data-content]::after {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    padding: .1rem;
+    transform: translateY(-50%) translateX(-50%);
+  }
+}
+
+.is-divider-vertical.is-white,
+.is-divider.is-white {
+  border-top-color: #fff;
+}
+
+.is-divider-vertical.is-white[data-content]::after,
+.is-divider.is-white[data-content]::after {
+  background: #0a0a0a;
+  color: #fff;
+}
+
+.is-divider-vertical.is-white::before,
+.is-divider.is-white::before {
+  border-left-color: #fff;
+}
+
+.is-divider-vertical.is-black,
+.is-divider.is-black {
+  border-top-color: #0a0a0a;
+}
+
+.is-divider-vertical.is-black[data-content]::after,
+.is-divider.is-black[data-content]::after {
+  background: #fff;
+  color: #0a0a0a;
+}
+
+.is-divider-vertical.is-black::before,
+.is-divider.is-black::before {
+  border-left-color: #0a0a0a;
+}
+
+.is-divider-vertical.is-light,
+.is-divider.is-light {
+  border-top-color: #f5f5f5;
+}
+
+.is-divider-vertical.is-light[data-content]::after,
+.is-divider.is-light[data-content]::after {
+  background: #363636;
+  color: #f5f5f5;
+}
+
+.is-divider-vertical.is-light::before,
+.is-divider.is-light::before {
+  border-left-color: #f5f5f5;
+}
+
+.is-divider-vertical.is-dark,
+.is-divider.is-dark {
+  border-top-color: #363636;
+}
+
+.is-divider-vertical.is-dark[data-content]::after,
+.is-divider.is-dark[data-content]::after {
+  background: #f5f5f5;
+  color: #363636;
+}
+
+.is-divider-vertical.is-dark::before,
+.is-divider.is-dark::before {
+  border-left-color: #363636;
+}
+
+.is-divider-vertical.is-primary,
+.is-divider.is-primary {
+  border-top-color: #00d1b2;
+}
+
+.is-divider-vertical.is-primary[data-content]::after,
+.is-divider.is-primary[data-content]::after {
+  background: #fff;
+  color: #00d1b2;
+}
+
+.is-divider-vertical.is-primary::before,
+.is-divider.is-primary::before {
+  border-left-color: #00d1b2;
+}
+
+.is-divider-vertical.is-link,
+.is-divider.is-link {
+  border-top-color: #3273dc;
+}
+
+.is-divider-vertical.is-link[data-content]::after,
+.is-divider.is-link[data-content]::after {
+  background: #fff;
+  color: #3273dc;
+}
+
+.is-divider-vertical.is-link::before,
+.is-divider.is-link::before {
+  border-left-color: #3273dc;
+}
+
+.is-divider-vertical.is-info,
+.is-divider.is-info {
+  border-top-color: #209cee;
+}
+
+.is-divider-vertical.is-info[data-content]::after,
+.is-divider.is-info[data-content]::after {
+  background: #fff;
+  color: #209cee;
+}
+
+.is-divider-vertical.is-info::before,
+.is-divider.is-info::before {
+  border-left-color: #209cee;
+}
+
+.is-divider-vertical.is-success,
+.is-divider.is-success {
+  border-top-color: #23d160;
+}
+
+.is-divider-vertical.is-success[data-content]::after,
+.is-divider.is-success[data-content]::after {
+  background: #fff;
+  color: #23d160;
+}
+
+.is-divider-vertical.is-success::before,
+.is-divider.is-success::before {
+  border-left-color: #23d160;
+}
+
+.is-divider-vertical.is-warning,
+.is-divider.is-warning {
+  border-top-color: #ffdd57;
+}
+
+.is-divider-vertical.is-warning[data-content]::after,
+.is-divider.is-warning[data-content]::after {
+  background: rgba(0, 0, 0, 0.7);
+  color: #ffdd57;
+}
+
+.is-divider-vertical.is-warning::before,
+.is-divider.is-warning::before {
+  border-left-color: #ffdd57;
+}
+
+.is-divider-vertical.is-danger,
+.is-divider.is-danger {
+  border-top-color: #ff3860;
+}
+
+.is-divider-vertical.is-danger[data-content]::after,
+.is-divider.is-danger[data-content]::after {
+  background: #fff;
+  color: #ff3860;
+}
+
+.is-divider-vertical.is-danger::before,
+.is-divider.is-danger::before {
+  border-left-color: #ff3860;
+}
+
+.is-divider-vertical.is-black-bis,
+.is-divider.is-black-bis {
+  border-top-color: #121212;
+}
+
+.is-divider-vertical.is-black-bis[data-content]::after,
+.is-divider.is-black-bis[data-content]::after {
+  background: #fff;
+  color: #121212;
+}
+
+.is-divider-vertical.is-black-bis::before,
+.is-divider.is-black-bis::before {
+  border-left-color: #121212;
+}
+
+.is-divider-vertical.is-black-ter,
+.is-divider.is-black-ter {
+  border-top-color: #242424;
+}
+
+.is-divider-vertical.is-black-ter[data-content]::after,
+.is-divider.is-black-ter[data-content]::after {
+  background: #fff;
+  color: #242424;
+}
+
+.is-divider-vertical.is-black-ter::before,
+.is-divider.is-black-ter::before {
+  border-left-color: #242424;
+}
+
+.is-divider-vertical.is-grey-darker,
+.is-divider.is-grey-darker {
+  border-top-color: #363636;
+}
+
+.is-divider-vertical.is-grey-darker[data-content]::after,
+.is-divider.is-grey-darker[data-content]::after {
+  background: #fff;
+  color: #363636;
+}
+
+.is-divider-vertical.is-grey-darker::before,
+.is-divider.is-grey-darker::before {
+  border-left-color: #363636;
+}
+
+.is-divider-vertical.is-grey-dark,
+.is-divider.is-grey-dark {
+  border-top-color: #4a4a4a;
+}
+
+.is-divider-vertical.is-grey-dark[data-content]::after,
+.is-divider.is-grey-dark[data-content]::after {
+  background: #fff;
+  color: #4a4a4a;
+}
+
+.is-divider-vertical.is-grey-dark::before,
+.is-divider.is-grey-dark::before {
+  border-left-color: #4a4a4a;
+}
+
+.is-divider-vertical.is-grey,
+.is-divider.is-grey {
+  border-top-color: #7a7a7a;
+}
+
+.is-divider-vertical.is-grey[data-content]::after,
+.is-divider.is-grey[data-content]::after {
+  background: #fff;
+  color: #7a7a7a;
+}
+
+.is-divider-vertical.is-grey::before,
+.is-divider.is-grey::before {
+  border-left-color: #7a7a7a;
+}
+
+.is-divider-vertical.is-grey-light,
+.is-divider.is-grey-light {
+  border-top-color: #b5b5b5;
+}
+
+.is-divider-vertical.is-grey-light[data-content]::after,
+.is-divider.is-grey-light[data-content]::after {
+  background: #fff;
+  color: #b5b5b5;
+}
+
+.is-divider-vertical.is-grey-light::before,
+.is-divider.is-grey-light::before {
+  border-left-color: #b5b5b5;
+}
+
+.is-divider-vertical.is-grey-lighter,
+.is-divider.is-grey-lighter {
+  border-top-color: #dbdbdb;
+}
+
+.is-divider-vertical.is-grey-lighter[data-content]::after,
+.is-divider.is-grey-lighter[data-content]::after {
+  background: rgba(0, 0, 0, 0.7);
+  color: #dbdbdb;
+}
+
+.is-divider-vertical.is-grey-lighter::before,
+.is-divider.is-grey-lighter::before {
+  border-left-color: #dbdbdb;
+}
+
+.is-divider-vertical.is-white-ter,
+.is-divider.is-white-ter {
+  border-top-color: #f5f5f5;
+}
+
+.is-divider-vertical.is-white-ter[data-content]::after,
+.is-divider.is-white-ter[data-content]::after {
+  background: rgba(0, 0, 0, 0.7);
+  color: #f5f5f5;
+}
+
+.is-divider-vertical.is-white-ter::before,
+.is-divider.is-white-ter::before {
+  border-left-color: #f5f5f5;
+}
+
+.is-divider-vertical.is-white-bis,
+.is-divider.is-white-bis {
+  border-top-color: #fafafa;
+}
+
+.is-divider-vertical.is-white-bis[data-content]::after,
+.is-divider.is-white-bis[data-content]::after {
+  background: rgba(0, 0, 0, 0.7);
+  color: #fafafa;
+}
+
+.is-divider-vertical.is-white-bis::before,
+.is-divider.is-white-bis::before {
+  border-left-color: #fafafa;
+}
+
+@-webkit-keyframes spinAround {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes spinAround {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.steps:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1rem;
+  min-height: 2rem;
+}
+
+.steps .step-item {
+  margin-top: 0;
+  position: relative;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.steps .step-item:not(:first-child) {
+  flex-basis: 1em;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.steps .step-item:not(:first-child)::before {
+  content: " ";
+  display: block;
+  position: absolute;
+}
+
+.steps .step-item::before {
+  background: linear-gradient(to left, #dbdbdb 50%, #00d1b2 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+}
+
+.steps .step-item::before .step-marker {
+  color: #fff;
+}
+
+.steps .step-item.is-active::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-active .step-marker {
+  background-color: #fff;
+  border-color: #00d1b2;
+  color: #00d1b2;
+}
+
+.steps .step-item.is-completed::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-completed .step-marker {
+  color: #fff;
+  background-color: #00d1b2;
+}
+
+.steps .step-item .step-marker {
+  align-items: center;
+  display: flex;
+  border-radius: 50%;
+  font-weight: 700;
+  justify-content: center;
+  background: #b5b5b5;
+  color: #fff;
+  border: .2em solid #fff;
+  z-index: 1;
+}
+
+.steps .step-item .step-details {
+  text-align: center;
+}
+
+.steps .step-item.is-white::before {
+  background: linear-gradient(to left, #dbdbdb 50%, #fff 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+}
+
+.steps .step-item.is-white.is-active::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-white.is-active .step-marker {
+  background-color: #fff;
+  border-color: #fff;
+  color: #fff;
+}
+
+.steps .step-item.is-white.is-completed::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-white.is-completed .step-marker {
+  color: #0a0a0a;
+  background-color: #fff;
+}
+
+.steps .step-item.is-black::before {
+  background: linear-gradient(to left, #dbdbdb 50%, #0a0a0a 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+}
+
+.steps .step-item.is-black.is-active::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-black.is-active .step-marker {
+  background-color: #fff;
+  border-color: #0a0a0a;
+  color: #0a0a0a;
+}
+
+.steps .step-item.is-black.is-completed::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-black.is-completed .step-marker {
+  color: #fff;
+  background-color: #0a0a0a;
+}
+
+.steps .step-item.is-light::before {
+  background: linear-gradient(to left, #dbdbdb 50%, #f5f5f5 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+}
+
+.steps .step-item.is-light.is-active::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-light.is-active .step-marker {
+  background-color: #fff;
+  border-color: #f5f5f5;
+  color: #f5f5f5;
+}
+
+.steps .step-item.is-light.is-completed::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-light.is-completed .step-marker {
+  color: #363636;
+  background-color: #f5f5f5;
+}
+
+.steps .step-item.is-dark::before {
+  background: linear-gradient(to left, #dbdbdb 50%, #363636 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+}
+
+.steps .step-item.is-dark.is-active::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-dark.is-active .step-marker {
+  background-color: #fff;
+  border-color: #363636;
+  color: #363636;
+}
+
+.steps .step-item.is-dark.is-completed::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-dark.is-completed .step-marker {
+  color: #f5f5f5;
+  background-color: #363636;
+}
+
+.steps .step-item.is-primary::before {
+  background: linear-gradient(to left, #dbdbdb 50%, #00d1b2 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+}
+
+.steps .step-item.is-primary.is-active::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-primary.is-active .step-marker {
+  background-color: #fff;
+  border-color: #00d1b2;
+  color: #00d1b2;
+}
+
+.steps .step-item.is-primary.is-completed::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-primary.is-completed .step-marker {
+  color: #fff;
+  background-color: #00d1b2;
+}
+
+.steps .step-item.is-link::before {
+  background: linear-gradient(to left, #dbdbdb 50%, #3273dc 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+}
+
+.steps .step-item.is-link.is-active::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-link.is-active .step-marker {
+  background-color: #fff;
+  border-color: #3273dc;
+  color: #3273dc;
+}
+
+.steps .step-item.is-link.is-completed::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-link.is-completed .step-marker {
+  color: #fff;
+  background-color: #3273dc;
+}
+
+.steps .step-item.is-info::before {
+  background: linear-gradient(to left, #dbdbdb 50%, #209cee 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+}
+
+.steps .step-item.is-info.is-active::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-info.is-active .step-marker {
+  background-color: #fff;
+  border-color: #209cee;
+  color: #209cee;
+}
+
+.steps .step-item.is-info.is-completed::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-info.is-completed .step-marker {
+  color: #fff;
+  background-color: #209cee;
+}
+
+.steps .step-item.is-success::before {
+  background: linear-gradient(to left, #dbdbdb 50%, #23d160 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+}
+
+.steps .step-item.is-success.is-active::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-success.is-active .step-marker {
+  background-color: #fff;
+  border-color: #23d160;
+  color: #23d160;
+}
+
+.steps .step-item.is-success.is-completed::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-success.is-completed .step-marker {
+  color: #fff;
+  background-color: #23d160;
+}
+
+.steps .step-item.is-warning::before {
+  background: linear-gradient(to left, #dbdbdb 50%, #ffdd57 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+}
+
+.steps .step-item.is-warning.is-active::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-warning.is-active .step-marker {
+  background-color: #fff;
+  border-color: #ffdd57;
+  color: #ffdd57;
+}
+
+.steps .step-item.is-warning.is-completed::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-warning.is-completed .step-marker {
+  color: rgba(0, 0, 0, 0.7);
+  background-color: #ffdd57;
+}
+
+.steps .step-item.is-danger::before {
+  background: linear-gradient(to left, #dbdbdb 50%, #ff3860 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+}
+
+.steps .step-item.is-danger.is-active::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-danger.is-active .step-marker {
+  background-color: #fff;
+  border-color: #ff3860;
+  color: #ff3860;
+}
+
+.steps .step-item.is-danger.is-completed::before {
+  background-position: left bottom;
+}
+
+.steps .step-item.is-danger.is-completed .step-marker {
+  color: #fff;
+  background-color: #ff3860;
+}
+
+.steps .steps-content {
+  align-items: stretch;
+  flex-basis: 100%;
+  margin: 2rem 0;
+}
+
+.steps .steps-content .step-content {
+  display: none;
+}
+
+.steps .steps-content .step-content.is-active {
+  display: block;
+}
+
+.steps .steps-actions {
+  display: flex;
+  align-items: stretch;
+  flex-basis: 100%;
+}
+
+.steps .steps-actions .steps-action {
+  display: flex;
+  flex-basis: 0;
+  flex-grow: 1;
+  margin: .5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.steps.is-animated .step-item::before {
+  transition: all 2s ease;
+}
+
+.steps.is-animated .step-item .step-marker {
+  transition: all 0s ease;
+  transition-delay: 1.5s;
+}
+
+.steps .step-item:not(:first-child)::before {
+  height: .2em;
+  width: 100%;
+  bottom: 0;
+  left: -50%;
+  top: 1rem;
+}
+
+.steps .step-item .step-marker {
+  height: 2rem;
+  width: 2rem;
+  position: absolute;
+  left: calc(50% - 1rem);
+}
+
+.steps .step-item .step-marker .icon * {
+  font-size: 1rem;
+}
+
+.steps .step-item .step-details {
+  margin-top: 2rem;
+  margin-left: .5em;
+  margin-right: .5em;
+  padding-top: .2em;
+}
+
+.steps .step-item .step-details .step-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.steps.is-small {
+  font-size: .75rem;
+  min-height: 1.5rem;
+}
+
+.steps.is-small .step-item:not(:first-child)::before {
+  height: .2em;
+  width: 100%;
+  bottom: 0;
+  left: -50%;
+  top: .75rem;
+}
+
+.steps.is-small .step-item .step-marker {
+  height: 1.5rem;
+  width: 1.5rem;
+  position: absolute;
+  left: calc(50% - .75rem);
+}
+
+.steps.is-small .step-item .step-marker .icon * {
+  font-size: .75rem;
+}
+
+.steps.is-small .step-item .step-details {
+  margin-top: 1.5rem;
+  margin-left: .5em;
+  margin-right: .5em;
+  padding-top: .2em;
+}
+
+.steps.is-small .step-item .step-details .step-title {
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.steps.is-medium {
+  font-size: 1.25rem;
+  min-height: 2.5rem;
+}
+
+.steps.is-medium .step-item:not(:first-child)::before {
+  height: .2em;
+  width: 100%;
+  bottom: 0;
+  left: -50%;
+  top: 1.25rem;
+}
+
+.steps.is-medium .step-item .step-marker {
+  height: 2.5rem;
+  width: 2.5rem;
+  position: absolute;
+  left: calc(50% - 1.25rem);
+}
+
+.steps.is-medium .step-item .step-marker .icon * {
+  font-size: 1.25rem;
+}
+
+.steps.is-medium .step-item .step-details {
+  margin-top: 2.5rem;
+  margin-left: .5em;
+  margin-right: .5em;
+  padding-top: .2em;
+}
+
+.steps.is-medium .step-item .step-details .step-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.steps.is-large {
+  font-size: 1.5rem;
+  min-height: 3rem;
+}
+
+.steps.is-large .step-item:not(:first-child)::before {
+  height: .2em;
+  width: 100%;
+  bottom: 0;
+  left: -50%;
+  top: 1.5rem;
+}
+
+.steps.is-large .step-item .step-marker {
+  height: 3rem;
+  width: 3rem;
+  position: absolute;
+  left: calc(50% - 1.5rem);
+}
+
+.steps.is-large .step-item .step-marker .icon * {
+  font-size: 1.5rem;
+}
+
+.steps.is-large .step-item .step-details {
+  margin-top: 3rem;
+  margin-left: .5em;
+  margin-right: .5em;
+  padding-top: .2em;
+}
+
+.steps.is-large .step-item .step-details .step-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
 .toast-title {
   font-weight: 700;
 }
@@ -25945,6 +27722,16 @@ body {
   background: #ECF0F3 !important;
 }
 
+.hero.welcome.is-info {
+  background: #36D1DC;
+  background: linear-gradient(to right, #5B86E5, #36D1DC);
+}
+
+.hero.welcome .title,
+.hero.welcome .subtitle {
+  color: #fcfdfd;
+}
+
 .table {
   font-size: 0.8em;
 }
@@ -26010,6 +27797,20 @@ table.dataTable thead .sorting_desc_disabled:after {
 
 .configuration {
   margin-top: 1rem;
+}
+
+.datetimepicker {
+  z-index: 5;
+}
+
+.alert-definition-item .rule-item {
+  border-radius: inherit;
+  /* FF3.6-15 */
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6ffffff', endColorstr='#00000000',GradientType=1 );
+  /* IE6-9 fallback on horizontal gradient */
 }
 
 .m-none {

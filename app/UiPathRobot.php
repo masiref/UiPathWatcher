@@ -7,18 +7,52 @@ use Illuminate\Database\Eloquent\Model;
 class UiPathRobot extends Model
 {
     /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['orchestrator'];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'ui_path_orchestrator_id', 'name', 'machine_name', 'description', 'username',
+        'type', 'is_online', 'is_logging', 'external_id'
+    ];
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
      * Get the orchestrator associated with the robot.
      */
     public function orchestrator()
     {
-        return $this->hasOne('App\UiPathOrchestrator');
+        return $this->belongsTo('App\UiPathOrchestrator', 'ui_path_orchestrator_id');
     }
 
     /**
-     * The environments that belong to the robot.
+     * The watched automated processes that belong to the process.
      */
-    public function environments()
+    public function watchedAutomatedProcesses()
     {
-        return $this->belongsToMany('App\UiPathEnvironment');
+        return $this->belongsToMany('App\WatchedAutomatedProcess');
+    }
+
+    public function level()
+    {
+        $level = 'success';
+        if ($this->is_logging) {
+            $level = 'warning';
+        }
+        if (!$this->is_online) {
+            $level = 'danger';
+        }
+        return $level;
     }
 }

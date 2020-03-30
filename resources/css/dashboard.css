@@ -20,14 +20,6 @@
 .info-tiles .notification {
   padding-right: 1.5rem;
 }
-.hero.welcome.is-info {
-  background: #36D1DC;
-  background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);
-  background: linear-gradient(to right, #5B86E5, #36D1DC);
-}
-.hero.welcome .title, .hero.welcome .subtitle {
-  color: hsl(192, 17%, 99%);
-}
 .card .content {
   font-size: 14px;
 }

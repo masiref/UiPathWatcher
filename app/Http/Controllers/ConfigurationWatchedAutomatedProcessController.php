@@ -8,6 +8,7 @@ use App\WatchedAutomatedProcess;
 use App\UiPathOrchestrator;
 use App\UiPathRobot;
 use App\Alert;
+use App\AlertTrigger;
 use Illuminate\Support\Facades\Auth;
 
 class ConfigurationWatchedAutomatedProcessController extends Controller
@@ -36,12 +37,13 @@ class ConfigurationWatchedAutomatedProcessController extends Controller
         return view('configuration.watched-automated-process.index', [
             'page' => 'configuration.watched-automated-process.index',
             'alerts' => $alerts,
-            'clients' => $clients,
+            'clients' => $clients->sortBy('name'),
             'clientsCount' => $clients->count(),
             'orchestratorsCount' => UiPathOrchestrator::all()->count(),
             'watchedAutomatedProcessesCount' => $watchedAutomatedProcesses->count(),
             'watchedAutomatedProcesses' => $watchedAutomatedProcesses,
             'robotsCount' => UiPathRobot::all()->count(),
+            'alertTriggersCount' => AlertTrigger::all()->count(),
             'openedAlertsCount' => Alert::where('closed', false)->count(),
             'underRevisionAlertsCount' => Alert::where('under_revision', true)->count(),
             'closedAlertsCount' => Alert::where('closed', true)->count()

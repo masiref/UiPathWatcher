@@ -26,15 +26,7 @@ class UiPathProcess extends Model
      */
     public function orchestrator()
     {
-        return $this->hasOne('App\UiPathOrchestrator');
-    }
-
-    /**
-     * Get the environment associated with the process.
-     */
-    public function environment()
-    {
-        return $this->hasOne('App\UiPathEnvironment');
+        return $this->belongsTo('App\UiPathOrchestrator', 'ui_path_orchestrator_id');
     }
 
     /**
