@@ -40,7 +40,7 @@
             'title' => $alertTrigger->watchedAutomatedProcess->runningPeriod(),
             'titleSize' => '6',
             'titleId' => 'process-running-period',
-            'icon' => 'play',
+            'icon' => 'clock',
             'iconSize' => 'small',
             'color' => 'info'
         ])

@@ -28,3 +28,7 @@ export const updateUnderRevisionAlertsTile = markup => {
 export const updateClosedAlertsTile = markup => {
     return _base.update(elements.closedAlertsTile, markup);
 };
+
+export const updateQuickBoard = markup => {
+    return _base.update(elements.quickBoard.main, markup);
+};

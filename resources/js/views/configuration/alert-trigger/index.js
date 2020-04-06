@@ -4,8 +4,9 @@ import bulmaSteps from 'bulma-steps';
 import Configuration from '../../../models/Configuration';
 import Client from '../../../models/Client';
 import WatchedAutomatedProcess from '../../../models/WatchedAutomatedProcess';
-import AlertDefinition from '../../../models/AlertDefinition';
-import AlertRule from '../../../models/AlertRule';
+import AlertTrigger from '../../../models/AlertTrigger';
+import AlertTriggerDefinition from '../../../models/AlertTriggerDefinition';
+import AlertTriggerRule from '../../../models/AlertTriggerRule';
 
 import * as _base from '../../base';
 import * as base from './base';
@@ -45,12 +46,23 @@ const details = {
                 }
                 return item;
             });
+        },
+        areValid: () => {
+            let valid = true;
+            details.alertDefinitions.list.forEach(alertDefinition => {
+                valid = valid && alertDefinition.isValid();
+            });
+            return valid;
         }
     }
 };
 
 export const init = () => {
     try {
+        setInterval(() => {
+            layoutController.update(configuration.layout);
+        }, 45000);
+        
         let steps = bulmaSteps.attach(base.selectors.steps, {
             onShow: id => {
                 switch (id) {
@@ -65,20 +77,36 @@ export const init = () => {
                             });
                         }
                         break;
+                    case 2:
+                        loadDefaultAlertTriggerSummary(processSelection.watchedProcessSelect.value);
+                        break;
+                    case 3:
+                        create().then(response => {
+                            initAlertTriggerConfirmation();
+                        });
+                        break;
                 }
             },
-            beforeNext: async (id) => {
+            beforeNext: id => {
                 switch (id) {
                     case 0:
                         return validateProcessSelectionForm();
+                        break;
+                    case 1:
+                        return validateTriggerDetailsForm();
+                        break;
                 }
             },
             onError: error => {
                 if (!bulmaStepsHiddenErrors.includes(error)) {
                     toastr.error(error, null, {
-                        positionClass: 'toast-bottom-center'
+                        positionClass: 'toast-bottom-right'
                     });
                 }
+            },
+            onFinish: () => {
+                console.log('coucou fini');
+                base.elements.steps.querySelector('.steps-action button[data-nav="previous"]').disabled = true;
             }
         });
         
@@ -99,13 +127,15 @@ const initProcessSelection = () => {
 
             if (
                 previousWatchedAutomatedProcess
+                && processSelection.watchedProcessSelect.value !== '0'
                 && previousWatchedAutomatedProcess.id !== processSelection.watchedProcessSelect.value
                 && details.alertDefinitions.list.length > 0
             ) {
                 const alert = await _base.swalWithBulmaButtons.fire({
                     title: 'New automated watched process selection detected',
                     text: `You selected a new automated watched process but you already defined ${details.alertDefinitions.list.length}
-                    trigger for process ${previousWatchedAutomatedProcess.data.name} of client ${previousClient.data.name}.
+                    trigger${details.alertDefinitions.list.length > 1 ? 's' : ''} for process ${previousWatchedAutomatedProcess.data.name}
+                    of client ${previousClient.data.name}.
                     Select the previously watched automated process or all changes will be lost!`,
                     icon: 'warning',
                     showCancelButton: false,
@@ -128,37 +158,32 @@ const initAlertTriggerDetails = () => {
             const target = e.target;
 
             if (target.matches(`${base.selectors.details.alertDefinition.addButton}, ${base.selectors.details.alertDefinition.addButtonChildren}`)) {
-                addDefaultAlertTriggerAlertDefinition();
-
-                console.log(details);
+                addDefaultAlertTriggerDefinition();
             }
+
             if (target.matches(`${base.selectors.details.alertDefinition.deleteButton}, ${base.selectors.details.alertDefinition.deleteButtonChildren}`)) {
                 const item = target.closest(base.selectors.details.alertDefinition.item);
                 const rank = parseInt(item.dataset.rank);
-                view.details.deleteAlertDefinition(item);
+                view.details.deleteDefinition(item);
                 details.alertDefinitions.remove(rank);
-                view.details.updateAlertDefinitionsCount(details.alertDefinitions.list.length);
-
-                console.log(details);
+                view.details.updateDefinitionsCount(details.alertDefinitions.list.length);
             }
+
             if (target.matches(`${base.selectors.details.alertDefinition.rule.addButton}, ${base.selectors.details.alertDefinition.rule.addButtonChildren}`)) {
                 const item = target.closest(base.selectors.details.alertDefinition.item);
                 const rank = parseInt(item.dataset.rank);
                 let alertDefinition = details.alertDefinitions.find(rank);
                 addDefaultAlertTriggerRule(processSelection.watchedProcessSelect.value, alertDefinition, item);
-
-                console.log(details);
             }
+
             if (target.matches(`${base.selectors.details.alertDefinition.rule.deleteButton}, ${base.selectors.details.alertDefinition.rule.deleteButtonChildren}`)) {
                 const alertDefinitionItem = target.closest(base.selectors.details.alertDefinition.item);
                 const alertDefinitionRank = parseInt(alertDefinitionItem.dataset.rank);
                 const ruleItem = target.closest(base.selectors.details.alertDefinition.rule.item);
                 const ruleItemRank = parseInt(ruleItem.dataset.rank);
                 let alertDefinition = details.alertDefinitions.find(alertDefinitionRank);
-                view.details.deleteAlertRule(alertDefinitionItem, ruleItem);
+                view.details.deleteRule(alertDefinitionItem, ruleItem);
                 alertDefinition.removeRule(ruleItemRank);
-
-                console.log(details);
             }
         });
 
@@ -169,11 +194,9 @@ const initAlertTriggerDetails = () => {
                 const level = target.value;
                 const item = target.closest(base.selectors.details.alertDefinition.item);
                 const rank = parseInt(item.dataset.rank);
-                view.details.updateAlertDefinitionLevel(item, level);
+                view.details.updateDefinitionLevel(item, level);
                 let alertDefinition = details.alertDefinitions.find(rank);
                 alertDefinition.level = level;
-
-                console.log(details);
             }
 
             if (target.matches(base.selectors.details.alertDefinition.rule.typeSelect)) {
@@ -194,8 +217,6 @@ const initAlertTriggerDetails = () => {
                         newRuleItem.querySelector(_base.selectors.dateTimeFooterCancelButton).addEventListener('click', validateAlertTriggerRuleForm(rule, newRuleItem));
                     }
                 });
-
-                console.log(details);
             }
 
             if (target.matches(base.selectors.details.alertDefinition.rule.parameter)) {
@@ -207,8 +228,6 @@ const initAlertTriggerDetails = () => {
                 const rule = alertDefinition.findRule(ruleItemRank);
 
                 validateAlertTriggerRuleForm(rule, ruleItem);
-
-                console.log(details);
             }
         });
 
@@ -224,12 +243,37 @@ const initAlertTriggerDetails = () => {
                 const rule = alertDefinition.findRule(ruleItemRank);
 
                 validateAlertTriggerRuleForm(rule, ruleItem);
-
-                console.log(details);
             }
         });
     } catch (error) {
         console.log(`Unable to init trigger details step: ${error}`)
+    }
+};
+
+const initAlertTriggerConfirmation = () => {
+    try {
+        const activeStepContent = document.querySelector(base.selectors.activeStepContent);
+        activeStepContent.querySelector(base.selectors.confirmation.notification).addEventListener('click', (e) => {
+            const target = e.target;
+
+            if (target.matches(`${base.selectors.confirmation.activateButton}, ${base.selectors.confirmation.activateButtonChildren}`)) {
+                const button = target.closest(base.selectors.confirmation.activateButton);
+                _base.renderLoader(button);
+                try {
+                    const alertTrigger = new AlertTrigger(button.dataset.id);
+                    alertTrigger.activate().then(response => {
+                        updateTable();
+                        _base.clearLoader(button);
+                        button.disabled = true;
+                    });
+                } catch (error) {
+                    _base.clearLoader(button);
+                    console.log(error);
+                }
+            }
+        });
+    } catch (error) {
+        console.log(`Unable to init trigger confirmation step: ${error}`)
     }
 };
 
@@ -255,17 +299,27 @@ const validateProcessSelectionForm = () => {
     return errors;
 };
 
-const validateTriggerDetailsForm = (e) => {
+const validateTriggerDetailsForm = () => {
     let errors = [];
 
-    const titleValid = !(e.target.value.trim() === '');
-    _base.toggleSuccessDangerState(e.target, titleValid);
+    const title = document.querySelector(base.selectors.details.title);
+    const titleValid = !(title.value.trim() === '');
+    _base.toggleSuccessDangerState(title, titleValid);
     if (!titleValid) {
-        errors.push('You need to enter a Title');
+        errors.push('You need to enter a title');
+    }
+
+    if (details.alertDefinitions.list.length === 0) {
+        errors.push('You need to add at least 1 alert definition');
+    }
+
+    const alertDefinitionsValid = details.alertDefinitions.areValid();
+    if (!alertDefinitionsValid) {
+        errors.push('You need to fix errors on all alert definitions');
     }
 
     return errors;
-}
+};
 
 const loadProcesses = async (e) => {
     const activeStepContent = document.querySelector(base.selectors.activeStepContent);
@@ -296,14 +350,13 @@ const loadProcesses = async (e) => {
 
 let previousWatchedAutomatedProcess;
 let previousClient;
-
 const loadDefaultAlertTriggerDetails = async (watchedAutomatedProcessId) => {
     const activeStepContent = document.querySelector(base.selectors.activeStepContent);
     try {
         _base.renderLoader(activeStepContent);
         return new Promise((resolve, reject) => {
             resolve(
-                configuration.getAlertTriggersDefaultAlertTriggerDetails(watchedAutomatedProcessId).then(async (response) => {
+                configuration.getAlertTriggersDefaultDetails(watchedAutomatedProcessId).then(async (response) => {
                     view.updateActiveStepContent(response.data);
                     
                     previousWatchedAutomatedProcess = new WatchedAutomatedProcess(watchedAutomatedProcessId);
@@ -321,18 +374,43 @@ const loadDefaultAlertTriggerDetails = async (watchedAutomatedProcessId) => {
     }
 };
 
-const addDefaultAlertTriggerAlertDefinition = async () => {
+let summaryAlertTrigger;
+const loadDefaultAlertTriggerSummary = async (watchedAutomatedProcessId) => {
+    const activeStepContent = document.querySelector(base.selectors.activeStepContent);
+    try {
+        _base.renderLoader(activeStepContent);
+        return new Promise((resolve, reject) => {
+            resolve(
+                configuration.getAlertTriggersDefaultSummary(
+                    watchedAutomatedProcessId,
+                    document.querySelector(base.selectors.details.title).value,
+                    details.alertDefinitions.list
+                ).then(async (response) => {
+                    view.updateActiveStepContent(response.data.view);
+                    summaryAlertTrigger = response.data.alertTrigger;
+
+                    _base.clearLoader(activeStepContent);
+                })
+            );
+        });
+    } catch (error) {
+        _base.clearLoader(activeStepContent);
+        console.log(error);
+    }
+};
+
+const addDefaultAlertTriggerDefinition = async () => {
     const activeStepContent = document.querySelector(base.selectors.activeStepContent);
     try {
         _base.renderLoader(activeStepContent);
         return new Promise((resolve, reject) => {
             const rank = details.alertDefinitions.list.length + 1;
             resolve(
-                configuration.getAlertTriggersDefaultAlertTriggerDefinition(rank).then(response => {
-                    view.details.addAlertDefinition(response.data);
-                    view.details.updateAlertDefinitionsCount(rank);
+                configuration.getAlertTriggersDefaultDefinition(rank).then(response => {
+                    view.details.addDefinition(response.data);
+                    view.details.updateDefinitionsCount(rank);
 
-                    const alertDefinition = new AlertDefinition(rank);
+                    const alertDefinition = new AlertTriggerDefinition(rank);
                     details.alertDefinitions.list.push(alertDefinition);
 
                     _base.clearLoader(activeStepContent);
@@ -352,11 +430,13 @@ const addDefaultAlertTriggerRule = async (watchedAutomatedProcessId, alertDefini
         return new Promise((resolve, reject) => {
             const rank = alertDefinition.rules.length + 1;
             resolve(
-                configuration.getAlertTriggersDefaultAlertTriggerRule(watchedAutomatedProcessId, rank).then(response => {
-                    view.details.addAlertRule(alertDefinitionItem, response.data);
+                configuration.getAlertTriggersDefaultRule(watchedAutomatedProcessId, rank).then(response => {
+                    view.details.addRule(alertDefinitionItem, response.data);
                     
-                    const alertRule = new AlertRule(rank);
+                    const alertRule = new AlertTriggerRule(alertDefinition.rank, rank);
                     alertDefinition.rules.push(alertRule);
+                    
+                    view.details.updateDefinitionValidity(alertDefinitionItem, alertDefinition.isValid());
 
                     _base.clearLoader(activeStepContent);
                 })
@@ -375,8 +455,8 @@ const updateAlertTriggerRuleType = async (watchedAutomatedProcessId, rule, ruleI
         return new Promise((resolve, reject) => {
             const rank = rule.rank;
             resolve(
-                configuration.getAlertTriggersDefaultAlertTriggerRule(watchedAutomatedProcessId, rank, type).then(response => {
-                    view.details.updateAlertRule(ruleItem, response.data, type);
+                configuration.getAlertTriggersDefaultRule(watchedAutomatedProcessId, rank, type).then(response => {
+                    view.details.updateRule(ruleItem, response.data, type);
                     rule.type = type;
                     _base.clearLoader(activeStepContent);
                 })
@@ -391,6 +471,7 @@ const updateAlertTriggerRuleType = async (watchedAutomatedProcessId, rule, ruleI
 const validateAlertTriggerRuleForm = (rule, ruleItem) => {
     try {
         let valid = false;
+        const alertDefinitionItem = base.elements.details.alertDefinition.item(rule.definitionRank);
         const rank = ruleItem.dataset.rank;
         const type = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.typeSelect).value;
         const title = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.title);
@@ -409,6 +490,9 @@ const validateAlertTriggerRuleForm = (rule, ruleItem) => {
             valid = validateAlertTriggerKibanaMetricVisualization(rule, ruleItem);
         }*/
 
+        rule.valid = valid;
+        view.details.updateDefinitionValidity(alertDefinitionItem, details.alertDefinitions.find(rule.definitionRank).isValid());
+
         _base.toggleSuccessDangerState(title, valid, true);
         _base.toggleSuccessDangerState(titleIcon, valid, true);
     } catch (error) {
@@ -422,6 +506,7 @@ const validateAlertTriggerJobsDurationRule = (rule, ruleItem) => {
         specific: {},
         standard: {
             timeSlot: {},
+            triggeringDays: {},
             involvedEntities: {}
         }
     };
@@ -447,6 +532,7 @@ const validateAlertTriggerJobsDurationRule = (rule, ruleItem) => {
         }
         
         const timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
+        const triggeringDaysSelectionValid = validateAlertTriggerRuleTriggeringDaysControls(ruleItem, parameters);
         const involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
         const involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
 
@@ -467,6 +553,7 @@ const validateAlertTriggerFaultedJobsPercentageRule = (rule, ruleItem) => {
         specific: {},
         standard: {
             timeSlot: {},
+            triggeringDays: {},
             involvedEntities: {}
         }
     };
@@ -486,6 +573,7 @@ const validateAlertTriggerFaultedJobsPercentageRule = (rule, ruleItem) => {
         
         const timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
         const relativeTimeSlotInputValid = validateAlertTriggerRuleRelativeTimeSlotControls(ruleItem, parameters);
+        const triggeringDaysSelectionValid = validateAlertTriggerRuleTriggeringDaysControls(ruleItem, parameters);
         const involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
         const involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
 
@@ -506,6 +594,7 @@ const validateAlertTriggerFailedQueueItemsPercentageRule = (rule, ruleItem) => {
         specific: {},
         standard: {
             timeSlot: {},
+            triggeringDays: {},
             involvedEntities: {}
         }
     };
@@ -525,6 +614,7 @@ const validateAlertTriggerFailedQueueItemsPercentageRule = (rule, ruleItem) => {
         
         const timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
         const relativeTimeSlotInputValid = validateAlertTriggerRuleRelativeTimeSlotControls(ruleItem, parameters);
+        const triggeringDaysSelectionValid = validateAlertTriggerRuleTriggeringDaysControls(ruleItem, parameters);
         const involvedQueuesSelectionValid = validateAlertTriggerRuleInvolvedQueuesSelectionControls(ruleItem, parameters);
 
         rule.parameters = parameters;
@@ -544,6 +634,7 @@ const validateAlertTriggerElasticSearchQueryRule = (rule, ruleItem) => {
         specific: {},
         standard: {
             timeSlot: {},
+            triggeringDays: {},
             involvedEntities: {}
         }
     };
@@ -576,6 +667,7 @@ const validateAlertTriggerElasticSearchQueryRule = (rule, ruleItem) => {
         
         const timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
         const relativeTimeSlotInputValid = validateAlertTriggerRuleRelativeTimeSlotControls(ruleItem, parameters);
+        const triggeringDaysSelectionValid = validateAlertTriggerRuleTriggeringDaysControls(ruleItem, parameters);
         const involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
         const involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
 
@@ -664,8 +756,8 @@ const validateAlertTriggerRuleTimeSlotControls = (ruleItem, parameters) => {
         if (valid) {
             const calendar = timeSlotInput.bulmaCalendar;
             parameters.standard.timeSlot = {
-                from: calendar.startTime.toTimeString(),
-                to: calendar.endTime.toTimeString()
+                from: calendar.startTime.toTimeString().split(' ')[0],
+                to: calendar.endTime.toTimeString().split(' ')[0]
             };
         }
             
@@ -694,6 +786,46 @@ const validateAlertTriggerRuleRelativeTimeSlotControls = (ruleItem, parameters) 
         
         _base.toggleSuccessDangerState(relativeTimeSlotInput, valid);
         //_base.toggleFormControlTooltip(relativeTimeSlotInput, valid);
+    } catch (error) {
+        console.log(error);
+    }
+
+    return valid;
+};
+
+const validateAlertTriggerRuleTriggeringDaysControls = (ruleItem, parameters) => {
+    let valid = false;
+
+    try {
+        const triggeringDaysTitle = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.triggeringDays.title);
+        const triggeringDaysTitleIcon = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.triggeringDays.titleIcon);
+        const triggeringDaysMondayCheckbox = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.triggeringDays.mondayCheckbox);
+        const triggeringDaysTuesdayCheckbox = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.triggeringDays.tuesdayCheckbox);
+        const triggeringDaysWednesdayCheckbox = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.triggeringDays.wednesdayCheckbox);
+        const triggeringDaysThursdayCheckbox = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.triggeringDays.thursdayCheckbox);
+        const triggeringDaysFridayCheckbox = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.triggeringDays.fridayCheckbox);
+        const triggeringDaysSaturdayCheckbox = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.triggeringDays.saturdayCheckbox);
+        const triggeringDaysSundayCheckbox = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.triggeringDays.sundayCheckbox);
+
+        valid = triggeringDaysMondayCheckbox.checked || triggeringDaysTuesdayCheckbox.checked ||
+        triggeringDaysWednesdayCheckbox.checked || triggeringDaysThursdayCheckbox.checked ||
+        triggeringDaysFridayCheckbox.checked || triggeringDaysSaturdayCheckbox.checked ||
+        triggeringDaysSundayCheckbox.checked;
+        
+        if (valid) {
+            parameters.standard.triggeringDays = {
+                monday: triggeringDaysMondayCheckbox.checked,
+                tuesday: triggeringDaysTuesdayCheckbox.checked,
+                wednesday: triggeringDaysWednesdayCheckbox.checked,
+                thursday: triggeringDaysThursdayCheckbox.checked,
+                friday: triggeringDaysFridayCheckbox.checked,
+                saturday: triggeringDaysSaturdayCheckbox.checked,
+                sunday: triggeringDaysSundayCheckbox.checked
+            };
+        }
+
+        _base.toggleSuccessDangerState(triggeringDaysTitle, valid, true);
+        _base.toggleSuccessDangerState(triggeringDaysTitleIcon, valid, true);
     } catch (error) {
         console.log(error);
     }
@@ -792,6 +924,55 @@ const validateAlertTriggerRuleInvolvedQueuesSelectionControls = (ruleItem, param
     }
 
     return valid;
+};
+
+const create = async () => {
+    const activeStepContent = document.querySelector(base.selectors.activeStepContent);
+    try {
+        _base.renderLoader(activeStepContent);
+        return new Promise((resolve, reject) => {
+            const alertTrigger = new AlertTrigger();
+            resolve(
+                alertTrigger.save(
+                    summaryAlertTrigger.watched_automated_process_id,
+                    summaryAlertTrigger.title,
+                    summaryAlertTrigger.definitions
+                ).then(response => {
+                    return new Promise((resolve, reject) => {
+                        resolve(
+                            configuration.getAlertTriggersCreationConfirmation(alertTrigger.id).then(response => {
+                                updateTable();
+                                layoutController.update(configuration.layout);
+                                view.updateActiveStepContent(response.data);
+                                _base.clearLoader(activeStepContent);
+                            })
+                        );
+                    });
+                })
+            );
+        });
+    } catch (error) {
+        _base.clearLoader(activeStepContent);
+        console.log(error);
+    }
+};
+
+const updateTable = async () => {
+    const table = document.querySelector(base.selectors.table);
+    try {
+        _base.renderLoader(table);
+        return new Promise((resolve, reject) => {
+            resolve(
+                configuration.updateAlertTriggersTable().then(res => {
+                    view.updateTable(configuration.alertTriggersTable);
+                    _base.clearLoader(table);
+                })
+            )
+        });
+    } catch (error) {
+        console.log(error);
+        _base.clearLoader(table);
+    }
 };
 
 const resetForm = () => {

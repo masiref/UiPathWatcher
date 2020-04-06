@@ -72,7 +72,7 @@ export default class Client {
                     axios.post('/api/clients', {
                         'name': name,
                         'code': code,
-                        'orchestrator_id': orchestrator
+                        'ui_path_orchestrator_id': orchestrator
                     }).then(response => {
                         if (response.data) {
                             this.id = response.data.id;

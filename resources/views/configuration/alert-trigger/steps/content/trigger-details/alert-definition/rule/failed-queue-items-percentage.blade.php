@@ -3,6 +3,11 @@
 <!-- time slots -->
 @include('configuration.alert-trigger.steps.content.trigger-details.alert-definition.rule.controls.time-slot')
 
+<div class="is-divider"></div>
+@include('configuration.alert-trigger.steps.content.trigger-details.alert-definition.rule.controls.triggering-days', [
+    'level' => 'danger'
+])
+
 <!-- uipath entities -->
 <div class="is-divider"></div>
 @include('configuration.alert-trigger.steps.content.trigger-details.alert-definition.rule.involved-entities.queues', [

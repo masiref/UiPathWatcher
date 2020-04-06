@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use App\User;
 use Carbon\Carbon;
 
@@ -15,12 +16,37 @@ class Alert extends Model
      */
     protected $with = ['reviewer'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('created_at', 'desc');
+        });
+    }
+
+    /**
+     * Get the parent that owns the alert.
+     */
+    public function parent()
+    {
+        return $this->hasOne('App\Alert', 'parent_id');
+    }
+
     /**
      * Get the alert trigger that owns the alert.
      */
     public function trigger()
     {
         return $this->belongsTo('App\AlertTrigger', 'alert_trigger_id');
+    }
+
+    /**
+     * Get the alert trigger definition that owns the alert.
+     */
+    public function definition()
+    {
+        return $this->belongsTo('App\AlertTriggerDefinition', 'alert_trigger_definition_id');
     }
 
     /**

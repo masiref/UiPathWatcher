@@ -12,8 +12,14 @@ class AlertTrigger extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'watched_automated_process_id'
+        'title', 'watched_automated_process_id', 'active'
     ];
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['definitions'];
 
     /**
      * Get the alerts for the alert trigger.

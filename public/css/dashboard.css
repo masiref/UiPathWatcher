@@ -35,3 +35,15 @@
   max-height: 250px;
   overflow-y: scroll;
 }
+
+.quick-board {
+  padding: 1.5rem 0 0 0;
+}
+
+.quick-board .notification {
+  padding-right: 1.5rem;
+}
+
+.quick-board .quick-board--heading {
+  cursor: pointer;
+}

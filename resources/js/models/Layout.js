@@ -13,7 +13,8 @@ export default class Layout {
         try {
             return Promise.all([
                 this.updateMenu(),
-                this.updateSidebar()
+                this.updateSidebar(),
+                this.updateHero()
             ]);
         } catch (error) {
             console.log(error);
@@ -40,6 +41,20 @@ export default class Layout {
                 resolve(
                     axios.get(`/layout/sidebar/${this.page}`).then(response => {
                         this.sidebar = response.data;
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async updateHero() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get('/layout/hero').then(response => {
+                        this.hero = response.data;
                     })
                 );
             });

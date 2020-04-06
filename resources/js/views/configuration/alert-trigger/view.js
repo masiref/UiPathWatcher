@@ -28,15 +28,15 @@ export const processSelection = {
 };
 
 export const details = {
-    updateAlertDefinitionsCount: count => {
+    updateDefinitionsCount: count => {
         document.querySelector(selectors.details.alertDefinition.count).innerHTML = count;
     },
-    addAlertDefinition: markup => {
+    addDefinition: markup => {
         document.querySelector(selectors.details.alertDefinition.list).appendChild(
             _base.htmlToElement(markup)
         );
     },
-    deleteAlertDefinition: alertDefinitionItem => {
+    deleteDefinition: alertDefinitionItem => {
         const rank = parseInt(alertDefinitionItem.dataset.rank);
         document.querySelector(selectors.details.alertDefinition.list).removeChild(
             alertDefinitionItem
@@ -51,7 +51,7 @@ export const details = {
             }
         });
     },
-    updateAlertDefinitionLevel: (alertDefinitionItem, level) => {
+    updateDefinitionLevel: (alertDefinitionItem, level) => {
         let state = `is-${level}`;
         let textState = `has-text-${level}`;
         const title = alertDefinitionItem.querySelector(selectors.details.alertDefinition.title);
@@ -63,12 +63,25 @@ export const details = {
         title.classList.add(textState);
         titleIcon.classList.add(textState);
     },
-    addAlertRule: (alertDefinitionItem, markup) => {
+    updateDefinitionValidity: (alertDefinitionItem, valid) => {
+        const titleIconRight = alertDefinitionItem.querySelector(selectors.details.alertDefinition.validityIcon);
+        const icon = titleIconRight.querySelector('i');
+        if (valid) {
+            icon.classList.remove('fa-exclamation-circle');
+            icon.classList.add('fa-check-circle');
+        } else {
+            icon.classList.remove('fa-check-circle');
+            icon.classList.add('fa-exclamation-circle');
+        }
+        _base.removeStates(titleIconRight);
+        _base.toggleSuccessDangerState(titleIconRight, valid, true);
+    },
+    addRule: (alertDefinitionItem, markup) => {
         alertDefinitionItem.querySelector(selectors.details.alertDefinition.rule.list).appendChild(
             _base.htmlToElement(markup)
         );
     },
-    deleteAlertRule: (alertDefinitionItem, ruleItem) => {
+    deleteRule: (alertDefinitionItem, ruleItem) => {
         const rank = parseInt(ruleItem.dataset.rank);
         alertDefinitionItem.querySelector(selectors.details.alertDefinition.rule.list).removeChild(
             ruleItem
@@ -83,7 +96,7 @@ export const details = {
             }
         });
     },
-    updateAlertRule: (ruleItem, markup, ruleType) => {
+    updateRule: (ruleItem, markup, ruleType) => {
         ruleItem = _base.update(ruleItem, markup);
         const title = ruleItem.querySelector(selectors.details.alertDefinition.rule.title);
         const titleIcon = ruleItem.querySelector(selectors.details.alertDefinition.rule.titleIcon);
@@ -91,11 +104,14 @@ export const details = {
         _base.toggleSuccessDangerState(titleIcon, false, true);
         
         if (ruleType !== 'none') {
+            const alertDefinitionItem = ruleItem.closest(selectors.details.alertDefinition.item);
             const calendarSelector = `
-                ${selectors.details.alertDefinition.rule.item}[data-rank="${ruleItem.dataset.rank}"] ${selectors.details.alertDefinition.rule.timeSlotInput}
+                ${selectors.details.alertDefinition.item}[data-rank="${alertDefinitionItem.dataset.rank}"]
+                ${selectors.details.alertDefinition.rule.item}[data-rank="${ruleItem.dataset.rank}"]
+                ${selectors.details.alertDefinition.rule.timeSlotInput}
             `;
-            const startTime = document.querySelector(calendarSelector).dataset.startTime.split(':');
-            const endTime = document.querySelector(calendarSelector).dataset.endTime.split(':');
+            const startTime = ruleItem.querySelector(calendarSelector).dataset.startTime.split(':');
+            const endTime = ruleItem.querySelector(calendarSelector).dataset.endTime.split(':');
             bulmaCalendar.attach(calendarSelector, {
                 type: 'time',
                 lang: 'en',

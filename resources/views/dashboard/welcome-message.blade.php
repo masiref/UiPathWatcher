@@ -6,11 +6,11 @@
         @php
             $orchestratorTitle = '1. Register your first UiPath Orchestrator';
             $orchestratorSubtitle = '
-                By registering a <strong><span class="icon"><i class="fas fa-server"></i></span> UiPath Orchestrator</strong>
-                you\'ll be able to link your <strong><span class="icon"><i class="fas fa-building"></i></span> Clients</strong> to it,
-                but also loading involved <strong><span class="icon"><i class="fas fa-robot"></i></span> Robots</strong> and
-                <strong><span class="icon"><i class="fas fa-sitemap"></i></span> Processes</strong> you need to watch. Furthermore,
-                by specifying information on <strong><span class="icon"><i class="fas fa-chart-bar"></i></span> ElasticSearch</strong>,
+                By registering a <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-server"></i></span> UiPath Orchestrator</span>
+                you\'ll be able to link your <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-building"></i></span> Clients</span> to it,
+                but also loading involved <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-robot"></i></span> Robots</span> and
+                <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-sitemap"></i></span> Processes</span> you need to watch. Furthermore,
+                by specifying information on <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-chart-bar"></i></span> ElasticSearch</span>,
                 you\'ll give access to your logs and extend your watching.
             ';
             $orchestratorState = $orchestratorsCount === 0 ? 'link' : 'success';
@@ -25,9 +25,9 @@
 
             $clientTitle = '2. Create your first Client';
             $clientSubtitle = '
-                A <strong><span class="icon"><i class="fas fa-building"></i></span> Client</strong> is a simple entity linked to a
-                <strong><span class="icon"><i class="fas fa-server"></i></span> UiPath Orchestrator</strong> in which you\'ll add
-                <strong><span class="icon"><i class="fas fa-binoculars"></i></span> Processes to watch</strong>.
+                A <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-building"></i></span> Client</span> is a simple entity linked to a
+                <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-server"></i></span> UiPath Orchestrator</span> in which you\'ll add
+                <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-binoculars"></i></span> Processes to watch</span>.
             ';
             $clientState = $orchestratorsCount === 0 ? 'grey' : ($clientsCount === 0 ? 'link' : 'success');
             $clientSubtitle .= $orchestratorsCount > 0 && $clientsCount === 0 ? "
@@ -43,10 +43,10 @@
             $watchedAutomatedProcessSubtitle = '
                 In order to watch an automated processcreated with UiPath solution, you\'ll need to give information on it
                 (eg: a name, a code, an execution time slot, etc.) but also identify the UiPath
-                <strong><span class="icon"><i class="fas fa-sitemap"></i></span> Processes</strong>,
-                <strong><span class="icon"><i class="fas fa-robot"></i></span> Robots</strong> and
-                <strong><span class="icon"><i class="fas fa-layer-group"></i></span> Queues</strong> involved. It will allow you to define
-                alert triggers on these entities (and on others related to <strong><span class="icon"><i class="fas fa-chart-bar"></i></span> ElasticSearch</strong>).
+                <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-sitemap"></i></span> Processes</span>,
+                <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-robot"></i></span> Robots</span> and
+                <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-layer-group"></i></span> Queues</span> involved. It will allow you to define
+                alert triggers on these entities (and on others related to <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-chart-bar"></i></span> ElasticSearch</span>).
             ';
             $watchedAutomatedProcessState = $clientsCount === 0 ? 'grey' : ($watchedAutomatedProcessesCount === 0 ? 'link' : 'success');
             $watchedAutomatedProcessSubtitle .= $clientsCount > 0 && $watchedAutomatedProcessesCount === 0 ? "
@@ -59,9 +59,14 @@
             $watchedAutomatedProcessIcon = $watchedAutomatedProcessesCount === 0 ? 'binoculars' : 'check-circle';
 
             $alertTriggerTitle = '4. Trigger your first Alert';
-            $alertTriggerSubtitle = "
-                ...
-            ";
+            $alertTriggerSubtitle = '
+                The <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-dragon"></i></span> Alert trigger</span> is the final key component of UiPath Watcher.
+                It allows you to define <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-burn"></i></span> Alerts</span> by
+                applying rules based on <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-server"></i></span> UiPath Orchestrator</span> entities
+                and <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-chart-bar"></i></span> ElasticSearch</span> logs.
+                These <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-dragon"></i></span> Alert triggers</span>
+                will be scanned every 5 minutes and may generate <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-burn"></i></span> Alerts</span> to handle.
+            ';
             $alertTriggerState = $watchedAutomatedProcessesCount === 0 ? 'grey' : ($alertTriggersCount === 0 ? 'link' : 'success');
             $alertTriggerSubtitle .= $watchedAutomatedProcessesCount > 0 ? "
                 <br><br>

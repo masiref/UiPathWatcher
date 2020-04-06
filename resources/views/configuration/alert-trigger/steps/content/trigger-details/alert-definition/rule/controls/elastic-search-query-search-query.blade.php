@@ -1,4 +1,3 @@
-<!-- kibana search query -->
 <div class="field is-horizontal">
     <div class="field-body">
         <div class="field">

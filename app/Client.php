@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Client extends Model
 {
@@ -12,7 +13,7 @@ class Client extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'code', 'orchestrator_id'
+        'name', 'code', 'ui_path_orchestrator_id'
     ];
 
     /**
@@ -21,6 +22,15 @@ class Client extends Model
      * @var array
      */
     protected $with = ['watchedAutomatedProcesses', 'orchestrator'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('name');
+        });
+    }
 
     public function __toString()
     {
@@ -98,27 +108,56 @@ class Client extends Model
      */
     public function higherAlertLevel()
     {
-        $dangerAlertsCount = 0;
-        $warningAlertsCount = 0;
-        $infoAlertsCount = 0;
+        $dangerCount = 0;
+        $warningCount = 0;
+        $infoCount = 0;
 
         foreach ($this->watchedAutomatedProcesses()->get() as $wap)
         {
-            $openedAlerts = $wap->openedAlerts();
-            $dangerAlertsCount += count($openedAlerts->where('level', 'danger'));
-            $warningAlertsCount += count($openedAlerts->where('level', 'warning'));
-            $infoAlertsCount += count($openedAlerts->where('level', 'info'));
+            $dangerCount += $wap->higherAlertLevel() === 'danger' ? 1 : 0;
+            $warningCount += $wap->higherAlertLevel() === 'warning' ? 1 : 0;
+            $infoCount += $wap->higherAlertLevel() === 'info' ? 1 : 0;
         }
 
-        if ($dangerAlertsCount > 0)
+        if ($dangerCount > 0)
             return 'danger';
         
-        if ($warningAlertsCount > 0)
+        if ($warningCount > 0)
             return 'warning';
         
-        if ($infoAlertsCount > 0)
+        if ($infoCount > 0)
             return 'info';
 
         return 'success';
+    }
+
+    public function robotsCount()
+    {
+        $count = 0;
+        foreach ($this->watchedAutomatedProcesses()->get() as $wap)
+        {
+            $count += $wap->robots->count();
+        }
+        return $count;
+    }
+
+    public function onlineRobotsCount()
+    {
+        $count = 0;
+        foreach ($this->watchedAutomatedProcesses()->get() as $wap)
+        {
+            $count += $wap->onlineRobotsCount();
+        }
+        return $count;
+    }
+
+    public function loggingRobotsCount()
+    {
+        $count = 0;
+        foreach ($this->watchedAutomatedProcesses()->get() as $wap)
+        {
+            $count += $wap->loggingRobotsCount();
+        }
+        return $count;
     }
 }

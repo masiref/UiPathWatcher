@@ -9,6 +9,13 @@
             <p class="title has-text-{{ $color }} is-{{ $titleSize ?? '2' }}">{!! $title !!}</p>
         </div>
     </div>
+    @if ($iconRight ?? false)
+        <div class="level-right">
+            <span class="icon is-{{ $iconRightSize ?? 'medium' }} has-text-{{ $iconRightColor }}">
+                <i class="fas {{ ($iconRightSize ?? 'medium') === 'medium' ? 'fa-2x' : '' }} fa-{{ $iconRight }}"></i>
+            </span>
+        </div>
+    @endif
 </div>
 @if ($subtitle ?? false)
     <p

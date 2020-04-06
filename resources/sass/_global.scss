@@ -3,7 +3,11 @@ html, body {
   font-size: 16px;
   line-height: 1.5;
   height: 100%;
-  background: #ECF0F3 !important;
+  background: $white-bis !important;
+}
+
+.hero.welcome {
+  border-radius: 3px;
 }
 
 .hero.welcome.is-info {
@@ -11,8 +15,16 @@ html, body {
   background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);
   background: linear-gradient(to right, #5B86E5, #36D1DC);
 }
-.hero.welcome .title, .hero.welcome .subtitle {
-  color: hsl(192, 17%, 99%);
+.hero.welcome.is-dark {
+  background: white;
+  background: -webkit-linear-gradient(to right, $grey-dark, $white-bis);
+  background: linear-gradient(to right, $grey-dark, $white-bis);
+}
+.hero.welcome.is-info .title, .hero.welcome.is-info .subtitle {
+  color: $white-bis;
+}
+.hero.welcome.is-dark .title, .hero.welcome.is-dark .subtitle {
+  color: $grey-lighter;
 }
 
 .table {

@@ -14,6 +14,12 @@ class AlertTriggerDefinition extends Model
     protected $fillable = [
         'alert_trigger_id', 'level', 'rank'
     ];
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['rules'];
 
     /**
      * Get the alert trigger that owns the alert trigger definition.

@@ -27,13 +27,28 @@ export const init = () => {
             alertController.init(dashboard, e.target);
         });
 
-        setTimeout(() => {
-            update();
-        }, 3000);
+        base.elements.dashboard.addEventListener('click', e => {
+            const target = e.target;
 
-        /*setInterval(() => {
+            if (target.matches(`${base.selectors.quickBoard.heading}, ${base.selectors.quickBoard.headingChildren}`)) {
+                const details = target.closest(base.selectors.quickBoard.item).querySelector(base.selectors.quickBoard.details);
+                if (details.style.display === 'block') {
+                    _base.animateCSS(details, 'fadeOut', () => {
+                        details.style.display = 'none';
+                    });
+                } else {
+                    _base.animateCSS(details, 'fadeIn');
+                    details.style.display = 'block';
+                }
+            }
+        });
+        /*setTimeout(() => {
+            update();
+        }, 3000);*/
+
+        setInterval(() => {
             update()
-        }, 30000);*/
+        }, 45000);
     } catch (error) {
         console.log(`Failed to init dashboard: ${error}`);
     }
@@ -42,8 +57,8 @@ export const init = () => {
 export const update = async () => {
     try {
         let promises = [
-            layoutController.updateMenu(dashboard.layout),
-            layoutController.updateSidebar(dashboard.layout),
+            layoutController.update(dashboard.layout),
+            updateQuickBoard(),
             updateTiles(),
             alertController.updatePendingTable(dashboard),
             alertController.updateClosedTable(dashboard)
@@ -69,7 +84,7 @@ export const updateTiles = async () => {
         tiles.forEach(tile => {
             _base.renderLoader(tile);
         });
-        return dashboard.updateTiles().then(res => {
+        return dashboard.updateTiles().then(response => {
             base.elements.clientTile = view.updateClientTile(dashboard.clientTile);
             base.elements.clientsTile = view.updateClientsTile(dashboard.clientsTile);
             base.elements.watchedAutomatedProcessesTile = view
@@ -83,6 +98,19 @@ export const updateTiles = async () => {
         tiles.forEach(tile => {
             _base.clearLoader(tile);
         });
+        console.log(error);
+    }
+};
+
+export const updateQuickBoard = async () => {
+    let quickBoard = base.elements.quickBoard.main;
+    try {
+        _base.renderLoader(quickBoard);
+        return dashboard.updateQuickBoard().then(response => {
+            quickBoard = view.updateQuickBoard(dashboard.quickBoard);
+        });
+    } catch (error) {
+        _base.clearLoader(quickBoard);
         console.log(error);
     }
 };

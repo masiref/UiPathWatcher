@@ -25,7 +25,7 @@ class UiPathRobot extends Model
 
     public function __toString()
     {
-        return $this->name;
+        return $this->machine_name;
     }
 
     /**
@@ -44,6 +44,17 @@ class UiPathRobot extends Model
         return $this->belongsToMany('App\WatchedAutomatedProcess');
     }
 
+    /**
+     * The alert trigger rules that belong to the robot.
+     */
+    public function alertTriggerRules()
+    {
+        return $this->belongsToMany('App\AlertTriggerRule');
+    }
+
+    /**
+     * Get robot's level
+     **/
     public function level()
     {
         $level = 'success';

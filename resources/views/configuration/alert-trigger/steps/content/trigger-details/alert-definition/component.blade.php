@@ -5,7 +5,9 @@
                 'title' => $title,
                 'icon' => 'burn',
                 'color' => $level,
-                'titleSize' => '5'
+                'titleSize' => '5',
+                'iconRight' => $valid ? 'check-circle' : 'exclamation-circle',
+                'iconRightColor' => $valid ? 'success' : 'danger'
             ])
 
             <!-- alert level -->

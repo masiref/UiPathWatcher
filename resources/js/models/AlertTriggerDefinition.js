@@ -1,4 +1,4 @@
-export default class AlertDefinition {
+export default class AlertTriggerDefinition {
     constructor(rank) {
         this.rank = rank;
         this.level = 'info';
@@ -22,5 +22,13 @@ export default class AlertDefinition {
             }
             return item;
         });
+    }
+
+    isValid() {
+        let valid = this.rules.length > 0;
+        this.rules.forEach(rule => {
+            valid = valid && rule.valid;
+        });
+        return valid;
     }
 }

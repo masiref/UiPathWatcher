@@ -1,7 +1,19 @@
 import Swal from 'sweetalert2';
 const luceneParser = require('lucene-query-parser');
 
+export const strings = {
+    shutdownAlertTriggersFormModalID: 'shutdown-alert-triggers-modal',
+    reactivateAlertTriggersFormModalID: 'reactivate-alert-triggers-modal'
+};
+
 export const selectors = {
+    app: '#app',
+    shutdownAlertTriggersButton: 'button#shutdown-alert-triggers',
+    shutdownAlertTriggersButtonChildren: 'button#shutdown-alert-triggers *',
+    shutdownAlertTriggersReasonTextarea: 'form.shutdown-alert-triggers-form textarea#reason',
+    reactivateAlertTriggersButton: 'button#reactivate-alert-triggers',
+    reactivateAlertTriggersButtonChildren: 'button#reactivate-alert-triggers *',
+    reactivateAlertTriggersReasonTextarea: 'form.reactivate-alert-triggers-form textarea#reason',
     closeModalTriggers: '.modal button.delete, .modal button.cancel, .modal button.cancel *',
     validateModalButton: '.modal button.validate',
     validateModalButtonChildren: '.modal button.validate *',
@@ -14,6 +26,7 @@ export const selectors = {
 };
 
 export const elements = {
+    app: document.querySelector(selectors.app)
 };
 
 export const update = (old, markup) => {

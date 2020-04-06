@@ -1,5 +1,6 @@
 import * as axios from 'axios';
 import Layout from './Layout';
+import { parse, stringify } from 'flatted/esm';
 
 export default class Configuration {
     constructor(page) {
@@ -48,7 +49,21 @@ export default class Configuration {
         }
     }
 
-    async getAlertTriggersDefaultAlertTriggerDetails(watchedAutomatedProcessId) {
+    async updateAlertTriggersTable() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get('/configuration/alert-trigger/table').then(response => {
+                        this.alertTriggersTable = response.data;
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getAlertTriggersDefaultDetails(watchedAutomatedProcessId) {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
@@ -60,7 +75,7 @@ export default class Configuration {
         }
     }
 
-    async getAlertTriggersDefaultAlertTriggerDefinition(rank) {
+    async getAlertTriggersDefaultDefinition(rank) {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
@@ -72,11 +87,38 @@ export default class Configuration {
         }
     }
 
-    async getAlertTriggersDefaultAlertTriggerRule(watchedAutomatedProcess, rank, type = 'none') {
+    async getAlertTriggersDefaultRule(watchedAutomatedProcess, rank, type = 'none') {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
                     axios.get(`/configuration/alert-trigger/default-alert-trigger-rule/${watchedAutomatedProcess}/${rank}/${type}`)
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getAlertTriggersDefaultSummary(watchedAutomatedProcess, title, alertDefinitions) {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.post(`/configuration/alert-trigger/default-alert-trigger-summary/${watchedAutomatedProcess}`, {
+                        title: title,
+                        definitions: alertDefinitions
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getAlertTriggersCreationConfirmation(alertTrigger) {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.post(`/configuration/alert-trigger/alert-trigger-creation-confirmation/${alertTrigger}`)
                 );
             });
         } catch (error) {

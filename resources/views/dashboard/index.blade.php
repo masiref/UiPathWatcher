@@ -6,11 +6,15 @@
 
 @section('content')
     @include('dashboard.tiles.index')
-    @if ($alertTriggersCount <= 1)
+    
+    @if ($alertTriggersCount < 1)
         @include('dashboard.welcome-message')
     @endif
-    @if ($clients->count() > 0)        
-        <div class="dashboard">
+    
+    <div class="dashboard">
+        @if ($watchedAutomatedProcessesCount > 0)
+            @include('dashboard.quick-board')
+
             <div class="is-divider" data-content="TABLE VIEW"></div>
             @include('layouts.title', [
                 'title' => 'Pending alerts',
@@ -42,6 +46,6 @@
                     </div>
                 @endforeach
             </div>
-        </div>
-    @endif
+        @endif
+    </div>
 @endsection

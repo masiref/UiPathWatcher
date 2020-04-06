@@ -3222,7 +3222,6 @@ table.dataTable thead .sorting_asc_disabled:after, table.dataTable thead .sortin
   }
 }
 nav.navbar {
-  border-top: 4px solid #276cda;
   margin-bottom: 1rem;
 }
 .navbar-item.brand-text {
@@ -27719,7 +27718,11 @@ body {
   font-size: 16px;
   line-height: 1.5;
   height: 100%;
-  background: #ECF0F3 !important;
+  background: #fafafa !important;
+}
+
+.hero.welcome {
+  border-radius: 3px;
 }
 
 .hero.welcome.is-info {
@@ -27727,9 +27730,19 @@ body {
   background: linear-gradient(to right, #5B86E5, #36D1DC);
 }
 
-.hero.welcome .title,
-.hero.welcome .subtitle {
-  color: #fcfdfd;
+.hero.welcome.is-dark {
+  background: white;
+  background: linear-gradient(to right, #4a4a4a, #fafafa);
+}
+
+.hero.welcome.is-info .title,
+.hero.welcome.is-info .subtitle {
+  color: #fafafa;
+}
+
+.hero.welcome.is-dark .title,
+.hero.welcome.is-dark .subtitle {
+  color: #dbdbdb;
 }
 
 .table {

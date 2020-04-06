@@ -58,4 +58,14 @@ class LayoutController extends Controller
             'page' => $page
         ]);
     }
+
+    /**
+     * Show the hero.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function hero(Request $request)
+    {
+        return view('layouts.hero');
+    }
 }

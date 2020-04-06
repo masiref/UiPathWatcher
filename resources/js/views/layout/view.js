@@ -8,3 +8,7 @@ export const updateMenu = markup => {
 export const updateSidebar = markup => {
     return _base.update(elements.sidebar, markup);
 };
+
+export const updateHero = markup => {
+    return _base.update(elements.hero, markup);
+};

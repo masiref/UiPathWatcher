@@ -6,7 +6,7 @@
         @include('configuration.alert-trigger.steps.content.trigger-details.index')
     </div>
     <div class="step-content summary">
-        @include('configuration.alert-trigger.steps.content.summary')
+        @include('configuration.alert-trigger.steps.content.summary.index')
     </div>
     <div class="step-content confirmation">
         @include('configuration.alert-trigger.steps.content.confirmation')

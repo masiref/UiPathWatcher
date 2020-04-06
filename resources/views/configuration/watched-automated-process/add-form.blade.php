@@ -72,7 +72,7 @@
     <div class="running-period-section p-b-md">
         @include('layouts.subtitle', [
             'title' => 'Execution time slot',
-            'icon' => 'play'
+            'icon' => 'clock'
         ])
         <div class="field is-horizontal">
             <div class="field-body">

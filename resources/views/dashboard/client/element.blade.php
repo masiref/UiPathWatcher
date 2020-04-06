@@ -9,8 +9,14 @@
         </p>
     </header>
     <div class="card-content">
-        @foreach ($client->watchedAutomatedProcesses()->get() as $watchedAutomatedProcess)
+        @forelse ($client->watchedAutomatedProcesses()->get() as $watchedAutomatedProcess)
             @include('dashboard.watched-automated-process.element')
-        @endforeach
+        @empty
+            <article class="message is-info">
+                <div class="message-body">
+                    There is no <strong><span class="icon"><i class="fas fa-binoculars"></i></span> Watched automated process</strong>
+                </div>
+            </article>
+        @endforelse
     </div>
 </div>

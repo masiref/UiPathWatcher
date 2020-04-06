@@ -1,22 +1,107 @@
 import './bootstrap';
-import * as _base from './views/base';
+import toastr from 'toastr';
+
+import * as base from './views/base';
+import * as view from './views/view';
+
+import App from './models/App';
+
 import * as dashboardController from './views/dashboard/index';
 import * as orchestratorConfigurationController from './views/configuration/orchestrator/index';
 import * as clientConfigurationController from './views/configuration/client/index';
 import * as watchedAutomatedProcessConfigurationController from './views/configuration/watched-automated-process/index';
 import * as alertTriggerConfigurationController from './views/configuration/alert-trigger/index';
+import * as layoutController from './views/layout/index';
 
 const url = window.location.href;
-if (_base.isDashboardRelatedURL(url)) {
+if (base.isDashboardRelatedURL(url)) {
     dashboardController.init();
-} else if (_base.isConfigurationOrchestratorRelatedURL(url)) {
+} else if (base.isConfigurationOrchestratorRelatedURL(url)) {
     orchestratorConfigurationController.init();
-} else if (_base.isConfigurationClientRelatedURL(url)) {
+} else if (base.isConfigurationClientRelatedURL(url)) {
     clientConfigurationController.init();
-} else if (_base.isConfigurationWatchedAutomatedProcessRelatedURL(url)) {
+} else if (base.isConfigurationWatchedAutomatedProcessRelatedURL(url)) {
     watchedAutomatedProcessConfigurationController.init();
-} else if (_base.isConfigurationAlertTriggerRelatedURL(url)) {
+} else if (base.isConfigurationAlertTriggerRelatedURL(url)) {
     alertTriggerConfigurationController.init();
+}
+
+const app = new App();
+
+base.elements.app.addEventListener('click', e => {
+    const target = e.target;
+
+    if (target.matches(`${base.selectors.shutdownAlertTriggersButton}, ${base.selectors.shutdownAlertTriggersButtonChildren}`)) {
+        const modal = view.showShutdownAlertTriggersFormModal();
+        modal.addEventListener('click', async (e) => {
+            if (e.target.matches(`${base.selectors.validateModalButton}, ${base.selectors.validateModalButtonChildren}`)) {
+                commitShutdownAlertTriggers();
+            }
+        });
+    }
+
+    if (target.matches(`${base.selectors.reactivateAlertTriggersButton}, ${base.selectors.reactivateAlertTriggersButtonChildren}`)) {
+        const modal = view.showReactivateAlertTriggersFormModal();
+        modal.addEventListener('click', async (e) => {
+            if (e.target.matches(`${base.selectors.validateModalButton}, ${base.selectors.validateModalButtonChildren}`)) {
+                commitReactivateAlertTriggers();
+            }
+        });
+    }
+});
+
+const commitShutdownAlertTriggers = () => {
+    try {
+        const reasonTextarea = document.querySelector(base.selectors.shutdownAlertTriggersReasonTextarea);
+        if (reasonTextarea.value.trim() === '') {
+            toastr.error('Reason is mandatory!', null, {
+                positionClass: 'toast-bottom-right'
+            });
+            reasonTextarea.classList.add('is-danger');
+        } else {
+            view.removeShutdownAlertTriggersFormModal();
+            base.renderLoader(document.querySelector(base.selectors.shutdownAlertTriggersButton));
+            try {
+                app.shutdownAlertTriggers(reasonTextarea.value).then(response => {
+                    layoutController.updateHero(app.layout);
+                });
+            } catch (error) {
+                toastr.error(`Alert triggers not shutdown due to application exception: ${error}`, null, {
+                    positionClass: 'toast-bottom-right'
+                });
+                base.clearLoader(document.querySelector(base.selectors.shutdownAlertTriggersButton));
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const commitReactivateAlertTriggers = () => {
+    try {
+        const reasonTextarea = document.querySelector(base.selectors.reactivateAlertTriggersReasonTextarea);
+        if (reasonTextarea.value.trim() === '') {
+            toastr.error('Reason is mandatory!', null, {
+                positionClass: 'toast-bottom-right'
+            });
+            reasonTextarea.classList.add('is-danger');
+        } else {
+            view.removeReactivateAlertTriggersFormModal();
+            base.renderLoader(document.querySelector(base.selectors.reactivateAlertTriggersButton));
+            try {
+                app.reactivateAlertTriggers(reasonTextarea.value).then(response => {
+                    layoutController.updateHero(app.layout);
+                });
+            } catch (error) {
+                toastr.error(`Alert triggers not reactivated due to application exception: ${error}`, null, {
+                    positionClass: 'toast-bottom-right'
+                });
+                base.clearLoader(document.querySelector(base.selectors.reactivateAlertTriggersButton));
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 // DataTables

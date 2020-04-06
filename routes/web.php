@@ -20,7 +20,11 @@ use App\UiPathRobot;
 Auth::routes();
 
 // Debug
-Route::get('/debug', 'DashboardController@debug')->name('debug');
+Route::get('/debug', 'AppController@debug')->name('debug');
+
+// App
+Route::post('/app/shutdown-alert-triggers', 'AppController@shutdownAlertTriggers')->name('app.shutdown-alert-triggers');
+Route::post('/app/reactivate-alert-triggers', 'AppController@reactivateAlertTriggers')->name('app.reactivate-alert-triggers');
 
 // Home
 Route::get('/', 'DashboardController@index')->name('dashboard');
@@ -28,6 +32,7 @@ Route::get('/', 'DashboardController@index')->name('dashboard');
 // Layout controller
 Route::get('/layout/menu/{page?}', 'LayoutController@menu')->name('layout.menu');
 Route::get('/layout/sidebar/{page?}', 'LayoutController@sidebar')->name('layout.sidebar');
+Route::get('/layout/hero', 'LayoutController@hero')->name('layout.hero');
 
 // Dashboard controller
 Route::get('/dashboard/tiles/{client?}', 'DashboardController@tiles')->name('dashboard.tiles');
@@ -35,6 +40,7 @@ Route::get('/dashboard/tiles/{client?}', 'DashboardController@tiles')->name('das
 Route::get('/dashboard/alert/table/{closed?}/{id?}', 'DashboardController@alertTable')->name('dashboard.alert.table');
 Route::get('/dashboard/alert/table-row/{alert}', 'DashboardController@alertTableRow')->name('dashboard.alert.table.row');
 Route::get('/dashboard/alert/element/{alert}', 'DashboardController@alertElement')->name('dashboard.alert.element');
+Route::get('/dashboard/quick-board/{client?}', 'DashboardController@quickBoard')->name('dashboard.quick-board');
 
 Route::get('/dashboard/client/elements', 'DashboardClientController@elements')->name('dashboard.client.elements');
 Route::get('/dashboard/client/element/{client}', 'DashboardClientController@element')->name('dashboard.client.element');
@@ -77,3 +83,11 @@ Route::get('/configuration/alert-trigger/default-alert-trigger-definition/{rank}
     ->name('configuration.alert-trigger.default-alert-trigger-definition');
 Route::get('/configuration/alert-trigger/default-alert-trigger-rule/{watchedAutomatedProcess}/{rank}/{type}', 'ConfigurationAlertTriggerController@defaultAlertTriggerRule')
     ->name('configuration.alert-trigger.default-alert-trigger-rule');
+Route::post('/configuration/alert-trigger/default-alert-trigger-summary/{watchedAutomatedProcess}', 'ConfigurationAlertTriggerController@defaultAlertTriggerSummary')
+    ->name('configuration.alert-trigger.default-alert-trigger-summary');
+Route::post('/configuration/alert-trigger/alert-trigger-creation-confirmation/{alertTrigger}', 'ConfigurationAlertTriggerController@alertTriggerCreationConfirmation')
+    ->name('configuration.alert-trigger.alert-trigger-creation-confirmation');
+Route::get(
+    '/configuration/alert-trigger/table',
+    'ConfigurationAlertTriggerController@table'
+)->name('configuration.alert-trigger.table');

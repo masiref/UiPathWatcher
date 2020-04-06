@@ -6,48 +6,54 @@
 
 @section('content')
     @include('dashboard.tiles.index')
-    @if ($watchedAutomatedProcessesCount === 0)
-        <article class="message is-info">
-            <div class="message-body">
-                You can watch your first Automated Process by creating it
-                <a href="{{ route('configuration.watched-automated-process') }}" class="">here</a>.
-            </div>
-        </article>
-    @else
-        @if ($alertTriggersCount === 0)
+        
+    <div class="dashboard">
+        @if ($clientWatchedAutomatedProcessesCount === 0)
             <article class="message is-info">
                 <div class="message-body">
-                    You can configure your first <strong><span class="icon"><i class="fas fa-dragon"></i></span> Alert trigger</strong> by creating it
-                    <a href="{{ route('configuration.alert-trigger') }}" class="">here</a>.
+                    You can watch your first <strong><span class="icon"><i class="fas fa-binoculars"></i></span> Automated Process</strong> by creating it
+                    <a href="{{ route('configuration.watched-automated-process') }}" class="">here</a>.
                 </div>
             </article>
+        @else
+            @if ($clientAlertTriggersCount === 0)
+                <article class="message is-info">
+                    <div class="message-body">
+                        You can configure your first <strong><span class="icon"><i class="fas fa-dragon"></i></span> Alert trigger</strong> by creating it
+                        <a href="{{ route('configuration.alert-trigger') }}" class="">here</a>.
+                    </div>
+                </article>
+            @endif
         @endif
-        
-        <div class="dashboard">
-            <div class="is-divider" data-content="TABLE VIEW"></div>
-            @include('layouts.title', [
-                'title' => 'Pending alerts',
-                'icon' => 'fire',
-                'color' => 'dark'
-            ])
-            @include('dashboard.alert.table', [
-                'tableID' => 'pending-alerts-table',
-                'alerts' => $pendingAlerts,
-                'options' => [ 'closed' => false ]
-            ])
+        @if ($clientWatchedAutomatedProcessesCount > 0)
+            @include('dashboard.client.quick-board')
 
-            @include('layouts.title', [
-                'title' => 'Closed alerts',
-                'icon' => 'dumpster-fire',
-                'color' => 'grey-light'
-            ])
-            @include('dashboard.alert.table', [
-                'tableID' => 'closed-alerts-table',
-                'alerts' => $closedAlerts,
-                'options' => [ 'closed' => true ]
-            ])
+            @if ($clientAlertTriggersCount > 0)
+                <div class="is-divider" data-content="TABLE VIEW"></div>
+                @include('layouts.title', [
+                    'title' => 'Pending alerts',
+                    'icon' => 'fire',
+                    'color' => 'dark'
+                ])
+                @include('dashboard.alert.table', [
+                    'tableID' => 'pending-alerts-table',
+                    'alerts' => $pendingAlerts,
+                    'options' => [ 'closed' => false ]
+                ])
 
-            <div class="is-divider" data-content="DETAILED VIEW"></div>
+                @include('layouts.title', [
+                    'title' => 'Closed alerts',
+                    'icon' => 'dumpster-fire',
+                    'color' => 'grey-light'
+                ])
+                @include('dashboard.alert.table', [
+                    'tableID' => 'closed-alerts-table',
+                    'alerts' => $closedAlerts,
+                    'options' => [ 'closed' => true ]
+                ])
+                <div class="is-divider" data-content="DETAILED VIEW"></div>
+            @endif
+            
             <div class="columns is-multiline">
                 @foreach ($client->watchedAutomatedProcesses()->get() as $watchedAutomatedProcess)
                     <div class="column is-6">
@@ -55,6 +61,6 @@
                     </div>
                 @endforeach
             </div>
-        </div>
-    @endif
+        @endif
+    </div>
 @endsection

@@ -52,6 +52,10 @@ const resetButton = base.elements.resetButton;
 
 export const init = () => {
     try {
+        setInterval(() => {
+            layoutController.update(configuration.layout);
+        }, 45000);
+        
         base.elements.addForm.addEventListener('keyup', validateForm);
         base.elements.addForm.addEventListener('change', validateForm);
         document.querySelector(base.selectors.runningPeriodCalendar).bulmaCalendar.on('select clear', validateForm);
@@ -67,7 +71,7 @@ export const init = () => {
             if (e.target.matches(`${base.selectors.createButton}, ${base.selectors.createButtonChildren}`) && !createButton.disabled) {
                 create().then(res => {
                     toastr.success('Watched automated process successfully added!', null, {
-                        positionClass: 'toast-bottom-center'
+                        positionClass: 'toast-bottom-right'
                     });
                     return Promise.all([
                         updateTable(),
@@ -141,7 +145,7 @@ const validateForm = () => {
         selectedQueuesCount = $(base.selectors.involvedQueuesTable).DataTable().rows({ selected: true }).count();
     }
     involvedQueuesCount.innerHTML = selectedQueuesCount;
-    const involvedQueuesTableValid = selectedQueuesCount > 0;
+    const involvedQueuesTableValid = /*selectedQueuesCount > 0*/ true;
     _base.toggleSuccessDangerState(involvedQueuesSectionTitle, involvedQueuesTableValid, true);
     _base.toggleSuccessDangerState(involvedQueuesSectionTitleIcon, involvedQueuesTableValid, true);
     _base.toggleSuccessDangerState(involvedQueuesCount, involvedQueuesTableValid);
@@ -168,7 +172,7 @@ const loadProcesses = async (e) => {
                 let selected = [];
                 if (data.error) {
                     toastr.error(`Unable to load processes: ${data.error}`, null, {
-                        positionClass: 'toast-bottom-center'
+                        positionClass: 'toast-bottom-right'
                     });
                     if ($.fn.dataTable.isDataTable(base.selectors.involvedProcessesTable)) {
                         $(base.selectors.involvedProcessesTable).DataTable().clear().draw();
@@ -224,7 +228,7 @@ const loadRobots = async (e) => {
                 let selected = [];
                 if (data.error) {
                     toastr.error(`Unable to load robots: ${data.error}`, null, {
-                        positionClass: 'toast-bottom-center'
+                        positionClass: 'toast-bottom-right'
                     });
                     if ($.fn.dataTable.isDataTable(base.selectors.involvedRobotsTable)) {
                         $(base.selectors.involvedRobotsTable).DataTable().clear().draw();
@@ -317,7 +321,7 @@ const loadQueues = async (e) => {
                 let selected = [];
                 if (data.error) {
                     toastr.error(`Unable to load queues: ${data.error}`, null, {
-                        positionClass: 'toast-bottom-center'
+                        positionClass: 'toast-bottom-right'
                     });
                     if ($.fn.dataTable.isDataTable(base.selectors.involvedQueuesTable)) {
                         $(base.selectors.involvedQueuesTable).DataTable().clear().draw();
@@ -430,7 +434,7 @@ const create = async () => {
         });
     } catch (error) {
         toastr.error(`Watched automated process not added due to application exception: ${error}`, null, {
-            positionClass: 'toast-bottom-center'
+            positionClass: 'toast-bottom-right'
         });
         console.log(error);
         _base.clearLoader(addForm);
@@ -438,7 +442,7 @@ const create = async () => {
 };
 
 const updateTable = async () => {
-    const table = base.elements.table;
+    const table = document.querySelector(base.selectors.table);
     try {
         _base.renderLoader(table);
         return new Promise((resolve, reject) => {

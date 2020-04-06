@@ -24,15 +24,18 @@ class CreateAlertTriggerRulesTable extends Migration
                 'elastic-search-query'
             ])->default('none');
             $table->integer('rank');
-            $table->boolean('relative_time_slot');
-            $table->integer('relative_time_slot_duration');
-            $table->dateTime('time_slot_from');
-            $table->dateTime('time_slot_until');
-            $table->json('failed_queue_items_percentage');
-            $table->json('faulted_jobs_percentage');
-            $table->json('jobs_durations');
-            $table->json('kibana_metric_visualization');
-            $table->json('kibana_search');
+            $table->time('time_slot_from');
+            $table->time('time_slot_until');
+            $table->boolean('has_relative_time_slot');
+            $table->integer('relative_time_slot_duration')->nullable(true);
+            $table->boolean('is_triggered_on_monday');
+            $table->boolean('is_triggered_on_tuesday');
+            $table->boolean('is_triggered_on_wednesday');
+            $table->boolean('is_triggered_on_thursday');
+            $table->boolean('is_triggered_on_friday');
+            $table->boolean('is_triggered_on_saturday');
+            $table->boolean('is_triggered_on_sunday');
+            $table->json('parameters');
             $table->timestamps();
 
             $table->foreign('alert_trigger_definition_id')

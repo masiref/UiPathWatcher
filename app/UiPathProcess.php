@@ -36,4 +36,12 @@ class UiPathProcess extends Model
     {
         return $this->belongsToMany('App\WatchedAutomatedProcess');
     }
+
+    /**
+     * The alert trigger rules that belong to the process.
+     */
+    public function alertTriggerRules()
+    {
+        return $this->belongsToMany('App\AlertTriggerRule');
+    }
 }

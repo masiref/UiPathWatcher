@@ -21,6 +21,7 @@ export const selectors = {
             title: '.alert-definition-item .title-level p.title',
             titleIcon: '.alert-definition-item .title-level span.icon',
             titleRank: 'span.trigger-details--alert-definition--rank',
+            validityIcon: '.alert-definition-item .title-level .level-right span.icon',
             addButton: 'button.trigger-details--alert-definition--add-button',
             addButtonChildren: 'button.trigger-details--alert-definition--add-button *',
             deleteButton: 'button.trigger-details--alert-definition--delete-button',
@@ -56,6 +57,17 @@ export const selectors = {
                     lowerCountInput: 'input.trigger-details--alert-definition--elastic-search-query-rule--lower-count-input',
                     higherCountInput: 'input.trigger-details--alert-definition--elastic-search-query-rule--higher-count-input'
                 },
+                triggeringDays: {
+                    title: 'div.triggering-days-section .title-level p.title',
+                    titleIcon: 'div.triggering-days-section .title-level span.icon',
+                    mondayCheckbox: 'input.trigger-details--alert-definition--rule--triggering-day-monday',
+                    tuesdayCheckbox: 'input.trigger-details--alert-definition--rule--triggering-day-tuesday',
+                    wednesdayCheckbox: 'input.trigger-details--alert-definition--rule--triggering-day-wednesday',
+                    thursdayCheckbox: 'input.trigger-details--alert-definition--rule--triggering-day-thursday',
+                    fridayCheckbox: 'input.trigger-details--alert-definition--rule--triggering-day-friday',
+                    saturdayCheckbox: 'input.trigger-details--alert-definition--rule--triggering-day-saturday',
+                    sundayCheckbox: 'input.trigger-details--alert-definition--rule--triggering-day-sunday'
+                },
                 /*kibanaMetricVisualizationControls: {
                     metricVisualizationSelect: 'select.trigger-details--alert-definition--kibana-metric-visualization-rule--metric-visualization-select',
                     lowerCountInput: 'input.trigger-details--alert-definition--kibana-metric-visualization-rule--lower-count-input',
@@ -83,6 +95,11 @@ export const selectors = {
                 }
             }
         }
+    },
+    confirmation: {
+        notification: '.notification',
+        activateButton: 'button.trigger-details--confirmation--activate-button',
+        activateButtonChildren: 'button.trigger-details--confirmation--activate-button *'
     }
 };
 

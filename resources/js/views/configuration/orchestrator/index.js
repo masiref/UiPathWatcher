@@ -24,6 +24,10 @@ const resetButton = base.elements.resetButton;
 
 export const init = () => {
     try {
+        setInterval(() => {
+            layoutController.update(configuration.layout);
+        }, 45000);
+
         base.elements.addForm.addEventListener('keyup', checkForm);
         base.elements.addForm.addEventListener('change', checkForm);
 
@@ -31,7 +35,7 @@ export const init = () => {
             if (e.target.matches(`${base.selectors.createButton}, ${base.selectors.createButtonChildren}`) && !createButton.disabled) {
                 create().then(res => {
                     toastr.success('Orchestrator successfully added!', null, {
-                        positionClass: 'toast-bottom-center'
+                        positionClass: 'toast-bottom-right'
                     });
                     return Promise.all([
                         updateTable(),
@@ -113,7 +117,7 @@ const create = async () => {
         });
     } catch (error) {
         toastr.error(`Orchestrator not added due to application exception: ${error}`, null, {
-            positionClass: 'toast-bottom-center'
+            positionClass: 'toast-bottom-right'
         });
         console.log(error);
         _base.clearLoader(addForm);
@@ -121,7 +125,7 @@ const create = async () => {
 };
 
 const updateTable = async () => {
-    const table = base.elements.table;
+    const table = document.querySelector(base.selectors.table);
     try {
         _base.renderLoader(table);
         return new Promise((resolve, reject) => {

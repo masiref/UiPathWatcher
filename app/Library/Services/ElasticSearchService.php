@@ -7,7 +7,7 @@ use App\UiPathRobot;
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\RequestException;
 
-class KibanaService {
+class ElasticSearchService {
 
     protected function getGuzzle(UiPathOrchestrator $orchestrator)
     {

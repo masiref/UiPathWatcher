@@ -115,10 +115,10 @@ class WatchedAutomatedProcess extends Model
     {
         $openedAlerts = $this->openedAlerts();
         
-        if (count($openedAlerts->where('level', 'danger')) > 0)
+        if (count($openedAlerts->where('level', 'danger')) > 0 || $this->onlineRobotsCount() < $this->robots->count())
             return 'danger';
         
-        if (count($openedAlerts->where('level', 'warning')) > 0)
+        if (count($openedAlerts->where('level', 'warning')) > 0 || $this->loggingRobotsCount() < $this->robots->count())
             return 'warning';
         
         if (count($openedAlerts->where('level', 'info')) > 0)
@@ -127,6 +127,9 @@ class WatchedAutomatedProcess extends Model
         return 'success';
     }
 
+    /**
+     * The days on which the watched process is running
+     */
     public function runningDays()
     {
         $days = '';
@@ -176,17 +179,30 @@ class WatchedAutomatedProcess extends Model
                 $days.= ($days === '' ? '' : ', ') . 'Sunday';
             }
             $search = ',';
-            $replace = ', and';
+            $replace = ' and';
             $days = strrev(implode(strrev($replace), explode(strrev($search), strrev($days), 2)));
         }
         return $days;
     }
 
+    /**
+     * The days and hours on which the process is running
+     */
     public function runningPeriod()
     {
         $days = $this->runningDays();
         $timeFrom = Carbon::createFromTimeString($this->running_period_time_from)->format('g:i A');
         $timeUntil = Carbon::createFromTimeString($this->running_period_time_until)->format('g:i A');
         return "Running from $timeFrom until $timeUntil on $days";
+    }
+
+    public function onlineRobotsCount()
+    {
+        return $this->robots()->where('is_online', true)->count();
+    }
+
+    public function loggingRobotsCount()
+    {
+        return $this->robots()->where('is_logging', true)->count();
     }
 }

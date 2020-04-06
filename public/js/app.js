@@ -37372,6 +37372,137 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 
 /***/ }),
 
+/***/ "./node_modules/flatted/esm/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/flatted/esm/index.js ***!
+  \*******************************************/
+/*! exports provided: default, parse, stringify */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parse", function() { return parse; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stringify", function() { return stringify; });
+var Flatted = (function (Primitive, primitive) {
+
+  /*!
+   * ISC License
+   *
+   * Copyright (c) 2018, Andrea Giammarchi, @WebReflection
+   *
+   * Permission to use, copy, modify, and/or distribute this software for any
+   * purpose with or without fee is hereby granted, provided that the above
+   * copyright notice and this permission notice appear in all copies.
+   *
+   * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+   * REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+   * AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+   * INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+   * LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE
+   * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+   * PERFORMANCE OF THIS SOFTWARE.
+   */
+
+  var Flatted = {
+
+    parse: function parse(text, reviver) {
+      var input = JSON.parse(text, Primitives).map(primitives);
+      var value = input[0];
+      var $ = reviver || noop;
+      var tmp = typeof value === 'object' && value ?
+                  revive(input, new Set, value, $) :
+                  value;
+      return $.call({'': tmp}, '', tmp);
+    },
+
+    stringify: function stringify(value, replacer, space) {
+      for (var
+        firstRun,
+        known = new Map,
+        input = [],
+        output = [],
+        $ = replacer && typeof replacer === typeof input ?
+              function (k, v) {
+                if (k === '' || -1 < replacer.indexOf(k)) return v;
+              } :
+              (replacer || noop),
+        i = +set(known, input, $.call({'': value}, '', value)),
+        replace = function (key, value) {
+          if (firstRun) {
+            firstRun = !firstRun;
+            return value;
+          }
+          var after = $.call(this, key, value);
+          switch (typeof after) {
+            case 'object':
+              if (after === null) return after;
+            case primitive:
+              return known.get(after) || set(known, input, after);
+          }
+          return after;
+        };
+        i < input.length; i++
+      ) {
+        firstRun = true;
+        output[i] = JSON.stringify(input[i], replace, space);
+      }
+      return '[' + output.join(',') + ']';
+    }
+
+  };
+
+  return Flatted;
+
+  function noop(key, value) {
+    return value;
+  }
+
+  function revive(input, parsed, output, $) {
+    return Object.keys(output).reduce(
+      function (output, key) {
+        var value = output[key];
+        if (value instanceof Primitive) {
+          var tmp = input[value];
+          if (typeof tmp === 'object' && !parsed.has(tmp)) {
+            parsed.add(tmp);
+            output[key] = $.call(output, key, revive(input, parsed, tmp, $));
+          } else {
+            output[key] = $.call(output, key, tmp);
+          }
+        } else
+          output[key] = $.call(output, key, value);
+        return output;
+      },
+      output
+    );
+  }
+
+  function set(known, input, value) {
+    var index = Primitive(input.push(value) - 1);
+    known.set(value, index);
+    return index;
+  }
+
+  // the two kinds of primitives
+  //  1. the real one
+  //  2. the wrapped one
+
+  function primitives(value) {
+    return value instanceof Primitive ? Primitive(value) : value;
+  }
+
+  function Primitives(key, value) {
+    return typeof value === primitive ? new Primitive(value) : value;
+  }
+
+}(String, 'string'));
+/* harmony default export */ __webpack_exports__["default"] = (Flatted);
+var parse = Flatted.parse;
+var stringify = Flatted.stringify;
+
+
+/***/ }),
+
 /***/ "./node_modules/jquery/dist/jquery.js":
 /*!********************************************!*\
   !*** ./node_modules/jquery/dist/jquery.js ***!
@@ -89360,13 +89491,30 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-/* harmony import */ var _views_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./views/base */ "./resources/js/views/base.js");
-/* harmony import */ var _views_dashboard_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/dashboard/index */ "./resources/js/views/dashboard/index.js");
-/* harmony import */ var _views_configuration_orchestrator_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/configuration/orchestrator/index */ "./resources/js/views/configuration/orchestrator/index.js");
-/* harmony import */ var _views_configuration_client_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/configuration/client/index */ "./resources/js/views/configuration/client/index.js");
-/* harmony import */ var _views_configuration_watched_automated_process_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./views/configuration/watched-automated-process/index */ "./resources/js/views/configuration/watched-automated-process/index.js");
-/* harmony import */ var _views_configuration_alert_trigger_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./views/configuration/alert-trigger/index */ "./resources/js/views/configuration/alert-trigger/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(toastr__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _views_base__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/base */ "./resources/js/views/base.js");
+/* harmony import */ var _views_view__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/view */ "./resources/js/views/view.js");
+/* harmony import */ var _models_App__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./models/App */ "./resources/js/models/App.js");
+/* harmony import */ var _views_dashboard_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./views/dashboard/index */ "./resources/js/views/dashboard/index.js");
+/* harmony import */ var _views_configuration_orchestrator_index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./views/configuration/orchestrator/index */ "./resources/js/views/configuration/orchestrator/index.js");
+/* harmony import */ var _views_configuration_client_index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./views/configuration/client/index */ "./resources/js/views/configuration/client/index.js");
+/* harmony import */ var _views_configuration_watched_automated_process_index__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./views/configuration/watched-automated-process/index */ "./resources/js/views/configuration/watched-automated-process/index.js");
+/* harmony import */ var _views_configuration_alert_trigger_index__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./views/configuration/alert-trigger/index */ "./resources/js/views/configuration/alert-trigger/index.js");
+/* harmony import */ var _views_layout_index__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./views/layout/index */ "./resources/js/views/layout/index.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+
 
 
 
@@ -89376,17 +89524,141 @@ __webpack_require__.r(__webpack_exports__);
 
 var url = window.location.href;
 
-if (_views_base__WEBPACK_IMPORTED_MODULE_1__["isDashboardRelatedURL"](url)) {
-  _views_dashboard_index__WEBPACK_IMPORTED_MODULE_2__["init"]();
-} else if (_views_base__WEBPACK_IMPORTED_MODULE_1__["isConfigurationOrchestratorRelatedURL"](url)) {
-  _views_configuration_orchestrator_index__WEBPACK_IMPORTED_MODULE_3__["init"]();
-} else if (_views_base__WEBPACK_IMPORTED_MODULE_1__["isConfigurationClientRelatedURL"](url)) {
-  _views_configuration_client_index__WEBPACK_IMPORTED_MODULE_4__["init"]();
-} else if (_views_base__WEBPACK_IMPORTED_MODULE_1__["isConfigurationWatchedAutomatedProcessRelatedURL"](url)) {
-  _views_configuration_watched_automated_process_index__WEBPACK_IMPORTED_MODULE_5__["init"]();
-} else if (_views_base__WEBPACK_IMPORTED_MODULE_1__["isConfigurationAlertTriggerRelatedURL"](url)) {
-  _views_configuration_alert_trigger_index__WEBPACK_IMPORTED_MODULE_6__["init"]();
-} // DataTables
+if (_views_base__WEBPACK_IMPORTED_MODULE_3__["isDashboardRelatedURL"](url)) {
+  _views_dashboard_index__WEBPACK_IMPORTED_MODULE_6__["init"]();
+} else if (_views_base__WEBPACK_IMPORTED_MODULE_3__["isConfigurationOrchestratorRelatedURL"](url)) {
+  _views_configuration_orchestrator_index__WEBPACK_IMPORTED_MODULE_7__["init"]();
+} else if (_views_base__WEBPACK_IMPORTED_MODULE_3__["isConfigurationClientRelatedURL"](url)) {
+  _views_configuration_client_index__WEBPACK_IMPORTED_MODULE_8__["init"]();
+} else if (_views_base__WEBPACK_IMPORTED_MODULE_3__["isConfigurationWatchedAutomatedProcessRelatedURL"](url)) {
+  _views_configuration_watched_automated_process_index__WEBPACK_IMPORTED_MODULE_9__["init"]();
+} else if (_views_base__WEBPACK_IMPORTED_MODULE_3__["isConfigurationAlertTriggerRelatedURL"](url)) {
+  _views_configuration_alert_trigger_index__WEBPACK_IMPORTED_MODULE_10__["init"]();
+}
+
+var app = new _models_App__WEBPACK_IMPORTED_MODULE_5__["default"]();
+_views_base__WEBPACK_IMPORTED_MODULE_3__["elements"].app.addEventListener('click', function (e) {
+  var target = e.target;
+
+  if (target.matches("".concat(_views_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].shutdownAlertTriggersButton, ", ").concat(_views_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].shutdownAlertTriggersButtonChildren))) {
+    var modal = _views_view__WEBPACK_IMPORTED_MODULE_4__["showShutdownAlertTriggersFormModal"]();
+    modal.addEventListener('click',
+    /*#__PURE__*/
+    function () {
+      var _ref = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (e.target.matches("".concat(_views_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].validateModalButton, ", ").concat(_views_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].validateModalButtonChildren))) {
+                  commitShutdownAlertTriggers();
+                }
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }());
+  }
+
+  if (target.matches("".concat(_views_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].reactivateAlertTriggersButton, ", ").concat(_views_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].reactivateAlertTriggersButtonChildren))) {
+    var _modal = _views_view__WEBPACK_IMPORTED_MODULE_4__["showReactivateAlertTriggersFormModal"]();
+
+    _modal.addEventListener('click',
+    /*#__PURE__*/
+    function () {
+      var _ref2 = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (e.target.matches("".concat(_views_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].validateModalButton, ", ").concat(_views_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].validateModalButtonChildren))) {
+                  commitReactivateAlertTriggers();
+                }
+
+              case 1:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      return function (_x2) {
+        return _ref2.apply(this, arguments);
+      };
+    }());
+  }
+});
+
+var commitShutdownAlertTriggers = function commitShutdownAlertTriggers() {
+  try {
+    var reasonTextarea = document.querySelector(_views_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].shutdownAlertTriggersReasonTextarea);
+
+    if (reasonTextarea.value.trim() === '') {
+      toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error('Reason is mandatory!', null, {
+        positionClass: 'toast-bottom-right'
+      });
+      reasonTextarea.classList.add('is-danger');
+    } else {
+      _views_view__WEBPACK_IMPORTED_MODULE_4__["removeShutdownAlertTriggersFormModal"]();
+      _views_base__WEBPACK_IMPORTED_MODULE_3__["renderLoader"](document.querySelector(_views_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].shutdownAlertTriggersButton));
+
+      try {
+        app.shutdownAlertTriggers(reasonTextarea.value).then(function (response) {
+          _views_layout_index__WEBPACK_IMPORTED_MODULE_11__["updateHero"](app.layout);
+        });
+      } catch (error) {
+        toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error("Alert triggers not shutdown due to application exception: ".concat(error), null, {
+          positionClass: 'toast-bottom-right'
+        });
+        _views_base__WEBPACK_IMPORTED_MODULE_3__["clearLoader"](document.querySelector(_views_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].shutdownAlertTriggersButton));
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+var commitReactivateAlertTriggers = function commitReactivateAlertTriggers() {
+  try {
+    var reasonTextarea = document.querySelector(_views_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].reactivateAlertTriggersReasonTextarea);
+
+    if (reasonTextarea.value.trim() === '') {
+      toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error('Reason is mandatory!', null, {
+        positionClass: 'toast-bottom-right'
+      });
+      reasonTextarea.classList.add('is-danger');
+    } else {
+      _views_view__WEBPACK_IMPORTED_MODULE_4__["removeReactivateAlertTriggersFormModal"]();
+      _views_base__WEBPACK_IMPORTED_MODULE_3__["renderLoader"](document.querySelector(_views_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].reactivateAlertTriggersButton));
+
+      try {
+        app.reactivateAlertTriggers(reasonTextarea.value).then(function (response) {
+          _views_layout_index__WEBPACK_IMPORTED_MODULE_11__["updateHero"](app.layout);
+        });
+      } catch (error) {
+        toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error("Alert triggers not reactivated due to application exception: ".concat(error), null, {
+          positionClass: 'toast-bottom-right'
+        });
+        _views_base__WEBPACK_IMPORTED_MODULE_3__["clearLoader"](document.querySelector(_views_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].reactivateAlertTriggersButton));
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}; // DataTables
 
 
 $('.table').DataTable({
@@ -95555,34 +95827,166 @@ function () {
 
 /***/ }),
 
-/***/ "./resources/js/models/AlertDefinition.js":
-/*!************************************************!*\
-  !*** ./resources/js/models/AlertDefinition.js ***!
-  \************************************************/
+/***/ "./resources/js/models/AlertTrigger.js":
+/*!*********************************************!*\
+  !*** ./resources/js/models/AlertTrigger.js ***!
+  \*********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AlertDefinition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AlertTrigger; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var AlertDefinition =
+
+
+var AlertTrigger =
 /*#__PURE__*/
 function () {
-  function AlertDefinition(rank) {
-    _classCallCheck(this, AlertDefinition);
+  function AlertTrigger() {
+    var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+    _classCallCheck(this, AlertTrigger);
+
+    if (id) {
+      this.id = id;
+    }
+  }
+
+  _createClass(AlertTrigger, [{
+    key: "save",
+    value: function () {
+      var _save = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(watchedAutomatedProcess, title, definitions) {
+        var _this = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                return _context.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["post"]('/api/alert-triggers', {
+                    'watched_automated_process_id': watchedAutomatedProcess,
+                    'title': title,
+                    'definitions': definitions
+                  }).then(function (response) {
+                    if (response.data) {
+                      _this.id = response.data.id;
+                    }
+                  }));
+                }));
+
+              case 4:
+                _context.prev = 4;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 4]]);
+      }));
+
+      function save(_x, _x2, _x3) {
+        return _save.apply(this, arguments);
+      }
+
+      return save;
+    }()
+  }, {
+    key: "activate",
+    value: function () {
+      var _activate = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _this2 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                return _context2.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["patch"]("/api/alert-triggers/".concat(_this2.id), {
+                    'active': 1
+                  }));
+                }));
+
+              case 4:
+                _context2.prev = 4;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+
+              case 7:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 4]]);
+      }));
+
+      function activate() {
+        return _activate.apply(this, arguments);
+      }
+
+      return activate;
+    }()
+  }]);
+
+  return AlertTrigger;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/js/models/AlertTriggerDefinition.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/models/AlertTriggerDefinition.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AlertTriggerDefinition; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var AlertTriggerDefinition =
+/*#__PURE__*/
+function () {
+  function AlertTriggerDefinition(rank) {
+    _classCallCheck(this, AlertTriggerDefinition);
 
     this.rank = rank;
     this.level = 'info';
     this.rules = [];
   }
 
-  _createClass(AlertDefinition, [{
+  _createClass(AlertTriggerDefinition, [{
     key: "findRule",
     value: function findRule(rank) {
       return this.rules.find(function (item) {
@@ -95604,34 +96008,165 @@ function () {
         return item;
       });
     }
+  }, {
+    key: "isValid",
+    value: function isValid() {
+      var valid = this.rules.length > 0;
+      this.rules.forEach(function (rule) {
+        valid = valid && rule.valid;
+      });
+      return valid;
+    }
   }]);
 
-  return AlertDefinition;
+  return AlertTriggerDefinition;
 }();
 
 
 
 /***/ }),
 
-/***/ "./resources/js/models/AlertRule.js":
-/*!******************************************!*\
-  !*** ./resources/js/models/AlertRule.js ***!
-  \******************************************/
+/***/ "./resources/js/models/AlertTriggerRule.js":
+/*!*************************************************!*\
+  !*** ./resources/js/models/AlertTriggerRule.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AlertRule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AlertTriggerRule; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var AlertRule = function AlertRule(rank) {
-  _classCallCheck(this, AlertRule);
+var AlertTriggerRule = function AlertTriggerRule(definitionRank, rank) {
+  _classCallCheck(this, AlertTriggerRule);
 
+  this.definitionRank = definitionRank;
   this.rank = rank;
   this.type = 'none';
+  this.valid = false;
   this.parameters = {};
 };
+
+
+
+/***/ }),
+
+/***/ "./resources/js/models/App.js":
+/*!************************************!*\
+  !*** ./resources/js/models/App.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return App; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Layout */ "./resources/js/models/Layout.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+var App =
+/*#__PURE__*/
+function () {
+  function App() {
+    _classCallCheck(this, App);
+
+    this.layout = new _Layout__WEBPACK_IMPORTED_MODULE_2__["default"]();
+  }
+
+  _createClass(App, [{
+    key: "shutdownAlertTriggers",
+    value: function () {
+      var _shutdownAlertTriggers = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(reason) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                return _context.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["post"]('/app/shutdown-alert-triggers', {
+                    reason: reason
+                  }));
+                }));
+
+              case 4:
+                _context.prev = 4;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 4]]);
+      }));
+
+      function shutdownAlertTriggers(_x) {
+        return _shutdownAlertTriggers.apply(this, arguments);
+      }
+
+      return shutdownAlertTriggers;
+    }()
+  }, {
+    key: "reactivateAlertTriggers",
+    value: function () {
+      var _reactivateAlertTriggers = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(reason) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                return _context2.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["post"]('/app/reactivate-alert-triggers', {
+                    reason: reason
+                  }));
+                }));
+
+              case 4:
+                _context2.prev = 4;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+
+              case 7:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 4]]);
+      }));
+
+      function reactivateAlertTriggers(_x2) {
+        return _reactivateAlertTriggers.apply(this, arguments);
+      }
+
+      return reactivateAlertTriggers;
+    }()
+  }]);
+
+  return App;
+}();
 
 
 
@@ -95849,7 +96384,7 @@ function () {
                   resolve(axios__WEBPACK_IMPORTED_MODULE_1__["post"]('/api/clients', {
                     'name': name,
                     'code': code,
-                    'orchestrator_id': orchestrator
+                    'ui_path_orchestrator_id': orchestrator
                   }).then(function (response) {
                     if (response.data) {
                       _this5.id = response.data.id;
@@ -96008,6 +96543,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Layout */ "./resources/js/models/Layout.js");
+/* harmony import */ var flatted_esm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flatted/esm */ "./node_modules/flatted/esm/index.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -96019,6 +96555,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -96147,18 +96684,22 @@ function () {
       return updateWatchedAutomatedProcessesTable;
     }()
   }, {
-    key: "getAlertTriggersDefaultAlertTriggerDetails",
+    key: "updateAlertTriggersTable",
     value: function () {
-      var _getAlertTriggersDefaultAlertTriggerDetails = _asyncToGenerator(
+      var _updateAlertTriggersTable = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(watchedAutomatedProcessId) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var _this4 = this;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 _context4.prev = 0;
                 return _context4.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/alert-trigger/default-alert-trigger-details/".concat(watchedAutomatedProcessId)));
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]('/configuration/alert-trigger/table').then(function (response) {
+                    _this4.alertTriggersTable = response.data;
+                  }));
                 }));
 
               case 4:
@@ -96174,25 +96715,25 @@ function () {
         }, _callee4, null, [[0, 4]]);
       }));
 
-      function getAlertTriggersDefaultAlertTriggerDetails(_x) {
-        return _getAlertTriggersDefaultAlertTriggerDetails.apply(this, arguments);
+      function updateAlertTriggersTable() {
+        return _updateAlertTriggersTable.apply(this, arguments);
       }
 
-      return getAlertTriggersDefaultAlertTriggerDetails;
+      return updateAlertTriggersTable;
     }()
   }, {
-    key: "getAlertTriggersDefaultAlertTriggerDefinition",
+    key: "getAlertTriggersDefaultDetails",
     value: function () {
-      var _getAlertTriggersDefaultAlertTriggerDefinition = _asyncToGenerator(
+      var _getAlertTriggersDefaultDetails = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(rank) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(watchedAutomatedProcessId) {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 _context5.prev = 0;
                 return _context5.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/alert-trigger/default-alert-trigger-definition/".concat(rank)));
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/alert-trigger/default-alert-trigger-details/".concat(watchedAutomatedProcessId)));
                 }));
 
               case 4:
@@ -96208,48 +96749,153 @@ function () {
         }, _callee5, null, [[0, 4]]);
       }));
 
-      function getAlertTriggersDefaultAlertTriggerDefinition(_x2) {
-        return _getAlertTriggersDefaultAlertTriggerDefinition.apply(this, arguments);
+      function getAlertTriggersDefaultDetails(_x) {
+        return _getAlertTriggersDefaultDetails.apply(this, arguments);
       }
 
-      return getAlertTriggersDefaultAlertTriggerDefinition;
+      return getAlertTriggersDefaultDetails;
     }()
   }, {
-    key: "getAlertTriggersDefaultAlertTriggerRule",
+    key: "getAlertTriggersDefaultDefinition",
     value: function () {
-      var _getAlertTriggersDefaultAlertTriggerRule = _asyncToGenerator(
+      var _getAlertTriggersDefaultDefinition = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(watchedAutomatedProcess, rank) {
-        var type,
-            _args6 = arguments;
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(rank) {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
-                type = _args6.length > 2 && _args6[2] !== undefined ? _args6[2] : 'none';
-                _context6.prev = 1;
+                _context6.prev = 0;
                 return _context6.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/alert-trigger/default-alert-trigger-rule/".concat(watchedAutomatedProcess, "/").concat(rank, "/").concat(type)));
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/alert-trigger/default-alert-trigger-definition/".concat(rank)));
                 }));
 
-              case 5:
-                _context6.prev = 5;
-                _context6.t0 = _context6["catch"](1);
+              case 4:
+                _context6.prev = 4;
+                _context6.t0 = _context6["catch"](0);
                 console.log(_context6.t0);
 
-              case 8:
+              case 7:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[1, 5]]);
+        }, _callee6, null, [[0, 4]]);
       }));
 
-      function getAlertTriggersDefaultAlertTriggerRule(_x3, _x4) {
-        return _getAlertTriggersDefaultAlertTriggerRule.apply(this, arguments);
+      function getAlertTriggersDefaultDefinition(_x2) {
+        return _getAlertTriggersDefaultDefinition.apply(this, arguments);
       }
 
-      return getAlertTriggersDefaultAlertTriggerRule;
+      return getAlertTriggersDefaultDefinition;
+    }()
+  }, {
+    key: "getAlertTriggersDefaultRule",
+    value: function () {
+      var _getAlertTriggersDefaultRule = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7(watchedAutomatedProcess, rank) {
+        var type,
+            _args7 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                type = _args7.length > 2 && _args7[2] !== undefined ? _args7[2] : 'none';
+                _context7.prev = 1;
+                return _context7.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/alert-trigger/default-alert-trigger-rule/".concat(watchedAutomatedProcess, "/").concat(rank, "/").concat(type)));
+                }));
+
+              case 5:
+                _context7.prev = 5;
+                _context7.t0 = _context7["catch"](1);
+                console.log(_context7.t0);
+
+              case 8:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, null, [[1, 5]]);
+      }));
+
+      function getAlertTriggersDefaultRule(_x3, _x4) {
+        return _getAlertTriggersDefaultRule.apply(this, arguments);
+      }
+
+      return getAlertTriggersDefaultRule;
+    }()
+  }, {
+    key: "getAlertTriggersDefaultSummary",
+    value: function () {
+      var _getAlertTriggersDefaultSummary = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8(watchedAutomatedProcess, title, alertDefinitions) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _context8.prev = 0;
+                return _context8.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["post"]("/configuration/alert-trigger/default-alert-trigger-summary/".concat(watchedAutomatedProcess), {
+                    title: title,
+                    definitions: alertDefinitions
+                  }));
+                }));
+
+              case 4:
+                _context8.prev = 4;
+                _context8.t0 = _context8["catch"](0);
+                console.log(_context8.t0);
+
+              case 7:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, null, [[0, 4]]);
+      }));
+
+      function getAlertTriggersDefaultSummary(_x5, _x6, _x7) {
+        return _getAlertTriggersDefaultSummary.apply(this, arguments);
+      }
+
+      return getAlertTriggersDefaultSummary;
+    }()
+  }, {
+    key: "getAlertTriggersCreationConfirmation",
+    value: function () {
+      var _getAlertTriggersCreationConfirmation = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9(alertTrigger) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                _context9.prev = 0;
+                return _context9.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["post"]("/configuration/alert-trigger/alert-trigger-creation-confirmation/".concat(alertTrigger)));
+                }));
+
+              case 4:
+                _context9.prev = 4;
+                _context9.t0 = _context9["catch"](0);
+                console.log(_context9.t0);
+
+              case 7:
+              case "end":
+                return _context9.stop();
+            }
+          }
+        }, _callee9, null, [[0, 4]]);
+      }));
+
+      function getAlertTriggersCreationConfirmation(_x8) {
+        return _getAlertTriggersCreationConfirmation.apply(this, arguments);
+      }
+
+      return getAlertTriggersCreationConfirmation;
     }()
   }]);
 
@@ -96384,37 +97030,83 @@ function () {
       return updateTiles;
     }()
   }, {
-    key: "updateClients",
+    key: "updateQuickBoard",
     value: function () {
-      var _updateClients = _asyncToGenerator(
+      var _updateQuickBoard = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var _this2 = this;
 
+        var url;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
+                url = '';
+                url = "/dashboard/quick-board";
+
+                if (this.clientID) {
+                  url = "".concat(url, "/").concat(this.clientID);
+                }
+
                 return _context2.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"](url).then(function (response) {
+                    _this2.quickBoard = response.data;
+                  }));
+                }));
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 7]]);
+      }));
+
+      function updateQuickBoard() {
+        return _updateQuickBoard.apply(this, arguments);
+      }
+
+      return updateQuickBoard;
+    }()
+  }, {
+    key: "updateClients",
+    value: function () {
+      var _updateClients = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var _this3 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                return _context3.abrupt("return", new Promise(function (resolve, reject) {
                   resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/dashboard/client/elements").then(function (response) {
-                    _this2.clients = Object.keys(response.data).map(function (key) {
+                    _this3.clients = Object.keys(response.data).map(function (key) {
                       return [Number(key), response.data[key]];
                     });
                   }));
                 }));
 
               case 4:
-                _context2.prev = 4;
-                _context2.t0 = _context2["catch"](0);
-                console.log(_context2.t0);
+                _context3.prev = 4;
+                _context3.t0 = _context3["catch"](0);
+                console.log(_context3.t0);
 
               case 7:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, null, [[0, 4]]);
+        }, _callee3, null, [[0, 4]]);
       }));
 
       function updateClients() {
@@ -96428,15 +97120,15 @@ function () {
     value: function () {
       var _updateAlertsTable = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(closed, id) {
-        var _this3 = this;
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(closed, id) {
+        var _this4 = this;
 
         var url;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                _context3.prev = 0;
+                _context4.prev = 0;
                 closed = closed ? 1 : 0;
                 url = "/dashboard/alert/table/".concat(closed, "/").concat(id);
 
@@ -96448,27 +97140,27 @@ function () {
                   }
                 }
 
-                return _context3.abrupt("return", new Promise(function (resolve, reject) {
+                return _context4.abrupt("return", new Promise(function (resolve, reject) {
                   resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"](url).then(function (response) {
                     if (!closed) {
-                      _this3.pendingAlertsTable = response.data;
+                      _this4.pendingAlertsTable = response.data;
                     } else {
-                      _this3.closedAlertsTable = response.data;
+                      _this4.closedAlertsTable = response.data;
                     }
                   }));
                 }));
 
               case 7:
-                _context3.prev = 7;
-                _context3.t0 = _context3["catch"](0);
-                console.log(_context3.t0);
+                _context4.prev = 7;
+                _context4.t0 = _context4["catch"](0);
+                console.log(_context4.t0);
 
               case 10:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, this, [[0, 7]]);
+        }, _callee4, this, [[0, 7]]);
       }));
 
       function updateAlertsTable(_x, _x2) {
@@ -96541,7 +97233,7 @@ function () {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                return _context.abrupt("return", Promise.all([this.updateMenu(), this.updateSidebar()]));
+                return _context.abrupt("return", Promise.all([this.updateMenu(), this.updateSidebar(), this.updateHero()]));
 
               case 4:
                 _context.prev = 4;
@@ -96637,6 +97329,44 @@ function () {
       }
 
       return updateSidebar;
+    }()
+  }, {
+    key: "updateHero",
+    value: function () {
+      var _updateHero = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var _this3 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                return _context4.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]('/layout/hero').then(function (response) {
+                    _this3.hero = response.data;
+                  }));
+                }));
+
+              case 4:
+                _context4.prev = 4;
+                _context4.t0 = _context4["catch"](0);
+                console.log(_context4.t0);
+
+              case 7:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 4]]);
+      }));
+
+      function updateHero() {
+        return _updateHero.apply(this, arguments);
+      }
+
+      return updateHero;
     }()
   }]);
 
@@ -97935,11 +98665,12 @@ var removeIgnoranceFormModal = function removeIgnoranceFormModal() {
 /*!************************************!*\
   !*** ./resources/js/views/base.js ***!
   \************************************/
-/*! exports provided: selectors, elements, update, htmlToElement, htmlToElements, renderLoader, clearLoader, animateCSS, showModal, closeModal, swalWithBulmaButtons, isDashboardRelatedURL, getClientIDFromURL, isUserRelatedURL, isConfigurationOrchestratorRelatedURL, isConfigurationClientRelatedURL, isConfigurationWatchedAutomatedProcessRelatedURL, isConfigurationAlertTriggerRelatedURL, validURL, toggleSuccessDangerState, toggleFormControlTooltip, removeStates, removeSelectOptions, isNormalInteger, timeStringToFloat, isValidLuceneString */
+/*! exports provided: strings, selectors, elements, update, htmlToElement, htmlToElements, renderLoader, clearLoader, animateCSS, showModal, closeModal, swalWithBulmaButtons, isDashboardRelatedURL, getClientIDFromURL, isUserRelatedURL, isConfigurationOrchestratorRelatedURL, isConfigurationClientRelatedURL, isConfigurationWatchedAutomatedProcessRelatedURL, isConfigurationAlertTriggerRelatedURL, validURL, toggleSuccessDangerState, toggleFormControlTooltip, removeStates, removeSelectOptions, isNormalInteger, timeStringToFloat, isValidLuceneString */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "strings", function() { return strings; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectors", function() { return selectors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "elements", function() { return elements; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "update", function() { return update; });
@@ -97972,7 +98703,18 @@ __webpack_require__.r(__webpack_exports__);
 
 var luceneParser = __webpack_require__(/*! lucene-query-parser */ "./node_modules/lucene-query-parser/lib/lucene-query-parser.js");
 
+var strings = {
+  shutdownAlertTriggersFormModalID: 'shutdown-alert-triggers-modal',
+  reactivateAlertTriggersFormModalID: 'reactivate-alert-triggers-modal'
+};
 var selectors = {
+  app: '#app',
+  shutdownAlertTriggersButton: 'button#shutdown-alert-triggers',
+  shutdownAlertTriggersButtonChildren: 'button#shutdown-alert-triggers *',
+  shutdownAlertTriggersReasonTextarea: 'form.shutdown-alert-triggers-form textarea#reason',
+  reactivateAlertTriggersButton: 'button#reactivate-alert-triggers',
+  reactivateAlertTriggersButtonChildren: 'button#reactivate-alert-triggers *',
+  reactivateAlertTriggersReasonTextarea: 'form.reactivate-alert-triggers-form textarea#reason',
   closeModalTriggers: '.modal button.delete, .modal button.cancel, .modal button.cancel *',
   validateModalButton: '.modal button.validate',
   validateModalButtonChildren: '.modal button.validate *',
@@ -97983,7 +98725,9 @@ var selectors = {
   dateTimeFooterCancelButton: 'button.datetimepicker-footer-cancel',
   formControlWrapper: '.control'
 };
-var elements = {};
+var elements = {
+  app: document.querySelector(selectors.app)
+};
 var update = function update(old, markup) {
   if (old) {
     var node = htmlToElement(markup);
@@ -98297,6 +99041,7 @@ var selectors = {
       title: '.alert-definition-item .title-level p.title',
       titleIcon: '.alert-definition-item .title-level span.icon',
       titleRank: 'span.trigger-details--alert-definition--rank',
+      validityIcon: '.alert-definition-item .title-level .level-right span.icon',
       addButton: 'button.trigger-details--alert-definition--add-button',
       addButtonChildren: 'button.trigger-details--alert-definition--add-button *',
       deleteButton: 'button.trigger-details--alert-definition--delete-button',
@@ -98332,6 +99077,17 @@ var selectors = {
           lowerCountInput: 'input.trigger-details--alert-definition--elastic-search-query-rule--lower-count-input',
           higherCountInput: 'input.trigger-details--alert-definition--elastic-search-query-rule--higher-count-input'
         },
+        triggeringDays: {
+          title: 'div.triggering-days-section .title-level p.title',
+          titleIcon: 'div.triggering-days-section .title-level span.icon',
+          mondayCheckbox: 'input.trigger-details--alert-definition--rule--triggering-day-monday',
+          tuesdayCheckbox: 'input.trigger-details--alert-definition--rule--triggering-day-tuesday',
+          wednesdayCheckbox: 'input.trigger-details--alert-definition--rule--triggering-day-wednesday',
+          thursdayCheckbox: 'input.trigger-details--alert-definition--rule--triggering-day-thursday',
+          fridayCheckbox: 'input.trigger-details--alert-definition--rule--triggering-day-friday',
+          saturdayCheckbox: 'input.trigger-details--alert-definition--rule--triggering-day-saturday',
+          sundayCheckbox: 'input.trigger-details--alert-definition--rule--triggering-day-sunday'
+        },
 
         /*kibanaMetricVisualizationControls: {
             metricVisualizationSelect: 'select.trigger-details--alert-definition--kibana-metric-visualization-rule--metric-visualization-select',
@@ -98360,6 +99116,11 @@ var selectors = {
         }
       }
     }
+  },
+  confirmation: {
+    notification: '.notification',
+    activateButton: 'button.trigger-details--confirmation--activate-button',
+    activateButtonChildren: 'button.trigger-details--confirmation--activate-button *'
   }
 };
 var elements = {
@@ -98405,12 +99166,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _models_Configuration__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../models/Configuration */ "./resources/js/models/Configuration.js");
 /* harmony import */ var _models_Client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../models/Client */ "./resources/js/models/Client.js");
 /* harmony import */ var _models_WatchedAutomatedProcess__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../models/WatchedAutomatedProcess */ "./resources/js/models/WatchedAutomatedProcess.js");
-/* harmony import */ var _models_AlertDefinition__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../models/AlertDefinition */ "./resources/js/models/AlertDefinition.js");
-/* harmony import */ var _models_AlertRule__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../models/AlertRule */ "./resources/js/models/AlertRule.js");
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../base */ "./resources/js/views/base.js");
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./base */ "./resources/js/views/configuration/alert-trigger/base.js");
-/* harmony import */ var _view__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./view */ "./resources/js/views/configuration/alert-trigger/view.js");
-/* harmony import */ var _layout_index__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../layout/index */ "./resources/js/views/layout/index.js");
+/* harmony import */ var _models_AlertTrigger__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../models/AlertTrigger */ "./resources/js/models/AlertTrigger.js");
+/* harmony import */ var _models_AlertTriggerDefinition__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../models/AlertTriggerDefinition */ "./resources/js/models/AlertTriggerDefinition.js");
+/* harmony import */ var _models_AlertTriggerRule__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../models/AlertTriggerRule */ "./resources/js/models/AlertTriggerRule.js");
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../base */ "./resources/js/views/base.js");
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./base */ "./resources/js/views/configuration/alert-trigger/base.js");
+/* harmony import */ var _view__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./view */ "./resources/js/views/configuration/alert-trigger/view.js");
+/* harmony import */ var _layout_index__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../layout/index */ "./resources/js/views/layout/index.js");
 
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -98436,12 +99198,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 var BS_TRIGGER_DETAILS_STEP_ACCESS_REFUSED_BY_USER = 'trigger-details-step-access-refused-by-user';
 var bulmaStepsHiddenErrors = [BS_TRIGGER_DETAILS_STEP_ACCESS_REFUSED_BY_USER];
 var configuration = new _models_Configuration__WEBPACK_IMPORTED_MODULE_3__["default"]('configuration.alert-trigger.index');
 var processSelection = {
-  clientSelect: _base__WEBPACK_IMPORTED_MODULE_9__["elements"].processSelection.clientSelect,
-  watchedProcessSelect: _base__WEBPACK_IMPORTED_MODULE_9__["elements"].processSelection.watchedProcessSelect
+  clientSelect: _base__WEBPACK_IMPORTED_MODULE_10__["elements"].processSelection.clientSelect,
+  watchedProcessSelect: _base__WEBPACK_IMPORTED_MODULE_10__["elements"].processSelection.watchedProcessSelect
 };
 var details = {
   alertDefinitions: {
@@ -98463,12 +99226,22 @@ var details = {
 
         return item;
       });
+    },
+    areValid: function areValid() {
+      var valid = true;
+      details.alertDefinitions.list.forEach(function (alertDefinition) {
+        valid = valid && alertDefinition.isValid();
+      });
+      return valid;
     }
   }
 };
 var init = function init() {
   try {
-    var steps = bulma_steps__WEBPACK_IMPORTED_MODULE_2___default.a.attach(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].steps, {
+    setInterval(function () {
+      _layout_index__WEBPACK_IMPORTED_MODULE_12__["update"](configuration.layout);
+    }, 45000);
+    var steps = bulma_steps__WEBPACK_IMPORTED_MODULE_2___default.a.attach(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].steps, {
       onShow: function onShow(id) {
         switch (id) {
           case 0:
@@ -98484,43 +99257,39 @@ var init = function init() {
             }
 
             break;
+
+          case 2:
+            loadDefaultAlertTriggerSummary(processSelection.watchedProcessSelect.value);
+            break;
+
+          case 3:
+            create().then(function (response) {
+              initAlertTriggerConfirmation();
+            });
+            break;
         }
       },
-      beforeNext: function () {
-        var _beforeNext = _asyncToGenerator(
-        /*#__PURE__*/
-        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(id) {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  _context.t0 = id;
-                  _context.next = _context.t0 === 0 ? 3 : 4;
-                  break;
+      beforeNext: function beforeNext(id) {
+        switch (id) {
+          case 0:
+            return validateProcessSelectionForm();
+            break;
 
-                case 3:
-                  return _context.abrupt("return", validateProcessSelectionForm());
-
-                case 4:
-                case "end":
-                  return _context.stop();
-              }
-            }
-          }, _callee);
-        }));
-
-        function beforeNext(_x) {
-          return _beforeNext.apply(this, arguments);
+          case 1:
+            return validateTriggerDetailsForm();
+            break;
         }
-
-        return beforeNext;
-      }(),
+      },
       onError: function onError(error) {
         if (!bulmaStepsHiddenErrors.includes(error)) {
           toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error(error, null, {
-            positionClass: 'toast-bottom-center'
+            positionClass: 'toast-bottom-right'
           });
         }
+      },
+      onFinish: function onFinish() {
+        console.log('coucou fini');
+        _base__WEBPACK_IMPORTED_MODULE_10__["elements"].steps.querySelector('.steps-action button[data-nav="previous"]').disabled = true;
       }
     });
     initProcessSelection();
@@ -98536,12 +99305,12 @@ var initProcessSelection = function initProcessSelection() {
     function () {
       var _ref = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context.prev = _context.next) {
               case 0:
-                _context2.next = 2;
+                _context.next = 2;
                 return loadProcesses(e);
 
               case 2:
@@ -98549,13 +99318,13 @@ var initProcessSelection = function initProcessSelection() {
 
               case 3:
               case "end":
-                return _context2.stop();
+                return _context.stop();
             }
           }
-        }, _callee2);
+        }, _callee);
       }));
 
-      return function (_x2) {
+      return function (_x) {
         return _ref.apply(this, arguments);
       };
     }());
@@ -98564,40 +99333,40 @@ var initProcessSelection = function initProcessSelection() {
     function () {
       var _ref2 = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(e) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
         var alert;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 validateProcessSelectionForm(e);
 
-                if (!(previousWatchedAutomatedProcess && previousWatchedAutomatedProcess.id !== processSelection.watchedProcessSelect.value && details.alertDefinitions.list.length > 0)) {
-                  _context3.next = 5;
+                if (!(previousWatchedAutomatedProcess && processSelection.watchedProcessSelect.value !== '0' && previousWatchedAutomatedProcess.id !== processSelection.watchedProcessSelect.value && details.alertDefinitions.list.length > 0)) {
+                  _context2.next = 5;
                   break;
                 }
 
-                _context3.next = 4;
-                return _base__WEBPACK_IMPORTED_MODULE_8__["swalWithBulmaButtons"].fire({
+                _context2.next = 4;
+                return _base__WEBPACK_IMPORTED_MODULE_9__["swalWithBulmaButtons"].fire({
                   title: 'New automated watched process selection detected',
-                  text: "You selected a new automated watched process but you already defined ".concat(details.alertDefinitions.list.length, "\n                    trigger for process ").concat(previousWatchedAutomatedProcess.data.name, " of client ").concat(previousClient.data.name, ".\n                    Select the previously watched automated process or all changes will be lost!"),
+                  text: "You selected a new automated watched process but you already defined ".concat(details.alertDefinitions.list.length, "\n                    trigger").concat(details.alertDefinitions.list.length > 1 ? 's' : '', " for process ").concat(previousWatchedAutomatedProcess.data.name, "\n                    of client ").concat(previousClient.data.name, ".\n                    Select the previously watched automated process or all changes will be lost!"),
                   icon: 'warning',
                   showCancelButton: false,
                   confirmButtonText: 'I got it!'
                 });
 
               case 4:
-                alert = _context3.sent;
+                alert = _context2.sent;
 
               case 5:
               case "end":
-                return _context3.stop();
+                return _context2.stop();
             }
           }
-        }, _callee3);
+        }, _callee2);
       }));
 
-      return function (_x3) {
+      return function (_x2) {
         return _ref2.apply(this, arguments);
       };
     }());
@@ -98608,91 +99377,84 @@ var initProcessSelection = function initProcessSelection() {
 
 var initAlertTriggerDetails = function initAlertTriggerDetails() {
   try {
-    var title = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.title);
+    var title = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.title);
     title.addEventListener('change', validateTriggerDetailsForm);
     title.addEventListener('keyup', validateTriggerDetailsForm);
-    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.section).addEventListener('click', function (e) {
+    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.section).addEventListener('click', function (e) {
       var target = e.target;
 
-      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.addButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.addButtonChildren))) {
-        addDefaultAlertTriggerAlertDefinition();
-        console.log(details);
+      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.addButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.addButtonChildren))) {
+        addDefaultAlertTriggerDefinition();
       }
 
-      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.deleteButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.deleteButtonChildren))) {
-        var item = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.item);
+      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.deleteButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.deleteButtonChildren))) {
+        var item = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.item);
         var rank = parseInt(item.dataset.rank);
-        _view__WEBPACK_IMPORTED_MODULE_10__["details"].deleteAlertDefinition(item);
+        _view__WEBPACK_IMPORTED_MODULE_11__["details"].deleteDefinition(item);
         details.alertDefinitions.remove(rank);
-        _view__WEBPACK_IMPORTED_MODULE_10__["details"].updateAlertDefinitionsCount(details.alertDefinitions.list.length);
-        console.log(details);
+        _view__WEBPACK_IMPORTED_MODULE_11__["details"].updateDefinitionsCount(details.alertDefinitions.list.length);
       }
 
-      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.addButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.addButtonChildren))) {
-        var _item = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.item);
+      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.addButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.addButtonChildren))) {
+        var _item = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.item);
 
         var _rank = parseInt(_item.dataset.rank);
 
         var alertDefinition = details.alertDefinitions.find(_rank);
         addDefaultAlertTriggerRule(processSelection.watchedProcessSelect.value, alertDefinition, _item);
-        console.log(details);
       }
 
-      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.deleteButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.deleteButtonChildren))) {
-        var alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.item);
+      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.deleteButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.deleteButtonChildren))) {
+        var alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.item);
         var alertDefinitionRank = parseInt(alertDefinitionItem.dataset.rank);
-        var ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.item);
+        var ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.item);
         var ruleItemRank = parseInt(ruleItem.dataset.rank);
 
         var _alertDefinition = details.alertDefinitions.find(alertDefinitionRank);
 
-        _view__WEBPACK_IMPORTED_MODULE_10__["details"].deleteAlertRule(alertDefinitionItem, ruleItem);
+        _view__WEBPACK_IMPORTED_MODULE_11__["details"].deleteRule(alertDefinitionItem, ruleItem);
 
         _alertDefinition.removeRule(ruleItemRank);
-
-        console.log(details);
       }
     });
-    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.section).addEventListener('change', function (e) {
+    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.section).addEventListener('change', function (e) {
       var target = e.target;
 
-      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.levelSelect)) {
+      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.levelSelect)) {
         var level = target.value;
-        var item = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.item);
+        var item = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.item);
         var rank = parseInt(item.dataset.rank);
-        _view__WEBPACK_IMPORTED_MODULE_10__["details"].updateAlertDefinitionLevel(item, level);
+        _view__WEBPACK_IMPORTED_MODULE_11__["details"].updateDefinitionLevel(item, level);
         var alertDefinition = details.alertDefinitions.find(rank);
         alertDefinition.level = level;
-        console.log(details);
       }
 
-      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.typeSelect)) {
+      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.typeSelect)) {
         var type = target.value;
-        var alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.item);
+        var alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.item);
         var alertDefinitionRank = parseInt(alertDefinitionItem.dataset.rank);
-        var ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.item);
+        var ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.item);
         var ruleItemRank = parseInt(ruleItem.dataset.rank);
         var rule = details.alertDefinitions.find(alertDefinitionRank).findRule(ruleItemRank);
         updateAlertTriggerRuleType(processSelection.watchedProcessSelect.value, rule, ruleItem, type).then(function (response) {
-          var newRuleItem = _base__WEBPACK_IMPORTED_MODULE_9__["elements"].details.alertDefinition.rule.item(alertDefinitionItem, ruleItemRank);
+          var newRuleItem = _base__WEBPACK_IMPORTED_MODULE_10__["elements"].details.alertDefinition.rule.item(alertDefinitionItem, ruleItemRank);
 
           if (type !== 'none') {
-            var timeSlotInput = newRuleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.timeSlotInput);
+            var timeSlotInput = newRuleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.timeSlotInput);
             timeSlotInput.bulmaCalendar.on('select clear', function () {
               validateAlertTriggerRuleForm(rule, newRuleItem);
             });
-            newRuleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_8__["selectors"].dateTimeFooterCancelButton).addEventListener('click', validateAlertTriggerRuleForm(rule, newRuleItem));
+            newRuleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].dateTimeFooterCancelButton).addEventListener('click', validateAlertTriggerRuleForm(rule, newRuleItem));
           }
         });
-        console.log(details);
       }
 
-      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.parameter)) {
-        var _alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.item);
+      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.parameter)) {
+        var _alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.item);
 
         var _alertDefinitionRank = parseInt(_alertDefinitionItem.dataset.rank);
 
-        var _ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.item);
+        var _ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.item);
 
         var _ruleItemRank = parseInt(_ruleItem.dataset.rank);
 
@@ -98701,21 +99463,19 @@ var initAlertTriggerDetails = function initAlertTriggerDetails() {
         var _rule = _alertDefinition2.findRule(_ruleItemRank);
 
         validateAlertTriggerRuleForm(_rule, _ruleItem);
-        console.log(details);
       }
     });
-    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.section).addEventListener('keyup', function (e) {
+    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.section).addEventListener('keyup', function (e) {
       var target = e.target;
 
-      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.parameter)) {
-        var alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.item);
+      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.parameter)) {
+        var alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.item);
         var alertDefinitionRank = parseInt(alertDefinitionItem.dataset.rank);
-        var ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.item);
+        var ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.item);
         var ruleItemRank = parseInt(ruleItem.dataset.rank);
         var alertDefinition = details.alertDefinitions.find(alertDefinitionRank);
         var rule = alertDefinition.findRule(ruleItemRank);
         validateAlertTriggerRuleForm(rule, ruleItem);
-        console.log(details);
       }
     });
   } catch (error) {
@@ -98723,11 +99483,43 @@ var initAlertTriggerDetails = function initAlertTriggerDetails() {
   }
 };
 
+var initAlertTriggerConfirmation = function initAlertTriggerConfirmation() {
+  try {
+    var activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].activeStepContent);
+    activeStepContent.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].confirmation.notification).addEventListener('click', function (e) {
+      var target = e.target;
+
+      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].confirmation.activateButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].confirmation.activateButtonChildren))) {
+        var button = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].confirmation.activateButton);
+
+        _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](button);
+
+        try {
+          var alertTrigger = new _models_AlertTrigger__WEBPACK_IMPORTED_MODULE_6__["default"](button.dataset.id);
+          alertTrigger.activate().then(function (response) {
+            updateTable();
+
+            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](button);
+
+            button.disabled = true;
+          });
+        } catch (error) {
+          _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](button);
+
+          console.log(error);
+        }
+      }
+    });
+  } catch (error) {
+    console.log("Unable to init trigger confirmation step: ".concat(error));
+  }
+};
+
 var validateProcessSelectionForm = function validateProcessSelectionForm() {
   var errors = [];
   var clientSelectValid = !(processSelection.clientSelect.value === "0");
 
-  _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](processSelection.clientSelect.parentNode, clientSelectValid);
+  _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](processSelection.clientSelect.parentNode, clientSelectValid);
 
   if (!clientSelectValid) {
     errors.push('You need to select a Client');
@@ -98736,26 +99528,37 @@ var validateProcessSelectionForm = function validateProcessSelectionForm() {
   var watchedProcessSelectValid = !(processSelection.watchedProcessSelect.value === "0");
 
   if (!processSelection.watchedProcessSelect.disabled) {
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](processSelection.watchedProcessSelect.parentNode, watchedProcessSelectValid);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](processSelection.watchedProcessSelect.parentNode, watchedProcessSelectValid);
 
     if (!watchedProcessSelectValid) {
       errors.push('You need to select a Watched process');
     }
   } else {
-    _base__WEBPACK_IMPORTED_MODULE_8__["removeStates"](processSelection.watchedProcessSelect.parentNode);
+    _base__WEBPACK_IMPORTED_MODULE_9__["removeStates"](processSelection.watchedProcessSelect.parentNode);
   }
 
   return errors;
 };
 
-var validateTriggerDetailsForm = function validateTriggerDetailsForm(e) {
+var validateTriggerDetailsForm = function validateTriggerDetailsForm() {
   var errors = [];
-  var titleValid = !(e.target.value.trim() === '');
+  var title = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.title);
+  var titleValid = !(title.value.trim() === '');
 
-  _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](e.target, titleValid);
+  _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](title, titleValid);
 
   if (!titleValid) {
-    errors.push('You need to enter a Title');
+    errors.push('You need to enter a title');
+  }
+
+  if (details.alertDefinitions.list.length === 0) {
+    errors.push('You need to add at least 1 alert definition');
+  }
+
+  var alertDefinitionsValid = details.alertDefinitions.areValid();
+
+  if (!alertDefinitionsValid) {
+    errors.push('You need to fix errors on all alert definitions');
   }
 
   return errors;
@@ -98766,62 +99569,62 @@ var loadProcesses =
 function () {
   var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(e) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(e) {
     var activeStepContent, id, client;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
       while (1) {
-        switch (_context4.prev = _context4.next) {
+        switch (_context3.prev = _context3.next) {
           case 0:
-            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].activeStepContent);
-            _context4.prev = 1;
+            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].activeStepContent);
+            _context3.prev = 1;
 
-            _base__WEBPACK_IMPORTED_MODULE_8__["renderLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](activeStepContent);
 
-            _base__WEBPACK_IMPORTED_MODULE_8__["removeSelectOptions"](processSelection.watchedProcessSelect, true);
+            _base__WEBPACK_IMPORTED_MODULE_9__["removeSelectOptions"](processSelection.watchedProcessSelect, true);
 
             id = e.target.value.trim();
 
             if (!(id !== "0")) {
-              _context4.next = 10;
+              _context3.next = 10;
               break;
             }
 
             client = new _models_Client__WEBPACK_IMPORTED_MODULE_4__["default"](id);
-            return _context4.abrupt("return", new Promise(function (resolve, reject) {
+            return _context3.abrupt("return", new Promise(function (resolve, reject) {
               resolve(client.get().then(function (response) {
                 var processes = client.data.watched_automated_processes;
-                _view__WEBPACK_IMPORTED_MODULE_10__["processSelection"].updateProcesses(processes);
+                _view__WEBPACK_IMPORTED_MODULE_11__["processSelection"].updateProcesses(processes);
 
-                _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+                _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
               }));
             }));
 
           case 10:
             processSelection.watchedProcessSelect.disabled = true;
 
-            _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
 
           case 12:
-            _context4.next = 18;
+            _context3.next = 18;
             break;
 
           case 14:
-            _context4.prev = 14;
-            _context4.t0 = _context4["catch"](1);
+            _context3.prev = 14;
+            _context3.t0 = _context3["catch"](1);
 
-            _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
 
-            console.log(_context4.t0);
+            console.log(_context3.t0);
 
           case 18:
           case "end":
-            return _context4.stop();
+            return _context3.stop();
         }
       }
-    }, _callee4, null, [[1, 14]]);
+    }, _callee3, null, [[1, 14]]);
   }));
 
-  return function loadProcesses(_x4) {
+  return function loadProcesses(_x3) {
     return _ref3.apply(this, arguments);
   };
 }();
@@ -98834,109 +99637,129 @@ var loadDefaultAlertTriggerDetails =
 function () {
   var _ref4 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(watchedAutomatedProcessId) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(watchedAutomatedProcessId) {
     var activeStepContent;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
       while (1) {
-        switch (_context6.prev = _context6.next) {
+        switch (_context5.prev = _context5.next) {
           case 0:
-            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].activeStepContent);
-            _context6.prev = 1;
+            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].activeStepContent);
+            _context5.prev = 1;
 
-            _base__WEBPACK_IMPORTED_MODULE_8__["renderLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](activeStepContent);
 
-            return _context6.abrupt("return", new Promise(function (resolve, reject) {
-              resolve(configuration.getAlertTriggersDefaultAlertTriggerDetails(watchedAutomatedProcessId).then(
+            return _context5.abrupt("return", new Promise(function (resolve, reject) {
+              resolve(configuration.getAlertTriggersDefaultDetails(watchedAutomatedProcessId).then(
               /*#__PURE__*/
               function () {
                 var _ref5 = _asyncToGenerator(
                 /*#__PURE__*/
-                _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(response) {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+                _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(response) {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
                     while (1) {
-                      switch (_context5.prev = _context5.next) {
+                      switch (_context4.prev = _context4.next) {
                         case 0:
-                          _view__WEBPACK_IMPORTED_MODULE_10__["updateActiveStepContent"](response.data);
+                          _view__WEBPACK_IMPORTED_MODULE_11__["updateActiveStepContent"](response.data);
                           previousWatchedAutomatedProcess = new _models_WatchedAutomatedProcess__WEBPACK_IMPORTED_MODULE_5__["default"](watchedAutomatedProcessId);
-                          _context5.next = 4;
+                          _context4.next = 4;
                           return previousWatchedAutomatedProcess.get();
 
                         case 4:
                           previousClient = new _models_Client__WEBPACK_IMPORTED_MODULE_4__["default"](previousWatchedAutomatedProcess.data.client_id);
-                          _context5.next = 7;
+                          _context4.next = 7;
                           return previousClient.get();
 
                         case 7:
-                          _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+                          _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
 
                         case 8:
                         case "end":
-                          return _context5.stop();
+                          return _context4.stop();
                       }
                     }
-                  }, _callee5);
+                  }, _callee4);
                 }));
 
-                return function (_x6) {
+                return function (_x5) {
                   return _ref5.apply(this, arguments);
                 };
               }()));
             }));
 
           case 6:
-            _context6.prev = 6;
-            _context6.t0 = _context6["catch"](1);
+            _context5.prev = 6;
+            _context5.t0 = _context5["catch"](1);
 
-            _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
 
-            console.log(_context6.t0);
+            console.log(_context5.t0);
 
           case 10:
           case "end":
-            return _context6.stop();
+            return _context5.stop();
         }
       }
-    }, _callee6, null, [[1, 6]]);
+    }, _callee5, null, [[1, 6]]);
   }));
 
-  return function loadDefaultAlertTriggerDetails(_x5) {
+  return function loadDefaultAlertTriggerDetails(_x4) {
     return _ref4.apply(this, arguments);
   };
 }();
 
-var addDefaultAlertTriggerAlertDefinition =
+var summaryAlertTrigger;
+
+var loadDefaultAlertTriggerSummary =
 /*#__PURE__*/
 function () {
   var _ref6 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7(watchedAutomatedProcessId) {
     var activeStepContent;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
       while (1) {
         switch (_context7.prev = _context7.next) {
           case 0:
-            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].activeStepContent);
+            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].activeStepContent);
             _context7.prev = 1;
 
-            _base__WEBPACK_IMPORTED_MODULE_8__["renderLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](activeStepContent);
 
             return _context7.abrupt("return", new Promise(function (resolve, reject) {
-              var rank = details.alertDefinitions.list.length + 1;
-              resolve(configuration.getAlertTriggersDefaultAlertTriggerDefinition(rank).then(function (response) {
-                _view__WEBPACK_IMPORTED_MODULE_10__["details"].addAlertDefinition(response.data);
-                _view__WEBPACK_IMPORTED_MODULE_10__["details"].updateAlertDefinitionsCount(rank);
-                var alertDefinition = new _models_AlertDefinition__WEBPACK_IMPORTED_MODULE_6__["default"](rank);
-                details.alertDefinitions.list.push(alertDefinition);
+              resolve(configuration.getAlertTriggersDefaultSummary(watchedAutomatedProcessId, document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.title).value, details.alertDefinitions.list).then(
+              /*#__PURE__*/
+              function () {
+                var _ref7 = _asyncToGenerator(
+                /*#__PURE__*/
+                _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(response) {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+                    while (1) {
+                      switch (_context6.prev = _context6.next) {
+                        case 0:
+                          _view__WEBPACK_IMPORTED_MODULE_11__["updateActiveStepContent"](response.data.view);
+                          summaryAlertTrigger = response.data.alertTrigger;
 
-                _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
-              }));
+                          _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+
+                        case 3:
+                        case "end":
+                          return _context6.stop();
+                      }
+                    }
+                  }, _callee6);
+                }));
+
+                return function (_x7) {
+                  return _ref7.apply(this, arguments);
+                };
+              }()));
             }));
 
           case 6:
             _context7.prev = 6;
             _context7.t0 = _context7["catch"](1);
 
-            _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
 
             console.log(_context7.t0);
 
@@ -98948,35 +99771,36 @@ function () {
     }, _callee7, null, [[1, 6]]);
   }));
 
-  return function addDefaultAlertTriggerAlertDefinition() {
+  return function loadDefaultAlertTriggerSummary(_x6) {
     return _ref6.apply(this, arguments);
   };
 }();
 
-var addDefaultAlertTriggerRule =
+var addDefaultAlertTriggerDefinition =
 /*#__PURE__*/
 function () {
-  var _ref7 = _asyncToGenerator(
+  var _ref8 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8(watchedAutomatedProcessId, alertDefinition, alertDefinitionItem) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
     var activeStepContent;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
       while (1) {
         switch (_context8.prev = _context8.next) {
           case 0:
-            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].activeStepContent);
+            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].activeStepContent);
             _context8.prev = 1;
 
-            _base__WEBPACK_IMPORTED_MODULE_8__["renderLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](activeStepContent);
 
             return _context8.abrupt("return", new Promise(function (resolve, reject) {
-              var rank = alertDefinition.rules.length + 1;
-              resolve(configuration.getAlertTriggersDefaultAlertTriggerRule(watchedAutomatedProcessId, rank).then(function (response) {
-                _view__WEBPACK_IMPORTED_MODULE_10__["details"].addAlertRule(alertDefinitionItem, response.data);
-                var alertRule = new _models_AlertRule__WEBPACK_IMPORTED_MODULE_7__["default"](rank);
-                alertDefinition.rules.push(alertRule);
+              var rank = details.alertDefinitions.list.length + 1;
+              resolve(configuration.getAlertTriggersDefaultDefinition(rank).then(function (response) {
+                _view__WEBPACK_IMPORTED_MODULE_11__["details"].addDefinition(response.data);
+                _view__WEBPACK_IMPORTED_MODULE_11__["details"].updateDefinitionsCount(rank);
+                var alertDefinition = new _models_AlertTriggerDefinition__WEBPACK_IMPORTED_MODULE_7__["default"](rank);
+                details.alertDefinitions.list.push(alertDefinition);
 
-                _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+                _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
               }));
             }));
 
@@ -98984,7 +99808,7 @@ function () {
             _context8.prev = 6;
             _context8.t0 = _context8["catch"](1);
 
-            _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
 
             console.log(_context8.t0);
 
@@ -98996,34 +99820,36 @@ function () {
     }, _callee8, null, [[1, 6]]);
   }));
 
-  return function addDefaultAlertTriggerRule(_x7, _x8, _x9) {
-    return _ref7.apply(this, arguments);
+  return function addDefaultAlertTriggerDefinition() {
+    return _ref8.apply(this, arguments);
   };
 }();
 
-var updateAlertTriggerRuleType =
+var addDefaultAlertTriggerRule =
 /*#__PURE__*/
 function () {
-  var _ref8 = _asyncToGenerator(
+  var _ref9 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9(watchedAutomatedProcessId, rule, ruleItem, type) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9(watchedAutomatedProcessId, alertDefinition, alertDefinitionItem) {
     var activeStepContent;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
       while (1) {
         switch (_context9.prev = _context9.next) {
           case 0:
-            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].activeStepContent);
+            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].activeStepContent);
             _context9.prev = 1;
 
-            _base__WEBPACK_IMPORTED_MODULE_8__["renderLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](activeStepContent);
 
             return _context9.abrupt("return", new Promise(function (resolve, reject) {
-              var rank = rule.rank;
-              resolve(configuration.getAlertTriggersDefaultAlertTriggerRule(watchedAutomatedProcessId, rank, type).then(function (response) {
-                _view__WEBPACK_IMPORTED_MODULE_10__["details"].updateAlertRule(ruleItem, response.data, type);
-                rule.type = type;
+              var rank = alertDefinition.rules.length + 1;
+              resolve(configuration.getAlertTriggersDefaultRule(watchedAutomatedProcessId, rank).then(function (response) {
+                _view__WEBPACK_IMPORTED_MODULE_11__["details"].addRule(alertDefinitionItem, response.data);
+                var alertRule = new _models_AlertTriggerRule__WEBPACK_IMPORTED_MODULE_8__["default"](alertDefinition.rank, rank);
+                alertDefinition.rules.push(alertRule);
+                _view__WEBPACK_IMPORTED_MODULE_11__["details"].updateDefinitionValidity(alertDefinitionItem, alertDefinition.isValid());
 
-                _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+                _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
               }));
             }));
 
@@ -99031,7 +99857,7 @@ function () {
             _context9.prev = 6;
             _context9.t0 = _context9["catch"](1);
 
-            _base__WEBPACK_IMPORTED_MODULE_8__["clearLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
 
             console.log(_context9.t0);
 
@@ -99043,18 +99869,66 @@ function () {
     }, _callee9, null, [[1, 6]]);
   }));
 
-  return function updateAlertTriggerRuleType(_x10, _x11, _x12, _x13) {
-    return _ref8.apply(this, arguments);
+  return function addDefaultAlertTriggerRule(_x8, _x9, _x10) {
+    return _ref9.apply(this, arguments);
+  };
+}();
+
+var updateAlertTriggerRuleType =
+/*#__PURE__*/
+function () {
+  var _ref10 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10(watchedAutomatedProcessId, rule, ruleItem, type) {
+    var activeStepContent;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
+      while (1) {
+        switch (_context10.prev = _context10.next) {
+          case 0:
+            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].activeStepContent);
+            _context10.prev = 1;
+
+            _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](activeStepContent);
+
+            return _context10.abrupt("return", new Promise(function (resolve, reject) {
+              var rank = rule.rank;
+              resolve(configuration.getAlertTriggersDefaultRule(watchedAutomatedProcessId, rank, type).then(function (response) {
+                _view__WEBPACK_IMPORTED_MODULE_11__["details"].updateRule(ruleItem, response.data, type);
+                rule.type = type;
+
+                _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+              }));
+            }));
+
+          case 6:
+            _context10.prev = 6;
+            _context10.t0 = _context10["catch"](1);
+
+            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+
+            console.log(_context10.t0);
+
+          case 10:
+          case "end":
+            return _context10.stop();
+        }
+      }
+    }, _callee10, null, [[1, 6]]);
+  }));
+
+  return function updateAlertTriggerRuleType(_x11, _x12, _x13, _x14) {
+    return _ref10.apply(this, arguments);
   };
 }();
 
 var validateAlertTriggerRuleForm = function validateAlertTriggerRuleForm(rule, ruleItem) {
   try {
     var valid = false;
+    var alertDefinitionItem = _base__WEBPACK_IMPORTED_MODULE_10__["elements"].details.alertDefinition.item(rule.definitionRank);
     var rank = ruleItem.dataset.rank;
-    var type = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.typeSelect).value;
-    var title = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.title);
-    var titleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.titleIcon);
+    var type = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.typeSelect).value;
+    var title = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.title);
+    var titleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.titleIcon);
 
     if (type === 'jobs-duration') {
       valid = validateAlertTriggerJobsDurationRule(rule, ruleItem);
@@ -99070,9 +99944,12 @@ var validateAlertTriggerRuleForm = function validateAlertTriggerRuleForm(rule, r
     }*/
 
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](title, valid, true);
+    rule.valid = valid;
+    _view__WEBPACK_IMPORTED_MODULE_11__["details"].updateDefinitionValidity(alertDefinitionItem, details.alertDefinitions.find(rule.definitionRank).isValid());
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](titleIcon, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](title, valid, true);
+
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](titleIcon, valid, true);
   } catch (error) {
     console.log(error);
   }
@@ -99084,22 +99961,23 @@ var validateAlertTriggerJobsDurationRule = function validateAlertTriggerJobsDura
     specific: {},
     standard: {
       timeSlot: {},
+      triggeringDays: {},
       involvedEntities: {}
     }
   };
 
   try {
-    var minimalDurationInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.jobsDurationControls.minimalDurationInput);
-    var maximalDurationInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.jobsDurationControls.maximalDurationInput);
+    var minimalDurationInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.jobsDurationControls.minimalDurationInput);
+    var maximalDurationInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.jobsDurationControls.maximalDurationInput);
 
-    var minimalDurationInputValid = minimalDurationInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["isNormalInteger"](minimalDurationInput.value);
+    var minimalDurationInputValid = minimalDurationInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](minimalDurationInput.value);
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](minimalDurationInput, minimalDurationInputValid); //_base.toggleFormControlTooltip(minimalDurationInput, minimalDurationInputValid);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](minimalDurationInput, minimalDurationInputValid); //_base.toggleFormControlTooltip(minimalDurationInput, minimalDurationInputValid);
 
 
-    var maximalDurationInputValid = maximalDurationInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["isNormalInteger"](maximalDurationInput.value) && minimalDurationInputValid && parseInt(minimalDurationInput.value) < parseInt(maximalDurationInput.value);
+    var maximalDurationInputValid = maximalDurationInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](maximalDurationInput.value) && minimalDurationInputValid && parseInt(minimalDurationInput.value) < parseInt(maximalDurationInput.value);
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](maximalDurationInput, maximalDurationInputValid); //_base.toggleFormControlTooltip(maximalDurationInput, maximalDurationInputValid);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](maximalDurationInput, maximalDurationInputValid); //_base.toggleFormControlTooltip(maximalDurationInput, maximalDurationInputValid);
 
 
     if (minimalDurationInputValid && maximalDurationInputValid) {
@@ -99110,6 +99988,7 @@ var validateAlertTriggerJobsDurationRule = function validateAlertTriggerJobsDura
     }
 
     var timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
+    var triggeringDaysSelectionValid = validateAlertTriggerRuleTriggeringDaysControls(ruleItem, parameters);
     var involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
     var involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
     rule.parameters = parameters;
@@ -99127,16 +100006,17 @@ var validateAlertTriggerFaultedJobsPercentageRule = function validateAlertTrigge
     specific: {},
     standard: {
       timeSlot: {},
+      triggeringDays: {},
       involvedEntities: {}
     }
   };
 
   try {
-    var minimalPercentageInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.faultedJobsPercentageControls.minimalPercentageInput);
+    var minimalPercentageInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.faultedJobsPercentageControls.minimalPercentageInput);
 
-    var minimalPercentageInputValid = minimalPercentageInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["isNormalInteger"](minimalPercentageInput.value);
+    var minimalPercentageInputValid = minimalPercentageInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](minimalPercentageInput.value);
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](minimalPercentageInput, minimalPercentageInputValid); //_base.toggleFormControlTooltip(minimalPercentageInput, minimalPercentageInputValid);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](minimalPercentageInput, minimalPercentageInputValid); //_base.toggleFormControlTooltip(minimalPercentageInput, minimalPercentageInputValid);
 
 
     if (minimalPercentageInputValid) {
@@ -99147,6 +100027,7 @@ var validateAlertTriggerFaultedJobsPercentageRule = function validateAlertTrigge
 
     var timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
     var relativeTimeSlotInputValid = validateAlertTriggerRuleRelativeTimeSlotControls(ruleItem, parameters);
+    var triggeringDaysSelectionValid = validateAlertTriggerRuleTriggeringDaysControls(ruleItem, parameters);
     var involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
     var involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
     rule.parameters = parameters;
@@ -99164,16 +100045,17 @@ var validateAlertTriggerFailedQueueItemsPercentageRule = function validateAlertT
     specific: {},
     standard: {
       timeSlot: {},
+      triggeringDays: {},
       involvedEntities: {}
     }
   };
 
   try {
-    var minimalPercentageInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.failedQueueItemsPercentageControls.minimalPercentageInput);
+    var minimalPercentageInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.failedQueueItemsPercentageControls.minimalPercentageInput);
 
-    var minimalPercentageInputValid = minimalPercentageInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["isNormalInteger"](minimalPercentageInput.value);
+    var minimalPercentageInputValid = minimalPercentageInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](minimalPercentageInput.value);
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](minimalPercentageInput, minimalPercentageInputValid); //_base.toggleFormControlTooltip(minimalPercentageInput, minimalPercentageInputValid);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](minimalPercentageInput, minimalPercentageInputValid); //_base.toggleFormControlTooltip(minimalPercentageInput, minimalPercentageInputValid);
 
 
     if (minimalPercentageInputValid) {
@@ -99184,6 +100066,7 @@ var validateAlertTriggerFailedQueueItemsPercentageRule = function validateAlertT
 
     var timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
     var relativeTimeSlotInputValid = validateAlertTriggerRuleRelativeTimeSlotControls(ruleItem, parameters);
+    var triggeringDaysSelectionValid = validateAlertTriggerRuleTriggeringDaysControls(ruleItem, parameters);
     var involvedQueuesSelectionValid = validateAlertTriggerRuleInvolvedQueuesSelectionControls(ruleItem, parameters);
     rule.parameters = parameters;
     valid = minimalPercentageInputValid && timeSlotInputValid && relativeTimeSlotInputValid && involvedQueuesSelectionValid;
@@ -99200,28 +100083,29 @@ var validateAlertTriggerElasticSearchQueryRule = function validateAlertTriggerEl
     specific: {},
     standard: {
       timeSlot: {},
+      triggeringDays: {},
       involvedEntities: {}
     }
   };
 
   try {
-    var searchQueryInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.elasticSearchQueryControls.searchQueryInput);
-    var lowerCountInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.elasticSearchQueryControls.lowerCountInput);
-    var higherCountInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.elasticSearchQueryControls.higherCountInput);
+    var searchQueryInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.elasticSearchQueryControls.searchQueryInput);
+    var lowerCountInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.elasticSearchQueryControls.lowerCountInput);
+    var higherCountInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.elasticSearchQueryControls.higherCountInput);
 
-    var searchQueryInputValid = searchQueryInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["isValidLuceneString"]("'".concat(searchQueryInput.value.trim(), "'"));
+    var searchQueryInputValid = searchQueryInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isValidLuceneString"]("'".concat(searchQueryInput.value.trim(), "'"));
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](searchQueryInput, searchQueryInputValid); //_base.toggleFormControlTooltip(searchQueryInput, searchQueryInputValid);
-
-
-    var lowerCountInputValid = lowerCountInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["isNormalInteger"](lowerCountInput.value);
-
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](lowerCountInput, lowerCountInputValid); //_base.toggleFormControlTooltip(lowerCountInput, lowerCountInputValid);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](searchQueryInput, searchQueryInputValid); //_base.toggleFormControlTooltip(searchQueryInput, searchQueryInputValid);
 
 
-    var higherCountInputValid = higherCountInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["isNormalInteger"](higherCountInput.value) && lowerCountInputValid && parseInt(lowerCountInput.value) < parseInt(higherCountInput.value);
+    var lowerCountInputValid = lowerCountInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](lowerCountInput.value);
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](higherCountInput, higherCountInputValid); //_base.toggleFormControlTooltip(higherCountInput, higherCountInputValid);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](lowerCountInput, lowerCountInputValid); //_base.toggleFormControlTooltip(lowerCountInput, lowerCountInputValid);
+
+
+    var higherCountInputValid = higherCountInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](higherCountInput.value) && lowerCountInputValid && parseInt(lowerCountInput.value) < parseInt(higherCountInput.value);
+
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](higherCountInput, higherCountInputValid); //_base.toggleFormControlTooltip(higherCountInput, higherCountInputValid);
 
 
     if (lowerCountInputValid && higherCountInputValid) {
@@ -99234,6 +100118,7 @@ var validateAlertTriggerElasticSearchQueryRule = function validateAlertTriggerEl
 
     var timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
     var relativeTimeSlotInputValid = validateAlertTriggerRuleRelativeTimeSlotControls(ruleItem, parameters);
+    var triggeringDaysSelectionValid = validateAlertTriggerRuleTriggeringDaysControls(ruleItem, parameters);
     var involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
     var involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
     rule.parameters = parameters;
@@ -99303,24 +100188,24 @@ var validateAlertTriggerRuleTimeSlotControls = function validateAlertTriggerRule
   var valid = false;
 
   try {
-    var timeSlotInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.timeSlotInput);
+    var timeSlotInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.timeSlotInput);
     var minStart = timeSlotInput.dataset.startTime;
     var maxEnd = timeSlotInput.dataset.endTime;
-    var timeSlotInputFrom = timeSlotInput.parentNode.querySelector(_base__WEBPACK_IMPORTED_MODULE_8__["selectors"].dateTimeCalendarFromInput);
-    var timeSlotInputTo = timeSlotInput.parentNode.querySelector(_base__WEBPACK_IMPORTED_MODULE_8__["selectors"].dateTimeCalendarToInput);
-    valid = timeSlotInputFrom.value.trim() !== '' && timeSlotInputTo.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["timeStringToFloat"](timeSlotInputFrom.value.trim()) >= _base__WEBPACK_IMPORTED_MODULE_8__["timeStringToFloat"](minStart) && _base__WEBPACK_IMPORTED_MODULE_8__["timeStringToFloat"](timeSlotInputTo.value.trim()) <= _base__WEBPACK_IMPORTED_MODULE_8__["timeStringToFloat"](maxEnd) && _base__WEBPACK_IMPORTED_MODULE_8__["timeStringToFloat"](timeSlotInputFrom.value.trim()) < _base__WEBPACK_IMPORTED_MODULE_8__["timeStringToFloat"](timeSlotInputTo.value.trim());
+    var timeSlotInputFrom = timeSlotInput.parentNode.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].dateTimeCalendarFromInput);
+    var timeSlotInputTo = timeSlotInput.parentNode.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].dateTimeCalendarToInput);
+    valid = timeSlotInputFrom.value.trim() !== '' && timeSlotInputTo.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["timeStringToFloat"](timeSlotInputFrom.value.trim()) >= _base__WEBPACK_IMPORTED_MODULE_9__["timeStringToFloat"](minStart) && _base__WEBPACK_IMPORTED_MODULE_9__["timeStringToFloat"](timeSlotInputTo.value.trim()) <= _base__WEBPACK_IMPORTED_MODULE_9__["timeStringToFloat"](maxEnd) && _base__WEBPACK_IMPORTED_MODULE_9__["timeStringToFloat"](timeSlotInputFrom.value.trim()) < _base__WEBPACK_IMPORTED_MODULE_9__["timeStringToFloat"](timeSlotInputTo.value.trim());
 
     if (valid) {
       var calendar = timeSlotInput.bulmaCalendar;
       parameters.standard.timeSlot = {
-        from: calendar.startTime.toTimeString(),
-        to: calendar.endTime.toTimeString()
+        from: calendar.startTime.toTimeString().split(' ')[0],
+        to: calendar.endTime.toTimeString().split(' ')[0]
       };
     }
 
-    var timeSlotInputWrapper = timeSlotInput.closest(_base__WEBPACK_IMPORTED_MODULE_8__["selectors"].dateTimeCalendarWrapper);
+    var timeSlotInputWrapper = timeSlotInput.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].dateTimeCalendarWrapper);
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](timeSlotInputWrapper, valid); //_base.toggleFormControlTooltip(timeSlotInput, valid);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](timeSlotInputWrapper, valid); //_base.toggleFormControlTooltip(timeSlotInput, valid);
 
   } catch (error) {
     console.log(error);
@@ -99333,15 +100218,52 @@ var validateAlertTriggerRuleRelativeTimeSlotControls = function validateAlertTri
   var valid = false;
 
   try {
-    var relativeTimeSlotInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.relativeTimeSlotInput);
-    valid = relativeTimeSlotInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_8__["isNormalInteger"](relativeTimeSlotInput.value) || relativeTimeSlotInput.value.trim() === '';
+    var relativeTimeSlotInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.relativeTimeSlotInput);
+    valid = relativeTimeSlotInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](relativeTimeSlotInput.value) || relativeTimeSlotInput.value.trim() === '';
 
     if (valid) {
       parameters.standard.relativeTimeSlot = relativeTimeSlotInput.value.trim() !== '' ? parseInt(relativeTimeSlotInput.value) : null;
     }
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](relativeTimeSlotInput, valid); //_base.toggleFormControlTooltip(relativeTimeSlotInput, valid);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](relativeTimeSlotInput, valid); //_base.toggleFormControlTooltip(relativeTimeSlotInput, valid);
 
+  } catch (error) {
+    console.log(error);
+  }
+
+  return valid;
+};
+
+var validateAlertTriggerRuleTriggeringDaysControls = function validateAlertTriggerRuleTriggeringDaysControls(ruleItem, parameters) {
+  var valid = false;
+
+  try {
+    var triggeringDaysTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.title);
+    var triggeringDaysTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.titleIcon);
+    var triggeringDaysMondayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.mondayCheckbox);
+    var triggeringDaysTuesdayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.tuesdayCheckbox);
+    var triggeringDaysWednesdayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.wednesdayCheckbox);
+    var triggeringDaysThursdayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.thursdayCheckbox);
+    var triggeringDaysFridayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.fridayCheckbox);
+    var triggeringDaysSaturdayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.saturdayCheckbox);
+    var triggeringDaysSundayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.sundayCheckbox);
+    valid = triggeringDaysMondayCheckbox.checked || triggeringDaysTuesdayCheckbox.checked || triggeringDaysWednesdayCheckbox.checked || triggeringDaysThursdayCheckbox.checked || triggeringDaysFridayCheckbox.checked || triggeringDaysSaturdayCheckbox.checked || triggeringDaysSundayCheckbox.checked;
+
+    if (valid) {
+      parameters.standard.triggeringDays = {
+        monday: triggeringDaysMondayCheckbox.checked,
+        tuesday: triggeringDaysTuesdayCheckbox.checked,
+        wednesday: triggeringDaysWednesdayCheckbox.checked,
+        thursday: triggeringDaysThursdayCheckbox.checked,
+        friday: triggeringDaysFridayCheckbox.checked,
+        saturday: triggeringDaysSaturdayCheckbox.checked,
+        sunday: triggeringDaysSundayCheckbox.checked
+      };
+    }
+
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](triggeringDaysTitle, valid, true);
+
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](triggeringDaysTitleIcon, valid, true);
   } catch (error) {
     console.log(error);
   }
@@ -99353,11 +100275,11 @@ var validateAlertTriggerRuleInvolvedProcessesSelectionControls = function valida
   var valid = false;
 
   try {
-    var involvedProcessesTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes.title);
-    var involvedProcessesTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes.titleIcon);
-    var involvedProcessesCount = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes.count);
+    var involvedProcessesTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes.title);
+    var involvedProcessesTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes.titleIcon);
+    var involvedProcessesCount = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes.count);
 
-    var selectedProcesses = _toConsumableArray(ruleItem.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes["switch"])).filter(function (item) {
+    var selectedProcesses = _toConsumableArray(ruleItem.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes["switch"])).filter(function (item) {
       return item.checked;
     });
 
@@ -99371,11 +100293,11 @@ var validateAlertTriggerRuleInvolvedProcessesSelectionControls = function valida
       });
     }
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedProcessesTitle, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedProcessesTitle, valid, true);
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedProcessesTitleIcon, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedProcessesTitleIcon, valid, true);
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedProcessesCount, valid);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedProcessesCount, valid);
   } catch (error) {
     console.log(error);
   }
@@ -99387,11 +100309,11 @@ var validateAlertTriggerRuleInvolvedRobotsSelectionControls = function validateA
   var valid = false;
 
   try {
-    var involvedRobotsTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots.title);
-    var involvedRobotsTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots.titleIcon);
-    var involvedRobotsCount = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots.count);
+    var involvedRobotsTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots.title);
+    var involvedRobotsTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots.titleIcon);
+    var involvedRobotsCount = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots.count);
 
-    var selectedRobots = _toConsumableArray(ruleItem.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots["switch"])).filter(function (item) {
+    var selectedRobots = _toConsumableArray(ruleItem.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots["switch"])).filter(function (item) {
       return item.checked;
     });
 
@@ -99405,11 +100327,11 @@ var validateAlertTriggerRuleInvolvedRobotsSelectionControls = function validateA
       });
     }
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedRobotsTitle, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedRobotsTitle, valid, true);
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedRobotsTitleIcon, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedRobotsTitleIcon, valid, true);
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedRobotsCount, valid);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedRobotsCount, valid);
   } catch (error) {
     console.log(error);
   }
@@ -99421,11 +100343,11 @@ var validateAlertTriggerRuleInvolvedQueuesSelectionControls = function validateA
   var valid = false;
 
   try {
-    var involvedQueuesTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues.title);
-    var involvedQueuesTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues.titleIcon);
-    var involvedQueuesCount = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues.count);
+    var involvedQueuesTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues.title);
+    var involvedQueuesTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues.titleIcon);
+    var involvedQueuesCount = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues.count);
 
-    var selectedQueues = _toConsumableArray(ruleItem.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues["switch"])).filter(function (item) {
+    var selectedQueues = _toConsumableArray(ruleItem.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues["switch"])).filter(function (item) {
       return item.checked;
     });
 
@@ -99439,17 +100361,113 @@ var validateAlertTriggerRuleInvolvedQueuesSelectionControls = function validateA
       });
     }
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedQueuesTitle, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedQueuesTitle, valid, true);
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedQueuesTitleIcon, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedQueuesTitleIcon, valid, true);
 
-    _base__WEBPACK_IMPORTED_MODULE_8__["toggleSuccessDangerState"](involvedQueuesCount, valid);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedQueuesCount, valid);
   } catch (error) {
     console.log(error);
   }
 
   return valid;
 };
+
+var create =
+/*#__PURE__*/
+function () {
+  var _ref11 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11() {
+    var activeStepContent;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
+      while (1) {
+        switch (_context11.prev = _context11.next) {
+          case 0:
+            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].activeStepContent);
+            _context11.prev = 1;
+
+            _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](activeStepContent);
+
+            return _context11.abrupt("return", new Promise(function (resolve, reject) {
+              var alertTrigger = new _models_AlertTrigger__WEBPACK_IMPORTED_MODULE_6__["default"]();
+              resolve(alertTrigger.save(summaryAlertTrigger.watched_automated_process_id, summaryAlertTrigger.title, summaryAlertTrigger.definitions).then(function (response) {
+                return new Promise(function (resolve, reject) {
+                  resolve(configuration.getAlertTriggersCreationConfirmation(alertTrigger.id).then(function (response) {
+                    updateTable();
+                    _layout_index__WEBPACK_IMPORTED_MODULE_12__["update"](configuration.layout);
+                    _view__WEBPACK_IMPORTED_MODULE_11__["updateActiveStepContent"](response.data);
+
+                    _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+                  }));
+                });
+              }));
+            }));
+
+          case 6:
+            _context11.prev = 6;
+            _context11.t0 = _context11["catch"](1);
+
+            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+
+            console.log(_context11.t0);
+
+          case 10:
+          case "end":
+            return _context11.stop();
+        }
+      }
+    }, _callee11, null, [[1, 6]]);
+  }));
+
+  return function create() {
+    return _ref11.apply(this, arguments);
+  };
+}();
+
+var updateTable =
+/*#__PURE__*/
+function () {
+  var _ref12 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12() {
+    var table;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee12$(_context12) {
+      while (1) {
+        switch (_context12.prev = _context12.next) {
+          case 0:
+            table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].table);
+            _context12.prev = 1;
+
+            _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](table);
+
+            return _context12.abrupt("return", new Promise(function (resolve, reject) {
+              resolve(configuration.updateAlertTriggersTable().then(function (res) {
+                _view__WEBPACK_IMPORTED_MODULE_11__["updateTable"](configuration.alertTriggersTable);
+
+                _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](table);
+              }));
+            }));
+
+          case 6:
+            _context12.prev = 6;
+            _context12.t0 = _context12["catch"](1);
+            console.log(_context12.t0);
+
+            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](table);
+
+          case 10:
+          case "end":
+            return _context12.stop();
+        }
+      }
+    }, _callee12, null, [[1, 6]]);
+  }));
+
+  return function updateTable() {
+    return _ref12.apply(this, arguments);
+  };
+}();
 
 var resetForm = function resetForm() {
   try {} catch (error) {
@@ -99500,13 +100518,13 @@ var processSelection = {
   }
 };
 var details = {
-  updateAlertDefinitionsCount: function updateAlertDefinitionsCount(count) {
+  updateDefinitionsCount: function updateDefinitionsCount(count) {
     document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.count).innerHTML = count;
   },
-  addAlertDefinition: function addAlertDefinition(markup) {
+  addDefinition: function addDefinition(markup) {
     document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.list).appendChild(_base__WEBPACK_IMPORTED_MODULE_1__["htmlToElement"](markup));
   },
-  deleteAlertDefinition: function deleteAlertDefinition(alertDefinitionItem) {
+  deleteDefinition: function deleteDefinition(alertDefinitionItem) {
     var rank = parseInt(alertDefinitionItem.dataset.rank);
     document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.list).removeChild(alertDefinitionItem); // change rank of all alert definition items when > rank
 
@@ -99520,7 +100538,7 @@ var details = {
       }
     });
   },
-  updateAlertDefinitionLevel: function updateAlertDefinitionLevel(alertDefinitionItem, level) {
+  updateDefinitionLevel: function updateDefinitionLevel(alertDefinitionItem, level) {
     var state = "is-".concat(level);
     var textState = "has-text-".concat(level);
     var title = alertDefinitionItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.title);
@@ -99536,10 +100554,26 @@ var details = {
     title.classList.add(textState);
     titleIcon.classList.add(textState);
   },
-  addAlertRule: function addAlertRule(alertDefinitionItem, markup) {
+  updateDefinitionValidity: function updateDefinitionValidity(alertDefinitionItem, valid) {
+    var titleIconRight = alertDefinitionItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.validityIcon);
+    var icon = titleIconRight.querySelector('i');
+
+    if (valid) {
+      icon.classList.remove('fa-exclamation-circle');
+      icon.classList.add('fa-check-circle');
+    } else {
+      icon.classList.remove('fa-check-circle');
+      icon.classList.add('fa-exclamation-circle');
+    }
+
+    _base__WEBPACK_IMPORTED_MODULE_1__["removeStates"](titleIconRight);
+
+    _base__WEBPACK_IMPORTED_MODULE_1__["toggleSuccessDangerState"](titleIconRight, valid, true);
+  },
+  addRule: function addRule(alertDefinitionItem, markup) {
     alertDefinitionItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.list).appendChild(_base__WEBPACK_IMPORTED_MODULE_1__["htmlToElement"](markup));
   },
-  deleteAlertRule: function deleteAlertRule(alertDefinitionItem, ruleItem) {
+  deleteRule: function deleteRule(alertDefinitionItem, ruleItem) {
     var rank = parseInt(ruleItem.dataset.rank);
     alertDefinitionItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.list).removeChild(ruleItem); // change rank of all rule items when > rank
 
@@ -99553,7 +100587,7 @@ var details = {
       }
     });
   },
-  updateAlertRule: function updateAlertRule(ruleItem, markup, ruleType) {
+  updateRule: function updateRule(ruleItem, markup, ruleType) {
     ruleItem = _base__WEBPACK_IMPORTED_MODULE_1__["update"](ruleItem, markup);
     var title = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.title);
     var titleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.titleIcon);
@@ -99563,9 +100597,10 @@ var details = {
     _base__WEBPACK_IMPORTED_MODULE_1__["toggleSuccessDangerState"](titleIcon, false, true);
 
     if (ruleType !== 'none') {
-      var calendarSelector = "\n                ".concat(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.item, "[data-rank=\"").concat(ruleItem.dataset.rank, "\"] ").concat(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.timeSlotInput, "\n            ");
-      var startTime = document.querySelector(calendarSelector).dataset.startTime.split(':');
-      var endTime = document.querySelector(calendarSelector).dataset.endTime.split(':');
+      var alertDefinitionItem = ruleItem.closest(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.item);
+      var calendarSelector = "\n                ".concat(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.item, "[data-rank=\"").concat(alertDefinitionItem.dataset.rank, "\"]\n                ").concat(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.item, "[data-rank=\"").concat(ruleItem.dataset.rank, "\"]\n                ").concat(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.timeSlotInput, "\n            ");
+      var startTime = ruleItem.querySelector(calendarSelector).dataset.startTime.split(':');
+      var endTime = ruleItem.querySelector(calendarSelector).dataset.endTime.split(':');
       bulma_calendar__WEBPACK_IMPORTED_MODULE_2___default.a.attach(calendarSelector, {
         type: 'time',
         lang: 'en',
@@ -99661,6 +100696,9 @@ var orchestratorSelect = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5
 var createButton = _base__WEBPACK_IMPORTED_MODULE_5__["elements"].createButton;
 var init = function init() {
   try {
+    setInterval(function () {
+      _layout_index__WEBPACK_IMPORTED_MODULE_7__["update"](configuration.layout);
+    }, 45000);
     _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm.addEventListener('keyup', checkForm);
     _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm.addEventListener('change', checkForm);
     _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm.addEventListener('click',
@@ -99676,7 +100714,7 @@ var init = function init() {
                 if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButtonChildren)) && !createButton.disabled) {
                   create().then(function (res) {
                     toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Client successfully added!', null, {
-                      positionClass: 'toast-bottom-center'
+                      positionClass: 'toast-bottom-right'
                     });
                     return Promise.all([updateTable(), _layout_index__WEBPACK_IMPORTED_MODULE_7__["update"](configuration.layout)]);
                   });
@@ -99750,7 +100788,7 @@ function () {
             _context2.prev = 6;
             _context2.t0 = _context2["catch"](1);
             toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Client not added due to application exception: ".concat(_context2.t0), null, {
-              positionClass: 'toast-bottom-center'
+              positionClass: 'toast-bottom-right'
             });
             console.log(_context2.t0);
 
@@ -99780,7 +100818,7 @@ function () {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            table = _base__WEBPACK_IMPORTED_MODULE_5__["elements"].table;
+            table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table);
             _context3.prev = 1;
 
             _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](table);
@@ -99938,6 +100976,9 @@ var createButton = _base__WEBPACK_IMPORTED_MODULE_5__["elements"].createButton;
 var resetButton = _base__WEBPACK_IMPORTED_MODULE_5__["elements"].resetButton;
 var init = function init() {
   try {
+    setInterval(function () {
+      _layout_index__WEBPACK_IMPORTED_MODULE_7__["update"](configuration.layout);
+    }, 45000);
     _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm.addEventListener('keyup', checkForm);
     _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm.addEventListener('change', checkForm);
     _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm.addEventListener('click',
@@ -99953,7 +100994,7 @@ var init = function init() {
                 if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButtonChildren)) && !createButton.disabled) {
                   create().then(function (res) {
                     toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Orchestrator successfully added!', null, {
-                      positionClass: 'toast-bottom-center'
+                      positionClass: 'toast-bottom-right'
                     });
                     return Promise.all([updateTable(), _layout_index__WEBPACK_IMPORTED_MODULE_7__["update"](configuration.layout)]);
                   });
@@ -100055,7 +101096,7 @@ function () {
             _context2.prev = 6;
             _context2.t0 = _context2["catch"](1);
             toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Orchestrator not added due to application exception: ".concat(_context2.t0), null, {
-              positionClass: 'toast-bottom-center'
+              positionClass: 'toast-bottom-right'
             });
             console.log(_context2.t0);
 
@@ -100085,7 +101126,7 @@ function () {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            table = _base__WEBPACK_IMPORTED_MODULE_5__["elements"].table;
+            table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table);
             _context3.prev = 1;
 
             _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](table);
@@ -100323,6 +101364,9 @@ var createButton = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].createButton;
 var resetButton = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].resetButton;
 var init = function init() {
   try {
+    setInterval(function () {
+      _layout_index__WEBPACK_IMPORTED_MODULE_9__["update"](configuration.layout);
+    }, 45000);
     _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.addEventListener('keyup', validateForm);
     _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.addEventListener('change', validateForm);
     document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar).bulmaCalendar.on('select clear', validateForm);
@@ -100366,7 +101410,7 @@ var init = function init() {
                 if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].createButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].createButtonChildren)) && !createButton.disabled) {
                   create().then(function (res) {
                     toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Watched automated process successfully added!', null, {
-                      positionClass: 'toast-bottom-center'
+                      positionClass: 'toast-bottom-right'
                     });
                     return Promise.all([updateTable(), _layout_index__WEBPACK_IMPORTED_MODULE_9__["update"](configuration.layout)]);
                   });
@@ -100471,7 +101515,9 @@ var validateForm = function validateForm() {
   }
 
   involvedQueuesCount.innerHTML = selectedQueuesCount;
-  var involvedQueuesTableValid = selectedQueuesCount > 0;
+  var involvedQueuesTableValid =
+  /*selectedQueuesCount > 0*/
+  true;
 
   _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](involvedQueuesSectionTitle, involvedQueuesTableValid, true);
 
@@ -100510,7 +101556,7 @@ function () {
 
                   if (data.error) {
                     toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Unable to load processes: ".concat(data.error), null, {
-                      positionClass: 'toast-bottom-center'
+                      positionClass: 'toast-bottom-right'
                     });
 
                     if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)) {
@@ -100601,7 +101647,7 @@ function () {
 
                   if (data.error) {
                     toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Unable to load robots: ".concat(data.error), null, {
-                      positionClass: 'toast-bottom-center'
+                      positionClass: 'toast-bottom-right'
                     });
 
                     if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)) {
@@ -100750,7 +101796,7 @@ function () {
 
                   if (data.error) {
                     toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Unable to load queues: ".concat(data.error), null, {
-                      positionClass: 'toast-bottom-center'
+                      positionClass: 'toast-bottom-right'
                     });
 
                     if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)) {
@@ -100887,7 +101933,7 @@ function () {
             _context6.prev = 15;
             _context6.t0 = _context6["catch"](1);
             toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Watched automated process not added due to application exception: ".concat(_context6.t0), null, {
-              positionClass: 'toast-bottom-center'
+              positionClass: 'toast-bottom-right'
             });
             console.log(_context6.t0);
 
@@ -100917,7 +101963,7 @@ function () {
       while (1) {
         switch (_context7.prev = _context7.next) {
           case 0:
-            table = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].table;
+            table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].table);
             _context7.prev = 1;
 
             _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](table);
@@ -101064,6 +102110,14 @@ __webpack_require__.r(__webpack_exports__);
 var strings = {};
 var selectors = {
   dashboard: '.dashboard',
+  quickBoard: {
+    main: 'section.quick-board',
+    item: '.quick-board--item',
+    itemChildren: '.quick-board--item *',
+    heading: '.quick-board--heading',
+    headingChildren: '.quick-board--heading *',
+    details: '.quick-board--details'
+  },
   tiles: '.tile.is-parent',
   clientTile: '.tile.client',
   clientsTile: '.tile.clients',
@@ -101077,6 +102131,9 @@ var selectors = {
 };
 var elements = {
   dashboard: document.querySelector(selectors.dashboard),
+  quickBoard: {
+    main: document.querySelector(selectors.quickBoard.main)
+  },
   clientTile: document.querySelector(selectors.clientTile),
   clientsTile: document.querySelector(selectors.clientsTile),
   watchedAutomatedProcessesTile: document.querySelector(selectors.watchedAutomatedProcessesTile),
@@ -101094,7 +102151,7 @@ var elements = {
 /*!***********************************************!*\
   !*** ./resources/js/views/dashboard/index.js ***!
   \***********************************************/
-/*! exports provided: dashboard, init, update, updateTiles */
+/*! exports provided: dashboard, init, update, updateTiles, updateQuickBoard */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -101103,6 +102160,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "init", function() { return init; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "update", function() { return update; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTiles", function() { return updateTiles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateQuickBoard", function() { return updateQuickBoard; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _models_Dashboard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../models/Dashboard */ "./resources/js/models/Dashboard.js");
@@ -101142,12 +102200,30 @@ var init = function init() {
     _base__WEBPACK_IMPORTED_MODULE_3__["elements"].dashboard.addEventListener('click', function (e) {
       _alert_index__WEBPACK_IMPORTED_MODULE_6__["init"](dashboard, e.target);
     });
-    setTimeout(function () {
+    _base__WEBPACK_IMPORTED_MODULE_3__["elements"].dashboard.addEventListener('click', function (e) {
+      var target = e.target;
+
+      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].quickBoard.heading, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].quickBoard.headingChildren))) {
+        var details = target.closest(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].quickBoard.item).querySelector(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].quickBoard.details);
+
+        if (details.style.display === 'block') {
+          _base__WEBPACK_IMPORTED_MODULE_2__["animateCSS"](details, 'fadeOut', function () {
+            details.style.display = 'none';
+          });
+        } else {
+          _base__WEBPACK_IMPORTED_MODULE_2__["animateCSS"](details, 'fadeIn');
+
+          details.style.display = 'block';
+        }
+      }
+    });
+    /*setTimeout(() => {
+        update();
+    }, 3000);*/
+
+    setInterval(function () {
       update();
-    }, 3000);
-    /*setInterval(() => {
-        update()
-    }, 30000);*/
+    }, 45000);
   } catch (error) {
     console.log("Failed to init dashboard: ".concat(error));
   }
@@ -101164,7 +102240,7 @@ function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            promises = [_layout_index__WEBPACK_IMPORTED_MODULE_5__["updateMenu"](dashboard.layout), _layout_index__WEBPACK_IMPORTED_MODULE_5__["updateSidebar"](dashboard.layout), updateTiles(), _alert_index__WEBPACK_IMPORTED_MODULE_6__["updatePendingTable"](dashboard), _alert_index__WEBPACK_IMPORTED_MODULE_6__["updateClosedTable"](dashboard)];
+            promises = [_layout_index__WEBPACK_IMPORTED_MODULE_5__["update"](dashboard.layout), updateQuickBoard(), updateTiles(), _alert_index__WEBPACK_IMPORTED_MODULE_6__["updatePendingTable"](dashboard), _alert_index__WEBPACK_IMPORTED_MODULE_6__["updateClosedTable"](dashboard)];
 
             if (dashboard.clientID) {
               promises.push(_watched_automated_process_index__WEBPACK_IMPORTED_MODULE_8__["updateAll"](dashboard));
@@ -101209,7 +102285,7 @@ function () {
             tiles.forEach(function (tile) {
               _base__WEBPACK_IMPORTED_MODULE_2__["renderLoader"](tile);
             });
-            return _context2.abrupt("return", dashboard.updateTiles().then(function (res) {
+            return _context2.abrupt("return", dashboard.updateTiles().then(function (response) {
               _base__WEBPACK_IMPORTED_MODULE_3__["elements"].clientTile = _view__WEBPACK_IMPORTED_MODULE_4__["updateClientTile"](dashboard.clientTile);
               _base__WEBPACK_IMPORTED_MODULE_3__["elements"].clientsTile = _view__WEBPACK_IMPORTED_MODULE_4__["updateClientsTile"](dashboard.clientsTile);
               _base__WEBPACK_IMPORTED_MODULE_3__["elements"].watchedAutomatedProcessesTile = _view__WEBPACK_IMPORTED_MODULE_4__["updateWatchedAutomatedProcessesTile"](dashboard.watchedAutomatedProcessesTile);
@@ -101239,6 +102315,46 @@ function () {
     return _ref2.apply(this, arguments);
   };
 }();
+var updateQuickBoard =
+/*#__PURE__*/
+function () {
+  var _ref3 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+    var quickBoard;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            quickBoard = _base__WEBPACK_IMPORTED_MODULE_3__["elements"].quickBoard.main;
+            _context3.prev = 1;
+
+            _base__WEBPACK_IMPORTED_MODULE_2__["renderLoader"](quickBoard);
+
+            return _context3.abrupt("return", dashboard.updateQuickBoard().then(function (response) {
+              quickBoard = _view__WEBPACK_IMPORTED_MODULE_4__["updateQuickBoard"](dashboard.quickBoard);
+            }));
+
+          case 6:
+            _context3.prev = 6;
+            _context3.t0 = _context3["catch"](1);
+
+            _base__WEBPACK_IMPORTED_MODULE_2__["clearLoader"](quickBoard);
+
+            console.log(_context3.t0);
+
+          case 10:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[1, 6]]);
+  }));
+
+  return function updateQuickBoard() {
+    return _ref3.apply(this, arguments);
+  };
+}();
 
 /***/ }),
 
@@ -101246,7 +102362,7 @@ function () {
 /*!**********************************************!*\
   !*** ./resources/js/views/dashboard/view.js ***!
   \**********************************************/
-/*! exports provided: updateClientTile, updateClientsTile, updateWatchedAutomatedProcessesTile, updateRobotsTile, updateNotClosedAlertsTile, updateUnderRevisionAlertsTile, updateClosedAlertsTile */
+/*! exports provided: updateClientTile, updateClientsTile, updateWatchedAutomatedProcessesTile, updateRobotsTile, updateNotClosedAlertsTile, updateUnderRevisionAlertsTile, updateClosedAlertsTile, updateQuickBoard */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -101258,6 +102374,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateNotClosedAlertsTile", function() { return updateNotClosedAlertsTile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUnderRevisionAlertsTile", function() { return updateUnderRevisionAlertsTile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateClosedAlertsTile", function() { return updateClosedAlertsTile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateQuickBoard", function() { return updateQuickBoard; });
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./resources/js/views/dashboard/base.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../base */ "./resources/js/views/base.js");
 
@@ -101283,6 +102400,41 @@ var updateUnderRevisionAlertsTile = function updateUnderRevisionAlertsTile(marku
 var updateClosedAlertsTile = function updateClosedAlertsTile(markup) {
   return _base__WEBPACK_IMPORTED_MODULE_1__["update"](_base__WEBPACK_IMPORTED_MODULE_0__["elements"].closedAlertsTile, markup);
 };
+var updateQuickBoard = function updateQuickBoard(markup) {
+  return _base__WEBPACK_IMPORTED_MODULE_1__["update"](_base__WEBPACK_IMPORTED_MODULE_0__["elements"].quickBoard.main, markup);
+};
+
+/***/ }),
+
+/***/ "./resources/js/views/forms/reactivate-alert-triggers-form-modal.js":
+/*!**************************************************************************!*\
+  !*** ./resources/js/views/forms/reactivate-alert-triggers-form-modal.js ***!
+  \**************************************************************************/
+/*! exports provided: markup */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "markup", function() { return markup; });
+var markup = function markup() {
+  return "\n        <div id=\"reactivate-alert-triggers-modal\" class=\"modal\">\n            <div class=\"modal-background\"></div>\n            <div class=\"modal-card modal-content\">\n                <header class=\"modal-card-head has-background-success\">\n                    <p class=\"modal-card-title has-text-light\">\n                        <span class=\"icon\"><i class=\"fas fa-plug\"></i></span> Reactivate alert triggers\n                    </p>\n                    <button class=\"delete\" aria-label=\"close\"></button>\n                </header>\n                <section class=\"modal-card-body\">\n                    <form class=\"reactivate-alert-triggers-form\" method=\"POST\">\n                        <div class=\"field\">\n                            <div class=\"control\">\n                                <textarea class=\"textarea\"\n                                    id=\"reason\"\n                                    name=\"reason\"\n                                    placeholder=\"Reason\"\n                                    required></textarea>\n                            </div>\n                        </div>\n                    </form>\n                </section>\n                <footer class=\"modal-card-foot\">\n                    <div class=\"field is-grouped has-addons\">\n                        <div class=\"control\">\n                            <button class=\"button is-success validate\">\n                                <span class=\"icon is-small\">\n                                    <i class=\"fas fa-plug\"></i>\n                                </span>\n                                <span>Reactivate everything up!</span>\n                            </button>\n                        </div>\n                        <div class=\"control\">\n                            <button class=\"button is-danger is-outlined cancel\">\n                                <span class=\"icon is-small\">\n                                    <i class=\"fas fa-window-close\"></i>\n                                </span>\n                                <span>Cancel</span>\n                            </button>\n                        </div>\n                    </button>\n                </footer>\n            </div>\n        </div>\n    ";
+};
+
+/***/ }),
+
+/***/ "./resources/js/views/forms/shutdown-alert-triggers-form-modal.js":
+/*!************************************************************************!*\
+  !*** ./resources/js/views/forms/shutdown-alert-triggers-form-modal.js ***!
+  \************************************************************************/
+/*! exports provided: markup */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "markup", function() { return markup; });
+var markup = function markup() {
+  return "\n        <div id=\"shutdown-alert-triggers-modal\" class=\"modal\">\n            <div class=\"modal-background\"></div>\n            <div class=\"modal-card modal-content\">\n                <header class=\"modal-card-head has-background-danger\">\n                    <p class=\"modal-card-title has-text-light\">\n                        <span class=\"icon\"><i class=\"fas fa-power-off\"></i></span> Shutdown alert triggers\n                    </p>\n                    <button class=\"delete\" aria-label=\"close\"></button>\n                </header>\n                <section class=\"modal-card-body\">\n                    <form class=\"shutdown-alert-triggers-form\" method=\"POST\">\n                        <div class=\"field\">\n                            <div class=\"control\">\n                                <textarea class=\"textarea\"\n                                    id=\"reason\"\n                                    name=\"reason\"\n                                    placeholder=\"Reason\"\n                                    required></textarea>\n                            </div>\n                        </div>\n                    </form>\n                </section>\n                <footer class=\"modal-card-foot\">\n                    <div class=\"field is-grouped has-addons\">\n                        <div class=\"control\">\n                            <button class=\"button is-danger validate\">\n                                <span class=\"icon is-small\">\n                                    <i class=\"fas fa-power-off\"></i>\n                                </span>\n                                <span>Shut everything down!</span>\n                            </button>\n                        </div>\n                        <div class=\"control\">\n                            <button class=\"button is-danger is-outlined cancel\">\n                                <span class=\"icon is-small\">\n                                    <i class=\"fas fa-window-close\"></i>\n                                </span>\n                                <span>Cancel</span>\n                            </button>\n                        </div>\n                    </button>\n                </footer>\n            </div>\n        </div>\n    ";
+};
 
 /***/ }),
 
@@ -101301,11 +102453,13 @@ __webpack_require__.r(__webpack_exports__);
 var strings = {};
 var selectors = {
   sidebar: '.sidebar',
-  menu: '.navbar.menu'
+  menu: '.navbar.menu',
+  hero: 'section.hero'
 };
 var elements = {
   sidebar: document.querySelector(selectors.sidebar),
-  menu: document.querySelector(selectors.menu)
+  menu: document.querySelector(selectors.menu),
+  hero: document.querySelector(selectors.hero)
 };
 
 /***/ }),
@@ -101314,7 +102468,7 @@ var elements = {
 /*!********************************************!*\
   !*** ./resources/js/views/layout/index.js ***!
   \********************************************/
-/*! exports provided: update, updateMenu, updateSidebar */
+/*! exports provided: update, updateMenu, updateSidebar, updateHero */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -101322,6 +102476,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "update", function() { return update; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateMenu", function() { return updateMenu; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateSidebar", function() { return updateSidebar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateHero", function() { return updateHero; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../base */ "./resources/js/views/base.js");
@@ -101350,25 +102505,28 @@ function () {
 
             _base__WEBPACK_IMPORTED_MODULE_1__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_2__["elements"].sidebar);
 
+            _base__WEBPACK_IMPORTED_MODULE_1__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_2__["elements"].hero);
+
             return _context.abrupt("return", layout.update().then(function (res) {
               _base__WEBPACK_IMPORTED_MODULE_2__["elements"].menu = _view__WEBPACK_IMPORTED_MODULE_3__["updateMenu"](layout.menu);
+              _base__WEBPACK_IMPORTED_MODULE_2__["elements"].hero = _view__WEBPACK_IMPORTED_MODULE_3__["updateHero"](layout.hero);
               _base__WEBPACK_IMPORTED_MODULE_2__["elements"].sidebar = _view__WEBPACK_IMPORTED_MODULE_3__["updateSidebar"](layout.sidebar);
             }));
 
-          case 5:
-            _context.prev = 5;
+          case 6:
+            _context.prev = 6;
             _context.t0 = _context["catch"](0);
-
-            _base__WEBPACK_IMPORTED_MODULE_1__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_2__["elements"].menu);
 
             _base__WEBPACK_IMPORTED_MODULE_1__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_2__["elements"].sidebar);
 
-          case 9:
+            _base__WEBPACK_IMPORTED_MODULE_1__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_2__["elements"].hero);
+
+          case 10:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 5]]);
+    }, _callee, null, [[0, 6]]);
   }));
 
   return function update(_x) {
@@ -101444,6 +102602,42 @@ function () {
     return _ref3.apply(this, arguments);
   };
 }();
+var updateHero =
+/*#__PURE__*/
+function () {
+  var _ref4 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(layout) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+
+            _base__WEBPACK_IMPORTED_MODULE_1__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_2__["elements"].hero);
+
+            return _context4.abrupt("return", layout.updateHero().then(function (res) {
+              _base__WEBPACK_IMPORTED_MODULE_2__["elements"].hero = _view__WEBPACK_IMPORTED_MODULE_3__["updateHero"](layout.hero);
+            }));
+
+          case 5:
+            _context4.prev = 5;
+            _context4.t0 = _context4["catch"](0);
+
+            _base__WEBPACK_IMPORTED_MODULE_1__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_2__["elements"].hero);
+
+          case 8:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, null, [[0, 5]]);
+  }));
+
+  return function updateHero(_x4) {
+    return _ref4.apply(this, arguments);
+  };
+}();
 
 /***/ }),
 
@@ -101451,13 +102645,14 @@ function () {
 /*!*******************************************!*\
   !*** ./resources/js/views/layout/view.js ***!
   \*******************************************/
-/*! exports provided: updateMenu, updateSidebar */
+/*! exports provided: updateMenu, updateSidebar, updateHero */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateMenu", function() { return updateMenu; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateSidebar", function() { return updateSidebar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateHero", function() { return updateHero; });
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./resources/js/views/layout/base.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../base */ "./resources/js/views/base.js");
 
@@ -101467,6 +102662,53 @@ var updateMenu = function updateMenu(markup) {
 };
 var updateSidebar = function updateSidebar(markup) {
   return _base__WEBPACK_IMPORTED_MODULE_1__["update"](_base__WEBPACK_IMPORTED_MODULE_0__["elements"].sidebar, markup);
+};
+var updateHero = function updateHero(markup) {
+  return _base__WEBPACK_IMPORTED_MODULE_1__["update"](_base__WEBPACK_IMPORTED_MODULE_0__["elements"].hero, markup);
+};
+
+/***/ }),
+
+/***/ "./resources/js/views/view.js":
+/*!************************************!*\
+  !*** ./resources/js/views/view.js ***!
+  \************************************/
+/*! exports provided: showShutdownAlertTriggersFormModal, removeShutdownAlertTriggersFormModal, showReactivateAlertTriggersFormModal, removeReactivateAlertTriggersFormModal */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showShutdownAlertTriggersFormModal", function() { return showShutdownAlertTriggersFormModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeShutdownAlertTriggersFormModal", function() { return removeShutdownAlertTriggersFormModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showReactivateAlertTriggersFormModal", function() { return showReactivateAlertTriggersFormModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeReactivateAlertTriggersFormModal", function() { return removeReactivateAlertTriggersFormModal; });
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./resources/js/views/base.js");
+/* harmony import */ var _forms_shutdown_alert_triggers_form_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./forms/shutdown-alert-triggers-form-modal */ "./resources/js/views/forms/shutdown-alert-triggers-form-modal.js");
+/* harmony import */ var _forms_reactivate_alert_triggers_form_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./forms/reactivate-alert-triggers-form-modal */ "./resources/js/views/forms/reactivate-alert-triggers-form-modal.js");
+
+
+
+var showShutdownAlertTriggersFormModal = function showShutdownAlertTriggersFormModal() {
+  var markup = _forms_shutdown_alert_triggers_form_modal__WEBPACK_IMPORTED_MODULE_1__["markup"]();
+  document.body.insertAdjacentHTML('beforeend', markup);
+  var modal = document.getElementById(_base__WEBPACK_IMPORTED_MODULE_0__["strings"].shutdownAlertTriggersFormModalID);
+  _base__WEBPACK_IMPORTED_MODULE_0__["showModal"](modal);
+  return modal;
+};
+var removeShutdownAlertTriggersFormModal = function removeShutdownAlertTriggersFormModal() {
+  var modal = document.getElementById(_base__WEBPACK_IMPORTED_MODULE_0__["strings"].shutdownAlertTriggersFormModalID);
+  _base__WEBPACK_IMPORTED_MODULE_0__["closeModal"](modal);
+};
+var showReactivateAlertTriggersFormModal = function showReactivateAlertTriggersFormModal() {
+  var markup = _forms_reactivate_alert_triggers_form_modal__WEBPACK_IMPORTED_MODULE_2__["markup"]();
+  document.body.insertAdjacentHTML('beforeend', markup);
+  var modal = document.getElementById(_base__WEBPACK_IMPORTED_MODULE_0__["strings"].reactivateAlertTriggersFormModalID);
+  _base__WEBPACK_IMPORTED_MODULE_0__["showModal"](modal);
+  return modal;
+};
+var removeReactivateAlertTriggersFormModal = function removeReactivateAlertTriggersFormModal() {
+  var modal = document.getElementById(_base__WEBPACK_IMPORTED_MODULE_0__["strings"].reactivateAlertTriggersFormModalID);
+  _base__WEBPACK_IMPORTED_MODULE_0__["closeModal"](modal);
 };
 
 /***/ }),

@@ -56,6 +56,25 @@ export default class Dashboard {
             console.log(error);
         }
     }
+
+    async updateQuickBoard() {
+        try {
+            let url = '';
+            url = `/dashboard/quick-board`;
+            if (this.clientID) {
+                url = `${url}/${this.clientID}`;
+            }
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(url).then(response => {
+                        this.quickBoard = response.data;
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
     
     async updateClients() {
         try {

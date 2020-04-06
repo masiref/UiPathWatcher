@@ -53,6 +53,11 @@ class DashboardController extends Controller
         ]);
     }
 
+    /**
+     * Show information tiles.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function tiles(Request $request, Client $client = null)
     {
         $tiles = [
@@ -171,6 +176,23 @@ class DashboardController extends Controller
         return view('dashboard.watched-automated-process.element')
             ->with('watchedAutomatedProcess', $watchedAutomatedProcess)
             ->with('autonomous', $autonomous);
+    }
+
+    /**
+     * Show quick board.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function quickBoard(Request $request, Client $client = null)
+    {
+        if ($client) {
+            return view('dashboard.client.quick-board', [
+                'client' => $client
+            ]);
+        }
+        return view('dashboard.quick-board', [
+            'clients' => Client::all()
+        ]);
     }
 
     public function debug(UiPathOrchestratorService $service)
