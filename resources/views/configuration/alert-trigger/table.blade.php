@@ -6,7 +6,7 @@
         <th>Title</th>
         <th>Is active?</th>
         <th>Is ignored?</th>
-        <th>More</th>
+        {{--<th>More</th>--}}
     </thead>
     <tbody>
         @foreach($alertTriggers as $alertTrigger)
@@ -17,7 +17,7 @@
                 <td>{{ $alertTrigger->title }}</td>
                 <td>{{ $alertTrigger->active ? 'Yes' : 'No' }}</td>
                 <td>{{ $alertTrigger->ignored ? 'Yes' : 'No' }}</td>
-                <td></td>
+                {{--<td></td>--}}
             </tr>
         @endforeach
     </tbody>

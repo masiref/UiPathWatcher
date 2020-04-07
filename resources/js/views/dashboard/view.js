@@ -30,5 +30,5 @@ export const updateClosedAlertsTile = markup => {
 };
 
 export const updateQuickBoard = markup => {
-    return _base.update(elements.quickBoard.main, markup);
+    return _base.update(document.querySelector(selectors.quickBoard.main), markup);
 };

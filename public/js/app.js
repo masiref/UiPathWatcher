@@ -97791,13 +97791,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 
 var header = function header(title, alert) {
-  return "\n        <header class=\"modal-card-head has-background-".concat(alert.level, "\">\n            <p class=\"modal-card-title has-text-light\">\n                <span class=\"icon\"><i class=\"fas fa-burn\"></i></span> ").concat(title, "\n            </p>\n            <button class=\"delete\" aria-label=\"close\"></button>\n        </header>\n    ");
+  return "\n        <header class=\"modal-card-head has-background-".concat(alert.definition.level, "\">\n            <p class=\"modal-card-title has-text-light\">\n                <span class=\"icon\"><i class=\"fas fa-burn\"></i></span> ").concat(title, "\n            </p>\n            <button class=\"delete\" aria-label=\"close\"></button>\n        </header>\n    ");
 };
 var footer = function footer(successButtonLabel, successButtonIcon) {
   return "\n        <footer class=\"modal-card-foot\">\n            <div class=\"field is-grouped has-addons\">\n                <div class=\"control\">\n                    <button class=\"button is-success validate\">\n                        <span class=\"icon is-small\">\n                            <i class=\"fas fa-".concat(successButtonIcon, "\"></i>\n                        </span>\n                        <span>").concat(successButtonLabel, "</span>\n                    </button>\n                </div>\n                <div class=\"control\">\n                    <button class=\"button is-danger is-outlined cancel\">\n                        <span class=\"icon is-small\">\n                            <i class=\"fas fa-window-close\"></i>\n                        </span>\n                        <span>Cancel</span>\n                    </button>\n                </div>\n            </button>\n        </footer>\n    ");
 };
 var titleBlock = function titleBlock(alert) {
-  return "\n        <div class=\"columns\">\n            <div class=\"column\">\n                <div class=\"field\">\n                    <label class=\"label\">Client</label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"".concat(alert.watched_automated_process.client.name, "\" readonly>\n                    </div>\n                </div>\n                <div class=\"field\">\n                    <label class=\"label\">Watched automated process</label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"").concat(alert.watched_automated_process.name, "\" readonly>\n                    </div>\n                </div>\n            </div>\n            <div class=\"column\">\n                <div class=\"field\">\n                    <label class=\"label\">Alert</label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"").concat(alert.label, "\" readonly>\n                    </div>\n                </div>\n                <div class=\"field\">\n                    <label class=\"label\">Detected on</label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"").concat(moment__WEBPACK_IMPORTED_MODULE_0___default()(alert.created_at).format('DD/MM/YYYY HH:mm:ss'), "\" readonly>\n                    </div>\n                </div>\n            </div>\n        </div>\n    ");
+  return "\n        <div class=\"columns\">\n            <div class=\"column\">\n                <div class=\"field\">\n                    <label class=\"label\">Client</label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"".concat(alert.watched_automated_process.client.name, "\" readonly>\n                    </div>\n                </div>\n                <div class=\"field\">\n                    <label class=\"label\">Watched automated process</label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"").concat(alert.watched_automated_process.name, "\" readonly>\n                    </div>\n                </div>\n            </div>\n            <div class=\"column\">\n                <div class=\"field\">\n                    <label class=\"label\">Alert</label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"").concat(alert.trigger.title, "\" readonly>\n                    </div>\n                </div>\n                <div class=\"field\">\n                    <label class=\"label\">Detected on</label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"").concat(moment__WEBPACK_IMPORTED_MODULE_0___default()(alert.created_at).format('DD/MM/YYYY HH:mm:ss'), "\" readonly>\n                    </div>\n                </div>\n            </div>\n        </div>\n    ");
 };
 var underRevisionBlock = function underRevisionBlock(alert) {
   return "\n        <article class=\"message is-info is-small\">\n            <div class=\"message-body\">\n                Revision started on ".concat(moment__WEBPACK_IMPORTED_MODULE_0___default()(alert.revision_started_at).format('DD/MM/YYYY HH:mm:ss'), "\n                <small>\n                    (").concat(moment__WEBPACK_IMPORTED_MODULE_0___default()(alert.revision_started_at).fromNow(), ")\n                </small>\n            </div>\n        </article>\n    ");
@@ -97878,7 +97878,7 @@ function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(dashboard, target) {
-    var _id, _id2, _id3, _id4;
+    var id, _id, _id2, _id3;
 
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
@@ -97887,26 +97887,26 @@ function () {
             try {
               // Handle start revision button
               if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].revisionButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].revisionButtonChildren))) {
-                _id = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].revisionButton).dataset.id;
-                startRevision(dashboard, _id);
+                id = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].revisionButton).dataset.id;
+                startRevision(dashboard, id);
               } // Handle undo revision button
 
 
               if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].cancelButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].cancelButtonChildren))) {
-                _id2 = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].cancelButton).dataset.id;
-                undoRevision(dashboard, _id2);
+                _id = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].cancelButton).dataset.id;
+                undoRevision(dashboard, _id);
               } // Handle close button
 
 
               if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].closeButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].closeButtonChildren))) {
-                _id3 = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].closeButton).dataset.id;
-                close(dashboard, _id3);
+                _id2 = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].closeButton).dataset.id;
+                close(dashboard, _id2);
               } // Handle ignore button
 
 
               if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].ignoreButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].ignoreButtonChildren))) {
-                _id4 = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].ignoreButton).dataset.id;
-                ignore(dashboard, _id4);
+                _id3 = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].ignoreButton).dataset.id;
+                ignore(dashboard, _id3);
               }
             } catch (error) {
               console.log("Failed to init alert controller: ".concat(error));
@@ -98179,7 +98179,7 @@ function () {
                   alert.close(falsePositiveCheckbox.checked, descriptionTextarea.value.trim()).then(function (res) {
                     /*updateAfterAction(dashboard, 'closing_related_action', alert)*/
                     _dashboard_index__WEBPACK_IMPORTED_MODULE_7__["update"]().then(function (res) {
-                      _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
+                      _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](alert.id);
                     });
                   });
                 } catch (error) {
@@ -98818,8 +98818,8 @@ var isConfigurationAlertTriggerRelatedURL = function isConfigurationAlertTrigger
   return isRelated.test(url);
 };
 var validURL = function validURL(str) {
-  var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
-  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+  var pattern = new RegExp('^(https?:\\/\\/)' + // protocol
+  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
   '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
   '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
   '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
@@ -102326,7 +102326,7 @@ function () {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            quickBoard = _base__WEBPACK_IMPORTED_MODULE_3__["elements"].quickBoard.main;
+            quickBoard = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].quickBoard.main);
             _context3.prev = 1;
 
             _base__WEBPACK_IMPORTED_MODULE_2__["renderLoader"](quickBoard);
@@ -102401,7 +102401,7 @@ var updateClosedAlertsTile = function updateClosedAlertsTile(markup) {
   return _base__WEBPACK_IMPORTED_MODULE_1__["update"](_base__WEBPACK_IMPORTED_MODULE_0__["elements"].closedAlertsTile, markup);
 };
 var updateQuickBoard = function updateQuickBoard(markup) {
-  return _base__WEBPACK_IMPORTED_MODULE_1__["update"](_base__WEBPACK_IMPORTED_MODULE_0__["elements"].quickBoard.main, markup);
+  return _base__WEBPACK_IMPORTED_MODULE_1__["update"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].quickBoard.main), markup);
 };
 
 /***/ }),

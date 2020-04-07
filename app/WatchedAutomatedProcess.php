@@ -196,13 +196,39 @@ class WatchedAutomatedProcess extends Model
         return "Running from $timeFrom until $timeUntil on $days";
     }
 
+    /**
+     * Number of online robots belonging to the process
+     */
     public function onlineRobotsCount()
     {
         return $this->robots()->where('is_online', true)->count();
     }
 
+    /**
+     * Number of logging robots belonging to the process
+     */
     public function loggingRobotsCount()
     {
         return $this->robots()->where('is_logging', true)->count();
     }
+
+    /**
+     * Is the process running on specified date
+     */
+    public function runningOnDate(Carbon $date)
+    {
+        $dayOfWeek = $date->dayOfWeek;
+        $time = $date->format('H:i:s');
+        
+        return 
+            (($this->running_period_monday && $dayOfWeek === 1) ||
+            ($this->running_period_tuesday && $dayOfWeek === 2) ||
+            ($this->running_period_wednesday && $dayOfWeek === 3) ||
+            ($this->running_period_thursday && $dayOfWeek === 4) ||
+            ($this->running_period_friday && $dayOfWeek === 5) ||
+            ($this->running_period_saturday && $dayOfWeek === 6) ||
+            ($this->running_period_sunday && $dayOfWeek === 0)) &&
+            $time >= $this->running_period_time_from
+            && $time <= $this->running_period_time_until;
+     }
 }

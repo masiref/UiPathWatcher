@@ -15,7 +15,7 @@
                     @if (!$alertTriggerService->isUnderShutdown())
                         <div class="level-right">
                             <div class="level-item">
-                                <button class="button is-danger is-large" id="shutdown-alert-triggers">
+                                <button class="button is-danger" id="shutdown-alert-triggers">
                                     <span class="icon"><i class="fas fa-power-off"></i></span>
                                     <span>Shutdown alert triggers</span>
                                 </button>
@@ -24,7 +24,7 @@
                     @else
                         <div class="level-right">
                             <div class="level-item">
-                                <button class="button is-success is-large" id="reactivate-alert-triggers">
+                                <button class="button is-success" id="reactivate-alert-triggers">
                                     <span class="icon"><i class="fas fa-plug"></i></span>
                                     <span>Reactivate alert triggers</span>
                                 </button>

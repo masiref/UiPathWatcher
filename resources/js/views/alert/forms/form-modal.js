@@ -2,7 +2,7 @@ import moment from 'moment';
 
 export const header = (title, alert) => {
     return `
-        <header class="modal-card-head has-background-${alert.level}">
+        <header class="modal-card-head has-background-${alert.definition.level}">
             <p class="modal-card-title has-text-light">
                 <span class="icon"><i class="fas fa-burn"></i></span> ${title}
             </p>
@@ -57,7 +57,7 @@ export const titleBlock = alert => {
                 <div class="field">
                     <label class="label">Alert</label>
                     <div class="control">
-                        <input class="input is-static" type="text" value="${alert.label}" readonly>
+                        <input class="input is-static" type="text" value="${alert.trigger.title}" readonly>
                     </div>
                 </div>
                 <div class="field">

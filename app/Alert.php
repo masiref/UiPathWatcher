@@ -10,11 +10,21 @@ use Carbon\Carbon;
 class Alert extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'parent_id', 'alert_trigger_id', 'alert_trigger_definition_id', 'watched_automated_process_id',
+        'reviewer_id', 'under_revision', 'revision_started_at', 'closed', 'closed_at', 'closing_description'
+    ];
+
+    /**
      * The relationships that should always be loaded.
      *
      * @var array
      */
-    protected $with = ['reviewer'];
+    protected $with = ['trigger', 'definition', 'reviewer'];
 
     protected static function boot()
     {
@@ -30,7 +40,7 @@ class Alert extends Model
      */
     public function parent()
     {
-        return $this->hasOne('App\Alert', 'parent_id');
+        return $this->belongsTo('App\Alert', 'parent_id');
     }
 
     /**
@@ -117,7 +127,9 @@ class Alert extends Model
         $this->trigger->ignored = true;
         $this->ignored = true;
         $this->closed = true;
-        $this->ignorance_description = $description;
+        $this->closing_description = $description;
+        $this->trigger->ignorance_description = $description;
+        $this->trigger->save();
         
         return $this->save();
     }
@@ -225,7 +237,7 @@ class Alert extends Model
      **/
     public function levelOrder()
     {
-       switch ($this->level)
+       switch ($this->definition->level)
        {
            case 'danger':
                return 1;

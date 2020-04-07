@@ -19,7 +19,7 @@ class AlertTriggerDefinition extends Model
      *
      * @var array
      */
-    protected $with = ['rules'];
+    //protected $with = ['rules'];
 
     /**
      * Get the alert trigger that owns the alert trigger definition.

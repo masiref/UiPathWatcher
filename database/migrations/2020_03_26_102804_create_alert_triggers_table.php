@@ -21,6 +21,7 @@ class CreateAlertTriggersTable extends Migration
             $table->boolean('ignored')->default(false);
             $table->dateTime('ignored_from')->nullable(true);
             $table->dateTime('ignored_until')->nullable(true);
+            $table->text('ignorance_description')->nullable(true);
             $table->timestamps();
 
             $table->foreign('watched_automated_process_id')

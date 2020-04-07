@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\RequestException;
 use Carbon\Carbon;
+use App\AlertTrigger;
+use App\Alert;
 
 class AppController extends Controller
 {
@@ -40,59 +42,65 @@ class AppController extends Controller
         return null;
     }
 
-    public function debug(UiPathOrchestratorService $service)
+    public function debug(AlertTriggerService $service)
     {
-        $guzzle = new Guzzle([
-            'base_uri' => 'http://swdcfregb705:9200/'
-        ]);
-
-        try {
-            $json = '
-                {
-                    "sort":[
-                        {
-                            "timestamp":{
-                                "order":"desc",
-                                "unmapped_type":"boolean"
+        $messages = array();
+        if (!$service->isUnderShutdown()) {
+            $triggers = AlertTrigger::all()->where('active', true)->where('ignored', false);
+            $now = Carbon::now();
+            foreach ($triggers as $trigger) {
+                $wap = $trigger->watchedAutomatedProcess;
+                if ($wap->runningOnDate($now)) {
+                    array_push($messages, "$now in $wap running period");
+                    $definitions = $trigger->definitions->sortByDesc(function($definition) {
+                        return $definition->levelOrder();
+                    })->sortBy('rank');
+                    $alert = null;
+                    foreach ($definitions as $definition) {
+                        array_push($messages, "verifying definition {$definition->rank}");
+                        $verified = false;
+                        $rules = $definition->rules;
+                        foreach ($rules as $rule) {
+                            array_push($messages, "verifying rule {$rule->rank}");
+                            $verified = $service->verifyRule($rule);
+                            if (!$verified) {
+                                break;
                             }
                         }
-                    ],
-                    "query":{
-                        "bool":{
-                            "must":[
-                                {
-                                    "query_string":{
-                                        "query":"DestCountry: IT",
-                                        "analyze_wildcard":true
-                                    }
-                                }
-                            ],
-                            "filter":[
-                                {
-                                    "range":{
-                                        "timestamp":{
-                                            "format":"strict_date_optional_time",
-                                            "gte":"2020-03-30T20:41:23.862Z",
-                                            "lte":"2020-03-30T20:56:23.863Z"
-                                        }
-                                    }
-                                }
-                            ]
+                        if ($verified) {
+                            $existingAlert = $trigger->openedAlerts()->first();
+                            if ($existingAlert) {
+                                array_push($messages, "existing alert {$existingAlert->id}");
+                            }
+                            $alert = Alert::create([
+                                'alert_trigger_id' => $trigger->id,
+                                'alert_trigger_definition_id' => $definition->id,
+                                'watched_automated_process_id' => $wap->id,
+                                'reviewer_id' => $existingAlert ? $existingAlert->reviewer_id : null,
+                                'under_revision' => $existingAlert ? $existingAlert->under_revision : false,
+                                'revision_started_at' => $existingAlert ? $existingAlert->revision_started_at : null
+                            ]);
+                            array_push($messages, "$alert->id created");
+                            if ($existingAlert) {
+                                $existingAlert->update([
+                                    'closed' => true,
+                                    'closed_at' => $alert->created_at,
+                                    'closing_description' => 'Parent alert created',
+                                    'under_revision' => false,
+                                    'parent_id' => $alert->id
+                                ]);
+                                array_push($messages, "{$alert->id} updated");
+                            }
+                            break;
                         }
                     }
+                } else {
+                    array_push($messages, "$now not in $wap running period");
                 }
-            ';
-            $response = $guzzle->request('POST', 'kibana_sample_data_flights/_search', [
-                'headers' => [
-                    'Content-Type' => 'application/json',
-                    'Accept' => 'application/json'
-                ],
-                'body' => $json
-            ]);
-            return json_decode($response->getBody(), true)['hits']['total']['value'];
-        } catch (RequestException $e) {
-            return $e;
+            }
+        } else {
+            array_push($messages, 'Under shutdown');
         }
-        return null;
+        return json_encode($messages);
     }
 }

@@ -58,7 +58,7 @@ class UiPathRobot extends Model
     public function level()
     {
         $level = 'success';
-        if ($this->is_logging) {
+        if (!$this->is_logging) {
             $level = 'warning';
         }
         if (!$this->is_online) {

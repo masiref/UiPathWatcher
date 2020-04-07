@@ -25,7 +25,7 @@
                     <i class="fas fa-eye-slash"></i>
                 </span>
             </button>
-            <button class="button is-{{ $alert->level }} has-tooltip-bottom cancel-btn {{ $small ?? '' ? 'is-small' : '' }}"
+            <button class="button is-{{ $alert->definition->level }} has-tooltip-bottom cancel-btn {{ $small ?? '' ? 'is-small' : '' }}"
                 data-tooltip="Cancel review"
                 data-id="{{ $alert->id }}">
                 <span class="icon is-large">
@@ -42,7 +42,7 @@
             </button>
         @endif
     @else
-        <button class="button is-{{ $alert->level }} has-tooltip-bottom revision-btn {{ $small ?? '' ? 'is-small' : '' }}"
+        <button class="button is-{{ $alert->definition->level }} has-tooltip-bottom revision-btn {{ $small ?? '' ? 'is-small' : '' }}"
             data-tooltip="Review"
             data-id="{{ $alert->id }}">
             <span class="icon is-large">

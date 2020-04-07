@@ -1,6 +1,6 @@
 <tr id="alert-row-{{ $alert->id }}">
     <td data-order="{{ $alert->levelOrder() }}">
-        <span class="icon has-text-{{ $alert->level }}">
+        <span class="icon has-text-{{ $alert->definition->level }}">
             <i class="fas fa-burn"></i>
         </span>
     </td>
@@ -13,7 +13,7 @@
         data-tooltip="{{ $alert->watchedAutomatedProcess->name }}">
         {{ $alert->watchedAutomatedProcess->code }}
     </td>
-    <td>{{ $alert->label }}</td>
+    <td>{{ $alert->trigger->title }}</td>
     @if ($options['closed'])
         <td data-order="{{ $alert->closedAtTimestamp() }}">
             {{ $alert->closedAt() }}

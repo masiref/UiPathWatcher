@@ -103,7 +103,7 @@ export const updateTiles = async () => {
 };
 
 export const updateQuickBoard = async () => {
-    let quickBoard = base.elements.quickBoard.main;
+    let quickBoard = document.querySelector(base.selectors.quickBoard.main);
     try {
         _base.renderLoader(quickBoard);
         return dashboard.updateQuickBoard().then(response => {

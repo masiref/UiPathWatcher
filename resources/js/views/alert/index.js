@@ -147,7 +147,7 @@ export const commitClose = async(dashboard, alert) => {
                 alert.close(falsePositiveCheckbox.checked, descriptionTextarea.value.trim()).then(res => {
                     /*updateAfterAction(dashboard, 'closing_related_action', alert)*/
                     dashboardController.update().then(res => {
-                        view.clearLoaders(id);
+                        view.clearLoaders(alert.id);
                     });
                 });
             } catch (error) {

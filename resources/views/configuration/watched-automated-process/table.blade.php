@@ -6,7 +6,7 @@
         <th>Processes</th>
         <th>Robots</th>
         <th>Queues</th>
-        <th>More</th>
+        {{--<th>More</th>--}}
     </thead>
     <tbody>
         @foreach($watchedAutomatedProcesses as $wap)
@@ -41,7 +41,7 @@
                         </ul>
                     @endif
                 </td>
-                <td>
+                {{--<td>
                     <div class="buttons is-right">
                         <button class="button is-link has-tooltip-left is-small"
                             data-tooltip="{{ ($wap->additional_information ? $wap->additional_information . ' | ' : '') . $wap->runningPeriod() }}">
@@ -50,7 +50,7 @@
                             </span>
                         </button>
                     </div>
-                </td>
+                </td>--}}
             </tr>
         @endforeach
     </tbody>

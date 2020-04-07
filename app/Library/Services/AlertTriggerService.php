@@ -3,6 +3,7 @@
 namespace App\Library\Services;
 
 use App\AlertTriggerShutdown;
+use App\AlertTriggerRule;
 
 class AlertTriggerService {
 
@@ -14,5 +15,10 @@ class AlertTriggerService {
     public function currentShutdown()
     {
         return AlertTriggerShutdown::where('ended_at', null)->first();
+    }
+
+    public function verifyRule(AlertTriggerRule $rule)
+    {
+        return true;
     }
 }

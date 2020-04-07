@@ -19,7 +19,7 @@ class AlertTrigger extends Model
      *
      * @var array
      */
-    protected $with = ['definitions'];
+    //protected $with = ['definitions'];
 
     /**
      * Get the alerts for the alert trigger.
@@ -27,6 +27,16 @@ class AlertTrigger extends Model
     public function alerts()
     {
         return $this->hasMany('App\Alert');
+    }
+
+    /**
+     * The opened alerts that belong to the trigger
+     */
+    public function openedAlerts()
+    {
+        return $this->alerts()->get()->where('closed', false)->sortBy(function($alert) {
+            return $alert->levelOrder();
+        })->sortBy('created_at');
     }
 
     /**
