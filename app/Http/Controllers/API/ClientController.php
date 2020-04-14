@@ -54,7 +54,10 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        if ($client->update($request->all())) {
+            return $client;
+        }
+        return null;
     }
 
     /**
@@ -65,6 +68,9 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        if ($client->delete()) {
+            return 'deleted';
+        }
+        return null;
     }
 }

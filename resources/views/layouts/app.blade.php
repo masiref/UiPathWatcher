@@ -24,11 +24,11 @@
             @else
                 <div class="container">
                     <div class="columns">
-                        <div class="column is-3">
+                        <div class="column is-one-fifth is-hidden-touch">
                             @include('layouts.sidebar')
                         </div>
 
-                        <div class="column is-9">
+                        <div class="column">
                             @include('layouts.hero')
                             @yield('content')
                         </div>

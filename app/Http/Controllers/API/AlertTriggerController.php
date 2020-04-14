@@ -72,11 +72,11 @@ class AlertTriggerController extends Controller
                         'is_triggered_on_sunday' => $rule['is_triggered_on_sunday'],
                         'parameters' => $rule['parameters']
                     ]);
-                    $uiPathProcesses = UiPathProcess::find($rule['processes']);
+                    $uiPathProcesses = UiPathProcess::find(array_column($rule['processes'], 'id'));
                     $alertTriggerRule->processes()->attach($uiPathProcesses);
-                    $uiPathRobots = UiPathRobot::find($rule['robots']);
+                    $uiPathRobots = UiPathRobot::find(array_column($rule['robots'], 'id'));
                     $alertTriggerRule->robots()->attach($uiPathRobots);
-                    $uiPathQueues = UiPathQueue::find($rule['queues']);
+                    $uiPathQueues = UiPathQueue::find(array_column($rule['queues'], 'id'));
                     $alertTriggerRule->queues()->attach($uiPathQueues);
                 }
             }

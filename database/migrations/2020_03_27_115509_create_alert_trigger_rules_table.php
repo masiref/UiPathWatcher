@@ -18,7 +18,8 @@ class CreateAlertTriggerRulesTable extends Migration
             $table->unsignedBigInteger('alert_trigger_definition_id');
             $table->enum('type', [
                 'none',
-                'jobs-duration',
+                'jobs-min-duration',
+                'jobs-max-duration',
                 'faulted-jobs-percentage',
                 'failed-queue-items-percentage',
                 'elastic-search-query'

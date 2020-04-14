@@ -53,7 +53,7 @@ class UiPathOrchestratorController extends Controller
      */
     public function show(UiPathOrchestrator $uiPathOrchestrator)
     {
-        //
+        return $uiPathOrchestrator;
     }
 
     /**
@@ -76,7 +76,10 @@ class UiPathOrchestratorController extends Controller
      */
     public function update(Request $request, UiPathOrchestrator $uiPathOrchestrator)
     {
-        //
+        if ($uiPathOrchestrator->update($request->all())) {
+            return $uiPathOrchestrator;
+        }
+        return null;
     }
 
     /**
@@ -87,6 +90,9 @@ class UiPathOrchestratorController extends Controller
      */
     public function destroy(UiPathOrchestrator $uiPathOrchestrator)
     {
-        //
+        if ($uiPathOrchestrator->delete()) {
+            return 'deleted';
+        }
+        return null;
     }
 }

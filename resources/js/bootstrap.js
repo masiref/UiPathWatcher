@@ -53,4 +53,14 @@ if (token) {
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
-}
+};
+
+// DataTables
+$('.table').DataTable({
+    responsive: true,
+    select: {
+        className: 'is-selected',
+        info: false,
+        toggleable: false
+    }
+});

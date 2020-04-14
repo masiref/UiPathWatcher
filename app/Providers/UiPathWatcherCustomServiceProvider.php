@@ -16,8 +16,8 @@ class UiPathWatcherCustomServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Library\Services\AlertTriggerService', function($app) {
-            return new AlertTriggerService();
+        $this->app->singleton('App\Library\Services\AlertTriggerService', function($app) {
+            return new AlertTriggerService(new UiPathOrchestratorService());
         });
 
         $this->app->singleton('App\Library\Services\UiPathOrchestratorService', function($app) {

@@ -30,11 +30,9 @@
         
         <div class="is-divider"></div>
 
-        @include('layouts.title', [
-            'title' => 'Add a new orchestrator',
-            'icon' => 'plus-circle',
-            'color' => 'primary'
-        ])
-        @include('configuration.orchestrator.add-form')
+        <div class="forms-section">
+            @include('configuration.orchestrator.form.add')
+            @include('configuration.orchestrator.form.edit')
+        </div>
     </div>
 @endsection

@@ -61,7 +61,7 @@ class User extends Authenticatable
      */
     public function closedAlerts()
     {
-        return $this->alerts()->get()->where('closed', true)->sortByDesc('created_at');
+        return $this->alerts()->get()->where('closed', true)->where('parent', null)->sortByDesc('created_at');
     }
 
     /**
@@ -79,13 +79,13 @@ class User extends Authenticatable
     {
         $openedAlerts = $this->openedAlerts();
         
-        if (count($openedAlerts->where('level', 'danger')) > 0)
+        if (count($openedAlerts->where('definition.level', 'danger')) > 0)
             return 'danger';
         
-        if (count($openedAlerts->where('level', 'warning')) > 0)
+        if (count($openedAlerts->where('definition.level', 'warning')) > 0)
             return 'warning';
         
-        if (count($openedAlerts->where('level', 'info')) > 0)
+        if (count($openedAlerts->where('definition.level', 'info')) > 0)
             return 'info';
 
         return 'success';

@@ -61,7 +61,7 @@
             <div class="field">
                 <div class="control">
                     <div class="buttons is-centered">
-                        <button class="button is-primary is-medium trigger-details--alert-definition--add-button">
+                        <button class="button is-primary is-large trigger-details--alert-definition--add-button">
                             <span class="icon is-small">
                                 <i class="fas fa-plus-circle"></i>
                             </span>

@@ -50,6 +50,19 @@ class ConfigurationClientController extends Controller
     }
 
     /**
+     * Show the edit form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request, Client $client)
+    {
+        return view('configuration.client.form.edit', [
+            'client' => $client,
+            'orchestrators' => UiPathOrchestrator::all()
+        ]);
+    }
+
+    /**
      * Show the clients as table.
      *
      * @return \Illuminate\Http\Response

@@ -47,10 +47,10 @@ export const selectors = {
                     maximalDurationInput: 'input.trigger-details--alert-definition--jobs-duration-rule--maximal-duration-input'
                 },
                 faultedJobsPercentageControls: {
-                    minimalPercentageInput: 'input.trigger-details--alert-definition--faulted-jobs-percentage-rule--minimal-percentage-input'
+                    maximalPercentageInput: 'input.trigger-details--alert-definition--faulted-jobs-percentage-rule--maximal-percentage-input'
                 },
                 failedQueueItemsPercentageControls: {
-                    minimalPercentageInput: 'input.trigger-details--alert-definition--failed-queue-items-percentage-rule--minimal-percentage-input'
+                    maximalPercentageInput: 'input.trigger-details--alert-definition--failed-queue-items-percentage-rule--maximal-percentage-input'
                 },
                 elasticSearchQueryControls: {
                     searchQueryInput: 'input.trigger-details--alert-definition--elastic-search-query-rule--search-query-input',

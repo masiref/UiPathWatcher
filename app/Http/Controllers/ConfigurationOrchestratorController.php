@@ -54,6 +54,17 @@ class ConfigurationOrchestratorController extends Controller
     }
 
     /**
+     * Show the edit form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request, UiPathOrchestrator $orchestrator)
+    {
+        return view('configuration.orchestrator.form.edit')
+            ->with('orchestrator', $orchestrator);
+    }
+
+    /**
      * Show the orchestrators as table.
      *
      * @return \Illuminate\Http\Response

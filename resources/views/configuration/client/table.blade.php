@@ -7,7 +7,7 @@
     </thead>
     <tbody>
         @foreach($clients as $client)
-            <tr>
+            <tr data-id="{{ $client->id }}">
                 <td>{{ $client->name }}</td>
                 <td>{{ $client->code }}</td>
                 <td>

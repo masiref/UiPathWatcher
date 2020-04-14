@@ -34,7 +34,7 @@ class DashboardController extends Controller
     public function index()
     {
         $pendingAlerts = Alert::all()->where('closed', false);
-        $closedAlerts = Alert::all()->where('closed', true);
+        $closedAlerts = Alert::all()->where('closed', true)->where('parent', null);
         $clients = Client::all();
 
         return view('dashboard.index', [
@@ -49,7 +49,7 @@ class DashboardController extends Controller
             'alertTriggersCount' => AlertTrigger::all()->count(),
             'openedAlertsCount' => Alert::where('closed', false)->count(),
             'underRevisionAlertsCount' => Alert::where('under_revision', true)->count(),
-            'closedAlertsCount' => Alert::where('closed', true)->count()
+            'closedAlertsCount' => $closedAlerts->count()
         ]);
     }
 
@@ -120,7 +120,7 @@ class DashboardController extends Controller
                 break;
 
                 case 'alerts-closed':
-                $value = $alerts->where('closed', true)->count();
+                $value = $alerts->where('closed', true)->where('parent', null)->count();
                 $parameter = 'closedAlertsCount';
                 break;
             }
@@ -147,6 +147,9 @@ class DashboardController extends Controller
     public function alertTable(Request $request, $closed, $id)
     {
         $alerts = Alert::all()->where('closed', $closed);
+        if ($closed) {
+            $alerts = $alerts->where('parent', null);
+        }
         return view('dashboard.alert.table')
             ->with('alerts', $alerts)
             ->with('tableID', $id)

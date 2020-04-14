@@ -4,10 +4,10 @@
             <p class="control is-expanded has-icons-left has-icons-right has-tooltip-bottom"
                 data-tooltip="Must be a positive integer value.">
                 <input class="input is-danger trigger-details--alert-definition--rule--parameter
-                    trigger-details--alert-definition--faulted-jobs-percentage-rule--minimal-percentage-input"
-                    type="text" placeholder="Minimal faulted jobs percentage">
+                    trigger-details--alert-definition--faulted-jobs-percentage-rule--maximal-percentage-input"
+                    type="text" placeholder="Maximal faulted jobs percentage">
                 <span class="icon is-small is-left">
-                    <i class="fas fa-greater-than-equal"></i>
+                    <i class="fas fa-less-than-equal"></i>
                 </span>
                 <span class="icon is-small is-right">
                     <i class="fas fa-percentage"></i>

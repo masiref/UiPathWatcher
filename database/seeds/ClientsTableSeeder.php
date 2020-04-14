@@ -11,18 +11,18 @@ class ClientsTableSeeder extends Seeder
      */
     public function run()
     {
-        $orchestrator = App\UiPathOrchestrator::where('code', 'NPS')->first();
+        $orchestrator = App\UiPathOrchestrator::where('code', 'DEV17')->first();
         $client = new App\Client([
-            'name' => 'Natixis Payments',
-            'code' => 'NPS'
+            'name' => 'Robotics Team',
+            'code' => '89C3R-R'
         ]);
         $client->orchestrator()->associate($orchestrator);
         $client->save();
 
-        $orchestrator = App\UiPathOrchestrator::where('code', 'NL')->first();
+        $orchestrator = App\UiPathOrchestrator::where('code', 'DEV19')->first();
         $client = new App\Client([
-            'name' => 'Natixis Lease',
-            'code' => 'NL'
+            'name' => 'Migration Team',
+            'code' => 'MIG'
         ]);
         $client->orchestrator()->associate($orchestrator);
         $client->save();

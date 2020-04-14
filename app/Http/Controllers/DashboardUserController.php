@@ -31,7 +31,7 @@ class DashboardUserController extends Controller
     {
         $alerts = Alert::all()->where('reviewer_id', Auth::user()->id);
         $pendingAlerts = $alerts->where('closed', false);
-        $closedAlerts = $alerts->where('closed', true);
+        $closedAlerts = $alerts->where('closed', true)->where('parent', null);
         $clients = Client::all();
 
         return view('dashboard.user.index', [
@@ -70,7 +70,7 @@ class DashboardUserController extends Controller
                 break;
 
                 case 'alerts-closed':
-                $count = $alerts->where('closed', true)->count();
+                $count = $alerts->where('closed', true)->where('parent', null)->count();
                 $parameter = 'closedAlertsCount';
                 break;
             }
@@ -88,6 +88,9 @@ class DashboardUserController extends Controller
         $user = Auth::user();
         $alerts = Alert::whereHas('watchedAutomatedProcess', function($query) use($user, $closed) {
             $query->where('reviewer_id', $user->id)->where('closed', $closed);
+            if ($closed) {
+                $query->where('parent_id', null);
+            }
         })->get();
         return view('dashboard.alert.table')
             ->with('alerts', $alerts)

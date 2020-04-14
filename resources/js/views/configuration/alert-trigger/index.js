@@ -100,13 +100,9 @@ export const init = () => {
             onError: error => {
                 if (!bulmaStepsHiddenErrors.includes(error)) {
                     toastr.error(error, null, {
-                        positionClass: 'toast-bottom-right'
+                        positionClass: 'toast-bottom-left'
                     });
                 }
-            },
-            onFinish: () => {
-                console.log('coucou fini');
-                base.elements.steps.querySelector('.steps-action button[data-nav="previous"]').disabled = true;
             }
         });
         
@@ -477,8 +473,10 @@ const validateAlertTriggerRuleForm = (rule, ruleItem) => {
         const title = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.title);
         const titleIcon = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.titleIcon);
 
-        if (type === 'jobs-duration') {
-            valid = validateAlertTriggerJobsDurationRule(rule, ruleItem);
+        if (type === 'jobs-min-duration') {
+            valid = validateAlertTriggerJobsMinDurationRule(rule, ruleItem);
+        } else if (type === 'jobs-max-duration') {
+            valid = validateAlertTriggerJobsMaxDurationRule(rule, ruleItem);
         } else if (type === 'faulted-jobs-percentage') {
             valid = validateAlertTriggerFaultedJobsPercentageRule(rule, ruleItem);
         } else if (type === 'failed-queue-items-percentage') {
@@ -500,7 +498,7 @@ const validateAlertTriggerRuleForm = (rule, ruleItem) => {
     }
 };
 
-const validateAlertTriggerJobsDurationRule = (rule, ruleItem) => {
+const validateAlertTriggerJobsMinDurationRule = (rule, ruleItem) => {
     let valid = false;
     let parameters = {
         specific: {},
@@ -513,20 +511,54 @@ const validateAlertTriggerJobsDurationRule = (rule, ruleItem) => {
 
     try {
         const minimalDurationInput = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.jobsDurationControls.minimalDurationInput);
+
+        const minimalDurationInputValid = minimalDurationInput.value.trim() !== '' && _base.isNormalInteger(minimalDurationInput.value)
+            && parseInt(minimalDurationInput.value) > 0;
+        _base.toggleSuccessDangerState(minimalDurationInput, minimalDurationInputValid);
+        
+        if (minimalDurationInputValid) {
+            parameters.specific = {
+                minimalDuration: parseInt(minimalDurationInput.value)
+            };
+        }
+        
+        const timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
+        const relativeTimeSlotInputValid = validateAlertTriggerRuleRelativeTimeSlotControls(ruleItem, parameters);
+        const triggeringDaysSelectionValid = validateAlertTriggerRuleTriggeringDaysControls(ruleItem, parameters);
+        const involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
+        const involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
+
+        rule.parameters = parameters;
+
+        valid = minimalDurationInputValid && timeSlotInputValid && triggeringDaysSelectionValid
+            && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
+    } catch (error) {
+        console.log(error);
+    }
+
+    return valid;
+};
+
+const validateAlertTriggerJobsMaxDurationRule = (rule, ruleItem) => {
+    let valid = false;
+    let parameters = {
+        specific: {},
+        standard: {
+            timeSlot: {},
+            triggeringDays: {},
+            involvedEntities: {}
+        }
+    };
+
+    try {
         const maximalDurationInput = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.jobsDurationControls.maximalDurationInput);
 
-        const minimalDurationInputValid = minimalDurationInput.value.trim() !== '' && _base.isNormalInteger(minimalDurationInput.value);
-        _base.toggleSuccessDangerState(minimalDurationInput, minimalDurationInputValid);
-        //_base.toggleFormControlTooltip(minimalDurationInput, minimalDurationInputValid);
-
         const maximalDurationInputValid = maximalDurationInput.value.trim() !== '' && _base.isNormalInteger(maximalDurationInput.value)
-            && minimalDurationInputValid && parseInt(minimalDurationInput.value) < parseInt(maximalDurationInput.value);
+            && parseInt(maximalDurationInput.value) > 0;
         _base.toggleSuccessDangerState(maximalDurationInput, maximalDurationInputValid);
-        //_base.toggleFormControlTooltip(maximalDurationInput, maximalDurationInputValid);
         
-        if (minimalDurationInputValid && maximalDurationInputValid) {
+        if (maximalDurationInputValid) {
             parameters.specific = {
-                minimalDuration: parseInt(minimalDurationInput.value),
                 maximalDuration: parseInt(maximalDurationInput.value)
             };
         }
@@ -538,7 +570,7 @@ const validateAlertTriggerJobsDurationRule = (rule, ruleItem) => {
 
         rule.parameters = parameters;
 
-        valid = minimalDurationInputValid && maximalDurationInputValid && timeSlotInputValid
+        valid = maximalDurationInputValid && timeSlotInputValid && triggeringDaysSelectionValid
             && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
     } catch (error) {
         console.log(error);
@@ -559,15 +591,15 @@ const validateAlertTriggerFaultedJobsPercentageRule = (rule, ruleItem) => {
     };
 
     try {
-        const minimalPercentageInput = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.faultedJobsPercentageControls.minimalPercentageInput);
+        const maximalPercentageInput = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.faultedJobsPercentageControls.maximalPercentageInput);
 
-        const minimalPercentageInputValid = minimalPercentageInput.value.trim() !== '' && _base.isNormalInteger(minimalPercentageInput.value);
-        _base.toggleSuccessDangerState(minimalPercentageInput, minimalPercentageInputValid);
-        //_base.toggleFormControlTooltip(minimalPercentageInput, minimalPercentageInputValid);
+        const maximalPercentageInputValid = maximalPercentageInput.value.trim() !== '' && _base.isNormalInteger(maximalPercentageInput.value);
+        _base.toggleSuccessDangerState(maximalPercentageInput, maximalPercentageInputValid);
+        //_base.toggleFormControlTooltip(maximalPercentageInput, maximalPercentageInputValid);
         
-        if (minimalPercentageInputValid) {
+        if (maximalPercentageInputValid) {
             parameters.specific = {
-                minimalPercentage: parseInt(minimalPercentageInput.value)
+                maximalPercentage: parseInt(maximalPercentageInput.value)
             };
         }
         
@@ -579,8 +611,8 @@ const validateAlertTriggerFaultedJobsPercentageRule = (rule, ruleItem) => {
 
         rule.parameters = parameters;
 
-        valid = minimalPercentageInputValid && timeSlotInputValid && relativeTimeSlotInputValid
-            && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
+        valid = maximalPercentageInputValid && timeSlotInputValid && relativeTimeSlotInputValid
+            && triggeringDaysSelectionValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
     } catch (error) {
         console.log(error);
     }
@@ -600,15 +632,15 @@ const validateAlertTriggerFailedQueueItemsPercentageRule = (rule, ruleItem) => {
     };
 
     try {
-        const minimalPercentageInput = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.failedQueueItemsPercentageControls.minimalPercentageInput);
+        const maximalPercentageInput = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.failedQueueItemsPercentageControls.maximalPercentageInput);
 
-        const minimalPercentageInputValid = minimalPercentageInput.value.trim() !== '' && _base.isNormalInteger(minimalPercentageInput.value);
-        _base.toggleSuccessDangerState(minimalPercentageInput, minimalPercentageInputValid);
-        //_base.toggleFormControlTooltip(minimalPercentageInput, minimalPercentageInputValid);
+        const maximalPercentageInputValid = maximalPercentageInput.value.trim() !== '' && _base.isNormalInteger(maximalPercentageInput.value);
+        _base.toggleSuccessDangerState(maximalPercentageInput, maximalPercentageInputValid);
+        //_base.toggleFormControlTooltip(maximalPercentageInput, maximalPercentageInputValid);
         
-        if (minimalPercentageInputValid) {
+        if (maximalPercentageInputValid) {
             parameters.specific = {
-                minimalPercentage: parseInt(minimalPercentageInput.value)
+                maximalPercentage: parseInt(maximalPercentageInput.value)
             };
         }
         
@@ -619,8 +651,8 @@ const validateAlertTriggerFailedQueueItemsPercentageRule = (rule, ruleItem) => {
 
         rule.parameters = parameters;
 
-        valid = minimalPercentageInputValid && timeSlotInputValid && relativeTimeSlotInputValid
-            && involvedQueuesSelectionValid;
+        valid = maximalPercentageInputValid && timeSlotInputValid && relativeTimeSlotInputValid
+            && triggeringDaysSelectionValid && involvedQueuesSelectionValid;
     } catch (error) {
         console.log(error);
     }
@@ -674,7 +706,7 @@ const validateAlertTriggerElasticSearchQueryRule = (rule, ruleItem) => {
         rule.parameters = parameters;
 
         valid = searchQueryInputValid && lowerCountInputValid && higherCountInputValid && timeSlotInputValid
-            && relativeTimeSlotInputValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
+            && relativeTimeSlotInputValid && triggeringDaysSelectionValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
     } catch (error) {
         console.log(error);
     }

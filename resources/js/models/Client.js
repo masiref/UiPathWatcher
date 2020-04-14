@@ -7,7 +7,7 @@ export default class Client {
         }
     }
 
-    async updateMarkup() {
+    /*async updateMarkup() {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
@@ -19,7 +19,7 @@ export default class Client {
         } catch (error) {
             console.log(error);
         }
-    }
+    }*/
 
     async get() {
         try {
@@ -35,7 +35,7 @@ export default class Client {
         }
     }
 
-    async update() {
+    /*async update() {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
@@ -47,7 +47,7 @@ export default class Client {
         } catch (error) {
             console.log(error);
         }
-    }
+    }*/
     
     async updateWatchedAutomatedProcesses() {
         try {
@@ -77,6 +77,52 @@ export default class Client {
                         if (response.data) {
                             this.id = response.data.id;
                         }
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async update(name, code, orchestrator) {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.patch(`/api/clients/${this.id}`, {
+                        'name': name,
+                        'code': code,
+                        'ui_path_orchestrator_id': orchestrator
+                    }).then(response => {
+                        if (response.data) {
+                            this.data = response.data;
+                        }
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async remove() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.delete(`/api/clients/${this.id}`)
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async loadEditForm() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(`/configuration/client/edit/${this.id}`).then(response => {
+                        this.editForm = response.data;
                     })
                 );
             });

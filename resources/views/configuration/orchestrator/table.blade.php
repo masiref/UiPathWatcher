@@ -1,4 +1,4 @@
-<table class="table is-fullwidth is-striped is-hoverable orchestrators">
+<table class="table data is-fullwidth is-striped is-hoverable orchestrators">
     <thead>
         <th>Name</th>
         <th>Code</th>
@@ -10,7 +10,7 @@
     </thead>
     <tbody>
         @foreach($orchestrators as $orchestrator)
-            <tr>
+            <tr data-id="{{ $orchestrator->id }}">
                 <td>{{ $orchestrator->name }}</td>
                 <td>{{ $orchestrator->code }}</td>
                 <td>

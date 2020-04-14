@@ -129,4 +129,24 @@ class AlertTriggerRule extends Model
         }
         return $days;
     }
+
+    /**
+     * Is the rule triggered on specified date
+     */
+    public function triggeredOnDate(Carbon $date)
+    {
+        $dayOfWeek = $date->dayOfWeek;
+        $time = $date->format('H:i:s');
+        
+        return 
+            (($this->is_triggered_on_monday && $dayOfWeek === 1) ||
+            ($this->is_triggered_on_tuesday && $dayOfWeek === 2) ||
+            ($this->is_triggered_on_wednesday && $dayOfWeek === 3) ||
+            ($this->is_triggered_on_thursday && $dayOfWeek === 4) ||
+            ($this->is_triggered_on_friday && $dayOfWeek === 5) ||
+            ($this->is_triggered_on_saturday && $dayOfWeek === 6) ||
+            ($this->is_triggered_on_sunday && $dayOfWeek === 0)) &&
+            $time >= $this->time_slot_from
+            && $time <= $this->time_slot_until;
+     }
 }

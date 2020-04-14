@@ -27,11 +27,9 @@
         
         <div class="is-divider"></div>
 
-        @include('layouts.title', [
-            'title' => 'Add a new client',
-            'icon' => 'plus-circle',
-            'color' => 'primary'
-        ])
-        @include('configuration.client.add-form')
+        <div class="forms-section">
+            @include('configuration.client.form.add')
+            @include('configuration.client.form.edit')
+        </div>
     </div>
 @endsection

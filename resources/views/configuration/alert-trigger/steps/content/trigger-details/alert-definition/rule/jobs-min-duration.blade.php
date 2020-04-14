@@ -1,8 +1,8 @@
 <!-- job durations -->
-@include('configuration.alert-trigger.steps.content.trigger-details.alert-definition.rule.controls.jobs-durations')
+@include('configuration.alert-trigger.steps.content.trigger-details.alert-definition.rule.controls.jobs-min-duration')
 <!-- time slots -->
 @include('configuration.alert-trigger.steps.content.trigger-details.alert-definition.rule.controls.time-slot', [
-    'withRelative' => false
+    'withRelative' => true
 ])
 
 <div class="is-divider"></div>

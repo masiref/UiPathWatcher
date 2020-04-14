@@ -89658,12 +89658,8 @@ var commitReactivateAlertTriggers = function commitReactivateAlertTriggers() {
   } catch (error) {
     console.log(error);
   }
-}; // DataTables
+}; // Bulma NavBar Burger Script
 
-
-$('.table').DataTable({
-  responsive: true
-}); // Bulma NavBar Burger Script
 
 document.addEventListener('DOMContentLoaded', function () {
   // Get all "navbar-burger" elements
@@ -89754,7 +89750,17 @@ if (token) {
 
 String.prototype.capitalize = function () {
   return this.charAt(0).toUpperCase() + this.slice(1);
-};
+}; // DataTables
+
+
+$('.table').DataTable({
+  responsive: true,
+  select: {
+    className: 'is-selected',
+    info: false,
+    toggleable: false
+  }
+});
 
 /***/ }),
 
@@ -96212,11 +96218,25 @@ function () {
       this.id = id;
     }
   }
+  /*async updateMarkup() {
+      try {
+          return new Promise((resolve, reject) => {
+              resolve(
+                  axios.get(`/dashboard/client/element/${this.id}`).then(response => {
+                      this.markup = response.data;
+                  })
+              );
+          });
+      } catch (error) {
+          console.log(error);
+      }
+  }*/
+
 
   _createClass(Client, [{
-    key: "updateMarkup",
+    key: "get",
     value: function () {
-      var _updateMarkup = _asyncToGenerator(
+      var _get = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var _this = this;
@@ -96227,8 +96247,8 @@ function () {
               case 0:
                 _context.prev = 0;
                 return _context.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/dashboard/client/element/".concat(_this.id)).then(function (response) {
-                    _this.markup = response.data;
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/api/clients/".concat(_this.id)).then(function (response) {
+                    _this.data = response.data;
                   }));
                 }));
 
@@ -96245,16 +96265,30 @@ function () {
         }, _callee, null, [[0, 4]]);
       }));
 
-      function updateMarkup() {
-        return _updateMarkup.apply(this, arguments);
+      function get() {
+        return _get.apply(this, arguments);
       }
 
-      return updateMarkup;
+      return get;
     }()
+    /*async update() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    this.get().then(response => {
+                        return this.updateMarkup();
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }*/
+
   }, {
-    key: "get",
+    key: "updateWatchedAutomatedProcesses",
     value: function () {
-      var _get = _asyncToGenerator(
+      var _updateWatchedAutomatedProcesses = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var _this2 = this;
@@ -96265,8 +96299,10 @@ function () {
               case 0:
                 _context2.prev = 0;
                 return _context2.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/api/clients/".concat(_this2.id)).then(function (response) {
-                    _this2.data = response.data;
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/dashboard/client/".concat(_this2.id, "/watched-automated-process/elements/1")).then(function (response) {
+                    _this2.watchedAutomatedProcesses = Object.keys(response.data).map(function (key) {
+                      return [Number(key), response.data[key]];
+                    });
                   }));
                 }));
 
@@ -96283,18 +96319,18 @@ function () {
         }, _callee2, null, [[0, 4]]);
       }));
 
-      function get() {
-        return _get.apply(this, arguments);
+      function updateWatchedAutomatedProcesses() {
+        return _updateWatchedAutomatedProcesses.apply(this, arguments);
       }
 
-      return get;
+      return updateWatchedAutomatedProcesses;
     }()
   }, {
-    key: "update",
+    key: "save",
     value: function () {
-      var _update = _asyncToGenerator(
+      var _save = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(name, code, orchestrator) {
         var _this3 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
@@ -96303,8 +96339,14 @@ function () {
               case 0:
                 _context3.prev = 0;
                 return _context3.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(_this3.get().then(function (response) {
-                    return _this3.updateMarkup();
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["post"]('/api/clients', {
+                    'name': name,
+                    'code': code,
+                    'ui_path_orchestrator_id': orchestrator
+                  }).then(function (response) {
+                    if (response.data) {
+                      _this3.id = response.data.id;
+                    }
                   }));
                 }));
 
@@ -96321,18 +96363,18 @@ function () {
         }, _callee3, null, [[0, 4]]);
       }));
 
-      function update() {
-        return _update.apply(this, arguments);
+      function save(_x, _x2, _x3) {
+        return _save.apply(this, arguments);
       }
 
-      return update;
+      return save;
     }()
   }, {
-    key: "updateWatchedAutomatedProcesses",
+    key: "update",
     value: function () {
-      var _updateWatchedAutomatedProcesses = _asyncToGenerator(
+      var _update = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(name, code, orchestrator) {
         var _this4 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
@@ -96341,10 +96383,14 @@ function () {
               case 0:
                 _context4.prev = 0;
                 return _context4.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/dashboard/client/".concat(_this4.id, "/watched-automated-process/elements/1")).then(function (response) {
-                    _this4.watchedAutomatedProcesses = Object.keys(response.data).map(function (key) {
-                      return [Number(key), response.data[key]];
-                    });
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["patch"]("/api/clients/".concat(_this4.id), {
+                    'name': name,
+                    'code': code,
+                    'ui_path_orchestrator_id': orchestrator
+                  }).then(function (response) {
+                    if (response.data) {
+                      _this4.data = response.data;
+                    }
                   }));
                 }));
 
@@ -96361,18 +96407,18 @@ function () {
         }, _callee4, null, [[0, 4]]);
       }));
 
-      function updateWatchedAutomatedProcesses() {
-        return _updateWatchedAutomatedProcesses.apply(this, arguments);
+      function update(_x4, _x5, _x6) {
+        return _update.apply(this, arguments);
       }
 
-      return updateWatchedAutomatedProcesses;
+      return update;
     }()
   }, {
-    key: "save",
+    key: "remove",
     value: function () {
-      var _save = _asyncToGenerator(
+      var _remove = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(name, code, orchestrator) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
         var _this5 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
@@ -96381,15 +96427,7 @@ function () {
               case 0:
                 _context5.prev = 0;
                 return _context5.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["post"]('/api/clients', {
-                    'name': name,
-                    'code': code,
-                    'ui_path_orchestrator_id': orchestrator
-                  }).then(function (response) {
-                    if (response.data) {
-                      _this5.id = response.data.id;
-                    }
-                  }));
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["delete"]("/api/clients/".concat(_this5.id)));
                 }));
 
               case 4:
@@ -96405,16 +96443,16 @@ function () {
         }, _callee5, null, [[0, 4]]);
       }));
 
-      function save(_x, _x2, _x3) {
-        return _save.apply(this, arguments);
+      function remove() {
+        return _remove.apply(this, arguments);
       }
 
-      return save;
+      return remove;
     }()
   }, {
-    key: "getProcessesFromOrchestrator",
+    key: "loadEditForm",
     value: function () {
-      var _getProcessesFromOrchestrator = _asyncToGenerator(
+      var _loadEditForm = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
         var _this6 = this;
@@ -96425,7 +96463,9 @@ function () {
               case 0:
                 _context6.prev = 0;
                 return _context6.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/orchestrator/processes/".concat(_this6.id)));
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/client/edit/".concat(_this6.id)).then(function (response) {
+                    _this6.editForm = response.data;
+                  }));
                 }));
 
               case 4:
@@ -96441,16 +96481,16 @@ function () {
         }, _callee6, null, [[0, 4]]);
       }));
 
-      function getProcessesFromOrchestrator() {
-        return _getProcessesFromOrchestrator.apply(this, arguments);
+      function loadEditForm() {
+        return _loadEditForm.apply(this, arguments);
       }
 
-      return getProcessesFromOrchestrator;
+      return loadEditForm;
     }()
   }, {
-    key: "getRobotsFromOrchestrator",
+    key: "getProcessesFromOrchestrator",
     value: function () {
-      var _getRobotsFromOrchestrator = _asyncToGenerator(
+      var _getProcessesFromOrchestrator = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
         var _this7 = this;
@@ -96461,7 +96501,7 @@ function () {
               case 0:
                 _context7.prev = 0;
                 return _context7.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/orchestrator/robots/".concat(_this7.id)));
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/orchestrator/processes/".concat(_this7.id)));
                 }));
 
               case 4:
@@ -96477,16 +96517,16 @@ function () {
         }, _callee7, null, [[0, 4]]);
       }));
 
-      function getRobotsFromOrchestrator() {
-        return _getRobotsFromOrchestrator.apply(this, arguments);
+      function getProcessesFromOrchestrator() {
+        return _getProcessesFromOrchestrator.apply(this, arguments);
       }
 
-      return getRobotsFromOrchestrator;
+      return getProcessesFromOrchestrator;
     }()
   }, {
-    key: "getQueuesFromOrchestrator",
+    key: "getRobotsFromOrchestrator",
     value: function () {
-      var _getQueuesFromOrchestrator = _asyncToGenerator(
+      var _getRobotsFromOrchestrator = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
         var _this8 = this;
@@ -96497,7 +96537,7 @@ function () {
               case 0:
                 _context8.prev = 0;
                 return _context8.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/orchestrator/queues/".concat(_this8.id)));
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/orchestrator/robots/".concat(_this8.id)));
                 }));
 
               case 4:
@@ -96511,6 +96551,42 @@ function () {
             }
           }
         }, _callee8, null, [[0, 4]]);
+      }));
+
+      function getRobotsFromOrchestrator() {
+        return _getRobotsFromOrchestrator.apply(this, arguments);
+      }
+
+      return getRobotsFromOrchestrator;
+    }()
+  }, {
+    key: "getQueuesFromOrchestrator",
+    value: function () {
+      var _getQueuesFromOrchestrator = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9() {
+        var _this9 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                _context9.prev = 0;
+                return _context9.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/orchestrator/queues/".concat(_this9.id)));
+                }));
+
+              case 4:
+                _context9.prev = 4;
+                _context9.t0 = _context9["catch"](0);
+                console.log(_context9.t0);
+
+              case 7:
+              case "end":
+                return _context9.stop();
+            }
+          }
+        }, _callee9, null, [[0, 4]]);
       }));
 
       function getQueuesFromOrchestrator() {
@@ -97467,6 +97543,129 @@ function () {
 
       return save;
     }()
+  }, {
+    key: "update",
+    value: function () {
+      var _update = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(name, code, url, tenant, apiUserUsername, apiUserPassword, elasticSearchUrl, elasticSearchIndex) {
+        var _this2 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                return _context2.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["patch"]("/api/ui-path-orchestrators/".concat(_this2.id), {
+                    'name': name,
+                    'code': code,
+                    'url': url,
+                    'tenant': tenant,
+                    'api_user_username': apiUserUsername,
+                    'api_user_password': apiUserPassword,
+                    'elastic_search_url': elasticSearchUrl,
+                    'elastic_search_index': elasticSearchIndex
+                  }).then(function (response) {
+                    if (response.data) {
+                      _this2.data = response.data;
+                    }
+                  }));
+                }));
+
+              case 4:
+                _context2.prev = 4;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+
+              case 7:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 4]]);
+      }));
+
+      function update(_x9, _x10, _x11, _x12, _x13, _x14, _x15, _x16) {
+        return _update.apply(this, arguments);
+      }
+
+      return update;
+    }()
+  }, {
+    key: "remove",
+    value: function () {
+      var _remove = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var _this3 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                return _context3.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["delete"]("/api/ui-path-orchestrators/".concat(_this3.id)));
+                }));
+
+              case 4:
+                _context3.prev = 4;
+                _context3.t0 = _context3["catch"](0);
+                console.log(_context3.t0);
+
+              case 7:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 4]]);
+      }));
+
+      function remove() {
+        return _remove.apply(this, arguments);
+      }
+
+      return remove;
+    }()
+  }, {
+    key: "loadEditForm",
+    value: function () {
+      var _loadEditForm = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var _this4 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                return _context4.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/orchestrator/edit/".concat(_this4.id)).then(function (response) {
+                    _this4.editForm = response.data;
+                  }));
+                }));
+
+              case 4:
+                _context4.prev = 4;
+                _context4.t0 = _context4["catch"](0);
+                console.log(_context4.t0);
+
+              case 7:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 4]]);
+      }));
+
+      function loadEditForm() {
+        return _loadEditForm.apply(this, arguments);
+      }
+
+      return loadEditForm;
+    }()
   }]);
 
   return Orchestrator;
@@ -98331,8 +98530,8 @@ function () {
                       text: 'The alert will be ignored forever, manual action to reactivate it will be needed!',
                       icon: 'warning',
                       showCancelButton: true,
-                      confirmButtonText: 'Ignore it!',
-                      cancelButtonText: 'Undo'
+                      confirmButtonText: '<span class="icon"><i class="fas fa-eye-slash"></i></span><span>Ignore it!</span>',
+                      cancelButtonText: '<span class="icon"><i class="fas fa-undo"></i></span><span>Undo</span>'
                     }).then(function (result) {
                       if (result.value) {
                         handleCommitIgnore(dashboard, alert, ignoranceCalendar, descriptionTextarea);
@@ -98780,9 +98979,12 @@ var closeModal = function closeModal(modal) {
 var swalWithBulmaButtons = sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
   customClass: {
     confirmButton: 'button is-success',
-    cancelButton: 'button is-danger'
+    cancelButton: 'button is-danger',
+    actions: 'buttons'
   },
-  buttonsStyling: false
+  buttonsStyling: false,
+  focusConfirm: false,
+  scrollbarPadding: false
 });
 var isDashboardRelatedURL = function isDashboardRelatedURL(url) {
   var isRelated = /.*\/dashboard\/.*|.*\/$/;
@@ -99067,10 +99269,10 @@ var selectors = {
           maximalDurationInput: 'input.trigger-details--alert-definition--jobs-duration-rule--maximal-duration-input'
         },
         faultedJobsPercentageControls: {
-          minimalPercentageInput: 'input.trigger-details--alert-definition--faulted-jobs-percentage-rule--minimal-percentage-input'
+          maximalPercentageInput: 'input.trigger-details--alert-definition--faulted-jobs-percentage-rule--maximal-percentage-input'
         },
         failedQueueItemsPercentageControls: {
-          minimalPercentageInput: 'input.trigger-details--alert-definition--failed-queue-items-percentage-rule--minimal-percentage-input'
+          maximalPercentageInput: 'input.trigger-details--alert-definition--failed-queue-items-percentage-rule--maximal-percentage-input'
         },
         elasticSearchQueryControls: {
           searchQueryInput: 'input.trigger-details--alert-definition--elastic-search-query-rule--search-query-input',
@@ -99283,13 +99485,9 @@ var init = function init() {
       onError: function onError(error) {
         if (!bulmaStepsHiddenErrors.includes(error)) {
           toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error(error, null, {
-            positionClass: 'toast-bottom-right'
+            positionClass: 'toast-bottom-left'
           });
         }
-      },
-      onFinish: function onFinish() {
-        console.log('coucou fini');
-        _base__WEBPACK_IMPORTED_MODULE_10__["elements"].steps.querySelector('.steps-action button[data-nav="previous"]').disabled = true;
       }
     });
     initProcessSelection();
@@ -99930,8 +100128,10 @@ var validateAlertTriggerRuleForm = function validateAlertTriggerRuleForm(rule, r
     var title = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.title);
     var titleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.titleIcon);
 
-    if (type === 'jobs-duration') {
-      valid = validateAlertTriggerJobsDurationRule(rule, ruleItem);
+    if (type === 'jobs-min-duration') {
+      valid = validateAlertTriggerJobsMinDurationRule(rule, ruleItem);
+    } else if (type === 'jobs-max-duration') {
+      valid = validateAlertTriggerJobsMaxDurationRule(rule, ruleItem);
     } else if (type === 'faulted-jobs-percentage') {
       valid = validateAlertTriggerFaultedJobsPercentageRule(rule, ruleItem);
     } else if (type === 'failed-queue-items-percentage') {
@@ -99955,7 +100155,7 @@ var validateAlertTriggerRuleForm = function validateAlertTriggerRuleForm(rule, r
   }
 };
 
-var validateAlertTriggerJobsDurationRule = function validateAlertTriggerJobsDurationRule(rule, ruleItem) {
+var validateAlertTriggerJobsMinDurationRule = function validateAlertTriggerJobsMinDurationRule(rule, ruleItem) {
   var valid = false;
   var parameters = {
     specific: {},
@@ -99968,21 +100168,49 @@ var validateAlertTriggerJobsDurationRule = function validateAlertTriggerJobsDura
 
   try {
     var minimalDurationInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.jobsDurationControls.minimalDurationInput);
-    var maximalDurationInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.jobsDurationControls.maximalDurationInput);
+    var minimalDurationInputValid = minimalDurationInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](minimalDurationInput.value) && parseInt(minimalDurationInput.value) > 0;
 
-    var minimalDurationInputValid = minimalDurationInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](minimalDurationInput.value);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](minimalDurationInput, minimalDurationInputValid);
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](minimalDurationInput, minimalDurationInputValid); //_base.toggleFormControlTooltip(minimalDurationInput, minimalDurationInputValid);
-
-
-    var maximalDurationInputValid = maximalDurationInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](maximalDurationInput.value) && minimalDurationInputValid && parseInt(minimalDurationInput.value) < parseInt(maximalDurationInput.value);
-
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](maximalDurationInput, maximalDurationInputValid); //_base.toggleFormControlTooltip(maximalDurationInput, maximalDurationInputValid);
-
-
-    if (minimalDurationInputValid && maximalDurationInputValid) {
+    if (minimalDurationInputValid) {
       parameters.specific = {
-        minimalDuration: parseInt(minimalDurationInput.value),
+        minimalDuration: parseInt(minimalDurationInput.value)
+      };
+    }
+
+    var timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
+    var relativeTimeSlotInputValid = validateAlertTriggerRuleRelativeTimeSlotControls(ruleItem, parameters);
+    var triggeringDaysSelectionValid = validateAlertTriggerRuleTriggeringDaysControls(ruleItem, parameters);
+    var involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
+    var involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
+    rule.parameters = parameters;
+    valid = minimalDurationInputValid && timeSlotInputValid && triggeringDaysSelectionValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
+  } catch (error) {
+    console.log(error);
+  }
+
+  return valid;
+};
+
+var validateAlertTriggerJobsMaxDurationRule = function validateAlertTriggerJobsMaxDurationRule(rule, ruleItem) {
+  var valid = false;
+  var parameters = {
+    specific: {},
+    standard: {
+      timeSlot: {},
+      triggeringDays: {},
+      involvedEntities: {}
+    }
+  };
+
+  try {
+    var maximalDurationInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.jobsDurationControls.maximalDurationInput);
+    var maximalDurationInputValid = maximalDurationInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](maximalDurationInput.value) && parseInt(maximalDurationInput.value) > 0;
+
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](maximalDurationInput, maximalDurationInputValid);
+
+    if (maximalDurationInputValid) {
+      parameters.specific = {
         maximalDuration: parseInt(maximalDurationInput.value)
       };
     }
@@ -99992,7 +100220,7 @@ var validateAlertTriggerJobsDurationRule = function validateAlertTriggerJobsDura
     var involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
     var involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
     rule.parameters = parameters;
-    valid = minimalDurationInputValid && maximalDurationInputValid && timeSlotInputValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
+    valid = maximalDurationInputValid && timeSlotInputValid && triggeringDaysSelectionValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
   } catch (error) {
     console.log(error);
   }
@@ -100012,16 +100240,16 @@ var validateAlertTriggerFaultedJobsPercentageRule = function validateAlertTrigge
   };
 
   try {
-    var minimalPercentageInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.faultedJobsPercentageControls.minimalPercentageInput);
+    var maximalPercentageInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.faultedJobsPercentageControls.maximalPercentageInput);
 
-    var minimalPercentageInputValid = minimalPercentageInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](minimalPercentageInput.value);
+    var maximalPercentageInputValid = maximalPercentageInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](maximalPercentageInput.value);
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](minimalPercentageInput, minimalPercentageInputValid); //_base.toggleFormControlTooltip(minimalPercentageInput, minimalPercentageInputValid);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](maximalPercentageInput, maximalPercentageInputValid); //_base.toggleFormControlTooltip(maximalPercentageInput, maximalPercentageInputValid);
 
 
-    if (minimalPercentageInputValid) {
+    if (maximalPercentageInputValid) {
       parameters.specific = {
-        minimalPercentage: parseInt(minimalPercentageInput.value)
+        maximalPercentage: parseInt(maximalPercentageInput.value)
       };
     }
 
@@ -100031,7 +100259,7 @@ var validateAlertTriggerFaultedJobsPercentageRule = function validateAlertTrigge
     var involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
     var involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
     rule.parameters = parameters;
-    valid = minimalPercentageInputValid && timeSlotInputValid && relativeTimeSlotInputValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
+    valid = maximalPercentageInputValid && timeSlotInputValid && relativeTimeSlotInputValid && triggeringDaysSelectionValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
   } catch (error) {
     console.log(error);
   }
@@ -100051,16 +100279,16 @@ var validateAlertTriggerFailedQueueItemsPercentageRule = function validateAlertT
   };
 
   try {
-    var minimalPercentageInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.failedQueueItemsPercentageControls.minimalPercentageInput);
+    var maximalPercentageInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.failedQueueItemsPercentageControls.maximalPercentageInput);
 
-    var minimalPercentageInputValid = minimalPercentageInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](minimalPercentageInput.value);
+    var maximalPercentageInputValid = maximalPercentageInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](maximalPercentageInput.value);
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](minimalPercentageInput, minimalPercentageInputValid); //_base.toggleFormControlTooltip(minimalPercentageInput, minimalPercentageInputValid);
+    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](maximalPercentageInput, maximalPercentageInputValid); //_base.toggleFormControlTooltip(maximalPercentageInput, maximalPercentageInputValid);
 
 
-    if (minimalPercentageInputValid) {
+    if (maximalPercentageInputValid) {
       parameters.specific = {
-        minimalPercentage: parseInt(minimalPercentageInput.value)
+        maximalPercentage: parseInt(maximalPercentageInput.value)
       };
     }
 
@@ -100069,7 +100297,7 @@ var validateAlertTriggerFailedQueueItemsPercentageRule = function validateAlertT
     var triggeringDaysSelectionValid = validateAlertTriggerRuleTriggeringDaysControls(ruleItem, parameters);
     var involvedQueuesSelectionValid = validateAlertTriggerRuleInvolvedQueuesSelectionControls(ruleItem, parameters);
     rule.parameters = parameters;
-    valid = minimalPercentageInputValid && timeSlotInputValid && relativeTimeSlotInputValid && involvedQueuesSelectionValid;
+    valid = maximalPercentageInputValid && timeSlotInputValid && relativeTimeSlotInputValid && triggeringDaysSelectionValid && involvedQueuesSelectionValid;
   } catch (error) {
     console.log(error);
   }
@@ -100122,7 +100350,7 @@ var validateAlertTriggerElasticSearchQueryRule = function validateAlertTriggerEl
     var involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
     var involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
     rule.parameters = parameters;
-    valid = searchQueryInputValid && lowerCountInputValid && higherCountInputValid && timeSlotInputValid && relativeTimeSlotInputValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
+    valid = searchQueryInputValid && lowerCountInputValid && higherCountInputValid && timeSlotInputValid && relativeTimeSlotInputValid && triggeringDaysSelectionValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
   } catch (error) {
     console.log(error);
   }
@@ -100638,20 +100866,29 @@ var strings = {
 };
 var selectors = {
   table: 'table.clients',
+  formsSection: '.forms-section',
+  addFormSection: '.add-form-section',
   addForm: '#add-form',
-  nameInput: 'input#name',
-  codeInput: 'input#code',
-  orchestratorSelect: 'select#orchestrator',
+  editFormSection: '.edit-form-section',
+  editForm: '#edit-form',
+  nameInput: 'input.name',
+  codeInput: 'input.code',
+  orchestratorSelect: 'select.orchestrator',
   createButton: 'button.create',
   createButtonChildren: 'button.create *',
   resetButton: 'button.reset',
-  resetButtonChildren: 'button.reset *'
+  resetButtonChildren: 'button.reset *',
+  saveButton: 'button.save',
+  saveButtonChildren: 'button.save *',
+  cancelButton: 'button.cancel',
+  cancelButtonChildren: 'button.cancel *',
+  removeButton: 'button.remove',
+  removeButtonChildren: 'button.remove *'
 };
 var elements = {
   table: document.querySelector(selectors.table),
-  addForm: document.querySelector(selectors.addForm),
-  createButton: document.querySelector(selectors.createButton),
-  resetButton: document.querySelector(selectors.resetButton)
+  formsSection: document.querySelector(selectors.formsSection),
+  addForm: document.querySelector(selectors.addForm)
 };
 
 /***/ }),
@@ -100690,6 +100927,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var configuration = new _models_Configuration__WEBPACK_IMPORTED_MODULE_2__["default"]('configuration.client.index');
+var currentMode = 'add';
 var nameInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
 var codeInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
 var orchestratorSelect = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
@@ -100699,6 +100937,7 @@ var init = function init() {
     setInterval(function () {
       _layout_index__WEBPACK_IMPORTED_MODULE_7__["update"](configuration.layout);
     }, 45000);
+    $(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table).DataTable().on('select', loadEditForm);
     _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm.addEventListener('keyup', checkForm);
     _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm.addEventListener('change', checkForm);
     _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm.addEventListener('click',
@@ -100707,14 +100946,17 @@ var init = function init() {
       var _ref = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+        var createButton;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                createButton = _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButton);
+
                 if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButtonChildren)) && !createButton.disabled) {
                   create().then(function (res) {
                     toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Client successfully added!', null, {
-                      positionClass: 'toast-bottom-right'
+                      positionClass: 'toast-bottom-left'
                     });
                     return Promise.all([updateTable(), _layout_index__WEBPACK_IMPORTED_MODULE_7__["update"](configuration.layout)]);
                   });
@@ -100725,7 +100967,7 @@ var init = function init() {
                   createButton.disabled = true;
                 }
 
-              case 2:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -100742,7 +100984,117 @@ var init = function init() {
   }
 };
 
+var loadAddForm = function loadAddForm(e) {
+  try {
+    $(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table).DataTable().rows().deselect();
+    _view__WEBPACK_IMPORTED_MODULE_6__["showAddForm"]();
+    currentMode = 'add';
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+var loadEditForm = function loadEditForm(e) {
+  try {
+    _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table));
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_5__["elements"].formsSection);
+
+    var row = $(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table).DataTable().row({
+      selected: true
+    }).node();
+    var id = row.dataset.id;
+    var client = new _models_Client__WEBPACK_IMPORTED_MODULE_3__["default"](id);
+    client.loadEditForm().then(function (response) {
+      _view__WEBPACK_IMPORTED_MODULE_6__["updateEditFormSection"](client.editForm);
+      var form = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].editForm);
+      form.addEventListener('keyup', checkForm);
+      form.addEventListener('change', checkForm);
+      form.addEventListener('click',
+      /*#__PURE__*/
+      function () {
+        var _ref2 = _asyncToGenerator(
+        /*#__PURE__*/
+        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+          var saveButton;
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  saveButton = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].saveButton);
+
+                  if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].saveButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].saveButtonChildren)) && !saveButton.disabled) {
+                    update().then(function (response) {
+                      loadAddForm(e);
+                      updateTable();
+                      _layout_index__WEBPACK_IMPORTED_MODULE_7__["update"](configuration.layout);
+                      toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Client successfully updated!', null, {
+                        positionClass: 'toast-bottom-left'
+                      });
+                    });
+                  }
+
+                  if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].cancelButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].cancelButtonChildren))) {
+                    loadAddForm(e);
+                  }
+
+                  if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].removeButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].removeButtonChildren))) {
+                    _base__WEBPACK_IMPORTED_MODULE_4__["swalWithBulmaButtons"].fire({
+                      title: 'Client removal confirmation',
+                      text: 'This client and all its related elements (watched processes, alert triggers and alerts) will be removed. Are you sure?',
+                      icon: 'warning',
+                      showCancelButton: true,
+                      confirmButtonText: '<span class="icon"><i class="fas fa-trash-alt"></i></span><span>Remove it!</span>',
+                      cancelButtonText: '<span class="icon"><i class="fas fa-undo"></i></span><span>Undo</span>'
+                    }).then(function (result) {
+                      if (result.value) {
+                        remove().then(function (reponse) {
+                          loadAddForm(e);
+                          updateTable();
+                          _layout_index__WEBPACK_IMPORTED_MODULE_7__["update"](configuration.layout);
+                          toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Client successfully removed!', null, {
+                            positionClass: 'toast-bottom-left'
+                          });
+                        });
+                      }
+                    });
+                  }
+
+                case 4:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2);
+        }));
+
+        return function (_x2) {
+          return _ref2.apply(this, arguments);
+        };
+      }());
+      _view__WEBPACK_IMPORTED_MODULE_6__["showEditForm"]();
+
+      _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table));
+
+      _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_5__["elements"].formsSection);
+
+      currentMode = 'edit';
+      checkForm(e);
+    });
+  } catch (error) {
+    console.log(error);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table));
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_5__["elements"].formsSection);
+  }
+};
+
 var checkForm = function checkForm(e) {
+  var form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].editForm);
+  var nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
+  var codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
+  var orchestratorSelect = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
   var nameInputValid = !(nameInput.value.trim() === '');
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](nameInput, nameInputValid);
@@ -100756,110 +101108,228 @@ var checkForm = function checkForm(e) {
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](orchestratorSelect.parentNode, orchestratorSelectValid);
 
   var formValid = nameInputValid && codeInputValid && orchestratorSelectValid;
-  createButton.disabled = !formValid;
+
+  if (currentMode === 'add') {
+    form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButton).disabled = !formValid;
+  } else {
+    form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].saveButton).disabled = !formValid;
+  }
 };
 
 var create =
 /*#__PURE__*/
 function () {
-  var _ref2 = _asyncToGenerator(
+  var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-    var addForm;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+    var form, _nameInput, _codeInput, _orchestratorSelect;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context3.prev = _context3.next) {
           case 0:
-            addForm = _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm;
-            _context2.prev = 1;
+            form = _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm;
+            _context3.prev = 1;
 
-            _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](addForm);
+            _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](form);
 
-            return _context2.abrupt("return", new Promise(function (resolve, reject) {
+            _nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
+            _codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
+            _orchestratorSelect = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
+            return _context3.abrupt("return", new Promise(function (resolve, reject) {
               var client = new _models_Client__WEBPACK_IMPORTED_MODULE_3__["default"]();
-              resolve(client.save(nameInput.value.trim(), codeInput.value.trim(), orchestratorSelect.value.trim()).then(function (res) {
+              resolve(client.save(_nameInput.value.trim(), _codeInput.value.trim(), _orchestratorSelect.value.trim()).then(function (res) {
                 resetForm();
 
-                _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](addForm);
+                _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
+              }));
+            }));
+
+          case 9:
+            _context3.prev = 9;
+            _context3.t0 = _context3["catch"](1);
+            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Client not added due to application exception: ".concat(_context3.t0), null, {
+              positionClass: 'toast-bottom-left'
+            });
+            console.log(_context3.t0);
+
+            _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
+
+          case 14:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[1, 9]]);
+  }));
+
+  return function create() {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+var update =
+/*#__PURE__*/
+function () {
+  var _ref4 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+    var form, _nameInput2, _codeInput2, _orchestratorSelect2;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            form = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].editForm);
+            _context4.prev = 1;
+
+            _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](form);
+
+            _nameInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
+            _codeInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
+            _orchestratorSelect2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
+            return _context4.abrupt("return", new Promise(function (resolve, reject) {
+              var client = new _models_Client__WEBPACK_IMPORTED_MODULE_3__["default"](form.dataset.id);
+              resolve(client.update(_nameInput2.value.trim(), _codeInput2.value.trim(), _orchestratorSelect2.value.trim()).then(function (response) {
+                resetForm();
+
+                _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
+              }));
+            }));
+
+          case 9:
+            _context4.prev = 9;
+            _context4.t0 = _context4["catch"](1);
+            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Client not updated due to application exception: ".concat(_context4.t0), null, {
+              positionClass: 'toast-bottom-left'
+            });
+            console.log(_context4.t0);
+
+            _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
+
+          case 14:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, null, [[1, 9]]);
+  }));
+
+  return function update() {
+    return _ref4.apply(this, arguments);
+  };
+}();
+
+var remove =
+/*#__PURE__*/
+function () {
+  var _ref5 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+    var form;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            form = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].editForm);
+            _context5.prev = 1;
+
+            _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](form);
+
+            return _context5.abrupt("return", new Promise(function (resolve, reject) {
+              var client = new _models_Client__WEBPACK_IMPORTED_MODULE_3__["default"](form.dataset.id);
+              resolve(client.remove().then(function (response) {
+                resetForm();
+
+                _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
               }));
             }));
 
           case 6:
-            _context2.prev = 6;
-            _context2.t0 = _context2["catch"](1);
-            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Client not added due to application exception: ".concat(_context2.t0), null, {
-              positionClass: 'toast-bottom-right'
+            _context5.prev = 6;
+            _context5.t0 = _context5["catch"](1);
+            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Client not removed due to application exception: ".concat(_context5.t0), null, {
+              positionClass: 'toast-bottom-left'
             });
-            console.log(_context2.t0);
+            console.log(_context5.t0);
 
-            _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](addForm);
+            _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
 
           case 11:
           case "end":
-            return _context2.stop();
+            return _context5.stop();
         }
       }
-    }, _callee2, null, [[1, 6]]);
+    }, _callee5, null, [[1, 6]]);
   }));
 
-  return function create() {
-    return _ref2.apply(this, arguments);
+  return function remove() {
+    return _ref5.apply(this, arguments);
   };
 }();
 
 var updateTable =
 /*#__PURE__*/
 function () {
-  var _ref3 = _asyncToGenerator(
+  var _ref6 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
     var table;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
       while (1) {
-        switch (_context3.prev = _context3.next) {
+        switch (_context6.prev = _context6.next) {
           case 0:
             table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table);
-            _context3.prev = 1;
+            _context6.prev = 1;
 
             _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](table);
 
-            return _context3.abrupt("return", new Promise(function (resolve, reject) {
+            return _context6.abrupt("return", new Promise(function (resolve, reject) {
               resolve(configuration.updateClientsTable().then(function (res) {
                 _view__WEBPACK_IMPORTED_MODULE_6__["updateTable"](configuration.clientsTable);
+                $(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table).DataTable().on('select', loadEditForm);
 
                 _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](table);
               }));
             }));
 
           case 6:
-            _context3.prev = 6;
-            _context3.t0 = _context3["catch"](1);
-            console.log(_context3.t0);
+            _context6.prev = 6;
+            _context6.t0 = _context6["catch"](1);
+            console.log(_context6.t0);
 
             _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](table);
 
           case 10:
           case "end":
-            return _context3.stop();
+            return _context6.stop();
         }
       }
-    }, _callee3, null, [[1, 6]]);
+    }, _callee6, null, [[1, 6]]);
   }));
 
   return function updateTable() {
-    return _ref3.apply(this, arguments);
+    return _ref6.apply(this, arguments);
   };
 }();
 
 var resetForm = function resetForm() {
   try {
-    _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm.reset();
+    var form = currentMode === 'add' ? document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].addForm) : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].editForm);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](nameInput);
+    var _nameInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](codeInput);
+    var _codeInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](orchestratorSelect.parentNode);
+    var _orchestratorSelect3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
+
+    form.reset();
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_nameInput3);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_codeInput3);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_orchestratorSelect3.parentNode);
   } catch (error) {
     console.log(error);
   }
@@ -100871,12 +101341,15 @@ var resetForm = function resetForm() {
 /*!*********************************************************!*\
   !*** ./resources/js/views/configuration/client/view.js ***!
   \*********************************************************/
-/*! exports provided: updateTable */
+/*! exports provided: updateTable, showAddForm, showEditForm, updateEditFormSection */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTable", function() { return updateTable; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showAddForm", function() { return showAddForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showEditForm", function() { return showEditForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateEditFormSection", function() { return updateEditFormSection; });
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./resources/js/views/configuration/client/base.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../base */ "./resources/js/views/base.js");
 
@@ -100884,8 +101357,26 @@ __webpack_require__.r(__webpack_exports__);
 var updateTable = function updateTable(markup) {
   var table = _base__WEBPACK_IMPORTED_MODULE_1__["update"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].table).closest(_base__WEBPACK_IMPORTED_MODULE_1__["selectors"].tableDataTablesWrapper), markup);
 
-  $(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].table).DataTable();
+  $(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].table).DataTable({
+    responsive: true,
+    select: {
+      className: 'is-selected',
+      info: false,
+      toggleable: false
+    }
+  });
   return table;
+};
+var showAddForm = function showAddForm() {
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].editFormSection).style.display = 'none';
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].addFormSection).style.display = 'block';
+};
+var showEditForm = function showEditForm() {
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].addFormSection).style.display = 'none';
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].editFormSection).style.display = 'block';
+};
+var updateEditFormSection = function updateEditFormSection(markup) {
+  return _base__WEBPACK_IMPORTED_MODULE_1__["update"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].editFormSection), markup);
 };
 
 /***/ }),
@@ -100907,25 +101398,34 @@ var strings = {
 };
 var selectors = {
   table: 'table.orchestrators',
+  formsSection: '.forms-section',
+  addFormSection: '.add-form-section',
   addForm: '#add-form',
-  nameInput: 'input#name',
-  codeInput: 'input#code',
-  urlInput: 'input#url',
-  tenantInput: 'input#tenant',
-  apiUserUsernameInput: 'input#api-user-username',
-  apiUserPasswordInput: 'input#api-user-password',
-  elasticSearchUrlInput: 'input#elastic-search-url',
-  elasticSearchIndexInput: 'input#elastic-search-index',
+  editFormSection: '.edit-form-section',
+  editForm: '#edit-form',
+  nameInput: 'input.name',
+  codeInput: 'input.code',
+  urlInput: 'input.url',
+  tenantInput: 'input.tenant',
+  apiUserUsernameInput: 'input.api-user-username',
+  apiUserPasswordInput: 'input.api-user-password',
+  elasticSearchUrlInput: 'input.elastic-search-url',
+  elasticSearchIndexInput: 'input.elastic-search-index',
   createButton: 'button.create',
   createButtonChildren: 'button.create *',
   resetButton: 'button.reset',
-  resetButtonChildren: 'button.reset *'
+  resetButtonChildren: 'button.reset *',
+  saveButton: 'button.save',
+  saveButtonChildren: 'button.save *',
+  cancelButton: 'button.cancel',
+  cancelButtonChildren: 'button.cancel *',
+  removeButton: 'button.remove',
+  removeButtonChildren: 'button.remove *'
 };
 var elements = {
   table: document.querySelector(selectors.table),
-  addForm: document.querySelector(selectors.addForm),
-  createButton: document.querySelector(selectors.createButton),
-  resetButton: document.querySelector(selectors.resetButton)
+  formsSection: document.querySelector(selectors.formsSection),
+  addForm: document.querySelector(selectors.addForm)
 };
 
 /***/ }),
@@ -100964,6 +101464,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var configuration = new _models_Configuration__WEBPACK_IMPORTED_MODULE_2__["default"]('configuration.orchestrator.index');
+var currentMode = 'add';
 var nameInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
 var codeInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
 var urlInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].urlInput);
@@ -100979,6 +101480,7 @@ var init = function init() {
     setInterval(function () {
       _layout_index__WEBPACK_IMPORTED_MODULE_7__["update"](configuration.layout);
     }, 45000);
+    $(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table).DataTable().on('select', loadEditForm);
     _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm.addEventListener('keyup', checkForm);
     _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm.addEventListener('change', checkForm);
     _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm.addEventListener('click',
@@ -100987,14 +101489,17 @@ var init = function init() {
       var _ref = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+        var createButton;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                createButton = _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButton);
+
                 if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButtonChildren)) && !createButton.disabled) {
                   create().then(function (res) {
                     toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Orchestrator successfully added!', null, {
-                      positionClass: 'toast-bottom-right'
+                      positionClass: 'toast-bottom-left'
                     });
                     return Promise.all([updateTable(), _layout_index__WEBPACK_IMPORTED_MODULE_7__["update"](configuration.layout)]);
                   });
@@ -101005,7 +101510,7 @@ var init = function init() {
                   createButton.disabled = true;
                 }
 
-              case 2:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -101022,162 +101527,405 @@ var init = function init() {
   }
 };
 
+var loadAddForm = function loadAddForm(e) {
+  try {
+    $(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table).DataTable().rows().deselect();
+    _view__WEBPACK_IMPORTED_MODULE_6__["showAddForm"]();
+    currentMode = 'add';
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+var loadEditForm = function loadEditForm(e) {
+  try {
+    _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table));
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_5__["elements"].formsSection);
+
+    var row = $(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table).DataTable().row({
+      selected: true
+    }).node();
+    var id = row.dataset.id;
+    var orchestrator = new _models_Orchestrator__WEBPACK_IMPORTED_MODULE_3__["default"](id);
+    orchestrator.loadEditForm().then(function (response) {
+      _view__WEBPACK_IMPORTED_MODULE_6__["updateEditFormSection"](orchestrator.editForm);
+      var form = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].editForm);
+      form.addEventListener('keyup', checkForm);
+      form.addEventListener('change', checkForm);
+      form.addEventListener('click',
+      /*#__PURE__*/
+      function () {
+        var _ref2 = _asyncToGenerator(
+        /*#__PURE__*/
+        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+          var saveButton;
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  saveButton = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].saveButton);
+
+                  if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].saveButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].saveButtonChildren)) && !saveButton.disabled) {
+                    update().then(function (response) {
+                      loadAddForm(e);
+                      updateTable();
+                      toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Orchestrator successfully updated!', null, {
+                        positionClass: 'toast-bottom-left'
+                      });
+                    });
+                  }
+
+                  if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].cancelButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].cancelButtonChildren))) {
+                    loadAddForm(e);
+                  }
+
+                  if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].removeButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].removeButtonChildren))) {
+                    _base__WEBPACK_IMPORTED_MODULE_4__["swalWithBulmaButtons"].fire({
+                      title: 'Orchestrator removal confirmation',
+                      text: 'This orchestrator and all its related elements (clients, watched processes, alert triggers and alerts) will be removed. Are you sure?',
+                      icon: 'warning',
+                      showCancelButton: true,
+                      confirmButtonText: '<span class="icon"><i class="fas fa-trash-alt"></i></span><span>Remove it!</span>',
+                      cancelButtonText: '<span class="icon"><i class="fas fa-undo"></i></span><span>Undo</span>'
+                    }).then(function (result) {
+                      if (result.value) {
+                        remove().then(function (reponse) {
+                          loadAddForm(e);
+                          updateTable();
+                          toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Orchestrator successfully removed!', null, {
+                            positionClass: 'toast-bottom-left'
+                          });
+                        });
+                      }
+                    });
+                  }
+
+                case 4:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2);
+        }));
+
+        return function (_x2) {
+          return _ref2.apply(this, arguments);
+        };
+      }());
+      _view__WEBPACK_IMPORTED_MODULE_6__["showEditForm"]();
+
+      _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table));
+
+      _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_5__["elements"].formsSection);
+
+      currentMode = 'edit';
+      checkForm(e);
+    });
+  } catch (error) {
+    console.log(error);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table));
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_5__["elements"].formsSection);
+  }
+};
+
 var checkForm = function checkForm(e) {
-  var nameInputValid = false;
-  var codeInputValid = false;
-  var urlInputValid = false;
-  var tenantInputValid = false;
-  var apiUserUsernameInputValid = false;
-  var apiUserPasswordInputValid = false;
-  var elasticSearchUrlInputValid = false;
-  var elasticSearchIndexInputValid = false;
-  nameInputValid = !(nameInput.value.trim() === '');
+  var form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].editForm);
+  var nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
+  var codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
+  var urlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].urlInput);
+  var tenantInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
+  var apiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
+  var apiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
+  var elasticSearchUrlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
+  var elasticSearchIndexInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
+  var nameInputValid = !(nameInput.value.trim() === '');
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](nameInput, nameInputValid);
 
-  codeInputValid = !(codeInput.value.trim() === '');
+  var codeInputValid = !(codeInput.value.trim() === '');
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](codeInput, codeInputValid);
 
-  urlInputValid = !(urlInput.value.trim() === '' || !_base__WEBPACK_IMPORTED_MODULE_4__["validURL"](urlInput.value));
+  var urlInputValid = !(urlInput.value.trim() === '' || !_base__WEBPACK_IMPORTED_MODULE_4__["validURL"](urlInput.value));
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](urlInput, urlInputValid);
 
-  tenantInputValid = !(tenantInput.value.trim() === '');
+  var tenantInputValid = !(tenantInput.value.trim() === '');
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](tenantInput, tenantInputValid);
 
-  apiUserUsernameInputValid = !(apiUserUsernameInput.value.trim() === '');
+  var apiUserUsernameInputValid = !(apiUserUsernameInput.value.trim() === '');
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](apiUserUsernameInput, apiUserUsernameInputValid);
 
-  apiUserPasswordInputValid = !(apiUserPasswordInput.value.trim() === '');
+  var apiUserPasswordInputValid = !(apiUserPasswordInput.value.trim() === '');
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](apiUserPasswordInput, apiUserPasswordInputValid);
 
-  elasticSearchUrlInputValid = !(elasticSearchUrlInput.value.trim() === '' || !_base__WEBPACK_IMPORTED_MODULE_4__["validURL"](elasticSearchUrlInput.value));
+  var elasticSearchUrlInputValid = !(elasticSearchUrlInput.value.trim() === '' || !_base__WEBPACK_IMPORTED_MODULE_4__["validURL"](elasticSearchUrlInput.value));
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](elasticSearchUrlInput, elasticSearchUrlInputValid);
 
-  elasticSearchIndexInputValid = !(elasticSearchIndexInput.value.trim() === '');
+  var elasticSearchIndexInputValid = !(elasticSearchIndexInput.value.trim() === '');
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](elasticSearchIndexInput, elasticSearchIndexInputValid);
 
   var formValid = nameInputValid && codeInputValid && urlInputValid && tenantInputValid && apiUserUsernameInputValid && apiUserPasswordInputValid && elasticSearchUrlInputValid && elasticSearchIndexInputValid;
-  createButton.disabled = !formValid;
+
+  if (currentMode === 'add') {
+    form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButton).disabled = !formValid;
+  } else {
+    form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].saveButton).disabled = !formValid;
+  }
 };
 
 var create =
 /*#__PURE__*/
 function () {
-  var _ref2 = _asyncToGenerator(
+  var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-    var addForm;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+    var form, _nameInput, _codeInput, _urlInput, _tenantInput, _apiUserUsernameInput, _apiUserPasswordInput, _elasticSearchUrlInput, _elasticSearchIndexInput;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context3.prev = _context3.next) {
           case 0:
-            addForm = _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm;
-            _context2.prev = 1;
+            form = _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm;
+            _context3.prev = 1;
 
-            _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](addForm);
+            _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](form);
 
-            return _context2.abrupt("return", new Promise(function (resolve, reject) {
+            _nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
+            _codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
+            _urlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].urlInput);
+            _tenantInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
+            _apiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
+            _apiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
+            _elasticSearchUrlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
+            _elasticSearchIndexInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
+            return _context3.abrupt("return", new Promise(function (resolve, reject) {
               var orchestrator = new _models_Orchestrator__WEBPACK_IMPORTED_MODULE_3__["default"]();
-              resolve(orchestrator.save(nameInput.value.trim(), codeInput.value.trim(), urlInput.value.trim(), tenantInput.value.trim(), apiUserUsernameInput.value.trim(), apiUserPasswordInput.value, elasticSearchUrlInput.value.trim(), elasticSearchIndexInput.value.trim()).then(function (res) {
+              resolve(orchestrator.save(_nameInput.value.trim(), _codeInput.value.trim(), _urlInput.value.trim(), _tenantInput.value.trim(), _apiUserUsernameInput.value.trim(), _apiUserPasswordInput.value, _elasticSearchUrlInput.value.trim(), _elasticSearchIndexInput.value.trim()).then(function (res) {
                 resetForm();
 
-                _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](addForm);
+                _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
+              }));
+            }));
+
+          case 14:
+            _context3.prev = 14;
+            _context3.t0 = _context3["catch"](1);
+            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Orchestrator not added due to application exception: ".concat(_context3.t0), null, {
+              positionClass: 'toast-bottom-left'
+            });
+            console.log(_context3.t0);
+
+            _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
+
+          case 19:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[1, 14]]);
+  }));
+
+  return function create() {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+var update =
+/*#__PURE__*/
+function () {
+  var _ref4 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+    var form, _nameInput2, _codeInput2, _urlInput2, _tenantInput2, _apiUserUsernameInput2, _apiUserPasswordInput2, _elasticSearchUrlInput2, _elasticSearchIndexInput2;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            form = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].editForm);
+            _context4.prev = 1;
+
+            _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](form);
+
+            _nameInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
+            _codeInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
+            _urlInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].urlInput);
+            _tenantInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
+            _apiUserUsernameInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
+            _apiUserPasswordInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
+            _elasticSearchUrlInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
+            _elasticSearchIndexInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
+            return _context4.abrupt("return", new Promise(function (resolve, reject) {
+              var orchestrator = new _models_Orchestrator__WEBPACK_IMPORTED_MODULE_3__["default"](form.dataset.id);
+              resolve(orchestrator.update(_nameInput2.value.trim(), _codeInput2.value.trim(), _urlInput2.value.trim(), _tenantInput2.value.trim(), _apiUserUsernameInput2.value.trim(), _apiUserPasswordInput2.value, _elasticSearchUrlInput2.value.trim(), _elasticSearchIndexInput2.value.trim()).then(function (response) {
+                resetForm();
+
+                _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
+              }));
+            }));
+
+          case 14:
+            _context4.prev = 14;
+            _context4.t0 = _context4["catch"](1);
+            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Orchestrator not updated due to application exception: ".concat(_context4.t0), null, {
+              positionClass: 'toast-bottom-left'
+            });
+            console.log(_context4.t0);
+
+            _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
+
+          case 19:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, null, [[1, 14]]);
+  }));
+
+  return function update() {
+    return _ref4.apply(this, arguments);
+  };
+}();
+
+var remove =
+/*#__PURE__*/
+function () {
+  var _ref5 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+    var form;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            form = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].editForm);
+            _context5.prev = 1;
+
+            _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](form);
+
+            return _context5.abrupt("return", new Promise(function (resolve, reject) {
+              var orchestrator = new _models_Orchestrator__WEBPACK_IMPORTED_MODULE_3__["default"](form.dataset.id);
+              resolve(orchestrator.remove().then(function (response) {
+                resetForm();
+
+                _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
               }));
             }));
 
           case 6:
-            _context2.prev = 6;
-            _context2.t0 = _context2["catch"](1);
-            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Orchestrator not added due to application exception: ".concat(_context2.t0), null, {
-              positionClass: 'toast-bottom-right'
+            _context5.prev = 6;
+            _context5.t0 = _context5["catch"](1);
+            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Orchestrator not removed due to application exception: ".concat(_context5.t0), null, {
+              positionClass: 'toast-bottom-left'
             });
-            console.log(_context2.t0);
+            console.log(_context5.t0);
 
-            _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](addForm);
+            _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
 
           case 11:
           case "end":
-            return _context2.stop();
+            return _context5.stop();
         }
       }
-    }, _callee2, null, [[1, 6]]);
+    }, _callee5, null, [[1, 6]]);
   }));
 
-  return function create() {
-    return _ref2.apply(this, arguments);
+  return function remove() {
+    return _ref5.apply(this, arguments);
   };
 }();
 
 var updateTable =
 /*#__PURE__*/
 function () {
-  var _ref3 = _asyncToGenerator(
+  var _ref6 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
     var table;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
       while (1) {
-        switch (_context3.prev = _context3.next) {
+        switch (_context6.prev = _context6.next) {
           case 0:
             table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table);
-            _context3.prev = 1;
+            _context6.prev = 1;
 
             _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](table);
 
-            return _context3.abrupt("return", new Promise(function (resolve, reject) {
+            return _context6.abrupt("return", new Promise(function (resolve, reject) {
               resolve(configuration.updateOrchestratorsTable().then(function (res) {
                 _view__WEBPACK_IMPORTED_MODULE_6__["updateTable"](configuration.orchestratorsTable);
+                $(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table).DataTable().on('select', loadEditForm);
 
                 _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](table);
               }));
             }));
 
           case 6:
-            _context3.prev = 6;
-            _context3.t0 = _context3["catch"](1);
-            console.log(_context3.t0);
+            _context6.prev = 6;
+            _context6.t0 = _context6["catch"](1);
+            console.log(_context6.t0);
 
             _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](table);
 
           case 10:
           case "end":
-            return _context3.stop();
+            return _context6.stop();
         }
       }
-    }, _callee3, null, [[1, 6]]);
+    }, _callee6, null, [[1, 6]]);
   }));
 
   return function updateTable() {
-    return _ref3.apply(this, arguments);
+    return _ref6.apply(this, arguments);
   };
 }();
 
 var resetForm = function resetForm() {
   try {
-    _base__WEBPACK_IMPORTED_MODULE_5__["elements"].addForm.reset();
+    var form = currentMode === 'add' ? document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].addForm) : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].editForm);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](nameInput);
+    var _nameInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](codeInput);
+    var _codeInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](urlInput);
+    var _urlInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].urlInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](tenantInput);
+    var _tenantInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](apiUserUsernameInput);
+    var _apiUserUsernameInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](apiUserPasswordInput);
+    var _apiUserPasswordInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](elasticSearchUrlInput);
+    var _elasticSearchUrlInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](elasticSearchIndexInput);
+    var _elasticSearchIndexInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
+
+    form.reset();
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_nameInput3);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_codeInput3);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_urlInput3);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_tenantInput3);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_apiUserUsernameInput3);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_apiUserPasswordInput3);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_elasticSearchUrlInput3);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_elasticSearchIndexInput3);
   } catch (error) {
     console.log(error);
   }
@@ -101189,12 +101937,15 @@ var resetForm = function resetForm() {
 /*!***************************************************************!*\
   !*** ./resources/js/views/configuration/orchestrator/view.js ***!
   \***************************************************************/
-/*! exports provided: updateTable */
+/*! exports provided: updateTable, showAddForm, showEditForm, updateEditFormSection */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTable", function() { return updateTable; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showAddForm", function() { return showAddForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showEditForm", function() { return showEditForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateEditFormSection", function() { return updateEditFormSection; });
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./resources/js/views/configuration/orchestrator/base.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../base */ "./resources/js/views/base.js");
 
@@ -101202,8 +101953,26 @@ __webpack_require__.r(__webpack_exports__);
 var updateTable = function updateTable(markup) {
   var table = _base__WEBPACK_IMPORTED_MODULE_1__["update"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].table).closest(_base__WEBPACK_IMPORTED_MODULE_1__["selectors"].tableDataTablesWrapper), markup);
 
-  $(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].table).DataTable();
+  $(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].table).DataTable({
+    responsive: true,
+    select: {
+      className: 'is-selected',
+      info: false,
+      toggleable: false
+    }
+  });
   return table;
+};
+var showAddForm = function showAddForm() {
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].editFormSection).style.display = 'none';
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].addFormSection).style.display = 'block';
+};
+var showEditForm = function showEditForm() {
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].addFormSection).style.display = 'none';
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].editFormSection).style.display = 'block';
+};
+var updateEditFormSection = function updateEditFormSection(markup) {
+  return _base__WEBPACK_IMPORTED_MODULE_1__["update"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].editFormSection), markup);
 };
 
 /***/ }),
@@ -101410,7 +102179,7 @@ var init = function init() {
                 if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].createButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].createButtonChildren)) && !createButton.disabled) {
                   create().then(function (res) {
                     toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Watched automated process successfully added!', null, {
-                      positionClass: 'toast-bottom-right'
+                      positionClass: 'toast-bottom-left'
                     });
                     return Promise.all([updateTable(), _layout_index__WEBPACK_IMPORTED_MODULE_9__["update"](configuration.layout)]);
                   });
@@ -101556,7 +102325,7 @@ function () {
 
                   if (data.error) {
                     toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Unable to load processes: ".concat(data.error), null, {
-                      positionClass: 'toast-bottom-right'
+                      positionClass: 'toast-bottom-left'
                     });
 
                     if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)) {
@@ -101647,7 +102416,7 @@ function () {
 
                   if (data.error) {
                     toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Unable to load robots: ".concat(data.error), null, {
-                      positionClass: 'toast-bottom-right'
+                      positionClass: 'toast-bottom-left'
                     });
 
                     if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)) {
@@ -101745,9 +102514,16 @@ var refreshInvolvedRobotsTable = function refreshInvolvedRobotsTable() {
             var environments = data['RobotEnvironments'].split(',').map(function (item) {
               return item.trim();
             });
-            return environments.some(function (item) {
-              return involvedProcessesEnvironments.indexOf(item) < 0;
-            });
+            var remove = true;
+
+            for (var _i = 0; _i < involvedProcessesEnvironments.length; _i++) {
+              if (environments.indexOf(involvedProcessesEnvironments[_i]) >= 0) {
+                remove = false;
+                break;
+              }
+            }
+
+            return remove; //return environments.some(item => involvedProcessesEnvironments.indexOf(item) < 0);
           }).remove();
         }
 
@@ -101796,7 +102572,7 @@ function () {
 
                   if (data.error) {
                     toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Unable to load queues: ".concat(data.error), null, {
-                      positionClass: 'toast-bottom-right'
+                      positionClass: 'toast-bottom-left'
                     });
 
                     if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)) {
@@ -101860,7 +102636,7 @@ function () {
   var _ref6 = _asyncToGenerator(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
-    var addForm, involvedProcessesRows, involvedProcesses, i, involvedProcess, involvedRobotsRows, involvedRobots, _i, involvedRobot, involvedQueuesRows, involvedQueues, _i2, involvedQueue;
+    var addForm, involvedProcessesRows, involvedProcesses, i, involvedProcess, involvedRobotsRows, involvedRobots, _i2, involvedRobot, involvedQueuesRows, involvedQueues, _i3, involvedQueue;
 
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
       while (1) {
@@ -101893,14 +102669,14 @@ function () {
             }).data();
             involvedRobots = [];
 
-            for (_i = 0; _i < involvedRobotsRows.length; _i++) {
+            for (_i2 = 0; _i2 < involvedRobotsRows.length; _i2++) {
               involvedRobot = {
-                name: involvedRobotsRows[_i]['Name'],
-                machine_name: involvedRobotsRows[_i]['MachineName'],
-                description: involvedRobotsRows[_i]['Description'],
-                username: involvedRobotsRows[_i]['Username'],
-                type: involvedRobotsRows[_i]['Type'],
-                external_id: involvedRobotsRows[_i]['Id']
+                name: involvedRobotsRows[_i2]['Name'],
+                machine_name: involvedRobotsRows[_i2]['MachineName'],
+                description: involvedRobotsRows[_i2]['Description'],
+                username: involvedRobotsRows[_i2]['Username'],
+                type: involvedRobotsRows[_i2]['Type'],
+                external_id: involvedRobotsRows[_i2]['Id']
               };
               involvedRobots.push(involvedRobot);
             }
@@ -101910,11 +102686,11 @@ function () {
             }).data();
             involvedQueues = [];
 
-            for (_i2 = 0; _i2 < involvedQueuesRows.length; _i2++) {
+            for (_i3 = 0; _i3 < involvedQueuesRows.length; _i3++) {
               involvedQueue = {
-                name: involvedQueuesRows[_i2]['Name'],
-                description: involvedQueuesRows[_i2]['Description'],
-                external_id: involvedQueuesRows[_i2]['Id']
+                name: involvedQueuesRows[_i3]['Name'],
+                description: involvedQueuesRows[_i3]['Description'],
+                external_id: involvedQueuesRows[_i3]['Id']
               };
               involvedQueues.push(involvedQueue);
             }
@@ -101933,7 +102709,7 @@ function () {
             _context6.prev = 15;
             _context6.t0 = _context6["catch"](1);
             toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Watched automated process not added due to application exception: ".concat(_context6.t0), null, {
-              positionClass: 'toast-bottom-right'
+              positionClass: 'toast-bottom-left'
             });
             console.log(_context6.t0);
 

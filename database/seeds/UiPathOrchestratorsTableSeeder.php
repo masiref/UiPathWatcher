@@ -13,24 +13,24 @@ class UiPathOrchestratorsTableSeeder extends Seeder
     public function run()
     {
         DB::table('ui_path_orchestrators')->insert([
-            'name' => 'Natixis Payments',
-            'code' => 'NPS',
-            'url' => 'https://uipath.dev.mycloud.intranatixis.com/',
+            'name' => 'Development-17',
+            'code' => 'DEV17',
+            'url' => 'https://orchestrator2017.dev.intranatixis.com/',
             'tenant' => 'Default',
             'api_user_username' => 'api_user',
             'api_user_password' => 'apiuser2019!',
-            'elastic_search_url' => 'http://swdcfregb705:9200/',
-            'elastic_search_index' => 'kibana_sample_data_flights'
+            'elastic_search_url' => 'http://swdcfregb705.cib.net:9200/',
+            'elastic_search_index' => 'kibana_sample_data_ecommerce'
         ]);
         DB::table('ui_path_orchestrators')->insert([
-            'name' => 'Natixis Lease',
-            'code' => 'NL',
+            'name' => 'Development-19',
+            'code' => 'DEV19',
             'url' => 'https://uipath.dev.mycloud.intranatixis.com/',
             'tenant' => 'Default',
             'api_user_username' => 'api_user',
             'api_user_password' => 'apiuser2019!',
-            'elastic_search_url' => 'http://swdcfregb705:9200/',
-            'elastic_search_index' => 'kibana_sample_data_ecommerce'
+            'elastic_search_url' => 'http://swdcfregb705.cib.net:9200/',
+            'elastic_search_index' => 'kibana_sample_data_flights'
         ]);
     }
 }

@@ -216,8 +216,8 @@ export const commitIgnore = async(dashboard, alert) => {
                         text: 'The alert will be ignored forever, manual action to reactivate it will be needed!',
                         icon: 'warning',
                         showCancelButton: true,
-                        confirmButtonText: 'Ignore it!',
-                        cancelButtonText: 'Undo'
+                        confirmButtonText: '<span class="icon"><i class="fas fa-eye-slash"></i></span><span>Ignore it!</span>',
+                        cancelButtonText: '<span class="icon"><i class="fas fa-undo"></i></span><span>Undo</span>'
                     }).then(result => {
                         if (result.value) {
                             handleCommitIgnore(dashboard, alert, ignoranceCalendar, descriptionTextarea);

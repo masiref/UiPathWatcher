@@ -1,4 +1,4 @@
-<aside class="menu is-hidden-mobile sidebar">
+<aside class="menu sidebar">
     <!-- Dashboard menu -->
     <p class="menu-label">
         <span class="icon"><i class="fas fa-chart-bar"></i></span>

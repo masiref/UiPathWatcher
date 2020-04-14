@@ -42,7 +42,7 @@ class DashboardClientController extends Controller
         $closedAlerts = Alert::whereHas('watchedAutomatedProcess', function($query) use($client) {
             $query->where('client_id', $client->id);
         })->where(function ($query) {
-            $query->where('closed', true);
+            $query->where('closed', true)->where('parent_id', null);
         })->get();
         $clients = Client::all();
 
@@ -78,6 +78,9 @@ class DashboardClientController extends Controller
             $query->where('client_id', $client->id);
         })->where(function ($query) use($closed) {
             $query->where('closed', $closed);
+            if ($closed) {
+                $query->where('parent_id', null);
+            }
         })->get();
         return view('dashboard.alert.table')
             ->with('alerts', $alerts)

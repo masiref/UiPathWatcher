@@ -90,9 +90,12 @@ export const closeModal = modal => {
 export const swalWithBulmaButtons = Swal.mixin({
     customClass: {
         confirmButton: 'button is-success',
-        cancelButton: 'button is-danger'
+        cancelButton: 'button is-danger',
+        actions: 'buttons'
     },
-    buttonsStyling: false
+    buttonsStyling: false,
+    focusConfirm: false,
+    scrollbarPadding: false
 });
 
 export const isDashboardRelatedURL = url => {

@@ -104,11 +104,6 @@ const commitReactivateAlertTriggers = () => {
     }
 }
 
-// DataTables
-$('.table').DataTable({
-    responsive: true
-});
-
 // Bulma NavBar Burger Script
 document.addEventListener('DOMContentLoaded', function () {
     // Get all "navbar-burger" elements

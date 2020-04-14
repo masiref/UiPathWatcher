@@ -11,6 +11,8 @@ import * as layoutController from '../../layout/index';
 
 const configuration = new Configuration('configuration.orchestrator.index');
 
+let currentMode = 'add';
+
 const nameInput = document.querySelector(base.selectors.nameInput);
 const codeInput = document.querySelector(base.selectors.codeInput);
 const urlInput = document.querySelector(base.selectors.urlInput);
@@ -28,14 +30,18 @@ export const init = () => {
             layoutController.update(configuration.layout);
         }, 45000);
 
+        $(base.selectors.table).DataTable()
+            .on('select', loadEditForm);
+
         base.elements.addForm.addEventListener('keyup', checkForm);
         base.elements.addForm.addEventListener('change', checkForm);
 
         base.elements.addForm.addEventListener('click', async (e) => {
+            const createButton = base.elements.addForm.querySelector(base.selectors.createButton);
             if (e.target.matches(`${base.selectors.createButton}, ${base.selectors.createButtonChildren}`) && !createButton.disabled) {
                 create().then(res => {
                     toastr.success('Orchestrator successfully added!', null, {
-                        positionClass: 'toast-bottom-right'
+                        positionClass: 'toast-bottom-left'
                     });
                     return Promise.all([
                         updateTable(),
@@ -53,50 +59,145 @@ export const init = () => {
     }
 };
 
-const checkForm = e => {
-    let nameInputValid = false;
-    let codeInputValid = false;
-    let urlInputValid = false;
-    let tenantInputValid = false;
-    let apiUserUsernameInputValid = false;
-    let apiUserPasswordInputValid = false;
-    let elasticSearchUrlInputValid = false;
-    let elasticSearchIndexInputValid = false;
+const loadAddForm = e => {
+    try {
+        $(base.selectors.table).DataTable().rows().deselect();
+        view.showAddForm();
+        currentMode = 'add';
+    } catch (error) {
+        console.log(error);
+    }
+};
 
-    nameInputValid = !(nameInput.value.trim() === '');
+const loadEditForm = e => {
+    try {
+        _base.renderLoader(document.querySelector(base.selectors.table));
+        _base.renderLoader(base.elements.formsSection);
+
+        const row = $(base.selectors.table).DataTable().row({ selected: true }).node();
+        const id = row.dataset.id;
+
+        const orchestrator = new Orchestrator(id);
+
+        orchestrator.loadEditForm().then(response => {
+            view.updateEditFormSection(orchestrator.editForm);
+
+            const form = document.querySelector(base.selectors.editForm);
+            form.addEventListener('keyup', checkForm);
+            form.addEventListener('change', checkForm);
+
+            form.addEventListener('click', async (e) => {
+                const saveButton = form.querySelector(base.selectors.saveButton);
+                if (e.target.matches(`${base.selectors.saveButton}, ${base.selectors.saveButtonChildren}`) && !saveButton.disabled) {
+                    update().then(response => {
+                        loadAddForm(e);
+                        updateTable();
+                        toastr.success('Orchestrator successfully updated!', null, {
+                            positionClass: 'toast-bottom-left'
+                        });
+                    });
+                }
+                if (e.target.matches(`${base.selectors.cancelButton}, ${base.selectors.cancelButtonChildren}`)) {
+                    loadAddForm(e);
+                }
+                if (e.target.matches(`${base.selectors.removeButton}, ${base.selectors.removeButtonChildren}`)) {
+                    _base.swalWithBulmaButtons.fire({
+                        title: 'Orchestrator removal confirmation',
+                        text: 'This orchestrator and all its related elements (clients, watched processes, alert triggers and alerts) will be removed. Are you sure?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: '<span class="icon"><i class="fas fa-trash-alt"></i></span><span>Remove it!</span>',
+                        cancelButtonText: '<span class="icon"><i class="fas fa-undo"></i></span><span>Undo</span>'
+                    }).then(result => {
+                        if (result.value) {
+                            remove().then(reponse => {
+                                loadAddForm(e);
+                                updateTable();
+                                toastr.success('Orchestrator successfully removed!', null, {
+                                    positionClass: 'toast-bottom-left'
+                                });
+                            });
+                        }
+                    });
+                }
+            });
+
+            view.showEditForm();
+
+            _base.clearLoader(document.querySelector(base.selectors.table));
+            _base.clearLoader(base.elements.formsSection);
+            
+            currentMode = 'edit';
+
+            checkForm(e);
+        });
+    } catch (error) {
+        console.log(error);
+        _base.clearLoader(document.querySelector(base.selectors.table));
+        _base.clearLoader(base.elements.formsSection);
+    }
+};
+
+const checkForm = e => {
+    const form = (currentMode === 'add' ? base.elements.addForm : document.querySelector(base.selectors.editForm));
+    
+    const nameInput = form.querySelector(base.selectors.nameInput);
+    const codeInput = form.querySelector(base.selectors.codeInput);
+    const urlInput = form.querySelector(base.selectors.urlInput);
+    const tenantInput = form.querySelector(base.selectors.tenantInput);
+    const apiUserUsernameInput = form.querySelector(base.selectors.apiUserUsernameInput);
+    const apiUserPasswordInput = form.querySelector(base.selectors.apiUserPasswordInput);
+    const elasticSearchUrlInput = form.querySelector(base.selectors.elasticSearchUrlInput);
+    const elasticSearchIndexInput = form.querySelector(base.selectors.elasticSearchIndexInput);
+
+    const nameInputValid = !(nameInput.value.trim() === '');
     _base.toggleSuccessDangerState(nameInput, nameInputValid);
 
-    codeInputValid = !(codeInput.value.trim() === '');
+    const codeInputValid = !(codeInput.value.trim() === '');
     _base.toggleSuccessDangerState(codeInput, codeInputValid);
 
-    urlInputValid = !(urlInput.value.trim() === '' || !_base.validURL(urlInput.value));
+    const urlInputValid = !(urlInput.value.trim() === '' || !_base.validURL(urlInput.value));
     _base.toggleSuccessDangerState(urlInput, urlInputValid);
 
-    tenantInputValid = !(tenantInput.value.trim() === '');
+    const tenantInputValid = !(tenantInput.value.trim() === '');
     _base.toggleSuccessDangerState(tenantInput, tenantInputValid);
 
-    apiUserUsernameInputValid = !(apiUserUsernameInput.value.trim() === '');
+    const apiUserUsernameInputValid = !(apiUserUsernameInput.value.trim() === '');
     _base.toggleSuccessDangerState(apiUserUsernameInput, apiUserUsernameInputValid);
 
-    apiUserPasswordInputValid = !(apiUserPasswordInput.value.trim() === '');
+    const apiUserPasswordInputValid = !(apiUserPasswordInput.value.trim() === '');
     _base.toggleSuccessDangerState(apiUserPasswordInput, apiUserPasswordInputValid);
 
-    elasticSearchUrlInputValid = !(elasticSearchUrlInput.value.trim() === '' || !_base.validURL(elasticSearchUrlInput.value));
+    const elasticSearchUrlInputValid = !(elasticSearchUrlInput.value.trim() === '' || !_base.validURL(elasticSearchUrlInput.value));
     _base.toggleSuccessDangerState(elasticSearchUrlInput, elasticSearchUrlInputValid);
 
-    elasticSearchIndexInputValid = !(elasticSearchIndexInput.value.trim() === '');
+    const elasticSearchIndexInputValid = !(elasticSearchIndexInput.value.trim() === '');
     _base.toggleSuccessDangerState(elasticSearchIndexInput, elasticSearchIndexInputValid);
     
     const formValid = nameInputValid && codeInputValid && urlInputValid && tenantInputValid && apiUserUsernameInputValid &&
         apiUserPasswordInputValid && elasticSearchUrlInputValid && elasticSearchIndexInputValid;
 
-    createButton.disabled = !formValid;
+    if (currentMode === 'add') {
+        form.querySelector(base.selectors.createButton).disabled = !formValid;
+    } else {
+        form.querySelector(base.selectors.saveButton).disabled = !formValid;
+    }
 };
 
 const create = async () => {
-    const addForm = base.elements.addForm;
+    const form = base.elements.addForm;
     try {
-        _base.renderLoader(addForm);
+        _base.renderLoader(form);
+
+        const nameInput = form.querySelector(base.selectors.nameInput);
+        const codeInput = form.querySelector(base.selectors.codeInput);
+        const urlInput = form.querySelector(base.selectors.urlInput);
+        const tenantInput = form.querySelector(base.selectors.tenantInput);
+        const apiUserUsernameInput = form.querySelector(base.selectors.apiUserUsernameInput);
+        const apiUserPasswordInput = form.querySelector(base.selectors.apiUserPasswordInput);
+        const elasticSearchUrlInput = form.querySelector(base.selectors.elasticSearchUrlInput);
+        const elasticSearchIndexInput = form.querySelector(base.selectors.elasticSearchIndexInput);
+        
         return new Promise((resolve, reject) => {
             const orchestrator = new Orchestrator();
             resolve(
@@ -111,16 +212,80 @@ const create = async () => {
                     elasticSearchIndexInput.value.trim()
                 ).then(res => {
                     resetForm();
-                    _base.clearLoader(addForm);
+                    _base.clearLoader(form);
                 })
             )
         });
     } catch (error) {
         toastr.error(`Orchestrator not added due to application exception: ${error}`, null, {
-            positionClass: 'toast-bottom-right'
+            positionClass: 'toast-bottom-left'
         });
         console.log(error);
-        _base.clearLoader(addForm);
+        _base.clearLoader(form);
+    }
+};
+
+const update = async () => {
+    const form = document.querySelector(base.selectors.editForm);
+    try {
+        _base.renderLoader(form);
+
+        const nameInput = form.querySelector(base.selectors.nameInput);
+        const codeInput = form.querySelector(base.selectors.codeInput);
+        const urlInput = form.querySelector(base.selectors.urlInput);
+        const tenantInput = form.querySelector(base.selectors.tenantInput);
+        const apiUserUsernameInput = form.querySelector(base.selectors.apiUserUsernameInput);
+        const apiUserPasswordInput = form.querySelector(base.selectors.apiUserPasswordInput);
+        const elasticSearchUrlInput = form.querySelector(base.selectors.elasticSearchUrlInput);
+        const elasticSearchIndexInput = form.querySelector(base.selectors.elasticSearchIndexInput);
+        
+        return new Promise((resolve, reject) => {
+            const orchestrator = new Orchestrator(form.dataset.id);
+            resolve(
+                orchestrator.update(
+                    nameInput.value.trim(),
+                    codeInput.value.trim(),
+                    urlInput.value.trim(),
+                    tenantInput.value.trim(),
+                    apiUserUsernameInput.value.trim(),
+                    apiUserPasswordInput.value,
+                    elasticSearchUrlInput.value.trim(),
+                    elasticSearchIndexInput.value.trim()
+                ).then(response => {
+                    resetForm();
+                    _base.clearLoader(form);
+                })
+            )
+        });
+    } catch (error) {
+        toastr.error(`Orchestrator not updated due to application exception: ${error}`, null, {
+            positionClass: 'toast-bottom-left'
+        });
+        console.log(error);
+        _base.clearLoader(form);
+    }
+};
+
+const remove = async () => {
+    const form = document.querySelector(base.selectors.editForm);
+    try {
+        _base.renderLoader(form);
+
+        return new Promise((resolve, reject) => {
+            const orchestrator = new Orchestrator(form.dataset.id);
+            resolve(
+                orchestrator.remove().then(response => {
+                    resetForm();
+                    _base.clearLoader(form);
+                })
+            )
+        });
+    } catch (error) {
+        toastr.error(`Orchestrator not removed due to application exception: ${error}`, null, {
+            positionClass: 'toast-bottom-left'
+        });
+        console.log(error);
+        _base.clearLoader(form);
     }
 };
 
@@ -132,6 +297,7 @@ const updateTable = async () => {
             resolve(
                 configuration.updateOrchestratorsTable().then(res => {
                     view.updateTable(configuration.orchestratorsTable);
+                    $(base.selectors.table).DataTable().on('select', loadEditForm);
                     _base.clearLoader(table);
                 })
             )
@@ -144,7 +310,18 @@ const updateTable = async () => {
 
 const resetForm = () => {
     try {
-        base.elements.addForm.reset();
+        const form = (currentMode === 'add' ? document.querySelector(base.selectors.addForm) : document.querySelector(base.selectors.editForm));
+
+        const nameInput = form.querySelector(base.selectors.nameInput);
+        const codeInput = form.querySelector(base.selectors.codeInput);
+        const urlInput = form.querySelector(base.selectors.urlInput);
+        const tenantInput = form.querySelector(base.selectors.tenantInput);
+        const apiUserUsernameInput = form.querySelector(base.selectors.apiUserUsernameInput);
+        const apiUserPasswordInput = form.querySelector(base.selectors.apiUserPasswordInput);
+        const elasticSearchUrlInput = form.querySelector(base.selectors.elasticSearchUrlInput);
+        const elasticSearchIndexInput = form.querySelector(base.selectors.elasticSearchIndexInput);
+        
+        form.reset();
         _base.removeStates(nameInput);
         _base.removeStates(codeInput);
         _base.removeStates(urlInput);

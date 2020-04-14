@@ -71,7 +71,7 @@ export const init = () => {
             if (e.target.matches(`${base.selectors.createButton}, ${base.selectors.createButtonChildren}`) && !createButton.disabled) {
                 create().then(res => {
                     toastr.success('Watched automated process successfully added!', null, {
-                        positionClass: 'toast-bottom-right'
+                        positionClass: 'toast-bottom-left'
                     });
                     return Promise.all([
                         updateTable(),
@@ -172,7 +172,7 @@ const loadProcesses = async (e) => {
                 let selected = [];
                 if (data.error) {
                     toastr.error(`Unable to load processes: ${data.error}`, null, {
-                        positionClass: 'toast-bottom-right'
+                        positionClass: 'toast-bottom-left'
                     });
                     if ($.fn.dataTable.isDataTable(base.selectors.involvedProcessesTable)) {
                         $(base.selectors.involvedProcessesTable).DataTable().clear().draw();
@@ -228,7 +228,7 @@ const loadRobots = async (e) => {
                 let selected = [];
                 if (data.error) {
                     toastr.error(`Unable to load robots: ${data.error}`, null, {
-                        positionClass: 'toast-bottom-right'
+                        positionClass: 'toast-bottom-left'
                     });
                     if ($.fn.dataTable.isDataTable(base.selectors.involvedRobotsTable)) {
                         $(base.selectors.involvedRobotsTable).DataTable().clear().draw();
@@ -291,7 +291,15 @@ const refreshInvolvedRobotsTable = () => {
                         let environments = data['RobotEnvironments'].split(',').map(item => {
                             return item.trim();
                         });
-                        return environments.some(item => involvedProcessesEnvironments.indexOf(item) < 0);
+                        let remove = true;
+                        for (let i = 0; i < involvedProcessesEnvironments.length; i++) {
+                            if (environments.indexOf(involvedProcessesEnvironments[i]) >= 0) {
+                                remove = false;
+                                break;
+                            }
+                        }
+                        return remove;
+                        //return environments.some(item => involvedProcessesEnvironments.indexOf(item) < 0);
                     }).remove();
                 }
                 table.draw();
@@ -321,7 +329,7 @@ const loadQueues = async (e) => {
                 let selected = [];
                 if (data.error) {
                     toastr.error(`Unable to load queues: ${data.error}`, null, {
-                        positionClass: 'toast-bottom-right'
+                        positionClass: 'toast-bottom-left'
                     });
                     if ($.fn.dataTable.isDataTable(base.selectors.involvedQueuesTable)) {
                         $(base.selectors.involvedQueuesTable).DataTable().clear().draw();
@@ -434,7 +442,7 @@ const create = async () => {
         });
     } catch (error) {
         toastr.error(`Watched automated process not added due to application exception: ${error}`, null, {
-            positionClass: 'toast-bottom-right'
+            positionClass: 'toast-bottom-left'
         });
         console.log(error);
         _base.clearLoader(addForm);

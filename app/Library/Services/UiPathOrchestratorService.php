@@ -67,7 +67,7 @@ class UiPathOrchestratorService {
         return $result;
     }
 
-    public function getReleases(UiPathOrchestrator $orchestrator, $token)
+    public function getReleases(UiPathOrchestrator $orchestrator, $token, $filter = '')
     {
         $result = $this->getDefaultResult();
 
@@ -75,7 +75,7 @@ class UiPathOrchestratorService {
         $headers = $this->getHeaders($token);
         try {
             $result['releases'] = json_decode(
-                $guzzle->request('GET', 'odata/Releases', [
+                $guzzle->request('GET', 'odata/Releases' . ($filter !== '' ? "?\$filter=$filter" : ''), [
                     'headers' => $headers
                 ])->getBody(),
                 true
@@ -87,7 +87,7 @@ class UiPathOrchestratorService {
         return $result;
     }
 
-    public function getRobots(UiPathOrchestrator $orchestrator, $token)
+    public function getRobots(UiPathOrchestrator $orchestrator, $token, $filter = '')
     {
         $result = $this->getDefaultResult();
 
@@ -95,7 +95,7 @@ class UiPathOrchestratorService {
         $headers = $this->getHeaders($token);
         try {
             $result['robots'] = json_decode(
-                $guzzle->request('GET', 'odata/Robots', [
+                $guzzle->request('GET', 'odata/Robots' . ($filter !== '' ? "?\$filter=$filter" : ''), [
                     'headers' => $headers
                 ])->getBody(),
                 true
@@ -107,7 +107,7 @@ class UiPathOrchestratorService {
         return $result;
     }
 
-    public function getQueues(UiPathOrchestrator $orchestrator, $token)
+    public function getQueues(UiPathOrchestrator $orchestrator, $token, $filter = '')
     {
         $result = $this->getDefaultResult();
 
@@ -115,13 +115,34 @@ class UiPathOrchestratorService {
         $headers = $this->getHeaders($token);
         try {
             $result['queues'] = json_decode(
-                $guzzle->request('GET', 'odata/QueueDefinitions', [
+                $guzzle->request('GET', 'odata/QueueDefinitions' . ($filter !== '' ? "?\$filter=$filter" : ''), [
                     'headers' => $headers
                 ])->getBody(),
                 true
             )['value'];
         } catch (RequestException $e) {
             $result = $this->getErrorResult("impossible to get queues from $orchestrator->url");
+        }
+
+        return $result;
+    }
+
+    public function getJobs(UiPathOrchestrator $orchestrator, $token, $filter = '')
+    {
+        $result = $this->getDefaultResult();
+
+        $guzzle = $this->getGuzzle($orchestrator);
+        $headers = $this->getHeaders($token);
+
+        try {
+            $result['jobs'] = json_decode(
+                $guzzle->request('GET', 'odata/Jobs' . ($filter !== '' ? "?\$filter=$filter" : ''), [
+                    'headers' => $headers
+                ])->getBody(),
+                true
+            )['value'];
+        } catch (RequestException $e) {
+            $result = $this->getErrorResult("impossible to get jobs from $orchestrator->url");
         }
 
         return $result;

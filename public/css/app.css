@@ -27732,7 +27732,7 @@ body {
 
 .hero.welcome.is-dark {
   background: white;
-  background: linear-gradient(to right, #4a4a4a, #fafafa);
+  background: linear-gradient(to right, #2d3436, #b2bec3);
 }
 
 .hero.welcome.is-info .title,

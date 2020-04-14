@@ -97,7 +97,7 @@ class WatchedAutomatedProcess extends Model
      */
     public function closedAlerts()
     {
-        return $this->alerts()->get()->where('closed', true)->sortByDesc('created_at');
+        return $this->alerts()->get()->where('closed', true)->where('parent', null)->sortByDesc('created_at');
     }
 
     /**

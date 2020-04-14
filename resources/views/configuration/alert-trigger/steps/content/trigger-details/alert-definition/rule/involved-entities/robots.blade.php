@@ -17,10 +17,10 @@
         <div class="field-body">
             <div class="field">
                 @foreach ($robots as $robot)
-                    @if ($loop->iteration % 4 === 0)
+                    @if ($loop->iteration % 5 === 0)
                         </div>
                     @endif
-                    @if ($loop->iteration % 4 === 0 || $loop->first)
+                    @if ($loop->iteration % 5 === 0 || $loop->first)
                         <div class="columns">
                     @endif
                     <div class="column">
@@ -28,12 +28,16 @@
                             <input type="checkbox" id="robot-{{ $uniqid . '-' . $robot->id }}"
                                 class="switch is-rounded trigger-details--alert-definition--involved-robots--robot-switch
                                     trigger-details--alert-definition--rule--parameter"
-                                {!! $robots->count() === 1 ? 'checked="checked" disabled' : '' !!}
+                                checked="checked"
+                                {!! $robots->count() === 1 ? ' disabled' : '' !!}
                                 data-id="{{ $robot->id }}">
                             <label for="robot-{{ $uniqid . '-' . $robot->id }}" class="checkbox">{{ $robot }}</label>
                         </p>
                     </div>
                     @if ($loop->last)
+                        @for ($i = $loop->iteration + 1; ($i + 1) % 5 !== 0; $i++)
+                            <div class="column"></div>
+                        @endfor
                         </div>
                     @endif
                 @endforeach
