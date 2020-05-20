@@ -1,9 +1,17 @@
+@include('layouts.title', [
+    'title' => 'Details',
+    'icon' => 'asterisk',
+    'color' => 'info',
+    'titleSize' => '4'
+])
+
 @if ($alertTrigger ?? false)
     @include('configuration.alert-trigger.steps.content.watched-process-information')
     <div class="field-body">
         <div class="field">
             <p class="control is-expanded has-icons-left">
-                <input class="input is-danger trigger-details--title-input" type="text" placeholder="Title">
+                <input class="input is-danger trigger-details--title-input" type="text" placeholder="Title"
+                    value="{{ $alertTrigger->title }}">
                 <span class="icon is-small is-left">
                     <i class="fas fa-dragon"></i>
                 </span>

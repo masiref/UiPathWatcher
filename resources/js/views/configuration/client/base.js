@@ -12,6 +12,8 @@ export const selectors = {
     nameInput: 'input.name',
     codeInput: 'input.code',
     orchestratorSelect: 'select.orchestrator',
+    elasticSearchUrlInput: 'input.elastic-search-url',
+    elasticSearchIndexInput: 'input.elastic-search-index',
     createButton: 'button.create',
     createButtonChildren: 'button.create *',
     resetButton: 'button.reset',

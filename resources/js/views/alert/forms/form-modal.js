@@ -31,7 +31,7 @@ export const footer = (successButtonLabel, successButtonIcon) => {
                         <span>Cancel</span>
                     </button>
                 </div>
-            </button>
+            </div>
         </footer>
     `;
 };
@@ -41,29 +41,41 @@ export const titleBlock = alert => {
         <div class="columns">
             <div class="column">
                 <div class="field">
-                    <label class="label">Client</label>
+                    <label class="label">
+                        <span class="icon"><i class="fas fa-building"></i></span>
+                        <span>Client</span>
+                    </label>
                     <div class="control">
                         <input class="input is-static" type="text" value="${alert.watched_automated_process.client.name}" readonly>
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Watched automated process</label>
+                    <label class="label">
+                        <span class="icon"><i class="fas fa-clock"></i></span>
+                        <span>Detected on</span>
+                    </label>
                     <div class="control">
-                        <input class="input is-static" type="text" value="${alert.watched_automated_process.name}" readonly>
+                        <input class="input is-static" type="text" value="${moment(alert.created_at).format('DD/MM/YYYY HH:mm:ss')}" readonly>
                     </div>
                 </div>
             </div>
             <div class="column">
                 <div class="field">
-                    <label class="label">Alert</label>
+                    <label class="label">
+                        <span class="icon"><i class="fas fa-binoculars"></i></span>
+                        <span>Watched automated process</span>
+                    </label>
                     <div class="control">
-                        <input class="input is-static" type="text" value="${alert.trigger.title}" readonly>
+                        <input class="input is-static" type="text" value="${alert.watched_automated_process.name}" readonly>
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Detected on</label>
+                    <label class="label">
+                        <span class="icon"><i class="fas fa-dragon"></i></span>
+                        <span>Alert trigger</span>
+                    </label>
                     <div class="control">
-                        <input class="input is-static" type="text" value="${moment(alert.created_at).format('DD/MM/YYYY HH:mm:ss')}" readonly>
+                        <input class="input is-static" type="text" value="${alert.trigger.title}" readonly>
                     </div>
                 </div>
             </div>

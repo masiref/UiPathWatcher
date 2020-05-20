@@ -33,6 +33,20 @@ export default class Alert {
         }
     }
 
+    async timeline() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(`/dashboard/alert/timeline/${this.id}`).then(result => {
+                        this.timeline = result.data;
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async update() {
         try {
             return new Promise((resolve, reject) => {

@@ -15,8 +15,6 @@ export const selectors = {
     tenantInput: 'input.tenant',
     apiUserUsernameInput: 'input.api-user-username',
     apiUserPasswordInput: 'input.api-user-password',
-    elasticSearchUrlInput: 'input.elastic-search-url',
-    elasticSearchIndexInput: 'input.elastic-search-index',
     createButton: 'button.create',
     createButtonChildren: 'button.create *',
     resetButton: 'button.reset',

@@ -87,4 +87,69 @@ export default class WatchedAutomatedProcess {
             console.log(error);
         }
     }
+
+    async update(
+        client, name, code, operationalHandbookPageURL, kibanaDashboardURL, additionalInformation,
+        runningPeriodMonday, runningPeriodTuesday, runningPeriodWednesday, runningPeriodThursday,
+        runningPeriodFriday, runningPeriodSaturday, runningPeriodSunday, runningTimePeriodFrom,
+        runningTimePeriodUntil, involvedProcesses, involvedRobots, involvedQueues) {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.patch(`/api/watched-automated-processes/${this.id}`, {
+                        'client_id': client,
+                        'name': name,
+                        'code': code,
+                        'operational_handbook_page_url': operationalHandbookPageURL,
+                        'kibana_dashboard_url': kibanaDashboardURL,
+                        'additional_information': additionalInformation,
+                        'running_period_monday': runningPeriodMonday ? 1 : 0,
+                        'running_period_tuesday': runningPeriodTuesday ? 1 : 0,
+                        'running_period_wednesday': runningPeriodWednesday ? 1 : 0,
+                        'running_period_thursday': runningPeriodThursday ? 1 : 0,
+                        'running_period_friday': runningPeriodFriday ? 1 : 0,
+                        'running_period_saturday': runningPeriodSaturday ? 1 : 0,
+                        'running_period_sunday': runningPeriodSunday ? 1 : 0,
+                        'running_period_time_from': runningTimePeriodFrom,
+                        'running_period_time_until': runningTimePeriodUntil,
+                        'involved_processes': involvedProcesses,
+                        'involved_robots': involvedRobots,
+                        'involved_queues': involvedQueues
+                    }).then(response => {
+                        if (response.data) {
+                            this.data = response.data;
+                        }
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async remove() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.delete(`/api/watched-automated-processes/${this.id}`)
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async loadEditForm() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(`/configuration/watched-automated-process/edit/${this.id}`).then(response => {
+                        this.editForm = response.data;
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }

@@ -46,7 +46,7 @@ class DashboardController extends Controller
             'clientsCount' => $clients->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
             'robotsCount' => UiPathRobot::all()->count(),
-            'alertTriggersCount' => AlertTrigger::all()->count(),
+            'alertTriggersCount' => AlertTrigger::all()->where('deleted', false)->count(),
             'openedAlertsCount' => Alert::where('closed', false)->count(),
             'underRevisionAlertsCount' => Alert::where('under_revision', true)->count(),
             'closedAlertsCount' => $closedAlerts->count()
@@ -137,6 +137,22 @@ class DashboardController extends Controller
     public function alertElement(Request $request, Alert $alert)
     {
         return view('dashboard.alert.element')->with('alert', $alert);
+    }
+
+    /**
+     * Show an alert timeline.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function alertTimeline(Request $request, Alert $alert)
+    {
+        $ancestors = array();
+        $ancestor = Alert::all()->where('parent_id', $alert->id)->first();
+        while ($ancestor !== null) {
+            array_push($ancestors, $ancestor);
+            $ancestor = Alert::all()->where('parent_id', $ancestor->id)->first();
+        }
+        return view('dashboard.alert.timeline')->with('alert', $alert)->with('ancestors', $ancestors);
     }
 
     /**

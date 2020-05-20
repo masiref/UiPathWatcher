@@ -37,7 +37,7 @@ class ConfigurationAlertTriggerController extends Controller
     {
         $alerts = Alert::all()->where('closed', false);
         $clients = Client::all();
-        $alertTriggers = AlertTrigger::all();
+        $alertTriggers = AlertTrigger::all()->where('deleted', false);
         
         return view('configuration.alert-trigger.index', [
             'page' => 'configuration.alert-trigger.index',
@@ -52,6 +52,31 @@ class ConfigurationAlertTriggerController extends Controller
             'underRevisionAlertsCount' => Alert::where('under_revision', true)->count(),
             'closedAlertsCount' => Alert::where('closed', true)->count(),
             'orchestratorsCount' => UiPathOrchestrator::all()->count()
+        ]);
+    }
+
+    /**
+     * Show the edit form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request, AlertTrigger $alertTrigger)
+    {
+        return view('configuration.alert-trigger.form.edit', [
+            'alertTrigger' => $alertTrigger,
+            'clients' => Client::all()->sortBy('name')
+        ]);
+    }
+
+    /**
+     * Show the edit buttons.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editButtons(Request $request, AlertTrigger $alertTrigger)
+    {
+        return view('configuration.alert-trigger.form.edit-buttons', [
+            'alertTrigger' => $alertTrigger
         ]);
     }
 
@@ -204,7 +229,7 @@ class ConfigurationAlertTriggerController extends Controller
      */
     public function table(Request $request)
     {
-        $alertTriggers = AlertTrigger::all();
+        $alertTriggers = AlertTrigger::all()->where('deleted', false);
         return view('configuration.alert-trigger.table')
             ->with('alertTriggers', $alertTriggers);
     }

@@ -12,14 +12,27 @@ class AlertTrigger extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'watched_automated_process_id', 'active'
+        'title', 'watched_automated_process_id', 'active', 'ignored',
+        'ignored_from', 'ignored_until', 'ignorance_description', 'deleted',
+        'deleted_at', 'definitions'
     ];
-    /**
-     * The relationships that should always be loaded.
-     *
-     * @var array
-     */
-    //protected $with = ['definitions'];
+    
+    public function setDeleted($deleted = true)
+    {
+        $this->deleted = $deleted;
+        if ($deleted) {
+            $this->active = false;
+        }
+        foreach ($this->definitions as $definition) {
+            $definition->deleted = $deleted;
+            foreach ($definition->rules as $rule) {
+                $rule->deleted = $deleted;
+                $rule->save();
+            }
+            $definition->save();
+        }
+        $this->save();
+    }
 
     /**
      * Get the alerts for the alert trigger.

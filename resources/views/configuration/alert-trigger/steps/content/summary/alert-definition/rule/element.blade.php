@@ -1,6 +1,6 @@
 <a class="panel-block is-active">
     <span class="panel-icon">
-        <i class="fas fa-burn" aria-hidden="true"></i>
+        <i class="fas fa-swatchbook" aria-hidden="true"></i>
     </span>
     @include("configuration.alert-trigger.steps.content.summary.alert-definition.rule.summary.{$rule->type}")
 

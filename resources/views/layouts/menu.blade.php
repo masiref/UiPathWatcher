@@ -1,4 +1,4 @@
-<nav class="navbar has-shadow menu">
+<nav class="navbar has-shadow is-fixed-top menu">
     <div class="container">
         <div class="navbar-brand">
             <a href="{{ url('/') }}" class="navbar-item">{{ config('app.name', 'Laravel') }}</a>

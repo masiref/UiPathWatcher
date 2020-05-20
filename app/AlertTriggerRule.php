@@ -17,7 +17,7 @@ class AlertTriggerRule extends Model
         'time_slot_until', 'has_relative_time_slot', 'relative_time_slot_duration',
         'is_triggered_on_monday', 'is_triggered_on_tuesday', 'is_triggered_on_wednesday',
         'is_triggered_on_thursday', 'is_triggered_on_friday', 'is_triggered_on_saturday',
-        'is_triggered_on_sunday', 'parameters'
+        'is_triggered_on_sunday', 'parameters', 'deleted', 'deleted_at'
     ];
 
     protected $casts = [

@@ -40,6 +40,7 @@ Route::get('/dashboard/tiles/{client?}', 'DashboardController@tiles')->name('das
 Route::get('/dashboard/alert/table/{closed?}/{id?}', 'DashboardController@alertTable')->name('dashboard.alert.table');
 Route::get('/dashboard/alert/table-row/{alert}', 'DashboardController@alertTableRow')->name('dashboard.alert.table.row');
 Route::get('/dashboard/alert/element/{alert}', 'DashboardController@alertElement')->name('dashboard.alert.element');
+Route::get('/dashboard/alert/timeline/{alert}', 'DashboardController@alertTimeline')->name('dashboard.alert.timeline');
 Route::get('/dashboard/quick-board/{client?}', 'DashboardController@quickBoard')->name('dashboard.quick-board');
 
 Route::get('/dashboard/client/elements', 'DashboardClientController@elements')->name('dashboard.client.elements');
@@ -73,6 +74,8 @@ Route::get('/configuration/client/table', 'ConfigurationClientController@table')
 
 Route::get('/configuration/watched-automated-process', 'ConfigurationWatchedAutomatedProcessController@index')
     ->name('configuration.watched-automated-process');
+Route::get('/configuration/watched-automated-process/edit/{watchedAutomatedProcess}', 'ConfigurationWatchedAutomatedProcessController@edit')
+    ->name('configuration.watched-automated-process.edit');
 Route::get(
     '/configuration/watched-automated-process/table',
     'ConfigurationWatchedAutomatedProcessController@table'
@@ -89,6 +92,10 @@ Route::post('/configuration/alert-trigger/default-alert-trigger-summary/{watched
     ->name('configuration.alert-trigger.default-alert-trigger-summary');
 Route::post('/configuration/alert-trigger/alert-trigger-creation-confirmation/{alertTrigger}', 'ConfigurationAlertTriggerController@alertTriggerCreationConfirmation')
     ->name('configuration.alert-trigger.alert-trigger-creation-confirmation');
+Route::get('/configuration/alert-trigger/edit/{alertTrigger}', 'ConfigurationAlertTriggerController@edit')
+    ->name('configuration.alert-trigger.edit');
+Route::get('/configuration/alert-trigger/edit-buttons/{alertTrigger}', 'ConfigurationAlertTriggerController@editButtons')
+    ->name('configuration.alert-trigger.edit-buttons');
 Route::get(
     '/configuration/alert-trigger/table',
     'ConfigurationAlertTriggerController@table'

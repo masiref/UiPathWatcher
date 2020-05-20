@@ -7,7 +7,7 @@ export default class Orchestrator {
         }
     }
 
-    async save(name, code, url, tenant, apiUserUsername, apiUserPassword, elasticSearchUrl, elasticSearchIndex) {
+    async save(name, code, url, tenant, apiUserUsername, apiUserPassword) {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
@@ -17,9 +17,7 @@ export default class Orchestrator {
                         'url': url,
                         'tenant': tenant,
                         'api_user_username': apiUserUsername,
-                        'api_user_password': apiUserPassword,
-                        'elastic_search_url': elasticSearchUrl,
-                        'elastic_search_index': elasticSearchIndex
+                        'api_user_password': apiUserPassword
                     }).then(response => {
                         if (response.data) {
                             this.id = response.data.id;
@@ -32,7 +30,7 @@ export default class Orchestrator {
         }
     }
 
-    async update(name, code, url, tenant, apiUserUsername, apiUserPassword, elasticSearchUrl, elasticSearchIndex) {
+    async update(name, code, url, tenant, apiUserUsername, apiUserPassword) {
         try {
             return new Promise((resolve, reject) => {
                 resolve(

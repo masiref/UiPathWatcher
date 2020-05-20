@@ -8,10 +8,8 @@
             $orchestratorSubtitle = '
                 By registering a <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-server"></i></span> UiPath Orchestrator</span>
                 you\'ll be able to link your <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-building"></i></span> Clients</span> to it,
-                but also loading involved <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-robot"></i></span> Robots</span> and
-                <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-sitemap"></i></span> Processes</span> you need to watch. Furthermore,
-                by specifying information on <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-chart-bar"></i></span> ElasticSearch</span>,
-                you\'ll give access to your logs and extend your watching.
+                but also loading involved <span class="has-text-weight-medium"><span class="icon"><i class="fab fa-android"></i></span> Robots</span> and
+                <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-sitemap"></i></span> Processes</span> you need to watch.
             ';
             $orchestratorState = $orchestratorsCount === 0 ? 'link' : 'success';
             $orchestratorSubtitle .= $orchestratorsCount === 0 ? "
@@ -27,9 +25,11 @@
             $clientSubtitle = '
                 A <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-building"></i></span> Client</span> is a simple entity linked to a
                 <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-server"></i></span> UiPath Orchestrator</span> in which you\'ll add
-                <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-binoculars"></i></span> Processes to watch</span>.
+                <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-binoculars"></i></span> Processes to watch</span>. Furthermore,
+                by specifying information on <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-chart-bar"></i></span> ElasticSearch</span>,
+                you\'ll give access to your logs and extend your watching.
             ';
-            $clientState = $orchestratorsCount === 0 ? 'grey-light' : ($clientsCount === 0 ? 'link' : 'success');
+            $clientState = $orchestratorsCount === 0 ? 'grey' : ($clientsCount === 0 ? 'link' : 'success');
             $clientSubtitle .= $orchestratorsCount > 0 && $clientsCount === 0 ? "
                 <br><br>
                 <a href='" . route('configuration.client') . "' class='button is-link'>
@@ -44,11 +44,11 @@
                 In order to watch an automated processcreated with UiPath solution, you\'ll need to give information on it
                 (eg: a name, a code, an execution time slot, etc.) but also identify the UiPath
                 <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-sitemap"></i></span> Processes</span>,
-                <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-robot"></i></span> Robots</span> and
+                <span class="has-text-weight-medium"><span class="icon"><i class="fab fa-android"></i></span> Robots</span> and
                 <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-layer-group"></i></span> Queues</span> involved. It will allow you to define
                 alert triggers on these entities (and on others related to <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-chart-bar"></i></span> ElasticSearch</span>).
             ';
-            $watchedAutomatedProcessState = $clientsCount === 0 ? 'grey-light' : ($watchedAutomatedProcessesCount === 0 ? 'link' : 'success');
+            $watchedAutomatedProcessState = $clientsCount === 0 ? 'grey' : ($watchedAutomatedProcessesCount === 0 ? 'link' : 'success');
             $watchedAutomatedProcessSubtitle .= $clientsCount > 0 && $watchedAutomatedProcessesCount === 0 ? "
                 <br><br>
                 <a href='" . route('configuration.watched-automated-process') . "' class='button is-link'>
@@ -67,7 +67,7 @@
                 These <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-dragon"></i></span> Alert triggers</span>
                 will be scanned every 5 minutes and may generate <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-burn"></i></span> Alerts</span> to handle.
             ';
-            $alertTriggerState = $watchedAutomatedProcessesCount === 0 ? 'grey-light' : ($alertTriggersCount === 0 ? 'link' : 'success');
+            $alertTriggerState = $watchedAutomatedProcessesCount === 0 ? 'grey' : ($alertTriggersCount === 0 ? 'link' : 'success');
             $alertTriggerSubtitle .= $watchedAutomatedProcessesCount > 0 ? "
                 <br><br>
                 <a href='" . route('configuration.alert-trigger') . "' class='button is-link'>

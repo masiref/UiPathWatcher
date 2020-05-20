@@ -1,8 +1,10 @@
 export default class AlertTriggerDefinition {
-    constructor(rank) {
+    constructor(id, rank, level = 'info', rules = []) {
+        this.id = id;
         this.rank = rank;
-        this.level = 'info';
-        this.rules = [];
+        this.level = level;
+        this.rules = rules;
+        this.changed = false;
     }
 
     findRule(rank) {
@@ -11,7 +13,13 @@ export default class AlertTriggerDefinition {
         });
     }
 
+    addRule(rule) {
+        this.changed = true;
+        this.rules.push(rule);
+    }
+
     removeRule(rank) {
+        this.changed = true;
         this.rules = this.rules.filter(item => {
             return item.rank !== rank;
         });

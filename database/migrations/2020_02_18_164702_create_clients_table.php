@@ -18,6 +18,8 @@ class CreateClientsTable extends Migration
             $table->unsignedBigInteger('ui_path_orchestrator_id');
             $table->string('name');
             $table->string('code');
+            $table->string('elastic_search_url');
+            $table->string('elastic_search_index');
             $table->timestamps();
         });
     }

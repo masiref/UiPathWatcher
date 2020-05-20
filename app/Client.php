@@ -13,7 +13,8 @@ class Client extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'code', 'ui_path_orchestrator_id'
+        'name', 'code', 'ui_path_orchestrator_id',
+        'elastic_search_url', 'elastic_search_index'
     ];
 
     /**

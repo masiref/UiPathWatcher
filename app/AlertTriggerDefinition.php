@@ -12,7 +12,8 @@ class AlertTriggerDefinition extends Model
      * @var array
      */
     protected $fillable = [
-        'alert_trigger_id', 'level', 'rank'
+        'alert_trigger_id', 'level', 'rank', 'deleted',
+        'deleted_at'
     ];
     /**
      * The relationships that should always be loaded.

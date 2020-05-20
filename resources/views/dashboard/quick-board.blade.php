@@ -2,7 +2,7 @@
     <div class="columns is-multiline">
         @foreach ($clients as $client)
             <div class="column is-3 quick-board--item">
-                <div class="notification is-{{ $client->higherAlertLevel() }} quick-board--heading">
+                <div class="notification box is-{{ $client->higherAlertLevel() }} quick-board--heading">
                     <p class="title is-3 has-text-centered">{{ $client->code }}</p>
                     <p class="subtitle has-text-centered">{{ $client->name }}</p>
                 </div>

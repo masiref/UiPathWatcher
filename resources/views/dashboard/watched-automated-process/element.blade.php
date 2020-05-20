@@ -1,6 +1,6 @@
 <article
     id="watched-automated-process-{{ $watchedAutomatedProcess->id }}"
-    class="media watched-automated-process-box {{ $autonomous ?? '' ? 'has-background-white p-md' : '' }}"
+    class="media watched-automated-process-box {{ $autonomous ?? false ? 'has-background-white' : '' }}"
     data-id="{{ $watchedAutomatedProcess->id }}">
     <div class="media-content">
         <div class="content">
@@ -10,19 +10,49 @@
                 </span>
                 <strong>{{ $watchedAutomatedProcess->name }}</strong>
             </p>
-            @if ($watchedAutomatedProcess->additional_information
-                || $watchedAutomatedProcess->operational_handbook_page_url
-                || $watchedAutomatedProcess->kibana_dashboard_url)
-                <article class="message is-primary is-small">
-                    <div class="message-body">
-                        @if ($watchedAutomatedProcess->additional_information)
-                            {{ $watchedAutomatedProcess->additional_information }}
-                        @endif
-                        @include('dashboard.watched-automated-process.buttons')
-                    </div>
-                </article>
+
+            <div class="is-divider" data-content="General information"></div>
+            @if ($watchedAutomatedProcess->additional_information)
+                @include('layouts.title', [
+                    'title' => $watchedAutomatedProcess->additional_information,
+                    'titleSize' => '6',
+                    'icon' => 'info-circle',
+                    'iconSize' => 'small',
+                    'color' => 'info',
+                    'underlined' => false
+                ])
             @endif
+            @include('layouts.title', [
+                'title' => $watchedAutomatedProcess->runningPeriod(),
+                'titleSize' => '6',
+                'icon' => 'clock',
+                'iconSize' => 'small',
+                'color' => 'info',
+                'underlined' => false
+            ])
+            @if ($watchedAutomatedProcess->operational_handbook_page_url)
+                @include('layouts.title', [
+                    'title' => '<a href="' . $watchedAutomatedProcess->operational_handbook_page_url . '" target="about:blank">Operational handbook</a>',
+                    'titleSize' => '6',
+                    'icon' => 'book',
+                    'iconSize' => 'small',
+                    'color' => 'info',
+                    'underlined' => false
+                ])
+            @endif
+            @if ($watchedAutomatedProcess->kibana_dashboard_url)
+                @include('layouts.title', [
+                    'title' => '<a href="' . $watchedAutomatedProcess->kibana_dashboard_url . '" target="about:blank">Kibana dashboard</a>',
+                    'titleSize' => '6',
+                    'icon' => 'chart-bar',
+                    'iconSize' => 'small',
+                    'color' => 'info',
+                    'underlined' => false
+                ])
+            @endif
+            
             @if ($watchedAutomatedProcess->robots->count() > 0)
+                <div class="is-divider" data-content="Robots"></div>
                 @foreach($watchedAutomatedProcess->robots as $robot)
                     @if ($loop->iteration % 6 === 0)
                             </div>
@@ -38,7 +68,7 @@
                             <p class="title has-tooltip-bottom has-text-{{ $robot->level() }}"
                                 data-tooltip="{{ (strlen($robot) > 8 ? $robot . ' - ' : '') }}{{ $robot->username }} {{ $robot->description ? '(' . $robot->description . ')' : '' }}">
                                 <span class="icon is-small">
-                                    <i class="fas fa-robot"></i>
+                                    <i class="fab fa-android"></i>
                                 </span>
                             </p>
                         </div>
@@ -50,12 +80,14 @@
                 @endforeach
             @endif
         </div>
+        
+        <div class="is-divider" data-content="Alerts"></div>
         @forelse($watchedAutomatedProcess->openedAlerts() as $alert)
             @include('dashboard.alert.element')
         @empty
             <article class="message is-success">
                 <div class="message-body">
-                    There is no <strong><span class="icon"><i class="fas fa-burn"></i></span> Alert</strong>
+                    <span class="icon"><i class="fas fa-thumbs-up"></i></span> Everything is under control
                 </div>
             </article>
         @endforelse

@@ -21,11 +21,11 @@
                                 </span>
                                 <span>Save</span>
                             </button>
-                            <button class="button is-danger is-outlined cancel">
+                            <button class="button is-dark is-outlined cancel">
                                 <span class="icon is-small">
-                                    <i class="fas fa-undo"></i>
+                                    <i class="fas fa-times"></i>
                                 </span>
-                                <span>Cancel</span>
+                                <span>Close</span>
                             </button>
                             <button class="button is-danger remove">
                                 <span class="icon is-small">

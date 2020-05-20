@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\AlertTrigger;
 use App\Alert;
 use App\AlertTriggerRule;
+use App\AlertTriggerDefinition;
 
 class AppController extends Controller
 {
@@ -45,7 +46,24 @@ class AppController extends Controller
 
     public function debug(AlertTriggerService $service)
     {
-        $rule = AlertTriggerRule::find(4);
-        return $service->verifyRule($rule, Carbon::now()) ? 'verified' : 'not verified';
+        $trigger = AlertTrigger::find(1);
+        $definition = AlertTriggerDefinition::find(1);
+        $wap = $trigger->watchedAutomatedProcess;
+        $alert = Alert::create([
+            'alert_trigger_id' => $trigger->id,
+            'alert_trigger_definition_id' => $definition->id,
+            'watched_automated_process_id' => $wap->id,
+            'messages' => array('My first message')
+        ]);
+        $ancestor = Alert::find(2);
+        $ancestor->update([
+            'closed' => true,
+            'closed_at' => $alert->created_at,
+            'closing_description' => 'Parent alert created',
+            'auto_closed' => true,
+            'under_revision' => false,
+            'parent_id' => $alert->id
+        ]);
+        return $alert;
     }
 }

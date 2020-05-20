@@ -45,7 +45,7 @@ class ConfigurationOrchestratorController extends Controller
             'clientsCount' => $clients->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
             'robotsCount' => UiPathRobot::all()->count(),
-            'alertTriggersCount' => AlertTrigger::all()->count(),
+            'alertTriggersCount' => AlertTrigger::all()->where('deleted', false)->count(),
             'openedAlertsCount' => Alert::where('closed', false)->count(),
             'underRevisionAlertsCount' => Alert::where('under_revision', true)->count(),
             'closedAlertsCount' => Alert::where('closed', true)->count(),

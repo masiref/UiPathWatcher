@@ -17,12 +17,6 @@
 .info-tiles .subtitle {
   font-weight: 300;
 }
-.info-tiles .notification {
-  padding-right: 1.5rem;
-}
-.card .content {
-  font-size: 14px;
-}
 .card-footer-item {
   font-size: 14px;
   font-weight: 700;
@@ -38,10 +32,6 @@
 
 .quick-board {
   padding: 1.5rem 0 0 0;
-}
-
-.quick-board .notification {
-  padding-right: 1.5rem;
 }
 
 .quick-board .quick-board--heading {

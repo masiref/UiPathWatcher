@@ -6,6 +6,8 @@
                 data-tooltip="Must be defined between {{ substr($watchedAutomatedProcess->running_period_time_from, 0, 5) }} and {{ substr($watchedAutomatedProcess->running_period_time_until, 0, 5) }}">
                 <input type="date" class="datetime trigger-details--alert-definition--rule--parameter
                     trigger-details--alert-definition--rule--time-slot-input"
+                    data-effective-start-time="{{ ($alertTriggerRule ?? false) ? substr($alertTriggerRule->time_slot_from, 0, 5) : '' }}"
+                    data-effective-end-time="{{ ($alertTriggerRule ?? false) ? substr($alertTriggerRule->time_slot_until, 0, 5) : '' }}"
                     data-start-time="{{ substr($watchedAutomatedProcess->running_period_time_from, 0, 5) }}"
                     data-end-time="{{ substr($watchedAutomatedProcess->running_period_time_until, 0, 5) }}">
             </p>
@@ -17,7 +19,8 @@
                     data-tooltip="Duration is in minutes. Must be a positive integer value.">
                     <input class="input is-danger trigger-details--alert-definition--rule--parameter
                         trigger-details--alert-definition--rule--relative-time-slot-input"
-                        type="text" placeholder="Optional relative time slot (minutes)">
+                        type="text" value="{{ ($alertTriggerRule ?? false) && $alertTriggerRule->has_relative_time_slot ? $alertTriggerRule->relative_time_slot_duration : '' }}"
+                        placeholder="Optional time slot window (minutes)">
                     <span class="icon is-small is-left">
                         <i class="fas fa-history"></i>
                     </span>

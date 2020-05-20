@@ -18,6 +18,8 @@ class CreateAlertTriggerDefinitionsTable extends Migration
             $table->unsignedBigInteger('alert_trigger_id');
             $table->enum('level', ['danger', 'warning', 'info'])->default('info');
             $table->integer('rank');
+            $table->boolean('deleted')->default(false);
+            $table->dateTime('deleted_at')->nullable(true);
             $table->timestamps();
 
             $table->foreign('alert_trigger_id')

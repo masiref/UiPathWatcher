@@ -3,6 +3,7 @@ export const strings = {
     row: 'alert-row-',
     closingFormModalID: 'alert-closing-modal',
     ignoranceFormModalID: 'alert-ignorance-modal',
+    timelineFormModalID: 'alert-timeline-modal-',
     pendingTableID: 'pending-alerts-table',
     closedTableID: 'closed-alerts-table'
 };
@@ -13,6 +14,8 @@ export const selectors = {
     boxFooter: '.alert-box__footer',
     commentButton: '.comment-btn',
     commentButtonChildren: '.comment-btn *',
+    timelineButton: '.timeline-btn',
+    timelineButtonChildren: '.timeline-btn *',
     revisionButton: '.revision-btn',
     revisionButtonChildren: '.revision-btn *',
     cancelButton: '.cancel-btn',

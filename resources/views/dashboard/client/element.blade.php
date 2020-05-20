@@ -9,6 +9,20 @@
         </p>
     </header>
     <div class="card-content">
+        <article class="panel is-info">
+            <a href="{{ $client->orchestrator->url }}" target="about:blank" class="panel-block is-active">
+                <span class="panel-icon">
+                    <i class="fas fa-server" aria-hidden="true"></i>
+                </span>
+                UiPath Orchestrator tenant is &nbsp;<strong>{{ $client->orchestrator->tenant }}</strong>
+            </a>
+            <a href="{{ $client->elastic_search_url }}" target="about:blank" class="panel-block is-active">
+                <span class="panel-icon">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                </span>
+                ElasticSearch index is &nbsp;<strong>{{ $client->elastic_search_index }}</strong>
+            </a>
+        </article>
         @forelse ($client->watchedAutomatedProcesses()->get() as $watchedAutomatedProcess)
             @include('dashboard.watched-automated-process.element')
         @empty

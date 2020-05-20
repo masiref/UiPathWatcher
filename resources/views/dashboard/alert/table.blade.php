@@ -1,4 +1,4 @@
-<table id="{{ $tableID ?? 'alerts-table' }}" class="table is-fullwidth is-striped is-hoverable">
+<table id="{{ $tableID ?? 'alerts-table' }}" class="table data unselectable is-fullwidth is-striped is-hoverable">
     <thead>
         <tr>
             <th>Level</th>
@@ -11,9 +11,7 @@
                 <th>False positive?</th>
                 <th>Ignored?</th>
             @endif
-            @if (!$options['closed'])
-                <th>Actions</th>
-            @endif
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>

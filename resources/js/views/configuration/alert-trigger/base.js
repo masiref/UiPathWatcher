@@ -4,19 +4,24 @@ export const strings = {
 
 export const selectors = {
     table: 'table.alert-triggers',
+    formsSection: '.forms-section',
+    addFormSection: '.add-form-section',
     addForm: '#add-form',
+    editFormSection: '.edit-form-section',
+    editForm: '#edit-form',
+    editFormButtonsSection: '.edit-buttons-section',
     steps: '.steps',
     activeStepContent: '.step-content.is-active',
     processSelection: {
-        clientSelect: 'select#client',
-        watchedProcessSelect: 'select#watched-automated-process'
+        clientSelect: 'select.client',
+        watchedProcessSelect: 'select.watched-automated-process'
     },
     details: {
         title: 'input.trigger-details--title-input',
         alertDefinition: {
             section: '.alert-definitions-section',
             list: '.alert-definitions-list',
-            count: '#alert-definitions-section-title p.title span.tag',
+            count: '.alert-definitions-section p.title span.tag',
             item: '.alert-definition-item',
             title: '.alert-definition-item .title-level p.title',
             titleIcon: '.alert-definition-item .title-level span.icon',
@@ -99,12 +104,29 @@ export const selectors = {
     confirmation: {
         notification: '.notification',
         activateButton: 'button.trigger-details--confirmation--activate-button',
-        activateButtonChildren: 'button.trigger-details--confirmation--activate-button *'
-    }
+        activateButtonChildren: 'button.trigger-details--confirmation--activate-button *',
+        closeButton: 'button.trigger-details--confirmation--close-button',
+        closeButtonChildren: 'button.trigger-details--confirmation--close-button *'
+    },
+    activateButton: 'button.activate',
+    activateButtonChildren: 'button.activate *',
+    disableButton: 'button.disable',
+    disableButtonChildren: 'button.disable *',
+    ignoreButton: 'button.ignore',
+    ignoreButtonChildren: 'button.ignore *',
+    acknowledgeButton: 'button.acknowledge',
+    acknowledgeButtonChildren: 'button.acknowledge *',
+    cancelButton: 'button.cancel',
+    cancelButtonChildren: 'button.cancel *',
+    removeButton: 'button.remove',
+    removeButtonChildren: 'button.remove *',
+    restoreButton: 'button.restore',
+    restoreButtonChildren: 'button.restore *'
 };
 
 export const elements = {
     table: document.querySelector(selectors.table),
+    formsSection: document.querySelector(selectors.formsSection),
     addForm: document.querySelector(selectors.addForm),
     steps: document.querySelector(selectors.steps),
     processSelection: {

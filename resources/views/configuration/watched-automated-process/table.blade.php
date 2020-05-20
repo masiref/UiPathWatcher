@@ -1,4 +1,4 @@
-<table class="table is-fullwidth is-striped is-hoverable watched-automated-processes">
+<table class="table data selectable is-fullwidth is-striped is-hoverable watched-automated-processes">
     <thead>
         <th>Client</th>
         <th>Name</th>
@@ -10,7 +10,7 @@
     </thead>
     <tbody>
         @foreach($watchedAutomatedProcesses as $wap)
-            <tr>
+            <tr data-id="{{ $wap->id }}">
                 <td>{{ $wap->client }}</td>
                 <td>{{ $wap->name }}</td>
                 <td>{{ $wap->code }}</td>

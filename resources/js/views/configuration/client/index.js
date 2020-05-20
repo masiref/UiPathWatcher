@@ -13,11 +13,6 @@ const configuration = new Configuration('configuration.client.index');
 
 let currentMode = 'add';
 
-const nameInput = document.querySelector(base.selectors.nameInput);
-const codeInput = document.querySelector(base.selectors.codeInput);
-const orchestratorSelect = document.querySelector(base.selectors.orchestratorSelect);
-const createButton = base.elements.createButton;
-
 export const init = () => {
     try {
         setInterval(() => {
@@ -55,16 +50,19 @@ export const init = () => {
 
 const loadAddForm = e => {
     try {
+        currentMode = 'add';
+        
         $(base.selectors.table).DataTable().rows().deselect();
         view.showAddForm();
-        currentMode = 'add';
     } catch (error) {
         console.log(error);
     }
 };
 
 const loadEditForm = e => {
-    try {
+    try {    
+        currentMode = 'edit';
+
         _base.renderLoader(document.querySelector(base.selectors.table));
         _base.renderLoader(base.elements.formsSection);
 
@@ -122,8 +120,6 @@ const loadEditForm = e => {
 
             _base.clearLoader(document.querySelector(base.selectors.table));
             _base.clearLoader(base.elements.formsSection);
-            
-            currentMode = 'edit';
 
             checkForm(e);
         });
@@ -140,6 +136,8 @@ const checkForm = e => {
     const nameInput = form.querySelector(base.selectors.nameInput);
     const codeInput = form.querySelector(base.selectors.codeInput);
     const orchestratorSelect = form.querySelector(base.selectors.orchestratorSelect);
+    const elasticSearchUrlInput = form.querySelector(base.selectors.elasticSearchUrlInput);
+    const elasticSearchIndexInput = form.querySelector(base.selectors.elasticSearchIndexInput);
 
     const nameInputValid = !(nameInput.value.trim() === '');
     _base.toggleSuccessDangerState(nameInput, nameInputValid);
@@ -149,8 +147,15 @@ const checkForm = e => {
     
     const orchestratorSelectValid = !(orchestratorSelect.value === "0");
     _base.toggleSuccessDangerState(orchestratorSelect.parentNode, orchestratorSelectValid);
+
+    const elasticSearchUrlInputValid = !(elasticSearchUrlInput.value.trim() === '' || !_base.validURL(elasticSearchUrlInput.value));
+    _base.toggleSuccessDangerState(elasticSearchUrlInput, elasticSearchUrlInputValid);
+
+    const elasticSearchIndexInputValid = !(elasticSearchIndexInput.value.trim() === '');
+    _base.toggleSuccessDangerState(elasticSearchIndexInput, elasticSearchIndexInputValid);
     
-    const formValid = nameInputValid && codeInputValid && orchestratorSelectValid;
+    const formValid = nameInputValid && codeInputValid && orchestratorSelectValid &&
+        elasticSearchUrlInputValid && elasticSearchIndexInputValid;
 
     if (currentMode === 'add') {
         form.querySelector(base.selectors.createButton).disabled = !formValid;
@@ -167,6 +172,8 @@ const create = async () => {
         const nameInput = form.querySelector(base.selectors.nameInput);
         const codeInput = form.querySelector(base.selectors.codeInput);
         const orchestratorSelect = form.querySelector(base.selectors.orchestratorSelect);
+        const elasticSearchUrlInput = form.querySelector(base.selectors.elasticSearchUrlInput);
+        const elasticSearchIndexInput = form.querySelector(base.selectors.elasticSearchIndexInput);
 
         return new Promise((resolve, reject) => {
             const client = new Client();
@@ -174,7 +181,9 @@ const create = async () => {
                 client.save(
                     nameInput.value.trim(),
                     codeInput.value.trim(),
-                    orchestratorSelect.value.trim()
+                    orchestratorSelect.value.trim(),
+                    elasticSearchUrlInput.value.trim(),
+                    elasticSearchIndexInput.value.trim()
                 ).then(res => {
                     resetForm();
                     _base.clearLoader(form);
@@ -198,6 +207,8 @@ const update = async () => {
         const nameInput = form.querySelector(base.selectors.nameInput);
         const codeInput = form.querySelector(base.selectors.codeInput);
         const orchestratorSelect = form.querySelector(base.selectors.orchestratorSelect);
+        const elasticSearchUrlInput = form.querySelector(base.selectors.elasticSearchUrlInput);
+        const elasticSearchIndexInput = form.querySelector(base.selectors.elasticSearchIndexInput);
         
         return new Promise((resolve, reject) => {
             const client = new Client(form.dataset.id);
@@ -205,7 +216,9 @@ const update = async () => {
                 client.update(
                     nameInput.value.trim(),
                     codeInput.value.trim(),
-                    orchestratorSelect.value.trim()
+                    orchestratorSelect.value.trim(),
+                    elasticSearchUrlInput.value.trim(),
+                    elasticSearchIndexInput.value.trim()
                 ).then(response => {
                     resetForm();
                     _base.clearLoader(form);
@@ -270,11 +283,15 @@ const resetForm = () => {
         const nameInput = form.querySelector(base.selectors.nameInput);
         const codeInput = form.querySelector(base.selectors.codeInput);
         const orchestratorSelect = form.querySelector(base.selectors.orchestratorSelect);
+        const elasticSearchUrlInput = form.querySelector(base.selectors.elasticSearchUrlInput);
+        const elasticSearchIndexInput = form.querySelector(base.selectors.elasticSearchIndexInput);
 
         form.reset();
         _base.removeStates(nameInput);
         _base.removeStates(codeInput);
         _base.removeStates(orchestratorSelect.parentNode);
+        _base.removeStates(elasticSearchUrlInput);
+        _base.removeStates(elasticSearchIndexInput);
     } catch (error) {
         console.log(error);
     }

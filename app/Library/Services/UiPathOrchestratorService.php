@@ -127,6 +127,26 @@ class UiPathOrchestratorService {
         return $result;
     }
 
+    public function getQueueItems(UiPathOrchestrator $orchestrator, $token, $filter = '')
+    {
+        $result = $this->getDefaultResult();
+
+        $guzzle = $this->getGuzzle($orchestrator);
+        $headers = $this->getHeaders($token);
+        try {
+            $result['queue-items'] = json_decode(
+                $guzzle->request('GET', 'odata/QueueItems' . ($filter !== '' ? "?\$filter=$filter" : ''), [
+                    'headers' => $headers
+                ])->getBody(),
+                true
+            )['value'];
+        } catch (RequestException $e) {
+            $result = $this->getErrorResult("impossible to get queue items from $orchestrator->url");
+        }
+
+        return $result;
+    }
+
     public function getJobs(UiPathOrchestrator $orchestrator, $token, $filter = '')
     {
         $result = $this->getDefaultResult();

@@ -25,16 +25,12 @@
         ])
         
         <div class="is-divider"></div>
-        
         @include('configuration.alert-trigger.table')
         
         <div class="is-divider"></div>
-
-        @include('layouts.title', [
-            'title' => 'Configure a new alert trigger',
-            'icon' => 'plus-circle',
-            'color' => 'primary'
-        ])
-        @include('configuration.alert-trigger.add-form')
+        <div class="forms-section">
+            @include('configuration.alert-trigger.form.add')
+            @include('configuration.alert-trigger.form.edit')
+        </div>
     </div>
 @endsection

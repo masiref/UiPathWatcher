@@ -7,13 +7,31 @@ export const updateTable = markup => {
         document.querySelector(selectors.table).closest(_base.selectors.tableDataTablesWrapper),
         markup
     );
-    $(selectors.table).DataTable();
+    $(selectors.table).DataTable({
+        responsive: true,
+        select: {
+            className: 'is-selected',
+            info: false,
+            toggleable: false,
+            items: 'row'
+        }
+    });
     return table;
 }
 
-export const updateActiveStepContent = markup => {
-    document.querySelector(selectors.activeStepContent).innerHTML = markup;
-}
+export const showAddForm = () => {
+    document.querySelector(selectors.editFormSection).style.display = 'none';
+    document.querySelector(selectors.addFormSection).style.display = 'block';
+};
+
+export const showEditForm = () => {
+    document.querySelector(selectors.addFormSection).style.display = 'none';
+    document.querySelector(selectors.editFormSection).style.display = 'block';
+};
+
+export const updateEditFormSection = markup => {
+    return _base.update(document.querySelector(selectors.editFormSection), markup);
+};
 
 export const processSelection = {
     updateProcesses: processes => {
@@ -28,21 +46,21 @@ export const processSelection = {
 };
 
 export const details = {
-    updateDefinitionsCount: count => {
-        document.querySelector(selectors.details.alertDefinition.count).innerHTML = count;
+    updateDefinitionsCount: (form, count) => {
+        form.querySelector(selectors.details.alertDefinition.count).innerHTML = count;
     },
-    addDefinition: markup => {
-        document.querySelector(selectors.details.alertDefinition.list).appendChild(
+    addDefinition: (form, markup) => {
+        form.querySelector(selectors.details.alertDefinition.list).appendChild(
             _base.htmlToElement(markup)
         );
     },
-    deleteDefinition: alertDefinitionItem => {
+    deleteDefinition: (form, alertDefinitionItem) => {
         const rank = parseInt(alertDefinitionItem.dataset.rank);
-        document.querySelector(selectors.details.alertDefinition.list).removeChild(
+        form.querySelector(selectors.details.alertDefinition.list).removeChild(
             alertDefinitionItem
         );
         // change rank of all alert definition items when > rank
-        const alertDefinitionItems = document.querySelectorAll(selectors.details.alertDefinition.item);
+        const alertDefinitionItems = form.querySelectorAll(selectors.details.alertDefinition.item);
         alertDefinitionItems.forEach(alertDefinitionItem => {
             const alertDefinitionItemRank = parseInt(alertDefinitionItem.dataset.rank);
             if (alertDefinitionItemRank > rank) {
@@ -77,7 +95,7 @@ export const details = {
         _base.toggleSuccessDangerState(titleIconRight, valid, true);
     },
     addRule: (alertDefinitionItem, markup) => {
-        alertDefinitionItem.querySelector(selectors.details.alertDefinition.rule.list).appendChild(
+        const ruleItem = alertDefinitionItem.querySelector(selectors.details.alertDefinition.rule.list).appendChild(
             _base.htmlToElement(markup)
         );
     },
@@ -105,26 +123,46 @@ export const details = {
         
         if (ruleType !== 'none') {
             const alertDefinitionItem = ruleItem.closest(selectors.details.alertDefinition.item);
-            const calendarSelector = `
-                ${selectors.details.alertDefinition.item}[data-rank="${alertDefinitionItem.dataset.rank}"]
-                ${selectors.details.alertDefinition.rule.item}[data-rank="${ruleItem.dataset.rank}"]
-                ${selectors.details.alertDefinition.rule.timeSlotInput}
-            `;
-            const startTime = ruleItem.querySelector(calendarSelector).dataset.startTime.split(':');
-            const endTime = ruleItem.querySelector(calendarSelector).dataset.endTime.split(':');
-            bulmaCalendar.attach(calendarSelector, {
-                type: 'time',
-                lang: 'en',
-                isRange: true,
-                headerPosition: 'bottom',
-                labelFrom: 'From',
-                labelTo: 'To',
-                timeFormat: 'HH:mm',
-                showFooter: true,
-                start: new Date(1970, 1, 1, startTime[0], startTime[1], 0),
-                end: new Date(1970, 1, 1, endTime[0], endTime[1], 0)
-            });
+            initDateTimeField(alertDefinitionItem, ruleItem);
         }
         return ruleItem;
     }
 };
+
+export const initDateTimeField = (alertDefinitionItem, ruleItem) => {
+    const calendarSelector = `
+        ${selectors.details.alertDefinition.item}[data-rank="${alertDefinitionItem.dataset.rank}"]
+        ${selectors.details.alertDefinition.rule.item}[data-rank="${ruleItem.dataset.rank}"]
+        ${selectors.details.alertDefinition.rule.timeSlotInput}
+    `;
+    let startTime = ruleItem.querySelector(calendarSelector).dataset.startTime;
+    if (startTime) {
+        startTime = startTime.split(':');
+    }
+    let endTime = ruleItem.querySelector(calendarSelector).dataset.endTime;
+    if (endTime) {
+        endTime = endTime.split(':');
+    }
+    /*let effectiveStartTime = ruleItem.querySelector(calendarSelector).dataset.effectiveStartTime;
+    if (effectiveStartTime) {
+        startTime = effectiveStartTime.split(':');
+    }
+    let effectiveEndTime = ruleItem.querySelector(calendarSelector).dataset.effectiveEndTndTime;
+    if (endTime) {
+        endTime = effectiveEndTime.split(':');
+    }*/
+    if (!ruleItem.querySelector(selectors.details.alertDefinition.rule.timeSlotInput).bulmaCalendar) {
+        bulmaCalendar.attach(calendarSelector, {
+            type: 'time',
+            lang: 'en',
+            isRange: true,
+            headerPosition: 'bottom',
+            labelFrom: 'From',
+            labelTo: 'To',
+            timeFormat: 'HH:mm',
+            showFooter: true,
+            start: startTime ? new Date(1970, 1, 1, startTime[0], startTime[1], 0) : null,
+            end: startTime ? new Date(1970, 1, 1, endTime[0], endTime[1], 0) : null
+        });
+    }
+}

@@ -35,7 +35,7 @@ class LayoutController extends Controller
             'clientsCount' => $clients->count(),
             'orchestratorsCount' => UiPathOrchestrator::all()->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
-            'alertTriggersCount' => AlertTrigger::all()->count(),
+            'alertTriggersCount' => AlertTrigger::all()->where('deleted', false)->count(),
             'page' => $page
         ]);
     }
@@ -54,7 +54,7 @@ class LayoutController extends Controller
             'clientsCount' => $clients->count(),
             'orchestratorsCount' => UiPathOrchestrator::all()->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
-            'alertTriggersCount' => AlertTrigger::all()->count(),
+            'alertTriggersCount' => AlertTrigger::all()->where('deleted', false)->count(),
             'page' => $page
         ]);
     }

@@ -1,13 +1,28 @@
 <article class="message is-link">
     <div class="message-body has-text-grey-dark">
         <div class="level">
+            <div class="level-right">
+                <div class="level-item">
+                    @include('layouts.title', [
+                        'title' => 'Selected watched process',
+                        'icon' => 'binoculars',
+                        'iconSize' => 'small',
+                        'color' => 'info',
+                        'titleSize' => '6'
+                    ])
+                </div>
+            </div>
+        </div>
+        <div class="level">
             <div class="level-left">
                 <div class="level-item">
                     @include('layouts.title', [
                         'title' => $alertTrigger->watchedAutomatedProcess->client,
-                        'titleSize' => '4',
+                        'titleSize' => '5',
                         'icon' => 'building',
-                        'color' => 'link'
+                        'iconSize' => 'small',
+                        'color' => 'link',
+                        'underlined' => false
                     ])
                 </div>
                 <div class="level-item">
@@ -18,9 +33,11 @@
                 <div class="level-item">
                     @include('layouts.title', [
                         'title' => $alertTrigger->watchedAutomatedProcess . ' (' . $alertTrigger->watchedAutomatedProcess->code . ')' ,
-                        'titleSize' => '4',
+                        'titleSize' => '5',
                         'icon' => 'binoculars',
-                        'color' => 'link'
+                        'iconSize' => 'small',
+                        'color' => 'link',
+                        'underlined' => false
                     ])
                 </div>
             </div>
@@ -29,20 +46,22 @@
         @if ($alertTrigger->watchedAutomatedProcess->additional_information)
             @include('layouts.title', [
                 'title' => $alertTrigger->watchedAutomatedProcess->additional_information,
-                'titleSize' => '6',
+                'titleSize' => '5',
                 'icon' => 'info-circle',
                 'iconSize' => 'small',
-                'color' => 'info'
+                'color' => 'info',
+                'underlined' => false
             ])
         @endif
 
         @include('layouts.title', [
             'title' => $alertTrigger->watchedAutomatedProcess->runningPeriod(),
-            'titleSize' => '6',
+            'titleSize' => '5',
             'titleId' => 'process-running-period',
             'icon' => 'clock',
             'iconSize' => 'small',
-            'color' => 'info'
+            'color' => 'info',
+            'underlined' => false
         ])
 
         @if (
@@ -62,10 +81,11 @@
                         <div class="level-item">
                             @include('layouts.title', [
                                 'title' => $operationalHandbookPageLink,
-                                'titleSize' => '6',
+                                'titleSize' => '5',
                                 'icon' => 'book',
                                 'iconSize' => 'small',
-                                'color' => 'info'
+                                'color' => 'info',
+                                'underlined' => false
                             ])
                         </div>
                     @endif
@@ -90,10 +110,11 @@
                         <div class="level-item">
                             @include('layouts.title', [
                                 'title' => $kibanaDashboardLink,
-                                'titleSize' => '6',
+                                'titleSize' => '5',
                                 'icon' => 'chart-bar',
                                 'iconSize' => 'small',
-                                'color' => 'info'
+                                'color' => 'info',
+                                'underlined' => false
                             ])
                         </div>
                     @endif

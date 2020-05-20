@@ -119,3 +119,10 @@ export const removeIgnoranceFormModal = () => {
     const modal = document.getElementById(strings.ignoranceFormModalID);
     _base.closeModal(modal);
 };
+
+export const showTimelineFormModal = alert => {
+    document.body.insertAdjacentHTML('beforeend', alert.timeline);
+    let modal = document.getElementById(strings.timelineFormModalID + alert.id);
+    _base.showModal(modal);
+    return modal;
+};

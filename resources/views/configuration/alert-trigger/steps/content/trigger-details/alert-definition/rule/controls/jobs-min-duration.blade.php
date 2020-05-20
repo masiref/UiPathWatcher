@@ -5,7 +5,8 @@
                 data-tooltip="Duration is in minutes. Must be a positive integer value.">
                 <input class="input is-success trigger-details--alert-definition--rule--parameter
                     trigger-details--alert-definition--jobs-duration-rule--minimal-duration-input"
-                    type="text" value="0" placeholder="Minimal duration (minutes)">
+                    type="text" value="{{ ($alertTriggerRule ?? false) ? $alertTriggerRule->parameters['minimalDuration'] : '0' }}"
+                    placeholder="Minimal duration (minutes)">
                 <span class="icon is-small is-left">
                     <i class="fas fa-greater-than-equal"></i>
                 </span>

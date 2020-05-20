@@ -2,16 +2,16 @@
 
 namespace App\Library\Services;
 
-use App\UiPathOrchestrator;
+use App\Client;
 use App\UiPathRobot;
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\RequestException;
 
 class ElasticSearchService {
 
-    protected function getGuzzle(UiPathOrchestrator $orchestrator)
+    protected function getGuzzle(Client $client)
     {
-        $url = $orchestrator->elastic_search_server_url;
+        $url = $client->elastic_search_server_url;
         return new Guzzle([
             'base_uri' => "$url"
         ]);
@@ -81,22 +81,23 @@ class ElasticSearchService {
         return $json;
     }
 
-    public function search(UiPathOrchestrator $orchestrator, $query, $from, $until)
+    public function search(Client $client, $query, $from, $until)
     {
         $result = $this->getDefaultResult();
 
-        $guzzle = $this->getGuzzle($orchestrator);
+        $guzzle = $this->getGuzzle($client);
         $headers = $this->getHeaders();
         try {
+            $json = $this->getSearchPayload($query, $from, $until);
             $result['count'] = json_decode(
-                $guzzle->request('POST', "{$orchestrator->elastic_search_index}/_search", [
+                $guzzle->request('POST', "{$client->elastic_search_index}/_search", [
                     'headers' => $headers,
                     'body' => $json
                 ])->getBody(),
                 true
             )['hits']['total']['value'];
         } catch (RequestException $e) {
-            $result = $this->getErrorResult("impossible to make searches on $orchestrator->elastic_search_server_url (index: $orchestrator->elastic_search_index)");
+            $result = $this->getErrorResult("impossible to make searches on $client->elastic_search_server_url (index: $client->elastic_search_index)");
         }
 
         return $result;

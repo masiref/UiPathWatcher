@@ -12,6 +12,12 @@ import * as layoutController from '../layout/index';
 
 export const init = async (dashboard, target) => {
     try {
+        // Handle timeline button
+        if (target.matches(`${base.selectors.timelineButton}, ${base.selectors.timelineButtonChildren}`)) {
+            const id = target.closest(base.selectors.timelineButton).dataset.id;
+            timeline(id);
+        }
+
         // Handle start revision button
         if (target.matches(`${base.selectors.revisionButton}, ${base.selectors.revisionButtonChildren}`)) {
             const id = target.closest(base.selectors.revisionButton).dataset.id;
@@ -62,6 +68,22 @@ const updateAfterAction = async (dashboard, action, alert) => {
         }
     } catch (error) {
         console.log(error);
+    }
+};
+
+export const timeline = async(id) => {
+    try {
+        const alert = new Alert(id);
+        view.renderLoaders(id);
+        alert.timeline().then(res => {
+            const modal = view.showTimelineFormModal(alert);
+            view.clearLoaders(id);
+        });
+    } catch (error) {
+        toastr.error(`Alert timeline not shown due to application exception: ${error}`, null, {
+            positionClass: 'toast-bottom-center'
+        });
+        view.clearLoaders(id);
     }
 };
 
@@ -122,14 +144,6 @@ export const close = async(dashboard, id) => {
     }
 };
 
-export const undoClose = async() => {
-    try {
-        view.removeClosingFormModal();
-    } catch (error) {
-        console.log(error);
-    }
-};
-
 export const commitClose = async(dashboard, alert) => {
     try {
         const descriptionTextarea = document.querySelector(base.selectors.closingDescriptionTextarea);
@@ -182,14 +196,6 @@ export const ignore = async(dashboard, id) => {
             positionClass: 'toast-bottom-center'
         });
         view.clearLoaders(id);
-    }
-};
-
-export const undoIgnore = async(id) => {
-    try {
-        view.removeIgnoranceFormModal();
-    } catch (error) {
-        console.log(error);
     }
 };
 

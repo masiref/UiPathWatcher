@@ -16,7 +16,7 @@
                         <span class="icon is-small">
                             <i class="fas fa-trash-alt"></i>
                         </span>
-                        <span>Delete</span>
+                        <span>Remove alert definition</span>
                     </button>
                 </div>
             </div>

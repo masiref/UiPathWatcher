@@ -64,25 +64,3 @@
         </div>
     </div>
 </div>
-<div class="field is-horizontal">
-    <div class="field-body">
-        <div class="field">
-            <p class="control is-expanded has-icons-left">
-                <input class="input elastic-search-url" type="text" placeholder="ElasticSearch URL"
-                    value="{{ ($orchestrator ?? false) ? $orchestrator->elastic_search_url : '' }}">
-                <span class="icon is-small is-left">
-                    <i class="fas fa-chart-bar"></i>
-                </span>
-            </p>
-        </div>
-        <div class="field">
-            <p class="control is-expanded has-icons-left">
-                <input class="input elastic-search-index" type="text" placeholder="ElasticSearch Index"
-                    value="{{ ($orchestrator ?? false) ? $orchestrator->elastic_search_index : '' }}">
-                <span class="icon is-small is-left">
-                    <i class="fas fa-bookmark"></i>
-                </span>
-            </p>
-        </div>
-    </div>
-</div>

@@ -57,10 +57,10 @@ class DashboardClientController extends Controller
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
             'clientWatchedAutomatedProcessesCount' => WatchedAutomatedProcess::where('client_id', $client->id)->count(),
             'robotsCount' => UiPathRobot::where('ui_path_orchestrator_id', $client->orchestrator->id)->count(),
-            'alertTriggersCount' => AlertTrigger::all()->count(),
+            'alertTriggersCount' => AlertTrigger::all()->where('deleted', false)->count(),
             'clientAlertTriggersCount' => AlertTrigger::whereHas('watchedAutomatedProcess', function($query) use($client) {
                 $query->where('client_id', $client->id);
-            })->count(),
+            })->where('deleted', false)->count(),
             'openedAlertsCount' => $pendingAlerts->count(),
             'underRevisionAlertsCount' => $underRevisionAlerts->count(),
             'closedAlertsCount' => $closedAlerts->count()

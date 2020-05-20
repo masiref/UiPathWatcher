@@ -21,12 +21,10 @@
         <td>{{ $alert->false_positive ? 'Yes' : 'No' }}</td>
         <td>{{ $alert->ignored ? 'Yes' : 'No' }}</td>
     @endif
-    @if (!$options['closed'])
-        <td>
-            @include('dashboard.alert.buttons', [
-                'small' => true,
-                'table' => true
-            ])
-        </td>
-    @endif
+    <td>
+        @include('dashboard.alert.buttons', [
+            'small' => true,
+            'table' => true
+        ])
+    </td>
 </tr>

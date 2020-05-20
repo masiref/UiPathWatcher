@@ -65,14 +65,16 @@ export default class Client {
         }
     }
 
-    async save(name, code, orchestrator) {
+    async save(name, code, orchestrator, elasticSearchUrl, elasticSearchIndex) {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
                     axios.post('/api/clients', {
                         'name': name,
                         'code': code,
-                        'ui_path_orchestrator_id': orchestrator
+                        'ui_path_orchestrator_id': orchestrator,
+                        'elastic_search_url': elasticSearchUrl,
+                        'elastic_search_index': elasticSearchIndex
                     }).then(response => {
                         if (response.data) {
                             this.id = response.data.id;
@@ -85,14 +87,16 @@ export default class Client {
         }
     }
 
-    async update(name, code, orchestrator) {
+    async update(name, code, orchestrator, elasticSearchUrl, elasticSearchIndex) {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
                     axios.patch(`/api/clients/${this.id}`, {
                         'name': name,
                         'code': code,
-                        'ui_path_orchestrator_id': orchestrator
+                        'ui_path_orchestrator_id': orchestrator,
+                        'elastic_search_url': elasticSearchUrl,
+                        'elastic_search_index': elasticSearchIndex
                     }).then(response => {
                         if (response.data) {
                             this.data = response.data;

@@ -2,7 +2,7 @@
     <div class="columns is-multiline">
         @foreach ($client->watchedAutomatedProcesses()->get() as $watchedAutomatedProcess)
             <div class="column is-3 quick-board--item">
-                <div class="notification is-{{ $watchedAutomatedProcess->higherAlertLevel() }} quick-board--heading">
+                <div class="notification box is-{{ $watchedAutomatedProcess->higherAlertLevel() }} quick-board--heading">
                     <p class="title is-3 has-text-centered">{{ $watchedAutomatedProcess->code }}</p>
                     <p class="subtitle has-text-centered">{{ $watchedAutomatedProcess->name }}</p>
                 </div>

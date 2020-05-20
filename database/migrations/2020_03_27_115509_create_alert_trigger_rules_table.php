@@ -37,6 +37,8 @@ class CreateAlertTriggerRulesTable extends Migration
             $table->boolean('is_triggered_on_saturday');
             $table->boolean('is_triggered_on_sunday');
             $table->json('parameters');
+            $table->boolean('deleted')->default(false);
+            $table->dateTime('deleted_at')->nullable(true);
             $table->timestamps();
 
             $table->foreign('alert_trigger_definition_id')

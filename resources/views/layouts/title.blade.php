@@ -1,8 +1,8 @@
-<div class="level title-level" id="{{ $titleId ?? '' }}">
+<div class="level title-level {{ ($underlined ?? true) ? 'underlined' : '' }}" id="{{ $titleId ?? '' }}">
     <div class="level-left">
         <div class="level-item">
             <span class="icon is-{{ $iconSize ?? 'medium' }} has-text-{{ $color }}">
-                <i class="fas {{ ($iconSize ?? 'medium') === 'medium' ? 'fa-2x' : '' }} fa-{{ $icon }}"></i>
+                <i class="{{ $iconType ?? false ? $iconType : 'fas' }} {{ ($iconSize ?? 'medium') === 'medium' ? 'fa-2x' : '' }} fa-{{ $icon }}"></i>
             </span>
         </div>
         <div class="level-item">
@@ -12,7 +12,7 @@
     @if ($iconRight ?? false)
         <div class="level-right">
             <span class="icon is-{{ $iconRightSize ?? 'medium' }} has-text-{{ $iconRightColor }}">
-                <i class="fas {{ ($iconRightSize ?? 'medium') === 'medium' ? 'fa-2x' : '' }} fa-{{ $iconRight }}"></i>
+                <i class="{{ $iconRightType ?? false ? $iconRightType : 'fas' }} {{ ($iconRightSize ?? 'medium') === 'medium' ? 'fa-2x' : '' }} fa-{{ $iconRight }}"></i>
             </span>
         </div>
     @endif

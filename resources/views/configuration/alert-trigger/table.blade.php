@@ -1,4 +1,4 @@
-<table class="table is-fullwidth is-striped is-hoverable alert-triggers">
+<table class="table data selectable is-fullwidth is-striped is-hoverable alert-triggers">
     <thead>
         <th>#</th>
         <th>Client</th>
@@ -10,7 +10,7 @@
     </thead>
     <tbody>
         @foreach($alertTriggers as $alertTrigger)
-            <tr>
+            <tr data-id="{{ $alertTrigger->id }}">
                 <td>#{{ str_pad($alertTrigger->id, 4, '0', STR_PAD_LEFT) }}</td>
                 <td>{{ $alertTrigger->watchedAutomatedProcess->client }}</td>
                 <td>{{ $alertTrigger->watchedAutomatedProcess }}</td>

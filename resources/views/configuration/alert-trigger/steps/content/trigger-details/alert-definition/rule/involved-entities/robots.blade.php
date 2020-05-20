@@ -9,7 +9,8 @@
 
     @include('layouts.title', [
         'title' => $title,
-        'icon' => 'robot',
+        'icon' => 'android',
+        'iconType' => 'fab',
         'color' => $level,
         'titleSize' => '5'
     ])

@@ -27,6 +27,17 @@
         @endif
         @if ($clientWatchedAutomatedProcessesCount > 0)
             @include('dashboard.client.quick-board')
+            
+            @if ($clientAlertTriggersCount > 0)
+                <div class="is-divider" data-content="DETAILED VIEW"></div>
+            @endif
+            <div class="columns is-multiline">
+                @foreach ($client->watchedAutomatedProcesses()->get() as $watchedAutomatedProcess)
+                    <div class="column is-6">
+                        @include('dashboard.watched-automated-process.element', [ 'autonomous' => true ])
+                    </div>
+                @endforeach
+            </div>
 
             @if ($clientAlertTriggersCount > 0)
                 <div class="is-divider" data-content="TABLE VIEW"></div>
@@ -51,16 +62,7 @@
                     'alerts' => $closedAlerts,
                     'options' => [ 'closed' => true ]
                 ])
-                <div class="is-divider" data-content="DETAILED VIEW"></div>
             @endif
-            
-            <div class="columns is-multiline">
-                @foreach ($client->watchedAutomatedProcesses()->get() as $watchedAutomatedProcess)
-                    <div class="column is-6">
-                        @include('dashboard.watched-automated-process.element', [ 'autonomous' => true ])
-                    </div>
-                @endforeach
-            </div>
         @endif
     </div>
 @endsection

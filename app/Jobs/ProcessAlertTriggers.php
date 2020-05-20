@@ -38,7 +38,7 @@ class ProcessAlertTriggers implements ShouldQueue
         if (!$service->isUnderShutdown()) {
 
             // retrieve all active and not ignored triggers
-            $triggers = AlertTrigger::all()->where('active', true)->where('ignored', false);
+            $triggers = AlertTrigger::all()->where('active', true)->where('ignored', false)->where('deleted', false);
 
             // get current date
             $now = Carbon::now();
@@ -52,6 +52,7 @@ class ProcessAlertTriggers implements ShouldQueue
                     
                     // get definitions attached to trigger ordered by rank (asc) and level (desc)
                     $definitions = $trigger->definitions
+                        ->where('deleted', false)
                         ->sortBy('rank')
                         ->sortBy(function($definition) {
                             return $definition->levelOrder();
@@ -64,13 +65,20 @@ class ProcessAlertTriggers implements ShouldQueue
                         
                         // definition rules are by default not verified
                         $verified = false;
+                        $messages = array();
 
-                        $rules = $definition->rules->sortBy('rank');
+                        $rules = $definition->rules
+                            ->where('deleted', false)
+                            ->sortBy('rank');
+
                         foreach ($rules as $rule) {
-                            $verified = $service->verifyRule($rule, $now);
+                            $ruleVerification = $service->verifyRule($rule, $now);
+                            $verified = $ruleVerification['result'];
                             // if rule is not verified, no need to check other rules
                             if (!$verified) {
                                 break;
+                            } else {
+                                $messages = array_merge($messages, $ruleVerification['messages']);
                             }
                         }
 
@@ -85,7 +93,8 @@ class ProcessAlertTriggers implements ShouldQueue
                                 $alert = Alert::create([
                                     'alert_trigger_id' => $trigger->id,
                                     'alert_trigger_definition_id' => $definition->id,
-                                    'watched_automated_process_id' => $wap->id
+                                    'watched_automated_process_id' => $wap->id,
+                                    'messages' => $messages
                                 ]);
                             } elseif ($existingAlert->definition->level !== $definition->level) {
                                 // if existing alert has not same definition level
@@ -94,6 +103,7 @@ class ProcessAlertTriggers implements ShouldQueue
                                     'alert_trigger_id' => $trigger->id,
                                     'alert_trigger_definition_id' => $definition->id,
                                     'watched_automated_process_id' => $wap->id,
+                                    'messages' => $messages,
                                     'reviewer_id' => $existingAlert->reviewer_id,
                                     'under_revision' => $existingAlert->under_revision,
                                     'revision_started_at' => $existingAlert->revision_started_at
@@ -104,6 +114,7 @@ class ProcessAlertTriggers implements ShouldQueue
                                     'closed' => true,
                                     'closed_at' => $alert->created_at,
                                     'closing_description' => 'Parent alert created',
+                                    'auto_closed' => true,
                                     'under_revision' => false,
                                     'parent_id' => $alert->id
                                 ]);
@@ -111,6 +122,17 @@ class ProcessAlertTriggers implements ShouldQueue
 
                             // no need to check other definitions
                             break;
+                        } else {
+                            // close opened alerts with same definition
+                            foreach ($trigger->openedAlerts()->where('alert_trigger_definition_id', $definition->id) as $alert) {
+                                $alert->update([
+                                    'closed' => true,
+                                    'closed_at' => Carbon::now(),
+                                    'closing_description' => 'Rules are not verified anymore',
+                                    'auto_closed' => true,
+                                    'under_revision' => false
+                                ]);
+                            }
                         }
                     }
                 }

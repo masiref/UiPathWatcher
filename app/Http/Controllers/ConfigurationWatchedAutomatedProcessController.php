@@ -43,10 +43,23 @@ class ConfigurationWatchedAutomatedProcessController extends Controller
             'watchedAutomatedProcessesCount' => $watchedAutomatedProcesses->count(),
             'watchedAutomatedProcesses' => $watchedAutomatedProcesses,
             'robotsCount' => UiPathRobot::all()->count(),
-            'alertTriggersCount' => AlertTrigger::all()->count(),
+            'alertTriggersCount' => AlertTrigger::all()->where('deleted', false)->count(),
             'openedAlertsCount' => Alert::where('closed', false)->count(),
             'underRevisionAlertsCount' => Alert::where('under_revision', true)->count(),
             'closedAlertsCount' => Alert::where('closed', true)->count()
+        ]);
+    }
+
+    /**
+     * Show the edit form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request, WatchedAutomatedProcess $watchedAutomatedProcess)
+    {
+        return view('configuration.watched-automated-process.form.edit', [
+            'watchedAutomatedProcess' => $watchedAutomatedProcess,
+            'clients' => Client::all()
         ]);
     }
 

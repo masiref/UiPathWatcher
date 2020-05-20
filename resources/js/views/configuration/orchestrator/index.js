@@ -13,17 +13,6 @@ const configuration = new Configuration('configuration.orchestrator.index');
 
 let currentMode = 'add';
 
-const nameInput = document.querySelector(base.selectors.nameInput);
-const codeInput = document.querySelector(base.selectors.codeInput);
-const urlInput = document.querySelector(base.selectors.urlInput);
-const tenantInput = document.querySelector(base.selectors.tenantInput);
-const apiUserUsernameInput = document.querySelector(base.selectors.apiUserUsernameInput);
-const apiUserPasswordInput = document.querySelector(base.selectors.apiUserPasswordInput);
-const elasticSearchUrlInput = document.querySelector(base.selectors.elasticSearchUrlInput);
-const elasticSearchIndexInput = document.querySelector(base.selectors.elasticSearchIndexInput);
-const createButton = base.elements.createButton;
-const resetButton = base.elements.resetButton;
-
 export const init = () => {
     try {
         setInterval(() => {
@@ -61,16 +50,19 @@ export const init = () => {
 
 const loadAddForm = e => {
     try {
+        currentMode = 'add';
+        
         $(base.selectors.table).DataTable().rows().deselect();
         view.showAddForm();
-        currentMode = 'add';
     } catch (error) {
         console.log(error);
     }
 };
 
 const loadEditForm = e => {
-    try {
+    try {    
+        currentMode = 'edit';
+
         _base.renderLoader(document.querySelector(base.selectors.table));
         _base.renderLoader(base.elements.formsSection);
 
@@ -126,8 +118,6 @@ const loadEditForm = e => {
 
             _base.clearLoader(document.querySelector(base.selectors.table));
             _base.clearLoader(base.elements.formsSection);
-            
-            currentMode = 'edit';
 
             checkForm(e);
         });
@@ -147,8 +137,6 @@ const checkForm = e => {
     const tenantInput = form.querySelector(base.selectors.tenantInput);
     const apiUserUsernameInput = form.querySelector(base.selectors.apiUserUsernameInput);
     const apiUserPasswordInput = form.querySelector(base.selectors.apiUserPasswordInput);
-    const elasticSearchUrlInput = form.querySelector(base.selectors.elasticSearchUrlInput);
-    const elasticSearchIndexInput = form.querySelector(base.selectors.elasticSearchIndexInput);
 
     const nameInputValid = !(nameInput.value.trim() === '');
     _base.toggleSuccessDangerState(nameInput, nameInputValid);
@@ -167,15 +155,9 @@ const checkForm = e => {
 
     const apiUserPasswordInputValid = !(apiUserPasswordInput.value.trim() === '');
     _base.toggleSuccessDangerState(apiUserPasswordInput, apiUserPasswordInputValid);
-
-    const elasticSearchUrlInputValid = !(elasticSearchUrlInput.value.trim() === '' || !_base.validURL(elasticSearchUrlInput.value));
-    _base.toggleSuccessDangerState(elasticSearchUrlInput, elasticSearchUrlInputValid);
-
-    const elasticSearchIndexInputValid = !(elasticSearchIndexInput.value.trim() === '');
-    _base.toggleSuccessDangerState(elasticSearchIndexInput, elasticSearchIndexInputValid);
     
     const formValid = nameInputValid && codeInputValid && urlInputValid && tenantInputValid && apiUserUsernameInputValid &&
-        apiUserPasswordInputValid && elasticSearchUrlInputValid && elasticSearchIndexInputValid;
+        apiUserPasswordInputValid;
 
     if (currentMode === 'add') {
         form.querySelector(base.selectors.createButton).disabled = !formValid;
@@ -195,8 +177,6 @@ const create = async () => {
         const tenantInput = form.querySelector(base.selectors.tenantInput);
         const apiUserUsernameInput = form.querySelector(base.selectors.apiUserUsernameInput);
         const apiUserPasswordInput = form.querySelector(base.selectors.apiUserPasswordInput);
-        const elasticSearchUrlInput = form.querySelector(base.selectors.elasticSearchUrlInput);
-        const elasticSearchIndexInput = form.querySelector(base.selectors.elasticSearchIndexInput);
         
         return new Promise((resolve, reject) => {
             const orchestrator = new Orchestrator();
@@ -207,9 +187,7 @@ const create = async () => {
                     urlInput.value.trim(),
                     tenantInput.value.trim(),
                     apiUserUsernameInput.value.trim(),
-                    apiUserPasswordInput.value,
-                    elasticSearchUrlInput.value.trim(),
-                    elasticSearchIndexInput.value.trim()
+                    apiUserPasswordInput.value
                 ).then(res => {
                     resetForm();
                     _base.clearLoader(form);
@@ -236,8 +214,6 @@ const update = async () => {
         const tenantInput = form.querySelector(base.selectors.tenantInput);
         const apiUserUsernameInput = form.querySelector(base.selectors.apiUserUsernameInput);
         const apiUserPasswordInput = form.querySelector(base.selectors.apiUserPasswordInput);
-        const elasticSearchUrlInput = form.querySelector(base.selectors.elasticSearchUrlInput);
-        const elasticSearchIndexInput = form.querySelector(base.selectors.elasticSearchIndexInput);
         
         return new Promise((resolve, reject) => {
             const orchestrator = new Orchestrator(form.dataset.id);
@@ -248,9 +224,7 @@ const update = async () => {
                     urlInput.value.trim(),
                     tenantInput.value.trim(),
                     apiUserUsernameInput.value.trim(),
-                    apiUserPasswordInput.value,
-                    elasticSearchUrlInput.value.trim(),
-                    elasticSearchIndexInput.value.trim()
+                    apiUserPasswordInput.value
                 ).then(response => {
                     resetForm();
                     _base.clearLoader(form);
@@ -318,8 +292,6 @@ const resetForm = () => {
         const tenantInput = form.querySelector(base.selectors.tenantInput);
         const apiUserUsernameInput = form.querySelector(base.selectors.apiUserUsernameInput);
         const apiUserPasswordInput = form.querySelector(base.selectors.apiUserPasswordInput);
-        const elasticSearchUrlInput = form.querySelector(base.selectors.elasticSearchUrlInput);
-        const elasticSearchIndexInput = form.querySelector(base.selectors.elasticSearchIndexInput);
         
         form.reset();
         _base.removeStates(nameInput);
@@ -328,8 +300,6 @@ const resetForm = () => {
         _base.removeStates(tenantInput);
         _base.removeStates(apiUserUsernameInput);
         _base.removeStates(apiUserPasswordInput);
-        _base.removeStates(elasticSearchUrlInput);
-        _base.removeStates(elasticSearchIndexInput);
     } catch (error) {
         console.log(error);
     }

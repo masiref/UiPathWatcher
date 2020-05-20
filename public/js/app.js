@@ -89753,13 +89753,17 @@ String.prototype.capitalize = function () {
 }; // DataTables
 
 
-$('.table').DataTable({
+$('.table.data.selectable').DataTable({
   responsive: true,
   select: {
     className: 'is-selected',
     info: false,
-    toggleable: false
+    toggleable: false,
+    items: 'row'
   }
+});
+$('.table.data.unselectable').DataTable({
+  responsive: true
 });
 
 /***/ }),
@@ -95545,43 +95549,81 @@ function () {
       return updateRowMarkup;
     }()
   }, {
+    key: "timeline",
+    value: function () {
+      var _timeline = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var _this3 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                return _context3.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/dashboard/alert/timeline/".concat(_this3.id)).then(function (result) {
+                    _this3.timeline = result.data;
+                  }));
+                }));
+
+              case 4:
+                _context3.prev = 4;
+                _context3.t0 = _context3["catch"](0);
+                console.log(_context3.t0);
+
+              case 7:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 4]]);
+      }));
+
+      function timeline() {
+        return _timeline.apply(this, arguments);
+      }
+
+      return timeline;
+    }()
+  }, {
     key: "update",
     value: function () {
       var _update = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var _this3 = this;
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var _this4 = this;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                _context4.prev = 0;
-                return _context4.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/api/alerts/".concat(_this3.id)).then(
+                _context5.prev = 0;
+                return _context5.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/api/alerts/".concat(_this4.id)).then(
                   /*#__PURE__*/
                   function () {
                     var _ref = _asyncToGenerator(
                     /*#__PURE__*/
-                    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(result) {
-                      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+                    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(result) {
+                      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
                         while (1) {
-                          switch (_context3.prev = _context3.next) {
+                          switch (_context4.prev = _context4.next) {
                             case 0:
-                              _this3.data = result.data;
-                              _context3.next = 3;
-                              return _this3.updateMarkup();
+                              _this4.data = result.data;
+                              _context4.next = 3;
+                              return _this4.updateMarkup();
 
                             case 3:
-                              _context3.next = 5;
-                              return _this3.updateRowMarkup();
+                              _context4.next = 5;
+                              return _this4.updateRowMarkup();
 
                             case 5:
                             case "end":
-                              return _context3.stop();
+                              return _context4.stop();
                           }
                         }
-                      }, _callee3);
+                      }, _callee4);
                     }));
 
                     return function (_x) {
@@ -95591,16 +95633,16 @@ function () {
                 }));
 
               case 4:
-                _context4.prev = 4;
-                _context4.t0 = _context4["catch"](0);
-                console.log(_context4.t0);
+                _context5.prev = 4;
+                _context5.t0 = _context5["catch"](0);
+                console.log(_context5.t0);
 
               case 7:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4, null, [[0, 4]]);
+        }, _callee5, null, [[0, 4]]);
       }));
 
       function update() {
@@ -95614,40 +95656,40 @@ function () {
     value: function () {
       var _enterRevisionMode = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
-        var _this4 = this;
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+        var _this5 = this;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
           while (1) {
-            switch (_context6.prev = _context6.next) {
+            switch (_context7.prev = _context7.next) {
               case 0:
-                _context6.prev = 0;
-                return _context6.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["put"]("/api/alerts/".concat(_this4.id), {
+                _context7.prev = 0;
+                return _context7.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["put"]("/api/alerts/".concat(_this5.id), {
                     action: 'enter_revision_mode'
                   }).then(
                   /*#__PURE__*/
                   function () {
                     var _ref2 = _asyncToGenerator(
                     /*#__PURE__*/
-                    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(res) {
-                      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+                    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(res) {
+                      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
                         while (1) {
-                          switch (_context5.prev = _context5.next) {
+                          switch (_context6.prev = _context6.next) {
                             case 0:
-                              _context5.next = 2;
-                              return _this4.updateMarkup();
+                              _context6.next = 2;
+                              return _this5.updateMarkup();
 
                             case 2:
-                              _context5.next = 4;
-                              return _this4.updateRowMarkup();
+                              _context6.next = 4;
+                              return _this5.updateRowMarkup();
 
                             case 4:
                             case "end":
-                              return _context5.stop();
+                              return _context6.stop();
                           }
                         }
-                      }, _callee5);
+                      }, _callee6);
                     }));
 
                     return function (_x2) {
@@ -95657,16 +95699,16 @@ function () {
                 }));
 
               case 4:
-                _context6.prev = 4;
-                _context6.t0 = _context6["catch"](0);
-                console.log(_context6.t0);
+                _context7.prev = 4;
+                _context7.t0 = _context7["catch"](0);
+                console.log(_context7.t0);
 
               case 7:
               case "end":
-                return _context6.stop();
+                return _context7.stop();
             }
           }
-        }, _callee6, null, [[0, 4]]);
+        }, _callee7, null, [[0, 4]]);
       }));
 
       function enterRevisionMode() {
@@ -95680,73 +95722,7 @@ function () {
     value: function () {
       var _exitRevisionMode = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
-        var _this5 = this;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
-          while (1) {
-            switch (_context8.prev = _context8.next) {
-              case 0:
-                _context8.prev = 0;
-                return _context8.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["put"]("/api/alerts/".concat(_this5.id), {
-                    action: 'exit_revision_mode'
-                  }).then(
-                  /*#__PURE__*/
-                  function () {
-                    var _ref3 = _asyncToGenerator(
-                    /*#__PURE__*/
-                    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7(res) {
-                      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
-                        while (1) {
-                          switch (_context7.prev = _context7.next) {
-                            case 0:
-                              _context7.next = 2;
-                              return _this5.updateMarkup();
-
-                            case 2:
-                              _context7.next = 4;
-                              return _this5.updateRowMarkup();
-
-                            case 4:
-                            case "end":
-                              return _context7.stop();
-                          }
-                        }
-                      }, _callee7);
-                    }));
-
-                    return function (_x3) {
-                      return _ref3.apply(this, arguments);
-                    };
-                  }()));
-                }));
-
-              case 4:
-                _context8.prev = 4;
-                _context8.t0 = _context8["catch"](0);
-                console.log(_context8.t0);
-
-              case 7:
-              case "end":
-                return _context8.stop();
-            }
-          }
-        }, _callee8, null, [[0, 4]]);
-      }));
-
-      function exitRevisionMode() {
-        return _exitRevisionMode.apply(this, arguments);
-      }
-
-      return exitRevisionMode;
-    }()
-  }, {
-    key: "close",
-    value: function () {
-      var _close = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9(falsePositive, description) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9() {
         var _this6 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
@@ -95756,10 +95732,36 @@ function () {
                 _context9.prev = 0;
                 return _context9.abrupt("return", new Promise(function (resolve, reject) {
                   resolve(axios__WEBPACK_IMPORTED_MODULE_1__["put"]("/api/alerts/".concat(_this6.id), {
-                    action: 'close',
-                    falsePositive: falsePositive,
-                    description: description
-                  }));
+                    action: 'exit_revision_mode'
+                  }).then(
+                  /*#__PURE__*/
+                  function () {
+                    var _ref3 = _asyncToGenerator(
+                    /*#__PURE__*/
+                    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8(res) {
+                      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+                        while (1) {
+                          switch (_context8.prev = _context8.next) {
+                            case 0:
+                              _context8.next = 2;
+                              return _this6.updateMarkup();
+
+                            case 2:
+                              _context8.next = 4;
+                              return _this6.updateRowMarkup();
+
+                            case 4:
+                            case "end":
+                              return _context8.stop();
+                          }
+                        }
+                      }, _callee8);
+                    }));
+
+                    return function (_x3) {
+                      return _ref3.apply(this, arguments);
+                    };
+                  }()));
                 }));
 
               case 4:
@@ -95775,18 +95777,18 @@ function () {
         }, _callee9, null, [[0, 4]]);
       }));
 
-      function close(_x4, _x5) {
-        return _close.apply(this, arguments);
+      function exitRevisionMode() {
+        return _exitRevisionMode.apply(this, arguments);
       }
 
-      return close;
+      return exitRevisionMode;
     }()
   }, {
-    key: "ignore",
+    key: "close",
     value: function () {
-      var _ignore = _asyncToGenerator(
+      var _close = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10(from_, fromTime, to, toTime, description) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10(falsePositive, description) {
         var _this7 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
@@ -95796,11 +95798,8 @@ function () {
                 _context10.prev = 0;
                 return _context10.abrupt("return", new Promise(function (resolve, reject) {
                   resolve(axios__WEBPACK_IMPORTED_MODULE_1__["put"]("/api/alerts/".concat(_this7.id), {
-                    action: 'ignore',
-                    from_: from_,
-                    fromTime: fromTime,
-                    to: to,
-                    toTime: toTime,
+                    action: 'close',
+                    falsePositive: falsePositive,
                     description: description
                   }));
                 }));
@@ -95816,6 +95815,49 @@ function () {
             }
           }
         }, _callee10, null, [[0, 4]]);
+      }));
+
+      function close(_x4, _x5) {
+        return _close.apply(this, arguments);
+      }
+
+      return close;
+    }()
+  }, {
+    key: "ignore",
+    value: function () {
+      var _ignore = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11(from_, fromTime, to, toTime, description) {
+        var _this8 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
+          while (1) {
+            switch (_context11.prev = _context11.next) {
+              case 0:
+                _context11.prev = 0;
+                return _context11.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["put"]("/api/alerts/".concat(_this8.id), {
+                    action: 'ignore',
+                    from_: from_,
+                    fromTime: fromTime,
+                    to: to,
+                    toTime: toTime,
+                    description: description
+                  }));
+                }));
+
+              case 4:
+                _context11.prev = 4;
+                _context11.t0 = _context11["catch"](0);
+                console.log(_context11.t0);
+
+              case 7:
+              case "end":
+                return _context11.stop();
+            }
+          }
+        }, _callee11, null, [[0, 4]]);
       }));
 
       function ignore(_x6, _x7, _x8, _x9, _x10) {
@@ -95847,6 +95889,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _AlertTriggerDefinition__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AlertTriggerDefinition */ "./resources/js/models/AlertTriggerDefinition.js");
+/* harmony import */ var _AlertTriggerRule__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AlertTriggerRule */ "./resources/js/models/AlertTriggerRule.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -95861,6 +95905,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+
+
 var AlertTrigger =
 /*#__PURE__*/
 function () {
@@ -95869,59 +95915,143 @@ function () {
 
     _classCallCheck(this, AlertTrigger);
 
-    if (id) {
-      this.id = id;
-    }
+    //if (id) {
+    this.id = id; //this.get();
+    //} else {
+
+    this.title = '';
+    this.definitions = [];
+    this.changed = false;
+    this.valid = true;
+    this.finished = false; //}
   }
 
   _createClass(AlertTrigger, [{
-    key: "save",
-    value: function () {
-      var _save = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(watchedAutomatedProcess, title, definitions) {
-        var _this = this;
+    key: "findDefinition",
+    value: function findDefinition(rank) {
+      return this.definitions.find(function (item) {
+        return item.rank === rank;
+      });
+    }
+  }, {
+    key: "addDefinition",
+    value: function addDefinition(definition) {
+      this.changed = true;
+      this.definitions.push(definition);
+    }
+  }, {
+    key: "removeDefinition",
+    value: function removeDefinition(rank) {
+      this.changed = true;
+      this.definitions = this.definitions.filter(function (item) {
+        return item.rank !== rank;
+      }); // change rank of all items when > rank
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.prev = 0;
-                return _context.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["post"]('/api/alert-triggers', {
-                    'watched_automated_process_id': watchedAutomatedProcess,
-                    'title': title,
-                    'definitions': definitions
-                  }).then(function (response) {
-                    if (response.data) {
-                      _this.id = response.data.id;
-                    }
-                  }));
-                }));
+      this.definitions = this.definitions.map(function (item) {
+        if (item.rank > rank) {
+          item.rank = item.rank - 1;
+        }
 
-              case 4:
-                _context.prev = 4;
-                _context.t0 = _context["catch"](0);
-                console.log(_context.t0);
+        return item;
+      });
+    }
+  }, {
+    key: "isValid",
+    value: function isValid() {
+      var valid = true;
+      this.definitions.forEach(function (alertDefinition) {
+        valid = valid && alertDefinition.isValid();
+      });
+      this.valid = valid;
+      return this.valid;
+    }
+  }, {
+    key: "hasChanged",
+    value: function hasChanged() {
+      var _this = this;
 
-              case 7:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[0, 4]]);
-      }));
-
-      function save(_x, _x2, _x3) {
-        return _save.apply(this, arguments);
+      if (!this.changed) {
+        this.definitions.forEach(function (alertDefinition) {
+          _this.changed = _this.changed || alertDefinition.changed;
+        });
       }
 
-      return save;
-    }()
+      return this.changed;
+    }
   }, {
-    key: "activate",
+    key: "setUnchanged",
+    value: function setUnchanged() {
+      this.changed = false;
+      this.definitions.forEach(function (alertDefinition) {
+        alertDefinition.changed = false;
+      });
+    }
+  }, {
+    key: "loadDefinitions",
+    value: function loadDefinitions() {
+      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var definitions = [];
+
+      if (data) {
+        this.data = data;
+      }
+
+      if (this.data) {
+        this.data.definitions.forEach(function (definition) {
+          if (!definition.deleted) {
+            var definitionId = definition.id;
+            var definitionRank = definition.rank;
+            var level = definition.level;
+            var rules = [];
+            definition.rules.forEach(function (rule) {
+              if (!rule.deleted) {
+                var ruleId = rule.id;
+                var rank = rule.rank;
+                var type = rule.type;
+                var standardParameters = {
+                  timeSlot: {
+                    from: rule.time_slot_from,
+                    to: rule.time_slot_until
+                  },
+                  relativeTimeSlot: rule.relative_time_slot_duration,
+                  triggeringDays: {
+                    monday: rule.is_triggered_on_monday,
+                    tuesday: rule.is_triggered_on_tuesday,
+                    wednesday: rule.is_triggered_on_wednesday,
+                    thursday: rule.is_triggered_on_thursday,
+                    friday: rule.is_triggered_on_friday,
+                    saturday: rule.is_triggered_on_saturday,
+                    sunday: rule.is_triggered_on_sunday
+                  },
+                  involvedEntities: {
+                    processes: rule.processes ? rule.processes.map(function (item) {
+                      return item.id;
+                    }) : [],
+                    robots: rule.robots ? rule.robots.map(function (item) {
+                      return item.id;
+                    }) : [],
+                    queues: rule.queues ? rule.queues.map(function (item) {
+                      return item.id;
+                    }) : []
+                  }
+                };
+                var specificParameters = rule.parameters;
+                var alertTriggerRule = new _AlertTriggerRule__WEBPACK_IMPORTED_MODULE_3__["default"](ruleId, definitionRank, rank, type, true, standardParameters, specificParameters);
+                rules.push(alertTriggerRule);
+              }
+            });
+            var alertTriggerDefinition = new _AlertTriggerDefinition__WEBPACK_IMPORTED_MODULE_2__["default"](definitionId, definitionRank, level, rules);
+            definitions.push(alertTriggerDefinition);
+          }
+        });
+      }
+
+      return definitions;
+    }
+  }, {
+    key: "get",
     value: function () {
-      var _activate = _asyncToGenerator(
+      var _get = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var _this2 = this;
@@ -95932,9 +96062,42 @@ function () {
               case 0:
                 _context2.prev = 0;
                 return _context2.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["patch"]("/api/alert-triggers/".concat(_this2.id), {
-                    'active': 1
-                  }));
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/api/alert-triggers/".concat(_this2.id)).then(
+                  /*#__PURE__*/
+                  function () {
+                    var _ref = _asyncToGenerator(
+                    /*#__PURE__*/
+                    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(result) {
+                      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+                        while (1) {
+                          switch (_context.prev = _context.next) {
+                            case 0:
+                              _this2.data = result.data;
+                              _this2.valid = true;
+                              _this2.title = _this2.data.title;
+                              _this2.active = _this2.data.active === 1;
+                              _this2.ignored = _this2.data.ignored === 1;
+                              _this2.ignored_form = _this2.data.ignored_from ? new Date(_this2.data.ignored_from) : null;
+                              _this2.ignored_until = _this2.data.ignored_until ? new Date(_this2.data.ignored_until) : null;
+                              _this2.ignorance_description = _this2.data.ignorance_description;
+                              _this2.deleted = _this2.data.deleted;
+                              _this2.deleted_at = _this2.data.deleted_at ? new Date(_this2.data.deleted_at) : null;
+                              _this2.created_at = _this2.data.created_at ? new Date(_this2.data.created_at) : null;
+                              _this2.updated_at = _this2.data.updated_at ? new Date(_this2.data.updated_at) : null;
+                              _this2.definitions = _this2.loadDefinitions();
+
+                            case 13:
+                            case "end":
+                              return _context.stop();
+                          }
+                        }
+                      }, _callee);
+                    }));
+
+                    return function (_x) {
+                      return _ref.apply(this, arguments);
+                    };
+                  }()));
                 }));
 
               case 4:
@@ -95950,11 +96113,370 @@ function () {
         }, _callee2, null, [[0, 4]]);
       }));
 
+      function get() {
+        return _get.apply(this, arguments);
+      }
+
+      return get;
+    }()
+  }, {
+    key: "save",
+    value: function () {
+      var _save = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(watchedAutomatedProcess) {
+        var _this3 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                return _context3.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["post"]('/api/alert-triggers', {
+                    'watched_automated_process_id': watchedAutomatedProcess,
+                    'title': _this3.title,
+                    'definitions': _this3.definitions
+                  }).then(function (response) {
+                    if (response.data) {
+                      _this3.id = response.data.id;
+
+                      _this3.setUnchanged();
+                    }
+                  }));
+                }));
+
+              case 4:
+                _context3.prev = 4;
+                _context3.t0 = _context3["catch"](0);
+                console.log(_context3.t0);
+
+              case 7:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 4]]);
+      }));
+
+      function save(_x2) {
+        return _save.apply(this, arguments);
+      }
+
+      return save;
+    }()
+  }, {
+    key: "update",
+    value: function () {
+      var _update = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var _this4 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                return _context4.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["patch"]("/api/alert-triggers/".concat(_this4.id), {
+                    'title': _this4.title,
+                    'definitions': _this4.definitions
+                  }).then(function (response) {
+                    console.log(response);
+
+                    if (response.data) {
+                      _this4.setUnchanged();
+                    }
+                  }));
+                }));
+
+              case 4:
+                _context4.prev = 4;
+                _context4.t0 = _context4["catch"](0);
+                console.log(_context4.t0);
+
+              case 7:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 4]]);
+      }));
+
+      function update() {
+        return _update.apply(this, arguments);
+      }
+
+      return update;
+    }()
+  }, {
+    key: "remove",
+    value: function () {
+      var _remove = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var _this5 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                return _context5.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["delete"]("/api/alert-triggers/".concat(_this5.id)).then(function (response) {
+                    _this5.deleted = true;
+
+                    _this5.setUnchanged();
+                  }));
+                }));
+
+              case 4:
+                _context5.prev = 4;
+                _context5.t0 = _context5["catch"](0);
+                console.log(_context5.t0);
+
+              case 7:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, null, [[0, 4]]);
+      }));
+
+      function remove() {
+        return _remove.apply(this, arguments);
+      }
+
+      return remove;
+    }()
+  }, {
+    key: "activate",
+    value: function () {
+      var _activate = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+        var _this6 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _context6.prev = 0;
+                return _context6.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["patch"]("/api/alert-triggers/".concat(_this6.id), {
+                    'active': 1
+                  }));
+                }));
+
+              case 4:
+                _context6.prev = 4;
+                _context6.t0 = _context6["catch"](0);
+                console.log(_context6.t0);
+
+              case 7:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, null, [[0, 4]]);
+      }));
+
       function activate() {
         return _activate.apply(this, arguments);
       }
 
       return activate;
+    }()
+  }, {
+    key: "disable",
+    value: function () {
+      var _disable = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+        var _this7 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _context7.prev = 0;
+                return _context7.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["patch"]("/api/alert-triggers/".concat(_this7.id), {
+                    'active': 0
+                  }));
+                }));
+
+              case 4:
+                _context7.prev = 4;
+                _context7.t0 = _context7["catch"](0);
+                console.log(_context7.t0);
+
+              case 7:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, null, [[0, 4]]);
+      }));
+
+      function disable() {
+        return _disable.apply(this, arguments);
+      }
+
+      return disable;
+    }()
+  }, {
+    key: "ignore",
+    value: function () {
+      var _ignore = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
+        var _this8 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _context8.prev = 0;
+                return _context8.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["patch"]("/api/alert-triggers/".concat(_this8.id), {
+                    'ignored': 1
+                  }));
+                }));
+
+              case 4:
+                _context8.prev = 4;
+                _context8.t0 = _context8["catch"](0);
+                console.log(_context8.t0);
+
+              case 7:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, null, [[0, 4]]);
+      }));
+
+      function ignore() {
+        return _ignore.apply(this, arguments);
+      }
+
+      return ignore;
+    }()
+  }, {
+    key: "acknowledge",
+    value: function () {
+      var _acknowledge = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9() {
+        var _this9 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                _context9.prev = 0;
+                return _context9.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["patch"]("/api/alert-triggers/".concat(_this9.id), {
+                    'ignored': 0
+                  }));
+                }));
+
+              case 4:
+                _context9.prev = 4;
+                _context9.t0 = _context9["catch"](0);
+                console.log(_context9.t0);
+
+              case 7:
+              case "end":
+                return _context9.stop();
+            }
+          }
+        }, _callee9, null, [[0, 4]]);
+      }));
+
+      function acknowledge() {
+        return _acknowledge.apply(this, arguments);
+      }
+
+      return acknowledge;
+    }()
+  }, {
+    key: "loadEditForm",
+    value: function () {
+      var _loadEditForm = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10() {
+        var _this10 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
+          while (1) {
+            switch (_context10.prev = _context10.next) {
+              case 0:
+                _context10.prev = 0;
+                return _context10.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/alert-trigger/edit/".concat(_this10.id)).then(function (response) {
+                    _this10.editForm = response.data;
+                  }));
+                }));
+
+              case 4:
+                _context10.prev = 4;
+                _context10.t0 = _context10["catch"](0);
+                console.log(_context10.t0);
+
+              case 7:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee10, null, [[0, 4]]);
+      }));
+
+      function loadEditForm() {
+        return _loadEditForm.apply(this, arguments);
+      }
+
+      return loadEditForm;
+    }()
+  }, {
+    key: "loadEditFormButtons",
+    value: function () {
+      var _loadEditFormButtons = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11() {
+        var _this11 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
+          while (1) {
+            switch (_context11.prev = _context11.next) {
+              case 0:
+                _context11.prev = 0;
+                return _context11.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/alert-trigger/edit-buttons/".concat(_this11.id)).then(function (response) {
+                    _this11.editFormButtons = response.data;
+                  }));
+                }));
+
+              case 4:
+                _context11.prev = 4;
+                _context11.t0 = _context11["catch"](0);
+                console.log(_context11.t0);
+
+              case 7:
+              case "end":
+                return _context11.stop();
+            }
+          }
+        }, _callee11, null, [[0, 4]]);
+      }));
+
+      function loadEditFormButtons() {
+        return _loadEditFormButtons.apply(this, arguments);
+      }
+
+      return loadEditFormButtons;
     }()
   }]);
 
@@ -95984,12 +96506,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var AlertTriggerDefinition =
 /*#__PURE__*/
 function () {
-  function AlertTriggerDefinition(rank) {
+  function AlertTriggerDefinition(id, rank) {
+    var level = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'info';
+    var rules = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
+
     _classCallCheck(this, AlertTriggerDefinition);
 
+    this.id = id;
     this.rank = rank;
-    this.level = 'info';
-    this.rules = [];
+    this.level = level;
+    this.rules = rules;
+    this.changed = false;
   }
 
   _createClass(AlertTriggerDefinition, [{
@@ -96000,8 +96527,15 @@ function () {
       });
     }
   }, {
+    key: "addRule",
+    value: function addRule(rule) {
+      this.changed = true;
+      this.rules.push(rule);
+    }
+  }, {
     key: "removeRule",
     value: function removeRule(rank) {
+      this.changed = true;
       this.rules = this.rules.filter(function (item) {
         return item.rank !== rank;
       }); // change rank of all items when > rank
@@ -96044,14 +96578,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AlertTriggerRule; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var AlertTriggerRule = function AlertTriggerRule(definitionRank, rank) {
+var AlertTriggerRule = function AlertTriggerRule(id, definitionRank, rank) {
+  var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'none';
+  var valid = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+  var standardParameters = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
+  var specificParameters = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : {};
+
   _classCallCheck(this, AlertTriggerRule);
 
+  this.id = id;
   this.definitionRank = definitionRank;
   this.rank = rank;
-  this.type = 'none';
-  this.valid = false;
-  this.parameters = {};
+  this.type = type;
+  this.valid = valid;
+  this.parameters = {
+    standard: standardParameters,
+    specific: specificParameters
+  };
 };
 
 
@@ -96330,7 +96873,7 @@ function () {
     value: function () {
       var _save = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(name, code, orchestrator) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(name, code, orchestrator, elasticSearchUrl, elasticSearchIndex) {
         var _this3 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
@@ -96342,7 +96885,9 @@ function () {
                   resolve(axios__WEBPACK_IMPORTED_MODULE_1__["post"]('/api/clients', {
                     'name': name,
                     'code': code,
-                    'ui_path_orchestrator_id': orchestrator
+                    'ui_path_orchestrator_id': orchestrator,
+                    'elastic_search_url': elasticSearchUrl,
+                    'elastic_search_index': elasticSearchIndex
                   }).then(function (response) {
                     if (response.data) {
                       _this3.id = response.data.id;
@@ -96363,7 +96908,7 @@ function () {
         }, _callee3, null, [[0, 4]]);
       }));
 
-      function save(_x, _x2, _x3) {
+      function save(_x, _x2, _x3, _x4, _x5) {
         return _save.apply(this, arguments);
       }
 
@@ -96374,7 +96919,7 @@ function () {
     value: function () {
       var _update = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(name, code, orchestrator) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(name, code, orchestrator, elasticSearchUrl, elasticSearchIndex) {
         var _this4 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
@@ -96386,7 +96931,9 @@ function () {
                   resolve(axios__WEBPACK_IMPORTED_MODULE_1__["patch"]("/api/clients/".concat(_this4.id), {
                     'name': name,
                     'code': code,
-                    'ui_path_orchestrator_id': orchestrator
+                    'ui_path_orchestrator_id': orchestrator,
+                    'elastic_search_url': elasticSearchUrl,
+                    'elastic_search_index': elasticSearchIndex
                   }).then(function (response) {
                     if (response.data) {
                       _this4.data = response.data;
@@ -96407,7 +96954,7 @@ function () {
         }, _callee4, null, [[0, 4]]);
       }));
 
-      function update(_x4, _x5, _x6) {
+      function update(_x6, _x7, _x8, _x9, _x10) {
         return _update.apply(this, arguments);
       }
 
@@ -97499,7 +98046,7 @@ function () {
     value: function () {
       var _save = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(name, code, url, tenant, apiUserUsername, apiUserPassword, elasticSearchUrl, elasticSearchIndex) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(name, code, url, tenant, apiUserUsername, apiUserPassword) {
         var _this = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
@@ -97514,9 +98061,7 @@ function () {
                     'url': url,
                     'tenant': tenant,
                     'api_user_username': apiUserUsername,
-                    'api_user_password': apiUserPassword,
-                    'elastic_search_url': elasticSearchUrl,
-                    'elastic_search_index': elasticSearchIndex
+                    'api_user_password': apiUserPassword
                   }).then(function (response) {
                     if (response.data) {
                       _this.id = response.data.id;
@@ -97537,7 +98082,7 @@ function () {
         }, _callee, null, [[0, 4]]);
       }));
 
-      function save(_x, _x2, _x3, _x4, _x5, _x6, _x7, _x8) {
+      function save(_x, _x2, _x3, _x4, _x5, _x6) {
         return _save.apply(this, arguments);
       }
 
@@ -97548,7 +98093,7 @@ function () {
     value: function () {
       var _update = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(name, code, url, tenant, apiUserUsername, apiUserPassword, elasticSearchUrl, elasticSearchIndex) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(name, code, url, tenant, apiUserUsername, apiUserPassword) {
         var _this2 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
@@ -97586,7 +98131,7 @@ function () {
         }, _callee2, null, [[0, 4]]);
       }));
 
-      function update(_x9, _x10, _x11, _x12, _x13, _x14, _x15, _x16) {
+      function update(_x7, _x8, _x9, _x10, _x11, _x12) {
         return _update.apply(this, arguments);
       }
 
@@ -97889,6 +98434,139 @@ function () {
 
       return save;
     }()
+  }, {
+    key: "update",
+    value: function () {
+      var _update2 = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(client, name, code, operationalHandbookPageURL, kibanaDashboardURL, additionalInformation, runningPeriodMonday, runningPeriodTuesday, runningPeriodWednesday, runningPeriodThursday, runningPeriodFriday, runningPeriodSaturday, runningPeriodSunday, runningTimePeriodFrom, runningTimePeriodUntil, involvedProcesses, involvedRobots, involvedQueues) {
+        var _this5 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                return _context5.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["patch"]("/api/watched-automated-processes/".concat(_this5.id), {
+                    'client_id': client,
+                    'name': name,
+                    'code': code,
+                    'operational_handbook_page_url': operationalHandbookPageURL,
+                    'kibana_dashboard_url': kibanaDashboardURL,
+                    'additional_information': additionalInformation,
+                    'running_period_monday': runningPeriodMonday ? 1 : 0,
+                    'running_period_tuesday': runningPeriodTuesday ? 1 : 0,
+                    'running_period_wednesday': runningPeriodWednesday ? 1 : 0,
+                    'running_period_thursday': runningPeriodThursday ? 1 : 0,
+                    'running_period_friday': runningPeriodFriday ? 1 : 0,
+                    'running_period_saturday': runningPeriodSaturday ? 1 : 0,
+                    'running_period_sunday': runningPeriodSunday ? 1 : 0,
+                    'running_period_time_from': runningTimePeriodFrom,
+                    'running_period_time_until': runningTimePeriodUntil,
+                    'involved_processes': involvedProcesses,
+                    'involved_robots': involvedRobots,
+                    'involved_queues': involvedQueues
+                  }).then(function (response) {
+                    if (response.data) {
+                      _this5.data = response.data;
+                    }
+                  }));
+                }));
+
+              case 4:
+                _context5.prev = 4;
+                _context5.t0 = _context5["catch"](0);
+                console.log(_context5.t0);
+
+              case 7:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, null, [[0, 4]]);
+      }));
+
+      function update(_x19, _x20, _x21, _x22, _x23, _x24, _x25, _x26, _x27, _x28, _x29, _x30, _x31, _x32, _x33, _x34, _x35, _x36) {
+        return _update2.apply(this, arguments);
+      }
+
+      return update;
+    }()
+  }, {
+    key: "remove",
+    value: function () {
+      var _remove = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+        var _this6 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _context6.prev = 0;
+                return _context6.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["delete"]("/api/watched-automated-processes/".concat(_this6.id)));
+                }));
+
+              case 4:
+                _context6.prev = 4;
+                _context6.t0 = _context6["catch"](0);
+                console.log(_context6.t0);
+
+              case 7:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, null, [[0, 4]]);
+      }));
+
+      function remove() {
+        return _remove.apply(this, arguments);
+      }
+
+      return remove;
+    }()
+  }, {
+    key: "loadEditForm",
+    value: function () {
+      var _loadEditForm = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+        var _this7 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _context7.prev = 0;
+                return _context7.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/configuration/watched-automated-process/edit/".concat(_this7.id)).then(function (response) {
+                    _this7.editForm = response.data;
+                  }));
+                }));
+
+              case 4:
+                _context7.prev = 4;
+                _context7.t0 = _context7["catch"](0);
+                console.log(_context7.t0);
+
+              case 7:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, null, [[0, 4]]);
+      }));
+
+      function loadEditForm() {
+        return _loadEditForm.apply(this, arguments);
+      }
+
+      return loadEditForm;
+    }()
   }]);
 
   return WatchedAutomatedProcess;
@@ -97915,6 +98593,7 @@ var strings = {
   row: 'alert-row-',
   closingFormModalID: 'alert-closing-modal',
   ignoranceFormModalID: 'alert-ignorance-modal',
+  timelineFormModalID: 'alert-timeline-modal-',
   pendingTableID: 'pending-alerts-table',
   closedTableID: 'closed-alerts-table'
 };
@@ -97924,6 +98603,8 @@ var selectors = {
   boxFooter: '.alert-box__footer',
   commentButton: '.comment-btn',
   commentButtonChildren: '.comment-btn *',
+  timelineButton: '.timeline-btn',
+  timelineButtonChildren: '.timeline-btn *',
   revisionButton: '.revision-btn',
   revisionButtonChildren: '.revision-btn *',
   cancelButton: '.cancel-btn',
@@ -97993,10 +98674,10 @@ var header = function header(title, alert) {
   return "\n        <header class=\"modal-card-head has-background-".concat(alert.definition.level, "\">\n            <p class=\"modal-card-title has-text-light\">\n                <span class=\"icon\"><i class=\"fas fa-burn\"></i></span> ").concat(title, "\n            </p>\n            <button class=\"delete\" aria-label=\"close\"></button>\n        </header>\n    ");
 };
 var footer = function footer(successButtonLabel, successButtonIcon) {
-  return "\n        <footer class=\"modal-card-foot\">\n            <div class=\"field is-grouped has-addons\">\n                <div class=\"control\">\n                    <button class=\"button is-success validate\">\n                        <span class=\"icon is-small\">\n                            <i class=\"fas fa-".concat(successButtonIcon, "\"></i>\n                        </span>\n                        <span>").concat(successButtonLabel, "</span>\n                    </button>\n                </div>\n                <div class=\"control\">\n                    <button class=\"button is-danger is-outlined cancel\">\n                        <span class=\"icon is-small\">\n                            <i class=\"fas fa-window-close\"></i>\n                        </span>\n                        <span>Cancel</span>\n                    </button>\n                </div>\n            </button>\n        </footer>\n    ");
+  return "\n        <footer class=\"modal-card-foot\">\n            <div class=\"field is-grouped has-addons\">\n                <div class=\"control\">\n                    <button class=\"button is-success validate\">\n                        <span class=\"icon is-small\">\n                            <i class=\"fas fa-".concat(successButtonIcon, "\"></i>\n                        </span>\n                        <span>").concat(successButtonLabel, "</span>\n                    </button>\n                </div>\n                <div class=\"control\">\n                    <button class=\"button is-danger is-outlined cancel\">\n                        <span class=\"icon is-small\">\n                            <i class=\"fas fa-window-close\"></i>\n                        </span>\n                        <span>Cancel</span>\n                    </button>\n                </div>\n            </div>\n        </footer>\n    ");
 };
 var titleBlock = function titleBlock(alert) {
-  return "\n        <div class=\"columns\">\n            <div class=\"column\">\n                <div class=\"field\">\n                    <label class=\"label\">Client</label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"".concat(alert.watched_automated_process.client.name, "\" readonly>\n                    </div>\n                </div>\n                <div class=\"field\">\n                    <label class=\"label\">Watched automated process</label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"").concat(alert.watched_automated_process.name, "\" readonly>\n                    </div>\n                </div>\n            </div>\n            <div class=\"column\">\n                <div class=\"field\">\n                    <label class=\"label\">Alert</label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"").concat(alert.trigger.title, "\" readonly>\n                    </div>\n                </div>\n                <div class=\"field\">\n                    <label class=\"label\">Detected on</label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"").concat(moment__WEBPACK_IMPORTED_MODULE_0___default()(alert.created_at).format('DD/MM/YYYY HH:mm:ss'), "\" readonly>\n                    </div>\n                </div>\n            </div>\n        </div>\n    ");
+  return "\n        <div class=\"columns\">\n            <div class=\"column\">\n                <div class=\"field\">\n                    <label class=\"label\">\n                        <span class=\"icon\"><i class=\"fas fa-building\"></i></span>\n                        <span>Client</span>\n                    </label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"".concat(alert.watched_automated_process.client.name, "\" readonly>\n                    </div>\n                </div>\n                <div class=\"field\">\n                    <label class=\"label\">\n                        <span class=\"icon\"><i class=\"fas fa-clock\"></i></span>\n                        <span>Detected on</span>\n                    </label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"").concat(moment__WEBPACK_IMPORTED_MODULE_0___default()(alert.created_at).format('DD/MM/YYYY HH:mm:ss'), "\" readonly>\n                    </div>\n                </div>\n            </div>\n            <div class=\"column\">\n                <div class=\"field\">\n                    <label class=\"label\">\n                        <span class=\"icon\"><i class=\"fas fa-binoculars\"></i></span>\n                        <span>Watched automated process</span>\n                    </label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"").concat(alert.watched_automated_process.name, "\" readonly>\n                    </div>\n                </div>\n                <div class=\"field\">\n                    <label class=\"label\">\n                        <span class=\"icon\"><i class=\"fas fa-dragon\"></i></span>\n                        <span>Alert trigger</span>\n                    </label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"").concat(alert.trigger.title, "\" readonly>\n                    </div>\n                </div>\n            </div>\n        </div>\n    ");
 };
 var underRevisionBlock = function underRevisionBlock(alert) {
   return "\n        <article class=\"message is-info is-small\">\n            <div class=\"message-body\">\n                Revision started on ".concat(moment__WEBPACK_IMPORTED_MODULE_0___default()(alert.revision_started_at).format('DD/MM/YYYY HH:mm:ss'), "\n                <small>\n                    (").concat(moment__WEBPACK_IMPORTED_MODULE_0___default()(alert.revision_started_at).fromNow(), ")\n                </small>\n            </div>\n        </article>\n    ");
@@ -98020,7 +98701,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var markup = function markup(elementID, alert) {
-  return "\n        <div id=\"".concat(elementID, "\" class=\"modal\">\n            <div class=\"modal-background\"></div>\n            <div class=\"modal-card modal-content\">\n                ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["header"])('Alert ignorance', alert), "\n                <section class=\"modal-card-body\">\n                    <form class=\"alert-closing-form\" method=\"POST\">\n                        ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["titleBlock"])(alert), "\n                        ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["underRevisionBlock"])(alert), "\n                        <div class=\"field\">\n                            <label class=\"label\">Ignore alert in range</label>\n                            <div class=\"control\">\n                                <input type=\"date\" class=\"datetime\"\n                                    id=\"ignorance_calendar\"\n                                    name=\"ignorance_calendar\">\n                            </div>\n                        </div>\n                        <div class=\"field\">\n                            <div class=\"control\">\n                                <textarea class=\"textarea\"\n                                    id=\"ignorance_description\"\n                                    name=\"ignorance_description\"\n                                    placeholder=\"Ignorance description\"\n                                    required></textarea>\n                            </div>\n                        </div>\n                    </form>\n                </section>\n                ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["footer"])('Ignore it!', 'eye-slash'), "\n            </div>\n        </div>\n    ");
+  return "\n        <div id=\"".concat(elementID, "\" class=\"modal\">\n            <div class=\"modal-background\"></div>\n            <div class=\"modal-card modal-content\">\n                ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["header"])('Alert trigger ignorance', alert), "\n                <section class=\"modal-card-body\">\n                    <form class=\"alert-closing-form\" method=\"POST\">\n                        ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["titleBlock"])(alert), "\n                        ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["underRevisionBlock"])(alert), "\n                        <div class=\"field\">\n                            <label class=\"label\">Ignore alert trigger in range</label>\n                            <div class=\"control\">\n                                <input type=\"date\" class=\"datetime\"\n                                    id=\"ignorance_calendar\"\n                                    name=\"ignorance_calendar\">\n                            </div>\n                        </div>\n                        <div class=\"field\">\n                            <div class=\"control\">\n                                <textarea class=\"textarea\"\n                                    id=\"ignorance_description\"\n                                    name=\"ignorance_description\"\n                                    placeholder=\"Ignorance description\"\n                                    required></textarea>\n                            </div>\n                        </div>\n                    </form>\n                </section>\n                ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["footer"])('Ignore it!', 'eye-slash'), "\n            </div>\n        </div>\n    ");
 };
 
 /***/ }),
@@ -98029,19 +98710,18 @@ var markup = function markup(elementID, alert) {
 /*!*******************************************!*\
   !*** ./resources/js/views/alert/index.js ***!
   \*******************************************/
-/*! exports provided: init, startRevision, undoRevision, close, undoClose, commitClose, ignore, undoIgnore, commitIgnore, updatePendingTable, updateClosedTable */
+/*! exports provided: init, timeline, startRevision, undoRevision, close, commitClose, ignore, commitIgnore, updatePendingTable, updateClosedTable */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "init", function() { return init; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "timeline", function() { return timeline; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startRevision", function() { return startRevision; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "undoRevision", function() { return undoRevision; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "close", function() { return close; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "undoClose", function() { return undoClose; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "commitClose", function() { return commitClose; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ignore", function() { return ignore; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "undoIgnore", function() { return undoIgnore; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "commitIgnore", function() { return commitIgnore; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updatePendingTable", function() { return updatePendingTable; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateClosedTable", function() { return updateClosedTable; });
@@ -98077,35 +98757,41 @@ function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(dashboard, target) {
-    var id, _id, _id2, _id3;
+    var id, _id, _id2, _id3, _id4;
 
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             try {
-              // Handle start revision button
+              // Handle timeline button
+              if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].timelineButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].timelineButtonChildren))) {
+                id = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].timelineButton).dataset.id;
+                timeline(id);
+              } // Handle start revision button
+
+
               if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].revisionButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].revisionButtonChildren))) {
-                id = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].revisionButton).dataset.id;
-                startRevision(dashboard, id);
+                _id = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].revisionButton).dataset.id;
+                startRevision(dashboard, _id);
               } // Handle undo revision button
 
 
               if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].cancelButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].cancelButtonChildren))) {
-                _id = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].cancelButton).dataset.id;
-                undoRevision(dashboard, _id);
+                _id2 = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].cancelButton).dataset.id;
+                undoRevision(dashboard, _id2);
               } // Handle close button
 
 
               if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].closeButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].closeButtonChildren))) {
-                _id2 = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].closeButton).dataset.id;
-                close(dashboard, _id2);
+                _id3 = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].closeButton).dataset.id;
+                close(dashboard, _id3);
               } // Handle ignore button
 
 
               if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].ignoreButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].ignoreButtonChildren))) {
-                _id3 = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].ignoreButton).dataset.id;
-                ignore(dashboard, _id3);
+                _id4 = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].ignoreButton).dataset.id;
+                ignore(dashboard, _id4);
               }
             } catch (error) {
               console.log("Failed to init alert controller: ".concat(error));
@@ -98181,16 +98867,53 @@ function () {
   };
 }();
 
-var startRevision =
+var timeline =
 /*#__PURE__*/
 function () {
   var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(dashboard, id) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(id) {
     var alert;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
+          case 0:
+            try {
+              alert = new _models_Alert__WEBPACK_IMPORTED_MODULE_3__["default"](id);
+              _view__WEBPACK_IMPORTED_MODULE_6__["renderLoaders"](id);
+              alert.timeline().then(function (res) {
+                var modal = _view__WEBPACK_IMPORTED_MODULE_6__["showTimelineFormModal"](alert);
+                _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
+              });
+            } catch (error) {
+              toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error("Alert timeline not shown due to application exception: ".concat(error), null, {
+                positionClass: 'toast-bottom-center'
+              });
+              _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
+            }
+
+          case 1:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+
+  return function timeline(_x6) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+var startRevision =
+/*#__PURE__*/
+function () {
+  var _ref4 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(dashboard, id) {
+    var alert;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
           case 0:
             try {
               alert = new _models_Alert__WEBPACK_IMPORTED_MODULE_3__["default"](id);
@@ -98210,26 +98933,26 @@ function () {
 
           case 1:
           case "end":
-            return _context3.stop();
+            return _context4.stop();
         }
       }
-    }, _callee3);
+    }, _callee4);
   }));
 
-  return function startRevision(_x6, _x7) {
-    return _ref3.apply(this, arguments);
+  return function startRevision(_x7, _x8) {
+    return _ref4.apply(this, arguments);
   };
 }();
 var undoRevision =
 /*#__PURE__*/
 function () {
-  var _ref4 = _asyncToGenerator(
+  var _ref5 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(dashboard, id) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(dashboard, id) {
     var alert;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
       while (1) {
-        switch (_context4.prev = _context4.next) {
+        switch (_context5.prev = _context5.next) {
           case 0:
             try {
               alert = new _models_Alert__WEBPACK_IMPORTED_MODULE_3__["default"](id);
@@ -98249,26 +98972,26 @@ function () {
 
           case 1:
           case "end":
-            return _context4.stop();
+            return _context5.stop();
         }
       }
-    }, _callee4);
+    }, _callee5);
   }));
 
-  return function undoRevision(_x8, _x9) {
-    return _ref4.apply(this, arguments);
+  return function undoRevision(_x9, _x10) {
+    return _ref5.apply(this, arguments);
   };
 }();
 var close =
 /*#__PURE__*/
 function () {
-  var _ref5 = _asyncToGenerator(
+  var _ref6 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(dashboard, id) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7(dashboard, id) {
     var alert;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
       while (1) {
-        switch (_context6.prev = _context6.next) {
+        switch (_context7.prev = _context7.next) {
           case 0:
             try {
               alert = new _models_Alert__WEBPACK_IMPORTED_MODULE_3__["default"](id);
@@ -98278,12 +99001,12 @@ function () {
                 modal.addEventListener('click',
                 /*#__PURE__*/
                 function () {
-                  var _ref6 = _asyncToGenerator(
+                  var _ref7 = _asyncToGenerator(
                   /*#__PURE__*/
-                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(e) {
-                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(e) {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
                       while (1) {
-                        switch (_context5.prev = _context5.next) {
+                        switch (_context6.prev = _context6.next) {
                           case 0:
                             if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_4__["selectors"].validateModalButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_4__["selectors"].validateModalButtonChildren))) {
                               commitClose(dashboard, alert);
@@ -98291,14 +99014,14 @@ function () {
 
                           case 1:
                           case "end":
-                            return _context5.stop();
+                            return _context6.stop();
                         }
                       }
-                    }, _callee5);
+                    }, _callee6);
                   }));
 
-                  return function (_x12) {
-                    return _ref6.apply(this, arguments);
+                  return function (_x13) {
+                    return _ref7.apply(this, arguments);
                   };
                 }());
                 _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
@@ -98312,42 +99035,14 @@ function () {
 
           case 1:
           case "end":
-            return _context6.stop();
-        }
-      }
-    }, _callee6);
-  }));
-
-  return function close(_x10, _x11) {
-    return _ref5.apply(this, arguments);
-  };
-}();
-var undoClose =
-/*#__PURE__*/
-function () {
-  var _ref7 = _asyncToGenerator(
-  /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
-      while (1) {
-        switch (_context7.prev = _context7.next) {
-          case 0:
-            try {
-              _view__WEBPACK_IMPORTED_MODULE_6__["removeClosingFormModal"]();
-            } catch (error) {
-              console.log(error);
-            }
-
-          case 1:
-          case "end":
             return _context7.stop();
         }
       }
     }, _callee7);
   }));
 
-  return function undoClose() {
-    return _ref7.apply(this, arguments);
+  return function close(_x11, _x12) {
+    return _ref6.apply(this, arguments);
   };
 }();
 var commitClose =
@@ -98402,7 +99097,7 @@ function () {
     }, _callee8);
   }));
 
-  return function commitClose(_x13, _x14) {
+  return function commitClose(_x14, _x15) {
     return _ref8.apply(this, arguments);
   };
 }();
@@ -98444,7 +99139,7 @@ function () {
                     }, _callee9);
                   }));
 
-                  return function (_x17) {
+                  return function (_x18) {
                     return _ref10.apply(this, arguments);
                   };
                 }());
@@ -98465,48 +99160,20 @@ function () {
     }, _callee10);
   }));
 
-  return function ignore(_x15, _x16) {
+  return function ignore(_x16, _x17) {
     return _ref9.apply(this, arguments);
-  };
-}();
-var undoIgnore =
-/*#__PURE__*/
-function () {
-  var _ref11 = _asyncToGenerator(
-  /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11(id) {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
-      while (1) {
-        switch (_context11.prev = _context11.next) {
-          case 0:
-            try {
-              _view__WEBPACK_IMPORTED_MODULE_6__["removeIgnoranceFormModal"]();
-            } catch (error) {
-              console.log(error);
-            }
-
-          case 1:
-          case "end":
-            return _context11.stop();
-        }
-      }
-    }, _callee11);
-  }));
-
-  return function undoIgnore(_x18) {
-    return _ref11.apply(this, arguments);
   };
 }();
 var commitIgnore =
 /*#__PURE__*/
 function () {
-  var _ref12 = _asyncToGenerator(
+  var _ref11 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12(dashboard, alert) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11(dashboard, alert) {
     var ignoranceCalendar, descriptionTextarea;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee12$(_context12) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
       while (1) {
-        switch (_context12.prev = _context12.next) {
+        switch (_context11.prev = _context11.next) {
           case 0:
             try {
               ignoranceCalendar = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].ignoranceCalendar).bulmaCalendar;
@@ -98550,27 +99217,27 @@ function () {
 
           case 1:
           case "end":
-            return _context12.stop();
+            return _context11.stop();
         }
       }
-    }, _callee12);
+    }, _callee11);
   }));
 
   return function commitIgnore(_x19, _x20) {
-    return _ref12.apply(this, arguments);
+    return _ref11.apply(this, arguments);
   };
 }();
 
 var handleCommitIgnore =
 /*#__PURE__*/
 function () {
-  var _ref13 = _asyncToGenerator(
+  var _ref12 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee13(dashboard, alert, ignoranceCalendar, descriptionTextarea) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12(dashboard, alert, ignoranceCalendar, descriptionTextarea) {
     var startDate, startTime, endDate, endTime;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee13$(_context13) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee12$(_context12) {
       while (1) {
-        switch (_context13.prev = _context13.next) {
+        switch (_context12.prev = _context12.next) {
           case 0:
             try {
               _view__WEBPACK_IMPORTED_MODULE_6__["removeIgnoranceFormModal"]();
@@ -98604,18 +99271,66 @@ function () {
 
           case 1:
           case "end":
-            return _context13.stop();
+            return _context12.stop();
         }
       }
-    }, _callee13);
+    }, _callee12);
   }));
 
   return function handleCommitIgnore(_x21, _x22, _x23, _x24) {
-    return _ref13.apply(this, arguments);
+    return _ref12.apply(this, arguments);
   };
 }();
 
 var updatePendingTable =
+/*#__PURE__*/
+function () {
+  var _ref13 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee13(dashboard) {
+    var table;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee13$(_context13) {
+      while (1) {
+        switch (_context13.prev = _context13.next) {
+          case 0:
+            _context13.prev = 0;
+            table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].pendingTable);
+
+            if (!table) {
+              _context13.next = 5;
+              break;
+            }
+
+            _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](table);
+
+            return _context13.abrupt("return", dashboard.updateAlertsTable(false, _base__WEBPACK_IMPORTED_MODULE_5__["strings"].pendingTableID).then(function (res) {
+              _view__WEBPACK_IMPORTED_MODULE_6__["updatePendingTable"](dashboard.pendingAlertsTable);
+            }).then(function () {
+              _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](table);
+            }));
+
+          case 5:
+            _context13.next = 10;
+            break;
+
+          case 7:
+            _context13.prev = 7;
+            _context13.t0 = _context13["catch"](0);
+            console.log(_context13.t0);
+
+          case 10:
+          case "end":
+            return _context13.stop();
+        }
+      }
+    }, _callee13, null, [[0, 7]]);
+  }));
+
+  return function updatePendingTable(_x25) {
+    return _ref13.apply(this, arguments);
+  };
+}();
+var updateClosedTable =
 /*#__PURE__*/
 function () {
   var _ref14 = _asyncToGenerator(
@@ -98627,7 +99342,7 @@ function () {
         switch (_context14.prev = _context14.next) {
           case 0:
             _context14.prev = 0;
-            table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].pendingTable);
+            table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].closedTable);
 
             if (!table) {
               _context14.next = 5;
@@ -98636,8 +99351,8 @@ function () {
 
             _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](table);
 
-            return _context14.abrupt("return", dashboard.updateAlertsTable(false, _base__WEBPACK_IMPORTED_MODULE_5__["strings"].pendingTableID).then(function (res) {
-              _view__WEBPACK_IMPORTED_MODULE_6__["updatePendingTable"](dashboard.pendingAlertsTable);
+            return _context14.abrupt("return", dashboard.updateAlertsTable(true, _base__WEBPACK_IMPORTED_MODULE_5__["strings"].closedTableID).then(function (res) {
+              _view__WEBPACK_IMPORTED_MODULE_6__["updateClosedTable"](dashboard.closedAlertsTable);
             }).then(function () {
               _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](table);
             }));
@@ -98659,56 +99374,8 @@ function () {
     }, _callee14, null, [[0, 7]]);
   }));
 
-  return function updatePendingTable(_x25) {
-    return _ref14.apply(this, arguments);
-  };
-}();
-var updateClosedTable =
-/*#__PURE__*/
-function () {
-  var _ref15 = _asyncToGenerator(
-  /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee15(dashboard) {
-    var table;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee15$(_context15) {
-      while (1) {
-        switch (_context15.prev = _context15.next) {
-          case 0:
-            _context15.prev = 0;
-            table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].closedTable);
-
-            if (!table) {
-              _context15.next = 5;
-              break;
-            }
-
-            _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](table);
-
-            return _context15.abrupt("return", dashboard.updateAlertsTable(true, _base__WEBPACK_IMPORTED_MODULE_5__["strings"].closedTableID).then(function (res) {
-              _view__WEBPACK_IMPORTED_MODULE_6__["updateClosedTable"](dashboard.closedAlertsTable);
-            }).then(function () {
-              _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](table);
-            }));
-
-          case 5:
-            _context15.next = 10;
-            break;
-
-          case 7:
-            _context15.prev = 7;
-            _context15.t0 = _context15["catch"](0);
-            console.log(_context15.t0);
-
-          case 10:
-          case "end":
-            return _context15.stop();
-        }
-      }
-    }, _callee15, null, [[0, 7]]);
-  }));
-
   return function updateClosedTable(_x26) {
-    return _ref15.apply(this, arguments);
+    return _ref14.apply(this, arguments);
   };
 }();
 
@@ -98718,7 +99385,7 @@ function () {
 /*!******************************************!*\
   !*** ./resources/js/views/alert/view.js ***!
   \******************************************/
-/*! exports provided: renderLoaders, clearLoaders, update, remove, updatePendingTable, updateClosedTable, updateRow, showClosingFormModal, removeClosingFormModal, showIgnoranceFormModal, removeIgnoranceFormModal */
+/*! exports provided: renderLoaders, clearLoaders, update, remove, updatePendingTable, updateClosedTable, updateRow, showClosingFormModal, removeClosingFormModal, showIgnoranceFormModal, removeIgnoranceFormModal, showTimelineFormModal */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98734,6 +99401,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeClosingFormModal", function() { return removeClosingFormModal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showIgnoranceFormModal", function() { return showIgnoranceFormModal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeIgnoranceFormModal", function() { return removeIgnoranceFormModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showTimelineFormModal", function() { return showTimelineFormModal; });
 /* harmony import */ var bulma_calendar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bulma-calendar */ "./node_modules/bulma-calendar/dist/js/bulma-calendar.js");
 /* harmony import */ var bulma_calendar__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bulma_calendar__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -98856,6 +99524,14 @@ var removeIgnoranceFormModal = function removeIgnoranceFormModal() {
   var modal = document.getElementById(_base__WEBPACK_IMPORTED_MODULE_2__["strings"].ignoranceFormModalID);
 
   _base__WEBPACK_IMPORTED_MODULE_5__["closeModal"](modal);
+};
+var showTimelineFormModal = function showTimelineFormModal(alert) {
+  document.body.insertAdjacentHTML('beforeend', alert.timeline);
+  var modal = document.getElementById(_base__WEBPACK_IMPORTED_MODULE_2__["strings"].timelineFormModalID + alert.id);
+
+  _base__WEBPACK_IMPORTED_MODULE_5__["showModal"](modal);
+
+  return modal;
 };
 
 /***/ }),
@@ -99226,19 +99902,24 @@ var strings = {
 };
 var selectors = {
   table: 'table.alert-triggers',
+  formsSection: '.forms-section',
+  addFormSection: '.add-form-section',
   addForm: '#add-form',
+  editFormSection: '.edit-form-section',
+  editForm: '#edit-form',
+  editFormButtonsSection: '.edit-buttons-section',
   steps: '.steps',
   activeStepContent: '.step-content.is-active',
   processSelection: {
-    clientSelect: 'select#client',
-    watchedProcessSelect: 'select#watched-automated-process'
+    clientSelect: 'select.client',
+    watchedProcessSelect: 'select.watched-automated-process'
   },
   details: {
     title: 'input.trigger-details--title-input',
     alertDefinition: {
       section: '.alert-definitions-section',
       list: '.alert-definitions-list',
-      count: '#alert-definitions-section-title p.title span.tag',
+      count: '.alert-definitions-section p.title span.tag',
       item: '.alert-definition-item',
       title: '.alert-definition-item .title-level p.title',
       titleIcon: '.alert-definition-item .title-level span.icon',
@@ -99322,11 +100003,28 @@ var selectors = {
   confirmation: {
     notification: '.notification',
     activateButton: 'button.trigger-details--confirmation--activate-button',
-    activateButtonChildren: 'button.trigger-details--confirmation--activate-button *'
-  }
+    activateButtonChildren: 'button.trigger-details--confirmation--activate-button *',
+    closeButton: 'button.trigger-details--confirmation--close-button',
+    closeButtonChildren: 'button.trigger-details--confirmation--close-button *'
+  },
+  activateButton: 'button.activate',
+  activateButtonChildren: 'button.activate *',
+  disableButton: 'button.disable',
+  disableButtonChildren: 'button.disable *',
+  ignoreButton: 'button.ignore',
+  ignoreButtonChildren: 'button.ignore *',
+  acknowledgeButton: 'button.acknowledge',
+  acknowledgeButtonChildren: 'button.acknowledge *',
+  cancelButton: 'button.cancel',
+  cancelButtonChildren: 'button.cancel *',
+  removeButton: 'button.remove',
+  removeButtonChildren: 'button.remove *',
+  restoreButton: 'button.restore',
+  restoreButtonChildren: 'button.restore *'
 };
 var elements = {
   table: document.querySelector(selectors.table),
+  formsSection: document.querySelector(selectors.formsSection),
   addForm: document.querySelector(selectors.addForm),
   steps: document.querySelector(selectors.steps),
   processSelection: {
@@ -99365,16 +100063,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(toastr__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var bulma_steps__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bulma-steps */ "./node_modules/bulma-steps/dist/js/bulma-steps.min.js");
 /* harmony import */ var bulma_steps__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bulma_steps__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _models_Configuration__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../models/Configuration */ "./resources/js/models/Configuration.js");
-/* harmony import */ var _models_Client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../models/Client */ "./resources/js/models/Client.js");
-/* harmony import */ var _models_WatchedAutomatedProcess__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../models/WatchedAutomatedProcess */ "./resources/js/models/WatchedAutomatedProcess.js");
-/* harmony import */ var _models_AlertTrigger__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../models/AlertTrigger */ "./resources/js/models/AlertTrigger.js");
-/* harmony import */ var _models_AlertTriggerDefinition__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../models/AlertTriggerDefinition */ "./resources/js/models/AlertTriggerDefinition.js");
-/* harmony import */ var _models_AlertTriggerRule__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../models/AlertTriggerRule */ "./resources/js/models/AlertTriggerRule.js");
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../base */ "./resources/js/views/base.js");
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./base */ "./resources/js/views/configuration/alert-trigger/base.js");
-/* harmony import */ var _view__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./view */ "./resources/js/views/configuration/alert-trigger/view.js");
-/* harmony import */ var _layout_index__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../layout/index */ "./resources/js/views/layout/index.js");
+/* harmony import */ var bulma_calendar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bulma-calendar */ "./node_modules/bulma-calendar/dist/js/bulma-calendar.js");
+/* harmony import */ var bulma_calendar__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bulma_calendar__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _models_Configuration__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../models/Configuration */ "./resources/js/models/Configuration.js");
+/* harmony import */ var _models_Client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../models/Client */ "./resources/js/models/Client.js");
+/* harmony import */ var _models_WatchedAutomatedProcess__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../models/WatchedAutomatedProcess */ "./resources/js/models/WatchedAutomatedProcess.js");
+/* harmony import */ var _models_AlertTrigger__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../models/AlertTrigger */ "./resources/js/models/AlertTrigger.js");
+/* harmony import */ var _models_AlertTriggerDefinition__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../models/AlertTriggerDefinition */ "./resources/js/models/AlertTriggerDefinition.js");
+/* harmony import */ var _models_AlertTriggerRule__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../models/AlertTriggerRule */ "./resources/js/models/AlertTriggerRule.js");
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../base */ "./resources/js/views/base.js");
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./base */ "./resources/js/views/configuration/alert-trigger/base.js");
+/* harmony import */ var _view__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./view */ "./resources/js/views/configuration/alert-trigger/view.js");
+/* harmony import */ var _layout_index__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../layout/index */ "./resources/js/views/layout/index.js");
 
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -99401,120 +100101,335 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 var BS_TRIGGER_DETAILS_STEP_ACCESS_REFUSED_BY_USER = 'trigger-details-step-access-refused-by-user';
 var bulmaStepsHiddenErrors = [BS_TRIGGER_DETAILS_STEP_ACCESS_REFUSED_BY_USER];
-var configuration = new _models_Configuration__WEBPACK_IMPORTED_MODULE_3__["default"]('configuration.alert-trigger.index');
+var configuration = new _models_Configuration__WEBPACK_IMPORTED_MODULE_4__["default"]('configuration.alert-trigger.index');
+var currentMode = 'add';
+var steps;
 var processSelection = {
-  clientSelect: _base__WEBPACK_IMPORTED_MODULE_10__["elements"].processSelection.clientSelect,
-  watchedProcessSelect: _base__WEBPACK_IMPORTED_MODULE_10__["elements"].processSelection.watchedProcessSelect
+  clientSelect: function clientSelect(form) {
+    return form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].processSelection.clientSelect);
+  },
+  watchedProcessSelect: function watchedProcessSelect(form) {
+    return form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].processSelection.watchedProcessSelect);
+  }
 };
 var details = {
-  alertDefinitions: {
-    list: [],
-    find: function find(rank) {
-      return details.alertDefinitions.list.find(function (item) {
-        return item.rank === rank;
-      });
-    },
-    remove: function remove(rank) {
-      details.alertDefinitions.list = details.alertDefinitions.list.filter(function (item) {
-        return item.rank !== rank;
-      }); // change rank of all items when > rank
-
-      details.alertDefinitions.list = details.alertDefinitions.list.map(function (item) {
-        if (item.rank > rank) {
-          item.rank = item.rank - 1;
-        }
-
-        return item;
-      });
-    },
-    areValid: function areValid() {
-      var valid = true;
-      details.alertDefinitions.list.forEach(function (alertDefinition) {
-        valid = valid && alertDefinition.isValid();
-      });
-      return valid;
-    }
-  }
+  currentWatchedAutomatedProcess: new _models_WatchedAutomatedProcess__WEBPACK_IMPORTED_MODULE_6__["default"](),
+  currentClient: new _models_Client__WEBPACK_IMPORTED_MODULE_5__["default"](),
+  currentAlertTrigger: new _models_AlertTrigger__WEBPACK_IMPORTED_MODULE_7__["default"]()
 };
 var init = function init() {
   try {
     setInterval(function () {
-      _layout_index__WEBPACK_IMPORTED_MODULE_12__["update"](configuration.layout);
+      _layout_index__WEBPACK_IMPORTED_MODULE_13__["update"](configuration.layout);
     }, 45000);
-    var steps = bulma_steps__WEBPACK_IMPORTED_MODULE_2___default.a.attach(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].steps, {
-      onShow: function onShow(id) {
-        switch (id) {
-          case 0:
-            validateProcessSelectionForm();
-            break;
-
-          case 1:
-            if (!(previousWatchedAutomatedProcess && previousWatchedAutomatedProcess.id === processSelection.watchedProcessSelect.value)) {
-              details.alertDefinitions.list = [];
-              loadDefaultAlertTriggerDetails(processSelection.watchedProcessSelect.value).then(function (response) {
-                initAlertTriggerDetails();
-              });
-            }
-
-            break;
-
-          case 2:
-            loadDefaultAlertTriggerSummary(processSelection.watchedProcessSelect.value);
-            break;
-
-          case 3:
-            create().then(function (response) {
-              initAlertTriggerConfirmation();
-            });
-            break;
-        }
-      },
-      beforeNext: function beforeNext(id) {
-        switch (id) {
-          case 0:
-            return validateProcessSelectionForm();
-            break;
-
-          case 1:
-            return validateTriggerDetailsForm();
-            break;
-        }
-      },
-      onError: function onError(error) {
-        if (!bulmaStepsHiddenErrors.includes(error)) {
-          toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error(error, null, {
-            positionClass: 'toast-bottom-left'
-          });
-        }
+    $(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table).DataTable().on('select', loadEditForm);
+    $(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table).DataTable().on('user-select', function (e, dt, type, cell, originalEvent) {
+      if (originalEvent.target.closest('tr').classList.contains('is-selected')) {
+        e.preventDefault();
       }
     });
+    attachSteps();
     initProcessSelection();
   } catch (error) {
     console.log("Unable to init alert trigger controller: ".concat(error));
   }
 };
 
-var initProcessSelection = function initProcessSelection() {
+var attachSteps = function attachSteps() {
+  var form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_11__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm);
+  var formSelector = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_11__["selectors"].addForm : _base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm;
+  steps = bulma_steps__WEBPACK_IMPORTED_MODULE_2___default.a.attach("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].steps), {
+    onShow: function onShow(id) {
+      switch (id) {
+        case 0:
+          validateProcessSelectionForm();
+          break;
+
+        case 1:
+          loadDefaultAlertTriggerDetails(processSelection.watchedProcessSelect(form).value);
+          break;
+
+        case 2:
+          loadDefaultAlertTriggerSummary(processSelection.watchedProcessSelect(form).value);
+          break;
+
+        case 3:
+          if (currentMode === 'add') {
+            create().then(function (response) {
+              initAlertTriggerConfirmation();
+            });
+          } else {
+            update().then(function (response) {
+              initAlertTriggerConfirmation();
+            });
+          }
+
+          break;
+      }
+    },
+    beforeNext: function beforeNext(id) {
+      switch (id) {
+        case 0:
+          return validateProcessSelectionForm();
+          break;
+
+        case 1:
+          return validateTriggerDetailsForm();
+          break;
+
+        case 2:
+          if (!details.currentAlertTrigger.hasChanged() && currentMode === 'edit') {
+            return ['There have been no changes to the selected alert trigger'];
+          }
+
+          break;
+      }
+    },
+    onError: function onError(error) {
+      if (!bulmaStepsHiddenErrors.includes(error)) {
+        toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error(error, null, {
+          positionClass: 'toast-bottom-left'
+        });
+      }
+    }
+  });
+};
+
+var loadAddForm = function loadAddForm(e) {
   try {
-    processSelection.clientSelect.addEventListener('change',
+    currentMode = 'add';
+    $(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table).DataTable().rows().deselect();
+    _view__WEBPACK_IMPORTED_MODULE_12__["showAddForm"]();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+var loadEditForm = function loadEditForm(e) {
+  try {
+    if (details.currentAlertTrigger.hasChanged()) {
+      _base__WEBPACK_IMPORTED_MODULE_10__["swalWithBulmaButtons"].fire({
+        title: 'Alert trigger closing confirmation',
+        text: 'This alert trigger has changed, all changes will be lost. Are you sure?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: '<span class="icon"><i class="fas fa-check"></i></span><span>Yes</span>',
+        cancelButtonText: '<span class="icon"><i class="fas fa-times"></i></span><span>No</span>'
+      }).then(function (result) {
+        if (result.value) {
+          if (details.currentAlertTrigger.id) {
+            $(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table).DataTable().row("tr[data-id=\"".concat(details.currentAlertTrigger.id, "\"]")).node().classList.remove('is-selected');
+          }
+
+          initEditForm();
+        } else {
+          $(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table).DataTable().rows().deselect();
+
+          if (details.currentAlertTrigger.id) {
+            $(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table).DataTable().row("tr[data-id=\"".concat(details.currentAlertTrigger.id, "\"]")).node().classList.add('is-selected');
+          }
+        }
+      });
+    } else {
+      if (details.currentAlertTrigger.id) {
+        $(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table).DataTable().row("tr[data-id=\"".concat(details.currentAlertTrigger.id, "\"]")).node().classList.remove('is-selected');
+      }
+
+      initEditForm();
+    }
+  } catch (error) {
+    console.log(error);
+
+    _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table));
+
+    _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_11__["elements"].formsSection);
+  }
+};
+
+var initEditForm = function initEditForm() {
+  currentMode = 'edit';
+
+  _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table));
+
+  _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_11__["elements"].formsSection);
+
+  var selectedRow = $(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table).DataTable().row({
+    selected: true
+  }) || $(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table).DataTable().row("tr[data-id=\"".concat(details.currentAlertTrigger.id, "\"]"));
+  var row = selectedRow.node();
+  var id = row.dataset.id;
+  details.currentAlertTrigger = new _models_AlertTrigger__WEBPACK_IMPORTED_MODULE_7__["default"](id);
+  details.currentAlertTrigger.loadEditForm().then(function (response) {
+    _view__WEBPACK_IMPORTED_MODULE_12__["updateEditFormSection"](details.currentAlertTrigger.editForm);
+    attachSteps();
+    var form = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm);
+    var formSection = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editFormSection);
+    form.addEventListener('keyup', validateTriggerDetailsForm);
+    form.addEventListener('change', validateTriggerDetailsForm);
+    form.addEventListener('click',
     /*#__PURE__*/
     function () {
       var _ref = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+        var restoreButton;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return loadProcesses(e);
+                if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].activateButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].activateButtonChildren))) {
+                  _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](formSection);
 
-              case 2:
-                validateProcessSelectionForm();
+                  try {
+                    details.currentAlertTrigger.activate().then(function (response) {
+                      // set is active to true in table
+                      var selectedRow = $(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table).DataTable().row("tr[data-id=\"".concat(details.currentAlertTrigger.id, "\"]"));
+                      var row = selectedRow.node();
+                      var data = selectedRow.data();
+                      data[4] = 'Yes';
+                      selectedRow.data(data);
+                      details.currentAlertTrigger.loadEditFormButtons().then(function (response) {
+                        form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editFormButtonsSection).innerHTML = details.currentAlertTrigger.editFormButtons;
 
-              case 3:
+                        _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](formSection);
+                      });
+                    });
+                  } catch (error) {
+                    _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](formSection);
+
+                    console.log(error);
+                  }
+                }
+
+                if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].disableButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].disableButtonChildren))) {
+                  _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](formSection);
+
+                  try {
+                    details.currentAlertTrigger.disable().then(function (response) {
+                      // set is active to false in table
+                      var selectedRow = $(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table).DataTable().row("tr[data-id=\"".concat(details.currentAlertTrigger.id, "\"]"));
+                      var row = selectedRow.node();
+                      var data = selectedRow.data();
+                      data[4] = 'No';
+                      selectedRow.data(data);
+                      details.currentAlertTrigger.loadEditFormButtons().then(function (response) {
+                        form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editFormButtonsSection).innerHTML = details.currentAlertTrigger.editFormButtons;
+
+                        _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](formSection);
+                      });
+                    });
+                  } catch (error) {
+                    _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](formSection);
+
+                    console.log(error);
+                  }
+                }
+
+                if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].ignoreButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].ignoreButtonChildren))) {
+                  _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](formSection);
+
+                  try {
+                    details.currentAlertTrigger.ignore().then(function (response) {
+                      // set ignored to true in table
+                      var selectedRow = $(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table).DataTable().row("tr[data-id=\"".concat(details.currentAlertTrigger.id, "\"]"));
+                      var row = selectedRow.node();
+                      var data = selectedRow.data();
+                      data[5] = 'Yes';
+                      selectedRow.data(data);
+                      details.currentAlertTrigger.loadEditFormButtons().then(function (response) {
+                        form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editFormButtonsSection).innerHTML = details.currentAlertTrigger.editFormButtons;
+
+                        _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](formSection);
+                      });
+                    });
+                  } catch (error) {
+                    _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](formSection);
+
+                    console.log(error);
+                  }
+                }
+
+                if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].acknowledgeButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].acknowledgeButtonChildren))) {
+                  _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](formSection);
+
+                  try {
+                    details.currentAlertTrigger.acknowledge().then(function (response) {
+                      // set ignored to false in table
+                      var selectedRow = $(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table).DataTable().row("tr[data-id=\"".concat(details.currentAlertTrigger.id, "\"]"));
+                      var row = selectedRow.node();
+                      var data = selectedRow.data();
+                      data[5] = 'No';
+                      selectedRow.data(data);
+                      details.currentAlertTrigger.loadEditFormButtons().then(function (response) {
+                        form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editFormButtonsSection).innerHTML = details.currentAlertTrigger.editFormButtons;
+
+                        _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](formSection);
+                      });
+                    });
+                  } catch (error) {
+                    _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](formSection);
+
+                    console.log(error);
+                  }
+                }
+
+                if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].cancelButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].cancelButtonChildren))) {
+                  if (details.currentAlertTrigger.hasChanged()) {
+                    _base__WEBPACK_IMPORTED_MODULE_10__["swalWithBulmaButtons"].fire({
+                      title: 'Alert trigger closing confirmation',
+                      text: 'This alert trigger has changed, all changes will be lost. Are you sure?',
+                      icon: 'warning',
+                      showCancelButton: true,
+                      confirmButtonText: '<span class="icon"><i class="fas fa-check"></i></span><span>Yes</span>',
+                      cancelButtonText: '<span class="icon"><i class="fas fa-times"></i></span><span>No</span>'
+                    }).then(function (result) {
+                      if (result.value) {
+                        details.currentAlertTrigger = new _models_AlertTrigger__WEBPACK_IMPORTED_MODULE_7__["default"]();
+                        resetForm();
+                        validateProcessSelectionForm();
+                        loadAddForm(e);
+                      }
+                    });
+                  } else {
+                    details.currentAlertTrigger = new _models_AlertTrigger__WEBPACK_IMPORTED_MODULE_7__["default"]();
+                    resetForm();
+                    validateProcessSelectionForm();
+                    loadAddForm(e);
+                  }
+                }
+
+                if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].removeButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].removeButtonChildren))) {
+                  _base__WEBPACK_IMPORTED_MODULE_10__["swalWithBulmaButtons"].fire({
+                    title: 'Alert trigger removal confirmation',
+                    text: 'This alert trigger and all its related elements (alerts, definitions, rules) will be removed. Are you sure?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: '<span class="icon"><i class="fas fa-trash-alt"></i></span><span>Remove it!</span>',
+                    cancelButtonText: '<span class="icon"><i class="fas fa-undo"></i></span><span>Undo</span>'
+                  }).then(function (result) {
+                    if (result.value) {
+                      details.currentAlertTrigger.remove().then(function (reponse) {
+                        loadAddForm(e);
+                        updateTable();
+                        _layout_index__WEBPACK_IMPORTED_MODULE_13__["update"](configuration.layout);
+                        toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Alert trigger successfully removed!', null, {
+                          positionClass: 'toast-bottom-left'
+                        });
+                      });
+                    }
+                  });
+                }
+
+                restoreButton = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].restoreButton);
+
+                if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].restoreButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].restoreButtonChildren))) {
+                  console.log('restore'); // reload buttons
+                }
+
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -99526,37 +100441,35 @@ var initProcessSelection = function initProcessSelection() {
         return _ref.apply(this, arguments);
       };
     }());
-    processSelection.watchedProcessSelect.addEventListener('change',
+    _view__WEBPACK_IMPORTED_MODULE_12__["showEditForm"]();
+
+    _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table));
+
+    _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_11__["elements"].formsSection); //checkForm(e);
+
+  });
+};
+
+var initProcessSelection = function initProcessSelection() {
+  try {
+    var form = _base__WEBPACK_IMPORTED_MODULE_11__["elements"].addForm;
+    processSelection.clientSelect(form).addEventListener('change',
     /*#__PURE__*/
     function () {
       var _ref2 = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
-        var alert;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                validateProcessSelectionForm(e);
+                _context2.next = 2;
+                return loadProcesses(e);
 
-                if (!(previousWatchedAutomatedProcess && processSelection.watchedProcessSelect.value !== '0' && previousWatchedAutomatedProcess.id !== processSelection.watchedProcessSelect.value && details.alertDefinitions.list.length > 0)) {
-                  _context2.next = 5;
-                  break;
-                }
+              case 2:
+                validateProcessSelectionForm();
 
-                _context2.next = 4;
-                return _base__WEBPACK_IMPORTED_MODULE_9__["swalWithBulmaButtons"].fire({
-                  title: 'New automated watched process selection detected',
-                  text: "You selected a new automated watched process but you already defined ".concat(details.alertDefinitions.list.length, "\n                    trigger").concat(details.alertDefinitions.list.length > 1 ? 's' : '', " for process ").concat(previousWatchedAutomatedProcess.data.name, "\n                    of client ").concat(previousClient.data.name, ".\n                    Select the previously watched automated process or all changes will be lost!"),
-                  icon: 'warning',
-                  showCancelButton: false,
-                  confirmButtonText: 'I got it!'
-                });
-
-              case 4:
-                alert = _context2.sent;
-
-              case 5:
+              case 3:
               case "end":
                 return _context2.stop();
             }
@@ -99568,144 +100481,250 @@ var initProcessSelection = function initProcessSelection() {
         return _ref2.apply(this, arguments);
       };
     }());
+    processSelection.watchedProcessSelect(form).addEventListener('change',
+    /*#__PURE__*/
+    function () {
+      var _ref3 = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(e) {
+        var alert;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                validateProcessSelectionForm(e);
+
+                if (!(details.currentWatchedAutomatedProcess && processSelection.watchedProcessSelect(form).value !== '0' && details.currentWatchedAutomatedProcess.id !== processSelection.watchedProcessSelect(form).value && details.currentAlertTrigger.definitions.length > 0)) {
+                  _context3.next = 5;
+                  break;
+                }
+
+                _context3.next = 4;
+                return _base__WEBPACK_IMPORTED_MODULE_10__["swalWithBulmaButtons"].fire({
+                  title: 'New automated watched process selection detected',
+                  text: "You selected a new automated watched process but you already defined ".concat(details.currentAlertTrigger.definitions.length, "\n                    trigger").concat(details.currentAlertTrigger.definitions.length > 1 ? 's' : '', " for process ").concat(details.currentWatchedAutomatedProcess.data.name, "\n                    of client ").concat(details.currentClient.data.name, ".\n                    Select the previously watched automated process or all changes will be lost!"),
+                  icon: 'warning',
+                  showCancelButton: false,
+                  confirmButtonText: 'I got it!'
+                });
+
+              case 4:
+                alert = _context3.sent;
+
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }));
+
+      return function (_x3) {
+        return _ref3.apply(this, arguments);
+      };
+    }());
   } catch (error) {
     console.log("Unable to init process selection step: ".concat(error));
   }
 };
 
 var initAlertTriggerDetails = function initAlertTriggerDetails() {
+  var form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_11__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm);
+  var formSelector = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_11__["selectors"].addForm : _base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm;
+  validateTriggerDetailsForm();
+
   try {
-    var title = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.title);
+    form.addEventListener('change', function (e) {
+      details.currentAlertTrigger.changed = true;
+    });
+    var title = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.title);
     title.addEventListener('change', validateTriggerDetailsForm);
     title.addEventListener('keyup', validateTriggerDetailsForm);
-    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.section).addEventListener('click', function (e) {
+    $("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.typeSelect)).each(function (index, target) {
+      var type = target.value;
+      var alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.item);
+      var alertDefinitionRank = parseInt(alertDefinitionItem.dataset.rank);
+      var ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.item);
+      var ruleItemRank = parseInt(ruleItem.dataset.rank);
+      var rule = details.currentAlertTrigger.findDefinition(alertDefinitionRank).findRule(ruleItemRank);
+      var newRuleItem = _base__WEBPACK_IMPORTED_MODULE_11__["elements"].details.alertDefinition.rule.item(alertDefinitionItem, ruleItemRank);
+
+      if (type !== 'none') {
+        _view__WEBPACK_IMPORTED_MODULE_12__["initDateTimeField"](alertDefinitionItem, newRuleItem);
+        var timeSlotInput = newRuleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.timeSlotInput);
+        timeSlotInput.bulmaCalendar.on('select clear', function () {
+          validateAlertTriggerRuleForm(rule, newRuleItem);
+        });
+        newRuleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].dateTimeFooterCancelButton).addEventListener('click', validateAlertTriggerRuleForm(rule, newRuleItem));
+      }
+    });
+    form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.section).addEventListener('click', function (e) {
       var target = e.target;
 
-      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.addButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.addButtonChildren))) {
+      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.addButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.addButtonChildren))) {
         addDefaultAlertTriggerDefinition();
       }
 
-      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.deleteButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.deleteButtonChildren))) {
-        var item = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.item);
-        var rank = parseInt(item.dataset.rank);
-        _view__WEBPACK_IMPORTED_MODULE_11__["details"].deleteDefinition(item);
-        details.alertDefinitions.remove(rank);
-        _view__WEBPACK_IMPORTED_MODULE_11__["details"].updateDefinitionsCount(details.alertDefinitions.list.length);
-      }
-
-      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.addButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.addButtonChildren))) {
-        var _item = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.item);
-
-        var _rank = parseInt(_item.dataset.rank);
-
-        var alertDefinition = details.alertDefinitions.find(_rank);
-        addDefaultAlertTriggerRule(processSelection.watchedProcessSelect.value, alertDefinition, _item);
-      }
-
-      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.deleteButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.deleteButtonChildren))) {
-        var alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.item);
-        var alertDefinitionRank = parseInt(alertDefinitionItem.dataset.rank);
-        var ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.item);
-        var ruleItemRank = parseInt(ruleItem.dataset.rank);
-
-        var _alertDefinition = details.alertDefinitions.find(alertDefinitionRank);
-
-        _view__WEBPACK_IMPORTED_MODULE_11__["details"].deleteRule(alertDefinitionItem, ruleItem);
-
-        _alertDefinition.removeRule(ruleItemRank);
-      }
-    });
-    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.section).addEventListener('change', function (e) {
-      var target = e.target;
-
-      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.levelSelect)) {
-        var level = target.value;
-        var item = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.item);
-        var rank = parseInt(item.dataset.rank);
-        _view__WEBPACK_IMPORTED_MODULE_11__["details"].updateDefinitionLevel(item, level);
-        var alertDefinition = details.alertDefinitions.find(rank);
-        alertDefinition.level = level;
-      }
-
-      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.typeSelect)) {
-        var type = target.value;
-        var alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.item);
-        var alertDefinitionRank = parseInt(alertDefinitionItem.dataset.rank);
-        var ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.item);
-        var ruleItemRank = parseInt(ruleItem.dataset.rank);
-        var rule = details.alertDefinitions.find(alertDefinitionRank).findRule(ruleItemRank);
-        updateAlertTriggerRuleType(processSelection.watchedProcessSelect.value, rule, ruleItem, type).then(function (response) {
-          var newRuleItem = _base__WEBPACK_IMPORTED_MODULE_10__["elements"].details.alertDefinition.rule.item(alertDefinitionItem, ruleItemRank);
-
-          if (type !== 'none') {
-            var timeSlotInput = newRuleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.timeSlotInput);
-            timeSlotInput.bulmaCalendar.on('select clear', function () {
-              validateAlertTriggerRuleForm(rule, newRuleItem);
-            });
-            newRuleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].dateTimeFooterCancelButton).addEventListener('click', validateAlertTriggerRuleForm(rule, newRuleItem));
+      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.deleteButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.deleteButtonChildren))) {
+        _base__WEBPACK_IMPORTED_MODULE_10__["swalWithBulmaButtons"].fire({
+          title: 'Alert definition removal confirmation',
+          text: 'This alert definition and all its rules will be removed. Are you sure?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: '<span class="icon"><i class="fas fa-trash-alt"></i></span><span>Remove it!</span>',
+          cancelButtonText: '<span class="icon"><i class="fas fa-undo"></i></span><span>Undo</span>'
+        }).then(function (result) {
+          if (result.value) {
+            var item = target.closest(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.item);
+            var rank = parseInt(item.dataset.rank);
+            _view__WEBPACK_IMPORTED_MODULE_12__["details"].deleteDefinition(form, item);
+            details.currentAlertTrigger.removeDefinition(rank);
+            _view__WEBPACK_IMPORTED_MODULE_12__["details"].updateDefinitionsCount(form, details.currentAlertTrigger.definitions.length);
           }
         });
       }
 
-      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.parameter)) {
-        var _alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.item);
+      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.addButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.addButtonChildren))) {
+        var item = target.closest(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.item);
+        var rank = parseInt(item.dataset.rank);
+        var alertDefinition = details.currentAlertTrigger.findDefinition(rank);
+        addDefaultAlertTriggerRule(processSelection.watchedProcessSelect(form).value, alertDefinition, item);
+      }
+
+      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.deleteButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.deleteButtonChildren))) {
+        _base__WEBPACK_IMPORTED_MODULE_10__["swalWithBulmaButtons"].fire({
+          title: 'Rule removal confirmation',
+          text: 'This rule will be removed. Are you sure?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: '<span class="icon"><i class="fas fa-trash-alt"></i></span><span>Remove it!</span>',
+          cancelButtonText: '<span class="icon"><i class="fas fa-undo"></i></span><span>Undo</span>'
+        }).then(function (result) {
+          if (result.value) {
+            var alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.item);
+            var alertDefinitionRank = parseInt(alertDefinitionItem.dataset.rank);
+            var ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.item);
+            var ruleItemRank = parseInt(ruleItem.dataset.rank);
+
+            var _alertDefinition = details.currentAlertTrigger.findDefinition(alertDefinitionRank);
+
+            _alertDefinition.removeRule(ruleItemRank);
+
+            _view__WEBPACK_IMPORTED_MODULE_12__["details"].deleteRule(alertDefinitionItem, ruleItem);
+            _view__WEBPACK_IMPORTED_MODULE_12__["details"].updateDefinitionValidity(alertDefinitionItem, _alertDefinition.isValid());
+          }
+        });
+      }
+    });
+    form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.section).addEventListener('change', function (e) {
+      var target = e.target;
+
+      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.levelSelect)) {
+        var level = target.value;
+        var item = target.closest(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.item);
+        var rank = parseInt(item.dataset.rank);
+        _view__WEBPACK_IMPORTED_MODULE_12__["details"].updateDefinitionLevel(item, level);
+        var alertDefinition = details.currentAlertTrigger.findDefinition(rank);
+        alertDefinition.level = level;
+      }
+
+      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.typeSelect)) {
+        var type = target.value;
+        var alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.item);
+        var alertDefinitionRank = parseInt(alertDefinitionItem.dataset.rank);
+        var ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.item);
+        var ruleItemRank = parseInt(ruleItem.dataset.rank);
+        var rule = details.currentAlertTrigger.findDefinition(alertDefinitionRank).findRule(ruleItemRank);
+        updateAlertTriggerRuleType(processSelection.watchedProcessSelect(form).value, rule, ruleItem, type).then(function (response) {
+          var newRuleItem = _base__WEBPACK_IMPORTED_MODULE_11__["elements"].details.alertDefinition.rule.item(alertDefinitionItem, ruleItemRank);
+
+          if (type !== 'none') {
+            var timeSlotInput = newRuleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.timeSlotInput);
+            timeSlotInput.bulmaCalendar.on('select clear', function () {
+              validateAlertTriggerRuleForm(rule, newRuleItem);
+            });
+            newRuleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].dateTimeFooterCancelButton).addEventListener('click', validateAlertTriggerRuleForm(rule, newRuleItem));
+          }
+        });
+      }
+
+      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.parameter)) {
+        var _alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.item);
 
         var _alertDefinitionRank = parseInt(_alertDefinitionItem.dataset.rank);
 
-        var _ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.item);
+        var _ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.item);
 
         var _ruleItemRank = parseInt(_ruleItem.dataset.rank);
 
-        var _alertDefinition2 = details.alertDefinitions.find(_alertDefinitionRank);
+        var _alertDefinition2 = details.currentAlertTrigger.findDefinition(_alertDefinitionRank);
 
         var _rule = _alertDefinition2.findRule(_ruleItemRank);
 
         validateAlertTriggerRuleForm(_rule, _ruleItem);
       }
     });
-    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.section).addEventListener('keyup', function (e) {
+    form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.section).addEventListener('keyup', function (e) {
       var target = e.target;
 
-      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.parameter)) {
-        var alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.item);
+      if (target.matches(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.parameter)) {
+        var alertDefinitionItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.item);
         var alertDefinitionRank = parseInt(alertDefinitionItem.dataset.rank);
-        var ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.item);
+        var ruleItem = target.closest(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.item);
         var ruleItemRank = parseInt(ruleItem.dataset.rank);
-        var alertDefinition = details.alertDefinitions.find(alertDefinitionRank);
+        var alertDefinition = details.currentAlertTrigger.findDefinition(alertDefinitionRank);
         var rule = alertDefinition.findRule(ruleItemRank);
         validateAlertTriggerRuleForm(rule, ruleItem);
       }
     });
   } catch (error) {
     console.log("Unable to init trigger details step: ".concat(error));
+    throw error;
   }
 };
 
 var initAlertTriggerConfirmation = function initAlertTriggerConfirmation() {
   try {
-    var activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].activeStepContent);
-    activeStepContent.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].confirmation.notification).addEventListener('click', function (e) {
+    var form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_11__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm);
+    var activeStepContent = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].activeStepContent);
+    var activateButton = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].confirmation.activateButton);
+    activateButton.disabled = details.currentAlertTrigger && details.currentAlertTrigger.active;
+    activeStepContent.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].confirmation.notification).addEventListener('click', function (e) {
       var target = e.target;
 
-      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].confirmation.activateButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].confirmation.activateButtonChildren))) {
-        var button = target.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].confirmation.activateButton);
-
-        _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](button);
+      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].confirmation.activateButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].confirmation.activateButtonChildren))) {
+        _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](activateButton);
 
         try {
-          var alertTrigger = new _models_AlertTrigger__WEBPACK_IMPORTED_MODULE_6__["default"](button.dataset.id);
-          alertTrigger.activate().then(function (response) {
-            updateTable();
+          details.currentAlertTrigger.activate().then(function (response) {
+            if (currentMode === 'edit') {
+              _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](formSection);
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](button);
+              details.currentAlertTrigger.loadEditFormButtons().then(function (response) {
+                form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editFormButtonsSection).innerHTML = details.currentAlertTrigger.editFormButtons;
 
-            button.disabled = true;
+                _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](formSection);
+              });
+            }
+
+            updateTable().then(function (response) {
+              _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activateButton);
+
+              activateButton.disabled = true;
+            });
           });
         } catch (error) {
-          _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](button);
+          _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activateButton);
 
           console.log(error);
         }
+      }
+
+      if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].confirmation.closeButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].confirmation.closeButtonChildren))) {
+        details.currentAlertTrigger = new _models_AlertTrigger__WEBPACK_IMPORTED_MODULE_7__["default"]();
+        resetForm();
+        validateProcessSelectionForm();
+        loadAddForm(e);
       }
     });
   } catch (error) {
@@ -99714,46 +100733,51 @@ var initAlertTriggerConfirmation = function initAlertTriggerConfirmation() {
 };
 
 var validateProcessSelectionForm = function validateProcessSelectionForm() {
+  var form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_11__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm);
   var errors = [];
-  var clientSelectValid = !(processSelection.clientSelect.value === "0");
+  var clientSelectValid = !(processSelection.clientSelect(form).value === "0");
 
-  _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](processSelection.clientSelect.parentNode, clientSelectValid);
+  _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](processSelection.clientSelect(form).parentNode, clientSelectValid);
 
   if (!clientSelectValid) {
     errors.push('You need to select a Client');
   }
 
-  var watchedProcessSelectValid = !(processSelection.watchedProcessSelect.value === "0");
+  var watchedProcessSelectValid = !(processSelection.watchedProcessSelect(form).value === "0");
 
   if (!processSelection.watchedProcessSelect.disabled) {
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](processSelection.watchedProcessSelect.parentNode, watchedProcessSelectValid);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](processSelection.watchedProcessSelect(form).parentNode, watchedProcessSelectValid);
 
     if (!watchedProcessSelectValid) {
       errors.push('You need to select a Watched process');
     }
   } else {
-    _base__WEBPACK_IMPORTED_MODULE_9__["removeStates"](processSelection.watchedProcessSelect.parentNode);
+    _base__WEBPACK_IMPORTED_MODULE_10__["removeStates"](processSelection.watchedProcessSelect(form).parentNode);
   }
 
   return errors;
 };
 
 var validateTriggerDetailsForm = function validateTriggerDetailsForm() {
+  var form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_11__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm);
+  var formSelector = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_11__["selectors"].addForm : _base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm;
   var errors = [];
-  var title = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.title);
+  var title = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.title);
   var titleValid = !(title.value.trim() === '');
 
-  _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](title, titleValid);
+  _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](title, titleValid);
 
   if (!titleValid) {
     errors.push('You need to enter a title');
+  } else {
+    details.currentAlertTrigger.title = title.value.trim();
   }
 
-  if (details.alertDefinitions.list.length === 0) {
+  if (details.currentAlertTrigger.definitions.length === 0) {
     errors.push('You need to add at least 1 alert definition');
   }
 
-  var alertDefinitionsValid = details.alertDefinitions.areValid();
+  var alertDefinitionsValid = details.currentAlertTrigger.isValid();
 
   if (!alertDefinitionsValid) {
     errors.push('You need to fix errors on all alert definitions');
@@ -99765,368 +100789,385 @@ var validateTriggerDetailsForm = function validateTriggerDetailsForm() {
 var loadProcesses =
 /*#__PURE__*/
 function () {
-  var _ref3 = _asyncToGenerator(
+  var _ref4 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(e) {
-    var activeStepContent, id, client;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(e) {
+    var form, activeStepContent, id, client;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
       while (1) {
-        switch (_context3.prev = _context3.next) {
+        switch (_context4.prev = _context4.next) {
           case 0:
-            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].activeStepContent);
-            _context3.prev = 1;
+            form = _base__WEBPACK_IMPORTED_MODULE_11__["elements"].addForm;
+            activeStepContent = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].activeStepContent);
+            _context4.prev = 2;
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](activeStepContent);
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["removeSelectOptions"](processSelection.watchedProcessSelect, true);
+            _base__WEBPACK_IMPORTED_MODULE_10__["removeSelectOptions"](processSelection.watchedProcessSelect(form), true);
 
             id = e.target.value.trim();
 
             if (!(id !== "0")) {
-              _context3.next = 10;
+              _context4.next = 11;
               break;
             }
 
-            client = new _models_Client__WEBPACK_IMPORTED_MODULE_4__["default"](id);
-            return _context3.abrupt("return", new Promise(function (resolve, reject) {
+            client = new _models_Client__WEBPACK_IMPORTED_MODULE_5__["default"](id);
+            return _context4.abrupt("return", new Promise(function (resolve, reject) {
               resolve(client.get().then(function (response) {
                 var processes = client.data.watched_automated_processes;
-                _view__WEBPACK_IMPORTED_MODULE_11__["processSelection"].updateProcesses(processes);
+                _view__WEBPACK_IMPORTED_MODULE_12__["processSelection"].updateProcesses(processes);
 
-                _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+                _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
               }));
             }));
 
-          case 10:
-            processSelection.watchedProcessSelect.disabled = true;
+          case 11:
+            processSelection.watchedProcessSelect(form).disabled = true;
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
 
-          case 12:
-            _context3.next = 18;
+          case 13:
+            _context4.next = 19;
             break;
 
-          case 14:
-            _context3.prev = 14;
-            _context3.t0 = _context3["catch"](1);
+          case 15:
+            _context4.prev = 15;
+            _context4.t0 = _context4["catch"](2);
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
 
-            console.log(_context3.t0);
+            console.log(_context4.t0);
 
-          case 18:
+          case 19:
           case "end":
-            return _context3.stop();
+            return _context4.stop();
         }
       }
-    }, _callee3, null, [[1, 14]]);
+    }, _callee4, null, [[2, 15]]);
   }));
 
-  return function loadProcesses(_x3) {
-    return _ref3.apply(this, arguments);
-  };
-}();
-
-var previousWatchedAutomatedProcess;
-var previousClient;
-
-var loadDefaultAlertTriggerDetails =
-/*#__PURE__*/
-function () {
-  var _ref4 = _asyncToGenerator(
-  /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(watchedAutomatedProcessId) {
-    var activeStepContent;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
-      while (1) {
-        switch (_context5.prev = _context5.next) {
-          case 0:
-            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].activeStepContent);
-            _context5.prev = 1;
-
-            _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](activeStepContent);
-
-            return _context5.abrupt("return", new Promise(function (resolve, reject) {
-              resolve(configuration.getAlertTriggersDefaultDetails(watchedAutomatedProcessId).then(
-              /*#__PURE__*/
-              function () {
-                var _ref5 = _asyncToGenerator(
-                /*#__PURE__*/
-                _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(response) {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-                    while (1) {
-                      switch (_context4.prev = _context4.next) {
-                        case 0:
-                          _view__WEBPACK_IMPORTED_MODULE_11__["updateActiveStepContent"](response.data);
-                          previousWatchedAutomatedProcess = new _models_WatchedAutomatedProcess__WEBPACK_IMPORTED_MODULE_5__["default"](watchedAutomatedProcessId);
-                          _context4.next = 4;
-                          return previousWatchedAutomatedProcess.get();
-
-                        case 4:
-                          previousClient = new _models_Client__WEBPACK_IMPORTED_MODULE_4__["default"](previousWatchedAutomatedProcess.data.client_id);
-                          _context4.next = 7;
-                          return previousClient.get();
-
-                        case 7:
-                          _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
-
-                        case 8:
-                        case "end":
-                          return _context4.stop();
-                      }
-                    }
-                  }, _callee4);
-                }));
-
-                return function (_x5) {
-                  return _ref5.apply(this, arguments);
-                };
-              }()));
-            }));
-
-          case 6:
-            _context5.prev = 6;
-            _context5.t0 = _context5["catch"](1);
-
-            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
-
-            console.log(_context5.t0);
-
-          case 10:
-          case "end":
-            return _context5.stop();
-        }
-      }
-    }, _callee5, null, [[1, 6]]);
-  }));
-
-  return function loadDefaultAlertTriggerDetails(_x4) {
+  return function loadProcesses(_x4) {
     return _ref4.apply(this, arguments);
   };
 }();
 
-var summaryAlertTrigger;
+var loadDefaultAlertTriggerDetails =
+/*#__PURE__*/
+function () {
+  var _ref5 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(watchedAutomatedProcessId) {
+    var form, activeStepContent;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_11__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm);
+            activeStepContent = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].activeStepContent);
+            _context6.prev = 2;
+
+            _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](activeStepContent);
+
+            if (currentMode === 'edit' && !('data' in details.currentAlertTrigger)) {
+              details.currentAlertTrigger = new _models_AlertTrigger__WEBPACK_IMPORTED_MODULE_7__["default"](form.dataset.id);
+              details.currentAlertTrigger.get().then(function (response) {
+                initAlertTriggerDetails();
+              });
+            } else {
+              if (!(details.currentWatchedAutomatedProcess && details.currentWatchedAutomatedProcess.id === processSelection.watchedProcessSelect(form).value) && !('data' in details.currentAlertTrigger)) {
+                if (currentMode === 'add') {
+                  //details.currentAlertTrigger = new AlertTrigger();
+                  configuration.getAlertTriggersDefaultDetails(watchedAutomatedProcessId).then(
+                  /*#__PURE__*/
+                  function () {
+                    var _ref6 = _asyncToGenerator(
+                    /*#__PURE__*/
+                    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(response) {
+                      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+                        while (1) {
+                          switch (_context5.prev = _context5.next) {
+                            case 0:
+                              activeStepContent.innerHTML = response.data;
+                              initAlertTriggerDetails();
+
+                            case 2:
+                            case "end":
+                              return _context5.stop();
+                          }
+                        }
+                      }, _callee5);
+                    }));
+
+                    return function (_x6) {
+                      return _ref6.apply(this, arguments);
+                    };
+                  }());
+                }
+              }
+            }
+
+            details.currentWatchedAutomatedProcess = new _models_WatchedAutomatedProcess__WEBPACK_IMPORTED_MODULE_6__["default"](processSelection.watchedProcessSelect(form).value);
+            _context6.next = 8;
+            return details.currentWatchedAutomatedProcess.get();
+
+          case 8:
+            details.currentClient = new _models_Client__WEBPACK_IMPORTED_MODULE_5__["default"](details.currentWatchedAutomatedProcess.data.client_id);
+            _context6.next = 11;
+            return details.currentClient.get();
+
+          case 11:
+            _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
+
+            _context6.next = 18;
+            break;
+
+          case 14:
+            _context6.prev = 14;
+            _context6.t0 = _context6["catch"](2);
+
+            _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
+
+            console.log(_context6.t0);
+
+          case 18:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6, null, [[2, 14]]);
+  }));
+
+  return function loadDefaultAlertTriggerDetails(_x5) {
+    return _ref5.apply(this, arguments);
+  };
+}();
 
 var loadDefaultAlertTriggerSummary =
 /*#__PURE__*/
 function () {
-  var _ref6 = _asyncToGenerator(
+  var _ref7 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7(watchedAutomatedProcessId) {
-    var activeStepContent;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8(watchedAutomatedProcessId) {
+    var form, activeStepContent;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
       while (1) {
-        switch (_context7.prev = _context7.next) {
+        switch (_context8.prev = _context8.next) {
           case 0:
-            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].activeStepContent);
-            _context7.prev = 1;
+            form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_11__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm);
+            activeStepContent = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].activeStepContent);
+            activeStepContent.innerHTML = '';
+            _context8.prev = 3;
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](activeStepContent);
 
-            return _context7.abrupt("return", new Promise(function (resolve, reject) {
-              resolve(configuration.getAlertTriggersDefaultSummary(watchedAutomatedProcessId, document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.title).value, details.alertDefinitions.list).then(
+            return _context8.abrupt("return", new Promise(function (resolve, reject) {
+              resolve(configuration.getAlertTriggersDefaultSummary(watchedAutomatedProcessId, form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.title).value, details.currentAlertTrigger.definitions).then(
               /*#__PURE__*/
               function () {
-                var _ref7 = _asyncToGenerator(
+                var _ref8 = _asyncToGenerator(
                 /*#__PURE__*/
-                _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(response) {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+                _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7(response) {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
                     while (1) {
-                      switch (_context6.prev = _context6.next) {
+                      switch (_context7.prev = _context7.next) {
                         case 0:
-                          _view__WEBPACK_IMPORTED_MODULE_11__["updateActiveStepContent"](response.data.view);
-                          summaryAlertTrigger = response.data.alertTrigger;
+                          activeStepContent.innerHTML = response.data.view;
+                          details.currentAlertTrigger.loadDefinitions(response.data.alertTrigger);
 
-                          _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+                          _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
 
                         case 3:
                         case "end":
-                          return _context6.stop();
+                          return _context7.stop();
                       }
                     }
-                  }, _callee6);
+                  }, _callee7);
                 }));
 
-                return function (_x7) {
-                  return _ref7.apply(this, arguments);
+                return function (_x8) {
+                  return _ref8.apply(this, arguments);
                 };
               }()));
             }));
 
-          case 6:
-            _context7.prev = 6;
-            _context7.t0 = _context7["catch"](1);
+          case 8:
+            _context8.prev = 8;
+            _context8.t0 = _context8["catch"](3);
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
 
-            console.log(_context7.t0);
+            console.log(_context8.t0);
 
-          case 10:
+          case 12:
           case "end":
-            return _context7.stop();
+            return _context8.stop();
         }
       }
-    }, _callee7, null, [[1, 6]]);
+    }, _callee8, null, [[3, 8]]);
   }));
 
-  return function loadDefaultAlertTriggerSummary(_x6) {
-    return _ref6.apply(this, arguments);
+  return function loadDefaultAlertTriggerSummary(_x7) {
+    return _ref7.apply(this, arguments);
   };
 }();
 
 var addDefaultAlertTriggerDefinition =
 /*#__PURE__*/
 function () {
-  var _ref8 = _asyncToGenerator(
+  var _ref9 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
-    var activeStepContent;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9() {
+    var form, activeStepContent;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
       while (1) {
-        switch (_context8.prev = _context8.next) {
+        switch (_context9.prev = _context9.next) {
           case 0:
-            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].activeStepContent);
-            _context8.prev = 1;
+            form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_11__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm);
+            activeStepContent = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].activeStepContent);
+            _context9.prev = 2;
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](activeStepContent);
 
-            return _context8.abrupt("return", new Promise(function (resolve, reject) {
-              var rank = details.alertDefinitions.list.length + 1;
+            return _context9.abrupt("return", new Promise(function (resolve, reject) {
+              var rank = details.currentAlertTrigger.definitions.length + 1;
               resolve(configuration.getAlertTriggersDefaultDefinition(rank).then(function (response) {
-                _view__WEBPACK_IMPORTED_MODULE_11__["details"].addDefinition(response.data);
-                _view__WEBPACK_IMPORTED_MODULE_11__["details"].updateDefinitionsCount(rank);
-                var alertDefinition = new _models_AlertTriggerDefinition__WEBPACK_IMPORTED_MODULE_7__["default"](rank);
-                details.alertDefinitions.list.push(alertDefinition);
+                _view__WEBPACK_IMPORTED_MODULE_12__["details"].addDefinition(form, response.data);
+                _view__WEBPACK_IMPORTED_MODULE_12__["details"].updateDefinitionsCount(form, rank);
+                var alertDefinition = new _models_AlertTriggerDefinition__WEBPACK_IMPORTED_MODULE_8__["default"](null, rank);
+                details.currentAlertTrigger.addDefinition(alertDefinition);
 
-                _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+                _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
               }));
             }));
 
-          case 6:
-            _context8.prev = 6;
-            _context8.t0 = _context8["catch"](1);
+          case 7:
+            _context9.prev = 7;
+            _context9.t0 = _context9["catch"](2);
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
 
-            console.log(_context8.t0);
+            console.log(_context9.t0);
 
-          case 10:
+          case 11:
           case "end":
-            return _context8.stop();
+            return _context9.stop();
         }
       }
-    }, _callee8, null, [[1, 6]]);
+    }, _callee9, null, [[2, 7]]);
   }));
 
   return function addDefaultAlertTriggerDefinition() {
-    return _ref8.apply(this, arguments);
+    return _ref9.apply(this, arguments);
   };
 }();
 
 var addDefaultAlertTriggerRule =
 /*#__PURE__*/
 function () {
-  var _ref9 = _asyncToGenerator(
+  var _ref10 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9(watchedAutomatedProcessId, alertDefinition, alertDefinitionItem) {
-    var activeStepContent;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10(watchedAutomatedProcessId, alertDefinition, alertDefinitionItem) {
+    var form, activeStepContent;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
       while (1) {
-        switch (_context9.prev = _context9.next) {
+        switch (_context10.prev = _context10.next) {
           case 0:
-            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].activeStepContent);
-            _context9.prev = 1;
+            form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_11__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm);
+            activeStepContent = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].activeStepContent);
+            _context10.prev = 2;
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](activeStepContent);
 
-            return _context9.abrupt("return", new Promise(function (resolve, reject) {
+            return _context10.abrupt("return", new Promise(function (resolve, reject) {
               var rank = alertDefinition.rules.length + 1;
               resolve(configuration.getAlertTriggersDefaultRule(watchedAutomatedProcessId, rank).then(function (response) {
-                _view__WEBPACK_IMPORTED_MODULE_11__["details"].addRule(alertDefinitionItem, response.data);
-                var alertRule = new _models_AlertTriggerRule__WEBPACK_IMPORTED_MODULE_8__["default"](alertDefinition.rank, rank);
-                alertDefinition.rules.push(alertRule);
-                _view__WEBPACK_IMPORTED_MODULE_11__["details"].updateDefinitionValidity(alertDefinitionItem, alertDefinition.isValid());
+                _view__WEBPACK_IMPORTED_MODULE_12__["details"].addRule(alertDefinitionItem, response.data);
+                var alertRule = new _models_AlertTriggerRule__WEBPACK_IMPORTED_MODULE_9__["default"](null, alertDefinition.rank, rank);
+                alertDefinition.addRule(alertRule);
+                _view__WEBPACK_IMPORTED_MODULE_12__["details"].updateDefinitionValidity(alertDefinitionItem, alertDefinition.isValid());
 
-                _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+                _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
               }));
             }));
 
-          case 6:
-            _context9.prev = 6;
-            _context9.t0 = _context9["catch"](1);
+          case 7:
+            _context10.prev = 7;
+            _context10.t0 = _context10["catch"](2);
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
 
-            console.log(_context9.t0);
+            console.log(_context10.t0);
 
-          case 10:
+          case 11:
           case "end":
-            return _context9.stop();
+            return _context10.stop();
         }
       }
-    }, _callee9, null, [[1, 6]]);
+    }, _callee10, null, [[2, 7]]);
   }));
 
-  return function addDefaultAlertTriggerRule(_x8, _x9, _x10) {
-    return _ref9.apply(this, arguments);
+  return function addDefaultAlertTriggerRule(_x9, _x10, _x11) {
+    return _ref10.apply(this, arguments);
   };
 }();
 
 var updateAlertTriggerRuleType =
 /*#__PURE__*/
 function () {
-  var _ref10 = _asyncToGenerator(
+  var _ref11 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10(watchedAutomatedProcessId, rule, ruleItem, type) {
-    var activeStepContent;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11(watchedAutomatedProcessId, rule, ruleItem, type) {
+    var form, activeStepContent;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
       while (1) {
-        switch (_context10.prev = _context10.next) {
+        switch (_context11.prev = _context11.next) {
           case 0:
-            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].activeStepContent);
-            _context10.prev = 1;
+            form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_11__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm);
+            activeStepContent = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].activeStepContent);
+            _context11.prev = 2;
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](activeStepContent);
 
-            return _context10.abrupt("return", new Promise(function (resolve, reject) {
+            return _context11.abrupt("return", new Promise(function (resolve, reject) {
               var rank = rule.rank;
               resolve(configuration.getAlertTriggersDefaultRule(watchedAutomatedProcessId, rank, type).then(function (response) {
-                _view__WEBPACK_IMPORTED_MODULE_11__["details"].updateRule(ruleItem, response.data, type);
+                _view__WEBPACK_IMPORTED_MODULE_12__["details"].updateRule(ruleItem, response.data, type);
                 rule.type = type;
 
-                _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+                _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
               }));
             }));
 
-          case 6:
-            _context10.prev = 6;
-            _context10.t0 = _context10["catch"](1);
+          case 7:
+            _context11.prev = 7;
+            _context11.t0 = _context11["catch"](2);
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
 
-            console.log(_context10.t0);
+            console.log(_context11.t0);
 
-          case 10:
+          case 11:
           case "end":
-            return _context10.stop();
+            return _context11.stop();
         }
       }
-    }, _callee10, null, [[1, 6]]);
+    }, _callee11, null, [[2, 7]]);
   }));
 
-  return function updateAlertTriggerRuleType(_x11, _x12, _x13, _x14) {
-    return _ref10.apply(this, arguments);
+  return function updateAlertTriggerRuleType(_x12, _x13, _x14, _x15) {
+    return _ref11.apply(this, arguments);
   };
 }();
 
 var validateAlertTriggerRuleForm = function validateAlertTriggerRuleForm(rule, ruleItem) {
   try {
     var valid = false;
-    var alertDefinitionItem = _base__WEBPACK_IMPORTED_MODULE_10__["elements"].details.alertDefinition.item(rule.definitionRank);
+    var alertDefinitionItem = _base__WEBPACK_IMPORTED_MODULE_11__["elements"].details.alertDefinition.item(rule.definitionRank);
     var rank = ruleItem.dataset.rank;
-    var type = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.typeSelect).value;
-    var title = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.title);
-    var titleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.titleIcon);
+    var type = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.typeSelect).value;
+    var title = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.title);
+    var titleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.titleIcon);
 
     if (type === 'jobs-min-duration') {
       valid = validateAlertTriggerJobsMinDurationRule(rule, ruleItem);
@@ -100145,11 +101186,11 @@ var validateAlertTriggerRuleForm = function validateAlertTriggerRuleForm(rule, r
 
 
     rule.valid = valid;
-    _view__WEBPACK_IMPORTED_MODULE_11__["details"].updateDefinitionValidity(alertDefinitionItem, details.alertDefinitions.find(rule.definitionRank).isValid());
+    _view__WEBPACK_IMPORTED_MODULE_12__["details"].updateDefinitionValidity(alertDefinitionItem, details.currentAlertTrigger.findDefinition(rule.definitionRank).isValid());
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](title, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](title, valid, true);
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](titleIcon, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](titleIcon, valid, true);
   } catch (error) {
     console.log(error);
   }
@@ -100167,10 +101208,10 @@ var validateAlertTriggerJobsMinDurationRule = function validateAlertTriggerJobsM
   };
 
   try {
-    var minimalDurationInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.jobsDurationControls.minimalDurationInput);
-    var minimalDurationInputValid = minimalDurationInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](minimalDurationInput.value) && parseInt(minimalDurationInput.value) > 0;
+    var minimalDurationInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.jobsDurationControls.minimalDurationInput);
+    var minimalDurationInputValid = minimalDurationInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_10__["isNormalInteger"](minimalDurationInput.value) && parseInt(minimalDurationInput.value) > 0;
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](minimalDurationInput, minimalDurationInputValid);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](minimalDurationInput, minimalDurationInputValid);
 
     if (minimalDurationInputValid) {
       parameters.specific = {
@@ -100204,10 +101245,10 @@ var validateAlertTriggerJobsMaxDurationRule = function validateAlertTriggerJobsM
   };
 
   try {
-    var maximalDurationInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.jobsDurationControls.maximalDurationInput);
-    var maximalDurationInputValid = maximalDurationInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](maximalDurationInput.value) && parseInt(maximalDurationInput.value) > 0;
+    var maximalDurationInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.jobsDurationControls.maximalDurationInput);
+    var maximalDurationInputValid = maximalDurationInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_10__["isNormalInteger"](maximalDurationInput.value) && parseInt(maximalDurationInput.value) > 0;
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](maximalDurationInput, maximalDurationInputValid);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](maximalDurationInput, maximalDurationInputValid);
 
     if (maximalDurationInputValid) {
       parameters.specific = {
@@ -100240,11 +101281,11 @@ var validateAlertTriggerFaultedJobsPercentageRule = function validateAlertTrigge
   };
 
   try {
-    var maximalPercentageInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.faultedJobsPercentageControls.maximalPercentageInput);
+    var maximalPercentageInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.faultedJobsPercentageControls.maximalPercentageInput);
 
-    var maximalPercentageInputValid = maximalPercentageInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](maximalPercentageInput.value);
+    var maximalPercentageInputValid = maximalPercentageInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_10__["isNormalInteger"](maximalPercentageInput.value);
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](maximalPercentageInput, maximalPercentageInputValid); //_base.toggleFormControlTooltip(maximalPercentageInput, maximalPercentageInputValid);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](maximalPercentageInput, maximalPercentageInputValid); //_base.toggleFormControlTooltip(maximalPercentageInput, maximalPercentageInputValid);
 
 
     if (maximalPercentageInputValid) {
@@ -100279,11 +101320,11 @@ var validateAlertTriggerFailedQueueItemsPercentageRule = function validateAlertT
   };
 
   try {
-    var maximalPercentageInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.failedQueueItemsPercentageControls.maximalPercentageInput);
+    var maximalPercentageInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.failedQueueItemsPercentageControls.maximalPercentageInput);
 
-    var maximalPercentageInputValid = maximalPercentageInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](maximalPercentageInput.value);
+    var maximalPercentageInputValid = maximalPercentageInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_10__["isNormalInteger"](maximalPercentageInput.value);
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](maximalPercentageInput, maximalPercentageInputValid); //_base.toggleFormControlTooltip(maximalPercentageInput, maximalPercentageInputValid);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](maximalPercentageInput, maximalPercentageInputValid); //_base.toggleFormControlTooltip(maximalPercentageInput, maximalPercentageInputValid);
 
 
     if (maximalPercentageInputValid) {
@@ -100317,23 +101358,23 @@ var validateAlertTriggerElasticSearchQueryRule = function validateAlertTriggerEl
   };
 
   try {
-    var searchQueryInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.elasticSearchQueryControls.searchQueryInput);
-    var lowerCountInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.elasticSearchQueryControls.lowerCountInput);
-    var higherCountInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.elasticSearchQueryControls.higherCountInput);
+    var searchQueryInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.elasticSearchQueryControls.searchQueryInput);
+    var lowerCountInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.elasticSearchQueryControls.lowerCountInput);
+    var higherCountInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.elasticSearchQueryControls.higherCountInput);
 
-    var searchQueryInputValid = searchQueryInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isValidLuceneString"]("'".concat(searchQueryInput.value.trim(), "'"));
+    var searchQueryInputValid = searchQueryInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_10__["isValidLuceneString"]("'".concat(searchQueryInput.value.trim(), "'"));
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](searchQueryInput, searchQueryInputValid); //_base.toggleFormControlTooltip(searchQueryInput, searchQueryInputValid);
-
-
-    var lowerCountInputValid = lowerCountInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](lowerCountInput.value);
-
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](lowerCountInput, lowerCountInputValid); //_base.toggleFormControlTooltip(lowerCountInput, lowerCountInputValid);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](searchQueryInput, searchQueryInputValid); //_base.toggleFormControlTooltip(searchQueryInput, searchQueryInputValid);
 
 
-    var higherCountInputValid = higherCountInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](higherCountInput.value) && lowerCountInputValid && parseInt(lowerCountInput.value) < parseInt(higherCountInput.value);
+    var lowerCountInputValid = lowerCountInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_10__["isNormalInteger"](lowerCountInput.value);
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](higherCountInput, higherCountInputValid); //_base.toggleFormControlTooltip(higherCountInput, higherCountInputValid);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](lowerCountInput, lowerCountInputValid); //_base.toggleFormControlTooltip(lowerCountInput, lowerCountInputValid);
+
+
+    var higherCountInputValid = higherCountInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_10__["isNormalInteger"](higherCountInput.value) && lowerCountInputValid && parseInt(lowerCountInput.value) < parseInt(higherCountInput.value);
+
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](higherCountInput, higherCountInputValid); //_base.toggleFormControlTooltip(higherCountInput, higherCountInputValid);
 
 
     if (lowerCountInputValid && higherCountInputValid) {
@@ -100416,12 +101457,12 @@ var validateAlertTriggerRuleTimeSlotControls = function validateAlertTriggerRule
   var valid = false;
 
   try {
-    var timeSlotInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.timeSlotInput);
+    var timeSlotInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.timeSlotInput);
     var minStart = timeSlotInput.dataset.startTime;
     var maxEnd = timeSlotInput.dataset.endTime;
-    var timeSlotInputFrom = timeSlotInput.parentNode.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].dateTimeCalendarFromInput);
-    var timeSlotInputTo = timeSlotInput.parentNode.querySelector(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].dateTimeCalendarToInput);
-    valid = timeSlotInputFrom.value.trim() !== '' && timeSlotInputTo.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["timeStringToFloat"](timeSlotInputFrom.value.trim()) >= _base__WEBPACK_IMPORTED_MODULE_9__["timeStringToFloat"](minStart) && _base__WEBPACK_IMPORTED_MODULE_9__["timeStringToFloat"](timeSlotInputTo.value.trim()) <= _base__WEBPACK_IMPORTED_MODULE_9__["timeStringToFloat"](maxEnd) && _base__WEBPACK_IMPORTED_MODULE_9__["timeStringToFloat"](timeSlotInputFrom.value.trim()) < _base__WEBPACK_IMPORTED_MODULE_9__["timeStringToFloat"](timeSlotInputTo.value.trim());
+    var timeSlotInputFrom = timeSlotInput.parentNode.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].dateTimeCalendarFromInput);
+    var timeSlotInputTo = timeSlotInput.parentNode.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].dateTimeCalendarToInput);
+    valid = timeSlotInputFrom.value.trim() !== '' && timeSlotInputTo.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_10__["timeStringToFloat"](timeSlotInputFrom.value.trim()) >= _base__WEBPACK_IMPORTED_MODULE_10__["timeStringToFloat"](minStart) && _base__WEBPACK_IMPORTED_MODULE_10__["timeStringToFloat"](timeSlotInputTo.value.trim()) <= _base__WEBPACK_IMPORTED_MODULE_10__["timeStringToFloat"](maxEnd) && _base__WEBPACK_IMPORTED_MODULE_10__["timeStringToFloat"](timeSlotInputFrom.value.trim()) < _base__WEBPACK_IMPORTED_MODULE_10__["timeStringToFloat"](timeSlotInputTo.value.trim());
 
     if (valid) {
       var calendar = timeSlotInput.bulmaCalendar;
@@ -100431,9 +101472,9 @@ var validateAlertTriggerRuleTimeSlotControls = function validateAlertTriggerRule
       };
     }
 
-    var timeSlotInputWrapper = timeSlotInput.closest(_base__WEBPACK_IMPORTED_MODULE_9__["selectors"].dateTimeCalendarWrapper);
+    var timeSlotInputWrapper = timeSlotInput.closest(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].dateTimeCalendarWrapper);
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](timeSlotInputWrapper, valid); //_base.toggleFormControlTooltip(timeSlotInput, valid);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](timeSlotInputWrapper, valid); //_base.toggleFormControlTooltip(timeSlotInput, valid);
 
   } catch (error) {
     console.log(error);
@@ -100446,14 +101487,14 @@ var validateAlertTriggerRuleRelativeTimeSlotControls = function validateAlertTri
   var valid = false;
 
   try {
-    var relativeTimeSlotInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.relativeTimeSlotInput);
-    valid = relativeTimeSlotInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_9__["isNormalInteger"](relativeTimeSlotInput.value) || relativeTimeSlotInput.value.trim() === '';
+    var relativeTimeSlotInput = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.relativeTimeSlotInput);
+    valid = relativeTimeSlotInput.value.trim() !== '' && _base__WEBPACK_IMPORTED_MODULE_10__["isNormalInteger"](relativeTimeSlotInput.value) || relativeTimeSlotInput.value.trim() === '';
 
     if (valid) {
       parameters.standard.relativeTimeSlot = relativeTimeSlotInput.value.trim() !== '' ? parseInt(relativeTimeSlotInput.value) : null;
     }
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](relativeTimeSlotInput, valid); //_base.toggleFormControlTooltip(relativeTimeSlotInput, valid);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](relativeTimeSlotInput, valid); //_base.toggleFormControlTooltip(relativeTimeSlotInput, valid);
 
   } catch (error) {
     console.log(error);
@@ -100466,15 +101507,15 @@ var validateAlertTriggerRuleTriggeringDaysControls = function validateAlertTrigg
   var valid = false;
 
   try {
-    var triggeringDaysTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.title);
-    var triggeringDaysTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.titleIcon);
-    var triggeringDaysMondayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.mondayCheckbox);
-    var triggeringDaysTuesdayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.tuesdayCheckbox);
-    var triggeringDaysWednesdayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.wednesdayCheckbox);
-    var triggeringDaysThursdayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.thursdayCheckbox);
-    var triggeringDaysFridayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.fridayCheckbox);
-    var triggeringDaysSaturdayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.saturdayCheckbox);
-    var triggeringDaysSundayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.triggeringDays.sundayCheckbox);
+    var triggeringDaysTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.triggeringDays.title);
+    var triggeringDaysTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.triggeringDays.titleIcon);
+    var triggeringDaysMondayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.triggeringDays.mondayCheckbox);
+    var triggeringDaysTuesdayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.triggeringDays.tuesdayCheckbox);
+    var triggeringDaysWednesdayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.triggeringDays.wednesdayCheckbox);
+    var triggeringDaysThursdayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.triggeringDays.thursdayCheckbox);
+    var triggeringDaysFridayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.triggeringDays.fridayCheckbox);
+    var triggeringDaysSaturdayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.triggeringDays.saturdayCheckbox);
+    var triggeringDaysSundayCheckbox = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.triggeringDays.sundayCheckbox);
     valid = triggeringDaysMondayCheckbox.checked || triggeringDaysTuesdayCheckbox.checked || triggeringDaysWednesdayCheckbox.checked || triggeringDaysThursdayCheckbox.checked || triggeringDaysFridayCheckbox.checked || triggeringDaysSaturdayCheckbox.checked || triggeringDaysSundayCheckbox.checked;
 
     if (valid) {
@@ -100489,9 +101530,9 @@ var validateAlertTriggerRuleTriggeringDaysControls = function validateAlertTrigg
       };
     }
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](triggeringDaysTitle, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](triggeringDaysTitle, valid, true);
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](triggeringDaysTitleIcon, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](triggeringDaysTitleIcon, valid, true);
   } catch (error) {
     console.log(error);
   }
@@ -100503,11 +101544,11 @@ var validateAlertTriggerRuleInvolvedProcessesSelectionControls = function valida
   var valid = false;
 
   try {
-    var involvedProcessesTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes.title);
-    var involvedProcessesTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes.titleIcon);
-    var involvedProcessesCount = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes.count);
+    var involvedProcessesTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes.title);
+    var involvedProcessesTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes.titleIcon);
+    var involvedProcessesCount = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes.count);
 
-    var selectedProcesses = _toConsumableArray(ruleItem.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes["switch"])).filter(function (item) {
+    var selectedProcesses = _toConsumableArray(ruleItem.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.processes["switch"])).filter(function (item) {
       return item.checked;
     });
 
@@ -100521,11 +101562,11 @@ var validateAlertTriggerRuleInvolvedProcessesSelectionControls = function valida
       });
     }
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedProcessesTitle, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](involvedProcessesTitle, valid, true);
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedProcessesTitleIcon, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](involvedProcessesTitleIcon, valid, true);
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedProcessesCount, valid);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](involvedProcessesCount, valid);
   } catch (error) {
     console.log(error);
   }
@@ -100537,11 +101578,11 @@ var validateAlertTriggerRuleInvolvedRobotsSelectionControls = function validateA
   var valid = false;
 
   try {
-    var involvedRobotsTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots.title);
-    var involvedRobotsTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots.titleIcon);
-    var involvedRobotsCount = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots.count);
+    var involvedRobotsTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots.title);
+    var involvedRobotsTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots.titleIcon);
+    var involvedRobotsCount = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots.count);
 
-    var selectedRobots = _toConsumableArray(ruleItem.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots["switch"])).filter(function (item) {
+    var selectedRobots = _toConsumableArray(ruleItem.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.robots["switch"])).filter(function (item) {
       return item.checked;
     });
 
@@ -100555,11 +101596,11 @@ var validateAlertTriggerRuleInvolvedRobotsSelectionControls = function validateA
       });
     }
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedRobotsTitle, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](involvedRobotsTitle, valid, true);
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedRobotsTitleIcon, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](involvedRobotsTitleIcon, valid, true);
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedRobotsCount, valid);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](involvedRobotsCount, valid);
   } catch (error) {
     console.log(error);
   }
@@ -100571,11 +101612,11 @@ var validateAlertTriggerRuleInvolvedQueuesSelectionControls = function validateA
   var valid = false;
 
   try {
-    var involvedQueuesTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues.title);
-    var involvedQueuesTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues.titleIcon);
-    var involvedQueuesCount = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues.count);
+    var involvedQueuesTitle = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues.title);
+    var involvedQueuesTitleIcon = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues.titleIcon);
+    var involvedQueuesCount = ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues.count);
 
-    var selectedQueues = _toConsumableArray(ruleItem.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues["switch"])).filter(function (item) {
+    var selectedQueues = _toConsumableArray(ruleItem.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.rule.involvedEntitiesControls.queues["switch"])).filter(function (item) {
       return item.checked;
     });
 
@@ -100589,11 +101630,11 @@ var validateAlertTriggerRuleInvolvedQueuesSelectionControls = function validateA
       });
     }
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedQueuesTitle, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](involvedQueuesTitle, valid, true);
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedQueuesTitleIcon, valid, true);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](involvedQueuesTitleIcon, valid, true);
 
-    _base__WEBPACK_IMPORTED_MODULE_9__["toggleSuccessDangerState"](involvedQueuesCount, valid);
+    _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](involvedQueuesCount, valid);
   } catch (error) {
     console.log(error);
   }
@@ -100604,101 +101645,175 @@ var validateAlertTriggerRuleInvolvedQueuesSelectionControls = function validateA
 var create =
 /*#__PURE__*/
 function () {
-  var _ref11 = _asyncToGenerator(
+  var _ref12 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11() {
-    var activeStepContent;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12() {
+    var form, activeStepContent;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee12$(_context12) {
       while (1) {
-        switch (_context11.prev = _context11.next) {
+        switch (_context12.prev = _context12.next) {
           case 0:
-            activeStepContent = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].activeStepContent);
-            _context11.prev = 1;
+            form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_11__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm);
+            activeStepContent = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].activeStepContent);
+            _context12.prev = 2;
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](activeStepContent);
 
-            return _context11.abrupt("return", new Promise(function (resolve, reject) {
-              var alertTrigger = new _models_AlertTrigger__WEBPACK_IMPORTED_MODULE_6__["default"]();
-              resolve(alertTrigger.save(summaryAlertTrigger.watched_automated_process_id, summaryAlertTrigger.title, summaryAlertTrigger.definitions).then(function (response) {
+            return _context12.abrupt("return", new Promise(function (resolve, reject) {
+              resolve(details.currentAlertTrigger.save(details.currentWatchedAutomatedProcess.id).then(function (response) {
                 return new Promise(function (resolve, reject) {
-                  resolve(configuration.getAlertTriggersCreationConfirmation(alertTrigger.id).then(function (response) {
+                  resolve(configuration.getAlertTriggersCreationConfirmation(details.currentAlertTrigger.id).then(function (response) {
                     updateTable();
-                    _layout_index__WEBPACK_IMPORTED_MODULE_12__["update"](configuration.layout);
-                    _view__WEBPACK_IMPORTED_MODULE_11__["updateActiveStepContent"](response.data);
+                    _layout_index__WEBPACK_IMPORTED_MODULE_13__["update"](configuration.layout);
+                    activeStepContent.innerHTML = response.data;
 
-                    _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+                    _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
                   }));
                 });
               }));
             }));
 
-          case 6:
-            _context11.prev = 6;
-            _context11.t0 = _context11["catch"](1);
+          case 7:
+            _context12.prev = 7;
+            _context12.t0 = _context12["catch"](2);
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](activeStepContent);
+            _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
 
-            console.log(_context11.t0);
+            console.log(_context12.t0);
 
-          case 10:
+          case 11:
           case "end":
-            return _context11.stop();
+            return _context12.stop();
         }
       }
-    }, _callee11, null, [[1, 6]]);
+    }, _callee12, null, [[2, 7]]);
   }));
 
   return function create() {
-    return _ref11.apply(this, arguments);
+    return _ref12.apply(this, arguments);
+  };
+}();
+
+var update =
+/*#__PURE__*/
+function () {
+  var _ref13 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee13() {
+    var form, activeStepContent;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee13$(_context13) {
+      while (1) {
+        switch (_context13.prev = _context13.next) {
+          case 0:
+            form = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm);
+            activeStepContent = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].activeStepContent);
+            _context13.prev = 2;
+
+            _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](activeStepContent);
+
+            return _context13.abrupt("return", new Promise(function (resolve, reject) {
+              resolve(details.currentAlertTrigger.update().then(function (response) {
+                return new Promise(function (resolve, reject) {
+                  resolve(configuration.getAlertTriggersCreationConfirmation(details.currentAlertTrigger.id).then(function (response) {
+                    updateTable().then(function (response) {
+                      $(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table).DataTable().row("tr[data-id=\"".concat(details.currentAlertTrigger.id, "\"]")).node().classList.add('is-selected');
+                    });
+                    _layout_index__WEBPACK_IMPORTED_MODULE_13__["update"](configuration.layout);
+                    activeStepContent.innerHTML = response.data;
+
+                    _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
+                  }));
+                });
+              }));
+            }));
+
+          case 7:
+            _context13.prev = 7;
+            _context13.t0 = _context13["catch"](2);
+
+            _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](activeStepContent);
+
+            console.log(_context13.t0);
+
+          case 11:
+          case "end":
+            return _context13.stop();
+        }
+      }
+    }, _callee13, null, [[2, 7]]);
+  }));
+
+  return function update() {
+    return _ref13.apply(this, arguments);
   };
 }();
 
 var updateTable =
 /*#__PURE__*/
 function () {
-  var _ref12 = _asyncToGenerator(
+  var _ref14 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12() {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee14() {
     var table;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee12$(_context12) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee14$(_context14) {
       while (1) {
-        switch (_context12.prev = _context12.next) {
+        switch (_context14.prev = _context14.next) {
           case 0:
-            table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_10__["selectors"].table);
-            _context12.prev = 1;
+            table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table);
+            _context14.prev = 1;
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["renderLoader"](table);
+            _base__WEBPACK_IMPORTED_MODULE_10__["renderLoader"](table);
 
-            return _context12.abrupt("return", new Promise(function (resolve, reject) {
+            return _context14.abrupt("return", new Promise(function (resolve, reject) {
               resolve(configuration.updateAlertTriggersTable().then(function (res) {
-                _view__WEBPACK_IMPORTED_MODULE_11__["updateTable"](configuration.alertTriggersTable);
+                _view__WEBPACK_IMPORTED_MODULE_12__["updateTable"](configuration.alertTriggersTable);
+                $(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table).DataTable().on('select', loadEditForm);
+                $(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].table).DataTable().on('user-select', function (e, dt, type, cell, originalEvent) {
+                  if (originalEvent.target.closest('tr').classList.contains('is-selected')) {
+                    e.preventDefault();
+                  }
+                });
 
-                _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](table);
+                _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](table);
               }));
             }));
 
           case 6:
-            _context12.prev = 6;
-            _context12.t0 = _context12["catch"](1);
-            console.log(_context12.t0);
+            _context14.prev = 6;
+            _context14.t0 = _context14["catch"](1);
+            console.log(_context14.t0);
 
-            _base__WEBPACK_IMPORTED_MODULE_9__["clearLoader"](table);
+            _base__WEBPACK_IMPORTED_MODULE_10__["clearLoader"](table);
 
           case 10:
           case "end":
-            return _context12.stop();
+            return _context14.stop();
         }
       }
-    }, _callee12, null, [[1, 6]]);
+    }, _callee14, null, [[1, 6]]);
   }));
 
   return function updateTable() {
-    return _ref12.apply(this, arguments);
+    return _ref14.apply(this, arguments);
   };
 }();
 
 var resetForm = function resetForm() {
-  try {} catch (error) {
+  try {
+    var form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_11__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm);
+    var formSelector = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_11__["selectors"].addForm : _base__WEBPACK_IMPORTED_MODULE_11__["selectors"].editForm;
+    steps[0].activate_step(0);
+    steps[0].uncomplete_step(0);
+    steps[0].uncomplete_step(1);
+    steps[0].uncomplete_step(2);
+    processSelection.watchedProcessSelect(form).value = 0;
+    processSelection.clientSelect(form).value = 0;
+    form.querySelector(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.title).value = '';
+    $("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_11__["selectors"].details.alertDefinition.item)).each(function (index, item) {
+      _view__WEBPACK_IMPORTED_MODULE_12__["details"].deleteDefinition(form, item);
+    });
+    _view__WEBPACK_IMPORTED_MODULE_12__["details"].updateDefinitionsCount(form, 0);
+  } catch (error) {
     console.log(error);
   }
 };
@@ -100709,15 +101824,18 @@ var resetForm = function resetForm() {
 /*!****************************************************************!*\
   !*** ./resources/js/views/configuration/alert-trigger/view.js ***!
   \****************************************************************/
-/*! exports provided: updateTable, updateActiveStepContent, processSelection, details */
+/*! exports provided: updateTable, showAddForm, showEditForm, updateEditFormSection, processSelection, details, initDateTimeField */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTable", function() { return updateTable; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateActiveStepContent", function() { return updateActiveStepContent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showAddForm", function() { return showAddForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showEditForm", function() { return showEditForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateEditFormSection", function() { return updateEditFormSection; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "processSelection", function() { return processSelection; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "details", function() { return details; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initDateTimeField", function() { return initDateTimeField; });
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./resources/js/views/configuration/alert-trigger/base.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../base */ "./resources/js/views/base.js");
 /* harmony import */ var bulma_calendar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bulma-calendar */ "./node_modules/bulma-calendar/dist/js/bulma-calendar.js");
@@ -100728,11 +101846,27 @@ __webpack_require__.r(__webpack_exports__);
 var updateTable = function updateTable(markup) {
   var table = _base__WEBPACK_IMPORTED_MODULE_1__["update"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].table).closest(_base__WEBPACK_IMPORTED_MODULE_1__["selectors"].tableDataTablesWrapper), markup);
 
-  $(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].table).DataTable();
+  $(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].table).DataTable({
+    responsive: true,
+    select: {
+      className: 'is-selected',
+      info: false,
+      toggleable: false,
+      items: 'row'
+    }
+  });
   return table;
 };
-var updateActiveStepContent = function updateActiveStepContent(markup) {
-  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].activeStepContent).innerHTML = markup;
+var showAddForm = function showAddForm() {
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].editFormSection).style.display = 'none';
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].addFormSection).style.display = 'block';
+};
+var showEditForm = function showEditForm() {
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].addFormSection).style.display = 'none';
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].editFormSection).style.display = 'block';
+};
+var updateEditFormSection = function updateEditFormSection(markup) {
+  return _base__WEBPACK_IMPORTED_MODULE_1__["update"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].editFormSection), markup);
 };
 var processSelection = {
   updateProcesses: function updateProcesses(processes) {
@@ -100746,17 +101880,17 @@ var processSelection = {
   }
 };
 var details = {
-  updateDefinitionsCount: function updateDefinitionsCount(count) {
-    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.count).innerHTML = count;
+  updateDefinitionsCount: function updateDefinitionsCount(form, count) {
+    form.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.count).innerHTML = count;
   },
-  addDefinition: function addDefinition(markup) {
-    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.list).appendChild(_base__WEBPACK_IMPORTED_MODULE_1__["htmlToElement"](markup));
+  addDefinition: function addDefinition(form, markup) {
+    form.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.list).appendChild(_base__WEBPACK_IMPORTED_MODULE_1__["htmlToElement"](markup));
   },
-  deleteDefinition: function deleteDefinition(alertDefinitionItem) {
+  deleteDefinition: function deleteDefinition(form, alertDefinitionItem) {
     var rank = parseInt(alertDefinitionItem.dataset.rank);
-    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.list).removeChild(alertDefinitionItem); // change rank of all alert definition items when > rank
+    form.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.list).removeChild(alertDefinitionItem); // change rank of all alert definition items when > rank
 
-    var alertDefinitionItems = document.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.item);
+    var alertDefinitionItems = form.querySelectorAll(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.item);
     alertDefinitionItems.forEach(function (alertDefinitionItem) {
       var alertDefinitionItemRank = parseInt(alertDefinitionItem.dataset.rank);
 
@@ -100799,7 +101933,7 @@ var details = {
     _base__WEBPACK_IMPORTED_MODULE_1__["toggleSuccessDangerState"](titleIconRight, valid, true);
   },
   addRule: function addRule(alertDefinitionItem, markup) {
-    alertDefinitionItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.list).appendChild(_base__WEBPACK_IMPORTED_MODULE_1__["htmlToElement"](markup));
+    var ruleItem = alertDefinitionItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.list).appendChild(_base__WEBPACK_IMPORTED_MODULE_1__["htmlToElement"](markup));
   },
   deleteRule: function deleteRule(alertDefinitionItem, ruleItem) {
     var rank = parseInt(ruleItem.dataset.rank);
@@ -100826,24 +101960,48 @@ var details = {
 
     if (ruleType !== 'none') {
       var alertDefinitionItem = ruleItem.closest(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.item);
-      var calendarSelector = "\n                ".concat(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.item, "[data-rank=\"").concat(alertDefinitionItem.dataset.rank, "\"]\n                ").concat(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.item, "[data-rank=\"").concat(ruleItem.dataset.rank, "\"]\n                ").concat(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.timeSlotInput, "\n            ");
-      var startTime = ruleItem.querySelector(calendarSelector).dataset.startTime.split(':');
-      var endTime = ruleItem.querySelector(calendarSelector).dataset.endTime.split(':');
-      bulma_calendar__WEBPACK_IMPORTED_MODULE_2___default.a.attach(calendarSelector, {
-        type: 'time',
-        lang: 'en',
-        isRange: true,
-        headerPosition: 'bottom',
-        labelFrom: 'From',
-        labelTo: 'To',
-        timeFormat: 'HH:mm',
-        showFooter: true,
-        start: new Date(1970, 1, 1, startTime[0], startTime[1], 0),
-        end: new Date(1970, 1, 1, endTime[0], endTime[1], 0)
-      });
+      initDateTimeField(alertDefinitionItem, ruleItem);
     }
 
     return ruleItem;
+  }
+};
+var initDateTimeField = function initDateTimeField(alertDefinitionItem, ruleItem) {
+  var calendarSelector = "\n        ".concat(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.item, "[data-rank=\"").concat(alertDefinitionItem.dataset.rank, "\"]\n        ").concat(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.item, "[data-rank=\"").concat(ruleItem.dataset.rank, "\"]\n        ").concat(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.timeSlotInput, "\n    ");
+  var startTime = ruleItem.querySelector(calendarSelector).dataset.startTime;
+
+  if (startTime) {
+    startTime = startTime.split(':');
+  }
+
+  var endTime = ruleItem.querySelector(calendarSelector).dataset.endTime;
+
+  if (endTime) {
+    endTime = endTime.split(':');
+  }
+  /*let effectiveStartTime = ruleItem.querySelector(calendarSelector).dataset.effectiveStartTime;
+  if (effectiveStartTime) {
+      startTime = effectiveStartTime.split(':');
+  }
+  let effectiveEndTime = ruleItem.querySelector(calendarSelector).dataset.effectiveEndTndTime;
+  if (endTime) {
+      endTime = effectiveEndTime.split(':');
+  }*/
+
+
+  if (!ruleItem.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].details.alertDefinition.rule.timeSlotInput).bulmaCalendar) {
+    bulma_calendar__WEBPACK_IMPORTED_MODULE_2___default.a.attach(calendarSelector, {
+      type: 'time',
+      lang: 'en',
+      isRange: true,
+      headerPosition: 'bottom',
+      labelFrom: 'From',
+      labelTo: 'To',
+      timeFormat: 'HH:mm',
+      showFooter: true,
+      start: startTime ? new Date(1970, 1, 1, startTime[0], startTime[1], 0) : null,
+      end: startTime ? new Date(1970, 1, 1, endTime[0], endTime[1], 0) : null
+    });
   }
 };
 
@@ -100874,6 +102032,8 @@ var selectors = {
   nameInput: 'input.name',
   codeInput: 'input.code',
   orchestratorSelect: 'select.orchestrator',
+  elasticSearchUrlInput: 'input.elastic-search-url',
+  elasticSearchIndexInput: 'input.elastic-search-index',
   createButton: 'button.create',
   createButtonChildren: 'button.create *',
   resetButton: 'button.reset',
@@ -100928,10 +102088,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var configuration = new _models_Configuration__WEBPACK_IMPORTED_MODULE_2__["default"]('configuration.client.index');
 var currentMode = 'add';
-var nameInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
-var codeInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
-var orchestratorSelect = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
-var createButton = _base__WEBPACK_IMPORTED_MODULE_5__["elements"].createButton;
 var init = function init() {
   try {
     setInterval(function () {
@@ -100986,9 +102142,9 @@ var init = function init() {
 
 var loadAddForm = function loadAddForm(e) {
   try {
+    currentMode = 'add';
     $(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table).DataTable().rows().deselect();
     _view__WEBPACK_IMPORTED_MODULE_6__["showAddForm"]();
-    currentMode = 'add';
   } catch (error) {
     console.log(error);
   }
@@ -100996,6 +102152,8 @@ var loadAddForm = function loadAddForm(e) {
 
 var loadEditForm = function loadEditForm(e) {
   try {
+    currentMode = 'edit';
+
     _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table));
 
     _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_5__["elements"].formsSection);
@@ -101078,7 +102236,6 @@ var loadEditForm = function loadEditForm(e) {
 
       _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_5__["elements"].formsSection);
 
-      currentMode = 'edit';
       checkForm(e);
     });
   } catch (error) {
@@ -101095,6 +102252,8 @@ var checkForm = function checkForm(e) {
   var nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
   var codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
   var orchestratorSelect = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
+  var elasticSearchUrlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
+  var elasticSearchIndexInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
   var nameInputValid = !(nameInput.value.trim() === '');
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](nameInput, nameInputValid);
@@ -101107,7 +102266,15 @@ var checkForm = function checkForm(e) {
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](orchestratorSelect.parentNode, orchestratorSelectValid);
 
-  var formValid = nameInputValid && codeInputValid && orchestratorSelectValid;
+  var elasticSearchUrlInputValid = !(elasticSearchUrlInput.value.trim() === '' || !_base__WEBPACK_IMPORTED_MODULE_4__["validURL"](elasticSearchUrlInput.value));
+
+  _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](elasticSearchUrlInput, elasticSearchUrlInputValid);
+
+  var elasticSearchIndexInputValid = !(elasticSearchIndexInput.value.trim() === '');
+
+  _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](elasticSearchIndexInput, elasticSearchIndexInputValid);
+
+  var formValid = nameInputValid && codeInputValid && orchestratorSelectValid && elasticSearchUrlInputValid && elasticSearchIndexInputValid;
 
   if (currentMode === 'add') {
     form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButton).disabled = !formValid;
@@ -101122,8 +102289,7 @@ function () {
   var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-    var form, _nameInput, _codeInput, _orchestratorSelect;
-
+    var form, nameInput, codeInput, orchestratorSelect, elasticSearchUrlInput, elasticSearchIndexInput;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -101133,20 +102299,22 @@ function () {
 
             _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](form);
 
-            _nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
-            _codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
-            _orchestratorSelect = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
+            nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
+            codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
+            orchestratorSelect = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
+            elasticSearchUrlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
+            elasticSearchIndexInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
             return _context3.abrupt("return", new Promise(function (resolve, reject) {
               var client = new _models_Client__WEBPACK_IMPORTED_MODULE_3__["default"]();
-              resolve(client.save(_nameInput.value.trim(), _codeInput.value.trim(), _orchestratorSelect.value.trim()).then(function (res) {
+              resolve(client.save(nameInput.value.trim(), codeInput.value.trim(), orchestratorSelect.value.trim(), elasticSearchUrlInput.value.trim(), elasticSearchIndexInput.value.trim()).then(function (res) {
                 resetForm();
 
                 _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
               }));
             }));
 
-          case 9:
-            _context3.prev = 9;
+          case 11:
+            _context3.prev = 11;
             _context3.t0 = _context3["catch"](1);
             toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Client not added due to application exception: ".concat(_context3.t0), null, {
               positionClass: 'toast-bottom-left'
@@ -101155,12 +102323,12 @@ function () {
 
             _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
 
-          case 14:
+          case 16:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[1, 9]]);
+    }, _callee3, null, [[1, 11]]);
   }));
 
   return function create() {
@@ -101174,8 +102342,7 @@ function () {
   var _ref4 = _asyncToGenerator(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-    var form, _nameInput2, _codeInput2, _orchestratorSelect2;
-
+    var form, nameInput, codeInput, orchestratorSelect, elasticSearchUrlInput, elasticSearchIndexInput;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
@@ -101185,20 +102352,22 @@ function () {
 
             _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](form);
 
-            _nameInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
-            _codeInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
-            _orchestratorSelect2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
+            nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
+            codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
+            orchestratorSelect = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
+            elasticSearchUrlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
+            elasticSearchIndexInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
             return _context4.abrupt("return", new Promise(function (resolve, reject) {
               var client = new _models_Client__WEBPACK_IMPORTED_MODULE_3__["default"](form.dataset.id);
-              resolve(client.update(_nameInput2.value.trim(), _codeInput2.value.trim(), _orchestratorSelect2.value.trim()).then(function (response) {
+              resolve(client.update(nameInput.value.trim(), codeInput.value.trim(), orchestratorSelect.value.trim(), elasticSearchUrlInput.value.trim(), elasticSearchIndexInput.value.trim()).then(function (response) {
                 resetForm();
 
                 _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
               }));
             }));
 
-          case 9:
-            _context4.prev = 9;
+          case 11:
+            _context4.prev = 11;
             _context4.t0 = _context4["catch"](1);
             toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Client not updated due to application exception: ".concat(_context4.t0), null, {
               positionClass: 'toast-bottom-left'
@@ -101207,12 +102376,12 @@ function () {
 
             _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
 
-          case 14:
+          case 16:
           case "end":
             return _context4.stop();
         }
       }
-    }, _callee4, null, [[1, 9]]);
+    }, _callee4, null, [[1, 11]]);
   }));
 
   return function update() {
@@ -101316,20 +102485,22 @@ function () {
 var resetForm = function resetForm() {
   try {
     var form = currentMode === 'add' ? document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].addForm) : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].editForm);
-
-    var _nameInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
-
-    var _codeInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
-
-    var _orchestratorSelect3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
-
+    var nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
+    var codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
+    var orchestratorSelect = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
+    var elasticSearchUrlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
+    var elasticSearchIndexInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
     form.reset();
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_nameInput3);
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](nameInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_codeInput3);
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](codeInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_orchestratorSelect3.parentNode);
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](orchestratorSelect.parentNode);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](elasticSearchUrlInput);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](elasticSearchIndexInput);
   } catch (error) {
     console.log(error);
   }
@@ -101409,8 +102580,6 @@ var selectors = {
   tenantInput: 'input.tenant',
   apiUserUsernameInput: 'input.api-user-username',
   apiUserPasswordInput: 'input.api-user-password',
-  elasticSearchUrlInput: 'input.elastic-search-url',
-  elasticSearchIndexInput: 'input.elastic-search-index',
   createButton: 'button.create',
   createButtonChildren: 'button.create *',
   resetButton: 'button.reset',
@@ -101465,16 +102634,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var configuration = new _models_Configuration__WEBPACK_IMPORTED_MODULE_2__["default"]('configuration.orchestrator.index');
 var currentMode = 'add';
-var nameInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
-var codeInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
-var urlInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].urlInput);
-var tenantInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
-var apiUserUsernameInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
-var apiUserPasswordInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
-var elasticSearchUrlInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
-var elasticSearchIndexInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
-var createButton = _base__WEBPACK_IMPORTED_MODULE_5__["elements"].createButton;
-var resetButton = _base__WEBPACK_IMPORTED_MODULE_5__["elements"].resetButton;
 var init = function init() {
   try {
     setInterval(function () {
@@ -101529,9 +102688,9 @@ var init = function init() {
 
 var loadAddForm = function loadAddForm(e) {
   try {
+    currentMode = 'add';
     $(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table).DataTable().rows().deselect();
     _view__WEBPACK_IMPORTED_MODULE_6__["showAddForm"]();
-    currentMode = 'add';
   } catch (error) {
     console.log(error);
   }
@@ -101539,6 +102698,8 @@ var loadAddForm = function loadAddForm(e) {
 
 var loadEditForm = function loadEditForm(e) {
   try {
+    currentMode = 'edit';
+
     _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].table));
 
     _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_5__["elements"].formsSection);
@@ -101619,7 +102780,6 @@ var loadEditForm = function loadEditForm(e) {
 
       _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_5__["elements"].formsSection);
 
-      currentMode = 'edit';
       checkForm(e);
     });
   } catch (error) {
@@ -101639,8 +102799,6 @@ var checkForm = function checkForm(e) {
   var tenantInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
   var apiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
   var apiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
-  var elasticSearchUrlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
-  var elasticSearchIndexInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
   var nameInputValid = !(nameInput.value.trim() === '');
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](nameInput, nameInputValid);
@@ -101665,15 +102823,7 @@ var checkForm = function checkForm(e) {
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](apiUserPasswordInput, apiUserPasswordInputValid);
 
-  var elasticSearchUrlInputValid = !(elasticSearchUrlInput.value.trim() === '' || !_base__WEBPACK_IMPORTED_MODULE_4__["validURL"](elasticSearchUrlInput.value));
-
-  _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](elasticSearchUrlInput, elasticSearchUrlInputValid);
-
-  var elasticSearchIndexInputValid = !(elasticSearchIndexInput.value.trim() === '');
-
-  _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](elasticSearchIndexInput, elasticSearchIndexInputValid);
-
-  var formValid = nameInputValid && codeInputValid && urlInputValid && tenantInputValid && apiUserUsernameInputValid && apiUserPasswordInputValid && elasticSearchUrlInputValid && elasticSearchIndexInputValid;
+  var formValid = nameInputValid && codeInputValid && urlInputValid && tenantInputValid && apiUserUsernameInputValid && apiUserPasswordInputValid;
 
   if (currentMode === 'add') {
     form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButton).disabled = !formValid;
@@ -101688,8 +102838,7 @@ function () {
   var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-    var form, _nameInput, _codeInput, _urlInput, _tenantInput, _apiUserUsernameInput, _apiUserPasswordInput, _elasticSearchUrlInput, _elasticSearchIndexInput;
-
+    var form, nameInput, codeInput, urlInput, tenantInput, apiUserUsernameInput, apiUserPasswordInput;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -101699,25 +102848,23 @@ function () {
 
             _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](form);
 
-            _nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
-            _codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
-            _urlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].urlInput);
-            _tenantInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
-            _apiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
-            _apiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
-            _elasticSearchUrlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
-            _elasticSearchIndexInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
+            nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
+            codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
+            urlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].urlInput);
+            tenantInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
+            apiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
+            apiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
             return _context3.abrupt("return", new Promise(function (resolve, reject) {
               var orchestrator = new _models_Orchestrator__WEBPACK_IMPORTED_MODULE_3__["default"]();
-              resolve(orchestrator.save(_nameInput.value.trim(), _codeInput.value.trim(), _urlInput.value.trim(), _tenantInput.value.trim(), _apiUserUsernameInput.value.trim(), _apiUserPasswordInput.value, _elasticSearchUrlInput.value.trim(), _elasticSearchIndexInput.value.trim()).then(function (res) {
+              resolve(orchestrator.save(nameInput.value.trim(), codeInput.value.trim(), urlInput.value.trim(), tenantInput.value.trim(), apiUserUsernameInput.value.trim(), apiUserPasswordInput.value).then(function (res) {
                 resetForm();
 
                 _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
               }));
             }));
 
-          case 14:
-            _context3.prev = 14;
+          case 12:
+            _context3.prev = 12;
             _context3.t0 = _context3["catch"](1);
             toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Orchestrator not added due to application exception: ".concat(_context3.t0), null, {
               positionClass: 'toast-bottom-left'
@@ -101726,12 +102873,12 @@ function () {
 
             _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
 
-          case 19:
+          case 17:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[1, 14]]);
+    }, _callee3, null, [[1, 12]]);
   }));
 
   return function create() {
@@ -101745,8 +102892,7 @@ function () {
   var _ref4 = _asyncToGenerator(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-    var form, _nameInput2, _codeInput2, _urlInput2, _tenantInput2, _apiUserUsernameInput2, _apiUserPasswordInput2, _elasticSearchUrlInput2, _elasticSearchIndexInput2;
-
+    var form, nameInput, codeInput, urlInput, tenantInput, apiUserUsernameInput, apiUserPasswordInput;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
@@ -101756,25 +102902,23 @@ function () {
 
             _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](form);
 
-            _nameInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
-            _codeInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
-            _urlInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].urlInput);
-            _tenantInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
-            _apiUserUsernameInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
-            _apiUserPasswordInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
-            _elasticSearchUrlInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
-            _elasticSearchIndexInput2 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
+            nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
+            codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
+            urlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].urlInput);
+            tenantInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
+            apiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
+            apiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
             return _context4.abrupt("return", new Promise(function (resolve, reject) {
               var orchestrator = new _models_Orchestrator__WEBPACK_IMPORTED_MODULE_3__["default"](form.dataset.id);
-              resolve(orchestrator.update(_nameInput2.value.trim(), _codeInput2.value.trim(), _urlInput2.value.trim(), _tenantInput2.value.trim(), _apiUserUsernameInput2.value.trim(), _apiUserPasswordInput2.value, _elasticSearchUrlInput2.value.trim(), _elasticSearchIndexInput2.value.trim()).then(function (response) {
+              resolve(orchestrator.update(nameInput.value.trim(), codeInput.value.trim(), urlInput.value.trim(), tenantInput.value.trim(), apiUserUsernameInput.value.trim(), apiUserPasswordInput.value).then(function (response) {
                 resetForm();
 
                 _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
               }));
             }));
 
-          case 14:
-            _context4.prev = 14;
+          case 12:
+            _context4.prev = 12;
             _context4.t0 = _context4["catch"](1);
             toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Orchestrator not updated due to application exception: ".concat(_context4.t0), null, {
               positionClass: 'toast-bottom-left'
@@ -101783,12 +102927,12 @@ function () {
 
             _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
 
-          case 19:
+          case 17:
           case "end":
             return _context4.stop();
         }
       }
-    }, _callee4, null, [[1, 14]]);
+    }, _callee4, null, [[1, 12]]);
   }));
 
   return function update() {
@@ -101892,40 +103036,25 @@ function () {
 var resetForm = function resetForm() {
   try {
     var form = currentMode === 'add' ? document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].addForm) : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].editForm);
-
-    var _nameInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
-
-    var _codeInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
-
-    var _urlInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].urlInput);
-
-    var _tenantInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
-
-    var _apiUserUsernameInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
-
-    var _apiUserPasswordInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
-
-    var _elasticSearchUrlInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
-
-    var _elasticSearchIndexInput3 = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
-
+    var nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
+    var codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
+    var urlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].urlInput);
+    var tenantInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
+    var apiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
+    var apiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
     form.reset();
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_nameInput3);
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](nameInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_codeInput3);
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](codeInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_urlInput3);
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](urlInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_tenantInput3);
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](tenantInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_apiUserUsernameInput3);
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](apiUserUsernameInput);
 
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_apiUserPasswordInput3);
-
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_elasticSearchUrlInput3);
-
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](_elasticSearchIndexInput3);
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](apiUserPasswordInput);
   } catch (error) {
     console.log(error);
   }
@@ -101994,24 +103123,28 @@ var strings = {
 };
 var selectors = {
   table: 'table.watched-automated-processes',
+  formsSection: '.forms-section',
+  addFormSection: '.add-form-section',
   addForm: '#add-form',
-  clientSelect: 'select#client',
-  nameInput: 'input#name',
-  codeInput: 'input#code',
-  operationalHandbookPageURLInput: 'input#operational_handbook_page_url',
-  kibanaDashboardURLInput: 'input#kibana_dashboard_url',
-  additionalInformationTextarea: 'textarea#additional_information',
+  editFormSection: '.edit-form-section',
+  editForm: '#edit-form',
+  clientSelect: 'select.client',
+  nameInput: 'input.name',
+  codeInput: 'input.code',
+  operationalHandbookPageURLInput: 'input.operational_handbook_page_url',
+  kibanaDashboardURLInput: 'input.kibana_dashboard_url',
+  additionalInformationTextarea: 'textarea.additional_information',
   runningPeriodSection: 'div.running-period-section',
   runningPeriodSectionTitle: 'div.running-period-section .subtitle-level h1',
   runningPeriodSectionTitleIcon: 'div.running-period-section .subtitle-level span.icon',
-  runningPeriodCalendar: 'input#running_period_times',
-  runningPeriodMondayCheckbox: 'input#running_period_monday',
-  runningPeriodTuesdayCheckbox: 'input#running_period_tuesday',
-  runningPeriodWednesdayCheckbox: 'input#running_period_wednesday',
-  runningPeriodThursdayCheckbox: 'input#running_period_thursday',
-  runningPeriodFridayCheckbox: 'input#running_period_friday',
-  runningPeriodSaturdayCheckbox: 'input#running_period_saturday',
-  runningPeriodSundayCheckbox: 'input#running_period_sunday',
+  runningPeriodCalendar: 'input.running_period_times',
+  runningPeriodMondayCheckbox: 'input.running_period_monday',
+  runningPeriodTuesdayCheckbox: 'input.running_period_tuesday',
+  runningPeriodWednesdayCheckbox: 'input.running_period_wednesday',
+  runningPeriodThursdayCheckbox: 'input.running_period_thursday',
+  runningPeriodFridayCheckbox: 'input.running_period_friday',
+  runningPeriodSaturdayCheckbox: 'input.running_period_saturday',
+  runningPeriodSundayCheckbox: 'input.running_period_sunday',
   involvedProcessesSection: 'div.involved-processes-section',
   involvedProcessesSectionTitle: 'div.involved-processes-section .subtitle-level h1',
   involvedProcessesSectionTitleIcon: 'div.involved-processes-section .subtitle-level span.icon',
@@ -102030,28 +103163,18 @@ var selectors = {
   createButton: 'button.create',
   createButtonChildren: 'button.create *',
   resetButton: 'button.reset',
-  resetButtonChildren: 'button.reset *'
+  resetButtonChildren: 'button.reset *',
+  saveButton: 'button.save',
+  saveButtonChildren: 'button.save *',
+  cancelButton: 'button.cancel',
+  cancelButtonChildren: 'button.cancel *',
+  removeButton: 'button.remove',
+  removeButtonChildren: 'button.remove *'
 };
 var elements = {
   table: document.querySelector(selectors.table),
-  addForm: document.querySelector(selectors.addForm),
-  runningPeriodSection: document.querySelector(selectors.runningPeriodSection),
-  runningPeriodSectionTitle: document.querySelector(selectors.runningPeriodSectionTitle),
-  runningPeriodSectionTitleIcon: document.querySelector(selectors.runningPeriodSectionTitleIcon),
-  involvedProcessesSection: document.querySelector(selectors.involvedProcessesSection),
-  involvedProcessesSectionTitle: document.querySelector(selectors.involvedProcessesSectionTitle),
-  involvedProcessesSectionTitleIcon: document.querySelector(selectors.involvedProcessesSectionTitleIcon),
-  involvedProcessesCount: document.querySelector(selectors.involvedProcessesCount),
-  involvedRobotsSection: document.querySelector(selectors.involvedRobotsSection),
-  involvedRobotsSectionTitle: document.querySelector(selectors.involvedRobotsSectionTitle),
-  involvedRobotsSectionTitleIcon: document.querySelector(selectors.involvedRobotsSectionTitleIcon),
-  involvedRobotsCount: document.querySelector(selectors.involvedRobotsCount),
-  involvedQueuesSection: document.querySelector(selectors.involvedQueuesSection),
-  involvedQueuesSectionTitle: document.querySelector(selectors.involvedQueuesSectionTitle),
-  involvedQueuesSectionTitleIcon: document.querySelector(selectors.involvedQueuesSectionTitleIcon),
-  involvedQueuesCount: document.querySelector(selectors.involvedQueuesCount),
-  createButton: document.querySelector(selectors.createButton),
-  resetButton: document.querySelector(selectors.resetButton)
+  formsSection: document.querySelector(selectors.formsSection),
+  addForm: document.querySelector(selectors.addForm)
 };
 
 /***/ }),
@@ -102095,51 +103218,65 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var configuration = new _models_Configuration__WEBPACK_IMPORTED_MODULE_3__["default"]('configuration.watched-automated-process.index');
-var clientSelect = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].clientSelect);
-var nameInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].nameInput);
-var codeInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].codeInput);
-var operationalHandbookPageURLInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].operationalHandbookPageURLInput);
-var kibanaDashboardURLInput = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].kibanaDashboardURLInput);
-var additionalInformationTextarea = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].additionalInformationTextarea);
-var runningPeriodSectionTitle = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].runningPeriodSectionTitle;
-var runningPeriodSectionTitleIcon = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].runningPeriodSectionTitleIcon;
-var runningPeriodMondayCheckbox = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodMondayCheckbox);
-var runningPeriodTuesdayCheckbox = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodTuesdayCheckbox);
-var runningPeriodWednesdayCheckbox = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodWednesdayCheckbox);
-var runningPeriodThursdayCheckbox = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodThursdayCheckbox);
-var runningPeriodFridayCheckbox = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodFridayCheckbox);
-var runningPeriodSaturdayCheckbox = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSaturdayCheckbox);
-var runningPeriodSundayCheckbox = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSundayCheckbox);
-var runningPeriodCalendar = bulma_calendar__WEBPACK_IMPORTED_MODULE_2___default.a.attach(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runnningPeriodCalendar, {
-  type: 'time',
-  lang: 'en',
-  isRange: true,
-  headerPosition: 'bottom',
-  labelFrom: 'From',
-  labelTo: 'To',
-  timeFormat: 'HH:mm',
-  showFooter: true
+var currentMode = 'add';
+/*const clientSelect = document.querySelector(base.selectors.clientSelect);
+const nameInput = document.querySelector(base.selectors.nameInput);
+const codeInput = document.querySelector(base.selectors.codeInput);
+const operationalHandbookPageURLInput = document.querySelector(base.selectors.operationalHandbookPageURLInput);
+const kibanaDashboardURLInput = document.querySelector(base.selectors.kibanaDashboardURLInput);
+const additionalInformationTextarea = document.querySelector(base.selectors.additionalInformationTextarea);
+const runningPeriodSectionTitle = base.elements.runningPeriodSectionTitle;
+const runningPeriodSectionTitleIcon = base.elements.runningPeriodSectionTitleIcon;
+const runningPeriodMondayCheckbox = document.querySelector(base.selectors.runningPeriodMondayCheckbox);
+const runningPeriodTuesdayCheckbox = document.querySelector(base.selectors.runningPeriodTuesdayCheckbox);
+const runningPeriodWednesdayCheckbox = document.querySelector(base.selectors.runningPeriodWednesdayCheckbox);
+const runningPeriodThursdayCheckbox = document.querySelector(base.selectors.runningPeriodThursdayCheckbox);
+const runningPeriodFridayCheckbox = document.querySelector(base.selectors.runningPeriodFridayCheckbox);
+const runningPeriodSaturdayCheckbox = document.querySelector(base.selectors.runningPeriodSaturdayCheckbox);
+const runningPeriodSundayCheckbox = document.querySelector(base.selectors.runningPeriodSundayCheckbox);
+const runningPeriodCalendar = bulmaCalendar.attach(base.selectors.runningPeriodCalendar, {
+    type: 'time',
+    lang: 'en',
+    isRange: true,
+    headerPosition: 'bottom',
+    labelFrom: 'From',
+    labelTo: 'To',
+    timeFormat: 'HH:mm',
+    showFooter: true
 });
-var involvedProcessesSectionTitle = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedProcessesSectionTitle;
-var involvedProcessesSectionTitleIcon = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedProcessesSectionTitleIcon;
-var involvedProcessesCount = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedProcessesCount;
-var involvedRobotsSectionTitle = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsSectionTitle;
-var involvedRobotsSectionTitleIcon = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsSectionTitleIcon;
-var involvedRobotsCount = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsCount;
-var involvedQueuesSectionTitle = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedQueuesSectionTitle;
-var involvedQueuesSectionTitleIcon = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedQueuesSectionTitleIcon;
-var involvedQueuesCount = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedQueuesCount;
-var createButton = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].createButton;
-var resetButton = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].resetButton;
+const involvedProcessesSectionTitle = base.elements.involvedProcessesSectionTitle;
+const involvedProcessesSectionTitleIcon = base.elements.involvedProcessesSectionTitleIcon;
+const involvedProcessesCount = base.elements.involvedProcessesCount;
+const involvedRobotsSectionTitle = base.elements.involvedRobotsSectionTitle;
+const involvedRobotsSectionTitleIcon = base.elements.involvedRobotsSectionTitleIcon;
+const involvedRobotsCount = base.elements.involvedRobotsCount;
+const involvedQueuesSectionTitle = base.elements.involvedQueuesSectionTitle;
+const involvedQueuesSectionTitleIcon = base.elements.involvedQueuesSectionTitleIcon;
+const involvedQueuesCount = base.elements.involvedQueuesCount;
+const createButton = base.elements.createButton;
+const resetButton = base.elements.resetButton;*/
+
 var init = function init() {
   try {
     setInterval(function () {
       _layout_index__WEBPACK_IMPORTED_MODULE_9__["update"](configuration.layout);
     }, 45000);
-    _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.addEventListener('keyup', validateForm);
-    _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.addEventListener('change', validateForm);
-    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar).bulmaCalendar.on('select clear', validateForm);
-    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].dateTimeFooterCancelButton).addEventListener('click', validateForm);
+    $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].table).DataTable().on('select', loadEditForm);
+    _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.addEventListener('keyup', checkForm);
+    _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.addEventListener('change', checkForm);
+    bulma_calendar__WEBPACK_IMPORTED_MODULE_2___default.a.attach("".concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].addForm, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar), {
+      type: 'time',
+      lang: 'en',
+      isRange: true,
+      headerPosition: 'bottom',
+      labelFrom: 'From',
+      labelTo: 'To',
+      timeFormat: 'HH:mm',
+      showFooter: true
+    });
+    _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar).bulmaCalendar.on('select clear', checkForm);
+    _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.querySelector(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].dateTimeFooterCancelButton).addEventListener('click', checkForm);
+    var clientSelect = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].clientSelect);
     clientSelect.addEventListener('change',
     /*#__PURE__*/
     function () {
@@ -102172,10 +103309,13 @@ var init = function init() {
       var _ref2 = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+        var createButton;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                createButton = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].createButton);
+
                 if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].createButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].createButtonChildren)) && !createButton.disabled) {
                   create().then(function (res) {
                     toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Watched automated process successfully added!', null, {
@@ -102190,7 +103330,7 @@ var init = function init() {
                   createButton.disabled = true;
                 }
 
-              case 2:
+              case 3:
               case "end":
                 return _context2.stop();
             }
@@ -102207,7 +103347,183 @@ var init = function init() {
   }
 };
 
-var validateForm = function validateForm() {
+var loadAddForm = function loadAddForm(e) {
+  try {
+    currentMode = 'add';
+    $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].table).DataTable().rows().deselect();
+    _view__WEBPACK_IMPORTED_MODULE_8__["showAddForm"]();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+var loadEditForm =
+/*#__PURE__*/
+function () {
+  var _ref3 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(e) {
+    var row, id, watchedAutomatedProcess;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            try {
+              currentMode = 'edit';
+
+              _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].table));
+
+              _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].formsSection);
+
+              row = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].table).DataTable().row({
+                selected: true
+              }).node();
+              id = row.dataset.id;
+              watchedAutomatedProcess = new _models_WatchedAutomatedProcess__WEBPACK_IMPORTED_MODULE_4__["default"](id);
+              watchedAutomatedProcess.loadEditForm().then(function (response) {
+                _view__WEBPACK_IMPORTED_MODULE_8__["updateEditFormSection"](watchedAutomatedProcess.editForm);
+                var form = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm);
+                form.addEventListener('keyup', checkForm);
+                form.addEventListener('change', checkForm);
+                var startTime = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar).dataset.startTime.split(':');
+                var endTime = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar).dataset.endTime.split(':');
+                bulma_calendar__WEBPACK_IMPORTED_MODULE_2___default.a.attach("".concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar), {
+                  type: 'time',
+                  lang: 'en',
+                  isRange: true,
+                  headerPosition: 'bottom',
+                  labelFrom: 'From',
+                  labelTo: 'To',
+                  timeFormat: 'HH:mm',
+                  showFooter: true,
+                  start: new Date(1970, 1, 1, startTime[0], startTime[1], 0),
+                  end: new Date(1970, 1, 1, endTime[0], endTime[1], 0)
+                });
+                form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar).bulmaCalendar.on('select clear', checkForm);
+                form.querySelector(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].dateTimeFooterCancelButton).addEventListener('click', checkForm);
+                var clientSelect = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].clientSelect);
+                loadProcesses(null, clientSelect.value);
+                loadRobots(null, clientSelect.value);
+                loadQueues(null, clientSelect.value);
+                form.addEventListener('click',
+                /*#__PURE__*/
+                function () {
+                  var _ref4 = _asyncToGenerator(
+                  /*#__PURE__*/
+                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(e) {
+                    var saveButton;
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+                      while (1) {
+                        switch (_context3.prev = _context3.next) {
+                          case 0:
+                            saveButton = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].saveButton);
+
+                            if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].saveButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].saveButtonChildren)) && !saveButton.disabled) {
+                              update().then(function (response) {
+                                loadAddForm(e);
+                                updateTable();
+                                _layout_index__WEBPACK_IMPORTED_MODULE_9__["update"](configuration.layout);
+                                toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Watched automated process successfully updated!', null, {
+                                  positionClass: 'toast-bottom-left'
+                                });
+                              });
+                            }
+
+                            if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].cancelButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].cancelButtonChildren))) {
+                              loadAddForm(e);
+                            }
+
+                            if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].removeButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].removeButtonChildren))) {
+                              _base__WEBPACK_IMPORTED_MODULE_6__["swalWithBulmaButtons"].fire({
+                                title: 'Watched automated process removal confirmation',
+                                text: 'This watched automated process and all its related elements (alert triggers and alerts) will be removed. Are you sure?',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonText: '<span class="icon"><i class="fas fa-trash-alt"></i></span><span>Remove it!</span>',
+                                cancelButtonText: '<span class="icon"><i class="fas fa-undo"></i></span><span>Undo</span>'
+                              }).then(function (result) {
+                                if (result.value) {
+                                  remove().then(function (reponse) {
+                                    loadAddForm(e);
+                                    updateTable();
+                                    _layout_index__WEBPACK_IMPORTED_MODULE_9__["update"](configuration.layout);
+                                    toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Watched automated process successfully removed!', null, {
+                                      positionClass: 'toast-bottom-left'
+                                    });
+                                  });
+                                }
+                              });
+                            }
+
+                          case 4:
+                          case "end":
+                            return _context3.stop();
+                        }
+                      }
+                    }, _callee3);
+                  }));
+
+                  return function (_x4) {
+                    return _ref4.apply(this, arguments);
+                  };
+                }());
+                _view__WEBPACK_IMPORTED_MODULE_8__["showEditForm"]();
+
+                _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].table));
+
+                _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].formsSection);
+
+                checkForm(e);
+              });
+            } catch (error) {
+              console.log(error);
+
+              _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].table));
+
+              _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].formsSection);
+            }
+
+          case 1:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+
+  return function loadEditForm(_x3) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+var checkForm = function checkForm() {
+  var form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm);
+  var formSelector = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_7__["selectors"].addForm : _base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm;
+  var clientSelect = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].clientSelect);
+  var nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].nameInput);
+  var codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].codeInput);
+  var operationalHandbookPageURLInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].operationalHandbookPageURLInput);
+  var kibanaDashboardURLInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].kibanaDashboardURLInput);
+  var additionalInformationTextarea = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].additionalInformationTextarea);
+  var runningPeriodSectionTitle = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSectionTitle);
+  var runningPeriodSectionTitleIcon = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSectionTitleIcon);
+  var runningPeriodMondayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodMondayCheckbox);
+  var runningPeriodTuesdayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodTuesdayCheckbox);
+  var runningPeriodWednesdayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodWednesdayCheckbox);
+  var runningPeriodThursdayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodThursdayCheckbox);
+  var runningPeriodFridayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodFridayCheckbox);
+  var runningPeriodSaturdayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSaturdayCheckbox);
+  var runningPeriodSundayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSundayCheckbox);
+  var runningPeriodCalendar = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar).bulmaCalendar;
+  var involvedProcessesSectionTitle = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesSectionTitle);
+  var involvedProcessesSectionTitleIcon = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesSectionTitleIcon);
+  var involvedProcessesCount = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesCount);
+  var involvedRobotsSectionTitle = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsSectionTitle);
+  var involvedRobotsSectionTitleIcon = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsSectionTitleIcon);
+  var involvedRobotsCount = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsCount);
+  var involvedQueuesSectionTitle = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesSectionTitle);
+  var involvedQueuesSectionTitleIcon = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesSectionTitleIcon);
+  var involvedQueuesCount = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesCount);
   var clientSelectValid = !(clientSelect.value === "0");
 
   _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](clientSelect.parentNode, clientSelectValid);
@@ -102229,7 +103545,7 @@ var validateForm = function validateForm() {
   _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](kibanaDashboardURLInput, kibanaDashboardURLInputValid);
 
   var runningPeriodDaysValid = runningPeriodMondayCheckbox.checked || runningPeriodTuesdayCheckbox.checked || runningPeriodWednesdayCheckbox.checked || runningPeriodThursdayCheckbox.checked || runningPeriodFridayCheckbox.checked || runningPeriodSaturdayCheckbox.checked || runningPeriodSundayCheckbox.checked;
-  var calendar = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar);
+  var calendar = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar);
   var calendarFrom = calendar.parentNode.querySelector(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].dateTimeCalendarFromInput);
   var calendarTo = calendar.parentNode.querySelector(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].dateTimeCalendarToInput);
   var runningPeriodCalendarValid = calendarFrom.value.trim() !== '' && calendarTo.value.trim() !== '';
@@ -102243,8 +103559,8 @@ var validateForm = function validateForm() {
 
   var selectedProcessesCount = 0;
 
-  if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)) {
-    selectedProcessesCount = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable).DataTable().rows({
+  if ($.fn.dataTable.isDataTable("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable))) {
+    selectedProcessesCount = $("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)).DataTable().rows({
       selected: true
     }).count();
   }
@@ -102260,8 +103576,8 @@ var validateForm = function validateForm() {
 
   var selectedRobotsCount = 0;
 
-  if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)) {
-    selectedRobotsCount = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).DataTable().rows({
+  if ($.fn.dataTable.isDataTable("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable))) {
+    selectedRobotsCount = $("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)).DataTable().rows({
       selected: true
     }).count();
   }
@@ -102277,8 +103593,8 @@ var validateForm = function validateForm() {
 
   var selectedQueuesCount = 0;
 
-  if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)) {
-    selectedQueuesCount = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).DataTable().rows({
+  if ($.fn.dataTable.isDataTable("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable))) {
+    selectedQueuesCount = $("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)).DataTable().rows({
       selected: true
     }).count();
   }
@@ -102297,30 +103613,48 @@ var validateForm = function validateForm() {
   _base__WEBPACK_IMPORTED_MODULE_6__["toggleSuccessDangerState"](additionalInformationTextarea, true);
 
   var formValid = nameInputValid && codeInputValid && clientSelectValid && operationalHandbookPageURLInputValid && kibanaDashboardURLInputValid && runningPeriodDaysValid && runningPeriodCalendarValid && involvedProcessesTableValid && involvedRobotsTableValid && involvedQueuesTableValid;
-  createButton.disabled = !formValid;
+
+  if (currentMode === 'add') {
+    form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].createButton).disabled = !formValid;
+  } else {
+    form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].saveButton).disabled = !formValid;
+  }
 };
 
 var loadProcesses =
 /*#__PURE__*/
 function () {
-  var _ref3 = _asyncToGenerator(
+  var _ref5 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(e) {
-    var id, client;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+    var e,
+        id_,
+        form,
+        formSelector,
+        id,
+        tableSelector,
+        client,
+        _args5 = arguments;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
       while (1) {
-        switch (_context3.prev = _context3.next) {
+        switch (_context5.prev = _context5.next) {
           case 0:
-            try {
-              _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedProcessesSection);
+            e = _args5.length > 0 && _args5[0] !== undefined ? _args5[0] : null;
+            id_ = _args5.length > 1 && _args5[1] !== undefined ? _args5[1] : null;
+            form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm);
+            formSelector = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_7__["selectors"].addForm : _base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm;
 
-              id = e.target.value.trim();
+            try {
+              _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesSection));
+
+              id = e ? e.target.value.trim() : id_;
+              tableSelector = "".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable);
 
               if (id !== "0") {
                 client = new _models_Client__WEBPACK_IMPORTED_MODULE_5__["default"](id);
                 client.getProcessesFromOrchestrator().then(function (response) {
                   var data = response.data;
-                  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable).classList.add('table');
+                  form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable).classList.add('table');
                   var selected = [];
 
                   if (data.error) {
@@ -102328,15 +103662,15 @@ function () {
                       positionClass: 'toast-bottom-left'
                     });
 
-                    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)) {
-                      $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable).DataTable().clear().draw();
+                    if ($.fn.dataTable.isDataTable(tableSelector)) {
+                      $(tableSelector).DataTable().clear().draw();
                     }
                   } else {
-                    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)) {
-                      $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable).DataTable().destroy();
+                    if ($.fn.dataTable.isDataTable(tableSelector)) {
+                      $(tableSelector).DataTable().destroy();
                     }
 
-                    $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable).DataTable({
+                    $(tableSelector).DataTable({
                       select: {
                         style: 'multi',
                         className: 'is-selected',
@@ -102355,37 +103689,46 @@ function () {
                         data: 'EnvironmentName'
                       }]
                     }).on('select deselect', function () {
-                      validateForm();
+                      checkForm();
                       refreshInvolvedRobotsTable();
                     });
-                    validateForm();
+                    var processesTable = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable);
+
+                    if (processesTable.dataset.selected) {
+                      var selectedItems = JSON.parse(processesTable.dataset.selected);
+                      $("".concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)).DataTable().rows(function (index, data, node) {
+                        return selectedItems.indexOf(data.Id) >= 0;
+                      }).select();
+                    }
+
+                    checkForm();
                   }
 
-                  _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedProcessesSection);
+                  _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesSection));
                 });
               } else {
-                if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)) {
-                  $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable).DataTable().clear().draw();
+                if ($.fn.dataTable.isDataTable(tableSelector)) {
+                  $(tableSelector).DataTable().clear().draw();
                 }
 
-                _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedProcessesSection);
+                _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesSection));
               }
             } catch (error) {
-              _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedProcessesSection);
+              _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesSection));
 
               console.log(error);
             }
 
-          case 1:
+          case 5:
           case "end":
-            return _context3.stop();
+            return _context5.stop();
         }
       }
-    }, _callee3);
+    }, _callee5);
   }));
 
-  return function loadProcesses(_x3) {
-    return _ref3.apply(this, arguments);
+  return function loadProcesses() {
+    return _ref5.apply(this, arguments);
   };
 }();
 
@@ -102394,24 +103737,37 @@ var involvedRobotsTableData;
 var loadRobots =
 /*#__PURE__*/
 function () {
-  var _ref4 = _asyncToGenerator(
+  var _ref6 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(e) {
-    var id, client;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+    var e,
+        id_,
+        form,
+        formSelector,
+        id,
+        tableSelector,
+        client,
+        _args6 = arguments;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
       while (1) {
-        switch (_context4.prev = _context4.next) {
+        switch (_context6.prev = _context6.next) {
           case 0:
-            try {
-              _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsSection);
+            e = _args6.length > 0 && _args6[0] !== undefined ? _args6[0] : null;
+            id_ = _args6.length > 1 ? _args6[1] : undefined;
+            form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm);
+            formSelector = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_7__["selectors"].addForm : _base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm;
 
-              id = e.target.value.trim();
+            try {
+              _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsSection));
+
+              id = e ? e.target.value.trim() : id_;
+              tableSelector = "".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable);
 
               if (id !== "0") {
                 client = new _models_Client__WEBPACK_IMPORTED_MODULE_5__["default"](id);
                 client.getRobotsFromOrchestrator().then(function (response) {
                   var data = response.data;
-                  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).classList.add('table');
+                  form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).classList.add('table');
                   var selected = [];
 
                   if (data.error) {
@@ -102419,15 +103775,15 @@ function () {
                       positionClass: 'toast-bottom-left'
                     });
 
-                    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)) {
-                      $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).DataTable().clear().draw();
+                    if ($.fn.dataTable.isDataTable(tableSelector)) {
+                      $(tableSelector).DataTable().clear().draw();
                     }
                   } else {
-                    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)) {
-                      $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).DataTable().destroy();
+                    if ($.fn.dataTable.isDataTable(tableSelector)) {
+                      $(tableSelector).DataTable().destroy();
                     }
 
-                    $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).DataTable({
+                    $(tableSelector).DataTable({
                       select: {
                         style: 'multi',
                         className: 'is-selected',
@@ -102451,45 +103807,61 @@ function () {
                         title: 'Environments',
                         data: 'RobotEnvironments'
                       }]
-                    }).on('select deselect', validateForm);
+                    }).on('select deselect', checkForm);
                     involvedRobotsTableData = data;
-                    validateForm();
+                    var robotsTable = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable);
+
+                    if (robotsTable.dataset.selected) {
+                      var selectedItems = JSON.parse(robotsTable.dataset.selected);
+                      $("".concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)).DataTable().rows(function (index, data, node) {
+                        return selectedItems.indexOf(data.Id) >= 0;
+                      }).select();
+                    } // trigger processes selection to refresh involved robots table content
+
+
+                    $("".concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)).trigger('select');
+                    checkForm();
                   }
 
-                  _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsSection);
+                  _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsSection));
                 });
               } else {
-                if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)) {
-                  $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).DataTable().clear().draw();
+                if ($.fn.dataTable.isDataTable(tableSelector)) {
+                  $(tableSelector).DataTable().clear().draw();
                 }
 
-                _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsSection);
+                _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsSection));
               }
             } catch (error) {
-              _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsSection);
+              _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsSection));
 
               console.log(error);
             }
 
-          case 1:
+          case 5:
           case "end":
-            return _context4.stop();
+            return _context6.stop();
         }
       }
-    }, _callee4);
+    }, _callee6);
   }));
 
-  return function loadRobots(_x4) {
-    return _ref4.apply(this, arguments);
+  return function loadRobots() {
+    return _ref6.apply(this, arguments);
   };
 }();
 
 var refreshInvolvedRobotsTable = function refreshInvolvedRobotsTable() {
-  try {
-    _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedProcessesTable);
+  var form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm);
+  var formSelector = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_7__["selectors"].addForm : _base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm;
 
-    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)) {
-      var involvedProcessesRows = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable).DataTable().rows({
+  try {
+    _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable));
+
+    var processesTableSelector = "".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable);
+
+    if ($.fn.dataTable.isDataTable(processesTableSelector)) {
+      var involvedProcessesRows = $(processesTableSelector).DataTable().rows({
         selected: true
       }).data();
       var involvedProcessesEnvironments = [];
@@ -102502,8 +103874,10 @@ var refreshInvolvedRobotsTable = function refreshInvolvedRobotsTable() {
         }
       }
 
-      if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)) {
-        var table = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).DataTable();
+      var robotsTableSelector = "".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable);
+
+      if ($.fn.dataTable.isDataTable(robotsTableSelector)) {
+        var table = $(robotsTableSelector).DataTable();
         var previouslySelectedRows = table.rows({
           selected: true
         }).data();
@@ -102536,12 +103910,12 @@ var refreshInvolvedRobotsTable = function refreshInvolvedRobotsTable() {
         }).select();
       }
 
-      validateForm();
+      checkForm();
     }
 
-    _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsTable);
+    _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable));
   } catch (error) {
-    _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedRobotsTable);
+    _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable));
 
     console.log(error);
   }
@@ -102550,24 +103924,37 @@ var refreshInvolvedRobotsTable = function refreshInvolvedRobotsTable() {
 var loadQueues =
 /*#__PURE__*/
 function () {
-  var _ref5 = _asyncToGenerator(
+  var _ref7 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(e) {
-    var id, client;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+    var e,
+        id_,
+        form,
+        formSelector,
+        id,
+        tableSelector,
+        client,
+        _args7 = arguments;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
       while (1) {
-        switch (_context5.prev = _context5.next) {
+        switch (_context7.prev = _context7.next) {
           case 0:
-            try {
-              _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedQueuesSection);
+            e = _args7.length > 0 && _args7[0] !== undefined ? _args7[0] : null;
+            id_ = _args7.length > 1 ? _args7[1] : undefined;
+            form = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm);
+            formSelector = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_7__["selectors"].addForm : _base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm;
 
-              id = e.target.value.trim();
+            try {
+              _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesSection));
+
+              id = e ? e.target.value.trim() : id_;
+              tableSelector = "".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable);
 
               if (id !== "0") {
                 client = new _models_Client__WEBPACK_IMPORTED_MODULE_5__["default"](id);
                 client.getQueuesFromOrchestrator().then(function (response) {
                   var data = response.data;
-                  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).classList.add('table');
+                  form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).classList.add('table');
                   var selected = [];
 
                   if (data.error) {
@@ -102575,15 +103962,15 @@ function () {
                       positionClass: 'toast-bottom-left'
                     });
 
-                    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)) {
-                      $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).DataTable().clear().draw();
+                    if ($.fn.dataTable.isDataTable(tableSelector)) {
+                      $(tableSelector).DataTable().clear().draw();
                     }
                   } else {
-                    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)) {
-                      $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).DataTable().destroy();
+                    if ($.fn.dataTable.isDataTable(tableSelector)) {
+                      $(tableSelector).DataTable().destroy();
                     }
 
-                    $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).DataTable({
+                    $(tableSelector).DataTable({
                       select: {
                         style: 'multi',
                         className: 'is-selected',
@@ -102598,56 +103985,81 @@ function () {
                         title: 'Description',
                         data: 'Description'
                       }]
-                    }).on('select deselect', validateForm);
-                    validateForm();
+                    }).on('select deselect', checkForm);
+                    var queuesTable = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable);
+
+                    if (queuesTable.dataset.selected) {
+                      var selectedItems = JSON.parse(queuesTable.dataset.selected);
+                      $("".concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)).DataTable().rows(function (index, data, node) {
+                        return selectedItems.indexOf(data.Id) >= 0;
+                      }).select();
+                    }
+
+                    checkForm();
                   }
 
-                  _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedQueuesSection);
+                  _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesSection));
                 });
               } else {
-                if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)) {
-                  $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).DataTable().clear().draw();
+                if ($.fn.dataTable.isDataTable(tableSelector)) {
+                  $(tableSelector).DataTable().clear().draw();
                 }
 
-                _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedQueuesSection);
+                _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesSection));
               }
             } catch (error) {
-              _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_7__["elements"].involvedQueuesSection);
+              _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesSection));
 
               console.log(error);
             }
 
-          case 1:
+          case 5:
           case "end":
-            return _context5.stop();
+            return _context7.stop();
         }
       }
-    }, _callee5);
+    }, _callee7);
   }));
 
-  return function loadQueues(_x5) {
-    return _ref5.apply(this, arguments);
+  return function loadQueues() {
+    return _ref7.apply(this, arguments);
   };
 }();
 
 var create =
 /*#__PURE__*/
 function () {
-  var _ref6 = _asyncToGenerator(
+  var _ref8 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
-    var addForm, involvedProcessesRows, involvedProcesses, i, involvedProcess, involvedRobotsRows, involvedRobots, _i2, involvedRobot, involvedQueuesRows, involvedQueues, _i3, involvedQueue;
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
+    var form, formSelector, clientSelect, nameInput, codeInput, operationalHandbookPageURLInput, kibanaDashboardURLInput, additionalInformationTextarea, runningPeriodSectionTitle, runningPeriodSectionTitleIcon, runningPeriodMondayCheckbox, runningPeriodTuesdayCheckbox, runningPeriodWednesdayCheckbox, runningPeriodThursdayCheckbox, runningPeriodFridayCheckbox, runningPeriodSaturdayCheckbox, runningPeriodSundayCheckbox, involvedProcessesRows, involvedProcesses, i, involvedProcess, involvedRobotsRows, involvedRobots, _i2, involvedRobot, involvedQueuesRows, involvedQueues, _i3, involvedQueue;
 
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
       while (1) {
-        switch (_context6.prev = _context6.next) {
+        switch (_context8.prev = _context8.next) {
           case 0:
-            addForm = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm;
-            _context6.prev = 1;
+            form = _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm;
+            formSelector = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_7__["selectors"].addForm : _base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm;
+            _context8.prev = 2;
 
-            _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](addForm);
+            _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](form);
 
-            involvedProcessesRows = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable).DataTable().rows({
+            clientSelect = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].clientSelect);
+            nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].nameInput);
+            codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].codeInput);
+            operationalHandbookPageURLInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].operationalHandbookPageURLInput);
+            kibanaDashboardURLInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].kibanaDashboardURLInput);
+            additionalInformationTextarea = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].additionalInformationTextarea);
+            runningPeriodSectionTitle = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSectionTitle);
+            runningPeriodSectionTitleIcon = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSectionTitleIcon);
+            runningPeriodMondayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodMondayCheckbox);
+            runningPeriodTuesdayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodTuesdayCheckbox);
+            runningPeriodWednesdayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodWednesdayCheckbox);
+            runningPeriodThursdayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodThursdayCheckbox);
+            runningPeriodFridayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodFridayCheckbox);
+            runningPeriodSaturdayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSaturdayCheckbox);
+            runningPeriodSundayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSundayCheckbox);
+            involvedProcessesRows = $("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)).DataTable().rows({
               selected: true
             }).data();
             involvedProcesses = [];
@@ -102664,7 +104076,7 @@ function () {
               involvedProcesses.push(involvedProcess);
             }
 
-            involvedRobotsRows = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).DataTable().rows({
+            involvedRobotsRows = $("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)).DataTable().rows({
               selected: true
             }).data();
             involvedRobots = [];
@@ -102681,7 +104093,7 @@ function () {
               involvedRobots.push(involvedRobot);
             }
 
-            involvedQueuesRows = $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).DataTable().rows({
+            involvedQueuesRows = $("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)).DataTable().rows({
               selected: true
             }).data();
             involvedQueues = [];
@@ -102695,97 +104107,287 @@ function () {
               involvedQueues.push(involvedQueue);
             }
 
-            return _context6.abrupt("return", new Promise(function (resolve, reject) {
+            return _context8.abrupt("return", new Promise(function (resolve, reject) {
               var watchedAutomatedProcess = new _models_WatchedAutomatedProcess__WEBPACK_IMPORTED_MODULE_4__["default"]();
-              var calendar = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar).bulmaCalendar;
+              var calendar = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar).bulmaCalendar;
               resolve(watchedAutomatedProcess.save(clientSelect.value.trim(), nameInput.value.trim(), codeInput.value.trim(), operationalHandbookPageURLInput.value.trim(), kibanaDashboardURLInput.value.trim(), additionalInformationTextarea.value.trim(), runningPeriodMondayCheckbox.checked, runningPeriodTuesdayCheckbox.checked, runningPeriodWednesdayCheckbox.checked, runningPeriodThursdayCheckbox.checked, runningPeriodFridayCheckbox.checked, runningPeriodSaturdayCheckbox.checked, runningPeriodSundayCheckbox.checked, calendar.startTime.toTimeString().split(' ')[0], calendar.endTime.toTimeString().split(' ')[0], involvedProcesses, involvedRobots, involvedQueues).then(function (res) {
                 resetForm();
 
-                _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](addForm);
+                _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form);
               }));
             }));
 
-          case 15:
-            _context6.prev = 15;
-            _context6.t0 = _context6["catch"](1);
-            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Watched automated process not added due to application exception: ".concat(_context6.t0), null, {
+          case 31:
+            _context8.prev = 31;
+            _context8.t0 = _context8["catch"](2);
+            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Watched automated process not added due to application exception: ".concat(_context8.t0), null, {
               positionClass: 'toast-bottom-left'
             });
-            console.log(_context6.t0);
+            console.log(_context8.t0);
 
-            _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](addForm);
+            _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form);
 
-          case 20:
+          case 36:
           case "end":
-            return _context6.stop();
+            return _context8.stop();
         }
       }
-    }, _callee6, null, [[1, 15]]);
+    }, _callee8, null, [[2, 31]]);
   }));
 
   return function create() {
-    return _ref6.apply(this, arguments);
+    return _ref8.apply(this, arguments);
+  };
+}();
+
+var update =
+/*#__PURE__*/
+function () {
+  var _ref9 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9() {
+    var form, formSelector, clientSelect, nameInput, codeInput, operationalHandbookPageURLInput, kibanaDashboardURLInput, additionalInformationTextarea, runningPeriodSectionTitle, runningPeriodSectionTitleIcon, runningPeriodMondayCheckbox, runningPeriodTuesdayCheckbox, runningPeriodWednesdayCheckbox, runningPeriodThursdayCheckbox, runningPeriodFridayCheckbox, runningPeriodSaturdayCheckbox, runningPeriodSundayCheckbox, involvedProcessesRows, involvedProcesses, i, involvedProcess, involvedRobotsRows, involvedRobots, _i4, involvedRobot, involvedQueuesRows, involvedQueues, _i5, involvedQueue;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
+      while (1) {
+        switch (_context9.prev = _context9.next) {
+          case 0:
+            form = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm);
+            formSelector = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_7__["selectors"].addForm : _base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm;
+            _context9.prev = 2;
+
+            _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](form);
+
+            clientSelect = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].clientSelect);
+            nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].nameInput);
+            codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].codeInput);
+            operationalHandbookPageURLInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].operationalHandbookPageURLInput);
+            kibanaDashboardURLInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].kibanaDashboardURLInput);
+            additionalInformationTextarea = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].additionalInformationTextarea);
+            runningPeriodSectionTitle = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSectionTitle);
+            runningPeriodSectionTitleIcon = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSectionTitleIcon);
+            runningPeriodMondayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodMondayCheckbox);
+            runningPeriodTuesdayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodTuesdayCheckbox);
+            runningPeriodWednesdayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodWednesdayCheckbox);
+            runningPeriodThursdayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodThursdayCheckbox);
+            runningPeriodFridayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodFridayCheckbox);
+            runningPeriodSaturdayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSaturdayCheckbox);
+            runningPeriodSundayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSundayCheckbox);
+            involvedProcessesRows = $("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)).DataTable().rows({
+              selected: true
+            }).data();
+            involvedProcesses = [];
+
+            for (i = 0; i < involvedProcessesRows.length; i++) {
+              involvedProcess = {
+                name: involvedProcessesRows[i]['ProcessKey'],
+                description: involvedProcessesRows[i]['Description'],
+                version: involvedProcessesRows[i]['ProcessVersion'],
+                external_id: involvedProcessesRows[i]['Id'],
+                environment_name: involvedProcessesRows[i]['EnvironmentName'],
+                external_environment_id: involvedProcessesRows[i]['EnvironmentId']
+              };
+              involvedProcesses.push(involvedProcess);
+            }
+
+            involvedRobotsRows = $("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)).DataTable().rows({
+              selected: true
+            }).data();
+            involvedRobots = [];
+
+            for (_i4 = 0; _i4 < involvedRobotsRows.length; _i4++) {
+              involvedRobot = {
+                name: involvedRobotsRows[_i4]['Name'],
+                machine_name: involvedRobotsRows[_i4]['MachineName'],
+                description: involvedRobotsRows[_i4]['Description'],
+                username: involvedRobotsRows[_i4]['Username'],
+                type: involvedRobotsRows[_i4]['Type'],
+                external_id: involvedRobotsRows[_i4]['Id']
+              };
+              involvedRobots.push(involvedRobot);
+            }
+
+            involvedQueuesRows = $("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)).DataTable().rows({
+              selected: true
+            }).data();
+            involvedQueues = [];
+
+            for (_i5 = 0; _i5 < involvedQueuesRows.length; _i5++) {
+              involvedQueue = {
+                name: involvedQueuesRows[_i5]['Name'],
+                description: involvedQueuesRows[_i5]['Description'],
+                external_id: involvedQueuesRows[_i5]['Id']
+              };
+              involvedQueues.push(involvedQueue);
+            }
+
+            return _context9.abrupt("return", new Promise(function (resolve, reject) {
+              console.log(form.dataset.id);
+              var watchedAutomatedProcess = new _models_WatchedAutomatedProcess__WEBPACK_IMPORTED_MODULE_4__["default"](form.dataset.id);
+              var calendar = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar).bulmaCalendar;
+              resolve(watchedAutomatedProcess.update(clientSelect.value.trim(), nameInput.value.trim(), codeInput.value.trim(), operationalHandbookPageURLInput.value.trim(), kibanaDashboardURLInput.value.trim(), additionalInformationTextarea.value.trim(), runningPeriodMondayCheckbox.checked, runningPeriodTuesdayCheckbox.checked, runningPeriodWednesdayCheckbox.checked, runningPeriodThursdayCheckbox.checked, runningPeriodFridayCheckbox.checked, runningPeriodSaturdayCheckbox.checked, runningPeriodSundayCheckbox.checked, calendar.startTime.toTimeString().split(' ')[0], calendar.endTime.toTimeString().split(' ')[0], involvedProcesses, involvedRobots, involvedQueues).then(function (res) {
+                resetForm();
+
+                _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form);
+              }));
+            }));
+
+          case 31:
+            _context9.prev = 31;
+            _context9.t0 = _context9["catch"](2);
+            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Watched automated process not updated due to application exception: ".concat(_context9.t0), null, {
+              positionClass: 'toast-bottom-left'
+            });
+            console.log(_context9.t0);
+
+            _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form);
+
+          case 36:
+          case "end":
+            return _context9.stop();
+        }
+      }
+    }, _callee9, null, [[2, 31]]);
+  }));
+
+  return function update() {
+    return _ref9.apply(this, arguments);
+  };
+}();
+
+var remove =
+/*#__PURE__*/
+function () {
+  var _ref10 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10() {
+    var form;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
+      while (1) {
+        switch (_context10.prev = _context10.next) {
+          case 0:
+            form = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm);
+            _context10.prev = 1;
+
+            _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](form);
+
+            return _context10.abrupt("return", new Promise(function (resolve, reject) {
+              var watchedAutomatedProcess = new _models_WatchedAutomatedProcess__WEBPACK_IMPORTED_MODULE_4__["default"](form.dataset.id);
+              resolve(watchedAutomatedProcess.remove().then(function (response) {
+                resetForm();
+
+                _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form);
+              }));
+            }));
+
+          case 6:
+            _context10.prev = 6;
+            _context10.t0 = _context10["catch"](1);
+            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Watched automated process not removed due to application exception: ".concat(_context10.t0), null, {
+              positionClass: 'toast-bottom-left'
+            });
+            console.log(_context10.t0);
+
+            _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](form);
+
+          case 11:
+          case "end":
+            return _context10.stop();
+        }
+      }
+    }, _callee10, null, [[1, 6]]);
+  }));
+
+  return function remove() {
+    return _ref10.apply(this, arguments);
   };
 }();
 
 var updateTable =
 /*#__PURE__*/
 function () {
-  var _ref7 = _asyncToGenerator(
+  var _ref11 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11() {
     var table;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
       while (1) {
-        switch (_context7.prev = _context7.next) {
+        switch (_context11.prev = _context11.next) {
           case 0:
             table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].table);
-            _context7.prev = 1;
+            _context11.prev = 1;
 
             _base__WEBPACK_IMPORTED_MODULE_6__["renderLoader"](table);
 
-            return _context7.abrupt("return", new Promise(function (resolve, reject) {
+            return _context11.abrupt("return", new Promise(function (resolve, reject) {
               resolve(configuration.updateWatchedAutomatedProcessesTable().then(function (res) {
                 _view__WEBPACK_IMPORTED_MODULE_8__["updateTable"](configuration.watchedAutomatedProcessesTable);
+                $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].table).DataTable().on('select', loadEditForm);
 
                 _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](table);
               }));
             }));
 
           case 6:
-            _context7.prev = 6;
-            _context7.t0 = _context7["catch"](1);
-            console.log(_context7.t0);
+            _context11.prev = 6;
+            _context11.t0 = _context11["catch"](1);
+            console.log(_context11.t0);
 
             _base__WEBPACK_IMPORTED_MODULE_6__["clearLoader"](table);
 
           case 10:
           case "end":
-            return _context7.stop();
+            return _context11.stop();
         }
       }
-    }, _callee7, null, [[1, 6]]);
+    }, _callee11, null, [[1, 6]]);
   }));
 
   return function updateTable() {
-    return _ref7.apply(this, arguments);
+    return _ref11.apply(this, arguments);
   };
 }();
 
 var resetForm = function resetForm() {
   try {
-    document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar).bulmaCalendar.clear();
+    var form = currentMode === 'add' ? document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].addForm) : document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm);
+    var formSelector = currentMode === 'add' ? _base__WEBPACK_IMPORTED_MODULE_7__["selectors"].addForm : _base__WEBPACK_IMPORTED_MODULE_7__["selectors"].editForm;
+    var clientSelect = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].clientSelect);
+    var nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].nameInput);
+    var codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].codeInput);
+    var operationalHandbookPageURLInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].operationalHandbookPageURLInput);
+    var kibanaDashboardURLInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].kibanaDashboardURLInput);
+    var additionalInformationTextarea = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].additionalInformationTextarea);
+    var runningPeriodSectionTitle = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSectionTitle);
+    var runningPeriodSectionTitleIcon = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSectionTitleIcon);
+    var runningPeriodMondayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodMondayCheckbox);
+    var runningPeriodTuesdayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodTuesdayCheckbox);
+    var runningPeriodWednesdayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodWednesdayCheckbox);
+    var runningPeriodThursdayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodThursdayCheckbox);
+    var runningPeriodFridayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodFridayCheckbox);
+    var runningPeriodSaturdayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSaturdayCheckbox);
+    var runningPeriodSundayCheckbox = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodSundayCheckbox);
+    var involvedProcessesSectionTitle = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesSectionTitle);
+    var involvedProcessesSectionTitleIcon = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesSectionTitleIcon);
+    var involvedProcessesCount = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesCount);
+    var involvedRobotsSectionTitle = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsSectionTitle);
+    var involvedRobotsSectionTitleIcon = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsSectionTitleIcon);
+    var involvedRobotsCount = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsCount);
+    var involvedQueuesSectionTitle = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesSectionTitle);
+    var involvedQueuesSectionTitleIcon = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesSectionTitleIcon);
+    var involvedQueuesCount = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesCount);
+    form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar).bulmaCalendar.clear();
 
-    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)) {
-      $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable).DataTable().clear().draw();
+    if ($.fn.dataTable.isDataTable("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable))) {
+      $("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedProcessesTable)).DataTable().clear().draw();
     }
 
-    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)) {
-      $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable).DataTable().clear().draw();
+    if ($.fn.dataTable.isDataTable("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable))) {
+      $("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedRobotsTable)).DataTable().clear().draw();
     }
 
-    if ($.fn.dataTable.isDataTable(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)) {
-      $(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable).DataTable().clear().draw();
+    if ($.fn.dataTable.isDataTable("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable))) {
+      $("".concat(formSelector, " ").concat(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].involvedQueuesTable)).DataTable().clear().draw();
     }
 
     _base__WEBPACK_IMPORTED_MODULE_7__["elements"].addForm.reset();
@@ -102813,7 +104415,7 @@ var resetForm = function resetForm() {
     runningPeriodFridayCheckbox.checked = false;
     runningPeriodSaturdayCheckbox.checked = false;
     runningPeriodSundayCheckbox.checked = false;
-    var calendar = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar);
+    var calendar = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_7__["selectors"].runningPeriodCalendar);
     var runningPeriodCalendarWrapper = calendar.closest(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].dateTimeCalendarWrapper);
 
     _base__WEBPACK_IMPORTED_MODULE_6__["removeStates"](runningPeriodCalendarWrapper);
@@ -102852,12 +104454,15 @@ var resetForm = function resetForm() {
 /*!****************************************************************************!*\
   !*** ./resources/js/views/configuration/watched-automated-process/view.js ***!
   \****************************************************************************/
-/*! exports provided: updateTable */
+/*! exports provided: updateTable, showAddForm, showEditForm, updateEditFormSection */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTable", function() { return updateTable; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showAddForm", function() { return showAddForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showEditForm", function() { return showEditForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateEditFormSection", function() { return updateEditFormSection; });
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./resources/js/views/configuration/watched-automated-process/base.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../base */ "./resources/js/views/base.js");
 
@@ -102865,8 +104470,26 @@ __webpack_require__.r(__webpack_exports__);
 var updateTable = function updateTable(markup) {
   var table = _base__WEBPACK_IMPORTED_MODULE_1__["update"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].table).closest(_base__WEBPACK_IMPORTED_MODULE_1__["selectors"].tableDataTablesWrapper), markup);
 
-  $(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].table).DataTable();
+  $(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].table).DataTable({
+    responsive: true,
+    select: {
+      className: 'is-selected',
+      info: false,
+      toggleable: false
+    }
+  });
   return table;
+};
+var showAddForm = function showAddForm() {
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].editFormSection).style.display = 'none';
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].addFormSection).style.display = 'block';
+};
+var showEditForm = function showEditForm() {
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].addFormSection).style.display = 'none';
+  document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].editFormSection).style.display = 'block';
+};
+var updateEditFormSection = function updateEditFormSection(markup) {
+  return _base__WEBPACK_IMPORTED_MODULE_1__["update"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_0__["selectors"].editFormSection), markup);
 };
 
 /***/ }),

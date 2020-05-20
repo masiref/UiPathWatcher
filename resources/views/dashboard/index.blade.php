@@ -15,6 +15,15 @@
         @if ($watchedAutomatedProcessesCount > 0)
             @include('dashboard.quick-board')
 
+            <div class="is-divider" data-content="DETAILED VIEW"></div>
+            <div class="columns is-multiline">
+                @foreach($clients as $client)
+                    <div class="column is-6">
+                        @include('dashboard.client.element')
+                    </div>
+                @endforeach
+            </div>
+
             <div class="is-divider" data-content="TABLE VIEW"></div>
             @include('layouts.title', [
                 'title' => 'Pending alerts',
@@ -37,15 +46,6 @@
                 'alerts' => $closedAlerts,
                 'options' => [ 'closed' => true ]
             ])
-
-            <div class="is-divider" data-content="DETAILED VIEW"></div>
-            <div class="columns is-multiline">
-                @foreach($clients as $client)
-                    <div class="column is-6">
-                        @include('dashboard.client.element')
-                    </div>
-                @endforeach
-            </div>
         @endif
     </div>
 @endsection

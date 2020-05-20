@@ -42,7 +42,7 @@ class DashboardUserController extends Controller
             'clients' => $clients,
             'clientsCount' => $clients->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
-            'alertTriggersCount' => AlertTrigger::all()->count(),
+            'alertTriggersCount' => AlertTrigger::all()->where('deleted', false)->count(),
             'openedAlertsCount' => $pendingAlerts->count(),
             'underRevisionAlertsCount' => $pendingAlerts->where('under_revision', true)->count(),
             'closedAlertsCount' => $closedAlerts->count()

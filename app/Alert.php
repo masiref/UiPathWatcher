@@ -16,7 +16,12 @@ class Alert extends Model
      */
     protected $fillable = [
         'parent_id', 'alert_trigger_id', 'alert_trigger_definition_id', 'watched_automated_process_id',
-        'reviewer_id', 'under_revision', 'revision_started_at', 'closed', 'closed_at', 'closing_description'
+        'reviewer_id', 'under_revision', 'revision_started_at', 'closed', 'closed_at', 'closing_description',
+        'messages', 'auto_closed'
+    ];
+
+    protected $casts = [
+        'messages' => 'array'
     ];
 
     /**
@@ -141,6 +146,12 @@ class Alert extends Model
     {
         $date = Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at);
         return $date->format('d/m/Y H:i:s');
+    }
+
+    public function createdAtDayDateTime()
+    {
+        $date = Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at);
+        return $date->toDayDateTimeString();
     }
 
     /**

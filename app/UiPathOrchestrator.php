@@ -12,8 +12,7 @@ class UiPathOrchestrator extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'code', 'url', 'tenant', 'api_user_username', 'api_user_password',
-        'elastic_search_url', 'elastic_search_index'
+        'name', 'code', 'url', 'tenant', 'api_user_username', 'api_user_password'
     ];
 
     public function __toString()

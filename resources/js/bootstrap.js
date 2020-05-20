@@ -56,11 +56,16 @@ String.prototype.capitalize = function() {
 };
 
 // DataTables
-$('.table').DataTable({
+$('.table.data.selectable').DataTable({
     responsive: true,
     select: {
         className: 'is-selected',
         info: false,
-        toggleable: false
+        toggleable: false,
+        items: 'row'
     }
+});
+
+$('.table.data.unselectable').DataTable({
+    responsive: true
 });

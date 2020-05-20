@@ -6,13 +6,13 @@ export const markup = (elementID, alert) => {
         <div id="${elementID}" class="modal">
             <div class="modal-background"></div>
             <div class="modal-card modal-content">
-                ${header('Alert ignorance', alert)}
+                ${header('Alert trigger ignorance', alert)}
                 <section class="modal-card-body">
                     <form class="alert-closing-form" method="POST">
                         ${titleBlock(alert)}
                         ${underRevisionBlock(alert)}
                         <div class="field">
-                            <label class="label">Ignore alert in range</label>
+                            <label class="label">Ignore alert trigger in range</label>
                             <div class="control">
                                 <input type="date" class="datetime"
                                     id="ignorance_calendar"

@@ -27,6 +27,8 @@ class CreateAlertsTable extends Migration
             $table->dateTime('closed_at')->nullable(true);
             $table->text('closing_description')->nullable(true);
             $table->boolean('false_positive')->default(false);
+            $table->json('messages')->nullable(true);
+            $table->boolean('auto_closed')->default(false);
             $table->timestamps();
 
             $table->foreign('parent_id')

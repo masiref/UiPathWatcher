@@ -8,10 +8,8 @@
         $orchestratorsSubtitle = '
             By registering a <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-server"></i></span> UiPath Orchestrator</span>
             you\'ll be able to link your <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-building"></i></span> Clients</span> to it,
-            but also loading involved <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-robot"></i></span> Robots</span> and
-            <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-sitemap"></i></span> Processes</span> you need to watch. Furthermore,
-            by specifying information on <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-chart-bar"></i></span> ElasticSearch</span>,
-            you\'ll give access to your logs and extend your watching.
+            but also loading involved <span class="has-text-weight-medium"><span class="icon"><i class="fab fa-android"></i></span> Robots</span> and
+            <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-sitemap"></i></span> Processes</span> you need to watch.
         ';
     @endphp
 
