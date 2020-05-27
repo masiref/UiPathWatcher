@@ -6,7 +6,7 @@
 @section('content')
     @php
         $clientSubtitle = '
-            A <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-building"></i></span> Client</span> is a simple entity linked to a
+            A <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-building"></i></span> Customer</span> is a simple entity linked to a
             <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-server"></i></span> UiPath Orchestrator</span> in which you\'ll add
             <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-binoculars"></i></span> Processes to watch</span>. Furthermore,
             by specifying information on <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-chart-bar"></i></span> ElasticSearch</span>,
@@ -16,7 +16,7 @@
 
     <div class="configuration">
         @include('layouts.title', [
-            'title' => 'Clients',
+            'title' => 'Customers',
             'icon' => 'building',
             'color' => 'link',
             'subtitle' => $clientSubtitle,

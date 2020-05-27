@@ -3,6 +3,8 @@ import * as _base from '../base';
 import * as base from './base';
 import * as view from './view';
 
+import * as appController from '../../app';
+
 export const update = async (layout) => {
     try {
         _base.renderLoader(base.elements.sidebar);
@@ -11,6 +13,7 @@ export const update = async (layout) => {
             base.elements.menu = view.updateMenu(layout.menu);
             base.elements.hero = view.updateHero(layout.hero);
             base.elements.sidebar = view.updateSidebar(layout.sidebar);
+            appController.showNotifications();
         });
     } catch (error) {
         _base.clearLoader(base.elements.sidebar);

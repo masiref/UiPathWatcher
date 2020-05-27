@@ -1,7 +1,7 @@
 <table class="table data selectable is-fullwidth is-striped is-hoverable alert-triggers">
     <thead>
         <th>#</th>
-        <th>Client</th>
+        <th>Customer</th>
         <th>Process</th>
         <th>Title</th>
         <th>Is active?</th>

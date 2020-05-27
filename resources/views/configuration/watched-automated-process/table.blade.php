@@ -1,6 +1,6 @@
 <table class="table data selectable is-fullwidth is-striped is-hoverable watched-automated-processes">
     <thead>
-        <th>Client</th>
+        <th>Customer</th>
         <th>Name</th>
         <th>Code</th>
         <th>Processes</th>

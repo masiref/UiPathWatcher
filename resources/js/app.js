@@ -1,5 +1,6 @@
 import './bootstrap';
 import toastr from 'toastr';
+import * as Push from 'push.js';
 
 import * as base from './views/base';
 import * as view from './views/view';
@@ -27,6 +28,31 @@ if (base.isDashboardRelatedURL(url)) {
 }
 
 const app = new App();
+
+export const showNotifications = () => {
+    try {
+        return new Promise((resolve, reject) => {
+            resolve(
+                app.getNotifications().then(result => {
+                    const notifications = result.data;
+                    notifications.forEach(notification => {
+                        const title = notification.data.title;
+                        const body = notification.data.body;
+                        Push.create(title, {
+                            body: body,
+                            icon: '/images/surveillance_camera2.png',
+                            onClick: () => {
+                                window.focus();
+                            }
+                        });
+                    });
+                })
+            );
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 base.elements.app.addEventListener('click', e => {
     const target = e.target;

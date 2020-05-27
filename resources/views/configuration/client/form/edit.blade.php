@@ -1,6 +1,6 @@
 <div class="edit-form-section" style="display: none;">
     @include('layouts.title', [
-        'title' => 'Edit a client',
+        'title' => 'Edit a customer',
         'icon' => 'edit',
         'color' => 'primary'
     ])

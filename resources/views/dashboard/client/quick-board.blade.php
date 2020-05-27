@@ -32,7 +32,7 @@
                     <div class="level">
                         <div class="level-left">
                             <div class="level-item">
-                                <span class="tag is-light is-{{ $watchedAutomatedProcess->loggingRobotsCount() === $watchedAutomatedProcess->robots->count() ? 'success' : 'danger' }}">
+                                <span class="tag is-light is-{{ $watchedAutomatedProcess->loggingRobotsCount() === $watchedAutomatedProcess->robots->count() ? 'success' : 'grey-light' }}">
                                     {{ $watchedAutomatedProcess->loggingRobotsCount() }} / {{ $watchedAutomatedProcess->robots->count() }}
                                 </span>
                             </div>

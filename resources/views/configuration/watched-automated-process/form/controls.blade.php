@@ -5,7 +5,7 @@
                 <div class="select is-fullwidth">
                     <select class="client"
                         {!! ($watchedAutomatedProcess ?? false) ? 'disabled' : '' !!}>
-                        <option value="0">Select a client</option>
+                        <option value="0">Select a customer</option>
                         @foreach ($clients as $client)
                             <option value="{{ $client->id }}"
                                 {!! ($watchedAutomatedProcess ?? false) && $watchedAutomatedProcess->client->id === $client->id ? 'selected' : '' !!}>

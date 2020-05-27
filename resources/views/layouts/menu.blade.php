@@ -28,7 +28,7 @@
                                     <a class="{{ $page === 'dashboard.client.index.' . $client->id ? 'is-active' : '' }} navbar-item" href="{{ route('dashboard.client', ['client' => $client->id ]) }}">
                                         <span class="icon"><i class="fas fa-building"></i></span>
                                         <span>
-                                            {{ $client->name }}
+                                            &nbsp;{{ $client->name }}
                                             &nbsp;<span class="tag is-{{ $client->higherAlertLevel() }}">{{ $client->openedAlertsCount() }}</span>
                                         </span>
                                     </a>
@@ -40,7 +40,7 @@
                                     <span class="icon"><i class="fas fa-burn"></i></span>
                                     <span>
                                         &nbsp;My alerts
-                                        &nbsp;<span class="tag is-{{ auth()->user()->higherAlertLevel() }}">{{ auth()->user()->alerts->count() }}</span>
+                                        &nbsp;<span class="tag is-{{ auth()->user()->higherAlertLevel() }}">{{ auth()->user()->openedAlerts()->count() }}</span>
                                     </span>
                                 </a>
                             @endif
@@ -65,7 +65,7 @@
                                 href="{{ route('configuration.client') }}">
                                 <span class="icon"><i class="fas fa-building"></i></span>
                                 <span>
-                                    &nbsp;Clients
+                                    &nbsp;Customers
                                     &nbsp;<span class="tag is-primary">{{ $clientsCount }}</span>
                                 </span>
                             </a>

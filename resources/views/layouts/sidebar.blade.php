@@ -64,7 +64,7 @@
                 href="{{ route('configuration.client') }}">
                 <span class="icon"><i class="fas fa-building"></i></span>
                 <span>
-                    Clients
+                    Customers
                     &nbsp;<span class="tag is-primary">{{ $clientsCount }}</span>
                 </span>
             </a>

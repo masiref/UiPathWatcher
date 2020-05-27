@@ -1,6 +1,6 @@
 <div class="add-form-section">
     @include('layouts.title', [
-        'title' => 'Add a new client',
+        'title' => 'Add a new customer',
         'icon' => 'plus-circle',
         'color' => 'primary'
     ])

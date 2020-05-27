@@ -3,7 +3,7 @@
         <tr>
             <th>Level</th>
             <th>#</th>
-            <th>Client</th>
+            <th>Customer</th>
             <th><abbr title="Automated process">A. Pr.</abbr></th>
             <th>Title</th>
             @if ($options['closed'])

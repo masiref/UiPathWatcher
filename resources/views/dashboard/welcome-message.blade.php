@@ -7,7 +7,7 @@
             $orchestratorTitle = '1. Register your first UiPath Orchestrator';
             $orchestratorSubtitle = '
                 By registering a <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-server"></i></span> UiPath Orchestrator</span>
-                you\'ll be able to link your <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-building"></i></span> Clients</span> to it,
+                you\'ll be able to link your <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-building"></i></span> Customers</span> to it,
                 but also loading involved <span class="has-text-weight-medium"><span class="icon"><i class="fab fa-android"></i></span> Robots</span> and
                 <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-sitemap"></i></span> Processes</span> you need to watch.
             ';
@@ -21,9 +21,9 @@
             " : "";
             $orchestratorIcon = $orchestratorsCount === 0 ? 'server' : 'check-circle';
 
-            $clientTitle = '2. Create your first Client';
+            $clientTitle = '2. Create your first Customer';
             $clientSubtitle = '
-                A <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-building"></i></span> Client</span> is a simple entity linked to a
+                A <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-building"></i></span> Customer</span> is a simple entity linked to a
                 <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-server"></i></span> UiPath Orchestrator</span> in which you\'ll add
                 <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-binoculars"></i></span> Processes to watch</span>. Furthermore,
                 by specifying information on <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-chart-bar"></i></span> ElasticSearch</span>,

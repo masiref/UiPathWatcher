@@ -7,6 +7,7 @@ use App\AlertTriggerShutdown;
 use App\Library\Services\AlertTriggerService;
 use App\Library\Services\UiPathOrchestratorService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\RequestException;
 use Carbon\Carbon;
@@ -14,6 +15,8 @@ use App\AlertTrigger;
 use App\Alert;
 use App\AlertTriggerRule;
 use App\AlertTriggerDefinition;
+use App\Notifications\AlertTriggered;
+use App\User;
 
 class AppController extends Controller
 {
@@ -44,10 +47,21 @@ class AppController extends Controller
         return null;
     }
 
+    public function notifications(Request $request)
+    {
+        $user = Auth::user();
+        if ($user) {
+            $notifications = $user->unreadNotifications;
+            $notifications->markAsRead();
+            return $notifications;
+        }
+        return array();
+    }
+
     public function debug(AlertTriggerService $service)
     {
         $trigger = AlertTrigger::find(1);
-        $definition = AlertTriggerDefinition::find(1);
+        $definition = AlertTriggerDefinition::find(3);
         $wap = $trigger->watchedAutomatedProcess;
         $alert = Alert::create([
             'alert_trigger_id' => $trigger->id,
@@ -55,7 +69,7 @@ class AppController extends Controller
             'watched_automated_process_id' => $wap->id,
             'messages' => array('My first message')
         ]);
-        $ancestor = Alert::find(2);
+        /*$ancestor = Alert::find(2);
         $ancestor->update([
             'closed' => true,
             'closed_at' => $alert->created_at,
@@ -63,7 +77,11 @@ class AppController extends Controller
             'auto_closed' => true,
             'under_revision' => false,
             'parent_id' => $alert->id
-        ]);
+        ]);*/
+
+        //$alert = Alert::find(1);
+        Notification::send(User::all(), new AlertTriggered($alert));
+
         return $alert;
     }
 }

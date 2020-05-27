@@ -17,7 +17,7 @@
             <div class="control has-icons-left">
                 <div class="select is-fullwidth">
                     <select class="client" {!! $alertTrigger ? 'disabled' : '' !!}>
-                        <option value="0">Select a client</option>
+                        <option value="0">Select a customer</option>
                         @foreach ($clients as $client)
                             <option value="{{ $client->id }}"
                                 {!! $client_ && $client_->id === $client->id ? 'selected' : '' !!}>{{ $client }}</option>

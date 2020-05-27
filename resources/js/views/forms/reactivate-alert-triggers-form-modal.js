@@ -29,7 +29,7 @@ export const markup = () => {
                                 <span class="icon is-small">
                                     <i class="fas fa-plug"></i>
                                 </span>
-                                <span>Reactivate everything up!</span>
+                                <span>Turn it on!</span>
                             </button>
                         </div>
                         <div class="control">

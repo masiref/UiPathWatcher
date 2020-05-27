@@ -33,7 +33,7 @@
                         <div class="level">
                             <div class="level-left">
                                 <div class="level-item">
-                                    <span class="tag is-light is-{{ $client->loggingRobotsCount() === $client->robotsCount() ? 'success' : 'danger' }}">
+                                    <span class="tag is-light is-{{ $client->loggingRobotsCount() === $client->robotsCount() ? 'success' : 'grey-light' }}">
                                         {{ $client->loggingRobotsCount() }} / {{ $client->robotsCount() }}
                                     </span>
                                 </div>

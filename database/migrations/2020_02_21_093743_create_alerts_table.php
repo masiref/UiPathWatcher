@@ -29,6 +29,9 @@ class CreateAlertsTable extends Migration
             $table->boolean('false_positive')->default(false);
             $table->json('messages')->nullable(true);
             $table->boolean('auto_closed')->default(false);
+            $table->dateTime('latest_heartbeat_at')->nullable(true);
+            $table->dateTime('top_ancestor_created_at')->nullable(true);
+            $table->boolean('alive')->default(true);
             $table->timestamps();
 
             $table->foreign('parent_id')

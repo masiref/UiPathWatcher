@@ -65,7 +65,7 @@
                     <div class="level-item has-text-centered p-sm">
                         <div>
                             <p class="heading has-text-weight-bold">{{ strlen($robot) > 8 ? substr($robot, 0, 5) . '...' : $robot }}</p>
-                            <p class="title has-tooltip-bottom has-text-{{ $robot->level() }}"
+                            <p class="title has-tooltip-bottom has-text-{{ $robot->level() === 'warning' ? 'grey-light' : $robot->level() }}"
                                 data-tooltip="{{ (strlen($robot) > 8 ? $robot . ' - ' : '') }}{{ $robot->username }} {{ $robot->description ? '(' . $robot->description . ')' : '' }}">
                                 <span class="icon is-small">
                                     <i class="fab fa-android"></i>

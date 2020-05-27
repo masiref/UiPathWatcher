@@ -12,7 +12,8 @@
         @include('layouts.title', [
             'title' => 'My pending alerts',
             'icon' => 'fire',
-            'color' => 'dark'
+            'color' => 'dark',
+            'underlined' => false
         ])
         @include('dashboard.alert.table', [
             'tableID' => 'pending-alerts-table',
@@ -23,7 +24,8 @@
         @include('layouts.title', [
             'title' => 'My closed alerts',
             'icon' => 'dumpster-fire',
-            'color' => 'grey-light'
+            'color' => 'grey-light',
+            'underlined' => false
         ])
         @include('dashboard.alert.table', [
             'tableID' => 'closed-alerts-table',

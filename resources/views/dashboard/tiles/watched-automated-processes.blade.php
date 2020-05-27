@@ -1,5 +1,5 @@
 <div class="tile is-parent watched-automated-processes">
-    <article class="tile is-child box">
+    <article class="tile is-child box notification is-blue">
         <p class="title">
             @if ($client ?? false)
                 {{ $clientWatchedAutomatedProcessesCount }}
@@ -7,6 +7,9 @@
                 {{ $watchedAutomatedProcessesCount }}
             @endif
         </p>
-        <p class="subtitle">Watched process{{ $watchedAutomatedProcessesCount > 1 ? 'es' : ''}}</p>
+        <p class="subtitle">
+            <span class="icon"><i class="fas fa-binoculars"></i></span>
+            <span>Watched process{{ $watchedAutomatedProcessesCount > 1 ? 'es' : ''}}</span>
+        </p>
     </article>
 </div>

@@ -6,7 +6,7 @@
             <div class="level">
                 <div class="level-left">
                     <div class="level-item">
-                        <h1 class="title">
+                        <h1 class="title is-1">
                             Hello, {{ Auth::user()->name }}.
                         </h1>
                     </div>
@@ -38,9 +38,10 @@
                     <div class="level-item">
                         <h2 class="subtitle">
                             @if ($alertTriggerService->isUnderShutdown())
-                                Alert triggers are under shutdown: {{ $alertTriggerService->currentShutdown()->reason }}
+                                <span class="icon"><i class="fas fa-exclamation-triangle"></i></span>
+                                <span class="has-text-weight-semibold">{{ $alertTriggerService->currentShutdown()->reason }}</span>
                             @else
-                                {{ $message ?? "Let's watch your bots!" }}
+                                <span class="has-text-weight-semibold">{{ $message ?? "Let's watch your bots!" }}</span>
                             @endif
                         </h2>
                     </div>

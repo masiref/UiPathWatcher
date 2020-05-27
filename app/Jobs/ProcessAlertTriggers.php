@@ -81,11 +81,12 @@ class ProcessAlertTriggers implements ShouldQueue
                                 $messages = array_merge($messages, $ruleVerification['messages']);
                             }
                         }
+                            
+                        // get existing opened alert attached to trigger
+                        $existingAlert = $trigger->openedAlerts()->first();
 
                         // if all rules are verified
                         if ($verified) {
-                            // get existing opened alert attached to trigger
-                            $existingAlert = $trigger->openedAlerts()->first();
 
                             if (!$existingAlert) {
                                 // if there is no existing alert
@@ -106,7 +107,8 @@ class ProcessAlertTriggers implements ShouldQueue
                                     'messages' => $messages,
                                     'reviewer_id' => $existingAlert->reviewer_id,
                                     'under_revision' => $existingAlert->under_revision,
-                                    'revision_started_at' => $existingAlert->revision_started_at
+                                    'revision_started_at' => $existingAlert->revision_started_at,
+                                    'top_ancestor_created_at' => $existingAlert->top_ancestor_created_at ?? $existingAlert->created_at
                                 ]);
                             
                                 // closing of existing alert if present
@@ -118,20 +120,35 @@ class ProcessAlertTriggers implements ShouldQueue
                                     'under_revision' => false,
                                     'parent_id' => $alert->id
                                 ]);
+                            } else {
+                                // alert of same definition level => update heartbeat
+                                $existingAlert->update([
+                                    'alive' => true,
+                                    'latest_heartbeat_at' => Carbon::now()
+                                ]);
                             }
 
                             // no need to check other definitions
                             break;
                         } else {
-                            // close opened alerts with same definition
-                            foreach ($trigger->openedAlerts()->where('alert_trigger_definition_id', $definition->id) as $alert) {
-                                $alert->update([
-                                    'closed' => true,
-                                    'closed_at' => Carbon::now(),
-                                    'closing_description' => 'Rules are not verified anymore',
-                                    'auto_closed' => true,
-                                    'under_revision' => false
-                                ]);
+                            // if existing opened alert not alive for more than 5 minutes close it
+                            if ($existingAlert && $existingAlert->definition->level === $definition->level) {
+                                $date = Carbon::createFromFormat('Y-m-d H:i:s', $existingAlert->latest_heartbeat_at ?? $existingAlert->created_at);
+                                $delay = $date->diffInMinutes(Carbon::now());
+
+                                if ($delay > 5) {
+                                    $alert->update([
+                                        'closed' => true,
+                                        'closed_at' => Carbon::now(),
+                                        'closing_description' => 'There is no applicable definition anymore after 5 minutes',
+                                        'auto_closed' => true,
+                                        'under_revision' => false
+                                    ]);
+                                } else {
+                                    $existingAlert->update([
+                                        'alive' => false
+                                    ]);
+                                }
                             }
                         }
                     }

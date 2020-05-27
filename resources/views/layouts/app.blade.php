@@ -8,7 +8,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }} {{ config('app.version', ' - Demo Version') }}</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -36,6 +36,14 @@
                 </div>
             @endif
         </div>
+
+        <footer class="footer">
+            <div class="content has-text-centered">
+                <p>
+                    <strong>UiPath Watcher</strong> - v1.0 - 2020</a>
+                </p>
+            </div>
+        </footer>
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>

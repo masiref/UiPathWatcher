@@ -26,6 +26,7 @@
             @endif
         @endif
         @if ($clientWatchedAutomatedProcessesCount > 0)
+            <div class="is-divider" data-content="QUICK BOARD"></div>
             @include('dashboard.client.quick-board')
             
             @if ($clientAlertTriggersCount > 0)
@@ -44,7 +45,8 @@
                 @include('layouts.title', [
                     'title' => 'Pending alerts',
                     'icon' => 'fire',
-                    'color' => 'dark'
+                    'color' => 'dark',
+                    'underlined' => false
                 ])
                 @include('dashboard.alert.table', [
                     'tableID' => 'pending-alerts-table',
@@ -55,7 +57,8 @@
                 @include('layouts.title', [
                     'title' => 'Closed alerts',
                     'icon' => 'dumpster-fire',
-                    'color' => 'grey-light'
+                    'color' => 'grey-light',
+                    'underlined' => false
                 ])
                 @include('dashboard.alert.table', [
                     'tableID' => 'closed-alerts-table',
