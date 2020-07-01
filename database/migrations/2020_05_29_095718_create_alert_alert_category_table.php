@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUiPathOrchestratorsTable extends Migration
+class CreateAlertAlertCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateUiPathOrchestratorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ui_path_orchestrators', function (Blueprint $table) {
+        Schema::create('alert_alert_category', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('code');
-            $table->string('url');
-            $table->timestamps();
+            $table->unsignedBigInteger('alert_id');
+            $table->unsignedBigInteger('alert_category_id');
         });
     }
 
@@ -29,6 +27,6 @@ class CreateUiPathOrchestratorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ui_path_orchestrators');
+        Schema::dropIfExists('alert_alert_category');
     }
 }

@@ -81,6 +81,11 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, 
   }
 }
 
+.sidebar {
+	position: sticky;
+  top: 65px;
+}
+
 article.watched-automated-process-box .media-content {
   border: 1px dotted $grey-light;
   padding: 1rem;

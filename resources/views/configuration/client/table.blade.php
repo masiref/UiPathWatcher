@@ -17,7 +17,7 @@
                         {{ $client->orchestrator->url }}
                     </a>
                 </td>
-                <td>{{ $client->orchestrator->tenant }}</td>
+                <td>{{ $client->ui_path_orchestrator_tenant }}</td>
                 <td>
                     <a href="{{ $client->elastic_search_url }}" target="about:blank">
                         {{ $client->elastic_search_url }}

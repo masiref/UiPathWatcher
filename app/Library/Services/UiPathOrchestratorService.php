@@ -2,16 +2,16 @@
 
 namespace App\Library\Services;
 
-use App\UiPathOrchestrator;
+use App\Client;
 use App\UiPathRobot;
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\RequestException;
 
 class UiPathOrchestratorService {
 
-    protected function getGuzzle(UiPathOrchestrator $orchestrator)
+    protected function getGuzzle(Client $client)
     {
-        $url = $orchestrator->url;
+        $url = $client->orchestrator->url;
         return new Guzzle([
             'base_uri' => "$url"
         ]);
@@ -41,15 +41,15 @@ class UiPathOrchestratorService {
         ];
     }
     
-    public function authenticate(UiPathOrchestrator $orchestrator)
+    public function authenticate(Client $client)
     {
         $result = $this->getDefaultResult();
 
-        $tenant = $orchestrator->tenant;
-        $username = $orchestrator->api_user_username;
-        $password = $orchestrator->api_user_password;
+        $tenant = $client->ui_path_orchestrator_tenant;
+        $username = $client->ui_path_orchestrator_api_user_username;
+        $password = $client->ui_path_orchestrator_api_user_password;
 
-        $guzzle = $this->getGuzzle($orchestrator);
+        $guzzle = $this->getGuzzle($client);
         try {
             $response = $guzzle->request('POST', 'api/account/authenticate', [
                 'json' => [
@@ -61,17 +61,17 @@ class UiPathOrchestratorService {
             $token = json_decode($response->getBody(), true)['result'];
             $result['token'] = $token;
         } catch (RequestException $e) {
-            $result = $this->getErrorResult("impossible to authenticate to $orchestrator->url ($tenant tenant) with $username user.");
+            $result = $this->getErrorResult("impossible to authenticate to $client->orchestrator->url ($tenant tenant) with $username user.");
         }
 
         return $result;
     }
 
-    public function getReleases(UiPathOrchestrator $orchestrator, $token, $filter = '')
+    public function getReleases(Client $client, $token, $filter = '')
     {
         $result = $this->getDefaultResult();
 
-        $guzzle = $this->getGuzzle($orchestrator);
+        $guzzle = $this->getGuzzle($client);
         $headers = $this->getHeaders($token);
         try {
             $result['releases'] = json_decode(
@@ -81,17 +81,17 @@ class UiPathOrchestratorService {
                 true
             )['value'];
         } catch (RequestException $e) {
-            $result = $this->getErrorResult("impossible to get releases from $orchestrator->url");
+            $result = $this->getErrorResult("impossible to get releases from $client->orchestrator->url");
         }
 
         return $result;
     }
 
-    public function getRobots(UiPathOrchestrator $orchestrator, $token, $filter = '')
+    public function getRobots(Client $client, $token, $filter = '')
     {
         $result = $this->getDefaultResult();
 
-        $guzzle = $this->getGuzzle($orchestrator);
+        $guzzle = $this->getGuzzle($client);
         $headers = $this->getHeaders($token);
         try {
             $result['robots'] = json_decode(
@@ -101,17 +101,17 @@ class UiPathOrchestratorService {
                 true
             )['value'];
         } catch (RequestException $e) {
-            $result = $this->getErrorResult("impossible to get robots from $orchestrator->url");
+            $result = $this->getErrorResult("impossible to get robots from $client->orchestrator->url");
         }
 
         return $result;
     }
 
-    public function getQueues(UiPathOrchestrator $orchestrator, $token, $filter = '')
+    public function getQueues(Client $client, $token, $filter = '')
     {
         $result = $this->getDefaultResult();
 
-        $guzzle = $this->getGuzzle($orchestrator);
+        $guzzle = $this->getGuzzle($client);
         $headers = $this->getHeaders($token);
         try {
             $result['queues'] = json_decode(
@@ -121,17 +121,17 @@ class UiPathOrchestratorService {
                 true
             )['value'];
         } catch (RequestException $e) {
-            $result = $this->getErrorResult("impossible to get queues from $orchestrator->url");
+            $result = $this->getErrorResult("impossible to get queues from $orchestrator->client->url");
         }
 
         return $result;
     }
 
-    public function getQueueItems(UiPathOrchestrator $orchestrator, $token, $filter = '')
+    public function getQueueItems(Client $client, $token, $filter = '')
     {
         $result = $this->getDefaultResult();
 
-        $guzzle = $this->getGuzzle($orchestrator);
+        $guzzle = $this->getGuzzle($client);
         $headers = $this->getHeaders($token);
         try {
             $result['queue-items'] = json_decode(
@@ -141,17 +141,17 @@ class UiPathOrchestratorService {
                 true
             )['value'];
         } catch (RequestException $e) {
-            $result = $this->getErrorResult("impossible to get queue items from $orchestrator->url");
+            $result = $this->getErrorResult("impossible to get queue items from $orchestrator->client->url");
         }
 
         return $result;
     }
 
-    public function getJobs(UiPathOrchestrator $orchestrator, $token, $filter = '')
+    public function getJobs(Client $client, $token, $filter = '')
     {
         $result = $this->getDefaultResult();
 
-        $guzzle = $this->getGuzzle($orchestrator);
+        $guzzle = $this->getGuzzle($client);
         $headers = $this->getHeaders($token);
 
         try {
@@ -162,7 +162,7 @@ class UiPathOrchestratorService {
                 true
             )['value'];
         } catch (RequestException $e) {
-            $result = $this->getErrorResult("impossible to get jobs from $orchestrator->url");
+            $result = $this->getErrorResult("impossible to get jobs from $orchestrator->client->url");
         }
 
         return $result;
@@ -172,8 +172,8 @@ class UiPathOrchestratorService {
     {
         $result = $this->getDefaultResult();
 
-        $orchestrator = $robot->orchestrator;
-        $guzzle = $this->getGuzzle($orchestrator);
+        $client = Client::all()->where('orchestrator', $robot->orchestrator)->first();
+        $guzzle = $this->getGuzzle($client);
         $headers = $this->getHeaders($token);
         try {
             $result['session'] = json_decode(

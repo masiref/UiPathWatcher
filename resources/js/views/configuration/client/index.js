@@ -29,7 +29,7 @@ export const init = () => {
             const createButton = base.elements.addForm.querySelector(base.selectors.createButton);
             if (e.target.matches(`${base.selectors.createButton}, ${base.selectors.createButtonChildren}`) && !createButton.disabled) {
                 create().then(res => {
-                    toastr.success('Client successfully added!', null, {
+                    toastr.success('Customer successfully added!', null, {
                         positionClass: 'toast-bottom-left'
                     });
                     return Promise.all([
@@ -85,7 +85,7 @@ const loadEditForm = e => {
                         loadAddForm(e);
                         updateTable();
                         layoutController.update(configuration.layout);
-                        toastr.success('Client successfully updated!', null, {
+                        toastr.success('Customer successfully updated!', null, {
                             positionClass: 'toast-bottom-left'
                         });
                     });
@@ -95,8 +95,8 @@ const loadEditForm = e => {
                 }
                 if (e.target.matches(`${base.selectors.removeButton}, ${base.selectors.removeButtonChildren}`)) {
                     _base.swalWithBulmaButtons.fire({
-                        title: 'Client removal confirmation',
-                        text: 'This client and all its related elements (watched processes, alert triggers and alerts) will be removed. Are you sure?',
+                        title: 'Customer removal confirmation',
+                        text: 'This customer and all its related elements (watched processes, alert triggers and alerts) will be removed. Are you sure?',
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonText: '<span class="icon"><i class="fas fa-trash-alt"></i></span><span>Remove it!</span>',
@@ -107,7 +107,7 @@ const loadEditForm = e => {
                                 loadAddForm(e);
                                 updateTable();
                                 layoutController.update(configuration.layout);
-                                toastr.success('Client successfully removed!', null, {
+                                toastr.success('Customer successfully removed!', null, {
                                     positionClass: 'toast-bottom-left'
                                 });
                             });
@@ -136,8 +136,13 @@ const checkForm = e => {
     const nameInput = form.querySelector(base.selectors.nameInput);
     const codeInput = form.querySelector(base.selectors.codeInput);
     const orchestratorSelect = form.querySelector(base.selectors.orchestratorSelect);
+    const orchestratorTenantInput = form.querySelector(base.selectors.orchestratorTenantInput);
+    const orchestratorApiUserUsernameInput = form.querySelector(base.selectors.orchestratorApiUserUsernameInput);
+    const orchestratorApiUserPasswordInput = form.querySelector(base.selectors.orchestratorApiUserPasswordInput);
     const elasticSearchUrlInput = form.querySelector(base.selectors.elasticSearchUrlInput);
     const elasticSearchIndexInput = form.querySelector(base.selectors.elasticSearchIndexInput);
+    const elasticSearchApiUserUsernameInput = form.querySelector(base.selectors.elasticSearchApiUserUsernameInput);
+    const elasticSearchApiUserPasswordInput = form.querySelector(base.selectors.elasticSearchApiUserPasswordInput);
 
     const nameInputValid = !(nameInput.value.trim() === '');
     _base.toggleSuccessDangerState(nameInput, nameInputValid);
@@ -148,14 +153,28 @@ const checkForm = e => {
     const orchestratorSelectValid = !(orchestratorSelect.value === "0");
     _base.toggleSuccessDangerState(orchestratorSelect.parentNode, orchestratorSelectValid);
 
+    const orchestratorTenantInputValid = !(orchestratorTenantInput.value.trim() === '');
+    _base.toggleSuccessDangerState(orchestratorTenantInput, orchestratorTenantInputValid);
+
+    const orchestratorApiUserUsernameInputValid = !(orchestratorApiUserUsernameInput.value.trim() === '');
+    _base.toggleSuccessDangerState(orchestratorApiUserUsernameInput, orchestratorApiUserUsernameInputValid);
+
+    const orchestratorApiUserPasswordInputValid = !(orchestratorApiUserPasswordInput.value.trim() === '');
+    _base.toggleSuccessDangerState(orchestratorApiUserPasswordInput, orchestratorApiUserPasswordInputValid);
+
     const elasticSearchUrlInputValid = !(elasticSearchUrlInput.value.trim() === '' || !_base.validURL(elasticSearchUrlInput.value));
     _base.toggleSuccessDangerState(elasticSearchUrlInput, elasticSearchUrlInputValid);
 
     const elasticSearchIndexInputValid = !(elasticSearchIndexInput.value.trim() === '');
     _base.toggleSuccessDangerState(elasticSearchIndexInput, elasticSearchIndexInputValid);
+
+    _base.toggleSuccessDangerState(elasticSearchApiUserUsernameInput, true);
+    _base.toggleSuccessDangerState(elasticSearchApiUserPasswordInput, true);
     
-    const formValid = nameInputValid && codeInputValid && orchestratorSelectValid &&
-        elasticSearchUrlInputValid && elasticSearchIndexInputValid;
+    const formValid = nameInputValid && codeInputValid && orchestratorSelectValid
+         && orchestratorTenantInputValid && orchestratorApiUserUsernameInputValid
+         && orchestratorApiUserPasswordInputValid
+         && elasticSearchUrlInputValid && elasticSearchIndexInputValid;
 
     if (currentMode === 'add') {
         form.querySelector(base.selectors.createButton).disabled = !formValid;
@@ -172,8 +191,13 @@ const create = async () => {
         const nameInput = form.querySelector(base.selectors.nameInput);
         const codeInput = form.querySelector(base.selectors.codeInput);
         const orchestratorSelect = form.querySelector(base.selectors.orchestratorSelect);
+        const orchestratorTenantInput = form.querySelector(base.selectors.orchestratorTenantInput);
+        const orchestratorApiUserUsernameInput = form.querySelector(base.selectors.orchestratorApiUserUsernameInput);
+        const orchestratorApiUserPasswordInput = form.querySelector(base.selectors.orchestratorApiUserPasswordInput);
         const elasticSearchUrlInput = form.querySelector(base.selectors.elasticSearchUrlInput);
         const elasticSearchIndexInput = form.querySelector(base.selectors.elasticSearchIndexInput);
+        const elasticSearchApiUserUsernameInput = form.querySelector(base.selectors.elasticSearchApiUserUsernameInput);
+        const elasticSearchApiUserPasswordInput = form.querySelector(base.selectors.elasticSearchApiUserPasswordInput);
 
         return new Promise((resolve, reject) => {
             const client = new Client();
@@ -182,8 +206,13 @@ const create = async () => {
                     nameInput.value.trim(),
                     codeInput.value.trim(),
                     orchestratorSelect.value.trim(),
+                    orchestratorTenantInput.value.trim(),
+                    orchestratorApiUserUsernameInput.value.trim(),
+                    orchestratorApiUserPasswordInput.value,
                     elasticSearchUrlInput.value.trim(),
-                    elasticSearchIndexInput.value.trim()
+                    elasticSearchIndexInput.value.trim(),
+                    elasticSearchApiUserUsernameInput.value.trim(),
+                    elasticSearchApiUserPasswordInput.value
                 ).then(res => {
                     resetForm();
                     _base.clearLoader(form);
@@ -191,7 +220,7 @@ const create = async () => {
             )
         });
     } catch (error) {
-        toastr.error(`Client not added due to application exception: ${error}`, null, {
+        toastr.error(`Customer not added due to application exception: ${error}`, null, {
             positionClass: 'toast-bottom-left'
         });
         console.log(error);
@@ -207,8 +236,13 @@ const update = async () => {
         const nameInput = form.querySelector(base.selectors.nameInput);
         const codeInput = form.querySelector(base.selectors.codeInput);
         const orchestratorSelect = form.querySelector(base.selectors.orchestratorSelect);
+        const orchestratorTenantInput = form.querySelector(base.selectors.orchestratorTenantInput);
+        const orchestratorApiUserUsernameInput = form.querySelector(base.selectors.orchestratorApiUserUsernameInput);
+        const orchestratorApiUserPasswordInput = form.querySelector(base.selectors.orchestratorApiUserPasswordInput);
         const elasticSearchUrlInput = form.querySelector(base.selectors.elasticSearchUrlInput);
         const elasticSearchIndexInput = form.querySelector(base.selectors.elasticSearchIndexInput);
+        const elasticSearchApiUserUsernameInput = form.querySelector(base.selectors.elasticSearchApiUserUsernameInput);
+        const elasticSearchApiUserPasswordInput = form.querySelector(base.selectors.elasticSearchApiUserPasswordInput);
         
         return new Promise((resolve, reject) => {
             const client = new Client(form.dataset.id);
@@ -217,8 +251,13 @@ const update = async () => {
                     nameInput.value.trim(),
                     codeInput.value.trim(),
                     orchestratorSelect.value.trim(),
+                    orchestratorTenantInput.value.trim(),
+                    orchestratorApiUserUsernameInput.value.trim(),
+                    orchestratorApiUserPasswordInput.value,
                     elasticSearchUrlInput.value.trim(),
-                    elasticSearchIndexInput.value.trim()
+                    elasticSearchIndexInput.value.trim(),
+                    elasticSearchApiUserUsernameInput.value.trim(),
+                    elasticSearchApiUserPasswordInput.value
                 ).then(response => {
                     resetForm();
                     _base.clearLoader(form);
@@ -226,7 +265,7 @@ const update = async () => {
             )
         });
     } catch (error) {
-        toastr.error(`Client not updated due to application exception: ${error}`, null, {
+        toastr.error(`Customer not updated due to application exception: ${error}`, null, {
             positionClass: 'toast-bottom-left'
         });
         console.log(error);
@@ -249,7 +288,7 @@ const remove = async () => {
             )
         });
     } catch (error) {
-        toastr.error(`Client not removed due to application exception: ${error}`, null, {
+        toastr.error(`Customer not removed due to application exception: ${error}`, null, {
             positionClass: 'toast-bottom-left'
         });
         console.log(error);
@@ -283,15 +322,25 @@ const resetForm = () => {
         const nameInput = form.querySelector(base.selectors.nameInput);
         const codeInput = form.querySelector(base.selectors.codeInput);
         const orchestratorSelect = form.querySelector(base.selectors.orchestratorSelect);
+        const orchestratorTenantInput = form.querySelector(base.selectors.orchestratorTenantInput);
+        const orchestratorApiUserUsernameInput = form.querySelector(base.selectors.orchestratorApiUserUsernameInput);
+        const orchestratorApiUserPasswordInput = form.querySelector(base.selectors.orchestratorApiUserPasswordInput);
         const elasticSearchUrlInput = form.querySelector(base.selectors.elasticSearchUrlInput);
         const elasticSearchIndexInput = form.querySelector(base.selectors.elasticSearchIndexInput);
+        const elasticSearchApiUserUsernameInput = form.querySelector(base.selectors.elasticSearchApiUserUsernameInput);
+        const elasticSearchApiUserPasswordInput = form.querySelector(base.selectors.elasticSearchApiUserPasswordInput);
 
         form.reset();
         _base.removeStates(nameInput);
         _base.removeStates(codeInput);
         _base.removeStates(orchestratorSelect.parentNode);
+        _base.removeStates(orchestratorTenantInput);
+        _base.removeStates(orchestratorApiUserUsernameInput);
+        _base.removeStates(orchestratorApiUserPasswordInput);
         _base.removeStates(elasticSearchUrlInput);
         _base.removeStates(elasticSearchIndexInput);
+        _base.removeStates(elasticSearchApiUserUsernameInput);
+        _base.removeStates(elasticSearchApiUserPasswordInput);
     } catch (error) {
         console.log(error);
     }

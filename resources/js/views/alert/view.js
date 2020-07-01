@@ -1,8 +1,7 @@
 import bulmaCalendar from 'bulma-calendar';
+import BulmaTagsInput from '@creativebulma/bulma-tagsinput';
 import moment from 'moment';
 import { strings, elements, selectors } from './base';
-import * as closingFormModal from './forms/closing-form-modal';
-import * as ignoranceFormModal from './forms/ignorance-form-modal';
 import * as _base from '../base';
 
 const renderLoaderOnBox = (id) => {
@@ -77,10 +76,11 @@ export const updateRow = (id, markup) => {
 };
 
 export const showClosingFormModal = alert => {
-    const markup = closingFormModal.markup(strings.closingFormModalID, alert);
+    const markup = alert.closingFormModal;
     document.body.insertAdjacentHTML('beforeend', markup);
     let modal = document.getElementById(strings.closingFormModalID);
     _base.showModal(modal);
+    new BulmaTagsInput(`#${strings.closingFormModalID} #keywords`);
     return modal;
 };
 
@@ -90,7 +90,7 @@ export const removeClosingFormModal = () => {
 };
 
 export const showIgnoranceFormModal = alert => {
-    const markup = ignoranceFormModal.markup(strings.ignoranceFormModalID, alert);
+    const markup = alert.ignoranceFormModal;
     document.body.insertAdjacentHTML('beforeend', markup);
     const now = moment();
     bulmaCalendar.attach(selectors.ignoranceFormModalIgnoreUntilDatetimeInput, {

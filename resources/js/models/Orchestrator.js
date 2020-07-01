@@ -7,17 +7,14 @@ export default class Orchestrator {
         }
     }
 
-    async save(name, code, url, tenant, apiUserUsername, apiUserPassword) {
+    async save(name, code, url, tenant) {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
                     axios.post('/api/ui-path-orchestrators', {
                         'name': name,
                         'code': code,
-                        'url': url,
-                        'tenant': tenant,
-                        'api_user_username': apiUserUsername,
-                        'api_user_password': apiUserPassword
+                        'url': url
                     }).then(response => {
                         if (response.data) {
                             this.id = response.data.id;
@@ -30,19 +27,14 @@ export default class Orchestrator {
         }
     }
 
-    async update(name, code, url, tenant, apiUserUsername, apiUserPassword) {
+    async update(name, code, url, tenant) {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
                     axios.patch(`/api/ui-path-orchestrators/${this.id}`, {
                         'name': name,
                         'code': code,
-                        'url': url,
-                        'tenant': tenant,
-                        'api_user_username': apiUserUsername,
-                        'api_user_password': apiUserPassword,
-                        'elastic_search_url': elasticSearchUrl,
-                        'elastic_search_index': elasticSearchIndex
+                        'url': url
                     }).then(response => {
                         if (response.data) {
                             this.data = response.data;

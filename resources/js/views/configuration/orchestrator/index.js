@@ -95,7 +95,7 @@ const loadEditForm = e => {
                 if (e.target.matches(`${base.selectors.removeButton}, ${base.selectors.removeButtonChildren}`)) {
                     _base.swalWithBulmaButtons.fire({
                         title: 'Orchestrator removal confirmation',
-                        text: 'This orchestrator and all its related elements (clients, watched processes, alert triggers and alerts) will be removed. Are you sure?',
+                        text: 'This orchestrator and all its related elements (customers, watched processes, alert triggers and alerts) will be removed. Are you sure?',
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonText: '<span class="icon"><i class="fas fa-trash-alt"></i></span><span>Remove it!</span>',
@@ -134,9 +134,6 @@ const checkForm = e => {
     const nameInput = form.querySelector(base.selectors.nameInput);
     const codeInput = form.querySelector(base.selectors.codeInput);
     const urlInput = form.querySelector(base.selectors.urlInput);
-    const tenantInput = form.querySelector(base.selectors.tenantInput);
-    const apiUserUsernameInput = form.querySelector(base.selectors.apiUserUsernameInput);
-    const apiUserPasswordInput = form.querySelector(base.selectors.apiUserPasswordInput);
 
     const nameInputValid = !(nameInput.value.trim() === '');
     _base.toggleSuccessDangerState(nameInput, nameInputValid);
@@ -146,18 +143,8 @@ const checkForm = e => {
 
     const urlInputValid = !(urlInput.value.trim() === '' || !_base.validURL(urlInput.value));
     _base.toggleSuccessDangerState(urlInput, urlInputValid);
-
-    const tenantInputValid = !(tenantInput.value.trim() === '');
-    _base.toggleSuccessDangerState(tenantInput, tenantInputValid);
-
-    const apiUserUsernameInputValid = !(apiUserUsernameInput.value.trim() === '');
-    _base.toggleSuccessDangerState(apiUserUsernameInput, apiUserUsernameInputValid);
-
-    const apiUserPasswordInputValid = !(apiUserPasswordInput.value.trim() === '');
-    _base.toggleSuccessDangerState(apiUserPasswordInput, apiUserPasswordInputValid);
     
-    const formValid = nameInputValid && codeInputValid && urlInputValid && tenantInputValid && apiUserUsernameInputValid &&
-        apiUserPasswordInputValid;
+    const formValid = nameInputValid && codeInputValid && urlInputValid;
 
     if (currentMode === 'add') {
         form.querySelector(base.selectors.createButton).disabled = !formValid;
@@ -174,9 +161,6 @@ const create = async () => {
         const nameInput = form.querySelector(base.selectors.nameInput);
         const codeInput = form.querySelector(base.selectors.codeInput);
         const urlInput = form.querySelector(base.selectors.urlInput);
-        const tenantInput = form.querySelector(base.selectors.tenantInput);
-        const apiUserUsernameInput = form.querySelector(base.selectors.apiUserUsernameInput);
-        const apiUserPasswordInput = form.querySelector(base.selectors.apiUserPasswordInput);
         
         return new Promise((resolve, reject) => {
             const orchestrator = new Orchestrator();
@@ -184,10 +168,7 @@ const create = async () => {
                 orchestrator.save(
                     nameInput.value.trim(),
                     codeInput.value.trim(),
-                    urlInput.value.trim(),
-                    tenantInput.value.trim(),
-                    apiUserUsernameInput.value.trim(),
-                    apiUserPasswordInput.value
+                    urlInput.value.trim()
                 ).then(res => {
                     resetForm();
                     _base.clearLoader(form);
@@ -211,9 +192,6 @@ const update = async () => {
         const nameInput = form.querySelector(base.selectors.nameInput);
         const codeInput = form.querySelector(base.selectors.codeInput);
         const urlInput = form.querySelector(base.selectors.urlInput);
-        const tenantInput = form.querySelector(base.selectors.tenantInput);
-        const apiUserUsernameInput = form.querySelector(base.selectors.apiUserUsernameInput);
-        const apiUserPasswordInput = form.querySelector(base.selectors.apiUserPasswordInput);
         
         return new Promise((resolve, reject) => {
             const orchestrator = new Orchestrator(form.dataset.id);
@@ -221,10 +199,7 @@ const update = async () => {
                 orchestrator.update(
                     nameInput.value.trim(),
                     codeInput.value.trim(),
-                    urlInput.value.trim(),
-                    tenantInput.value.trim(),
-                    apiUserUsernameInput.value.trim(),
-                    apiUserPasswordInput.value
+                    urlInput.value.trim()
                 ).then(response => {
                     resetForm();
                     _base.clearLoader(form);
@@ -289,17 +264,11 @@ const resetForm = () => {
         const nameInput = form.querySelector(base.selectors.nameInput);
         const codeInput = form.querySelector(base.selectors.codeInput);
         const urlInput = form.querySelector(base.selectors.urlInput);
-        const tenantInput = form.querySelector(base.selectors.tenantInput);
-        const apiUserUsernameInput = form.querySelector(base.selectors.apiUserUsernameInput);
-        const apiUserPasswordInput = form.querySelector(base.selectors.apiUserPasswordInput);
         
         form.reset();
         _base.removeStates(nameInput);
         _base.removeStates(codeInput);
         _base.removeStates(urlInput);
-        _base.removeStates(tenantInput);
-        _base.removeStates(apiUserUsernameInput);
-        _base.removeStates(apiUserPasswordInput);
     } catch (error) {
         console.log(error);
     }

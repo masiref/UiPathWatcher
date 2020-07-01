@@ -65,7 +65,9 @@ export default class Client {
         }
     }
 
-    async save(name, code, orchestrator, elasticSearchUrl, elasticSearchIndex) {
+    async save(name, code, orchestrator, orchestratorTenant, orchestratorApiUserUsername,
+        orchestratorApiUserPassword, elasticSearchUrl, elasticSearchIndex,
+        elasticSearchApiUserUsername, elasticSearchApiUserPassword) {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
@@ -73,8 +75,13 @@ export default class Client {
                         'name': name,
                         'code': code,
                         'ui_path_orchestrator_id': orchestrator,
+                        'ui_path_orchestrator_tenant': orchestratorTenant,
+                        'ui_path_orchestrator_api_user_username': orchestratorApiUserUsername,
+                        'ui_path_orchestrator_api_user_password': orchestratorApiUserPassword,
                         'elastic_search_url': elasticSearchUrl,
-                        'elastic_search_index': elasticSearchIndex
+                        'elastic_search_index': elasticSearchIndex,
+                        'elastic_search_api_user_username': elasticSearchApiUserUsername,
+                        'elastic_search_api_user_password': elasticSearchApiUserPassword
                     }).then(response => {
                         if (response.data) {
                             this.id = response.data.id;
@@ -87,7 +94,9 @@ export default class Client {
         }
     }
 
-    async update(name, code, orchestrator, elasticSearchUrl, elasticSearchIndex) {
+    async update(name, code, orchestrator, orchestratorTenant, orchestratorApiUserUsername,
+        orchestratorApiUserPassword, elasticSearchUrl, elasticSearchIndex,
+        elasticSearchApiUserUsername, elasticSearchApiUserPassword) {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
@@ -95,8 +104,13 @@ export default class Client {
                         'name': name,
                         'code': code,
                         'ui_path_orchestrator_id': orchestrator,
+                        'ui_path_orchestrator_tenant': orchestratorTenant,
+                        'ui_path_orchestrator_api_user_username': orchestratorApiUserUsername,
+                        'ui_path_orchestrator_api_user_password': orchestratorApiUserPassword,
                         'elastic_search_url': elasticSearchUrl,
-                        'elastic_search_index': elasticSearchIndex
+                        'elastic_search_index': elasticSearchIndex,
+                        'elastic_search_api_user_username': elasticSearchApiUserUsername,
+                        'elastic_search_api_user_password': elasticSearchApiUserPassword
                     }).then(response => {
                         if (response.data) {
                             this.data = response.data;

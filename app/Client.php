@@ -14,7 +14,10 @@ class Client extends Model
      */
     protected $fillable = [
         'name', 'code', 'ui_path_orchestrator_id',
-        'elastic_search_url', 'elastic_search_index'
+        'ui_path_orchestrator_tenant', 'ui_path_orchestrator_api_user_username',
+        'ui_path_orchestrator_api_user_password',
+        'elastic_search_url', 'elastic_search_index',
+        'elastic_search_api_user_username', 'elastic_search_api_user_password'
     ];
 
     /**

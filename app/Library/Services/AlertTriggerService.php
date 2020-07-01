@@ -44,10 +44,10 @@ class AlertTriggerService {
         return [ 'result' => false ];
     }
 
-    protected function getToken($orchestrator)
+    protected function getToken($client)
     {
         $orchestratorService = $this->orchestratorService;
-        $result = $orchestratorService->authenticate($orchestrator);
+        $result = $orchestratorService->authenticate($client);
         $token = null;
         if (!$result['error']) {
             $token = $result['token'];
@@ -59,8 +59,9 @@ class AlertTriggerService {
     {
         $orchestratorService = $this->orchestratorService;
 
-        $orchestrator = $rule->definition->trigger->watchedAutomatedProcess->client->orchestrator;
-        $token = $this->getToken($orchestrator);
+        $client = $rule->definition->trigger->watchedAutomatedProcess->client;
+        $orchestrator = $client->orchestrator;
+        $token = $this->getToken($client);
 
         $result = false;
         $messages = array();
@@ -92,7 +93,7 @@ class AlertTriggerService {
                 $timeFilter = "EndTime ne null and StartTime ge {$minDate->toDateTimeLocalString()}.000Z";
                 $globalFilter = "($filter) and ($timeFilter)";
 
-                $result = $orchestratorService->getJobs($orchestrator, $token, $globalFilter);
+                $result = $orchestratorService->getJobs($client, $token, $globalFilter);
                 if (!$result['error']) {
                     $jobs = $result['jobs'];
                     foreach ($jobs as $job) {
@@ -118,8 +119,9 @@ class AlertTriggerService {
     {
         $orchestratorService = $this->orchestratorService;
         
-        $orchestrator = $rule->definition->trigger->watchedAutomatedProcess->client->orchestrator;
-        $token = $this->getToken($orchestrator);
+        $client = $rule->definition->trigger->watchedAutomatedProcess->client;
+        $orchestrator = $client->orchestrator;
+        $token = $this->getToken($client);
 
         $result = false;
         $messages = array();
@@ -146,7 +148,7 @@ class AlertTriggerService {
                 $timeFilter = "StartTime ge {$minDate->toDateTimeLocalString()}.000Z";
                 $globalFilter = "($filter) and ($timeFilter)";
 
-                $result = $orchestratorService->getJobs($orchestrator, $token, $globalFilter);
+                $result = $orchestratorService->getJobs($client, $token, $globalFilter);
                 if (!$result['error']) {
                     $jobs = $result['jobs'];
                     foreach ($jobs as $job) {
@@ -171,8 +173,9 @@ class AlertTriggerService {
     {
         $orchestratorService = $this->orchestratorService;
         
-        $orchestrator = $rule->definition->trigger->watchedAutomatedProcess->client->orchestrator;
-        $token = $this->getToken($orchestrator);
+        $client = $rule->definition->trigger->watchedAutomatedProcess->client;
+        $orchestrator = $client->orchestrator;
+        $token = $this->getToken($client);
 
         $result = false;
         $messages = array();
@@ -205,12 +208,12 @@ class AlertTriggerService {
                 $allJobsFilter = "($filter) and (EndTime ne null and StartTime ge {$minDate->toDateTimeLocalString()}.000Z)";
                 $faultedJobsFilter = "($allJobsFilter) and State eq 'Faulted'";
 
-                $result = $orchestratorService->getJobs($orchestrator, $token, $allJobsFilter);
+                $result = $orchestratorService->getJobs($client, $token, $allJobsFilter);
                 if (!$result['error']) {
                     $allJobs = $result['jobs'];
 
                     if (count($allJobs) > 0) {
-                        $result = $orchestratorService->getJobs($orchestrator, $token, $faultedJobsFilter);
+                        $result = $orchestratorService->getJobs($client, $token, $faultedJobsFilter);
                         if (!$result['error']) {
                             $faultedJobs = $result['jobs'];
                             
@@ -233,8 +236,9 @@ class AlertTriggerService {
     {
         $orchestratorService = $this->orchestratorService;
         
-        $orchestrator = $rule->definition->trigger->watchedAutomatedProcess->client->orchestrator;
-        $token = $this->getToken($orchestrator);
+        $client = $rule->definition->trigger->watchedAutomatedProcess->client;
+        $orchestrator = $client->orchestrator;
+        $token = $this->getToken($client);
 
         $result = false;
         $messages = array();
@@ -266,12 +270,12 @@ class AlertTriggerService {
             $allQueueItemsFilter = "($filter) and (EndTime ne null and StartTime ge {$minDate->toDateTimeLocalString()}.000Z)";
             $failedQueueItemsFilter = "($allQueueItemsFilter) and Status eq 'Failed'";
 
-            $result = $orchestratorService->getQueueItems($orchestrator, $token, $allQueueItemsFilter);
+            $result = $orchestratorService->getQueueItems($client, $token, $allQueueItemsFilter);
             if (!$result['error']) {
                 $allQueueItems = $result['queue-items'];
 
                 if (count($allQueueItems) > 0) {
-                    $result = $orchestratorService->getQueueItems($orchestrator, $token, $failedQueueItemsFilter);
+                    $result = $orchestratorService->getQueueItems($client, $token, $failedQueueItemsFilter);
                     if (!$result['error']) {
                         $failedQueueItems = $result['queue-items'];
                         

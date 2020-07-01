@@ -10,6 +10,7 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
+        "@creativebulma/bulma-collapsible": "^1.0.4",
         "axios": "^0.19.2",
         "bulma": "^0.8.0",
         "bulma-timeline": "^3.0.4",
@@ -22,6 +23,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "@creativebulma/bulma-tagsinput": "^1.0.2",
         "@fortawesome/fontawesome-free": "^5.13.0",
         "animate.css": "^3.7.2",
         "bulma-calendar": "^6.0.7",

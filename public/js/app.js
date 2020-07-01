@@ -98,6 +98,1819 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
 
 /***/ }),
 
+/***/ "./node_modules/@creativebulma/bulma-collapsible/dist/js/bulma-collapsible.min.js":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/@creativebulma/bulma-collapsible/dist/js/bulma-collapsible.min.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function webpackUniversalModuleDefinition(e,t){ true?module.exports=t():undefined}(window,function(){return function(e){var t={};function __webpack_require__(n){if(t[n])return t[n].exports;var r=t[n]={i:n,l:!1,exports:{}};return e[n].call(r.exports,r,r.exports,__webpack_require__),r.l=!0,r.exports}return __webpack_require__.m=e,__webpack_require__.c=t,__webpack_require__.d=function(e,t,n){__webpack_require__.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},__webpack_require__.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},__webpack_require__.t=function(e,t){if(1&t&&(e=__webpack_require__(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(__webpack_require__.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var r in e)__webpack_require__.d(n,r,function(t){return e[t]}.bind(null,r));return n},__webpack_require__.n=function(e){var t=e&&e.__esModule?function getDefault(){return e.default}:function getModuleExports(){return e};return __webpack_require__.d(t,"a",t),t},__webpack_require__.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},__webpack_require__.p="",__webpack_require__(__webpack_require__.s=12)}([function(e,t){function _getPrototypeOf(t){return e.exports=_getPrototypeOf=Object.setPrototypeOf?Object.getPrototypeOf:function _getPrototypeOf(e){return e.__proto__||Object.getPrototypeOf(e)},_getPrototypeOf(t)}e.exports=_getPrototypeOf},function(e,t){e.exports=function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}},function(e,t){function _defineProperties(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}e.exports=function _createClass(e,t,n){return t&&_defineProperties(e.prototype,t),n&&_defineProperties(e,n),e}},function(e,t){e.exports=function _assertThisInitialized(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}},function(e,t,n){var r=n(8);e.exports=function _objectSpread(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{},o=Object.keys(n);"function"==typeof Object.getOwnPropertySymbols&&(o=o.concat(Object.getOwnPropertySymbols(n).filter(function(e){return Object.getOwnPropertyDescriptor(n,e).enumerable}))),o.forEach(function(t){r(e,t,n[t])})}return e}},function(e,t,n){var r=n(6),o=n(3);e.exports=function _possibleConstructorReturn(e,t){return!t||"object"!==r(t)&&"function"!=typeof t?o(e):t}},function(e,t){function _typeof2(e){return(_typeof2="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function _typeof2(e){return typeof e}:function _typeof2(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function _typeof(t){return"function"==typeof Symbol&&"symbol"===_typeof2(Symbol.iterator)?e.exports=_typeof=function _typeof(e){return _typeof2(e)}:e.exports=_typeof=function _typeof(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":_typeof2(e)},_typeof(t)}e.exports=_typeof},function(e,t,n){var r=n(11);e.exports=function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&r(e,t)}},function(e,t){e.exports=function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}},function(e,t,n){n(0);var r=n(10);function _get(t,n,o){return"undefined"!=typeof Reflect&&Reflect.get?e.exports=_get=Reflect.get:e.exports=_get=function _get(e,t,n){var o=r(e,t);if(o){var i=Object.getOwnPropertyDescriptor(o,t);return i.get?i.get.call(n):i.value}},_get(t,n,o||t)}e.exports=_get},function(e,t,n){var r=n(0);e.exports=function _superPropBase(e,t){for(;!Object.prototype.hasOwnProperty.call(e,t)&&null!==(e=r(e)););return e}},function(e,t){function _setPrototypeOf(t,n){return e.exports=_setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(e,t){return e.__proto__=t,e},_setPrototypeOf(t,n)}e.exports=_setPrototypeOf},function(e,t,n){"use strict";n.r(t);var r=n(1),o=n.n(r),i=n(2),s=n.n(i),l=n(5),a=n.n(l),c=n(3),u=n.n(c),f=n(0),p=n.n(f),d=n(9),h=n.n(d),_=n(7),y=n.n(_),v=n(4),m=n.n(v),b=function(){function EventEmitter(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:[];o()(this,EventEmitter),this._listeners=new Map(e),this._middlewares=new Map}return s()(EventEmitter,[{key:"listenerCount",value:function listenerCount(e){return this._listeners.has(e)?this._listeners.get(e).length:0}},{key:"removeListeners",value:function removeListeners(){var e=this,t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null,n=arguments.length>1&&void 0!==arguments[1]&&arguments[1];null!==t?Array.isArray(t)?name.forEach(function(t){return e.removeListeners(t,n)}):(this._listeners.delete(t),n&&this.removeMiddleware(t)):this._listeners=new Map}},{key:"middleware",value:function middleware(e,t){var n=this;Array.isArray(e)?name.forEach(function(e){return n.middleware(e,t)}):(Array.isArray(this._middlewares.get(e))||this._middlewares.set(e,[]),this._middlewares.get(e).push(t))}},{key:"removeMiddleware",value:function removeMiddleware(){var e=this,t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null;null!==t?Array.isArray(t)?name.forEach(function(t){return e.removeMiddleware(t)}):this._middlewares.delete(t):this._middlewares=new Map}},{key:"on",value:function on(e,t){var n=this,r=arguments.length>2&&void 0!==arguments[2]&&arguments[2];if(Array.isArray(e))e.forEach(function(e){return n.on(e,t)});else{var o=(e=e.toString()).split(/,|, | /);o.length>1?o.forEach(function(e){return n.on(e,t)}):(Array.isArray(this._listeners.get(e))||this._listeners.set(e,[]),this._listeners.get(e).push({once:r,callback:t}))}}},{key:"once",value:function once(e,t){this.on(e,t,!0)}},{key:"emit",value:function emit(e,t){var n=this,r=arguments.length>2&&void 0!==arguments[2]&&arguments[2];e=e.toString();var o=this._listeners.get(e),i=null,s=0,l=r;if(Array.isArray(o))for(o.forEach(function(a,c){r||(i=n._middlewares.get(e),Array.isArray(i)?(i.forEach(function(n){n(t,function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null;null!==e&&(t=e),s++},e)}),s>=i.length&&(l=!0)):l=!0),l&&(a.once&&(o[c]=null),a.callback(t))});-1!==o.indexOf(null);)o.splice(o.indexOf(null),1)}}]),EventEmitter}(),g=n(8),w=n.n(g),k=n(6),O=n.n(k),E=function isFunction(e){return"function"==typeof e},x=function isString(e){return"string"==typeof e||!!e&&"object"===O()(e)&&"[object String]"===Object.prototype.toString.call(e)},P=function isNode(e){try{return Node.prototype.cloneNode.call(e,!1),!0}catch(e){return!1}},S=function isNodeList(e){return NodeList.prototype.isPrototypeOf(e)},j=/^(?:f(?:alse)?|no?|0+)$/i,C=function uuid(){return(arguments.length>0&&void 0!==arguments[0]?arguments[0]:"")+([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,function(e){return(e^crypto.getRandomValues(new Uint8Array(1))[0]&15>>e/4).toString(16)})},A=function detectSupportsPassive(){var e=!1;if("undefined"!=typeof window&&"function"==typeof window.addEventListener){var t=Object.defineProperty({},"passive",{get:function get(){return e=!0,!0}}),n=function noop(){};window.addEventListener("testPassive",n,t),window.removeEventListener("testPassive",n,t)}return e},T=function querySelectorAll(e,t){return E(e)?e(t||("undefined"!=typeof document?document:null)):x(e)?t&&P(t)?t.querySelectorAll(e):"undefined"!=typeof document?document.querySelectorAll(e):null:P(e)?[e]:S(e)?e:null},q=function optionsFromDataset(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return P(e)&&e.dataset?Object.keys(e.dataset).filter(function(e){return Object.keys(t).includes(e)}).reduce(function(t,n){return m()({},t,w()({},n,e.dataset[n]))},{}):{}};"undefined"==typeof Node||Node.prototype.on||(Node.prototype.on=function(e,t){var n=this;return Array.isArray(e)||(e=e.split(" ")),e.forEach(function(e){n.addEventListener(e.trim(),t,!!A()&&{passive:!1})}),this}),"undefined"==typeof NodeList||NodeList.prototype.on||(NodeList.prototype.on=function(e,t){return this.forEach(function(n){n.on(e,t)}),this}),"undefined"==typeof Node||Node.prototype.off||(Node.prototype.off=function(e,t){var n=this;return Array.isArray(e)||(e=e.split(" ")),e.forEach(function(e){n.removeEventListener(e.trim(),t,!!A()&&{passive:!1})}),this}),"undefined"==typeof NodeList||NodeList.prototype.off||(NodeList.prototype.off=function(e,t){return this.forEach(function(n){n.off(e,t)}),this});var L=function(e){function Component(e){var t,n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{};if(o()(this,Component),(t=a()(this,p()(Component).call(this))).element=x(e)?t.options.container.querySelector(e):e,!t.element)throw new Error("An invalid selector or non-DOM node has been provided for ".concat(t.constructor.name,"."));return t.element[t.constructor.name]=t.constructor._interface.bind(u()(t)),t.element[t.constructor.name].Constructor=t.constructor.name,t.id=C(t.constructor.name+"-"),t.options=m()({},r,n,q(t.element,r)),t}return y()(Component,e),s()(Component,null,[{key:"attach",value:function attach(){var e=this,t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null,n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{},o=new Array;return null===t?o:(n=m()({},r,n,q(this.element,r)),(T(t,n.container)||[]).forEach(function(r){void 0===r[e.constructor.name]?o.push(new e(r,m()({selector:t},n))):o.push(r[e.constructor.name])}),o)}},{key:"_interface",value:function _interface(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};if("string"==typeof e){if(void 0===this[e])throw new TypeError('No method named "'.concat(e,'"'));return this[e](e)}return this}}]),Component}(b),N={allowMultiple:!1,container:"undefined"!=typeof document?document:null};n.d(t,"default",function(){return M});var M=function(e){function bulmaCollapsible(e){var t,n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return o()(this,bulmaCollapsible),(t=a()(this,p()(bulmaCollapsible).call(this,e,n,N))).onTriggerClick=t.onTriggerClick.bind(u()(t)),t.onTransitionEnd=t.onTransitionEnd.bind(u()(t)),t._init(),t}return y()(bulmaCollapsible,e),s()(bulmaCollapsible,[{key:"_init",value:function _init(){if(this._originalHeight=this.element.style.height,this._parent=this.element.dataset.parent,this._parent){var e=this.options.container.querySelector("#".concat(this._parent));this._siblings=T(this.options.selector,e)||[]}this._triggers=this.options.container.querySelectorAll('[data-action="collapse"][href="#'.concat(this.element.id,'"], [data-action="collapse"][data-target="').concat(this.element.id,'"]'))||null,this._triggers&&this._triggers.on("click touch",this.onTriggerClick),this._transitionEvent=function whichTransitionEvent(){var e=document.createElement("fakeelement"),t={transition:"transitionend",OTransition:"oTransitionEnd",MozTransition:"transitionend",WebkitTransition:"webkitTransitionEnd"};for(var n in t)if(void 0!==e.style[n])return t[n]}(),this._transitionEvent&&this.element.on(this._transitionEvent,this.onTransitionEnd),this.element.classList.contains("is-active")?this.expand():this.collapse()}},{key:"destroy",value:function destroy(){this._triggers&&this._triggers.off("click touch",this.onTriggerClick,!1)}},{key:"collapsed",value:function collapsed(){return this._collapsed}},{key:"expand",value:function expand(){var e=this;(void 0===this._collapsed||this._collapsed)&&(this.emit("before:expand",this),this._collapsed=!1,this._parent&&!function BooleanParse(e){return!j.test(e)&&!!e}(this.options.allowMultiple)&&this._siblings.forEach(function(t){t.isSameNode(e.element)||t.bulmaCollapsible&&t.bulmaCollapsible("close")}),this.element.style.height=this.element.scrollHeight+"px",this.element.classList.add("is-active"),this.element.setAttribute("aria-expanded",!0),this._triggers&&this._triggers.forEach(function(e){e.classList.add("is-active")}),this.emit("after:expand",this))}},{key:"open",value:function open(){this.expand()}},{key:"collapse",value:function collapse(){void 0!==this._collapsed&&this._collapsed||(this.emit("before:collapse",this),this._collapsed=!0,this.element.style.height=0,this.element.classList.remove("is-active"),this.element.setAttribute("aria-expanded",!1),this._triggers&&this._triggers.forEach(function(e){e.classList.remove("is-active")}),this.emit("after:collapse",this))}},{key:"close",value:function close(){this.collapse()}},{key:"onTriggerClick",value:function onTriggerClick(e){e.preventDefault(),this.collapsed()?(e.currentTarget.classList.add("is-active"),this.expand()):(e.currentTarget.classList.remove("is-active"),this.collapse())}},{key:"onTransitionEnd",value:function onTransitionEnd(e){this._collapsed||(this.element.style.height=this._originalHeight)}}],[{key:"attach",value:function attach(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:".is-collapsible",t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return h()(p()(bulmaCollapsible),"attach",this).call(this,e,t,N)}}]),bulmaCollapsible}(L)}]).default});
+
+/***/ }),
+
+/***/ "./node_modules/@creativebulma/bulma-tagsinput/src/js/defaultOptions.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/@creativebulma/bulma-tagsinput/src/js/defaultOptions.js ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _templates_tag__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./templates/tag */ "./node_modules/@creativebulma/bulma-tagsinput/src/js/templates/tag.js");
+
+
+const defaultOptions = {
+	allowDuplicates: false,					// Are duplicate tags allowed ?
+	caseSensitive: true,					// Is duplicate tags identification case sensitive ?
+	clearSelectionOnTyping: false,			// Should selected tag be cleared when typing a new input ?
+	closeDropdownOnItemSelect: true,		// Should dropdown be closed once an item has been clicked ?
+	delimiter: ',',							// Multiple tags delimiter
+	freeInput: true,						// Should user be able to input new tag manually ?
+	highlightDuplicate: true,				// Should we temporarly highlight identified duplicate tags ?
+	highlightMatchesString: true,			// Should we highlight identified matches strings when searching ?
+	itemValue: undefined,					// What is the object property to use as value when we work with Object tags ?
+  	itemText: undefined,					// What is the object property to use as text when we work with Object tags ?
+	maxTags: undefined,						// Maximum number of tags allowed
+	maxChars: undefined,					// Maximum of characters allowed for a single tag
+	minChars: 1,							// Minimum of characters before processing a new tag
+	noResultsLabel: 'No results found',		// Customize the dropdown placecholer when no results found
+	placeholder: '',						// Customize the input placholder
+	removable: true,						// Are tags removable ?
+	searchMinChars: 1,						// How many characters should we enter before starting dynamic search ?
+	searchOn: 'text',						// On what dropdown item data do we search the entered value : 'value' or 'text' ?
+	selectable: true,						// Are tags selectable ?
+	source: undefined,						// Array/Function/Promise to get external data
+	tagClass: 'is-rounded',					// Customize tags style by passing classes - They will be added to the tag element
+	trim: true								// Should we trim value before processing them ?
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (defaultOptions);
+
+
+/***/ }),
+
+/***/ "./node_modules/@creativebulma/bulma-tagsinput/src/js/index.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@creativebulma/bulma-tagsinput/src/js/index.js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BulmaTagsInput; });
+/* harmony import */ var _utils_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/component */ "./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/component.js");
+/* harmony import */ var _utils_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/dom */ "./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/dom.js");
+/* harmony import */ var _utils_type__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/type */ "./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/type.js");
+/* harmony import */ var _defaultOptions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./defaultOptions */ "./node_modules/@creativebulma/bulma-tagsinput/src/js/defaultOptions.js");
+/* harmony import */ var _templates_tag__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./templates/tag */ "./node_modules/@creativebulma/bulma-tagsinput/src/js/templates/tag.js");
+/* harmony import */ var _templates_wrapper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./templates/wrapper */ "./node_modules/@creativebulma/bulma-tagsinput/src/js/templates/wrapper.js");
+/* harmony import */ var _templates_dropdown_item__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./templates/dropdown-item */ "./node_modules/@creativebulma/bulma-tagsinput/src/js/templates/dropdown-item.js");
+
+
+
+
+
+
+
+
+// TODO: add pattern or function to valdiate value before adding
+
+class BulmaTagsInput extends _utils_component__WEBPACK_IMPORTED_MODULE_0__["default"] {
+    constructor(element, options = {}) {
+        super(element, options, _defaultOptions__WEBPACK_IMPORTED_MODULE_3__["default"]);
+        
+        // Convert Boolean string options to full Boolean
+        this.options.allowDuplicates = Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["BooleanParse"])(this.options.allowDuplicates);
+        this.options.caseSensitive = Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["BooleanParse"])(this.options.caseSensitive);
+        this.options.clearSelectionOnTyping = Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["BooleanParse"])(this.options.clearSelectionOnTyping);
+        this.options.closeDropdownOnItemSelect = Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["BooleanParse"])(this.options.closeDropdownOnItemSelect);
+        this.options.freeInput = Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["BooleanParse"])(this.options.freeInput);
+        this.options.highlightDuplicate = Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["BooleanParse"])(this.options.highlightDuplicate);
+        this.options.highlightMatchesString = Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["BooleanParse"])(this.options.highlightMatchesString);
+        this.options.removable = Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["BooleanParse"])(this.options.removable);
+        this.options.searchOn = this.options.searchOn.toLowerCase();
+        this.options.selectable = Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["BooleanParse"])(this.options.selectable);
+        this.options.trim = Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["BooleanParse"])(this.options.trim);
+
+		//Bind events to current class
+		this._onDocumentClick = this._onDocumentClick.bind(this);
+		this._onInputChange = this._onInputChange.bind(this);
+		this._onInputClick = this._onInputClick.bind(this);
+		this._onInputFocusOut = this._onInputFocusOut.bind(this);
+        this._onInputFocusIn = this._onInputFocusIn.bind(this);
+        this._onInputKeyDown = this._onInputKeyDown.bind(this);
+        this._onInputKeyPress = this._onInputKeyPress.bind(this);
+        this._onOriginalInputChange = this._onOriginalInputChange.bind(this);
+        this._onTagDeleteClick = this._onTagDeleteClick.bind(this);
+        this._onTagClick = this._onTagClick.bind(this);
+        this._onDropdownItemClick = this._onDropdownItemClick.bind(this);
+        
+        // Define internal variables
+        this.items = [];
+        this._selected = -1; // index of selected item
+
+		// Initiate plugin
+		this._init();
+	}
+
+	/**
+	 * Initiate all DOM element corresponding to selector
+	 * @method
+	 * @return {Array} Array of all Plugin instances
+	 */
+	static attach(selector = 'input[data-type="tags"], input[type="tags"], select[data-type="tags"], select[type="tags"]', options = {}, container = null) {
+		return super.attach(selector, options, container);
+	}
+
+	/**
+	 * Initiate plugin
+	 * @method init
+	 * @return {void}
+	 */
+	_init() {
+        // Detect if original input was a Select element
+        this._isSelect = (this.element.tagName === 'SELECT');
+        this._isMultiple = (this._isSelect && this.element.hasAttribute('multiple'));
+
+        // Detect if we work with Object items or not
+        // Object Items is forced when working with select element
+        this._objectItems = (typeof this.options.itemValue !== 'undefined') || this._isSelect;
+        this.options.itemValue = this.options.itemValue ? this.options.itemValue : (this._isSelect ? 'value' : undefined);
+        this.options.itemText = this.options.itemText ? this.options.itemText : (this._isSelect ? 'text' : undefined);
+        // If no itemText pass then use itemValue as itemText
+        if (typeof this.options.itemText === 'undefined') {
+            this.options.itemText = this.options.itemValue;
+        }
+
+        // Force freeInput to False if working with object items
+        this.options.freeInput = this._objectItems ? false : this.options.freeInput;
+
+        // Init search engine
+        this.source = null;
+        if (typeof this.options.source !== 'undefined') {
+            // Fix searchOn option if wrong
+            if (!['value', 'text'].includes(this.options.searchOn)) {
+                this.options.searchOn = _defaultOptions__WEBPACK_IMPORTED_MODULE_3__["default"].searchOn;
+            }
+
+            if (Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isPromise"])(this.options.source)) {
+                this.source = this.options.source;
+            } else if (Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isFunction"])(this.options.source)) {
+                this.source = value => Promise.resolve(this.options.source(value));
+            } else if (Array.isArray(this.options.source)) {
+                this.source = value => Promise.resolve(this.options.source.filter(i => {
+                    const val = (this._objectItems ? i[this.options.itemValue] : i);
+        
+                    return this.options.caseSensitive ? val.includes(value) : val.toLowerCase().includes(value.toLowerCase());
+                }));
+            }
+        }
+
+        // Determine allowed input modes
+        this._manualInputAllowed = !this._isSelect && this.options.freeInput;
+        this._filterInputAllowed = this._isSelect || this.source;
+
+        this._build();
+    }
+
+    /**
+     * Build TagsInput DOM elements
+     */
+    _build() {
+        // Create TagsInput DOM
+        const containerFragment = document.createRange().createContextualFragment(Object(_templates_wrapper__WEBPACK_IMPORTED_MODULE_5__["default"])({
+            emptyTitle: typeof this.options.noResultsLabel !== 'undefined' ? this.options.noResultsLabel : 'No results found',
+            placeholder: this.element.placeholder ? this.element.placeholder : this.options.placeholder,
+            uuid: this.id
+        }));
+
+        this.container = containerFragment.firstElementChild;
+        this.input = this.container.querySelector('input');
+        this.dropdown = this.container.querySelector(`#${this.id}-list .dropdown-content`);
+        this.dropdownEmptyOption = this.dropdown.querySelector('.empty-title');
+
+        // Clone attributes between original and new input
+        Object(_utils_dom__WEBPACK_IMPORTED_MODULE_1__["cloneAttributes"])(this.input, this.element, 'data-type multiple name type value');
+
+        if (this.element.disabled) {
+            this.container.setAttribute('disabled', 'disabled');
+            this.options.removable = false;
+            this.options.selectable = false;
+        }
+
+        // Propagate original input disabled attribute to the container
+        if (this.input.getAttribute('disabled') || this.input.classList.contains('is-disabled')) {
+            this.container.setAttribute('disabled', 'disabled');
+        }
+
+        if (!this._manualInputAllowed) {
+            this.container.classList.add(this._filterInputAllowed ? 'is-filter' : 'no-input');
+        }
+
+        // Remove dropdown if no source or original input is not a select element
+        if (!this._isSelect && typeof this.options.source === 'undefined') {
+            this.dropdown.remove();
+            this.dropdown = null;
+            this.input.setAttribute('list', null);
+        }
+
+        // Initialize plugin value from original input value
+        if (this._isSelect) {
+            Array.from(this.element.options).forEach(option => {
+                if (option.selected) {
+                    // HTML Option element contains value and text properties
+                    // Add it silently to not propagate to the original element
+                    this.add(option.value ? option : {
+                        value: option.text,
+                        text: option.text
+                    }, true);
+                }
+
+                this._createDropdownItem(option);
+            });
+        } else {
+            // We have on input element
+            if (this.element.value.length) {
+                this.add(this._objectItems ? JSON.parse(this.element.value) : this.element.value, true);
+            }
+        }
+
+        this._bindEvents();
+
+        // Insert container right before original input and make original input hidden
+        this.element.parentNode.insertBefore(this.container, this.element);
+
+        // Hide original input (type="hidden" only works on select)
+        this.element.style.display = 'none';
+    }
+
+    /**
+     * Bind all events listener
+     */
+    _bindEvents() {
+        // Bind document click event to close dropdown
+        document.addEventListener('click', this._onDocumentClick);
+
+        // Bind event handlers to orginal input
+        this.element.addEventListener('change', this._onOriginalInputChange);
+
+        // Bind event handlers to internal input
+        this.input.addEventListener('input', this._onInputChange);
+        this.input.addEventListener('click', this._onInputClick);
+        this.input.addEventListener('keydown', this._onInputKeyDown);
+        this.input.addEventListener('keypress', this._onInputKeyPress);
+        this.input.addEventListener('focusout', this._onInputFocusOut);
+        this.input.addEventListener('focusin', this._onInputFocusIn);
+    }
+
+    /**
+     * Check if caret is at the beginning of the input value
+     */
+    _caretAtStart() {
+		try {
+			return this.input.selectionStart === 0 && this.input.selectionEnd === 0;
+		} catch(e) {
+			return this.input.value === '';
+		}
+    }
+
+    /**
+     * Check value length constraint if option activated
+     * @param {string|object} item 
+     */
+    _checkLength(item) {
+        const value = this._objectItems ? item[this.options.itemValue] : item;
+
+        if (!Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isString"])(value)) {
+            return true;
+        }
+
+        return value.length >= this.options.minChars && (typeof this.options.maxChars === 'undefined' || value.length <= this.options.maxChars);
+    }
+
+    /**
+     * Close dropdown
+     */
+    _closeDropdown() {
+        if (this.dropdown) {
+            this.emit('before.dropdown.close', this);
+
+            this.container.classList.remove('is-active');
+
+            this.emit('after.dropdown.close', this);
+        }
+    }
+
+    /**
+     * Create a new dropdown item based on given item data
+     * @param {String|Object} item 
+     */
+    _createDropdownItem(item) {
+        if (this.dropdown) {
+            // TODO: add possibility to provide template through options
+            const dropdownItemFragment = document.createRange().createContextualFragment(Object(_templates_dropdown_item__WEBPACK_IMPORTED_MODULE_6__["default"])({
+                text: item.text,
+                value: item.value
+            }));
+            const dropdownItem = dropdownItemFragment.firstElementChild;
+
+            // Save item data into dataset
+            dropdownItem.dataset.value = item.value;
+            dropdownItem.dataset.text = item.text;
+
+            dropdownItem.addEventListener('click', this._onDropdownItemClick);
+
+            this.dropdown.append(dropdownItem);
+        }
+    }
+
+    /**
+     * Create a new tag and add it to the DOM
+     * @param string value 
+     */
+    _createTag(item) {
+        const tagFragment = document.createRange().createContextualFragment(Object(_templates_tag__WEBPACK_IMPORTED_MODULE_4__["default"])({
+            removable: this.options.removable,
+            style: this.options.tagClass,
+            text: item.text,
+            value: item.value
+        }));
+        const tag = tagFragment.firstElementChild;
+
+        // Attach tag click event to select it
+        tag.addEventListener('click', this._onTagClick);
+
+        if (this.options.removable) {
+            // Find delete button and attach click event
+            const deleteButton = tag.querySelector('.delete');
+            if (deleteButton) {
+                deleteButton.addEventListener('click', this._onTagDeleteClick);
+            }
+        }
+
+        // insert new tag at the end (ie just before input)
+        this.container.insertBefore(tag, this.input);
+    }
+
+    /**
+     * Remove all dropdown items except the empty title
+     */
+    _emptyDropdown() {
+        if (this.dropdown) {
+            Array.from(this.dropdown.children).filter(child => !child.classList.contains('empty-title')).forEach(child => {
+                child.remove();
+            });
+        }
+    }
+
+    /**
+     * Find needle into a string and wrap it with <mark> HTML tag
+     * @param {String} string 
+     * @param {String} needle 
+     */
+    _highlightMatchesInString(string, needle) {
+        const reg = "(" + needle + ")(?![^<]*>|[^<>]*</)"; // explanation: http://stackoverflow.com/a/18622606/1147859
+        const regex = new RegExp(reg, "i");
+
+        // If the regex doesn't match the string just return initial string
+        if (!string.match(regex)) {
+            return string;
+        }
+
+        // Otherwise, get to highlighting
+        const matchStartPosition = string.match(regex).index;
+        const matchEndPosition = matchStartPosition + string.match(regex)[0].toString().length;
+        const originalTextFoundByRegex = string.substring(matchStartPosition, matchEndPosition);
+        string = string.replace(regex, `<mark class="is-highlighted">${originalTextFoundByRegex}</mark>`);
+
+        return string;
+    }
+
+    /**
+     * Open dropdown
+     */
+    _openDropdown() {
+        if (this.dropdown) {
+            this.container.classList.add('is-active');
+        }
+    }
+
+    /**
+     * Propagate internal input changes to the original input
+     */
+    _propagateChange() {
+        if (!this._isSelect) {
+            // If original element is an input element
+            this.element.value = this.value;
+        } else {
+            // If original element is a select element
+            Array.from(this.element.options).forEach(option => {
+                option.setAttribute('selected', undefined);
+                option.selected = false;
+                
+                // If option has been added by TagsInput then we remove it
+                // Otherwise it is an original option
+                if (typeof option.dataset.source !== 'undefined') {
+                    option.remove();
+                }
+            });
+            
+            // Update original element options selected attributes
+            this.items.forEach(item => {
+                this._updateSelectOptions({
+                    value: this._objectItems ? item[this.options.itemValue] : item,
+                    text: this._objectItems ? item[this.options.itemText] : item
+                });
+            });
+        }
+        
+        // Trigger Change event manually (because original input is now hidden)
+        // Trick: Passes current class constructor name to prevent loop with _onOriginalInputChange handler)
+        const changeEvent = new CustomEvent('change', {
+            'detail': this.constructor.name
+        });
+        this.element.dispatchEvent(changeEvent);
+    }
+
+    /**
+     * Trim value if option activated
+     * @param {string|object} item 
+     */
+    _trim(item) {
+        if (this.options.trim) {
+            if (this._objectItems) {
+                if (Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isString"])(item[this.options.itemValue])) {
+                    item[this.options.itemValue] = item[this.options.itemValue].trim();
+                }
+
+                if (Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isString"])(item[this.options.itemText])) {
+                    item[this.options.itemText] = item[this.options.itemText].trim();
+                }
+            } else {
+                item = item.trim();
+            }
+        }
+
+        return item;
+    }
+
+    /**
+     * Filter Dropdown items to be compliant with already selected items and current input value
+     * Filtering is made on Text by default (can be changed with option)
+     */
+    _filterDropdownItems(value = null) {
+        if (this.dropdown) {
+            if (this.emit('before.dropdown.filter', this)) {
+                Array.from(this.dropdown.children).filter(child => !child.classList.contains('empty-title')).forEach(child => {
+                    const childValue = child.dataset[this.options.searchOn];
+
+                    // Remove highlights
+                    if (this.options.highlightMatchesString) {
+                        child.textContent = child.textContent.replace(/<\/?(mark\s?(class="is\-highlighted")?)?>]*>?/gm, '');
+                    }
+
+                    // If value is found in dropdown
+                    if ((value && value.length)) {
+                        if (this.options.caseSensitive) {
+                            child.style.display = childValue.includes(value) ? 'block' : 'none';
+                        } else {
+                            child.style.display = childValue.toLowerCase().includes(value.toLowerCase()) ? 'block' : 'none';
+                        }
+
+                        if (this.options.highlightMatchesString) {
+                            child.innerHTML = this._highlightMatchesInString(child.innerHTML, value);
+                        }
+                    } else {
+                        child.style.display = 'block';
+                    }
+
+                    if (!this.options.allowDuplicates || (this._isSelect && !this._isMultiple)) {
+                        const hasValue = this.options.searchOn === 'value' ? this.hasValue(childValue) : this.hasText(childValue);
+
+                        child.style.display = hasValue ? 'none' : child.style.display;
+                    }
+                });
+
+                const hasActiveItems = Array.from(this.dropdown.children).filter(child => !child.classList.contains('empty-title')).some(child => child.style.display !== 'none');
+                if (hasActiveItems) {
+                    this.dropdownEmptyOption.style.display = 'none';
+                } else {
+                    this.dropdownEmptyOption.style.display = 'block';
+                }
+
+                this.emit('after.dropdown.filter', this);
+
+                return hasActiveItems;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Update original select option based on given item
+     * @param {String|Object} item 
+     */
+    _updateSelectOptions(item) {
+        if (this._isSelect) {
+            // Check to see if the tag exists in its raw or uri-encoded form
+            let option = this.element.querySelector(`option[value="${encodeURIComponent(item.value)}"]`) || this.element.querySelector(`option[value="${item.value}"]`);
+
+            // add <option /> if item represents a value not present in one of the <select />'s options
+            if (!option) {
+                const optionFragment = document.createRange().createContextualFragment(`<option value="${item.value}" data-source="${this.id}" selected>${item.text}</option>`);
+                option = optionFragment.firstElementChild;
+            
+                this.element.add(option);
+            }
+
+            // mark option as selected
+            option.setAttribute('selected', 'selected');
+            option.selected = true;
+        }
+    }
+
+    /**
+     * Add given item
+     * item = 'john'
+     * item = 'john,jane'
+     * item = ['john', 'jane']
+     * item = [{
+     *  "value": "1",
+     *  "text": "John"
+     * }, {
+     *  "value": "2",
+     *  "text": "Jane"
+     * }]
+     * @param {String|Object} item 
+     * @param {Boolean} silently Should the change be propagated to the original element
+     */
+    add(items, silently = false) {
+        // Check if number of items is limited ans reached
+        if (typeof this.options.maxTags !== 'undefined' && this.items.length >= this.options.maxTags) {
+            return this;
+        }
+
+        // Make sure to work with an array of items
+        items = Array.isArray(items) ? items : Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isObject"])(items) ? [items] : items.split(this.options.delimiter);
+
+        // If string items are expected then check every item is a string
+        if (!this._objectItems && (items.filter(item => Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isString"])(item)).length !== items.length)) {
+            throw('Item must be a string or an array of strings');
+        }
+
+        // If object items are expected then check every item is an object
+        if (this._objectItems && (items.filter(item => Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isObject"])(item)).length !== items.length)) {
+            throw('Item must be an object or an array of objects');
+        }
+
+        items.forEach(item => {
+            item = this._trim(item);
+
+            // Check if item respects min/max chars
+            if (this._checkLength(item)) {
+
+                // If original input is a non multiple select element
+                if (this._isSelect && !this._isMultiple && this.items.length > 0) {
+                    this.removeAtIndex(0);
+                    this.element.remove(this.element.selectedIndex);
+                }
+
+                // check if duplicates are allowed or not
+                if (item = this.emit('before.add', item)) {
+                    if (this.options.allowDuplicates || !this.has(item)) {
+                        const itemData = {
+                            value: this._objectItems ? item[this.options.itemValue] : item,
+                            text: this._objectItems ? item[this.options.itemText] : item
+                        };
+
+                        const tag = this._createTag(itemData);
+                
+                        // save item into the internal array
+                        this.items.push(item);
+
+                        if (!silently) { 
+                            // Propagate change event to the original input
+                            this._propagateChange();
+
+                            this.emit('after.add', {
+                                item,
+                                tag
+                            });
+                        }
+                    } else {
+                        if (this.options.highlightDuplicate) {
+                            const duplicateTag = Array.from(this.container.children).filter(child => child.classList.contains('tag'))[this.indexOf(item)];
+
+                            if (duplicateTag) {
+                                duplicateTag.classList.add('is-duplicate');
+                                setTimeout(() => {
+                                    duplicateTag.classList.remove('is-duplicate');
+                                }, 1250);
+                            }
+                        }
+
+                        this.emit('item.duplicate', item);
+                    }
+                }
+            }
+        });
+
+        return this;
+    }
+
+    /**
+     * Unselect the selected item
+     */
+    clearSelection() {
+        if (this._selected >= 0) {
+            const item = this.items[this._selected];
+            const tag = Array.from(this.container.children).filter(child => child.classList.contains('tag'))[this._selected];
+
+            if (this.emit('before.unselect', {
+                item,
+                tag
+            })) {
+                if (tag) {
+                    tag.classList.remove('is-selected');
+                }
+
+                this._selected = -1;
+
+                this.emit('after.unselect', {
+                    item,
+                    tag
+                });
+            }
+        }
+
+        return this;
+    }
+
+    /**
+     * Shortcut to removeAll method
+     */
+    flush() {
+        return this.removeAll();
+    }
+
+    /**
+     * Sets focus on the input
+     */
+    focus() {
+        this.container.classList.add('is-focused');
+        this.input.focus();
+
+        return this;
+    }
+
+    /**
+     * Check if given item is present
+     * @param {String} item 
+     */
+    has(item) {
+        item = this._trim(item);
+
+        if (this._objectItems) {
+            return this.items.some(i => this.options.caseSensitive ? i[this.options.itemValue] === item[this.options.itemValue] : i[this.options.itemValue].toLowerCase() === item[this.options.itemValue].toLowerCase());
+        } else {
+            return this.hasValue(item);
+        }
+    }
+
+    /**
+     * Check if given text is present
+     * @param {String} value 
+     */
+    hasText(value) {
+        if (this.options.trim) {
+            value = value.trim();
+        }
+
+        return this.items.some(i => {
+            const val = (this._objectItems ? i[this.options.itemText] : i);
+
+            return this.options.caseSensitive ? val === value : val.toLowerCase() === value.toLowerCase();
+        });
+    }
+
+    /**
+     * Check if given value is present
+     * @param {String} value 
+     */
+    hasValue(value) {
+        if (this.options.trim) {
+            value = value.trim();
+        }
+
+        return this.items.some(i => {
+            const val = (this._objectItems ? i[this.options.itemValue] : i);
+
+            return this.options.caseSensitive ? val === value : val.toLowerCase() === value.toLowerCase();
+        });
+    } 
+
+    /**
+     * Get index of given item
+     * @param {string} item 
+     */
+    indexOf(item) {
+        item = this._trim(item);
+
+        if (this._objectItems) {
+            if (!Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isObject"])(item)) {
+                throw('Item must be an object');
+            }
+
+            return this.items.map(function(e) { return e.value; }).indexOf(item.value);
+        } else {
+            return this.items.indexOf(item);
+        }
+    }
+
+    /**
+     * Returns the internal input element
+     */
+    input() {
+        return this.input;
+    }
+
+    /**
+     * Get items
+     */
+    items() {
+        return this.items;
+    }
+
+    /**
+     * Remove given item
+     * item = 'john'
+     * item = 'john,jane'
+     * @param String item 
+     */
+    remove(items) {
+        if (this.options.removable) {
+            // Make sure to work with an array of items
+            items = Array.isArray(items) ? items : Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isObject"])(items) ? [items] : items.split(this.options.delimiter);
+
+            // If string items are expected then check every item is a string
+            if (!this._objectItems && (items.filter(item => Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isString"])(item)).length !== items.length)) {
+                throw('Item must be a string or an array of strings');
+            }
+            // If object items are expected then check every item is an object
+            if (this._objectItems && (items.filter(item => Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isObject"])(item)).length !== items.length)) {
+                throw('Item must be an object or an array of objects');
+            }
+
+            items.forEach(item => {
+                let index = this.indexOf(item);
+
+                while (index >= 0) {
+                    this.removeAtIndex(index);
+
+                    index = this.indexOf(item);
+                }
+            });
+        }
+
+        return this;
+    }
+
+    /**
+     * Remove all tags at once
+     */
+    removeAll() {
+        if (this.options.removable) {
+            if (this.emit('before.flush', this.items)) {
+                this.clearSelection();
+
+                Array.from(this.container.children).filter(child => child.classList.contains('tag')).forEach(tag => tag.remove());
+
+                this.items = [];
+
+                this._filterDropdownItems();
+
+                this._propagateChange();
+
+                this.emit('after.flush', this.items);
+            }
+        }
+
+        return this;
+    }
+
+    /**
+     * Remove item at given index
+     * @param Integer index 
+     */
+    removeAtIndex(index, clearSelection = true) {
+        if (this.options.removable && !isNaN(index) && index >= 0 && index < this.items.length) {
+            const tag = Array.from(this.container.children).filter(child => child.classList.contains('tag'))[index];
+            const item = this.items[index];
+
+            if (this.emit('before.remove', item)) {
+                if (clearSelection) {
+                    this.clearSelection();
+                }
+
+                if (tag) {
+                    tag.remove();
+                }
+
+                // If original input is a select element
+                // then deselect related option
+                if (this._isSelect) {
+                    this.element.options[index].selected = false;
+                }
+
+                if (this._selected == index) {
+                    this._selected = -1;
+                } else if (this._selected >= 0) {
+                    // One item less so selected index is 
+                    this._selected -= 1;
+                }
+
+                this.items.splice(index, 1);
+
+                this._filterDropdownItems();
+
+                this._propagateChange();
+
+                this.emit('after.remove', item);
+            }
+        }
+
+        return this;
+    }
+
+    /**
+     * Select given item
+     * @param {string} item 
+     */
+    select(items) {
+        if (this.options.selectable) {
+            // Make sure to work with an array of items
+            items = Array.isArray(items) ? items : Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isObject"])(items) ? [items] : items.split(this.options.delimiter);
+
+            // If string items are expected then check every item is a string
+            if (!this._objectItems && (items.filter(item => Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isString"])(item)).length !== items.length)) {
+                throw('Item must be a string or an array of strings');
+            }
+            // If object items are expected then check every item is an object
+            if (this._objectItems && (items.filter(item => Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isObject"])(item)).length !== items.length)) {
+                throw('Item must be an object or an array of objects');
+            }
+
+            items.forEach(item => {
+                this.selectAtIndex(this.indexOf(item));
+            });
+        }
+
+        return this;
+    }
+
+    /**
+     * Select tag at given index
+     * @param Integer index 
+     */
+    selectAtIndex(index) {
+        if (this.options.selectable) {
+            // Clear selection
+            this.clearSelection();
+
+            if (!isNaN(index) && index >= 0 && index < this.items.length) {
+                const tag = Array.from(this.container.children).filter(child => child.classList.contains('tag'))[index];
+                const item = this.items[index];
+
+                if (this.emit('before.select', {
+                    item,
+                    tag
+                })) {
+                    if (tag) {
+                        tag.classList.add('is-selected');
+                    }
+
+                    this._selected = index;
+
+                    this.emit('after.select', {
+                        item,
+                        tag
+                    });
+                }
+            }
+        }
+
+        return this;
+    }
+
+    /**
+     * Get selected item
+     */
+    get selected() {
+        if (this._selected >= 0) {
+            return this.items[this._selected];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Get selected item index
+     */
+    get selectedIndex() {
+        return this._selected;
+    }
+
+    /**
+     * Get value
+     */
+    get value() {
+        if (!this._isSelect) {
+            if (this._objectItems) {
+                return this.items.map(item => item.value).join(this.options.delimiter);
+            } else {
+                return this.items.join(this.options.delimiter);
+            }
+        } else {
+            return Array.from(this.element.options).filter(option => option.selected).map(option => option.value);
+        }
+    }
+
+    /**
+     * Set value
+     */
+    set value(string) {
+        this.removeAll();
+        this.add(string);
+    }
+
+    /**
+     * Document click event handler
+     * @param {Event} e 
+     */
+    _onDocumentClick(e) {
+        if (this.dropdown) {
+            // If we click on element inside container then do nothing
+            if (this.container.contains(e.target)) {
+                return;
+            }
+
+            // Tag and delete button already deleted when event triggered
+            // So we check if target is a tag delete button
+            if (e.target.dataset.tag && e.target.dataset.tag === 'delete') {
+                return;
+            }
+
+            // Click outside dropdown so close it
+            this._closeDropdown();
+        }
+    }
+
+    /**
+     * Input focus lost event handler
+     * @param {Event} e 
+     */
+    _onDropdownItemClick(e) {
+        e.preventDefault();
+        
+        if (this.dropdown) {
+            if (this._objectItems) {
+                let item = {};
+                item[this.options.itemText] = e.currentTarget.dataset.text;
+                item[this.options.itemValue] = e.currentTarget.dataset.value;
+
+                this.add(item);
+            } else {
+                this.add(e.currentTarget.dataset.value);
+            }
+
+            this._filterDropdownItems();
+            this.input.value = '';
+            this.input.focus();
+
+            if (this.options.closeDropdownOnItemSelect) {
+                this._closeDropdown();
+            }
+        }
+    }
+
+    /**
+     * Input change event handler
+     * @param {Event} e 
+     */
+    _onInputChange(e) {
+        this._filterDropdownItems(this.input.value);
+    }
+
+    /**
+     * Input click event handler
+     * @param {Event} e 
+     */
+    _onInputClick(e) {
+        e.preventDefault();
+
+        if (!this.source || this.input.value.length >= this.options.searchMinChars) {
+            this._openDropdown();
+            this._filterDropdownItems();
+        }
+    }
+
+    /**
+     * Input focus event handler
+     * 
+     * @param {Event} e 
+     */
+    _onInputFocusIn(e) {
+        e.preventDefault();
+        
+        if (this.container.getAttribute('disabled') !== null || this.container.classList.contains('is-disabled')) {
+            this.input.blur();
+            
+            return false;
+        }
+
+        this.container.classList.add('is-focused');
+    }
+
+    /**
+     * Input focus lost event handler
+     * @param {Event} e 
+     */
+    _onInputFocusOut(e) {
+        e.preventDefault();
+
+        this.container.classList.remove('is-focused');
+    }
+    
+    /**
+     * Input Keydown event handler
+     * 
+     * @param {Event} e 
+     */
+    _onInputKeyDown(e) {
+        const key = e.charCode || e.keyCode || e.which;
+
+        switch (key) {
+            // BACKSPACE
+            case 8:
+                if (this.options.removable) {
+                    if (this._caretAtStart() && this._selected >= 0) {
+                        const currentItemIndex = this._selected;
+                        // If tag was selected then select next (or previous if next does not exists)
+                        if (currentItemIndex >= 0) {
+                            this.selectAtIndex(currentItemIndex + 1 < this.items.length ? currentItemIndex + 1 : currentItemIndex - 1);
+                        }
+
+                        this.removeAtIndex(currentItemIndex, false);
+                    }
+                }
+                
+                if (this.source && (this.input.value.length) < this.options.searchMinChars) {
+                    this._closeDropdown();
+                }
+                break;
+            // ESCAPE
+            case 27:
+                if (this._selected >= 0) {
+                    this.clearSelection();
+                }
+
+                this._closeDropdown();
+                break;
+            // DELETE
+            case 46:
+                if (this.options.removable) {
+                    if (this._caretAtStart() && this._selected >= 0) {
+                        const currentItemIndex = this._selected;
+
+                        // If tag was selected then select next (or previous if next does not exists)
+                        if (currentItemIndex >= 0) {
+                            this.selectAtIndex(currentItemIndex + 1 < this.items.length ? currentItemIndex + 1 : currentItemIndex - 1);
+                        }
+                        
+                        this.removeAtIndex(currentItemIndex, false);
+                    }
+                }
+
+                if (this.source && (this.input.value.length) < this.options.searchMinChars) {
+                    this._closeDropdown();
+                }
+                break;
+            // LEFT ARROW
+            case 37:
+                if (!this.input.value.length) {
+                    if (this._selected < 0) {
+                        this.selectAtIndex(this.items.length - 1);
+                    } else {
+                        this.selectAtIndex(this._selected - 1 >= 0 ? this._selected - 1 : this.items.length - 1);
+                    }
+                }
+                break;
+            // RIGHT ARROW
+            case 39:
+                if (!this.input.value.length) {
+                    if (this._selected < 0) {
+                        this.selectAtIndex(0);
+                    } else {
+                        this.selectAtIndex(this._selected + 1 >= this.items.length ? 0 : this._selected + 1);
+                    }
+                }
+                break;
+            default:
+                if (this.options.clearSelectionOnTyping) {
+                    this.clearSelection();
+                }
+                // ignore
+        }
+    }
+    
+    /**
+     * Input Keypress event handler
+     * 
+     * @param {Event} e 
+     */
+    _onInputKeyPress(e) {
+        const key = e.charCode || e.keyCode || e.which;
+        let value = this._trim(this.input.value) + String.fromCharCode(key);
+
+        if (!this._manualInputAllowed && !this._filterInputAllowed) {
+            e.preventDefault();
+
+            return false;
+        }
+
+        // ENTER
+        if (!value.length && key !== 13) {
+            return false;
+        }
+
+        if (this._filterInputAllowed) {
+            this._filterDropdownItems(value);
+        }
+
+        if (this._filterInputAllowed && this.source && value.length >= this.options.searchMinChars && key !== 13) {
+            this._openDropdown();
+            this.dropdown.classList.add('is-loading');
+            this._emptyDropdown();
+
+            this.source(value).then(results => {
+                results = this.emit('on.results.received', results);
+        
+                if (results.length) {
+                    results.forEach(result => {
+                        let item = {
+                            value: null,
+                            text: null
+                        };
+
+                        if (!Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isObject"])(result)) {
+                            item.value = result;
+                            item.text = result;
+                        } else {
+                            item.value = result[this.options.itemValue];
+                            item.text = result[this.options.itemText];
+                        }
+
+                        this._createDropdownItem(item);
+                    });
+                }
+
+                this._filterDropdownItems(value);
+
+                this.dropdown.classList.remove('is-loading');
+            });
+        }
+
+        if (this._manualInputAllowed && (value.includes(this.options.delimiter) || key == 13)) {
+            // Prevent default behavior (ie: add char into input value)
+            e.preventDefault();
+
+            // Split value by delimiter in case we copy/paste multiple values
+            const values = value.split(this.options.delimiter);
+            values.forEach(value => {
+                // check if empty text when delimiter is removed
+                if ((value = value.replace(this.options.delimiter, '')) != '') {
+                    // push to array and remove delimiter
+                    this.add(value);
+                }
+            });
+
+            value = '';
+            // clear input
+            this.input.value = '';
+
+            this._closeDropdown();
+
+            return false;
+        }
+    }
+
+    /**
+     * Original input change event handler
+     * CAUTION: because original input is now hidden the change event must be triggered manually on change
+     * Example how to trigger change event manually
+     * var changeEvent = new Event('change');
+     * input.dispatchEvent(changeEvent);
+     * 
+     * @param {Event} e 
+     */
+    _onOriginalInputChange(e) {
+        if (!e.detail || Object(_utils_type__WEBPACK_IMPORTED_MODULE_2__["isString"])(e.detail) && e.detail !== this.constructor.name) {
+            this.value = e.currentTarget.value;
+        }
+    }
+    
+    /**
+     * Tag click event handler
+     * 
+     * @param {Event} e 
+     */
+    _onTagClick(e) {
+        e.preventDefault();
+        
+        if (e.currentTarget.classList.contains('delete')) {
+            return false;
+        }
+
+        if (this.container.getAttribute('disabled') !== null || this.container.classList.contains('is-disabled')) {
+            return false;
+        }
+
+        this.input.focus();
+
+        if (this.options.selectable) {
+            const tag = e.currentTarget.closest('.tag');
+
+            if (tag) {
+                const tagIndex = Array.from(this.container.children).indexOf(tag);
+                if (tagIndex === this._selected) {
+                    this.clearSelection();
+                } else {
+                    this.selectAtIndex(tagIndex);
+                }
+            }
+        }
+    }
+
+    /**
+     * Delete tag button click event handler
+     * 
+     * @param {Event} e 
+     */
+    _onTagDeleteClick(e) {
+		e.preventDefault();
+
+        if (this.container.getAttribute('disabled') !== null || this.container.classList.contains('is-disabled')) {
+            return false;
+        }
+        
+        const tag = e.currentTarget.closest('.tag');
+
+        if (tag) {
+            this.removeAtIndex(Array.from(this.container.children).indexOf(tag));
+        }
+    }
+}
+
+/***/ }),
+
+/***/ "./node_modules/@creativebulma/bulma-tagsinput/src/js/templates/dropdown-item.js":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/@creativebulma/bulma-tagsinput/src/js/templates/dropdown-item.js ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ((data) => {
+	return `<a href="javascript:void(0);" class="dropdown-item" data-value="${data.value}" data-text="${data.text}">${data.text}</a>`;
+});
+
+/***/ }),
+
+/***/ "./node_modules/@creativebulma/bulma-tagsinput/src/js/templates/tag.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/@creativebulma/bulma-tagsinput/src/js/templates/tag.js ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ((data) => {
+	return `<span class="tag ${data.style}" data-value="${data.value}">
+        ${data.text}
+        ${data.removable ? '<div class="delete is-small" data-tag="delete"></div>' : ''}
+    </span>`;
+});
+
+/***/ }),
+
+/***/ "./node_modules/@creativebulma/bulma-tagsinput/src/js/templates/wrapper.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@creativebulma/bulma-tagsinput/src/js/templates/wrapper.js ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ((data) => {
+	return `<div class="tags-input">
+        <input class="input" type="text" placeholder="${data.placeholder}">
+        <div id="${data.uuid}-list" class="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+                <span class="dropdown-item empty-title">${data.emptyTitle}</span>
+            </div>
+        </div>
+    </div>`;
+});
+
+/***/ }),
+
+/***/ "./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/component.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/component.js ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Component; });
+/* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./events */ "./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/events.js");
+/* harmony import */ var _dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dom */ "./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/dom.js");
+/* harmony import */ var _uuid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./uuid */ "./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/uuid.js");
+
+
+
+
+class Component extends _events__WEBPACK_IMPORTED_MODULE_0__["default"] {
+	constructor(element, options = {}, defaultOptions = {}) {
+		super();
+
+		this.element = Object(_dom__WEBPACK_IMPORTED_MODULE_1__["querySelector"])(element, document);
+
+		// An invalid selector or non-DOM node has been provided.
+		if (!this.element) {
+			throw new Error(`An invalid selector or non-DOM node has been provided for ${this.constructor.name}.`);
+		}
+
+		this.element[this.constructor.name] = this.constructor._interface.bind(this);
+		this.element[this.constructor.name].Constructor = this.constructor.name;
+		this.id = Object(_uuid__WEBPACK_IMPORTED_MODULE_2__["default"])(this.constructor.name + '-');
+
+		this.options = {
+			...defaultOptions,
+			...options,
+			...Object(_dom__WEBPACK_IMPORTED_MODULE_1__["optionsFromDataset"])(this.element, defaultOptions) // Use Element dataset values to override options
+		};
+	}
+
+	/**
+	 * Initiate all DOM element corresponding to selector
+	 * @method
+	 * @return {Array} Array of all Plugin instances
+	 */
+	static attach(selector = null, options = {}, node = null) {
+		let instances = new Array();
+
+		if (selector !== null) {
+			Object(_dom__WEBPACK_IMPORTED_MODULE_1__["querySelectorAll"])(selector, node).forEach(element => {
+				// Check if plugin has already been instantiated for element
+				if (typeof element[this.name] === 'undefined') { // If no then instantiate it and register it in element
+					instances.push(new this(element, {
+						selector: selector,
+						...options
+					}));
+				} else { // If Yes then return the existing instance
+					instances.push(element[this.name]);
+				}
+			});
+
+			if (typeof window[this.name] === 'undefined') {
+				window[this.name] = {
+					'observers': []
+				};
+			}
+
+			if (window[this.name]['observers'] && !window[this.name]['observers'].includes(selector)) {
+				this.observeDom(selector, options);
+
+				window[this.name]['observers'].push(selector);
+			}
+		}
+
+		return instances;
+	}
+
+	/**
+	 * Observe DOM mutations to automatically initialize plugin on new elements when added to the DOM
+	 * 
+	 * @param {string} selector 
+	 * @param {Object} options 
+	 */
+	static observeDom(selector, options) {
+		const observer = new MutationObserver(mutations => {
+			mutations.forEach(mutation => {
+				for (let i = 0; i < mutation.addedNodes.length; i++) {
+					if (typeof window[this.name] !== 'undefined') {
+						this.attach(selector, options, mutation.addedNodes[i]);
+					}
+				}
+			});
+		});
+
+		if (typeof document !== 'undefined') {
+			observer.observe(document, {
+				childList: true,
+				subtree: true
+			});
+		}
+	}
+
+	static _interface(name = null, options = {}) {
+		if (typeof name === 'string') {
+			if (typeof this[name] === 'undefined') {
+				throw new TypeError(`No method named "${name}"`);
+			}
+
+			return this[name](options);
+		}
+
+		return this;
+	}
+}
+
+/***/ }),
+
+/***/ "./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/dom.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/dom.js ***!
+  \*************************************************************************/
+/*! exports provided: querySelector, querySelectorAll, optionsFromDataset, cloneAttributes */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "querySelector", function() { return querySelector; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "querySelectorAll", function() { return querySelectorAll; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "optionsFromDataset", function() { return optionsFromDataset; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cloneAttributes", function() { return cloneAttributes; });
+/* harmony import */ var _type__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./type */ "./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/type.js");
+
+
+/**
+ * querySelector under steroid
+ * Can use as selector:
+ *  - function
+ *  - DOM Node
+ *  - String
+ * @param {String|Node|Function} selector 
+ * @param {Node|undefined} node 
+ */
+const querySelector = (selector, node) => {
+	if (Object(_type__WEBPACK_IMPORTED_MODULE_0__["isFunction"])(selector)) {
+		return selector(node);
+	}
+
+	if (Object(_type__WEBPACK_IMPORTED_MODULE_0__["isNode"])(selector)) {
+		return selector;
+	}
+
+	if (Object(_type__WEBPACK_IMPORTED_MODULE_0__["isString"])(selector)) {
+		if (!node || !Object(_type__WEBPACK_IMPORTED_MODULE_0__["isNode"])(node) || node.nodeType !== 1) {
+			node = document;
+		}
+		
+		return node.querySelector(selector);
+	}
+
+	if (Array.isArray(selector) || (typeof NodeList !== 'undefined' && NodeList.prototype.isPrototypeOf(selector))) {
+		return selector[0];
+	}
+}
+
+/** 
+ * querySelectorAll under steroid
+ * Can use as selector:
+ *  - function
+ *  - DOM Node
+ *  - String
+ * @param {String|Node|Function} selector 
+ * @param {Node|undefined} node 
+ */
+const querySelectorAll = (selector, node) => {
+	if (Object(_type__WEBPACK_IMPORTED_MODULE_0__["isFunction"])(selector)) {
+		return selector(node);
+	}
+	
+	if (Object(_type__WEBPACK_IMPORTED_MODULE_0__["isNode"])(selector)) {
+		return [selector];
+	}
+
+	if (Object(_type__WEBPACK_IMPORTED_MODULE_0__["isString"])(selector)) {
+		if (!node || !Object(_type__WEBPACK_IMPORTED_MODULE_0__["isNode"])(node) || node.nodeType !== 1) {
+			node = document;
+		}
+		
+		return node.querySelectorAll(selector);
+	}
+	
+	if (typeof NodeList !== 'undefined' && NodeList.prototype.isPrototypeOf(selector)) {
+		return selector;
+	} else {
+		return [];
+	}
+};
+
+// Convert dataset into Object
+const optionsFromDataset = (node, defaultOptions = {}) => {
+	if (Object(_type__WEBPACK_IMPORTED_MODULE_0__["isNode"])(node)) {
+		return node.dataset ? Object.keys(node.dataset)
+			.filter(key => Object.keys(defaultOptions).includes(key))
+			.reduce((obj, key) => {
+				return {
+					...obj,
+					[key]: node.dataset[key]
+				};
+			}, {}) : {};
+	} else {
+		return {};
+	}
+};
+
+/**
+ * Copy HTML attributes from a source element to a target element
+ * @param {Node} target 
+ * @param {Node} source 
+ * @param {String} except list of attributes to skip (separated by space)
+ */
+const cloneAttributes = (target, source, except = null) => {
+	if (except !== null) {
+		except = except.split(' ');
+	}
+
+	[...source.attributes].forEach(attr => {
+		if (!except.includes(attr.nodeName)) {
+			target.setAttribute(attr.nodeName === "id" ? 'data-id' : attr.nodeName, attr.nodeValue);
+		}
+	});
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/events.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/events.js ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return EventEmitter; });
+/**
+ * @class EventEmitter
+ *
+ * @property {Array} _listeners
+ */
+class EventEmitter {
+	/**
+	 * Construct EventEmitter
+	 * 
+	 * @param {Array} listeners 
+	 */
+	constructor(listeners = []) {
+		this._listeners = new Map(listeners);
+		this._events = new Map();
+	}
+
+	/**
+     * Destroys EventEmitter
+     */
+    destroy() {
+        this._listeners = {};
+        this.events = [];
+    }
+
+	/**
+	 * Count listeners registered for the provided eventName
+	 * 
+	 * @param {string} eventName 
+	 */
+	listenerCount(eventName) {
+		if (!this._listeners.has(eventName)) {
+			return 0;
+		}
+
+		return this._listeners.get(eventName).length;
+	}
+
+	/**
+     * Subscribes on event eventName specified function
+	 * 
+     * @param {string} eventName
+     * @param {function} listener
+     */
+	on(eventName, listener) {
+		this._addListener(eventName, listener, false);
+	}
+
+	/**
+     * Subscribes on event name specified function to fire only once
+	 * 
+     * @param {string} eventName
+     * @param {function} listener
+     */
+	once(eventName, listener) {
+		this._addListener(eventName, listener, true);
+	}
+
+	/**
+     * Removes event with specified eventName.
+	 * 
+     * @param {string} eventName
+     */
+    off(eventName) {
+		this._removeListeners(eventName);
+	}
+
+	/**
+     * Emits event with specified name and params.
+	 * 
+     * @param {string} eventName
+     * @param eventArgs
+     */
+    emit(eventName, ...eventArgs) {
+        return this._applyEvents(eventName, eventArgs);
+	}
+	
+	/**
+	 * Register a new listener
+	 * 
+	 * @param {string} eventName 
+	 * @param {function} listener 
+	 * @param {bool} once 
+	 */
+	_addListener(eventName, listener, once = false) {
+		if (Array.isArray(eventName)) {
+			eventName.forEach(e => this._addListener(e, listener, once));
+		} else {
+			eventName = eventName.toString();
+			const split = eventName.split(/,|, | /);
+
+			if (split.length > 1) {
+				split.forEach(e => this._addListener(e, listener, once));
+			} else {
+				if (!Array.isArray(this._listeners.get(eventName))) {
+					this._listeners.set(eventName, []);
+				}
+
+				(this._listeners.get(eventName)).push({
+					once: once,
+					fn: listener
+				});
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param {string|null} eventName 
+	 */
+	_removeListeners(eventName = null) {
+		if (eventName !== null) {
+			if (Array.isArray(eventName)) {
+				name.forEach(e => this.removeListeners(e));
+			} else {
+				eventName = eventName.toString();
+				const split = eventName.split(/,|, | /);
+
+				if (split.length > 1) {
+					split.forEach(e => this.removeListeners(e));
+				} else {
+					this._listeners.delete(eventName);
+				}
+			}
+		} else {
+			this._listeners = new Map();
+		}
+	}
+
+	/**
+     * Applies arguments to specified event
+	 * 
+     * @param {string} eventName
+     * @param {*[]} eventArguments
+     * @protected
+     */
+    _applyEvents(eventName, eventArguments) {
+		let result = eventArguments;
+
+        if (this._listeners.has(eventName)) {
+			const listeners = this._listeners.get(eventName);
+			let removableListeners = [];
+
+			listeners.forEach((listener, index) => {
+				if (result = listener.fn.apply(null, eventArguments)) {
+					if (listener.once) {
+						removableListeners.unshift(index);
+					}
+				}
+			});
+	
+			removableListeners.forEach(index => {
+				listeners.splice(index, 1);
+			});
+
+			return result;
+		}
+
+		return result[0];
+    }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/type.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/type.js ***!
+  \**************************************************************************/
+/*! exports provided: isFunction, isString, isObject, isPromise, isNode, BooleanParse, isSelectorValid */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isFunction", function() { return isFunction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isString", function() { return isString; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isObject", function() { return isObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPromise", function() { return isPromise; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNode", function() { return isNode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BooleanParse", function() { return BooleanParse; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isSelectorValid", function() { return isSelectorValid; });
+const isFunction = unknown => typeof unknown === 'function';
+const isString = unknown => (typeof unknown === 'string' || ((!!unknown && typeof unknown === 'object') && Object.prototype.toString.call(unknown) === '[object String]'));
+const isObject = unknown => ((typeof unknown === 'function' || (typeof unknown === 'object' && !!unknown)) && !Array.isArray(unknown));
+// Returns true if the value has a "then" function. Adapted from
+// https://github.com/graphql/graphql-js/blob/499a75939f70c4863d44149371d6a99d57ff7c35/src/jsutils/isPromise.js
+const isPromise = value => Boolean(value && typeof value.then === 'function');
+
+const isNode = unknown => {
+	try {
+		Node.prototype.cloneNode.call(unknown, false);
+		return true;
+	} catch (err) {
+		return false;
+	}
+};
+
+/**
+ * Convert String (false,False,True,true,no,yes,0,1) to real Boolean
+ * @param {String} val 
+ */
+const BooleanParse = function (val) {
+	const falsy = /^(?:f(?:alse)?|no?|0+)$/i;
+	
+	return !falsy.test(val) && !!val;
+};
+
+/**
+ * Check if given query selector is valid
+ * @param {String} selector 
+ */
+const isSelectorValid = selector => {
+	const queryCheck = s => document.createDocumentFragment().querySelector(s)
+	try {
+		queryCheck(selector);
+	} catch {
+		return false;
+	}
+	
+	return true;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/uuid.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@creativebulma/bulma-tagsinput/src/js/utils/uuid.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ((prefix = '') => prefix + ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)));
+
+/***/ }),
+
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -90054,6 +91867,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dataTables_select_min__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_dataTables_select_min__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _dataTables_responsive_min__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./dataTables.responsive.min */ "./resources/js/dataTables.responsive.min.js");
 /* harmony import */ var _dataTables_responsive_min__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_dataTables_responsive_min__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _creativebulma_bulma_collapsible__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @creativebulma/bulma-collapsible */ "./node_modules/@creativebulma/bulma-collapsible/dist/js/bulma-collapsible.min.js");
+/* harmony import */ var _creativebulma_bulma_collapsible__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_creativebulma_bulma_collapsible__WEBPACK_IMPORTED_MODULE_6__);
+
 
 
 
@@ -90115,7 +91931,9 @@ $('.table.data.selectable').DataTable({
 });
 $('.table.data.unselectable').DataTable({
   responsive: true
-});
+}); // Collapsible elements
+
+var bulmaCollapsibleInstances = _creativebulma_bulma_collapsible__WEBPACK_IMPORTED_MODULE_6___default.a.attach('.is-collapsible');
 
 /***/ }),
 
@@ -95900,9 +97718,9 @@ function () {
       return updateRowMarkup;
     }()
   }, {
-    key: "timeline",
+    key: "closingFormModal",
     value: function () {
-      var _timeline = _asyncToGenerator(
+      var _closingFormModal = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var _this3 = this;
@@ -95913,8 +97731,8 @@ function () {
               case 0:
                 _context3.prev = 0;
                 return _context3.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/dashboard/alert/timeline/".concat(_this3.id)).then(function (result) {
-                    _this3.timeline = result.data;
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/dashboard/alert/closing-form-modal/".concat(_this3.id)).then(function (result) {
+                    _this3.closingFormModal = result.data;
                   }));
                 }));
 
@@ -95931,19 +97749,57 @@ function () {
         }, _callee3, null, [[0, 4]]);
       }));
 
-      function timeline() {
-        return _timeline.apply(this, arguments);
+      function closingFormModal() {
+        return _closingFormModal.apply(this, arguments);
       }
 
-      return timeline;
+      return closingFormModal;
     }()
   }, {
-    key: "update",
+    key: "ignoranceFormModal",
     value: function () {
-      var _update = _asyncToGenerator(
+      var _ignoranceFormModal = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var _this4 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                return _context4.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/dashboard/alert/ignorance-form-modal/".concat(_this4.id)).then(function (result) {
+                    _this4.ignoranceFormModal = result.data;
+                  }));
+                }));
+
+              case 4:
+                _context4.prev = 4;
+                _context4.t0 = _context4["catch"](0);
+                console.log(_context4.t0);
+
+              case 7:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 4]]);
+      }));
+
+      function ignoranceFormModal() {
+        return _ignoranceFormModal.apply(this, arguments);
+      }
+
+      return ignoranceFormModal;
+    }()
+  }, {
+    key: "timeline",
+    value: function () {
+      var _timeline = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
-        var _this4 = this;
+        var _this5 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
           while (1) {
@@ -95951,36 +97807,9 @@ function () {
               case 0:
                 _context5.prev = 0;
                 return _context5.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/api/alerts/".concat(_this4.id)).then(
-                  /*#__PURE__*/
-                  function () {
-                    var _ref = _asyncToGenerator(
-                    /*#__PURE__*/
-                    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(result) {
-                      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-                        while (1) {
-                          switch (_context4.prev = _context4.next) {
-                            case 0:
-                              _this4.data = result.data;
-                              _context4.next = 3;
-                              return _this4.updateMarkup();
-
-                            case 3:
-                              _context4.next = 5;
-                              return _this4.updateRowMarkup();
-
-                            case 5:
-                            case "end":
-                              return _context4.stop();
-                          }
-                        }
-                      }, _callee4);
-                    }));
-
-                    return function (_x) {
-                      return _ref.apply(this, arguments);
-                    };
-                  }()));
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/dashboard/alert/timeline/".concat(_this5.id)).then(function (result) {
+                    _this5.timeline = result.data;
+                  }));
                 }));
 
               case 4:
@@ -95996,19 +97825,19 @@ function () {
         }, _callee5, null, [[0, 4]]);
       }));
 
-      function update() {
-        return _update.apply(this, arguments);
+      function timeline() {
+        return _timeline.apply(this, arguments);
       }
 
-      return update;
+      return timeline;
     }()
   }, {
-    key: "enterRevisionMode",
+    key: "update",
     value: function () {
-      var _enterRevisionMode = _asyncToGenerator(
+      var _update = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
-        var _this5 = this;
+        var _this6 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
           while (1) {
@@ -96016,26 +97845,25 @@ function () {
               case 0:
                 _context7.prev = 0;
                 return _context7.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["put"]("/api/alerts/".concat(_this5.id), {
-                    action: 'enter_revision_mode'
-                  }).then(
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["get"]("/api/alerts/".concat(_this6.id)).then(
                   /*#__PURE__*/
                   function () {
-                    var _ref2 = _asyncToGenerator(
+                    var _ref = _asyncToGenerator(
                     /*#__PURE__*/
-                    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(res) {
+                    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(result) {
                       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
                         while (1) {
                           switch (_context6.prev = _context6.next) {
                             case 0:
-                              _context6.next = 2;
-                              return _this5.updateMarkup();
+                              _this6.data = result.data;
+                              _context6.next = 3;
+                              return _this6.updateMarkup();
 
-                            case 2:
-                              _context6.next = 4;
-                              return _this5.updateRowMarkup();
+                            case 3:
+                              _context6.next = 5;
+                              return _this6.updateRowMarkup();
 
-                            case 4:
+                            case 5:
                             case "end":
                               return _context6.stop();
                           }
@@ -96043,8 +97871,8 @@ function () {
                       }, _callee6);
                     }));
 
-                    return function (_x2) {
-                      return _ref2.apply(this, arguments);
+                    return function (_x) {
+                      return _ref.apply(this, arguments);
                     };
                   }()));
                 }));
@@ -96062,19 +97890,19 @@ function () {
         }, _callee7, null, [[0, 4]]);
       }));
 
-      function enterRevisionMode() {
-        return _enterRevisionMode.apply(this, arguments);
+      function update() {
+        return _update.apply(this, arguments);
       }
 
-      return enterRevisionMode;
+      return update;
     }()
   }, {
-    key: "exitRevisionMode",
+    key: "enterRevisionMode",
     value: function () {
-      var _exitRevisionMode = _asyncToGenerator(
+      var _enterRevisionMode = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9() {
-        var _this6 = this;
+        var _this7 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
           while (1) {
@@ -96082,12 +97910,12 @@ function () {
               case 0:
                 _context9.prev = 0;
                 return _context9.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["put"]("/api/alerts/".concat(_this6.id), {
-                    action: 'exit_revision_mode'
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["put"]("/api/alerts/".concat(_this7.id), {
+                    action: 'enter_revision_mode'
                   }).then(
                   /*#__PURE__*/
                   function () {
-                    var _ref3 = _asyncToGenerator(
+                    var _ref2 = _asyncToGenerator(
                     /*#__PURE__*/
                     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8(res) {
                       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
@@ -96095,11 +97923,11 @@ function () {
                           switch (_context8.prev = _context8.next) {
                             case 0:
                               _context8.next = 2;
-                              return _this6.updateMarkup();
+                              return _this7.updateMarkup();
 
                             case 2:
                               _context8.next = 4;
-                              return _this6.updateRowMarkup();
+                              return _this7.updateRowMarkup();
 
                             case 4:
                             case "end":
@@ -96109,8 +97937,8 @@ function () {
                       }, _callee8);
                     }));
 
-                    return function (_x3) {
-                      return _ref3.apply(this, arguments);
+                    return function (_x2) {
+                      return _ref2.apply(this, arguments);
                     };
                   }()));
                 }));
@@ -96128,58 +97956,18 @@ function () {
         }, _callee9, null, [[0, 4]]);
       }));
 
-      function exitRevisionMode() {
-        return _exitRevisionMode.apply(this, arguments);
+      function enterRevisionMode() {
+        return _enterRevisionMode.apply(this, arguments);
       }
 
-      return exitRevisionMode;
+      return enterRevisionMode;
     }()
   }, {
-    key: "close",
+    key: "exitRevisionMode",
     value: function () {
-      var _close = _asyncToGenerator(
+      var _exitRevisionMode = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10(falsePositive, description) {
-        var _this7 = this;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
-          while (1) {
-            switch (_context10.prev = _context10.next) {
-              case 0:
-                _context10.prev = 0;
-                return _context10.abrupt("return", new Promise(function (resolve, reject) {
-                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["put"]("/api/alerts/".concat(_this7.id), {
-                    action: 'close',
-                    falsePositive: falsePositive,
-                    description: description
-                  }));
-                }));
-
-              case 4:
-                _context10.prev = 4;
-                _context10.t0 = _context10["catch"](0);
-                console.log(_context10.t0);
-
-              case 7:
-              case "end":
-                return _context10.stop();
-            }
-          }
-        }, _callee10, null, [[0, 4]]);
-      }));
-
-      function close(_x4, _x5) {
-        return _close.apply(this, arguments);
-      }
-
-      return close;
-    }()
-  }, {
-    key: "ignore",
-    value: function () {
-      var _ignore = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11(from_, fromTime, to, toTime, description) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11() {
         var _this8 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
@@ -96189,13 +97977,36 @@ function () {
                 _context11.prev = 0;
                 return _context11.abrupt("return", new Promise(function (resolve, reject) {
                   resolve(axios__WEBPACK_IMPORTED_MODULE_1__["put"]("/api/alerts/".concat(_this8.id), {
-                    action: 'ignore',
-                    from_: from_,
-                    fromTime: fromTime,
-                    to: to,
-                    toTime: toTime,
-                    description: description
-                  }));
+                    action: 'exit_revision_mode'
+                  }).then(
+                  /*#__PURE__*/
+                  function () {
+                    var _ref3 = _asyncToGenerator(
+                    /*#__PURE__*/
+                    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10(res) {
+                      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
+                        while (1) {
+                          switch (_context10.prev = _context10.next) {
+                            case 0:
+                              _context10.next = 2;
+                              return _this8.updateMarkup();
+
+                            case 2:
+                              _context10.next = 4;
+                              return _this8.updateRowMarkup();
+
+                            case 4:
+                            case "end":
+                              return _context10.stop();
+                          }
+                        }
+                      }, _callee10);
+                    }));
+
+                    return function (_x3) {
+                      return _ref3.apply(this, arguments);
+                    };
+                  }()));
                 }));
 
               case 4:
@@ -96209,6 +98020,89 @@ function () {
             }
           }
         }, _callee11, null, [[0, 4]]);
+      }));
+
+      function exitRevisionMode() {
+        return _exitRevisionMode.apply(this, arguments);
+      }
+
+      return exitRevisionMode;
+    }()
+  }, {
+    key: "close",
+    value: function () {
+      var _close = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12(falsePositive, description) {
+        var _this9 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee12$(_context12) {
+          while (1) {
+            switch (_context12.prev = _context12.next) {
+              case 0:
+                _context12.prev = 0;
+                return _context12.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["put"]("/api/alerts/".concat(_this9.id), {
+                    action: 'close',
+                    falsePositive: falsePositive,
+                    description: description
+                  }));
+                }));
+
+              case 4:
+                _context12.prev = 4;
+                _context12.t0 = _context12["catch"](0);
+                console.log(_context12.t0);
+
+              case 7:
+              case "end":
+                return _context12.stop();
+            }
+          }
+        }, _callee12, null, [[0, 4]]);
+      }));
+
+      function close(_x4, _x5) {
+        return _close.apply(this, arguments);
+      }
+
+      return close;
+    }()
+  }, {
+    key: "ignore",
+    value: function () {
+      var _ignore = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee13(from_, fromTime, to, toTime, description) {
+        var _this10 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee13$(_context13) {
+          while (1) {
+            switch (_context13.prev = _context13.next) {
+              case 0:
+                _context13.prev = 0;
+                return _context13.abrupt("return", new Promise(function (resolve, reject) {
+                  resolve(axios__WEBPACK_IMPORTED_MODULE_1__["put"]("/api/alerts/".concat(_this10.id), {
+                    action: 'ignore',
+                    from_: from_,
+                    fromTime: fromTime,
+                    to: to,
+                    toTime: toTime,
+                    description: description
+                  }));
+                }));
+
+              case 4:
+                _context13.prev = 4;
+                _context13.t0 = _context13["catch"](0);
+                console.log(_context13.t0);
+
+              case 7:
+              case "end":
+                return _context13.stop();
+            }
+          }
+        }, _callee13, null, [[0, 4]]);
       }));
 
       function ignore(_x6, _x7, _x8, _x9, _x10) {
@@ -97259,7 +99153,7 @@ function () {
     value: function () {
       var _save = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(name, code, orchestrator, elasticSearchUrl, elasticSearchIndex) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(name, code, orchestrator, orchestratorTenant, orchestratorApiUserUsername, orchestratorApiUserPassword, elasticSearchUrl, elasticSearchIndex, elasticSearchApiUserUsername, elasticSearchApiUserPassword) {
         var _this3 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
@@ -97272,8 +99166,13 @@ function () {
                     'name': name,
                     'code': code,
                     'ui_path_orchestrator_id': orchestrator,
+                    'ui_path_orchestrator_tenant': orchestratorTenant,
+                    'ui_path_orchestrator_api_user_username': orchestratorApiUserUsername,
+                    'ui_path_orchestrator_api_user_password': orchestratorApiUserPassword,
                     'elastic_search_url': elasticSearchUrl,
-                    'elastic_search_index': elasticSearchIndex
+                    'elastic_search_index': elasticSearchIndex,
+                    'elastic_search_api_user_username': elasticSearchApiUserUsername,
+                    'elastic_search_api_user_password': elasticSearchApiUserPassword
                   }).then(function (response) {
                     if (response.data) {
                       _this3.id = response.data.id;
@@ -97294,7 +99193,7 @@ function () {
         }, _callee3, null, [[0, 4]]);
       }));
 
-      function save(_x, _x2, _x3, _x4, _x5) {
+      function save(_x, _x2, _x3, _x4, _x5, _x6, _x7, _x8, _x9, _x10) {
         return _save.apply(this, arguments);
       }
 
@@ -97305,7 +99204,7 @@ function () {
     value: function () {
       var _update = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(name, code, orchestrator, elasticSearchUrl, elasticSearchIndex) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(name, code, orchestrator, orchestratorTenant, orchestratorApiUserUsername, orchestratorApiUserPassword, elasticSearchUrl, elasticSearchIndex, elasticSearchApiUserUsername, elasticSearchApiUserPassword) {
         var _this4 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
@@ -97318,8 +99217,13 @@ function () {
                     'name': name,
                     'code': code,
                     'ui_path_orchestrator_id': orchestrator,
+                    'ui_path_orchestrator_tenant': orchestratorTenant,
+                    'ui_path_orchestrator_api_user_username': orchestratorApiUserUsername,
+                    'ui_path_orchestrator_api_user_password': orchestratorApiUserPassword,
                     'elastic_search_url': elasticSearchUrl,
-                    'elastic_search_index': elasticSearchIndex
+                    'elastic_search_index': elasticSearchIndex,
+                    'elastic_search_api_user_username': elasticSearchApiUserUsername,
+                    'elastic_search_api_user_password': elasticSearchApiUserPassword
                   }).then(function (response) {
                     if (response.data) {
                       _this4.data = response.data;
@@ -97340,7 +99244,7 @@ function () {
         }, _callee4, null, [[0, 4]]);
       }));
 
-      function update(_x6, _x7, _x8, _x9, _x10) {
+      function update(_x11, _x12, _x13, _x14, _x15, _x16, _x17, _x18, _x19, _x20) {
         return _update.apply(this, arguments);
       }
 
@@ -98432,7 +100336,7 @@ function () {
     value: function () {
       var _save = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(name, code, url, tenant, apiUserUsername, apiUserPassword) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(name, code, url, tenant) {
         var _this = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
@@ -98444,10 +100348,7 @@ function () {
                   resolve(axios__WEBPACK_IMPORTED_MODULE_1__["post"]('/api/ui-path-orchestrators', {
                     'name': name,
                     'code': code,
-                    'url': url,
-                    'tenant': tenant,
-                    'api_user_username': apiUserUsername,
-                    'api_user_password': apiUserPassword
+                    'url': url
                   }).then(function (response) {
                     if (response.data) {
                       _this.id = response.data.id;
@@ -98468,7 +100369,7 @@ function () {
         }, _callee, null, [[0, 4]]);
       }));
 
-      function save(_x, _x2, _x3, _x4, _x5, _x6) {
+      function save(_x, _x2, _x3, _x4) {
         return _save.apply(this, arguments);
       }
 
@@ -98479,7 +100380,7 @@ function () {
     value: function () {
       var _update = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(name, code, url, tenant, apiUserUsername, apiUserPassword) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(name, code, url, tenant) {
         var _this2 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
@@ -98491,12 +100392,7 @@ function () {
                   resolve(axios__WEBPACK_IMPORTED_MODULE_1__["patch"]("/api/ui-path-orchestrators/".concat(_this2.id), {
                     'name': name,
                     'code': code,
-                    'url': url,
-                    'tenant': tenant,
-                    'api_user_username': apiUserUsername,
-                    'api_user_password': apiUserPassword,
-                    'elastic_search_url': elasticSearchUrl,
-                    'elastic_search_index': elasticSearchIndex
+                    'url': url
                   }).then(function (response) {
                     if (response.data) {
                       _this2.data = response.data;
@@ -98517,7 +100413,7 @@ function () {
         }, _callee2, null, [[0, 4]]);
       }));
 
-      function update(_x7, _x8, _x9, _x10, _x11, _x12) {
+      function update(_x5, _x6, _x7, _x8) {
         return _update.apply(this, arguments);
       }
 
@@ -99019,79 +100915,6 @@ var elements = {
 
 /***/ }),
 
-/***/ "./resources/js/views/alert/forms/closing-form-modal.js":
-/*!**************************************************************!*\
-  !*** ./resources/js/views/alert/forms/closing-form-modal.js ***!
-  \**************************************************************/
-/*! exports provided: markup */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "markup", function() { return markup; });
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _form_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form-modal */ "./resources/js/views/alert/forms/form-modal.js");
-
-
-var markup = function markup(elementID, alert) {
-  return "\n        <div id=\"".concat(elementID, "\" class=\"modal\">\n            <div class=\"modal-background\"></div>\n            <div class=\"modal-card modal-content\">\n                ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["header"])('Alert closing', alert), "\n                <section class=\"modal-card-body\">\n                    <form class=\"alert-closing-form\" method=\"POST\">\n                        ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["titleBlock"])(alert), "\n                        ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["underRevisionBlock"])(alert), "\n                        <div class=\"field\">\n                            <div class=\"control\">\n                                <input type=\"checkbox\" id=\"false_positive\" name=\"false_positive\" class=\"switch is-rounded\">\n                                <label for=\"false_positive\" class=\"checkbox\">\n                                    It is a false positive\n                                </label>\n                            </div>\n                        </div>\n                        <div class=\"field\">\n                            <div class=\"control\">\n                                <textarea class=\"textarea\"\n                                    id=\"closing_description\"\n                                    name=\"closing_description\"\n                                    placeholder=\"Resolution description\"\n                                    required></textarea>\n                            </div>\n                        </div>\n                    </form>\n                </section>\n                ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["footer"])('Put out the fire!', 'fire-extinguisher'), "\n            </div>\n        </div>\n    ");
-};
-
-/***/ }),
-
-/***/ "./resources/js/views/alert/forms/form-modal.js":
-/*!******************************************************!*\
-  !*** ./resources/js/views/alert/forms/form-modal.js ***!
-  \******************************************************/
-/*! exports provided: header, footer, titleBlock, underRevisionBlock */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "header", function() { return header; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "footer", function() { return footer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "titleBlock", function() { return titleBlock; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "underRevisionBlock", function() { return underRevisionBlock; });
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-
-var header = function header(title, alert) {
-  return "\n        <header class=\"modal-card-head has-background-".concat(alert.definition.level, "\">\n            <p class=\"modal-card-title has-text-light\">\n                <span class=\"icon\"><i class=\"fas fa-burn\"></i></span> ").concat(title, "\n            </p>\n            <button class=\"delete\" aria-label=\"close\"></button>\n        </header>\n    ");
-};
-var footer = function footer(successButtonLabel, successButtonIcon) {
-  return "\n        <footer class=\"modal-card-foot\">\n            <div class=\"field is-grouped has-addons\">\n                <div class=\"control\">\n                    <button class=\"button is-success validate\">\n                        <span class=\"icon is-small\">\n                            <i class=\"fas fa-".concat(successButtonIcon, "\"></i>\n                        </span>\n                        <span>").concat(successButtonLabel, "</span>\n                    </button>\n                </div>\n                <div class=\"control\">\n                    <button class=\"button is-danger is-outlined cancel\">\n                        <span class=\"icon is-small\">\n                            <i class=\"fas fa-window-close\"></i>\n                        </span>\n                        <span>Cancel</span>\n                    </button>\n                </div>\n            </div>\n        </footer>\n    ");
-};
-var titleBlock = function titleBlock(alert) {
-  return "\n        <div class=\"columns\">\n            <div class=\"column\">\n                <div class=\"field\">\n                    <label class=\"label\">\n                        <span class=\"icon\"><i class=\"fas fa-building\"></i></span>\n                        <span>Client</span>\n                    </label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"".concat(alert.watched_automated_process.client.name, "\" readonly>\n                    </div>\n                </div>\n                <div class=\"field\">\n                    <label class=\"label\">\n                        <span class=\"icon\"><i class=\"fas fa-clock\"></i></span>\n                        <span>Detected on</span>\n                    </label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"").concat(moment__WEBPACK_IMPORTED_MODULE_0___default()(alert.created_at).format('DD/MM/YYYY HH:mm:ss'), "\" readonly>\n                    </div>\n                </div>\n            </div>\n            <div class=\"column\">\n                <div class=\"field\">\n                    <label class=\"label\">\n                        <span class=\"icon\"><i class=\"fas fa-binoculars\"></i></span>\n                        <span>Watched automated process</span>\n                    </label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"").concat(alert.watched_automated_process.name, "\" readonly>\n                    </div>\n                </div>\n                <div class=\"field\">\n                    <label class=\"label\">\n                        <span class=\"icon\"><i class=\"fas fa-dragon\"></i></span>\n                        <span>Alert trigger</span>\n                    </label>\n                    <div class=\"control\">\n                        <input class=\"input is-static\" type=\"text\" value=\"").concat(alert.trigger.title, "\" readonly>\n                    </div>\n                </div>\n            </div>\n        </div>\n    ");
-};
-var underRevisionBlock = function underRevisionBlock(alert) {
-  return "\n        <article class=\"message is-info is-small\">\n            <div class=\"message-body\">\n                Revision started on ".concat(moment__WEBPACK_IMPORTED_MODULE_0___default()(alert.revision_started_at).format('DD/MM/YYYY HH:mm:ss'), "\n                <small>\n                    (").concat(moment__WEBPACK_IMPORTED_MODULE_0___default()(alert.revision_started_at).fromNow(), ")\n                </small>\n            </div>\n        </article>\n    ");
-};
-
-/***/ }),
-
-/***/ "./resources/js/views/alert/forms/ignorance-form-modal.js":
-/*!****************************************************************!*\
-  !*** ./resources/js/views/alert/forms/ignorance-form-modal.js ***!
-  \****************************************************************/
-/*! exports provided: markup */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "markup", function() { return markup; });
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _form_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form-modal */ "./resources/js/views/alert/forms/form-modal.js");
-
-
-var markup = function markup(elementID, alert) {
-  return "\n        <div id=\"".concat(elementID, "\" class=\"modal\">\n            <div class=\"modal-background\"></div>\n            <div class=\"modal-card modal-content\">\n                ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["header"])('Alert trigger ignorance', alert), "\n                <section class=\"modal-card-body\">\n                    <form class=\"alert-closing-form\" method=\"POST\">\n                        ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["titleBlock"])(alert), "\n                        ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["underRevisionBlock"])(alert), "\n                        <div class=\"field\">\n                            <label class=\"label\">Ignore alert trigger in range</label>\n                            <div class=\"control\">\n                                <input type=\"date\" class=\"datetime\"\n                                    id=\"ignorance_calendar\"\n                                    name=\"ignorance_calendar\">\n                            </div>\n                        </div>\n                        <div class=\"field\">\n                            <div class=\"control\">\n                                <textarea class=\"textarea\"\n                                    id=\"ignorance_description\"\n                                    name=\"ignorance_description\"\n                                    placeholder=\"Ignorance description\"\n                                    required></textarea>\n                            </div>\n                        </div>\n                    </form>\n                </section>\n                ").concat(Object(_form_modal__WEBPACK_IMPORTED_MODULE_1__["footer"])('Ignore it!', 'eye-slash'), "\n            </div>\n        </div>\n    ");
-};
-
-/***/ }),
-
 /***/ "./resources/js/views/alert/index.js":
 /*!*******************************************!*\
   !*** ./resources/js/views/alert/index.js ***!
@@ -99382,8 +101205,8 @@ function () {
             try {
               alert = new _models_Alert__WEBPACK_IMPORTED_MODULE_3__["default"](id);
               _view__WEBPACK_IMPORTED_MODULE_6__["renderLoaders"](id);
-              alert.update().then(function (res) {
-                var modal = _view__WEBPACK_IMPORTED_MODULE_6__["showClosingFormModal"](alert.data);
+              alert.closingFormModal().then(function (res) {
+                var modal = _view__WEBPACK_IMPORTED_MODULE_6__["showClosingFormModal"](alert);
                 modal.addEventListener('click',
                 /*#__PURE__*/
                 function () {
@@ -99413,7 +101236,7 @@ function () {
                 _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
               });
             } catch (error) {
-              toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error("Alert not updated due to application exception: ".concat(error), null, {
+              toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error("Alert closing form not shown due to application exception: ".concat(error), null, {
                 positionClass: 'toast-bottom-center'
               });
               _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
@@ -99501,8 +101324,8 @@ function () {
             try {
               alert = new _models_Alert__WEBPACK_IMPORTED_MODULE_3__["default"](id);
               _view__WEBPACK_IMPORTED_MODULE_6__["renderLoaders"](id);
-              alert.update().then(function (res) {
-                var modal = _view__WEBPACK_IMPORTED_MODULE_6__["showIgnoranceFormModal"](alert.data);
+              alert.ignoranceFormModal().then(function (res) {
+                var modal = _view__WEBPACK_IMPORTED_MODULE_6__["showIgnoranceFormModal"](alert);
                 modal.addEventListener('click',
                 /*#__PURE__*/
                 function () {
@@ -99532,7 +101355,7 @@ function () {
                 _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
               });
             } catch (error) {
-              toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error("Alert not updated due to application exception: ".concat(error), null, {
+              toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error("Alert trigger ignorance form not shown due to application exception: ".concat(error), null, {
                 positionClass: 'toast-bottom-center'
               });
               _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
@@ -99790,13 +101613,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showTimelineFormModal", function() { return showTimelineFormModal; });
 /* harmony import */ var bulma_calendar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bulma-calendar */ "./node_modules/bulma-calendar/dist/js/bulma-calendar.js");
 /* harmony import */ var bulma_calendar__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bulma_calendar__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./base */ "./resources/js/views/alert/base.js");
-/* harmony import */ var _forms_closing_form_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./forms/closing-form-modal */ "./resources/js/views/alert/forms/closing-form-modal.js");
-/* harmony import */ var _forms_ignorance_form_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./forms/ignorance-form-modal */ "./resources/js/views/alert/forms/ignorance-form-modal.js");
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../base */ "./resources/js/views/base.js");
-
+/* harmony import */ var _creativebulma_bulma_tagsinput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @creativebulma/bulma-tagsinput */ "./node_modules/@creativebulma/bulma-tagsinput/src/js/index.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./base */ "./resources/js/views/alert/base.js");
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../base */ "./resources/js/views/base.js");
 
 
 
@@ -99804,13 +101625,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var renderLoaderOnBox = function renderLoaderOnBox(id) {
-  _base__WEBPACK_IMPORTED_MODULE_5__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_2__["elements"].box(id));
+  _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](_base__WEBPACK_IMPORTED_MODULE_3__["elements"].box(id));
 };
 
 var renderLoaderOnTables = function renderLoaderOnTables() {
-  _base__WEBPACK_IMPORTED_MODULE_5__["renderLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_2__["selectors"].pendingTable));
+  _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].pendingTable));
 
-  _base__WEBPACK_IMPORTED_MODULE_5__["renderLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_2__["selectors"].closedTable));
+  _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].closedTable));
 };
 
 var renderLoaders = function renderLoaders(id) {
@@ -99819,13 +101640,13 @@ var renderLoaders = function renderLoaders(id) {
 };
 
 var clearLoaderOnBox = function clearLoaderOnBox(id) {
-  _base__WEBPACK_IMPORTED_MODULE_5__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_2__["elements"].box(id));
+  _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](_base__WEBPACK_IMPORTED_MODULE_3__["elements"].box(id));
 };
 
 var clearLoaderOnTables = function clearLoaderOnTables() {
-  _base__WEBPACK_IMPORTED_MODULE_5__["clearLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_2__["selectors"].pendingTable));
+  _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].pendingTable));
 
-  _base__WEBPACK_IMPORTED_MODULE_5__["clearLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_2__["selectors"].closedTable));
+  _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].closedTable));
 };
 
 var clearLoaders = function clearLoaders(id) {
@@ -99833,16 +101654,16 @@ var clearLoaders = function clearLoaders(id) {
   clearLoaderOnTables();
 };
 var update = function update(id, markup) {
-  return _base__WEBPACK_IMPORTED_MODULE_5__["update"](_base__WEBPACK_IMPORTED_MODULE_2__["elements"].box(id), markup);
+  return _base__WEBPACK_IMPORTED_MODULE_4__["update"](_base__WEBPACK_IMPORTED_MODULE_3__["elements"].box(id), markup);
 };
 
 var removeBox = function removeBox(id) {
-  var box = _base__WEBPACK_IMPORTED_MODULE_2__["elements"].box(id);
+  var box = _base__WEBPACK_IMPORTED_MODULE_3__["elements"].box(id);
   if (box) box.parentNode.removeChild(box);
 };
 
 var removeRow = function removeRow(id) {
-  var row = _base__WEBPACK_IMPORTED_MODULE_2__["elements"].row(id);
+  var row = _base__WEBPACK_IMPORTED_MODULE_3__["elements"].row(id);
   if (row) row.parentNode.removeChild(row);
 };
 
@@ -99851,39 +101672,40 @@ var remove = function remove(id) {
   removeRow(id);
 };
 var updatePendingTable = function updatePendingTable(markup) {
-  var table = _base__WEBPACK_IMPORTED_MODULE_5__["update"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_2__["selectors"].pendingTable).closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tableDataTablesWrapper), markup);
+  var table = _base__WEBPACK_IMPORTED_MODULE_4__["update"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].pendingTable).closest(_base__WEBPACK_IMPORTED_MODULE_4__["selectors"].tableDataTablesWrapper), markup);
 
-  $(_base__WEBPACK_IMPORTED_MODULE_2__["selectors"].pendingTable).DataTable();
+  $(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].pendingTable).DataTable();
   return table;
 };
 var updateClosedTable = function updateClosedTable(markup) {
-  var table = _base__WEBPACK_IMPORTED_MODULE_5__["update"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_2__["selectors"].closedTable).closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tableDataTablesWrapper), markup);
+  var table = _base__WEBPACK_IMPORTED_MODULE_4__["update"](document.querySelector(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].closedTable).closest(_base__WEBPACK_IMPORTED_MODULE_4__["selectors"].tableDataTablesWrapper), markup);
 
-  $(_base__WEBPACK_IMPORTED_MODULE_2__["selectors"].closedTable).DataTable();
+  $(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].closedTable).DataTable();
   return table;
 };
 var updateRow = function updateRow(id, markup) {
-  return _base__WEBPACK_IMPORTED_MODULE_5__["update"](_base__WEBPACK_IMPORTED_MODULE_2__["elements"].row(id), markup);
+  return _base__WEBPACK_IMPORTED_MODULE_4__["update"](_base__WEBPACK_IMPORTED_MODULE_3__["elements"].row(id), markup);
 };
 var showClosingFormModal = function showClosingFormModal(alert) {
-  var markup = _forms_closing_form_modal__WEBPACK_IMPORTED_MODULE_3__["markup"](_base__WEBPACK_IMPORTED_MODULE_2__["strings"].closingFormModalID, alert);
+  var markup = alert.closingFormModal;
   document.body.insertAdjacentHTML('beforeend', markup);
-  var modal = document.getElementById(_base__WEBPACK_IMPORTED_MODULE_2__["strings"].closingFormModalID);
+  var modal = document.getElementById(_base__WEBPACK_IMPORTED_MODULE_3__["strings"].closingFormModalID);
 
-  _base__WEBPACK_IMPORTED_MODULE_5__["showModal"](modal);
+  _base__WEBPACK_IMPORTED_MODULE_4__["showModal"](modal);
 
+  new _creativebulma_bulma_tagsinput__WEBPACK_IMPORTED_MODULE_1__["default"]("#".concat(_base__WEBPACK_IMPORTED_MODULE_3__["strings"].closingFormModalID, " #keywords"));
   return modal;
 };
 var removeClosingFormModal = function removeClosingFormModal() {
-  var modal = document.getElementById(_base__WEBPACK_IMPORTED_MODULE_2__["strings"].closingFormModalID);
+  var modal = document.getElementById(_base__WEBPACK_IMPORTED_MODULE_3__["strings"].closingFormModalID);
 
-  _base__WEBPACK_IMPORTED_MODULE_5__["closeModal"](modal);
+  _base__WEBPACK_IMPORTED_MODULE_4__["closeModal"](modal);
 };
 var showIgnoranceFormModal = function showIgnoranceFormModal(alert) {
-  var markup = _forms_ignorance_form_modal__WEBPACK_IMPORTED_MODULE_4__["markup"](_base__WEBPACK_IMPORTED_MODULE_2__["strings"].ignoranceFormModalID, alert);
+  var markup = alert.ignoranceFormModal;
   document.body.insertAdjacentHTML('beforeend', markup);
-  var now = moment__WEBPACK_IMPORTED_MODULE_1___default()();
-  bulma_calendar__WEBPACK_IMPORTED_MODULE_0___default.a.attach(_base__WEBPACK_IMPORTED_MODULE_2__["selectors"].ignoranceFormModalIgnoreUntilDatetimeInput, {
+  var now = moment__WEBPACK_IMPORTED_MODULE_2___default()();
+  bulma_calendar__WEBPACK_IMPORTED_MODULE_0___default.a.attach(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].ignoranceFormModalIgnoreUntilDatetimeInput, {
     type: 'datetime',
     lang: 'en',
     isRange: true,
@@ -99900,22 +101722,22 @@ var showIgnoranceFormModal = function showIgnoranceFormModal(alert) {
     showFooter: false
   }); //const ignoreUntilDatetime = document.getElementById(strings.ignoranceFormModalIgnoreUntilDatetimeInputID);
 
-  var modal = document.getElementById(_base__WEBPACK_IMPORTED_MODULE_2__["strings"].ignoranceFormModalID);
+  var modal = document.getElementById(_base__WEBPACK_IMPORTED_MODULE_3__["strings"].ignoranceFormModalID);
 
-  _base__WEBPACK_IMPORTED_MODULE_5__["showModal"](modal);
+  _base__WEBPACK_IMPORTED_MODULE_4__["showModal"](modal);
 
   return modal;
 };
 var removeIgnoranceFormModal = function removeIgnoranceFormModal() {
-  var modal = document.getElementById(_base__WEBPACK_IMPORTED_MODULE_2__["strings"].ignoranceFormModalID);
+  var modal = document.getElementById(_base__WEBPACK_IMPORTED_MODULE_3__["strings"].ignoranceFormModalID);
 
-  _base__WEBPACK_IMPORTED_MODULE_5__["closeModal"](modal);
+  _base__WEBPACK_IMPORTED_MODULE_4__["closeModal"](modal);
 };
 var showTimelineFormModal = function showTimelineFormModal(alert) {
   document.body.insertAdjacentHTML('beforeend', alert.timeline);
-  var modal = document.getElementById(_base__WEBPACK_IMPORTED_MODULE_2__["strings"].timelineFormModalID + alert.id);
+  var modal = document.getElementById(_base__WEBPACK_IMPORTED_MODULE_3__["strings"].timelineFormModalID + alert.id);
 
-  _base__WEBPACK_IMPORTED_MODULE_5__["showModal"](modal);
+  _base__WEBPACK_IMPORTED_MODULE_4__["showModal"](modal);
 
   return modal;
 };
@@ -100159,7 +101981,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectors", function() { return selectors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "elements", function() { return elements; });
 var strings = {
-  box: 'client-'
+  box: 'client-',
+  boxCollapsibleContent: 'collapsible-client-'
 };
 var selectors = {
   boxes: '.client-box'
@@ -100258,10 +102081,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "update", function() { return update; });
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./resources/js/views/client/base.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../base */ "./resources/js/views/base.js");
+/* harmony import */ var _creativebulma_bulma_collapsible__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @creativebulma/bulma-collapsible */ "./node_modules/@creativebulma/bulma-collapsible/dist/js/bulma-collapsible.min.js");
+/* harmony import */ var _creativebulma_bulma_collapsible__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_creativebulma_bulma_collapsible__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 var update = function update(id, markup) {
-  return _base__WEBPACK_IMPORTED_MODULE_1__["update"](_base__WEBPACK_IMPORTED_MODULE_0__["elements"].box(id), markup);
+  var client = _base__WEBPACK_IMPORTED_MODULE_1__["update"](_base__WEBPACK_IMPORTED_MODULE_0__["elements"].box(id), markup);
+
+  _creativebulma_bulma_collapsible__WEBPACK_IMPORTED_MODULE_2___default.a.attach("#".concat(_base__WEBPACK_IMPORTED_MODULE_0__["strings"].boxCollapsibleContent).concat(id));
+  return client;
 };
 
 var remove = function remove(id) {
@@ -100888,7 +102717,7 @@ var initProcessSelection = function initProcessSelection() {
                 _context3.next = 4;
                 return _base__WEBPACK_IMPORTED_MODULE_10__["swalWithBulmaButtons"].fire({
                   title: 'New automated watched process selection detected',
-                  text: "You selected a new automated watched process but you already defined ".concat(details.currentAlertTrigger.definitions.length, "\n                    trigger").concat(details.currentAlertTrigger.definitions.length > 1 ? 's' : '', " for process ").concat(details.currentWatchedAutomatedProcess.data.name, "\n                    of client ").concat(details.currentClient.data.name, ".\n                    Select the previously watched automated process or all changes will be lost!"),
+                  text: "You selected a new automated watched process but you already defined ".concat(details.currentAlertTrigger.definitions.length, "\n                    trigger").concat(details.currentAlertTrigger.definitions.length > 1 ? 's' : '', " for process ").concat(details.currentWatchedAutomatedProcess.data.name, "\n                    of customer ").concat(details.currentClient.data.name, ".\n                    Select the previously watched automated process or all changes will be lost!"),
                   icon: 'warning',
                   showCancelButton: false,
                   confirmButtonText: 'I got it!'
@@ -101126,7 +102955,7 @@ var validateProcessSelectionForm = function validateProcessSelectionForm() {
   _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](processSelection.clientSelect(form).parentNode, clientSelectValid);
 
   if (!clientSelectValid) {
-    errors.push('You need to select a Client');
+    errors.push('You need to select a customer');
   }
 
   var watchedProcessSelectValid = !(processSelection.watchedProcessSelect(form).value === "0");
@@ -101135,7 +102964,7 @@ var validateProcessSelectionForm = function validateProcessSelectionForm() {
     _base__WEBPACK_IMPORTED_MODULE_10__["toggleSuccessDangerState"](processSelection.watchedProcessSelect(form).parentNode, watchedProcessSelectValid);
 
     if (!watchedProcessSelectValid) {
-      errors.push('You need to select a Watched process');
+      errors.push('You need to select a watched process');
     }
   } else {
     _base__WEBPACK_IMPORTED_MODULE_10__["removeStates"](processSelection.watchedProcessSelect(form).parentNode);
@@ -102418,8 +104247,13 @@ var selectors = {
   nameInput: 'input.name',
   codeInput: 'input.code',
   orchestratorSelect: 'select.orchestrator',
+  orchestratorTenantInput: 'input.orchestrator-tenant',
+  orchestratorApiUserUsernameInput: 'input.orchestrator-api-user-username',
+  orchestratorApiUserPasswordInput: 'input.orchestrator-api-user-password',
   elasticSearchUrlInput: 'input.elastic-search-url',
   elasticSearchIndexInput: 'input.elastic-search-index',
+  elasticSearchApiUserUsernameInput: 'input.elastic-search-api-user-username',
+  elasticSearchApiUserPasswordInput: 'input.elastic-search-api-user-password',
   createButton: 'button.create',
   createButtonChildren: 'button.create *',
   resetButton: 'button.reset',
@@ -102497,7 +104331,7 @@ var init = function init() {
 
                 if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButtonChildren)) && !createButton.disabled) {
                   create().then(function (res) {
-                    toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Client successfully added!', null, {
+                    toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Customer successfully added!', null, {
                       positionClass: 'toast-bottom-left'
                     });
                     return Promise.all([updateTable(), _layout_index__WEBPACK_IMPORTED_MODULE_7__["update"](configuration.layout)]);
@@ -102572,7 +104406,7 @@ var loadEditForm = function loadEditForm(e) {
                       loadAddForm(e);
                       updateTable();
                       _layout_index__WEBPACK_IMPORTED_MODULE_7__["update"](configuration.layout);
-                      toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Client successfully updated!', null, {
+                      toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Customer successfully updated!', null, {
                         positionClass: 'toast-bottom-left'
                       });
                     });
@@ -102584,8 +104418,8 @@ var loadEditForm = function loadEditForm(e) {
 
                   if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].removeButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].removeButtonChildren))) {
                     _base__WEBPACK_IMPORTED_MODULE_4__["swalWithBulmaButtons"].fire({
-                      title: 'Client removal confirmation',
-                      text: 'This client and all its related elements (watched processes, alert triggers and alerts) will be removed. Are you sure?',
+                      title: 'Customer removal confirmation',
+                      text: 'This customer and all its related elements (watched processes, alert triggers and alerts) will be removed. Are you sure?',
                       icon: 'warning',
                       showCancelButton: true,
                       confirmButtonText: '<span class="icon"><i class="fas fa-trash-alt"></i></span><span>Remove it!</span>',
@@ -102596,7 +104430,7 @@ var loadEditForm = function loadEditForm(e) {
                           loadAddForm(e);
                           updateTable();
                           _layout_index__WEBPACK_IMPORTED_MODULE_7__["update"](configuration.layout);
-                          toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Client successfully removed!', null, {
+                          toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success('Customer successfully removed!', null, {
                             positionClass: 'toast-bottom-left'
                           });
                         });
@@ -102638,8 +104472,13 @@ var checkForm = function checkForm(e) {
   var nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
   var codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
   var orchestratorSelect = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
+  var orchestratorTenantInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorTenantInput);
+  var orchestratorApiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorApiUserUsernameInput);
+  var orchestratorApiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorApiUserPasswordInput);
   var elasticSearchUrlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
   var elasticSearchIndexInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
+  var elasticSearchApiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchApiUserUsernameInput);
+  var elasticSearchApiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchApiUserPasswordInput);
   var nameInputValid = !(nameInput.value.trim() === '');
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](nameInput, nameInputValid);
@@ -102652,6 +104491,18 @@ var checkForm = function checkForm(e) {
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](orchestratorSelect.parentNode, orchestratorSelectValid);
 
+  var orchestratorTenantInputValid = !(orchestratorTenantInput.value.trim() === '');
+
+  _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](orchestratorTenantInput, orchestratorTenantInputValid);
+
+  var orchestratorApiUserUsernameInputValid = !(orchestratorApiUserUsernameInput.value.trim() === '');
+
+  _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](orchestratorApiUserUsernameInput, orchestratorApiUserUsernameInputValid);
+
+  var orchestratorApiUserPasswordInputValid = !(orchestratorApiUserPasswordInput.value.trim() === '');
+
+  _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](orchestratorApiUserPasswordInput, orchestratorApiUserPasswordInputValid);
+
   var elasticSearchUrlInputValid = !(elasticSearchUrlInput.value.trim() === '' || !_base__WEBPACK_IMPORTED_MODULE_4__["validURL"](elasticSearchUrlInput.value));
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](elasticSearchUrlInput, elasticSearchUrlInputValid);
@@ -102660,7 +104511,11 @@ var checkForm = function checkForm(e) {
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](elasticSearchIndexInput, elasticSearchIndexInputValid);
 
-  var formValid = nameInputValid && codeInputValid && orchestratorSelectValid && elasticSearchUrlInputValid && elasticSearchIndexInputValid;
+  _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](elasticSearchApiUserUsernameInput, true);
+
+  _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](elasticSearchApiUserPasswordInput, true);
+
+  var formValid = nameInputValid && codeInputValid && orchestratorSelectValid && orchestratorTenantInputValid && orchestratorApiUserUsernameInputValid && orchestratorApiUserPasswordInputValid && elasticSearchUrlInputValid && elasticSearchIndexInputValid;
 
   if (currentMode === 'add') {
     form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButton).disabled = !formValid;
@@ -102675,7 +104530,7 @@ function () {
   var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-    var form, nameInput, codeInput, orchestratorSelect, elasticSearchUrlInput, elasticSearchIndexInput;
+    var form, nameInput, codeInput, orchestratorSelect, orchestratorTenantInput, orchestratorApiUserUsernameInput, orchestratorApiUserPasswordInput, elasticSearchUrlInput, elasticSearchIndexInput, elasticSearchApiUserUsernameInput, elasticSearchApiUserPasswordInput;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -102688,33 +104543,38 @@ function () {
             nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
             codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
             orchestratorSelect = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
+            orchestratorTenantInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorTenantInput);
+            orchestratorApiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorApiUserUsernameInput);
+            orchestratorApiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorApiUserPasswordInput);
             elasticSearchUrlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
             elasticSearchIndexInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
+            elasticSearchApiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchApiUserUsernameInput);
+            elasticSearchApiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchApiUserPasswordInput);
             return _context3.abrupt("return", new Promise(function (resolve, reject) {
               var client = new _models_Client__WEBPACK_IMPORTED_MODULE_3__["default"]();
-              resolve(client.save(nameInput.value.trim(), codeInput.value.trim(), orchestratorSelect.value.trim(), elasticSearchUrlInput.value.trim(), elasticSearchIndexInput.value.trim()).then(function (res) {
+              resolve(client.save(nameInput.value.trim(), codeInput.value.trim(), orchestratorSelect.value.trim(), orchestratorTenantInput.value.trim(), orchestratorApiUserUsernameInput.value.trim(), orchestratorApiUserPasswordInput.value, elasticSearchUrlInput.value.trim(), elasticSearchIndexInput.value.trim(), elasticSearchApiUserUsernameInput.value.trim(), elasticSearchApiUserPasswordInput.value).then(function (res) {
                 resetForm();
 
                 _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
               }));
             }));
 
-          case 11:
-            _context3.prev = 11;
+          case 16:
+            _context3.prev = 16;
             _context3.t0 = _context3["catch"](1);
-            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Client not added due to application exception: ".concat(_context3.t0), null, {
+            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Customer not added due to application exception: ".concat(_context3.t0), null, {
               positionClass: 'toast-bottom-left'
             });
             console.log(_context3.t0);
 
             _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
 
-          case 16:
+          case 21:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[1, 11]]);
+    }, _callee3, null, [[1, 16]]);
   }));
 
   return function create() {
@@ -102728,7 +104588,7 @@ function () {
   var _ref4 = _asyncToGenerator(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-    var form, nameInput, codeInput, orchestratorSelect, elasticSearchUrlInput, elasticSearchIndexInput;
+    var form, nameInput, codeInput, orchestratorSelect, orchestratorTenantInput, orchestratorApiUserUsernameInput, orchestratorApiUserPasswordInput, elasticSearchUrlInput, elasticSearchIndexInput, elasticSearchApiUserUsernameInput, elasticSearchApiUserPasswordInput;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
@@ -102741,33 +104601,38 @@ function () {
             nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
             codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
             orchestratorSelect = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
+            orchestratorTenantInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorTenantInput);
+            orchestratorApiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorApiUserUsernameInput);
+            orchestratorApiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorApiUserPasswordInput);
             elasticSearchUrlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
             elasticSearchIndexInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
+            elasticSearchApiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchApiUserUsernameInput);
+            elasticSearchApiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchApiUserPasswordInput);
             return _context4.abrupt("return", new Promise(function (resolve, reject) {
               var client = new _models_Client__WEBPACK_IMPORTED_MODULE_3__["default"](form.dataset.id);
-              resolve(client.update(nameInput.value.trim(), codeInput.value.trim(), orchestratorSelect.value.trim(), elasticSearchUrlInput.value.trim(), elasticSearchIndexInput.value.trim()).then(function (response) {
+              resolve(client.update(nameInput.value.trim(), codeInput.value.trim(), orchestratorSelect.value.trim(), orchestratorTenantInput.value.trim(), orchestratorApiUserUsernameInput.value.trim(), orchestratorApiUserPasswordInput.value, elasticSearchUrlInput.value.trim(), elasticSearchIndexInput.value.trim(), elasticSearchApiUserUsernameInput.value.trim(), elasticSearchApiUserPasswordInput.value).then(function (response) {
                 resetForm();
 
                 _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
               }));
             }));
 
-          case 11:
-            _context4.prev = 11;
+          case 16:
+            _context4.prev = 16;
             _context4.t0 = _context4["catch"](1);
-            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Client not updated due to application exception: ".concat(_context4.t0), null, {
+            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Customer not updated due to application exception: ".concat(_context4.t0), null, {
               positionClass: 'toast-bottom-left'
             });
             console.log(_context4.t0);
 
             _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
 
-          case 16:
+          case 21:
           case "end":
             return _context4.stop();
         }
       }
-    }, _callee4, null, [[1, 11]]);
+    }, _callee4, null, [[1, 16]]);
   }));
 
   return function update() {
@@ -102803,7 +104668,7 @@ function () {
           case 6:
             _context5.prev = 6;
             _context5.t0 = _context5["catch"](1);
-            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Client not removed due to application exception: ".concat(_context5.t0), null, {
+            toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Customer not removed due to application exception: ".concat(_context5.t0), null, {
               positionClass: 'toast-bottom-left'
             });
             console.log(_context5.t0);
@@ -102874,8 +104739,13 @@ var resetForm = function resetForm() {
     var nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
     var codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
     var orchestratorSelect = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorSelect);
+    var orchestratorTenantInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorTenantInput);
+    var orchestratorApiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorApiUserUsernameInput);
+    var orchestratorApiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].orchestratorApiUserPasswordInput);
     var elasticSearchUrlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchUrlInput);
     var elasticSearchIndexInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchIndexInput);
+    var elasticSearchApiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchApiUserUsernameInput);
+    var elasticSearchApiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].elasticSearchApiUserPasswordInput);
     form.reset();
 
     _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](nameInput);
@@ -102884,9 +104754,19 @@ var resetForm = function resetForm() {
 
     _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](orchestratorSelect.parentNode);
 
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](orchestratorTenantInput);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](orchestratorApiUserUsernameInput);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](orchestratorApiUserPasswordInput);
+
     _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](elasticSearchUrlInput);
 
     _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](elasticSearchIndexInput);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](elasticSearchApiUserUsernameInput);
+
+    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](elasticSearchApiUserPasswordInput);
   } catch (error) {
     console.log(error);
   }
@@ -102963,9 +104843,6 @@ var selectors = {
   nameInput: 'input.name',
   codeInput: 'input.code',
   urlInput: 'input.url',
-  tenantInput: 'input.tenant',
-  apiUserUsernameInput: 'input.api-user-username',
-  apiUserPasswordInput: 'input.api-user-password',
   createButton: 'button.create',
   createButtonChildren: 'button.create *',
   resetButton: 'button.reset',
@@ -103130,7 +105007,7 @@ var loadEditForm = function loadEditForm(e) {
                   if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].removeButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].removeButtonChildren))) {
                     _base__WEBPACK_IMPORTED_MODULE_4__["swalWithBulmaButtons"].fire({
                       title: 'Orchestrator removal confirmation',
-                      text: 'This orchestrator and all its related elements (clients, watched processes, alert triggers and alerts) will be removed. Are you sure?',
+                      text: 'This orchestrator and all its related elements (customers, watched processes, alert triggers and alerts) will be removed. Are you sure?',
                       icon: 'warning',
                       showCancelButton: true,
                       confirmButtonText: '<span class="icon"><i class="fas fa-trash-alt"></i></span><span>Remove it!</span>',
@@ -103182,9 +105059,6 @@ var checkForm = function checkForm(e) {
   var nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
   var codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
   var urlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].urlInput);
-  var tenantInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
-  var apiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
-  var apiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
   var nameInputValid = !(nameInput.value.trim() === '');
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](nameInput, nameInputValid);
@@ -103197,19 +105071,7 @@ var checkForm = function checkForm(e) {
 
   _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](urlInput, urlInputValid);
 
-  var tenantInputValid = !(tenantInput.value.trim() === '');
-
-  _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](tenantInput, tenantInputValid);
-
-  var apiUserUsernameInputValid = !(apiUserUsernameInput.value.trim() === '');
-
-  _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](apiUserUsernameInput, apiUserUsernameInputValid);
-
-  var apiUserPasswordInputValid = !(apiUserPasswordInput.value.trim() === '');
-
-  _base__WEBPACK_IMPORTED_MODULE_4__["toggleSuccessDangerState"](apiUserPasswordInput, apiUserPasswordInputValid);
-
-  var formValid = nameInputValid && codeInputValid && urlInputValid && tenantInputValid && apiUserUsernameInputValid && apiUserPasswordInputValid;
+  var formValid = nameInputValid && codeInputValid && urlInputValid;
 
   if (currentMode === 'add') {
     form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].createButton).disabled = !formValid;
@@ -103224,7 +105086,7 @@ function () {
   var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-    var form, nameInput, codeInput, urlInput, tenantInput, apiUserUsernameInput, apiUserPasswordInput;
+    var form, nameInput, codeInput, urlInput;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -103237,20 +105099,17 @@ function () {
             nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
             codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
             urlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].urlInput);
-            tenantInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
-            apiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
-            apiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
             return _context3.abrupt("return", new Promise(function (resolve, reject) {
               var orchestrator = new _models_Orchestrator__WEBPACK_IMPORTED_MODULE_3__["default"]();
-              resolve(orchestrator.save(nameInput.value.trim(), codeInput.value.trim(), urlInput.value.trim(), tenantInput.value.trim(), apiUserUsernameInput.value.trim(), apiUserPasswordInput.value).then(function (res) {
+              resolve(orchestrator.save(nameInput.value.trim(), codeInput.value.trim(), urlInput.value.trim()).then(function (res) {
                 resetForm();
 
                 _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
               }));
             }));
 
-          case 12:
-            _context3.prev = 12;
+          case 9:
+            _context3.prev = 9;
             _context3.t0 = _context3["catch"](1);
             toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Orchestrator not added due to application exception: ".concat(_context3.t0), null, {
               positionClass: 'toast-bottom-left'
@@ -103259,12 +105118,12 @@ function () {
 
             _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
 
-          case 17:
+          case 14:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[1, 12]]);
+    }, _callee3, null, [[1, 9]]);
   }));
 
   return function create() {
@@ -103278,7 +105137,7 @@ function () {
   var _ref4 = _asyncToGenerator(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-    var form, nameInput, codeInput, urlInput, tenantInput, apiUserUsernameInput, apiUserPasswordInput;
+    var form, nameInput, codeInput, urlInput;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
@@ -103291,20 +105150,17 @@ function () {
             nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
             codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
             urlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].urlInput);
-            tenantInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
-            apiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
-            apiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
             return _context4.abrupt("return", new Promise(function (resolve, reject) {
               var orchestrator = new _models_Orchestrator__WEBPACK_IMPORTED_MODULE_3__["default"](form.dataset.id);
-              resolve(orchestrator.update(nameInput.value.trim(), codeInput.value.trim(), urlInput.value.trim(), tenantInput.value.trim(), apiUserUsernameInput.value.trim(), apiUserPasswordInput.value).then(function (response) {
+              resolve(orchestrator.update(nameInput.value.trim(), codeInput.value.trim(), urlInput.value.trim()).then(function (response) {
                 resetForm();
 
                 _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
               }));
             }));
 
-          case 12:
-            _context4.prev = 12;
+          case 9:
+            _context4.prev = 9;
             _context4.t0 = _context4["catch"](1);
             toastr__WEBPACK_IMPORTED_MODULE_1___default.a.error("Orchestrator not updated due to application exception: ".concat(_context4.t0), null, {
               positionClass: 'toast-bottom-left'
@@ -103313,12 +105169,12 @@ function () {
 
             _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](form);
 
-          case 17:
+          case 14:
           case "end":
             return _context4.stop();
         }
       }
-    }, _callee4, null, [[1, 12]]);
+    }, _callee4, null, [[1, 9]]);
   }));
 
   return function update() {
@@ -103425,9 +105281,6 @@ var resetForm = function resetForm() {
     var nameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].nameInput);
     var codeInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].codeInput);
     var urlInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].urlInput);
-    var tenantInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].tenantInput);
-    var apiUserUsernameInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserUsernameInput);
-    var apiUserPasswordInput = form.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].apiUserPasswordInput);
     form.reset();
 
     _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](nameInput);
@@ -103435,12 +105288,6 @@ var resetForm = function resetForm() {
     _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](codeInput);
 
     _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](urlInput);
-
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](tenantInput);
-
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](apiUserUsernameInput);
-
-    _base__WEBPACK_IMPORTED_MODULE_4__["removeStates"](apiUserPasswordInput);
   } catch (error) {
     console.log(error);
   }

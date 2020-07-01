@@ -183,6 +183,26 @@ class DashboardController extends Controller
     }
 
     /**
+     * Show alert closing form modal.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function alertClosingFormModal(Request $request, Alert $alert)
+    {
+        return view('dashboard.alert.forms.closing')->with('alert', $alert);
+    }
+
+    /**
+     * Show alert ignorance form modal.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function alertIgnoranceFormModal(Request $request, Alert $alert)
+    {
+        return view('dashboard.alert.forms.ignorance')->with('alert', $alert);
+    }
+
+    /**
      * Show watched automated process element.
      *
      * @return \Illuminate\Http\Response

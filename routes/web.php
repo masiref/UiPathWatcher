@@ -41,11 +41,13 @@ Route::get('/dashboard/tiles/{client?}', 'DashboardController@tiles')->name('das
 Route::get('/dashboard/alert/table/{closed?}/{id?}', 'DashboardController@alertTable')->name('dashboard.alert.table');
 Route::get('/dashboard/alert/table-row/{alert}', 'DashboardController@alertTableRow')->name('dashboard.alert.table.row');
 Route::get('/dashboard/alert/element/{alert}', 'DashboardController@alertElement')->name('dashboard.alert.element');
+Route::get('/dashboard/alert/closing-form-modal/{alert}', 'DashboardController@alertClosingFormModal')->name('dashboard.alert.closing-form-modal');
+Route::get('/dashboard/alert/ignorance-form-modal/{alert}', 'DashboardController@alertIgnoranceFormModal')->name('dashboard.alert.ignorance-form-modal');
 Route::get('/dashboard/alert/timeline/{alert}', 'DashboardController@alertTimeline')->name('dashboard.alert.timeline');
 Route::get('/dashboard/quick-board/{client?}', 'DashboardController@quickBoard')->name('dashboard.quick-board');
 
 Route::get('/dashboard/client/elements', 'DashboardClientController@elements')->name('dashboard.client.elements');
-Route::get('/dashboard/client/element/{client}', 'DashboardClientController@element')->name('dashboard.client.element');
+Route::get('/dashboard/client/element/{client}/{collapsed?}', 'DashboardClientController@element')->name('dashboard.client.element');
 Route::get(
     '/dashboard/client/{client}/watched-automated-process/elements/{autonomous}',
     'DashboardClientController@watchedAutomatedProcessElements'

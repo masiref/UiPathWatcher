@@ -127,8 +127,8 @@ export const close = async(dashboard, id) => {
     try {
         const alert = new Alert(id);
         view.renderLoaders(id);
-        alert.update().then(res => {
-            const modal = view.showClosingFormModal(alert.data);
+        alert.closingFormModal().then(res => {
+            const modal = view.showClosingFormModal(alert);
             modal.addEventListener('click', async (e) => {
                 if (e.target.matches(`${_base.selectors.validateModalButton}, ${_base.selectors.validateModalButtonChildren}`)) {
                     commitClose(dashboard, alert);
@@ -137,7 +137,7 @@ export const close = async(dashboard, id) => {
             view.clearLoaders(id);
         });
     } catch (error) {
-        toastr.error(`Alert not updated due to application exception: ${error}`, null, {
+        toastr.error(`Alert closing form not shown due to application exception: ${error}`, null, {
             positionClass: 'toast-bottom-center'
         });
         view.clearLoaders(id);
@@ -182,8 +182,8 @@ export const ignore = async(dashboard, id) => {
     try {
         const alert = new Alert(id);
         view.renderLoaders(id);
-        alert.update().then(res => {
-            const modal = view.showIgnoranceFormModal(alert.data);
+        alert.ignoranceFormModal().then(res => {
+            const modal = view.showIgnoranceFormModal(alert);
             modal.addEventListener('click', async (e) => {
                 if (e.target.matches(`${_base.selectors.validateModalButton}, ${_base.selectors.validateModalButtonChildren}`)) {
                     commitIgnore(dashboard, alert);
@@ -192,7 +192,7 @@ export const ignore = async(dashboard, id) => {
             view.clearLoaders(id);
         });
     } catch (error) {
-        toastr.error(`Alert not updated due to application exception: ${error}`, null, {
+        toastr.error(`Alert trigger ignorance form not shown due to application exception: ${error}`, null, {
             positionClass: 'toast-bottom-center'
         });
         view.clearLoaders(id);

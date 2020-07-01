@@ -83,13 +83,12 @@ class ConfigurationOrchestratorController extends Controller
      */
     public function processes(Request $request, Client $client, UiPathOrchestratorService $orchestratorService)
     {
-        $orchestrator = $client->orchestrator;
-        $result = $orchestratorService->authenticate($orchestrator);
+        $result = $orchestratorService->authenticate($client);
         if ($result['error']) {
             return ['error' => $result['errorMessage']];
         } else {
             $token = $result['token'];
-            $result = $orchestratorService->getReleases($orchestrator, $token);
+            $result = $orchestratorService->getReleases($client, $token);
             if ($result['error']) {
                 return ['error' => $result['errorMessage']];
             } else {
@@ -105,13 +104,12 @@ class ConfigurationOrchestratorController extends Controller
      */
     public function robots(Request $request, Client $client, UiPathOrchestratorService $orchestratorService)
     {
-        $orchestrator = $client->orchestrator;
-        $result = $orchestratorService->authenticate($orchestrator);
+        $result = $orchestratorService->authenticate($client);
         if ($result['error']) {
             return ['error' => $result['errorMessage']];
         } else {
             $token = $result['token'];
-            $result = $orchestratorService->getRobots($orchestrator, $token);
+            $result = $orchestratorService->getRobots($client, $token);
             if ($result['error']) {
                 return ['error' => $result['errorMessage']];
             } else {
@@ -127,13 +125,12 @@ class ConfigurationOrchestratorController extends Controller
      */
     public function queues(Request $request, Client $client, UiPathOrchestratorService $orchestratorService)
     {
-        $orchestrator = $client->orchestrator;
-        $result = $orchestratorService->authenticate($orchestrator);
+        $result = $orchestratorService->authenticate($client);
         if ($result['error']) {
             return ['error' => $result['errorMessage']];
         } else {
             $token = $result['token'];
-            $result = $orchestratorService->getQueues($orchestrator, $token);
+            $result = $orchestratorService->getQueues($client, $token);
             if ($result['error']) {
                 return ['error' => $result['errorMessage']];
             } else {

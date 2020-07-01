@@ -4,6 +4,7 @@ import './jquery.dataTables.min';
 import './dataTables.bulma.min';
 import './dataTables.select.min';
 import './dataTables.responsive.min';
+import bulmaCollapsible from '@creativebulma/bulma-collapsible';
 
 window.jQuery = jquery;
 window.$ = jquery;
@@ -69,3 +70,6 @@ $('.table.data.selectable').DataTable({
 $('.table.data.unselectable').DataTable({
     responsive: true
 });
+
+// Collapsible elements
+const bulmaCollapsibleInstances = bulmaCollapsible.attach('.is-collapsible');

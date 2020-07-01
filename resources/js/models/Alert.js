@@ -33,6 +33,34 @@ export default class Alert {
         }
     }
 
+    async closingFormModal() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(`/dashboard/alert/closing-form-modal/${this.id}`).then(result => {
+                        this.closingFormModal = result.data;
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async ignoranceFormModal() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get(`/dashboard/alert/ignorance-form-modal/${this.id}`).then(result => {
+                        this.ignoranceFormModal = result.data;
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async timeline() {
         try {
             return new Promise((resolve, reject) => {

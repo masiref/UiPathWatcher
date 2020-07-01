@@ -49,7 +49,7 @@ class WatchedAutomatedProcessController extends Controller
             $queues = $request->get('involved_queues');
             $orchestrator = $wap->client->orchestrator;
 
-            $result = $orchestratorService->authenticate($orchestrator);
+            $result = $orchestratorService->authenticate($wap->client);
             $token = null;
             if (!$result['error']) {
                 $token = $result['token'];
@@ -147,7 +147,7 @@ class WatchedAutomatedProcessController extends Controller
             $queues = $request->get('involved_queues');
             $orchestrator = $watchedAutomatedProcess->client->orchestrator;
 
-            $result = $orchestratorService->authenticate($orchestrator);
+            $result = $orchestratorService->authenticate($watchedAutomatedProcess->client);
             $token = null;
             if (!$result['error']) {
                 $token = $result['token'];

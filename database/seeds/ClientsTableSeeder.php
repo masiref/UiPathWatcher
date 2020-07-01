@@ -15,6 +15,9 @@ class ClientsTableSeeder extends Seeder
         $client = new App\Client([
             'name' => 'Robotics Team',
             'code' => '89C3R-R',
+            'ui_path_orchestrator_tenant' => 'Default',
+            'ui_path_orchestrator_api_user_username' => 'api_user',
+            'ui_path_orchestrator_api_user_password' => 'apiuser2019!',
             'elastic_search_url' => 'http://swdcfregb705.cib.net:9200/',
             'elastic_search_index' => 'kibana_sample_data_ecommerce'
         ]);
@@ -25,6 +28,10 @@ class ClientsTableSeeder extends Seeder
         $client = new App\Client([
             'name' => 'Migration Team',
             'code' => 'MIG',
+            'ui_path_orchestrator_tenant' => 'Default',
+            'ui_path_orchestrator_api_user_username' => 'api_user',
+            'ui_path_orchestrator_api_user_password' => 'apiuser2019!',
+            'elastic_search_url' => 'http://swdcfregb705.cib.net:9200/',
             'elastic_search_url' => 'http://swdcfregb705.cib.net:9200/',
             'elastic_search_index' => 'kibana_sample_data_flights'
         ]);

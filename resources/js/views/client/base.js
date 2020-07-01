@@ -1,5 +1,6 @@
 export const strings = {
-    box: 'client-'
+    box: 'client-',
+    boxCollapsibleContent: 'collapsible-client-'
 };
 
 export const selectors = {

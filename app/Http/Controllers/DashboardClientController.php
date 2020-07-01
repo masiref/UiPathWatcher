@@ -93,9 +93,9 @@ class DashboardClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function element(Request $request, Client $client)
+    public function element(Request $request, Client $client, $collapsed = true)
     {
-        return view('dashboard.client.element')->with('client', $client);
+        return view('dashboard.client.element')->with('client', $client)->with('collapsed', $collapsed);
     }
 
     /**

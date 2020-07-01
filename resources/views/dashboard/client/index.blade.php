@@ -34,7 +34,7 @@
             @endif
             <div class="columns is-multiline">
                 @foreach ($client->watchedAutomatedProcesses()->get() as $watchedAutomatedProcess)
-                    <div class="column is-6">
+                    <div class="column is-12">
                         @include('dashboard.watched-automated-process.element', [ 'autonomous' => true ])
                     </div>
                 @endforeach

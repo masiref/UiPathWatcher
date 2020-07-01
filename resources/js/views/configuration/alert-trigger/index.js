@@ -355,7 +355,7 @@ const initProcessSelection = () => {
                     title: 'New automated watched process selection detected',
                     text: `You selected a new automated watched process but you already defined ${details.currentAlertTrigger.definitions.length}
                     trigger${details.currentAlertTrigger.definitions.length > 1 ? 's' : ''} for process ${details.currentWatchedAutomatedProcess.data.name}
-                    of client ${details.currentClient.data.name}.
+                    of customer ${details.currentClient.data.name}.
                     Select the previously watched automated process or all changes will be lost!`,
                     icon: 'warning',
                     showCancelButton: false,
@@ -575,14 +575,14 @@ const validateProcessSelectionForm = () => {
     const clientSelectValid = !(processSelection.clientSelect(form).value === "0");
     _base.toggleSuccessDangerState(processSelection.clientSelect(form).parentNode, clientSelectValid);
     if (!clientSelectValid) {
-        errors.push('You need to select a Client');
+        errors.push('You need to select a customer');
     }
     
     const watchedProcessSelectValid = !(processSelection.watchedProcessSelect(form).value === "0");
     if (!processSelection.watchedProcessSelect.disabled) {
         _base.toggleSuccessDangerState(processSelection.watchedProcessSelect(form).parentNode, watchedProcessSelectValid);
         if (!watchedProcessSelectValid) {
-            errors.push('You need to select a Watched process');
+            errors.push('You need to select a watched process');
         }
     } else {
         _base.removeStates(processSelection.watchedProcessSelect(form).parentNode);

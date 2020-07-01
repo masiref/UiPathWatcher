@@ -81,6 +81,14 @@ class Alert extends Model
     }
 
     /**
+     * The categories that belong to the alert.
+     */
+    public function categories()
+    {
+        return $this->belongsToMany('App\AlertCategory');
+    }
+
+    /**
      * Turn alert under revision
      */
     public function enterRevisionMode(User $reviewer)
