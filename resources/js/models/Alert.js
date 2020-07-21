@@ -125,14 +125,15 @@ export default class Alert {
         }
     }
 
-    async close(falsePositive, description) {
+    async close(falsePositive, description, categories) {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
                     axios.put(`/api/alerts/${this.id}`, {
                         action: 'close',
                         falsePositive: falsePositive,
-                        description: description
+                        description: description,
+                        categories: categories
                     })
                 );
             });
@@ -141,7 +142,7 @@ export default class Alert {
         }
     }
 
-    async ignore(from_, fromTime, to, toTime, description) {
+    async ignore(from_, fromTime, to, toTime, description, categories) {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
@@ -151,7 +152,8 @@ export default class Alert {
                         fromTime: fromTime,
                         to: to,
                         toTime: toTime,
-                        description: description
+                        description: description,
+                        categories: categories
                     })
                 );
             });

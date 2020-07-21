@@ -10,6 +10,7 @@
                 <th>Closed at</th>
                 <th>False positive?</th>
                 <th>Ignored?</th>
+                <th>Categories</th>
             @endif
             <th>Actions</th>
         </tr>

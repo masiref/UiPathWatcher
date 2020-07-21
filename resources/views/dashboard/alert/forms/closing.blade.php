@@ -59,29 +59,36 @@
                         </small>
                     </div>
                 </article>
-                {{--
                 <div class="field">
                     <div class="control">
-                        <select multiple id="keywords" data-type="tags" data-placeholder="Choose keywords">
-                            <option value="one" selected>One</option>
-                            <option value="two">Two</option>
-                        </select>
+                        <input type="checkbox" id="closing-false-positive" name="false_positive" class="switch is-rounded">
+                        <label for="closing-false-positive" class="checkbox">
+                            Is it a false positive?
+                        </label>
                     </div>
                 </div>
-                --}}
-                <div class="field">
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        <select multiple id="closing-keywords" data-type="tags" data-placeholder="Choose keywords">
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->label }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="control">
-                        <input type="checkbox" id="false_positive" name="false_positive" class="switch is-rounded">
-                        <label for="false_positive" class="checkbox">
-                            It is a false positive
-                        </label>
+                        <button id="closing-add-keyword" class="button is-info" disabled>
+                            <span class="icon is-small">
+                                <i class="fas fa-plus-circle"></i>
+                            </span>
+                            <span>New</span>
+                        </button>
                     </div>
                 </div>
                 <div class="field">
                     <div class="control">
                         <textarea class="textarea"
-                            id="closing_description"
-                            name="closing_description"
+                            id="closing-description"
+                            name="closing-description"
                             placeholder="Resolution description"
                             required></textarea>
                     </div>

@@ -63,15 +63,32 @@
                     <label class="label">Ignore alert trigger in range</label>
                     <div class="control">
                         <input type="date" class="datetime"
-                            id="ignorance_calendar"
-                            name="ignorance_calendar">
+                            id="ignorance-calendar"
+                            name="ignorance-calendar">
+                    </div>
+                </div>
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        <select multiple id="ignorance-keywords" data-type="tags" data-placeholder="Choose keywords">
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->label }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="control">
+                        <button id="ignorance-add-keyword" class="button is-info" disabled>
+                            <span class="icon is-small">
+                                <i class="fas fa-plus-circle"></i>
+                            </span>
+                            <span>New</span>
+                        </button>
                     </div>
                 </div>
                 <div class="field">
                     <div class="control">
                         <textarea class="textarea"
-                            id="ignorance_description"
-                            name="ignorance_description"
+                            id="ignorance-description"
+                            name="ignorance-description"
                             placeholder="Ignorance description"
                             required></textarea>
                     </div>

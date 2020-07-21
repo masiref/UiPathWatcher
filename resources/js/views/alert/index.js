@@ -1,4 +1,5 @@
 import bulmaCalendar from 'bulma-calendar';
+import BulmaTagsInput from '@creativebulma/bulma-tagsinput';
 import toastr from 'toastr';
 
 import Alert from '../../models/Alert';
@@ -81,7 +82,7 @@ export const timeline = async(id) => {
         });
     } catch (error) {
         toastr.error(`Alert timeline not shown due to application exception: ${error}`, null, {
-            positionClass: 'toast-bottom-center'
+            positionClass: 'toast-bottom-left'
         });
         view.clearLoaders(id);
     }
@@ -99,7 +100,7 @@ export const startRevision = async(dashboard, id) => {
         });
     } catch (error) {
         toastr.error(`Revision not started on alert due to application exception: ${error}`, null, {
-            positionClass: 'toast-bottom-center'
+            positionClass: 'toast-bottom-left'
         });
         view.clearLoaders(id);
     }
@@ -117,7 +118,7 @@ export const undoRevision = async(dashboard, id) => {
         });
     } catch (error) {
         toastr.error(`Revision not cancelled on alert due to application exception: ${error}`, null, {
-            positionClass: 'toast-bottom-center'
+            positionClass: 'toast-bottom-left'
         });
         view.clearLoaders(id);
     }
@@ -138,7 +139,7 @@ export const close = async(dashboard, id) => {
         });
     } catch (error) {
         toastr.error(`Alert closing form not shown due to application exception: ${error}`, null, {
-            positionClass: 'toast-bottom-center'
+            positionClass: 'toast-bottom-left'
         });
         view.clearLoaders(id);
     }
@@ -148,17 +149,34 @@ export const commitClose = async(dashboard, alert) => {
     try {
         const descriptionTextarea = document.querySelector(base.selectors.closingDescriptionTextarea);
         const falsePositiveCheckbox = document.querySelector(base.selectors.closingFalsePositiveCheckbox);
+        const keywordsList = document.querySelector(`#${base.strings.closingFormModalID} ${base.selectors.closingKeywordsList}`).BulmaTagsInput();
 
+        let valid = false;
+        if (keywordsList.items.length === 0) {
+            toastr.error('At least one keyword must be added!', null, {
+                positionClass: 'toast-bottom-left'
+            });
+            keywordsList.input.parentNode.classList.add('is-danger');
+        } else {
+            keywordsList.input.parentNode.classList.remove('is-danger');
+            valid = true;
+        }
         if (descriptionTextarea.value.trim() === '') {
             toastr.error('Description is mandatory!', null, {
-                positionClass: 'toast-bottom-center'
+                positionClass: 'toast-bottom-left'
             });
             descriptionTextarea.classList.add('is-danger');
+            valid = false;
         } else {
+            descriptionTextarea.classList.remove('is-danger');
+            valid = true;
+        }
+
+        if (valid) {
             view.removeClosingFormModal();
             view.renderLoaders(alert.id);
             try {
-                alert.close(falsePositiveCheckbox.checked, descriptionTextarea.value.trim()).then(res => {
+                alert.close(falsePositiveCheckbox.checked, descriptionTextarea.value.trim(), keywordsList.items).then(res => {
                     /*updateAfterAction(dashboard, 'closing_related_action', alert)*/
                     dashboardController.update().then(res => {
                         view.clearLoaders(alert.id);
@@ -166,14 +184,14 @@ export const commitClose = async(dashboard, alert) => {
                 });
             } catch (error) {
                 toastr.error(`Alert not closed due to application exception: ${error}`, null, {
-                    positionClass: 'toast-bottom-center'
+                    positionClass: 'toast-bottom-left'
                 });
                 view.clearLoaders(alert.id);
             }
         }
     } catch (error) {
         toastr.error(`Alert closing not committed due to application exception: ${error}`, null, {
-            positionClass: 'toast-bottom-center'
+            positionClass: 'toast-bottom-left'
         });
     }
 };
@@ -193,7 +211,7 @@ export const ignore = async(dashboard, id) => {
         });
     } catch (error) {
         toastr.error(`Alert trigger ignorance form not shown due to application exception: ${error}`, null, {
-            positionClass: 'toast-bottom-center'
+            positionClass: 'toast-bottom-left'
         });
         view.clearLoaders(id);
     }
@@ -203,45 +221,64 @@ export const commitIgnore = async(dashboard, alert) => {
     try {
         const ignoranceCalendar = document.querySelector(base.selectors.ignoranceCalendar).bulmaCalendar;
         const descriptionTextarea = document.querySelector(base.selectors.ignoranceDescriptionTextarea);
+        const keywordsList = document.querySelector(`#${base.strings.ignoranceFormModalID} ${base.selectors.ignoranceKeywordsList}`).BulmaTagsInput();
+
+        let valid = false;
+        if (keywordsList.items.length === 0) {
+            toastr.error('At least one keyword must be added!', null, {
+                positionClass: 'toast-bottom-left'
+            });
+            keywordsList.input.parentNode.classList.add('is-danger');
+        } else {
+            keywordsList.input.parentNode.classList.remove('is-danger');
+            valid = true;
+        }
 
         if (ignoranceCalendar.startDate === undefined || ignoranceCalendar.startTime === undefined) {
             toastr.error('Start date & time are mandatory!', null, {
-                positionClass: 'toast-bottom-center'
+                positionClass: 'toast-bottom-left'
             });
+            valid = false;
         } else {
-            if (descriptionTextarea.value.trim() === '') {
-                toastr.error('Description is mandatory!', null, {
-                    positionClass: 'toast-bottom-center'
+            valid = true;
+        }
+        if (descriptionTextarea.value.trim() === '') {
+            toastr.error('Description is mandatory!', null, {
+                positionClass: 'toast-bottom-left'
+            });
+            descriptionTextarea.classList.add('is-danger');
+            valid = false;
+        } else {
+            descriptionTextarea.classList.remove('is-danger');
+            valid = true;
+        }
+        if (valid) {
+            if (ignoranceCalendar.endDate === undefined) {
+                // ask user to validate infinite ignorance (manual action to reactivate alert triggering)
+                _base.swalWithBulmaButtons.fire({
+                    title: 'Infinite ignorance confirmation',
+                    text: 'The alert will be ignored forever, manual action to reactivate it will be needed!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: '<span class="icon"><i class="fas fa-eye-slash"></i></span><span>Ignore it!</span>',
+                    cancelButtonText: '<span class="icon"><i class="fas fa-undo"></i></span><span>Undo</span>'
+                }).then(result => {
+                    if (result.value) {
+                        handleCommitIgnore(dashboard, alert, ignoranceCalendar, descriptionTextarea, keywordsList.items);
+                    }
                 });
-                descriptionTextarea.classList.add('is-danger');
             } else {
-                if (ignoranceCalendar.endDate === undefined) {
-                    // ask user to validate infinite ignorance (manual action to reactivate alert triggering)
-                    _base.swalWithBulmaButtons.fire({
-                        title: 'Infinite ignorance confirmation',
-                        text: 'The alert will be ignored forever, manual action to reactivate it will be needed!',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonText: '<span class="icon"><i class="fas fa-eye-slash"></i></span><span>Ignore it!</span>',
-                        cancelButtonText: '<span class="icon"><i class="fas fa-undo"></i></span><span>Undo</span>'
-                    }).then(result => {
-                        if (result.value) {
-                            handleCommitIgnore(dashboard, alert, ignoranceCalendar, descriptionTextarea);
-                        }
-                    });
-                } else {
-                    handleCommitIgnore(dashboard, alert, ignoranceCalendar, descriptionTextarea);
-                }
+                handleCommitIgnore(dashboard, alert, ignoranceCalendar, descriptionTextarea, keywordsList.items);
             }
         }
     } catch (error) {
         toastr.error(`Alert ignorance not committed due to application exception: ${error}`, null, {
-            positionClass: 'toast-bottom-center'
+            positionClass: 'toast-bottom-left'
         });
     }
 };
 
-const handleCommitIgnore = async(dashboard, alert, ignoranceCalendar, descriptionTextarea) => {
+const handleCommitIgnore = async(dashboard, alert, ignoranceCalendar, descriptionTextarea, categories) => {
     try {
         view.removeIgnoranceFormModal();
         view.renderLoaders(alert.id);
@@ -260,7 +297,8 @@ const handleCommitIgnore = async(dashboard, alert, ignoranceCalendar, descriptio
             startTime,
             endDate,
             endTime,
-            descriptionTextarea.value.trim()
+            descriptionTextarea.value.trim(),
+            categories
         ).then(res => {
             /*updateAfterAction(dashboard, 'closing_related_action', alert)*/
             dashboardController.update().then(res => {
@@ -269,7 +307,7 @@ const handleCommitIgnore = async(dashboard, alert, ignoranceCalendar, descriptio
         });
     } catch (error) {
         toastr.error(`Alert not ignored due to application exception: ${error}`, null, {
-            positionClass: 'toast-bottom-center'
+            positionClass: 'toast-bottom-left'
         });
         view.clearLoaders(alert.id);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Alert;
+use App\AlertCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -80,7 +81,8 @@ class AlertController extends Controller
             case 'close':
                 $falsePositive = $data['falsePositive'];
                 $description = $data['description'];
-                if ($alert->close($falsePositive, $description)) {
+                $categories = $this->parseCategories($data['categories']);
+                if ($alert->close($falsePositive, $description, $categories)) {
                     return $alert;
                 } else {
                     // return error: not closed
@@ -92,12 +94,31 @@ class AlertController extends Controller
                 $to = isset($data['to']) ? $data['to'] : null;
                 $toTime = isset($data['toTime']) ? $data['toTime'] : null;
                 $description = $data['description'];
-                if ($alert->ignore($from, $fromTime, $to, $toTime, $description)) {
+                $categories = $this->parseCategories($data['categories']);
+                if ($alert->ignore($from, $fromTime, $to, $toTime, $description, $categories)) {
                     return $alert;
                 } else {
                     // return error: not ignored
                 }
         }
+    }
+
+    protected function parseCategories($data)
+    {
+        $categories = array();
+        foreach ($data as $category) {
+            $id = $category['value'];
+            $label = $category['text'];
+            $alertCategory = AlertCategory::find($id);
+            if (!$alertCategory) {
+                $alertCategory = AlertCategory::create([
+                    'label' => $label
+                ]);
+            }
+            array_push($categories, $alertCategory->id);
+        }
+
+        return $categories;
     }
 
     /**

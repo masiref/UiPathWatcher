@@ -115,13 +115,16 @@ class Alert extends Model
     /**
      * Close alert
      */
-     public function close($falsePositive, $description)
+     public function close($falsePositive, $description, $categories)
      {
         $this->closed_at = Carbon::now();
         $this->under_revision = false;
         $this->false_positive = $falsePositive;
         $this->closed = true;
         $this->closing_description = $description;
+
+        $alertCategories = AlertCategory::find($categories);
+        $this->categories()->attach($alertCategories);
         
         return $this->save();
      }
@@ -129,7 +132,7 @@ class Alert extends Model
      /**
       * Ignore alert
       **/
-    public function ignore($from, $fromTime, $to, $toTime, $description)
+    public function ignore($from, $fromTime, $to, $toTime, $description, $categories)
     {
         $this->closed_at = Carbon::now();
         $this->under_revision = false;
@@ -143,6 +146,9 @@ class Alert extends Model
         $this->closing_description = $description;
         $this->trigger->ignorance_description = $description;
         $this->trigger->save();
+
+        $alertCategories = AlertCategory::find($categories);
+        $this->categories()->attach($alertCategories);
         
         return $this->save();
     }

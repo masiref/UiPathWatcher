@@ -80,7 +80,33 @@ export const showClosingFormModal = alert => {
     document.body.insertAdjacentHTML('beforeend', markup);
     let modal = document.getElementById(strings.closingFormModalID);
     _base.showModal(modal);
-    new BulmaTagsInput(`#${strings.closingFormModalID} #keywords`);
+
+    const keywordsList = new BulmaTagsInput(`#${strings.closingFormModalID} ${selectors.closingKeywordsList}`);
+    const addKeywordButton = document.querySelector(`#${strings.closingFormModalID} ${selectors.closingAddKeywordButton}`);
+    keywordsList.input.onkeyup = () => {
+        const text = keywordsList.input.value.trim();
+        if (text !== '' && !keywordsList.hasText(text)) {
+            addKeywordButton.disabled = false;
+        } else {
+            addKeywordButton.disabled = true;
+        }
+    };
+    keywordsList.on('after.add', data => {
+        addKeywordButton.disabled = true;
+        keywordsList.input.parentNode.classList.remove('is-danger');
+    });
+    addKeywordButton.addEventListener('click', e => {
+        const target = e.target;
+        if (!target.disabled) {
+            const text = keywordsList.input.value.trim();
+            keywordsList.add({
+                'value': '-1',
+                'text': text
+            });
+            keywordsList.input.value = '';
+        }
+
+    });
     return modal;
 };
 
@@ -112,6 +138,33 @@ export const showIgnoranceFormModal = alert => {
     //const ignoreUntilDatetime = document.getElementById(strings.ignoranceFormModalIgnoreUntilDatetimeInputID);
     let modal = document.getElementById(strings.ignoranceFormModalID);
     _base.showModal(modal);
+
+    const keywordsList = new BulmaTagsInput(`#${strings.ignoranceFormModalID} ${selectors.ignoranceKeywordsList}`);
+    const addKeywordButton = document.querySelector(`#${strings.ignoranceFormModalID} ${selectors.ignoranceAddKeywordButton}`);
+    keywordsList.input.onkeyup = () => {
+        const text = keywordsList.input.value.trim();
+        if (text !== '' && !keywordsList.hasText(text)) {
+            addKeywordButton.disabled = false;
+        } else {
+            addKeywordButton.disabled = true;
+        }
+    };
+    keywordsList.on('after.add', data => {
+        addKeywordButton.disabled = true;
+        keywordsList.input.parentNode.classList.remove('is-danger');
+    });
+    addKeywordButton.addEventListener('click', e => {
+        const target = e.target;
+        if (!target.disabled) {
+            const text = keywordsList.input.value.trim();
+            keywordsList.add({
+                'value': '-1',
+                'text': text
+            });
+            keywordsList.input.value = '';
+        }
+
+    });
     return modal;
 };
 

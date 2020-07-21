@@ -211,3 +211,7 @@ footer.footer {
   background-color: white;
   padding: 6rem 1.5rem 6rem;
 }
+
+.tags-input.is-danger {
+  border-color: $danger;
+}

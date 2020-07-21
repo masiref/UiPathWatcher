@@ -69,7 +69,7 @@ class AppController extends Controller
             'watched_automated_process_id' => $wap->id,
             'messages' => array('My first message')
         ]);
-        $ancestor = Alert::find(2);
+        /*$ancestor = Alert::find(2);
         $ancestor->update([
             'closed' => true,
             'closed_at' => $alert->created_at,
@@ -77,7 +77,7 @@ class AppController extends Controller
             'auto_closed' => true,
             'under_revision' => false,
             'parent_id' => $alert->id
-        ]);
+        ]);*/
 
         //$alert = Alert::find(1);
         Notification::send(User::all(), new AlertTriggered($alert));

@@ -98033,7 +98033,7 @@ function () {
     value: function () {
       var _close = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12(falsePositive, description) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12(falsePositive, description, categories) {
         var _this9 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee12$(_context12) {
@@ -98045,7 +98045,8 @@ function () {
                   resolve(axios__WEBPACK_IMPORTED_MODULE_1__["put"]("/api/alerts/".concat(_this9.id), {
                     action: 'close',
                     falsePositive: falsePositive,
-                    description: description
+                    description: description,
+                    categories: categories
                   }));
                 }));
 
@@ -98062,7 +98063,7 @@ function () {
         }, _callee12, null, [[0, 4]]);
       }));
 
-      function close(_x4, _x5) {
+      function close(_x4, _x5, _x6) {
         return _close.apply(this, arguments);
       }
 
@@ -98073,7 +98074,7 @@ function () {
     value: function () {
       var _ignore = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee13(from_, fromTime, to, toTime, description) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee13(from_, fromTime, to, toTime, description, categories) {
         var _this10 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee13$(_context13) {
@@ -98088,7 +98089,8 @@ function () {
                     fromTime: fromTime,
                     to: to,
                     toTime: toTime,
-                    description: description
+                    description: description,
+                    categories: categories
                   }));
                 }));
 
@@ -98105,7 +98107,7 @@ function () {
         }, _callee13, null, [[0, 4]]);
       }));
 
-      function ignore(_x6, _x7, _x8, _x9, _x10) {
+      function ignore(_x7, _x8, _x9, _x10, _x11, _x12) {
         return _ignore.apply(this, arguments);
       }
 
@@ -100895,10 +100897,14 @@ var selectors = {
   closeButtonChildren: '.close-btn *',
   ignoreButton: '.ignore-btn',
   ignoreButtonChildren: '.ignore-btn *',
-  closingFalsePositiveCheckbox: '#false_positive',
-  closingDescriptionTextarea: '#closing_description',
-  ignoranceCalendar: '#ignorance_calendar',
-  ignoranceDescriptionTextarea: '#ignorance_description',
+  closingFalsePositiveCheckbox: '#closing-false-positive',
+  closingKeywordsList: '#closing-keywords',
+  closingAddKeywordButton: 'button#closing-add-keyword',
+  closingDescriptionTextarea: '#closing-description',
+  ignoranceCalendar: '#ignorance-calendar',
+  ignoranceKeywordsList: '#ignorance-keywords',
+  ignoranceAddKeywordButton: 'button#ignorance-add-keyword',
+  ignoranceDescriptionTextarea: '#ignorance-description',
   table: '#alerts-table',
   pendingTable: '#pending-alerts-table',
   closedTable: '#closed-alerts-table'
@@ -100938,19 +100944,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var bulma_calendar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bulma-calendar */ "./node_modules/bulma-calendar/dist/js/bulma-calendar.js");
 /* harmony import */ var bulma_calendar__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bulma_calendar__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
-/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(toastr__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _models_Alert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../models/Alert */ "./resources/js/models/Alert.js");
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../base */ "./resources/js/views/base.js");
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./base */ "./resources/js/views/alert/base.js");
-/* harmony import */ var _view__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./view */ "./resources/js/views/alert/view.js");
-/* harmony import */ var _dashboard_index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../dashboard/index */ "./resources/js/views/dashboard/index.js");
-/* harmony import */ var _layout_index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../layout/index */ "./resources/js/views/layout/index.js");
+/* harmony import */ var _creativebulma_bulma_tagsinput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @creativebulma/bulma-tagsinput */ "./node_modules/@creativebulma/bulma-tagsinput/src/js/index.js");
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(toastr__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _models_Alert__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../models/Alert */ "./resources/js/models/Alert.js");
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../base */ "./resources/js/views/base.js");
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./base */ "./resources/js/views/alert/base.js");
+/* harmony import */ var _view__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./view */ "./resources/js/views/alert/view.js");
+/* harmony import */ var _dashboard_index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../dashboard/index */ "./resources/js/views/dashboard/index.js");
+/* harmony import */ var _layout_index__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../layout/index */ "./resources/js/views/layout/index.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -100974,32 +100982,32 @@ function () {
           case 0:
             try {
               // Handle timeline button
-              if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].timelineButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].timelineButtonChildren))) {
-                id = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].timelineButton).dataset.id;
+              if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].timelineButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].timelineButtonChildren))) {
+                id = target.closest(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].timelineButton).dataset.id;
                 timeline(id);
               } // Handle start revision button
 
 
-              if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].revisionButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].revisionButtonChildren))) {
-                _id = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].revisionButton).dataset.id;
+              if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].revisionButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].revisionButtonChildren))) {
+                _id = target.closest(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].revisionButton).dataset.id;
                 startRevision(dashboard, _id);
               } // Handle undo revision button
 
 
-              if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].cancelButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].cancelButtonChildren))) {
-                _id2 = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].cancelButton).dataset.id;
+              if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].cancelButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].cancelButtonChildren))) {
+                _id2 = target.closest(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].cancelButton).dataset.id;
                 undoRevision(dashboard, _id2);
               } // Handle close button
 
 
-              if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].closeButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].closeButtonChildren))) {
-                _id3 = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].closeButton).dataset.id;
+              if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].closeButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].closeButtonChildren))) {
+                _id3 = target.closest(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].closeButton).dataset.id;
                 close(dashboard, _id3);
               } // Handle ignore button
 
 
-              if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].ignoreButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].ignoreButtonChildren))) {
-                _id4 = target.closest(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].ignoreButton).dataset.id;
+              if (target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].ignoreButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].ignoreButtonChildren))) {
+                _id4 = target.closest(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].ignoreButton).dataset.id;
                 ignore(dashboard, _id4);
               }
             } catch (error) {
@@ -101037,11 +101045,11 @@ function () {
               break;
             }
 
-            _view__WEBPACK_IMPORTED_MODULE_6__["update"](alert.id, alert.markup);
-            promises = [_layout_index__WEBPACK_IMPORTED_MODULE_8__["updateMenu"](dashboard), _layout_index__WEBPACK_IMPORTED_MODULE_8__["updateSidebar"](dashboard), _dashboard_index__WEBPACK_IMPORTED_MODULE_7__["updateTiles"](), updatePendingTable(dashboard)];
+            _view__WEBPACK_IMPORTED_MODULE_7__["update"](alert.id, alert.markup);
+            promises = [_layout_index__WEBPACK_IMPORTED_MODULE_9__["updateMenu"](dashboard), _layout_index__WEBPACK_IMPORTED_MODULE_9__["updateSidebar"](dashboard), _dashboard_index__WEBPACK_IMPORTED_MODULE_8__["updateTiles"](), updatePendingTable(dashboard)];
 
             if (!dashboard.userRelated) {
-              _view__WEBPACK_IMPORTED_MODULE_6__["updateRow"](alert.id, alert.rowMarkup);
+              _view__WEBPACK_IMPORTED_MODULE_7__["updateRow"](alert.id, alert.rowMarkup);
             }
 
             return _context2.abrupt("return", Promise.all(promises));
@@ -101052,7 +101060,7 @@ function () {
               break;
             }
 
-            return _context2.abrupt("return", _dashboard_index__WEBPACK_IMPORTED_MODULE_7__["update"]());
+            return _context2.abrupt("return", _dashboard_index__WEBPACK_IMPORTED_MODULE_8__["update"]());
 
           case 10:
             _context2.next = 15;
@@ -101088,17 +101096,17 @@ function () {
         switch (_context3.prev = _context3.next) {
           case 0:
             try {
-              alert = new _models_Alert__WEBPACK_IMPORTED_MODULE_3__["default"](id);
-              _view__WEBPACK_IMPORTED_MODULE_6__["renderLoaders"](id);
+              alert = new _models_Alert__WEBPACK_IMPORTED_MODULE_4__["default"](id);
+              _view__WEBPACK_IMPORTED_MODULE_7__["renderLoaders"](id);
               alert.timeline().then(function (res) {
-                var modal = _view__WEBPACK_IMPORTED_MODULE_6__["showTimelineFormModal"](alert);
-                _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
+                var modal = _view__WEBPACK_IMPORTED_MODULE_7__["showTimelineFormModal"](alert);
+                _view__WEBPACK_IMPORTED_MODULE_7__["clearLoaders"](id);
               });
             } catch (error) {
-              toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error("Alert timeline not shown due to application exception: ".concat(error), null, {
-                positionClass: 'toast-bottom-center'
+              toastr__WEBPACK_IMPORTED_MODULE_3___default.a.error("Alert timeline not shown due to application exception: ".concat(error), null, {
+                positionClass: 'toast-bottom-left'
               });
-              _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
+              _view__WEBPACK_IMPORTED_MODULE_7__["clearLoaders"](id);
             }
 
           case 1:
@@ -101125,19 +101133,19 @@ function () {
         switch (_context4.prev = _context4.next) {
           case 0:
             try {
-              alert = new _models_Alert__WEBPACK_IMPORTED_MODULE_3__["default"](id);
-              _view__WEBPACK_IMPORTED_MODULE_6__["renderLoaders"](id);
+              alert = new _models_Alert__WEBPACK_IMPORTED_MODULE_4__["default"](id);
+              _view__WEBPACK_IMPORTED_MODULE_7__["renderLoaders"](id);
               alert.enterRevisionMode().then(function (res) {
                 /*updateAfterAction(dashboard, 'revision_related_action', alert)*/
-                _dashboard_index__WEBPACK_IMPORTED_MODULE_7__["update"]().then(function (res) {
-                  _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
+                _dashboard_index__WEBPACK_IMPORTED_MODULE_8__["update"]().then(function (res) {
+                  _view__WEBPACK_IMPORTED_MODULE_7__["clearLoaders"](id);
                 });
               });
             } catch (error) {
-              toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error("Revision not started on alert due to application exception: ".concat(error), null, {
-                positionClass: 'toast-bottom-center'
+              toastr__WEBPACK_IMPORTED_MODULE_3___default.a.error("Revision not started on alert due to application exception: ".concat(error), null, {
+                positionClass: 'toast-bottom-left'
               });
-              _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
+              _view__WEBPACK_IMPORTED_MODULE_7__["clearLoaders"](id);
             }
 
           case 1:
@@ -101164,19 +101172,19 @@ function () {
         switch (_context5.prev = _context5.next) {
           case 0:
             try {
-              alert = new _models_Alert__WEBPACK_IMPORTED_MODULE_3__["default"](id);
-              _view__WEBPACK_IMPORTED_MODULE_6__["renderLoaders"](id);
+              alert = new _models_Alert__WEBPACK_IMPORTED_MODULE_4__["default"](id);
+              _view__WEBPACK_IMPORTED_MODULE_7__["renderLoaders"](id);
               alert.exitRevisionMode().then(function (res) {
                 /*updateAfterAction(dashboard, 'revision_related_action', alert)*/
-                _dashboard_index__WEBPACK_IMPORTED_MODULE_7__["update"]().then(function (res) {
-                  _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](alert.id);
+                _dashboard_index__WEBPACK_IMPORTED_MODULE_8__["update"]().then(function (res) {
+                  _view__WEBPACK_IMPORTED_MODULE_7__["clearLoaders"](alert.id);
                 });
               });
             } catch (error) {
-              toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error("Revision not cancelled on alert due to application exception: ".concat(error), null, {
-                positionClass: 'toast-bottom-center'
+              toastr__WEBPACK_IMPORTED_MODULE_3___default.a.error("Revision not cancelled on alert due to application exception: ".concat(error), null, {
+                positionClass: 'toast-bottom-left'
               });
-              _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
+              _view__WEBPACK_IMPORTED_MODULE_7__["clearLoaders"](id);
             }
 
           case 1:
@@ -101203,10 +101211,10 @@ function () {
         switch (_context7.prev = _context7.next) {
           case 0:
             try {
-              alert = new _models_Alert__WEBPACK_IMPORTED_MODULE_3__["default"](id);
-              _view__WEBPACK_IMPORTED_MODULE_6__["renderLoaders"](id);
+              alert = new _models_Alert__WEBPACK_IMPORTED_MODULE_4__["default"](id);
+              _view__WEBPACK_IMPORTED_MODULE_7__["renderLoaders"](id);
               alert.closingFormModal().then(function (res) {
-                var modal = _view__WEBPACK_IMPORTED_MODULE_6__["showClosingFormModal"](alert);
+                var modal = _view__WEBPACK_IMPORTED_MODULE_7__["showClosingFormModal"](alert);
                 modal.addEventListener('click',
                 /*#__PURE__*/
                 function () {
@@ -101217,7 +101225,7 @@ function () {
                       while (1) {
                         switch (_context6.prev = _context6.next) {
                           case 0:
-                            if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_4__["selectors"].validateModalButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_4__["selectors"].validateModalButtonChildren))) {
+                            if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].validateModalButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].validateModalButtonChildren))) {
                               commitClose(dashboard, alert);
                             }
 
@@ -101233,13 +101241,13 @@ function () {
                     return _ref7.apply(this, arguments);
                   };
                 }());
-                _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
+                _view__WEBPACK_IMPORTED_MODULE_7__["clearLoaders"](id);
               });
             } catch (error) {
-              toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error("Alert closing form not shown due to application exception: ".concat(error), null, {
-                positionClass: 'toast-bottom-center'
+              toastr__WEBPACK_IMPORTED_MODULE_3___default.a.error("Alert closing form not shown due to application exception: ".concat(error), null, {
+                positionClass: 'toast-bottom-left'
               });
-              _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
+              _view__WEBPACK_IMPORTED_MODULE_7__["clearLoaders"](id);
             }
 
           case 1:
@@ -101260,41 +101268,59 @@ function () {
   var _ref8 = _asyncToGenerator(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8(dashboard, alert) {
-    var descriptionTextarea, falsePositiveCheckbox;
+    var descriptionTextarea, falsePositiveCheckbox, keywordsList, valid;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
       while (1) {
         switch (_context8.prev = _context8.next) {
           case 0:
             try {
-              descriptionTextarea = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].closingDescriptionTextarea);
-              falsePositiveCheckbox = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].closingFalsePositiveCheckbox);
+              descriptionTextarea = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].closingDescriptionTextarea);
+              falsePositiveCheckbox = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].closingFalsePositiveCheckbox);
+              keywordsList = document.querySelector("#".concat(_base__WEBPACK_IMPORTED_MODULE_6__["strings"].closingFormModalID, " ").concat(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].closingKeywordsList)).BulmaTagsInput();
+              valid = false;
+
+              if (keywordsList.items.length === 0) {
+                toastr__WEBPACK_IMPORTED_MODULE_3___default.a.error('At least one keyword must be added!', null, {
+                  positionClass: 'toast-bottom-left'
+                });
+                keywordsList.input.parentNode.classList.add('is-danger');
+              } else {
+                keywordsList.input.parentNode.classList.remove('is-danger');
+                valid = true;
+              }
 
               if (descriptionTextarea.value.trim() === '') {
-                toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error('Description is mandatory!', null, {
-                  positionClass: 'toast-bottom-center'
+                toastr__WEBPACK_IMPORTED_MODULE_3___default.a.error('Description is mandatory!', null, {
+                  positionClass: 'toast-bottom-left'
                 });
                 descriptionTextarea.classList.add('is-danger');
+                valid = false;
               } else {
-                _view__WEBPACK_IMPORTED_MODULE_6__["removeClosingFormModal"]();
-                _view__WEBPACK_IMPORTED_MODULE_6__["renderLoaders"](alert.id);
+                descriptionTextarea.classList.remove('is-danger');
+                valid = true;
+              }
+
+              if (valid) {
+                _view__WEBPACK_IMPORTED_MODULE_7__["removeClosingFormModal"]();
+                _view__WEBPACK_IMPORTED_MODULE_7__["renderLoaders"](alert.id);
 
                 try {
-                  alert.close(falsePositiveCheckbox.checked, descriptionTextarea.value.trim()).then(function (res) {
+                  alert.close(falsePositiveCheckbox.checked, descriptionTextarea.value.trim(), keywordsList.items).then(function (res) {
                     /*updateAfterAction(dashboard, 'closing_related_action', alert)*/
-                    _dashboard_index__WEBPACK_IMPORTED_MODULE_7__["update"]().then(function (res) {
-                      _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](alert.id);
+                    _dashboard_index__WEBPACK_IMPORTED_MODULE_8__["update"]().then(function (res) {
+                      _view__WEBPACK_IMPORTED_MODULE_7__["clearLoaders"](alert.id);
                     });
                   });
                 } catch (error) {
-                  toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error("Alert not closed due to application exception: ".concat(error), null, {
-                    positionClass: 'toast-bottom-center'
+                  toastr__WEBPACK_IMPORTED_MODULE_3___default.a.error("Alert not closed due to application exception: ".concat(error), null, {
+                    positionClass: 'toast-bottom-left'
                   });
-                  _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](alert.id);
+                  _view__WEBPACK_IMPORTED_MODULE_7__["clearLoaders"](alert.id);
                 }
               }
             } catch (error) {
-              toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error("Alert closing not committed due to application exception: ".concat(error), null, {
-                positionClass: 'toast-bottom-center'
+              toastr__WEBPACK_IMPORTED_MODULE_3___default.a.error("Alert closing not committed due to application exception: ".concat(error), null, {
+                positionClass: 'toast-bottom-left'
               });
             }
 
@@ -101322,10 +101348,10 @@ function () {
         switch (_context10.prev = _context10.next) {
           case 0:
             try {
-              alert = new _models_Alert__WEBPACK_IMPORTED_MODULE_3__["default"](id);
-              _view__WEBPACK_IMPORTED_MODULE_6__["renderLoaders"](id);
+              alert = new _models_Alert__WEBPACK_IMPORTED_MODULE_4__["default"](id);
+              _view__WEBPACK_IMPORTED_MODULE_7__["renderLoaders"](id);
               alert.ignoranceFormModal().then(function (res) {
-                var modal = _view__WEBPACK_IMPORTED_MODULE_6__["showIgnoranceFormModal"](alert);
+                var modal = _view__WEBPACK_IMPORTED_MODULE_7__["showIgnoranceFormModal"](alert);
                 modal.addEventListener('click',
                 /*#__PURE__*/
                 function () {
@@ -101336,7 +101362,7 @@ function () {
                       while (1) {
                         switch (_context9.prev = _context9.next) {
                           case 0:
-                            if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_4__["selectors"].validateModalButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_4__["selectors"].validateModalButtonChildren))) {
+                            if (e.target.matches("".concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].validateModalButton, ", ").concat(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].validateModalButtonChildren))) {
                               commitIgnore(dashboard, alert);
                             }
 
@@ -101352,13 +101378,13 @@ function () {
                     return _ref10.apply(this, arguments);
                   };
                 }());
-                _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
+                _view__WEBPACK_IMPORTED_MODULE_7__["clearLoaders"](id);
               });
             } catch (error) {
-              toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error("Alert trigger ignorance form not shown due to application exception: ".concat(error), null, {
-                positionClass: 'toast-bottom-center'
+              toastr__WEBPACK_IMPORTED_MODULE_3___default.a.error("Alert trigger ignorance form not shown due to application exception: ".concat(error), null, {
+                positionClass: 'toast-bottom-left'
               });
-              _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](id);
+              _view__WEBPACK_IMPORTED_MODULE_7__["clearLoaders"](id);
             }
 
           case 1:
@@ -101379,48 +101405,69 @@ function () {
   var _ref11 = _asyncToGenerator(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11(dashboard, alert) {
-    var ignoranceCalendar, descriptionTextarea;
+    var ignoranceCalendar, descriptionTextarea, keywordsList, valid;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
       while (1) {
         switch (_context11.prev = _context11.next) {
           case 0:
             try {
-              ignoranceCalendar = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].ignoranceCalendar).bulmaCalendar;
-              descriptionTextarea = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].ignoranceDescriptionTextarea);
+              ignoranceCalendar = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].ignoranceCalendar).bulmaCalendar;
+              descriptionTextarea = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].ignoranceDescriptionTextarea);
+              keywordsList = document.querySelector("#".concat(_base__WEBPACK_IMPORTED_MODULE_6__["strings"].ignoranceFormModalID, " ").concat(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].ignoranceKeywordsList)).BulmaTagsInput();
+              valid = false;
+
+              if (keywordsList.items.length === 0) {
+                toastr__WEBPACK_IMPORTED_MODULE_3___default.a.error('At least one keyword must be added!', null, {
+                  positionClass: 'toast-bottom-left'
+                });
+                keywordsList.input.parentNode.classList.add('is-danger');
+              } else {
+                keywordsList.input.parentNode.classList.remove('is-danger');
+                valid = true;
+              }
 
               if (ignoranceCalendar.startDate === undefined || ignoranceCalendar.startTime === undefined) {
-                toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error('Start date & time are mandatory!', null, {
-                  positionClass: 'toast-bottom-center'
+                toastr__WEBPACK_IMPORTED_MODULE_3___default.a.error('Start date & time are mandatory!', null, {
+                  positionClass: 'toast-bottom-left'
                 });
+                valid = false;
               } else {
-                if (descriptionTextarea.value.trim() === '') {
-                  toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error('Description is mandatory!', null, {
-                    positionClass: 'toast-bottom-center'
+                valid = true;
+              }
+
+              if (descriptionTextarea.value.trim() === '') {
+                toastr__WEBPACK_IMPORTED_MODULE_3___default.a.error('Description is mandatory!', null, {
+                  positionClass: 'toast-bottom-left'
+                });
+                descriptionTextarea.classList.add('is-danger');
+                valid = false;
+              } else {
+                descriptionTextarea.classList.remove('is-danger');
+                valid = true;
+              }
+
+              if (valid) {
+                if (ignoranceCalendar.endDate === undefined) {
+                  // ask user to validate infinite ignorance (manual action to reactivate alert triggering)
+                  _base__WEBPACK_IMPORTED_MODULE_5__["swalWithBulmaButtons"].fire({
+                    title: 'Infinite ignorance confirmation',
+                    text: 'The alert will be ignored forever, manual action to reactivate it will be needed!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: '<span class="icon"><i class="fas fa-eye-slash"></i></span><span>Ignore it!</span>',
+                    cancelButtonText: '<span class="icon"><i class="fas fa-undo"></i></span><span>Undo</span>'
+                  }).then(function (result) {
+                    if (result.value) {
+                      handleCommitIgnore(dashboard, alert, ignoranceCalendar, descriptionTextarea, keywordsList.items);
+                    }
                   });
-                  descriptionTextarea.classList.add('is-danger');
                 } else {
-                  if (ignoranceCalendar.endDate === undefined) {
-                    // ask user to validate infinite ignorance (manual action to reactivate alert triggering)
-                    _base__WEBPACK_IMPORTED_MODULE_4__["swalWithBulmaButtons"].fire({
-                      title: 'Infinite ignorance confirmation',
-                      text: 'The alert will be ignored forever, manual action to reactivate it will be needed!',
-                      icon: 'warning',
-                      showCancelButton: true,
-                      confirmButtonText: '<span class="icon"><i class="fas fa-eye-slash"></i></span><span>Ignore it!</span>',
-                      cancelButtonText: '<span class="icon"><i class="fas fa-undo"></i></span><span>Undo</span>'
-                    }).then(function (result) {
-                      if (result.value) {
-                        handleCommitIgnore(dashboard, alert, ignoranceCalendar, descriptionTextarea);
-                      }
-                    });
-                  } else {
-                    handleCommitIgnore(dashboard, alert, ignoranceCalendar, descriptionTextarea);
-                  }
+                  handleCommitIgnore(dashboard, alert, ignoranceCalendar, descriptionTextarea, keywordsList.items);
                 }
               }
             } catch (error) {
-              toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error("Alert ignorance not committed due to application exception: ".concat(error), null, {
-                positionClass: 'toast-bottom-center'
+              toastr__WEBPACK_IMPORTED_MODULE_3___default.a.error("Alert ignorance not committed due to application exception: ".concat(error), null, {
+                positionClass: 'toast-bottom-left'
               });
             }
 
@@ -101442,15 +101489,15 @@ var handleCommitIgnore =
 function () {
   var _ref12 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12(dashboard, alert, ignoranceCalendar, descriptionTextarea) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12(dashboard, alert, ignoranceCalendar, descriptionTextarea, categories) {
     var startDate, startTime, endDate, endTime;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee12$(_context12) {
       while (1) {
         switch (_context12.prev = _context12.next) {
           case 0:
             try {
-              _view__WEBPACK_IMPORTED_MODULE_6__["removeIgnoranceFormModal"]();
-              _view__WEBPACK_IMPORTED_MODULE_6__["renderLoaders"](alert.id);
+              _view__WEBPACK_IMPORTED_MODULE_7__["removeIgnoranceFormModal"]();
+              _view__WEBPACK_IMPORTED_MODULE_7__["renderLoaders"](alert.id);
               startDate = ignoranceCalendar.startDate.toISOString().split('T')[0];
               startTime = ignoranceCalendar.startTime.toTimeString().split(' ')[0];
               endDate = ignoranceCalendar.endDate;
@@ -101465,17 +101512,17 @@ function () {
                 endTime = endTime.toTimeString().split(' ')[0];
               }
 
-              alert.ignore(startDate, startTime, endDate, endTime, descriptionTextarea.value.trim()).then(function (res) {
+              alert.ignore(startDate, startTime, endDate, endTime, descriptionTextarea.value.trim(), categories).then(function (res) {
                 /*updateAfterAction(dashboard, 'closing_related_action', alert)*/
-                _dashboard_index__WEBPACK_IMPORTED_MODULE_7__["update"]().then(function (res) {
-                  _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](alert.id);
+                _dashboard_index__WEBPACK_IMPORTED_MODULE_8__["update"]().then(function (res) {
+                  _view__WEBPACK_IMPORTED_MODULE_7__["clearLoaders"](alert.id);
                 });
               });
             } catch (error) {
-              toastr__WEBPACK_IMPORTED_MODULE_2___default.a.error("Alert not ignored due to application exception: ".concat(error), null, {
-                positionClass: 'toast-bottom-center'
+              toastr__WEBPACK_IMPORTED_MODULE_3___default.a.error("Alert not ignored due to application exception: ".concat(error), null, {
+                positionClass: 'toast-bottom-left'
               });
-              _view__WEBPACK_IMPORTED_MODULE_6__["clearLoaders"](alert.id);
+              _view__WEBPACK_IMPORTED_MODULE_7__["clearLoaders"](alert.id);
             }
 
           case 1:
@@ -101486,7 +101533,7 @@ function () {
     }, _callee12);
   }));
 
-  return function handleCommitIgnore(_x21, _x22, _x23, _x24) {
+  return function handleCommitIgnore(_x21, _x22, _x23, _x24, _x25) {
     return _ref12.apply(this, arguments);
   };
 }();
@@ -101503,19 +101550,19 @@ function () {
         switch (_context13.prev = _context13.next) {
           case 0:
             _context13.prev = 0;
-            table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].pendingTable);
+            table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].pendingTable);
 
             if (!table) {
               _context13.next = 5;
               break;
             }
 
-            _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](table);
+            _base__WEBPACK_IMPORTED_MODULE_5__["renderLoader"](table);
 
-            return _context13.abrupt("return", dashboard.updateAlertsTable(false, _base__WEBPACK_IMPORTED_MODULE_5__["strings"].pendingTableID).then(function (res) {
-              _view__WEBPACK_IMPORTED_MODULE_6__["updatePendingTable"](dashboard.pendingAlertsTable);
+            return _context13.abrupt("return", dashboard.updateAlertsTable(false, _base__WEBPACK_IMPORTED_MODULE_6__["strings"].pendingTableID).then(function (res) {
+              _view__WEBPACK_IMPORTED_MODULE_7__["updatePendingTable"](dashboard.pendingAlertsTable);
             }).then(function () {
-              _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](table);
+              _base__WEBPACK_IMPORTED_MODULE_5__["clearLoader"](table);
             }));
 
           case 5:
@@ -101535,7 +101582,7 @@ function () {
     }, _callee13, null, [[0, 7]]);
   }));
 
-  return function updatePendingTable(_x25) {
+  return function updatePendingTable(_x26) {
     return _ref13.apply(this, arguments);
   };
 }();
@@ -101551,19 +101598,19 @@ function () {
         switch (_context14.prev = _context14.next) {
           case 0:
             _context14.prev = 0;
-            table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_5__["selectors"].closedTable);
+            table = document.querySelector(_base__WEBPACK_IMPORTED_MODULE_6__["selectors"].closedTable);
 
             if (!table) {
               _context14.next = 5;
               break;
             }
 
-            _base__WEBPACK_IMPORTED_MODULE_4__["renderLoader"](table);
+            _base__WEBPACK_IMPORTED_MODULE_5__["renderLoader"](table);
 
-            return _context14.abrupt("return", dashboard.updateAlertsTable(true, _base__WEBPACK_IMPORTED_MODULE_5__["strings"].closedTableID).then(function (res) {
-              _view__WEBPACK_IMPORTED_MODULE_6__["updateClosedTable"](dashboard.closedAlertsTable);
+            return _context14.abrupt("return", dashboard.updateAlertsTable(true, _base__WEBPACK_IMPORTED_MODULE_6__["strings"].closedTableID).then(function (res) {
+              _view__WEBPACK_IMPORTED_MODULE_7__["updateClosedTable"](dashboard.closedAlertsTable);
             }).then(function () {
-              _base__WEBPACK_IMPORTED_MODULE_4__["clearLoader"](table);
+              _base__WEBPACK_IMPORTED_MODULE_5__["clearLoader"](table);
             }));
 
           case 5:
@@ -101583,7 +101630,7 @@ function () {
     }, _callee14, null, [[0, 7]]);
   }));
 
-  return function updateClosedTable(_x26) {
+  return function updateClosedTable(_x27) {
     return _ref14.apply(this, arguments);
   };
 }();
@@ -101693,7 +101740,35 @@ var showClosingFormModal = function showClosingFormModal(alert) {
 
   _base__WEBPACK_IMPORTED_MODULE_4__["showModal"](modal);
 
-  new _creativebulma_bulma_tagsinput__WEBPACK_IMPORTED_MODULE_1__["default"]("#".concat(_base__WEBPACK_IMPORTED_MODULE_3__["strings"].closingFormModalID, " #keywords"));
+  var keywordsList = new _creativebulma_bulma_tagsinput__WEBPACK_IMPORTED_MODULE_1__["default"]("#".concat(_base__WEBPACK_IMPORTED_MODULE_3__["strings"].closingFormModalID, " ").concat(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].closingKeywordsList));
+  var addKeywordButton = document.querySelector("#".concat(_base__WEBPACK_IMPORTED_MODULE_3__["strings"].closingFormModalID, " ").concat(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].closingAddKeywordButton));
+
+  keywordsList.input.onkeyup = function () {
+    var text = keywordsList.input.value.trim();
+
+    if (text !== '' && !keywordsList.hasText(text)) {
+      addKeywordButton.disabled = false;
+    } else {
+      addKeywordButton.disabled = true;
+    }
+  };
+
+  keywordsList.on('after.add', function (data) {
+    addKeywordButton.disabled = true;
+    keywordsList.input.parentNode.classList.remove('is-danger');
+  });
+  addKeywordButton.addEventListener('click', function (e) {
+    var target = e.target;
+
+    if (!target.disabled) {
+      var text = keywordsList.input.value.trim();
+      keywordsList.add({
+        'value': '-1',
+        'text': text
+      });
+      keywordsList.input.value = '';
+    }
+  });
   return modal;
 };
 var removeClosingFormModal = function removeClosingFormModal() {
@@ -101726,6 +101801,35 @@ var showIgnoranceFormModal = function showIgnoranceFormModal(alert) {
 
   _base__WEBPACK_IMPORTED_MODULE_4__["showModal"](modal);
 
+  var keywordsList = new _creativebulma_bulma_tagsinput__WEBPACK_IMPORTED_MODULE_1__["default"]("#".concat(_base__WEBPACK_IMPORTED_MODULE_3__["strings"].ignoranceFormModalID, " ").concat(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].ignoranceKeywordsList));
+  var addKeywordButton = document.querySelector("#".concat(_base__WEBPACK_IMPORTED_MODULE_3__["strings"].ignoranceFormModalID, " ").concat(_base__WEBPACK_IMPORTED_MODULE_3__["selectors"].ignoranceAddKeywordButton));
+
+  keywordsList.input.onkeyup = function () {
+    var text = keywordsList.input.value.trim();
+
+    if (text !== '' && !keywordsList.hasText(text)) {
+      addKeywordButton.disabled = false;
+    } else {
+      addKeywordButton.disabled = true;
+    }
+  };
+
+  keywordsList.on('after.add', function (data) {
+    addKeywordButton.disabled = true;
+    keywordsList.input.parentNode.classList.remove('is-danger');
+  });
+  addKeywordButton.addEventListener('click', function (e) {
+    var target = e.target;
+
+    if (!target.disabled) {
+      var text = keywordsList.input.value.trim();
+      keywordsList.add({
+        'value': '-1',
+        'text': text
+      });
+      keywordsList.input.value = '';
+    }
+  });
   return modal;
 };
 var removeIgnoranceFormModal = function removeIgnoranceFormModal() {

@@ -20,6 +20,7 @@
         </td>
         <td>{{ $alert->false_positive ? 'Yes' : 'No' }}</td>
         <td>{{ $alert->ignored ? 'Yes' : 'No' }}</td>
+        <td>{{ $alert->categories->pluck('label')->join(', ') }}</td>
     @endif
     <td>
         @include('dashboard.alert.buttons', [

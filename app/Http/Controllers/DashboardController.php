@@ -9,6 +9,7 @@ use App\UiPathOrchestrator;
 use App\UiPathRobot;
 use App\Alert;
 use App\AlertTrigger;
+use App\AlertCategory;
 use App\Library\Services\UiPathOrchestratorService;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client as Guzzle;
@@ -189,7 +190,8 @@ class DashboardController extends Controller
      */
     public function alertClosingFormModal(Request $request, Alert $alert)
     {
-        return view('dashboard.alert.forms.closing')->with('alert', $alert);
+        $categories = AlertCategory::all();
+        return view('dashboard.alert.forms.closing')->with('alert', $alert)->with('categories', $categories);
     }
 
     /**
@@ -199,7 +201,8 @@ class DashboardController extends Controller
      */
     public function alertIgnoranceFormModal(Request $request, Alert $alert)
     {
-        return view('dashboard.alert.forms.ignorance')->with('alert', $alert);
+        $categories = AlertCategory::all();
+        return view('dashboard.alert.forms.ignorance')->with('alert', $alert)->with('categories', $categories);
     }
 
     /**

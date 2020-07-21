@@ -29024,6 +29024,10 @@ footer.footer {
   padding: 6rem 1.5rem 6rem;
 }
 
+.tags-input.is-danger {
+  border-color: #ff3860;
+}
+
 .m-none {
   margin: 0;
 }
