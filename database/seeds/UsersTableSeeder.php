@@ -14,15 +14,15 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'Masiré Fofana',
-            'email' => 'mf@uw.com',
-            'password' => Hash::make('louloute'),
+            'email' => 'masire.fofana@natixis.com',
+            'password' => Hash::make('uipath'),
             'created_at' => Carbon::now()
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Jack Daniels',
-            'email' => 'jd@uw.com',
-            'password' => Hash::make('louloute'),
+            'name' => 'Yohann Gentilini',
+            'email' => 'yohann.gentilini@natixis.com',
+            'password' => Hash::make('uipath'),
             'created_at' => Carbon::now()
         ]);
     }
