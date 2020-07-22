@@ -61,7 +61,8 @@ class UiPathOrchestratorService {
             $token = json_decode($response->getBody(), true)['result'];
             $result['token'] = $token;
         } catch (RequestException $e) {
-            $result = $this->getErrorResult("impossible to authenticate to $client->orchestrator->url ($tenant tenant) with $username user.");
+            $message = $e->getMessage();
+            $result = $this->getErrorResult("impossible to authenticate to $client->orchestrator ($tenant tenant) with $username user: $message");
         }
 
         return $result;
@@ -81,7 +82,8 @@ class UiPathOrchestratorService {
                 true
             )['value'];
         } catch (RequestException $e) {
-            $result = $this->getErrorResult("impossible to get releases from $client->orchestrator->url");
+            $message = $e->getMessage();
+            $result = $this->getErrorResult("impossible to get releases from $client->orchestrator: $message");
         }
 
         return $result;
@@ -101,7 +103,8 @@ class UiPathOrchestratorService {
                 true
             )['value'];
         } catch (RequestException $e) {
-            $result = $this->getErrorResult("impossible to get robots from $client->orchestrator->url");
+            $message = $e->getMessage();
+            $result = $this->getErrorResult("impossible to get robots from $client->orchestrator: $message");
         }
 
         return $result;
@@ -121,7 +124,8 @@ class UiPathOrchestratorService {
                 true
             )['value'];
         } catch (RequestException $e) {
-            $result = $this->getErrorResult("impossible to get queues from $orchestrator->client->url");
+            $message = $e->getMessage();
+            $result = $this->getErrorResult("impossible to get queues from $client->orchestrator: $message");
         }
 
         return $result;
@@ -141,7 +145,8 @@ class UiPathOrchestratorService {
                 true
             )['value'];
         } catch (RequestException $e) {
-            $result = $this->getErrorResult("impossible to get queue items from $orchestrator->client->url");
+            $message = $e->getMessage();
+            $result = $this->getErrorResult("impossible to get queue items from $client->orchestrator: $message");
         }
 
         return $result;
@@ -162,7 +167,8 @@ class UiPathOrchestratorService {
                 true
             )['value'];
         } catch (RequestException $e) {
-            $result = $this->getErrorResult("impossible to get jobs from $orchestrator->client->url");
+            $message = $e->getMessage();
+            $result = $this->getErrorResult("impossible to get jobs from $client->orchestrator: $message");
         }
 
         return $result;
@@ -183,7 +189,8 @@ class UiPathOrchestratorService {
                 true
             )['value'][0];
         } catch (RequestException $e) {
-            $result = $this->getErrorResult("impossible to get state for $robot from $orchestrator->url");
+            $message = $e->getMessage();
+            $result = $this->getErrorResult("impossible to get state for $robot from $orchestrator: $message");
         }
 
         return $result;
