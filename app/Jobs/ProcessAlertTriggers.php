@@ -7,9 +7,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Notification;
 use App\Library\Services\AlertTriggerService;
+use App\Notifications\AlertTriggered;
 use App\AlertTrigger;
 use App\Alert;
+use App\User;
 use Carbon\Carbon;
 
 class ProcessAlertTriggers implements ShouldQueue
@@ -88,6 +91,8 @@ class ProcessAlertTriggers implements ShouldQueue
                         // if all rules are verified
                         if ($verified) {
 
+                            $alertCreated = false;
+
                             if (!$existingAlert) {
                                 // if there is no existing alert
                                 // creation of a new alert
@@ -97,6 +102,7 @@ class ProcessAlertTriggers implements ShouldQueue
                                     'watched_automated_process_id' => $wap->id,
                                     'messages' => $messages
                                 ]);
+                                $alertCreated = true;
                             } elseif ($existingAlert->definition->level !== $definition->level) {
                                 // if existing alert has not same definition level
                                 // creation of a new alert with existing one information
@@ -110,7 +116,8 @@ class ProcessAlertTriggers implements ShouldQueue
                                     'revision_started_at' => $existingAlert->revision_started_at,
                                     'top_ancestor_created_at' => $existingAlert->top_ancestor_created_at ?? $existingAlert->created_at
                                 ]);
-                            
+                                $alertCreated = true;
+
                                 // closing of existing alert if present
                                 $existingAlert->update([
                                     'closed' => true,
@@ -126,6 +133,10 @@ class ProcessAlertTriggers implements ShouldQueue
                                     'alive' => true,
                                     'latest_heartbeat_at' => Carbon::now()
                                 ]);
+                            }
+
+                            if ($alertCreated) {
+                                Notification::send(User::all(), new AlertTriggered($alert));
                             }
 
                             // no need to check other definitions

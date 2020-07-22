@@ -102,10 +102,20 @@ class AlertTriggerService {
                         $duration = $startTime->diffInMinutes($endTime);
                         
                         // if there is at least one job with duration <= rule.duration
-                        if ($duration <= $rule->parameters['minimalDuration']) {
+                        $minimalDuration = $rule->parameters['minimalDuration'];
+                        if ($duration <= $minimalDuration) {
                             $result = true;
-                            array_push($messages, "Duration of $process on $robot is $duration minutes. A minimal duration of ${$rule->parameters['minimalDuration']} minutes is expected.");
-                            //return [ 'result' => true, 'messages' => $messages ];
+                            if ($duration > 1) {
+                                $duration = "$duration minutes";
+                            } else {
+                                $duration = "$duration minute";
+                            }
+                            if ($minimalDuration > 1) {
+                                $minimalDuration = "$minimalDuration minutes";
+                            } else {
+                                $minimalDuration = "$minimalDuration minute";
+                            }
+                            array_push($messages, "Duration of $process on $robot is $duration. A minimal duration of $minimalDuration is expected.");
                         }
                     }
                 }
@@ -157,9 +167,20 @@ class AlertTriggerService {
                         $duration = $startTime->diffInMinutes($endTime);
                         
                         // if there is at least one job with duration >= rule.duration
-                        if ($duration >= $rule->parameters['maximalDuration']) {
+                        $maximalDuration = $rule->parameters['maximalDuration'];
+                        if ($duration >= $maximalDuration) {
                             $result = true;
-                            array_push($messages, "Duration of $process on $robot is $duration minutes. A maximal duration of ${$rule->parameters['maximalDuration']} minutes is expected.");
+                            if ($duration > 1) {
+                                $duration = "$duration minutes";
+                            } else {
+                                $duration = "$duration minute";
+                            }
+                            if ($maximalDuration > 1) {
+                                $maximalDuration = "$maximalDuration minutes";
+                            } else {
+                                $maximalDuration = "$maximalDuration minute";
+                            }
+                            array_push($messages, "Duration of $process on $robot is $duration. A maximal duration of $maximalDuration is expected.");
                         }
                     }
                 }
@@ -221,7 +242,7 @@ class AlertTriggerService {
                             $percentage = count($faultedJobs) / count($allJobs) * 100;
                             if ($percentage >= $rule->parameters['maximalPercentage']) {
                                 $result = true;
-                                array_push($messages, "Faulted jobs percentage of $process on $robot is $percentage %. A maximal percentage of ${$rule->parameters['maximalPercentage']} is expected.");
+                                array_push($messages, "Faulted jobs percentage of $process on $robot is $percentage %. A maximal percentage of {$rule->parameters['maximalPercentage']} is expected.");
                             }
                         }
                     }
@@ -283,7 +304,7 @@ class AlertTriggerService {
                         $percentage = count($failedQueueItems) / count($allQueueItems) * 100;
                         if ($percentage >= $rule->parameters['maximalPercentage']) {
                             $result = true;
-                            array_push($messages, "Failed queue items percentage of $queue is $percentage %. A maximal percentage of ${$rule->parameters['maximalPercentage']} is expected.");
+                            array_push($messages, "Failed queue items percentage of $queue is $percentage %. A maximal percentage of {$rule->parameters['maximalPercentage']} is expected.");
                         }
                     }
                 }
@@ -332,11 +353,11 @@ class AlertTriggerService {
                     $count = $result['count'];
                     if ($count >= $rule->parameters['lowerCount']) {
                         $result = true;
-                        array_push($messages, "Number of messages returned for process $process on robot $robot with query ${$rule->parameters['searchQuery']} is greater than or equal to expected [$count >= ${$rule->parameters['lowerCount']}]");
+                        array_push($messages, "Number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is greater than or equal to expected [$count >= {$rule->parameters['lowerCount']}]");
                     }
                     if ($count <= $rule->parameters['higherCount']) {
                         $result = true;
-                        array_push($messages, "Number of messages returned for process $process on robot $robot with query ${$rule->parameters['searchQuery']} is less than or equal to expected [$count >= ${$rule->parameters['higherCount']}]");
+                        array_push($messages, "Number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is less than or equal to expected [$count >= {$rule->parameters['higherCount']}]");
                     }
                 }
             }

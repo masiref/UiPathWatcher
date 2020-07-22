@@ -60,15 +60,21 @@ class AppController extends Controller
 
     public function debug(AlertTriggerService $service)
     {
-        $trigger = AlertTrigger::find(1);
-        $definition = AlertTriggerDefinition::find(3);
+        return $service->verifyRule(
+            AlertTriggerRule::find(7),
+            Carbon::now()
+        );
+        
+        /*$trigger = AlertTrigger::find(1);
+        $definition = AlertTriggerDefinition::find(1);
         $wap = $trigger->watchedAutomatedProcess;
         $alert = Alert::create([
             'alert_trigger_id' => $trigger->id,
             'alert_trigger_definition_id' => $definition->id,
             'watched_automated_process_id' => $wap->id,
             'messages' => array('My first message')
-        ]);
+        ]);*/
+
         /*$ancestor = Alert::find(2);
         $ancestor->update([
             'closed' => true,
@@ -80,7 +86,7 @@ class AppController extends Controller
         ]);*/
 
         //$alert = Alert::find(1);
-        Notification::send(User::all(), new AlertTriggered($alert));
+        //Notification::send(User::all(), new AlertTriggered($alert));
 
         return $alert;
     }

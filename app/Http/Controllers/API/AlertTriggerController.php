@@ -151,15 +151,15 @@ class AlertTriggerController extends Controller
         $involvedEntities = $standardParameters['involvedEntities'];
 
         $processes = array_key_exists('processes', $involvedEntities) ? $involvedEntities['processes'] : array();
-        $uiPathProcesses = UiPathProcess::find(array_column($processes, 'id'));
+        $uiPathProcesses = UiPathProcess::find($processes);
         $alertTriggerRule->processes()->attach($uiPathProcesses);
 
         $robots = array_key_exists('robots', $involvedEntities) ? $involvedEntities['robots'] : array();
-        $uiPathRobots = UiPathRobot::find(array_column($robots, 'id'));
+        $uiPathRobots = UiPathRobot::find($robots);
         $alertTriggerRule->robots()->attach($uiPathRobots);
 
         $queues = array_key_exists('queues', $involvedEntities) ? $involvedEntities['queues'] : array();
-        $uiPathQueues = UiPathQueue::find(array_column($queues, 'id'));
+        $uiPathQueues = UiPathQueue::find($queues);
         $alertTriggerRule->queues()->attach($uiPathQueues);
         
         return $alertTriggerRule;

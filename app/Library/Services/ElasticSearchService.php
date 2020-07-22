@@ -6,6 +6,7 @@ use App\Client;
 use App\UiPathRobot;
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\RequestException;
+use Carbon\Carbon;
 
 class ElasticSearchService {
 
@@ -89,8 +90,10 @@ class ElasticSearchService {
         $headers = $this->getHeaders();
         try {
             $json = $this->getSearchPayload($query, $from, $until);
+            $now = Carbon::now();
+            $suffix = $now->format('Y.m');
             $result['count'] = json_decode(
-                $guzzle->request('POST', "{$client->elastic_search_index}/_search", [
+                $guzzle->request('POST', "{$client->elastic_search_index}-$suffix/_search", [
                     'headers' => $headers,
                     'body' => $json
                 ])->getBody(),

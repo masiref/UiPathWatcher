@@ -28,10 +28,6 @@ class CreateAlertCategoriesTable extends Migration
             'label' => 'Business exception',
             'created_at' => Carbon::now()
         ]);
-        DB::table('alert_categories')->insert([
-            'label' => 'False positive',
-            'created_at' => Carbon::now()
-        ]);
     }
 
     /**
