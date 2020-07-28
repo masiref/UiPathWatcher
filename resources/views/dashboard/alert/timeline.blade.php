@@ -77,10 +77,10 @@
                         <table class="table is-bordered is-striped is-hoverable is-fullwidth">
                             <tbody>
                                 @if ($alert->closed)
-                                    <tr><td><span class="icon"><i class="fas fa-sticky-note"></i></span> {{ $alert->closing_description }}</td></tr>
+                                    <tr><td>{{ $alert->closing_description }}</td></tr>
                                 @else
                                     @foreach ($alert->messages as $message)
-                                        <tr><td><span class="icon"><i class="fas fa-sticky-note"></i></span> {{ $message }}</td></tr>
+                                        <tr><td>{{ $message }}</td></tr>
                                     @endforeach
                                 @endif
                             </tbody>
@@ -101,7 +101,7 @@
                             <table class="table is-bordered is-striped is-hoverable is-fullwidth">
                                 <tbody>
                                     @foreach ($ancestor->messages as $message)
-                                        <tr><td><span class="icon"><i class="fas fa-sticky-note"></i></span> {{ $message }}</td></tr>
+                                        <tr><td>{{ $message }}</td></tr>
                                     @endforeach
                                 </tbody>
                             </table>

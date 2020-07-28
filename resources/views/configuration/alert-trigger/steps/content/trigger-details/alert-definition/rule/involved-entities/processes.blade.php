@@ -28,7 +28,7 @@
                             <input type="checkbox" id="process-{{ $uniqid . '-' . $process->id }}"
                                 class="switch is-rounded trigger-details--alert-definition--involved-processes--process-switch
                                     trigger-details--alert-definition--rule--parameter"
-                                    checked="checked"
+                                {!! $alertTriggerRule->processes->pluck('id')->contains($process->id) ? ' checked="checked"' : '' !!}
                                 {!! $processes->count() === 1 ? ' disabled' : '' !!}
                                 data-id="{{ $process->id }}">
                             <label for="process-{{ $uniqid . '-' . $process->id }}" class="checkbox">{{ $process }}</label>

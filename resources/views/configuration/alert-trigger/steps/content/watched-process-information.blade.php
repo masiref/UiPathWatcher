@@ -1,19 +1,6 @@
 <article class="message is-link">
     <div class="message-body has-text-grey-dark">
         <div class="level">
-            <div class="level-right">
-                <div class="level-item">
-                    @include('layouts.title', [
-                        'title' => 'Selected watched process',
-                        'icon' => 'binoculars',
-                        'iconSize' => 'small',
-                        'color' => 'info',
-                        'titleSize' => '6'
-                    ])
-                </div>
-            </div>
-        </div>
-        <div class="level">
             <div class="level-left">
                 <div class="level-item">
                     @include('layouts.title', [

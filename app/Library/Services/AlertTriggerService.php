@@ -239,10 +239,10 @@ class AlertTriggerService {
                             $faultedJobs = $result['jobs'];
                             
                             // return jobs.faulted.count / jobs.count * 100 < rule.percentage
-                            $percentage = count($faultedJobs) / count($allJobs) * 100;
+                            $percentage = number_format(count($faultedJobs) / count($allJobs) * 100);
                             if ($percentage >= $rule->parameters['maximalPercentage']) {
                                 $result = true;
-                                array_push($messages, "Faulted jobs percentage of $process on $robot is $percentage %. A maximal percentage of {$rule->parameters['maximalPercentage']} is expected.");
+                                array_push($messages, "Faulted jobs percentage of $process on $robot is $percentage%. A maximum of {$rule->parameters['maximalPercentage']}% is expected.");
                             }
                         }
                     }
@@ -301,10 +301,10 @@ class AlertTriggerService {
                         $failedQueueItems = $result['queue-items'];
                         
                         // return items.failed.count / items.count * 100 < rule.percentage
-                        $percentage = count($failedQueueItems) / count($allQueueItems) * 100;
+                        $percentage = number_format(count($failedQueueItems) / count($allQueueItems) * 100);
                         if ($percentage >= $rule->parameters['maximalPercentage']) {
                             $result = true;
-                            array_push($messages, "Failed queue items percentage of $queue is $percentage %. A maximal percentage of {$rule->parameters['maximalPercentage']} is expected.");
+                            array_push($messages, "Failed queue items percentage of $queue is $percentage%. A maximum of {$rule->parameters['maximalPercentage']}% is expected.");
                         }
                     }
                 }
