@@ -49,26 +49,28 @@
         <span>Configuration</span>
     </p>
     <ul class="menu-list">
-        <li>
-            <a class="{{ $page === 'configuration.orchestrator.index' ? 'is-active' : '' }}"
-                href="{{ route('configuration.orchestrator') }}">
-                <span class="icon"><i class="fas fa-server"></i></span>
-                <span>
-                    Orchestrators
-                    &nbsp;<span class="tag is-primary">{{ $orchestratorsCount }}</span>
-                </span>
-            </a>
-        </li>
-        <li>
-            <a class="{{ $page === 'configuration.client.index' ? 'is-active' : '' }}"
-                href="{{ route('configuration.client') }}">
-                <span class="icon"><i class="fas fa-building"></i></span>
-                <span>
-                    Customers
-                    &nbsp;<span class="tag is-primary">{{ $clientsCount }}</span>
-                </span>
-            </a>
-        </li>
+        @role('admin')
+            <li>
+                <a class="{{ $page === 'configuration.orchestrator.index' ? 'is-active' : '' }}"
+                    href="{{ route('configuration.orchestrator') }}">
+                    <span class="icon"><i class="fas fa-server"></i></span>
+                    <span>
+                        Orchestrators
+                        &nbsp;<span class="tag is-primary">{{ $orchestratorsCount }}</span>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a class="{{ $page === 'configuration.client.index' ? 'is-active' : '' }}"
+                    href="{{ route('configuration.client') }}">
+                    <span class="icon"><i class="fas fa-building"></i></span>
+                    <span>
+                        Customers
+                        &nbsp;<span class="tag is-primary">{{ $clientsCount }}</span>
+                    </span>
+                </a>
+            </li>
+        @endrole
         <li>
             <a class="{{ $page === 'configuration.watched-automated-process.index' ? 'is-active' : '' }}"
                 href="{{ route('configuration.watched-automated-process') }}">
@@ -89,5 +91,27 @@
                 </span>
             </a>
         </li>
+    </ul>
+
+    <!-- Configuration menu -->
+    <p class="menu-label">
+        <span class="icon"><i class="fas fa-users-cog"></i></span>
+        <span>Users management</span>
+    </p>
+    <ul class="menu-list">
+        @role('admin')
+            <li>
+                <a href="{{ route('users') }}">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span>Show all users</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('users.create') }}">
+                    <span class="icon"><i class="fas fa-user-plus"></i></span>
+                    <span>Add a new user</span>
+                </a>
+            </li>
+        @endrole
     </ul>
 </aside>

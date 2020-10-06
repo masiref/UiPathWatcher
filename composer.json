@@ -16,6 +16,8 @@
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "~6.0",
+        "jeremykenedy/laravel-roles": "^4.0",
+        "jeremykenedy/laravel-users": "^4.2",
         "laravel-frontend-presets/bulma": "^3.0",
         "laravel/framework": "^6.2",
         "laravel/passport": "^8.4",

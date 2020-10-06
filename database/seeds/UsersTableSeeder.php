@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,18 +15,20 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => 'Masiré Fofana',
-            'email' => 'masire.fofana@natixis.com',
-            'password' => Hash::make('uipath'),
+        /*DB::table('users')->insert([
+            'name' => 'Admin',
+            'email' => 'admin@uipath-watcher.com',
+            'password' => Hash::make('password'),
             'created_at' => Carbon::now()
+        ]);*/
+
+        $user = config('roles.models.defaultUser')::create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('password'),
         ]);
 
-        DB::table('users')->insert([
-            'name' => 'Yohann Gentilini',
-            'email' => 'yohann.gentilini@natixis.com',
-            'password' => Hash::make('uipath'),
-            'created_at' => Carbon::now()
-        ]);
+        $role = config('roles.models.role')::where('name', '=', 'Admin')->first();
+        $user->attachRole($role);
     }
 }
