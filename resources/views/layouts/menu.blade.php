@@ -53,22 +53,24 @@
                         </a>
 
                         <div class="navbar-dropdown">
-                            <a class="navbar-item {{ $page === 'configuration.orchestrator.index' ? 'is-active' : '' }}"
-                                href="{{ route('configuration.orchestrator') }}">
-                                <span class="icon"><i class="fas fa-server"></i></span>
-                                <span>
-                                    &nbsp;Orchestrators
-                                    &nbsp;<span class="tag is-primary">{{ $orchestratorsCount }}</span>
-                                </span>
-                            </a>
-                            <a class="navbar-item {{ $page === 'configuration.client.index' ? 'is-active' : '' }}"
-                                href="{{ route('configuration.client') }}">
-                                <span class="icon"><i class="fas fa-building"></i></span>
-                                <span>
-                                    &nbsp;Customers
-                                    &nbsp;<span class="tag is-primary">{{ $clientsCount }}</span>
-                                </span>
-                            </a>
+                            @level(3)
+                                <a class="navbar-item {{ $page === 'configuration.orchestrator.index' ? 'is-active' : '' }}"
+                                    href="{{ route('configuration.orchestrator') }}">
+                                    <span class="icon"><i class="fas fa-server"></i></span>
+                                    <span>
+                                        &nbsp;Orchestrators
+                                        &nbsp;<span class="tag is-primary">{{ $orchestratorsCount }}</span>
+                                    </span>
+                                </a>
+                                <a class="navbar-item {{ $page === 'configuration.client.index' ? 'is-active' : '' }}"
+                                    href="{{ route('configuration.client') }}">
+                                    <span class="icon"><i class="fas fa-building"></i></span>
+                                    <span>
+                                        &nbsp;Customers
+                                        &nbsp;<span class="tag is-primary">{{ $clientsCount }}</span>
+                                    </span>
+                                </a>
+                            @endlevel
                             <a class="navbar-item {{ $page === 'configuration.watched-automated-process.index' ? 'is-active' : '' }}"
                                 href="{{ route('configuration.watched-automated-process') }}">
                                 <span class="icon"><i class="fas fa-binoculars"></i></span>
@@ -87,6 +89,32 @@
                             </a>
                         </div>
                     </div>
+
+                    @role('admin')
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link" href="#">
+                                <span class="icon"><i class="fas fa-users-cog"></i></span>
+                                <span>&nbsp;Users management</span>
+                            </a>
+
+                            <div class="navbar-dropdown">
+                                <a class="navbar-item"
+                                    href="{{ route('users') }}">
+                                    <span class="icon"><i class="fas fa-users"></i></span>
+                                    <span>
+                                        &nbsp;Show all users
+                                    </span>
+                                </a>
+                                <a class="navbar-item"
+                                    href="{{ route('users.create') }}">
+                                    <span class="icon"><i class="fas fa-user-plus"></i></span>
+                                    <span>
+                                        &nbsp;Add a new user
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    @endrole
                 </div>
             @endif
 

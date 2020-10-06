@@ -49,7 +49,7 @@
         <span>Configuration</span>
     </p>
     <ul class="menu-list">
-        @role('admin')
+        @level(3)
             <li>
                 <a class="{{ $page === 'configuration.orchestrator.index' ? 'is-active' : '' }}"
                     href="{{ route('configuration.orchestrator') }}">
@@ -70,7 +70,7 @@
                     </span>
                 </a>
             </li>
-        @endrole
+        @endlevel
         <li>
             <a class="{{ $page === 'configuration.watched-automated-process.index' ? 'is-active' : '' }}"
                 href="{{ route('configuration.watched-automated-process') }}">
@@ -93,13 +93,13 @@
         </li>
     </ul>
 
-    <!-- Configuration menu -->
-    <p class="menu-label">
-        <span class="icon"><i class="fas fa-users-cog"></i></span>
-        <span>Users management</span>
-    </p>
-    <ul class="menu-list">
-        @role('admin')
+    @role('admin')
+        <!-- Users management menu -->
+        <p class="menu-label">
+            <span class="icon"><i class="fas fa-users-cog"></i></span>
+            <span>Users management</span>
+        </p>
+        <ul class="menu-list">
             <li>
                 <a href="{{ route('users') }}">
                     <span class="icon"><i class="fas fa-users"></i></span>
@@ -112,6 +112,6 @@
                     <span>Add a new user</span>
                 </a>
             </li>
-        @endrole
-    </ul>
+        </ul>
+    @endrole
 </aside>
