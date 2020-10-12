@@ -21,10 +21,4 @@ class TrustProxies extends Middleware
      * @var int
      */
     protected $headers = Request::HEADER_X_FORWARDED_ALL;
-
-    /*public function __construct(Repository $config)
-    {
-        parent::__construct($config);
-        $this->proxies = config('trustedproxy.proxies');
-    }*/
 }
