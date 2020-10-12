@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('assets')
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <link rel="stylesheet" href="{{ url('css/login.css') }}">
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
                 <div class="column is-4 is-offset-4">
                     <div class="box">
                         <figure class="avatar">
-                            <img src="{{ asset('images/login.png') }}">
+                            <img src="{{ url('images/login.png') }}">
                         </figure>
                         <form class="login-form" method="POST" action="{{ route('login') }}">
                             {{ csrf_field() }}
