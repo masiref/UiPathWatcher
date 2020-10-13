@@ -18,7 +18,7 @@
                                 href="{{ route('dashboard.client', ['client' => $client->id ]) }}">
                                 <span class="icon"><i class="fas fa-building"></i></span>
                                 <span>
-                                    {{ $client->name }}
+                                    {{ $client->code }}
                                     &nbsp;<span class="tag is-{{ $client->higherAlertLevel() }}">{{ $client->openedAlertsCount() }}</span>
                                 </span>
                             </a>

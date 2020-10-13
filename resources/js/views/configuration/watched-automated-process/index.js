@@ -15,43 +15,6 @@ const configuration = new Configuration('configuration.watched-automated-process
 
 let currentMode = 'add';
 
-/*const clientSelect = document.querySelector(base.selectors.clientSelect);
-const nameInput = document.querySelector(base.selectors.nameInput);
-const codeInput = document.querySelector(base.selectors.codeInput);
-const operationalHandbookPageURLInput = document.querySelector(base.selectors.operationalHandbookPageURLInput);
-const kibanaDashboardURLInput = document.querySelector(base.selectors.kibanaDashboardURLInput);
-const additionalInformationTextarea = document.querySelector(base.selectors.additionalInformationTextarea);
-const runningPeriodSectionTitle = base.elements.runningPeriodSectionTitle;
-const runningPeriodSectionTitleIcon = base.elements.runningPeriodSectionTitleIcon;
-const runningPeriodMondayCheckbox = document.querySelector(base.selectors.runningPeriodMondayCheckbox);
-const runningPeriodTuesdayCheckbox = document.querySelector(base.selectors.runningPeriodTuesdayCheckbox);
-const runningPeriodWednesdayCheckbox = document.querySelector(base.selectors.runningPeriodWednesdayCheckbox);
-const runningPeriodThursdayCheckbox = document.querySelector(base.selectors.runningPeriodThursdayCheckbox);
-const runningPeriodFridayCheckbox = document.querySelector(base.selectors.runningPeriodFridayCheckbox);
-const runningPeriodSaturdayCheckbox = document.querySelector(base.selectors.runningPeriodSaturdayCheckbox);
-const runningPeriodSundayCheckbox = document.querySelector(base.selectors.runningPeriodSundayCheckbox);
-const runningPeriodCalendar = bulmaCalendar.attach(base.selectors.runningPeriodCalendar, {
-    type: 'time',
-    lang: 'en',
-    isRange: true,
-    headerPosition: 'bottom',
-    labelFrom: 'From',
-    labelTo: 'To',
-    timeFormat: 'HH:mm',
-    showFooter: true
-});
-const involvedProcessesSectionTitle = base.elements.involvedProcessesSectionTitle;
-const involvedProcessesSectionTitleIcon = base.elements.involvedProcessesSectionTitleIcon;
-const involvedProcessesCount = base.elements.involvedProcessesCount;
-const involvedRobotsSectionTitle = base.elements.involvedRobotsSectionTitle;
-const involvedRobotsSectionTitleIcon = base.elements.involvedRobotsSectionTitleIcon;
-const involvedRobotsCount = base.elements.involvedRobotsCount;
-const involvedQueuesSectionTitle = base.elements.involvedQueuesSectionTitle;
-const involvedQueuesSectionTitleIcon = base.elements.involvedQueuesSectionTitleIcon;
-const involvedQueuesCount = base.elements.involvedQueuesCount;
-const createButton = base.elements.createButton;
-const resetButton = base.elements.resetButton;*/
-
 export const init = () => {
     try {
         setInterval(() => {

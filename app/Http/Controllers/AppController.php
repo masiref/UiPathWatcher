@@ -58,10 +58,10 @@ class AppController extends Controller
         return array();
     }
 
-    public function debug(AlertTriggerService $service)
+    public function debugRule($id = 1, AlertTriggerService $service)
     {
         return $service->verifyRule(
-            AlertTriggerRule::find(1),
+            AlertTriggerRule::find($id),
             Carbon::now()
         );
         

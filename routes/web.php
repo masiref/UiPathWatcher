@@ -20,7 +20,7 @@ use App\UiPathRobot;
 Auth::routes();
 
 // Debug
-Route::get('/debug', 'AppController@debug')->name('debug');
+Route::get('/debug/rule/{rule?}', 'AppController@debugRule')->name('debugRule');
 
 // App
 Route::post('/app/shutdown-alert-triggers', 'AppController@shutdownAlertTriggers')->name('app.shutdown-alert-triggers');

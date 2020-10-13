@@ -105,6 +105,7 @@ const loadEditForm = e => {
                             remove().then(reponse => {
                                 loadAddForm(e);
                                 updateTable();
+                                layoutController.update(configuration.layout);
                                 toastr.success('Orchestrator successfully removed!', null, {
                                     positionClass: 'toast-bottom-left'
                                 });

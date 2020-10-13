@@ -38,3 +38,7 @@
 .quick-board .quick-board--heading {
   cursor: pointer;
 }
+
+.quick-board .quick-board--heading .subtitle {
+  font-size: .7rem;
+}
