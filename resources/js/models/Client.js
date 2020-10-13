@@ -25,7 +25,7 @@ export default class Client {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.get(`/api/clients/${this.id}`).then(response => {
+                    axios.get(`/clients/${this.id}`).then(response => {
                         this.data = response.data;
                     })
                 );
@@ -71,7 +71,7 @@ export default class Client {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.post('/api/clients', {
+                    axios.post('/clients', {
                         'name': name,
                         'code': code,
                         'ui_path_orchestrator_id': orchestrator,
@@ -100,7 +100,7 @@ export default class Client {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.patch(`/api/clients/${this.id}`, {
+                    axios.patch(`/clients/${this.id}`, {
                         'name': name,
                         'code': code,
                         'ui_path_orchestrator_id': orchestrator,
@@ -127,7 +127,7 @@ export default class Client {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.delete(`/api/clients/${this.id}`)
+                    axios.delete(`/clients/${this.id}`)
                 );
             });
         } catch (error) {

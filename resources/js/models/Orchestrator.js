@@ -11,7 +11,7 @@ export default class Orchestrator {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.post('/api/ui-path-orchestrators', {
+                    axios.post('/ui-path-orchestrators', {
                         'name': name,
                         'code': code,
                         'url': url
@@ -31,7 +31,7 @@ export default class Orchestrator {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.patch(`/api/ui-path-orchestrators/${this.id}`, {
+                    axios.patch(`/ui-path-orchestrators/${this.id}`, {
                         'name': name,
                         'code': code,
                         'url': url
@@ -51,7 +51,7 @@ export default class Orchestrator {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.delete(`/api/ui-path-orchestrators/${this.id}`)
+                    axios.delete(`/ui-path-orchestrators/${this.id}`)
                 );
             });
         } catch (error) {

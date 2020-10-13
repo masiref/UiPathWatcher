@@ -11,27 +11,6 @@ use Illuminate\Support\Facades\Auth;
 class AlertController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Alert  $alert
@@ -52,7 +31,7 @@ class AlertController extends Controller
      */
     public function update(Request $request, Alert $alert)
     {
-        $user = $request->user('api');
+        $user = Auth::user();
         $data = $request->all();
         $action = $data['action'];
         switch ($action) {
@@ -119,16 +98,5 @@ class AlertController extends Controller
         }
 
         return $categories;
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Alert  $alert
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Alert $alert)
-    {
-        //
     }
 }

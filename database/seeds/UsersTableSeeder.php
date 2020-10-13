@@ -1,10 +1,8 @@
 <?php
 
-namespace Database\Seeders;
-
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -22,7 +20,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => Carbon::now()
         ]);*/
 
-        $user = config('roles.models.defaultUser')::create([
+        $user = App\User::create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('password'),

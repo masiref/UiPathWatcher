@@ -79,7 +79,7 @@ export default class Alert {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.get(`/api/alerts/${this.id}`).then(async (result) => {
+                    axios.get(`/alerts/${this.id}`).then(async (result) => {
                         this.data = result.data;
                         await this.updateMarkup();
                         await this.updateRowMarkup();
@@ -95,7 +95,7 @@ export default class Alert {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.put(`/api/alerts/${this.id}`, {
+                    axios.put(`/alerts/${this.id}`, {
                         action: 'enter_revision_mode'
                     }).then(async (res) => {
                         await this.updateMarkup();
@@ -112,7 +112,7 @@ export default class Alert {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.put(`/api/alerts/${this.id}`, {
+                    axios.put(`/alerts/${this.id}`, {
                         action: 'exit_revision_mode'
                     }).then(async (res) => {
                         await this.updateMarkup();
@@ -129,7 +129,7 @@ export default class Alert {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.put(`/api/alerts/${this.id}`, {
+                    axios.put(`/alerts/${this.id}`, {
                         action: 'close',
                         falsePositive: falsePositive,
                         description: description,
@@ -146,7 +146,7 @@ export default class Alert {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.put(`/api/alerts/${this.id}`, {
+                    axios.put(`/alerts/${this.id}`, {
                         action: 'ignore',
                         from_: from_,
                         fromTime: fromTime,

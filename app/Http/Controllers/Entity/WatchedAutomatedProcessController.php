@@ -15,26 +15,6 @@ use Illuminate\Support\Facades\Auth;
 class WatchedAutomatedProcessController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -120,18 +100,7 @@ class WatchedAutomatedProcessController extends Controller
     {
         return $watchedAutomatedProcess;
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\WatchedAutomatedProcess  $watchedAutomatedProcess
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(WatchedAutomatedProcess $watchedAutomatedProcess)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
      *

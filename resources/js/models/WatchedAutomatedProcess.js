@@ -25,7 +25,7 @@ export default class WatchedAutomatedProcess {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.get(`/api/watched-automated-processes/${this.id}`).then(response => {
+                    axios.get(`/watched-automated-processes/${this.id}`).then(response => {
                         this.data = response.data;
                     })
                 );
@@ -57,7 +57,7 @@ export default class WatchedAutomatedProcess {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.post('/api/watched-automated-processes', {
+                    axios.post('/watched-automated-processes', {
                         'client_id': client,
                         'name': name,
                         'code': code,
@@ -96,7 +96,7 @@ export default class WatchedAutomatedProcess {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.patch(`/api/watched-automated-processes/${this.id}`, {
+                    axios.patch(`/watched-automated-processes/${this.id}`, {
                         'client_id': client,
                         'name': name,
                         'code': code,
@@ -131,7 +131,7 @@ export default class WatchedAutomatedProcess {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.delete(`/api/watched-automated-processes/${this.id}`)
+                    axios.delete(`/watched-automated-processes/${this.id}`)
                 );
             });
         } catch (error) {

@@ -124,7 +124,7 @@ export default class AlertTrigger {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.get(`/api/alert-triggers/${this.id}`).then(async (result) => {
+                    axios.get(`/alert-triggers/${this.id}`).then(async (result) => {
                         this.data = result.data;
                         
                         this.valid = true;
@@ -151,7 +151,7 @@ export default class AlertTrigger {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.post('/api/alert-triggers', {
+                    axios.post('/alert-triggers', {
                         'watched_automated_process_id': watchedAutomatedProcess,
                         'title': this.title,
                         'definitions': this.definitions
@@ -172,7 +172,7 @@ export default class AlertTrigger {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.patch(`/api/alert-triggers/${this.id}`, {
+                    axios.patch(`/alert-triggers/${this.id}`, {
                         'title': this.title,
                         'definitions': this.definitions
                     }).then(response => {
@@ -192,7 +192,7 @@ export default class AlertTrigger {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.delete(`/api/alert-triggers/${this.id}`).then(response => {
+                    axios.delete(`/alert-triggers/${this.id}`).then(response => {
                         this.deleted = true;
                         this.setUnchanged();
                     })
@@ -207,7 +207,7 @@ export default class AlertTrigger {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.patch(`/api/alert-triggers/${this.id}`, {
+                    axios.patch(`/alert-triggers/${this.id}`, {
                         'active': 1
                     })
                 );
@@ -221,7 +221,7 @@ export default class AlertTrigger {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.patch(`/api/alert-triggers/${this.id}`, {
+                    axios.patch(`/alert-triggers/${this.id}`, {
                         'active': 0
                     })
                 );
@@ -235,7 +235,7 @@ export default class AlertTrigger {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.patch(`/api/alert-triggers/${this.id}`, {
+                    axios.patch(`/alert-triggers/${this.id}`, {
                         'ignored': 1
                     })
                 );
@@ -249,7 +249,7 @@ export default class AlertTrigger {
         try {
             return new Promise((resolve, reject) => {
                 resolve(
-                    axios.patch(`/api/alert-triggers/${this.id}`, {
+                    axios.patch(`/alert-triggers/${this.id}`, {
                         'ignored': 0
                     })
                 );

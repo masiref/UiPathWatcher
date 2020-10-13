@@ -103,3 +103,11 @@ Route::get(
     '/configuration/alert-trigger/table',
     'ConfigurationAlertTriggerController@table'
 )->name('configuration.alert-trigger.table');
+
+Route::resources([
+    'alerts' => 'Entity\AlertController',
+    'clients' => 'Entity\ClientController',
+    'watched-automated-processes' => 'Entity\WatchedAutomatedProcessController',
+    'ui-path-orchestrators' => 'Entity\UiPathOrchestratorController',
+    'alert-triggers' => 'Entity\AlertTriggerController'
+]);
