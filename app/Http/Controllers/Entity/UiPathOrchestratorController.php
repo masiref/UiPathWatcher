@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Entity;
 
 use App\Http\Controllers\Controller;
 use App\UiPathOrchestrator;
@@ -34,17 +34,6 @@ class UiPathOrchestratorController extends Controller
     public function show(UiPathOrchestrator $uiPathOrchestrator)
     {
         return $uiPathOrchestrator;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\UiPathOrchestrator  $uiPathOrchestrator
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(UiPathOrchestrator $uiPathOrchestrator)
-    {
-        //
     }
 
     /**

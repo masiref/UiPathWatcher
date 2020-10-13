@@ -149,7 +149,8 @@ export const commitClose = async(dashboard, alert) => {
     try {
         const descriptionTextarea = document.querySelector(base.selectors.closingDescriptionTextarea);
         const falsePositiveCheckbox = document.querySelector(base.selectors.closingFalsePositiveCheckbox);
-        const keywordsList = document.querySelector(`#${base.strings.closingFormModalID} ${base.selectors.closingKeywordsList}`).BulmaTagsInput();
+        var keywordsListInput = document.querySelector(`#${base.strings.closingFormModalID} ${base.selectors.closingKeywordsList}`);
+        const keywordsList = keywordsListInput.BulmaTagsInput();
 
         let valid = false;
         if (keywordsList.items.length === 0) {

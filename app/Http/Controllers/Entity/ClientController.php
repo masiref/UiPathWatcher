@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Entity;
 
 use App\Client;
 use App\Http\Controllers\Controller;
