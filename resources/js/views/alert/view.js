@@ -107,7 +107,7 @@ export const showClosingFormModal = alert => {
         }
 
     });
-    return modal;
+    return { modal: modal, keywordsList: keywordsList };
 };
 
 export const removeClosingFormModal = () => {
@@ -165,7 +165,7 @@ export const showIgnoranceFormModal = alert => {
         }
 
     });
-    return modal;
+    return { modal: modal, keywordsList: keywordsList };
 };
 
 export const removeIgnoranceFormModal = () => {

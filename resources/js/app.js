@@ -1,6 +1,7 @@
 import './bootstrap';
 import toastr from 'toastr';
 import * as Push from 'push.js';
+import BulmaTagsInput from '@creativebulma/bulma-tagsinput';
 
 import * as base from './views/base';
 import * as view from './views/view';

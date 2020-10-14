@@ -10,10 +10,7 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "@creativebulma/bulma-collapsible": "^1.0.4",
         "axios": "^0.19.2",
-        "bulma": "^0.8.2",
-        "bulma-timeline": "^3.0.4",
         "cross-env": "^5.1",
         "laravel-mix": "^5.0.5",
         "lodash": "^4.17.20",
@@ -23,14 +20,18 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "@creativebulma/bulma-tagsinput": "^1.0.3",
+        "@creativebulma/bulma-badge": "^1.0.1",
+        "@creativebulma/bulma-collapsible": "^1.0.4",
+        "@creativebulma/bulma-tagsinput": "^1.0.2",
         "@fortawesome/fontawesome-free": "^5.15.1",
         "animate.css": "^3.7.2",
+        "bulma": "^0.8.2",
         "bulma-calendar": "^6.0.7",
         "bulma-divider": "^0.2.0",
         "bulma-pageloader": "^0.3.0",
         "bulma-steps": "^2.2.1",
         "bulma-switch": "^2.0.0",
+        "bulma-timeline": "^3.0.4",
         "bulma-tooltip": "^3.0.2",
         "datatables-bulma": "^1.0.1",
         "datatables.net": "^1.10.22",

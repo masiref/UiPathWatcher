@@ -1,5 +1,5 @@
 import bulmaCalendar from 'bulma-calendar';
-import BulmaTagsInput from '@creativebulma/bulma-tagsinput';
+
 import toastr from 'toastr';
 
 import Alert from '../../models/Alert';
@@ -129,10 +129,12 @@ export const close = async(dashboard, id) => {
         const alert = new Alert(id);
         view.renderLoaders(id);
         alert.closingFormModal().then(res => {
-            const modal = view.showClosingFormModal(alert);
+            const modalResult = view.showClosingFormModal(alert);
+            const modal = modalResult.modal;
+            const keywordsList = modalResult.keywordsList;
             modal.addEventListener('click', async (e) => {
                 if (e.target.matches(`${_base.selectors.validateModalButton}, ${_base.selectors.validateModalButtonChildren}`)) {
-                    commitClose(dashboard, alert);
+                    commitClose(dashboard, alert, keywordsList);
                 }
             });
             view.clearLoaders(id);
@@ -145,12 +147,12 @@ export const close = async(dashboard, id) => {
     }
 };
 
-export const commitClose = async(dashboard, alert) => {
+export const commitClose = async(dashboard, alert, keywordsList) => {
     try {
         const descriptionTextarea = document.querySelector(base.selectors.closingDescriptionTextarea);
         const falsePositiveCheckbox = document.querySelector(base.selectors.closingFalsePositiveCheckbox);
-        var keywordsListInput = document.querySelector(`#${base.strings.closingFormModalID} ${base.selectors.closingKeywordsList}`);
-        const keywordsList = keywordsListInput.BulmaTagsInput();
+        //var keywordsListInput = document.querySelector(`#${base.strings.closingFormModalID} ${base.selectors.closingKeywordsList}`);
+        //const keywordsList = keywordsListInput.BulmaTagsInput();
 
         let valid = false;
         if (keywordsList.items.length === 0) {
@@ -191,6 +193,7 @@ export const commitClose = async(dashboard, alert) => {
             }
         }
     } catch (error) {
+        console.log(error);
         toastr.error(`Alert closing not committed due to application exception: ${error}`, null, {
             positionClass: 'toast-bottom-left'
         });
@@ -202,10 +205,12 @@ export const ignore = async(dashboard, id) => {
         const alert = new Alert(id);
         view.renderLoaders(id);
         alert.ignoranceFormModal().then(res => {
-            const modal = view.showIgnoranceFormModal(alert);
+            const modalResult = view.showIgnoranceFormModal(alert);
+            const modal = modalResult.modal;
+            const keywordsList = modalResult.keywordsList;
             modal.addEventListener('click', async (e) => {
                 if (e.target.matches(`${_base.selectors.validateModalButton}, ${_base.selectors.validateModalButtonChildren}`)) {
-                    commitIgnore(dashboard, alert);
+                    commitIgnore(dashboard, alert, keywordsList);
                 }
             });
             view.clearLoaders(id);
@@ -218,11 +223,11 @@ export const ignore = async(dashboard, id) => {
     }
 };
 
-export const commitIgnore = async(dashboard, alert) => {
+export const commitIgnore = async(dashboard, alert, keywordsList) => {
     try {
         const ignoranceCalendar = document.querySelector(base.selectors.ignoranceCalendar).bulmaCalendar;
         const descriptionTextarea = document.querySelector(base.selectors.ignoranceDescriptionTextarea);
-        const keywordsList = document.querySelector(`#${base.strings.ignoranceFormModalID} ${base.selectors.ignoranceKeywordsList}`).BulmaTagsInput();
+        //const keywordsList = document.querySelector(`#${base.strings.ignoranceFormModalID} ${base.selectors.ignoranceKeywordsList}`).BulmaTagsInput();
 
         let valid = false;
         if (keywordsList.items.length === 0) {
