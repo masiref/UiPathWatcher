@@ -29,7 +29,7 @@
                             <input type="checkbox" id="robot-{{ $uniqid . '-' . $robot->id }}"
                                 class="switch is-rounded trigger-details--alert-definition--involved-robots--robot-switch
                                     trigger-details--alert-definition--rule--parameter"
-                                {!! $alertTriggerRule->robots->pluck('id')->contains($robot->id) ? ' checked="checked"' : '' !!}
+                                {!! $alertTriggerRule->robots->pluck('id')->contains($robot->id) || $robots->count() === 1 ? ' checked="checked"' : '' !!}
                                 {!! $robots->count() === 1 ? ' disabled' : '' !!}
                                 data-id="{{ $robot->id }}">
                             <label for="robot-{{ $uniqid . '-' . $robot->id }}" class="checkbox">{{ $robot }}</label>

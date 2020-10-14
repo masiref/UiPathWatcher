@@ -28,7 +28,7 @@
                             <input type="checkbox" id="queue-{{ $uniqid . '-' . $queue->id }}"
                                 class="switch is-rounded trigger-details--alert-definition--involved-queues--queue-switch
                                     trigger-details--alert-definition--rule--parameter"
-                                {!! $alertTriggerRule->queues->pluck('id')->contains($queue->id) ? ' checked="checked"' : '' !!}
+                                {!! $alertTriggerRule->queues->pluck('id')->contains($queue->id) || $queues->count() === 1 ? ' checked="checked"' : '' !!}
                                 {!! $queues->count() === 1 ? ' disabled' : '' !!}
                                 data-id="{{ $queue->id }}">
                             <label for="queue-{{ $uniqid . '-' . $queue->id }}" class="checkbox">{{ $queue }}</label>
