@@ -63,7 +63,7 @@ class AlertTriggerService {
         $orchestrator = $client->orchestrator;
         $token = $this->getToken($client);
 
-        $result = false;
+        $verified = false;
         $messages = array();
 
         foreach ($rule->robots as $robot) {
@@ -104,7 +104,7 @@ class AlertTriggerService {
                         // if there is at least one job with duration <= rule.duration
                         $minimalDuration = $rule->parameters['minimalDuration'];
                         if ($duration <= $minimalDuration) {
-                            $result = true;
+                            $verified = true;
                             if ($duration > 1) {
                                 $duration = "$duration minutes";
                             } else {
@@ -122,7 +122,7 @@ class AlertTriggerService {
             }
         }
 
-        return [ 'result' => $result, 'messages' => $messages ];
+        return [ 'result' => $verified, 'messages' => $messages ];
     }
 
     protected function verifyJobsMaxDurationRule(AlertTriggerRule $rule, Carbon $date)
@@ -133,7 +133,7 @@ class AlertTriggerService {
         $orchestrator = $client->orchestrator;
         $token = $this->getToken($client);
 
-        $result = false;
+        $verified = false;
         $messages = array();
         
         foreach ($rule->robots as $robot) {
@@ -169,7 +169,7 @@ class AlertTriggerService {
                         // if there is at least one job with duration >= rule.duration
                         $maximalDuration = $rule->parameters['maximalDuration'];
                         if ($duration >= $maximalDuration) {
-                            $result = true;
+                            $verified = true;
                             if ($duration > 1) {
                                 $duration = "$duration minutes";
                             } else {
@@ -187,7 +187,7 @@ class AlertTriggerService {
             }
         }
         
-        return [ 'result' => $result, 'messages' => $messages ];
+        return [ 'result' => $verified, 'messages' => $messages ];
     }
 
     protected function verifyFaultedJobsPercentageRule(AlertTriggerRule $rule, Carbon $date)
@@ -198,7 +198,7 @@ class AlertTriggerService {
         $orchestrator = $client->orchestrator;
         $token = $this->getToken($client);
 
-        $result = false;
+        $verified = false;
         $messages = array();
         
         foreach ($rule->robots as $robot) {
@@ -226,6 +226,7 @@ class AlertTriggerService {
                         }                
                     }
                 }
+                $minDate->tz('UTC');
                 $allJobsFilter = "($filter) and (EndTime ne null and StartTime ge {$minDate->toDateTimeLocalString()}.000Z)";
                 $faultedJobsFilter = "($allJobsFilter) and State eq 'Faulted'";
 
@@ -241,7 +242,7 @@ class AlertTriggerService {
                             // return jobs.faulted.count / jobs.count * 100 < rule.percentage
                             $percentage = number_format(count($faultedJobs) / count($allJobs) * 100);
                             if ($percentage >= $rule->parameters['maximalPercentage']) {
-                                $result = true;
+                                $verified = true;
                                 array_push($messages, "Faulted jobs percentage of $process on $robot is $percentage%. A maximum of {$rule->parameters['maximalPercentage']}% is expected.");
                             }
                         }
@@ -250,7 +251,7 @@ class AlertTriggerService {
             }
         }
 
-        return [ 'result' => $result, 'messages' => $messages ];
+        return [ 'result' => $verified, 'messages' => $messages ];
     }
 
     protected function verifyFailedQueueItemsPercentageRule(AlertTriggerRule $rule, Carbon $date)
@@ -261,7 +262,7 @@ class AlertTriggerService {
         $orchestrator = $client->orchestrator;
         $token = $this->getToken($client);
 
-        $result = false;
+        $verified = false;
         $messages = array();
         
         foreach ($rule->queues as $queue) {
@@ -288,6 +289,7 @@ class AlertTriggerService {
                     }                
                 }
             }
+            $minDate->tz('UTC');
             $allQueueItemsFilter = "($filter) and (EndTime ne null and StartTime ge {$minDate->toDateTimeLocalString()}.000Z)";
             $failedQueueItemsFilter = "($allQueueItemsFilter) and Status eq 'Failed'";
 
@@ -303,7 +305,7 @@ class AlertTriggerService {
                         // return items.failed.count / items.count * 100 < rule.percentage
                         $percentage = number_format(count($failedQueueItems) / count($allQueueItems) * 100);
                         if ($percentage >= $rule->parameters['maximalPercentage']) {
-                            $result = true;
+                            $verified = true;
                             array_push($messages, "Failed queue items percentage of $queue is $percentage%. A maximum of {$rule->parameters['maximalPercentage']}% is expected.");
                         }
                     }
@@ -311,14 +313,14 @@ class AlertTriggerService {
             }
         }
 
-        return [ 'result' => $result, 'messages' => $messages ];
+        return [ 'result' => $verified, 'messages' => $messages ];
     }
 
     protected function verifyElasticSearchQueryRule(AlertTriggerRule $rule, Carbon $date)
     {
         $elasticSearchService = $this->elasticSearchService;
 
-        $result = false;
+        $verified = false;
         $messages = array();
         
         foreach ($rule->robots as $robot) {
@@ -352,17 +354,17 @@ class AlertTriggerService {
                 if (!$result['error']) {
                     $count = $result['count'];
                     if ($count >= $rule->parameters['lowerCount']) {
-                        $result = true;
+                        $verified = true;
                         array_push($messages, "Number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is greater than or equal to expected [$count >= {$rule->parameters['lowerCount']}]");
                     }
                     if ($count <= $rule->parameters['higherCount']) {
-                        $result = true;
+                        $verified = true;
                         array_push($messages, "Number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is less than or equal to expected [$count >= {$rule->parameters['higherCount']}]");
                     }
                 }
             }
         }
         
-        return [ 'result' => $result, 'messages' => $messages ];
+        return [ 'result' => $verified, 'messages' => $messages ];
     }
 }
