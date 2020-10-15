@@ -65,7 +65,10 @@ export const details = {
             const alertDefinitionItemRank = parseInt(alertDefinitionItem.dataset.rank);
             if (alertDefinitionItemRank > rank) {
                 alertDefinitionItem.dataset.rank = alertDefinitionItemRank - 1;
-                alertDefinitionItem.querySelector(selectors.details.alertDefinition.titleRank).innerHTML = alertDefinitionItemRank - 1;
+                const titleRank = alertDefinitionItem.querySelector(selectors.details.alertDefinition.titleRank);
+                if (titleRank) {
+                    titleRank.innerHTML = alertDefinitionItemRank - 1;
+                }
             }
         });
     },
