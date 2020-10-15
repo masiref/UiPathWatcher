@@ -55,6 +55,8 @@ export const showNotifications = () => {
     }
 };
 
+showNotifications();
+
 base.elements.app.addEventListener('click', e => {
     const target = e.target;
 

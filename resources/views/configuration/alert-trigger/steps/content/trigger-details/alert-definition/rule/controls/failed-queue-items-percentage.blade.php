@@ -5,7 +5,8 @@
                 data-tooltip="Must be a positive integer value.">
                 <input class="input is-danger trigger-details--alert-definition--rule--parameter
                     trigger-details--alert-definition--failed-queue-items-percentage-rule--maximal-percentage-input"
-                    type="text" placeholder="Maximal failed queue items percentage">
+                    type="text" value="{{ ($alertTriggerRule ?? false) ? $alertTriggerRule->parameters['maximalPercentage'] : '' }}"
+                    placeholder="Maximal failed queue items percentage">
                 <span class="icon is-small is-left">
                     <i class="fas fa-less-than-equal"></i>
                 </span>
