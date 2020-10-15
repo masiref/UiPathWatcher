@@ -1,4 +1,4 @@
-<table id="{{ $tableID ?? 'alerts-table' }}" class="table data unselectable is-fullwidth is-striped is-hoverable">
+<table id="{{ $tableID ?? 'alerts-table' }}" class="table data unselectable is-fullwidth is-striped is-hoverable" {!! $options['closed'] ? 'data-order="[[ 1, &quot;desc&quot; ]]"' : '' !!}>
     <thead>
         <tr>
             <th>Level</th>
