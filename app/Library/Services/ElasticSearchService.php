@@ -12,7 +12,7 @@ class ElasticSearchService {
 
     protected function getGuzzle(Client $client)
     {
-        $url = $client->elastic_search_server_url;
+        $url = $client->elastic_search_url;
         return new Guzzle([
             'base_uri' => "$url"
         ]);
@@ -24,6 +24,17 @@ class ElasticSearchService {
             'Content-Type'  => 'application/json',       
             'Accept'        => 'application/json',
         ];
+    }
+
+    protected function getAuth(Client $client)
+    {
+        if ($client->elastic_search_api_user_username !== '') {
+            return [
+                $client->elastic_search_api_user_username,
+                $client->elastic_search_api_user_password
+            ];
+        }
+        return null;
     }
 
     protected function getDefaultResult()
@@ -46,20 +57,12 @@ class ElasticSearchService {
     {
         $json = '
             {
-                "sort":[
-                    {
-                        "timestamp":{
-                            "order":"desc",
-                            "unmapped_type":"boolean"
-                        }
-                    }
-                ],
                 "query":{
                     "bool":{
                         "must":[
                             {
                                 "query_string":{
-                                    "query":"' . $query .'",
+                                    "query":' . json_encode($query) .',
                                     "analyze_wildcard":true
                                 }
                             }
@@ -67,8 +70,8 @@ class ElasticSearchService {
                         "filter":[
                             {
                                 "range":{
-                                    "timestamp":{
-                                        "format":"basic_date_time_no_millis",
+                                    "@timestamp":{
+                                        "format":"date_hour_minute_second",
                                         "gte":"' . $from->toDateTimeLocalString() .'",
                                         "lte":"' . $until->toDateTimeLocalString() .'"
                                     }
@@ -88,19 +91,33 @@ class ElasticSearchService {
 
         $guzzle = $this->getGuzzle($client);
         $headers = $this->getHeaders();
+        $auth = $this->getAuth($client);
+
         try {
             $json = $this->getSearchPayload($query, $from, $until);
             $now = Carbon::now();
             $suffix = $now->format('Y.m');
-            $result['count'] = json_decode(
-                $guzzle->request('POST', "{$client->elastic_search_index}-$suffix/_search", [
-                    'headers' => $headers,
-                    'body' => $json
-                ])->getBody(),
-                true
-            )['hits']['total']['value'];
+            if ($auth) {
+                $result['count'] = json_decode(
+                    $guzzle->request('POST', "{$client->elastic_search_index}-$suffix/_search", [
+                        'headers' => $headers,
+                        'body' => $json,
+                        'auth' => $auth
+                    ])->getBody(),
+                    true
+                )['hits']['total']['value'];
+            } else {
+                $result['count'] = json_decode(
+                    $guzzle->request('POST', "{$client->elastic_search_index}-$suffix/_search", [
+                        'headers' => $headers,
+                        'body' => $json
+                    ])->getBody(),
+                    true
+                )['hits']['total']['value'];
+            }
         } catch (RequestException $e) {
-            $result = $this->getErrorResult("impossible to make searches on $client->elastic_search_server_url (index: $client->elastic_search_index)");
+            $message = $e->getMessage();
+            $result = $this->getErrorResult("impossible to make searches on $client->elastic_search_url (index: $client->elastic_search_index): $message");
         }
 
         return $result;

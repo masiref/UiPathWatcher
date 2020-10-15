@@ -320,12 +320,14 @@ class AlertTriggerService {
     {
         $elasticSearchService = $this->elasticSearchService;
 
+        $client = $rule->definition->trigger->watchedAutomatedProcess->client;
+
         $verified = false;
         $messages = array();
         
         foreach ($rule->robots as $robot) {
             foreach ($rule->processes as $process) {
-                $query = "processName:'${$process->name}_${$process->environment_name}' AND machineName:'$robot'";
+                $query = "processName:'{$process->name}_{$process->environment_name}' AND (machineName:'$robot' OR robotName:'$robot')";
                 
                 if ($rule->has_relative_time_slot) {
                     // get processed queue items with start date >= (now - relative time slot duration)
@@ -349,17 +351,17 @@ class AlertTriggerService {
                     }
                 }
 
-                $query = "($query) AND (${$rule->parameters['searchQuery']})";
-                $result = $elasticSearchService->search($rule->watchedAutomatedProcess->client, $query, $minDate, Carbon::now());
+                $query = "($query) AND ({$rule->parameters['searchQuery']})";
+                $result = $elasticSearchService->search($client, $query, $minDate, Carbon::now());
                 if (!$result['error']) {
                     $count = $result['count'];
-                    if ($count >= $rule->parameters['lowerCount']) {
+                    if ($rule->parameters['lowerCount'] > 0 && $count <= $rule->parameters['lowerCount']) {
                         $verified = true;
-                        array_push($messages, "Number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is greater than or equal to expected [$count >= {$rule->parameters['lowerCount']}]");
+                        array_push($messages, "Number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is less than or equal to expected value [$count <= {$rule->parameters['lowerCount']}]");
                     }
-                    if ($count <= $rule->parameters['higherCount']) {
+                    if ($count >= $rule->parameters['higherCount']) {
                         $verified = true;
-                        array_push($messages, "Number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is less than or equal to expected [$count >= {$rule->parameters['higherCount']}]");
+                        array_push($messages, "Number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is greater than or equal to expected value [$count >= {$rule->parameters['higherCount']}]");
                     }
                 }
             }

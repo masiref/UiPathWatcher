@@ -5,7 +5,8 @@
                 data-tooltip="Must be a string validating Lucene syntax.">
                 <input class="input is-danger trigger-details--alert-definition--rule--parameter
                 trigger-details--alert-definition--elastic-search-query-rule--search-query-input"
-                type="text" placeholder="Search query">
+                type="text" value="{{ ($alertTriggerRule ?? false) ? $alertTriggerRule->parameters['searchQuery'] : '' }}"
+                placeholder="Search query">
                 <span class="icon is-small is-left">
                     <i class="fas fa-search"></i>
                 </span>
