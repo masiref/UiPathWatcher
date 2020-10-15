@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\AlertTriggerShutdown;
 use App\Library\Services\AlertTriggerService;
 use App\Library\Services\UiPathOrchestratorService;
+use App\Library\Services\ElasticSearchService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use GuzzleHttp\Client as Guzzle;
@@ -17,6 +18,8 @@ use App\AlertTriggerRule;
 use App\AlertTriggerDefinition;
 use App\Notifications\AlertTriggered;
 use App\User;
+use App\Client;
+use App\UiPathRobot;
 
 class AppController extends Controller
 {
@@ -58,35 +61,21 @@ class AppController extends Controller
         return array();
     }
 
+    public function debug(ElasticSearchService $elasticSearchService)
+    {
+        $until = Carbon::now();
+        $from = $until->copy()->subMinutes(15);
+        $result = $elasticSearchService->search(Client::find(3), "machineName: 'DK968005' OR robotName: 'DK968005'", $from, $until);
+
+        return $result;
+    }
+
     public function debugRule($id = 1, AlertTriggerService $service)
     {
         return $service->verifyRule(
             AlertTriggerRule::find($id),
             Carbon::now()
         );
-        
-        /*$trigger = AlertTrigger::find(1);
-        $definition = AlertTriggerDefinition::find(1);
-        $wap = $trigger->watchedAutomatedProcess;
-        $alert = Alert::create([
-            'alert_trigger_id' => $trigger->id,
-            'alert_trigger_definition_id' => $definition->id,
-            'watched_automated_process_id' => $wap->id,
-            'messages' => array('My first message')
-        ]);*/
-
-        /*$ancestor = Alert::find(2);
-        $ancestor->update([
-            'closed' => true,
-            'closed_at' => $alert->created_at,
-            'closing_description' => 'Parent alert created',
-            'auto_closed' => true,
-            'under_revision' => false,
-            'parent_id' => $alert->id
-        ]);*/
-
-        //$alert = Alert::find(1);
-        //Notification::send(User::all(), new AlertTriggered($alert));
 
         return $alert;
     }

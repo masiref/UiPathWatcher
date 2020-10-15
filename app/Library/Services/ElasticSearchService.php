@@ -55,15 +55,18 @@ class ElasticSearchService {
 
     protected function getSearchPayload($query, $from, $until)
     {
+        $from->tz('UTC');
+        $until->tz('UTC');
         $json = '
             {
+                "track_total_hits": true,
                 "query":{
                     "bool":{
                         "must":[
                             {
                                 "query_string":{
-                                    "query":' . json_encode($query) .',
-                                    "analyze_wildcard":true
+                                    "query": ' . json_encode($query) .',
+                                    "analyze_wildcard": true
                                 }
                             }
                         ],
@@ -71,9 +74,9 @@ class ElasticSearchService {
                             {
                                 "range":{
                                     "@timestamp":{
-                                        "format":"date_hour_minute_second",
-                                        "gte":"' . $from->toDateTimeLocalString() .'",
-                                        "lte":"' . $until->toDateTimeLocalString() .'"
+                                        "format": "date_hour_minute_second",
+                                        "gte": "' . $from->toDateTimeLocalString() .'",
+                                        "lte": "' . $until->toDateTimeLocalString() .'"
                                     }
                                 }
                             }

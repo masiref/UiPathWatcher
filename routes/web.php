@@ -20,6 +20,7 @@ use App\UiPathRobot;
 Auth::routes();
 
 // Debug
+Route::get('/debug', 'AppController@debug')->name('debug');
 Route::get('/debug/rule/{rule?}', 'AppController@debugRule')->name('debugRule');
 
 // App

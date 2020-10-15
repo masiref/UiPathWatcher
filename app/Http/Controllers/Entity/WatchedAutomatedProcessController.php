@@ -9,8 +9,10 @@ use App\UiPathRobot;
 use App\UiPathQueue;
 use App\AlertTrigger;
 use App\Library\Services\UiPathOrchestratorService;
+use App\Library\Services\ElasticSearchService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class WatchedAutomatedProcessController extends Controller
 {
@@ -20,7 +22,7 @@ class WatchedAutomatedProcessController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, UiPathOrchestratorService $orchestratorService)
+    public function store(Request $request, UiPathOrchestratorService $orchestratorService, ElasticSearchService $elasticSearchService)
     {
         $wap = WatchedAutomatedProcess::create($request->all());
         if ($wap->save()) {
@@ -63,6 +65,13 @@ class WatchedAutomatedProcessController extends Controller
                             $state = $session['State'];
                             $isUnresponsive = $session['IsUnresponsive'] ?? false;
                             $uiPathRobot->is_online = ($state === 'Available' || $state === 'Busy') && (!$isUnresponsive);
+
+                            $until = Carbon::now();
+                            $from = $until->copy()->subMinutes(15);
+                            $result = $elasticSearchService->search($wap->client, "machineName: '$uiPathRobot' OR robotName: '$uiPathRobot'", $from, $until);
+                            if (!$result['error']) {
+                                $uiPathRobot->is_logging = $result['count'] > 0;
+                            }
                             $uiPathRobot->save();
                         }
                     }
