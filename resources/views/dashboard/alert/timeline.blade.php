@@ -55,6 +55,23 @@
                             'underlined' => false
                         ])
                     </div>
+                    @if ($alert->reviewer)
+                        <div class="level-item">
+                            <span class="icon has-text-link">
+                                <i class="fas fa-chevron-circle-right"></i>
+                            </span>
+                        </div>
+                        <div class="level-item">
+                            @include('layouts.title', [
+                                'title' => 'Reviewed by ' . $alert->reviewer->name,
+                                'titleSize' => '5',
+                                'icon' => 'user',
+                                'iconSize' => 'small',
+                                'color' => 'info',
+                                'underlined' => false
+                            ])
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="timeline is-centered">
@@ -77,12 +94,11 @@
                         <table class="table is-bordered is-striped is-hoverable is-fullwidth">
                             <tbody>
                                 @if ($alert->closed)
-                                    <tr><td>{{ $alert->closing_description }}</td></tr>
-                                @else
-                                    @foreach ($alert->messages as $message)
-                                        <tr><td>{{ $message }}</td></tr>
-                                    @endforeach
+                                    <tr class="is-selected"><td>{{ $alert->closing_description }}</td></tr>
                                 @endif
+                                @foreach ($alert->messages as $message)
+                                    <tr><td>{{ $message }}</td></tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
