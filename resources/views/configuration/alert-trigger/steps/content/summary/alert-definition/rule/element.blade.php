@@ -2,21 +2,21 @@
     <span class="panel-icon">
         <i class="fas fa-swatchbook" aria-hidden="true"></i>
     </span>
-    @include("configuration.alert-trigger.steps.content.summary.alert-definition.rule.summary.{$rule->type}")
+    @include("configuration.alert-trigger.steps.content.summary.alert-definition.rule.{$rule->type}")
 
-    @include('configuration.alert-trigger.steps.content.summary.alert-definition.rule.standard-parameters.time-slot')
+    @include('configuration.alert-trigger.steps.content.summary.alert-definition.rule.time-slot')
 
-    @include('configuration.alert-trigger.steps.content.summary.alert-definition.rule.standard-parameters.triggering-days')
+    @include('configuration.alert-trigger.steps.content.summary.alert-definition.rule.triggering-days')
 
     @if ($rule->processes->count() > 0)
-        @include('configuration.alert-trigger.steps.content.summary.alert-definition.rule.standard-parameters.involved-processes')
+        @include('configuration.alert-trigger.steps.content.summary.alert-definition.rule.involved-entities.processes')
     @endif
     
     @if ($rule->robots->count() > 0)
-        @include('configuration.alert-trigger.steps.content.summary.alert-definition.rule.standard-parameters.involved-robots')
+        @include('configuration.alert-trigger.steps.content.summary.alert-definition.rule.involved-entities.robots')
     @endif
     
     @if ($rule->queues->count() > 0)
-        @include('configuration.alert-trigger.steps.content.summary.alert-definition.rule.standard-parameters.involved-queues')
+        @include('configuration.alert-trigger.steps.content.summary.alert-definition.rule.involved-entities.queues')
     @endif
 </a>
