@@ -355,11 +355,15 @@ class AlertTriggerService {
                 $result = $elasticSearchService->search($client, $query, $minDate, Carbon::now());
                 if (!$result['error']) {
                     $count = $result['count'];
+                    if ($rule->parameters['lowerCount'] === 0 && $rule->parameters['lowerCount'] === $count && !$rule->parameters['higherCount']) {
+                        $verified = true;
+                        array_push($messages, "Number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is equal to 0 as expected");
+                    }
                     if ($rule->parameters['lowerCount'] > 0 && $count <= $rule->parameters['lowerCount']) {
                         $verified = true;
                         array_push($messages, "Number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is less than or equal to expected value [$count <= {$rule->parameters['lowerCount']}]");
                     }
-                    if ($count >= $rule->parameters['higherCount']) {
+                    if ($rule->parameters['higherCount'] && $count >= $rule->parameters['higherCount']) {
                         $verified = true;
                         array_push($messages, "Number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is greater than or equal to expected value [$count >= {$rule->parameters['higherCount']}]");
                     }

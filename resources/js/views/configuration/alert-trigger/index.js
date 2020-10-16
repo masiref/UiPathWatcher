@@ -665,7 +665,6 @@ const loadDefaultAlertTriggerDetails = async (watchedAutomatedProcessId) => {
                 && !('data' in details.currentAlertTrigger)
             ) {
                 if (currentMode === 'add') {
-                    //details.currentAlertTrigger = new AlertTrigger();
                     configuration.getAlertTriggersDefaultDetails(watchedAutomatedProcessId).then(async (response) => {
                         activeStepContent.innerHTML = response.data;
                         initAlertTriggerDetails();
@@ -805,9 +804,6 @@ const validateAlertTriggerRuleForm = (rule, ruleItem) => {
         } else if (type === 'elastic-search-query') {
             valid = validateAlertTriggerElasticSearchQueryRule(rule, ruleItem);
         }
-        /* else if (type === 'kibana-metric-visualization') {
-            valid = validateAlertTriggerKibanaMetricVisualization(rule, ruleItem);
-        }*/
 
         rule.valid = valid;
         view.details.updateDefinitionValidity(alertDefinitionItem, details.currentAlertTrigger.findDefinition(rule.definitionRank).isValid());
@@ -916,7 +912,6 @@ const validateAlertTriggerFaultedJobsPercentageRule = (rule, ruleItem) => {
 
         const maximalPercentageInputValid = maximalPercentageInput.value.trim() !== '' && _base.isNormalInteger(maximalPercentageInput.value);
         _base.toggleSuccessDangerState(maximalPercentageInput, maximalPercentageInputValid);
-        //_base.toggleFormControlTooltip(maximalPercentageInput, maximalPercentageInputValid);
         
         if (maximalPercentageInputValid) {
             parameters.specific = {
@@ -957,7 +952,6 @@ const validateAlertTriggerFailedQueueItemsPercentageRule = (rule, ruleItem) => {
 
         const maximalPercentageInputValid = maximalPercentageInput.value.trim() !== '' && _base.isNormalInteger(maximalPercentageInput.value);
         _base.toggleSuccessDangerState(maximalPercentageInput, maximalPercentageInputValid);
-        //_base.toggleFormControlTooltip(maximalPercentageInput, maximalPercentageInputValid);
         
         if (maximalPercentageInputValid) {
             parameters.specific = {
@@ -999,22 +993,21 @@ const validateAlertTriggerElasticSearchQueryRule = (rule, ruleItem) => {
 
         const searchQueryInputValid = searchQueryInput.value.trim() !== '' && _base.isValidLuceneString(`'${searchQueryInput.value.trim()}'`);
         _base.toggleSuccessDangerState(searchQueryInput, searchQueryInputValid);
-        //_base.toggleFormControlTooltip(searchQueryInput, searchQueryInputValid);
 
         const lowerCountInputValid = lowerCountInput.value.trim() !== '' && _base.isNormalInteger(lowerCountInput.value);
         _base.toggleSuccessDangerState(lowerCountInput, lowerCountInputValid);
-        //_base.toggleFormControlTooltip(lowerCountInput, lowerCountInputValid);
 
-        const higherCountInputValid = higherCountInput.value.trim() !== '' && _base.isNormalInteger(higherCountInput.value)
-            && lowerCountInputValid && parseInt(lowerCountInput.value) < parseInt(higherCountInput.value);
+        const higherCountInputValid = higherCountInput.value.trim() === '' || (
+            higherCountInput.value.trim() !== '' && _base.isNormalInteger(higherCountInput.value)
+            && lowerCountInputValid && (parseInt(lowerCountInput.value) + 1) < parseInt(higherCountInput.value)
+        );
         _base.toggleSuccessDangerState(higherCountInput, higherCountInputValid);
-        //_base.toggleFormControlTooltip(higherCountInput, higherCountInputValid);
         
         if (lowerCountInputValid && higherCountInputValid) {
             parameters.specific = {
                 searchQuery: searchQueryInput.value.trim(),
                 lowerCount: parseInt(lowerCountInput.value),
-                higherCount: parseInt(higherCountInput.value)
+                higherCount: higherCountInput.value.trim() !== '' ? parseInt(higherCountInput.value) : ''
             };
         }
         
@@ -1034,60 +1027,6 @@ const validateAlertTriggerElasticSearchQueryRule = (rule, ruleItem) => {
 
     return valid;
 };
-
-/*
-const validateAlertTriggerKibanaMetricVisualization = (rule, ruleItem) => {
-    let valid = false;
-    let parameters = {
-        specific: {},
-        standard: {
-            timeSlot: {},
-            involvedEntities: {}
-        }
-    };
-
-    try {
-        const metricVisualizationSelect = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.kibanaMetricVisualizationControls.metricVisualizationSelect);
-        const lowerCountInput = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.kibanaMetricVisualizationControls.lowerCountInput);
-        const higherCountInput = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.kibanaMetricVisualizationControls.higherCountInput);
-
-        const metricVisualizationSelectValid = metricVisualizationSelect.value !== 'none';
-        _base.toggleSuccessDangerState(metricVisualizationSelect.parentNode, metricVisualizationSelectValid);
-        //_base.toggleFormControlTooltip(metricVisualizationSelect.parentNode, metricVisualizationSelectValid);
-
-        const lowerCountInputValid = lowerCountInput.value.trim() !== '' && _base.isNormalInteger(lowerCountInput.value);
-        _base.toggleSuccessDangerState(lowerCountInput, lowerCountInputValid);
-        //_base.toggleFormControlTooltip(lowerCountInput, lowerCountInputValid);
-
-        const higherCountInputValid = higherCountInput.value.trim() !== '' && _base.isNormalInteger(higherCountInput.value)
-            && lowerCountInputValid && parseInt(lowerCountInput.value) < parseInt(higherCountInput.value);
-        _base.toggleSuccessDangerState(higherCountInput, higherCountInputValid);
-        //_base.toggleFormControlTooltip(higherCountInput, higherCountInputValid);
-        
-        if (lowerCountInputValid && higherCountInputValid) {
-            parameters.specific = {
-                metricVisualization: metricVisualizationSelect.value,
-                lowerCount: parseInt(lowerCountInput.value),
-                higherCount: parseInt(higherCountInput.value)
-            };
-        }
-        
-        const timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
-        const relativeTimeSlotInputValid = validateAlertTriggerRuleRelativeTimeSlotControls(ruleItem, parameters);
-        const involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
-        const involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
-
-        rule.parameters = parameters;
-
-        valid = metricVisualizationSelectValid && lowerCountInputValid && higherCountInputValid && timeSlotInputValid
-            && relativeTimeSlotInputValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
-    } catch (error) {
-        console.log(error);
-    }
-
-    return valid;
-};
-*/
 
 const validateAlertTriggerRuleTimeSlotControls = (ruleItem, parameters) => {
     let valid = false;
@@ -1116,7 +1055,6 @@ const validateAlertTriggerRuleTimeSlotControls = (ruleItem, parameters) => {
             
         const timeSlotInputWrapper = timeSlotInput.closest(_base.selectors.dateTimeCalendarWrapper);
         _base.toggleSuccessDangerState(timeSlotInputWrapper, valid);
-        //_base.toggleFormControlTooltip(timeSlotInput, valid);
     } catch (error) {
         console.log(error);
     }
@@ -1138,7 +1076,6 @@ const validateAlertTriggerRuleRelativeTimeSlotControls = (ruleItem, parameters) 
         }
         
         _base.toggleSuccessDangerState(relativeTimeSlotInput, valid);
-        //_base.toggleFormControlTooltip(relativeTimeSlotInput, valid);
     } catch (error) {
         console.log(error);
     }

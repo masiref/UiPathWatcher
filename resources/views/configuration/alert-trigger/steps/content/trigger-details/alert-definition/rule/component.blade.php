@@ -24,7 +24,6 @@
                             <option value="faulted-jobs-percentage" {!! $type === 'faulted-jobs-percentage' ? 'selected' : '' !!}>Faulted jobs percentage at maximum</option>
                             <option value="failed-queue-items-percentage" {!! $type === 'failed-queue-items-percentage' ? 'selected' : '' !!}>Failed queue items percentage at maximum</option>
                             <option value="elastic-search-query" {!! $type === 'elastic-search-query' ? 'selected' : '' !!}>ElasticSearch query results count</option>
-                            {{--<option value="kibana-metric-visualization" {!! $type === 'kibana-metric-visualization' ? 'selected' : '' !!}>Kibana metric visualization</option>--}}
                         </select>
                     </div>
                     <span class="icon is-small is-left">
