@@ -26,8 +26,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->job(new ProcessAlertTriggers)->everyFiveMinutes();
-        $schedule->job(new UpdateUiPathRobotsStatuses)->everyFifteenMinutes();
+        // local
+        $schedule->job(new ProcessAlertTriggers)->everyMinute()->environments(['local']);
+        $schedule->job(new UpdateUiPathRobotsStatuses)->everyMinute()->environments(['local']);
+
+        // staging & production
+        $schedule->job(new ProcessAlertTriggers)->everyFiveMinutes()->environments(['staging', 'production']);
+        $schedule->job(new UpdateUiPathRobotsStatuses)->everyFifteenMinutes()->environments(['staging', 'production']);
     }
 
     /**
