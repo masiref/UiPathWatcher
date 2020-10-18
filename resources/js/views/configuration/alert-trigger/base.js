@@ -62,6 +62,11 @@ export const selectors = {
                     lowerCountInput: 'input.trigger-details--alert-definition--elastic-search-query-rule--lower-count-input',
                     higherCountInput: 'input.trigger-details--alert-definition--elastic-search-query-rule--higher-count-input'
                 },
+                elasticSearchMultipleQueriesControls: {
+                    leftSearchQueryInput: 'input.trigger-details--alert-definition--elastic-search-multiple-queries-comparison-rule--left-search-query-input',
+                    rightSearchQueryInput: 'input.trigger-details--alert-definition--elastic-search-multiple-queries-comparison-rule--right-search-query-input',
+                    comparisonOperatorSelect: 'select.trigger-details--alert-definition--elastic-search-multiple-queries-comparison-rule--comparison-operator-input'
+                },
                 triggeringDays: {
                     title: 'div.triggering-days-section .title-level p.title',
                     titleIcon: 'div.triggering-days-section .title-level span.icon',

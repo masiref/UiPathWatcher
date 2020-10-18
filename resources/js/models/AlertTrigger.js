@@ -176,7 +176,6 @@ export default class AlertTrigger {
                         'title': this.title,
                         'definitions': this.definitions
                     }).then(response => {
-                        console.log(response);
                         if (response.data) {
                             this.setUnchanged();
                         }

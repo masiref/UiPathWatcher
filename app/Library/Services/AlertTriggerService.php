@@ -39,6 +39,8 @@ class AlertTriggerService {
                 return $this->verifyFailedQueueItemsPercentageRule($rule, $date);
             } elseif ($type === 'elastic-search-query') {
                 return $this->verifyElasticSearchQueryRule($rule, $date);
+            } elseif ($type === 'elastic-search-multiple-queries-comparison') {
+                return $this->verifyElasticSearchMultipleQueriesComparisonRule($rule, $date);
             }
         }
         return [ 'result' => false ];
@@ -366,6 +368,82 @@ class AlertTriggerService {
                     if ($rule->parameters['higherCount'] && $count >= $rule->parameters['higherCount']) {
                         $verified = true;
                         array_push($messages, "Number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is greater than or equal to expected value [$count >= {$rule->parameters['higherCount']}]");
+                    }
+                }
+            }
+        }
+        
+        return [ 'result' => $verified, 'messages' => $messages ];
+    }
+
+    protected function verifyElasticSearchMultipleQueriesComparisonRule(AlertTriggerRule $rule, Carbon $date)
+    {
+        $elasticSearchService = $this->elasticSearchService;
+
+        $client = $rule->definition->trigger->watchedAutomatedProcess->client;
+
+        $verified = false;
+        $messages = array();
+        
+        foreach ($rule->robots as $robot) {
+            foreach ($rule->processes as $process) {
+                $query = "processName:'{$process->name}_{$process->environment_name}' AND (machineName:'$robot' OR robotName:'$robot')";
+                
+                if ($rule->has_relative_time_slot) {
+                    // get processed queue items with start date >= (now - relative time slot duration)
+                    // get processed failed queue items with start date >= (now - relative time slot duration)
+                    $minDate = $date->copy()->subMinutes($rule->relative_time_slot_duration);
+                } else {
+                    // get processed queue items with start date >= today at time slot from
+                    // get processed failed queue items with start date >= today at time slot from
+                    $minDate = Carbon::createFromTimeString($rule->time_slot_from);
+
+                    // set to closed date of last closed alert triggered by same definition
+                    // to avoid triggering alerts already triggered
+                    $lastClosedAlert = Alert::all()->where('closed', true)->where('parent', null)
+                        ->where('alert_trigger_definition_id', $rule->definition->id)
+                        ->sortByDesc('closed_at')->first();
+                    if ($lastClosedAlert) {
+                        $lastClosedAlertClosedDate = Carbon::parse($lastClosedAlert->closed_at);
+                        if ($lastClosedAlertClosedDate->greaterThan($minDate)) {
+                            $minDate = $lastClosedAlertClosedDate;
+                        }                
+                    }
+                }
+
+                $leftQuery = "($query) AND ({$rule->parameters['leftSearchQuery']})";
+                $rightQuery = "($query) AND ({$rule->parameters['rightSearchQuery']})";
+                $leftResult = $elasticSearchService->search($client, $leftQuery, $minDate, Carbon::now());
+                $rightResult = $elasticSearchService->search($client, $rightQuery, $minDate, Carbon::now());
+                if (!$leftResult['error'] && !$rightResult['error']) {
+                    $leftCount = $leftResult['count'];
+                    $rightCount = $rightResult['count'];
+                    $comparisonOperator = $rule->parameters['comparisonOperator'];
+
+                    if ($comparisonOperator === 'not-equal' && leftCount != $rightCount) {
+                        $verified = true;
+                        array_push($messages,
+                            "Number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is not equal to that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount != $rightCount]");
+                    } elseif ($comparisonOperator === 'less' && $leftCount < $rightCount) {
+                        $verified = true;
+                        array_push($messages,
+                            "Number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is less than that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount < $rightCount]");
+                    } elseif ($comparisonOperator === 'less-equal' && $leftCount <= $rightCount) {
+                        $verified = true;
+                        array_push($messages,
+                            "Number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is less than or equal to that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount <= $rightCount]");
+                    } elseif ($comparisonOperator === 'equal' && $leftCount == $rightCount) {
+                        $verified = true;
+                        array_push($messages,
+                            "Number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is equal to that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount == $rightCount]");
+                    } elseif ($comparisonOperator === 'greater-equal' && $leftCount >= $rightCount) {
+                        $verified = true;
+                        array_push($messages,
+                            "Number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is greater than or equal to that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount >= $rightCount]");
+                    } elseif ($comparisonOperator === 'greater' && $leftCount > $rightCount) {
+                        $verified = true;
+                        array_push($messages,
+                            "Number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is greater than that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount > $rightCount]");
                     }
                 }
             }

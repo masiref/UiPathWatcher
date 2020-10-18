@@ -122,7 +122,14 @@ class ConfigurationAlertTriggerController extends Controller
     {
         $alertTriggerRule = new AlertTriggerRule([
             'rank' => $rank,
-            'type' => $type
+            'type' => $type,
+            'is_triggered_on_monday' => $watchedAutomatedProcess->running_period_monday,
+            'is_triggered_on_tuesday' => $watchedAutomatedProcess->running_period_tuesday,
+            'is_triggered_on_wednesday' => $watchedAutomatedProcess->running_period_wednesday,
+            'is_triggered_on_thursday' => $watchedAutomatedProcess->running_period_thursday,
+            'is_triggered_on_friday' => $watchedAutomatedProcess->running_period_friday,
+            'is_triggered_on_saturday' => $watchedAutomatedProcess->running_period_saturday,
+            'is_triggered_on_sunday' => $watchedAutomatedProcess->running_period_sunday,
         ]);
         return view("configuration.alert-trigger.steps.content.trigger-details.alert-definition.rule.element", [
             'alertTriggerRule' => $alertTriggerRule,

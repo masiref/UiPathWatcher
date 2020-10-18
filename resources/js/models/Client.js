@@ -7,20 +7,6 @@ export default class Client {
         }
     }
 
-    /*async updateMarkup() {
-        try {
-            return new Promise((resolve, reject) => {
-                resolve(
-                    axios.get(`/dashboard/client/element/${this.id}`).then(response => {
-                        this.markup = response.data;
-                    })
-                );
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    }*/
-
     async get() {
         try {
             return new Promise((resolve, reject) => {
@@ -34,20 +20,6 @@ export default class Client {
             console.log(error);
         }
     }
-
-    /*async update() {
-        try {
-            return new Promise((resolve, reject) => {
-                resolve(
-                    this.get().then(response => {
-                        return this.updateMarkup();
-                    })
-                );
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    }*/
     
     async updateWatchedAutomatedProcesses() {
         try {

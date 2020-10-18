@@ -538,10 +538,10 @@ const initAlertTriggerConfirmation = () => {
                 try {
                     details.currentAlertTrigger.activate().then(response => {
                         if (currentMode === 'edit') {
-                            _base.renderLoader(formSection);
+                            _base.renderLoader(base.elements.formsSection);
                             details.currentAlertTrigger.loadEditFormButtons().then(response => {
                                 form.querySelector(base.selectors.editFormButtonsSection).innerHTML = details.currentAlertTrigger.editFormButtons;
-                                _base.clearLoader(formSection);
+                                _base.clearLoader(base.elements.formsSection);
                             });
                         }
                         updateTable().then(response =>  {
@@ -803,6 +803,8 @@ const validateAlertTriggerRuleForm = (rule, ruleItem) => {
             valid = validateAlertTriggerFailedQueueItemsPercentageRule(rule, ruleItem);
         } else if (type === 'elastic-search-query') {
             valid = validateAlertTriggerElasticSearchQueryRule(rule, ruleItem);
+        } else if (type === 'elastic-search-multiple-queries-comparison') {
+            valid = validateAlertTriggerElasticSearchMultipleQueriesComparisonRule(rule, ruleItem);
         }
 
         rule.valid = valid;
@@ -1020,6 +1022,56 @@ const validateAlertTriggerElasticSearchQueryRule = (rule, ruleItem) => {
         rule.parameters = parameters;
 
         valid = searchQueryInputValid && lowerCountInputValid && higherCountInputValid && timeSlotInputValid
+            && relativeTimeSlotInputValid && triggeringDaysSelectionValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
+    } catch (error) {
+        console.log(error);
+    }
+
+    return valid;
+};
+
+const validateAlertTriggerElasticSearchMultipleQueriesComparisonRule = (rule, ruleItem) => {
+    let valid = false;
+    let parameters = {
+        specific: {},
+        standard: {
+            timeSlot: {},
+            triggeringDays: {},
+            involvedEntities: {}
+        }
+    };
+
+    try {
+        const leftSearchQueryInput = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.elasticSearchMultipleQueriesControls.leftSearchQueryInput);
+        const rightSearchQueryInput = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.elasticSearchMultipleQueriesControls.rightSearchQueryInput);
+        const comparisonOperatorSelect = ruleItem.querySelector(base.selectors.details.alertDefinition.rule.elasticSearchMultipleQueriesControls.comparisonOperatorSelect);
+
+        const leftSearchQueryInputValid = leftSearchQueryInput.value.trim() !== '' && _base.isValidLuceneString(`'${leftSearchQueryInput.value.trim()}'`);
+        _base.toggleSuccessDangerState(leftSearchQueryInput, leftSearchQueryInputValid);
+
+        const rightSearchQueryInputValid = rightSearchQueryInput.value.trim() !== '' && _base.isValidLuceneString(`'${rightSearchQueryInput.value.trim()}'`);
+        _base.toggleSuccessDangerState(rightSearchQueryInput, rightSearchQueryInputValid);
+        
+        const comparisonOperatorSelectValid = comparisonOperatorSelect.value !== 'none';
+        _base.toggleSuccessDangerState(comparisonOperatorSelect.parentNode, comparisonOperatorSelectValid);
+        
+        if (leftSearchQueryInputValid && rightSearchQueryInputValid && comparisonOperatorSelectValid) {
+            parameters.specific = {
+                leftSearchQuery: leftSearchQueryInput.value.trim(),
+                rightSearchQuery: rightSearchQueryInput.value.trim(),
+                comparisonOperator: comparisonOperatorSelect.value
+            };
+        }
+        
+        const timeSlotInputValid = validateAlertTriggerRuleTimeSlotControls(ruleItem, parameters);
+        const relativeTimeSlotInputValid = validateAlertTriggerRuleRelativeTimeSlotControls(ruleItem, parameters);
+        const triggeringDaysSelectionValid = validateAlertTriggerRuleTriggeringDaysControls(ruleItem, parameters);
+        const involvedProcessesSelectionValid = validateAlertTriggerRuleInvolvedProcessesSelectionControls(ruleItem, parameters);
+        const involvedRobotsSelectionValid = validateAlertTriggerRuleInvolvedRobotsSelectionControls(ruleItem, parameters);
+
+        rule.parameters = parameters;
+
+        valid = leftSearchQueryInputValid && rightSearchQueryInputValid && comparisonOperatorSelectValid && timeSlotInputValid
             && relativeTimeSlotInputValid && triggeringDaysSelectionValid && involvedProcessesSelectionValid && involvedRobotsSelectionValid;
     } catch (error) {
         console.log(error);

@@ -216,7 +216,7 @@ class AlertTriggerController extends Controller
                 'title' => $request->get('title')
             ]);
         }
-        if ($request->get('active')) {
+        if ($request->filled('active')) {
             $alertTrigger->update([
                 'active' => $request->get('active')
             ]);

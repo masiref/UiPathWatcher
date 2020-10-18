@@ -1,7 +1,7 @@
-<!-- ElasticSearch search query -->
-@include('configuration.alert-trigger.steps.content.trigger-details.alert-definition.rule.controls.elastic-search-query-search-query')
-<!-- ElasticSearch search query result counts -->
-@include('configuration.alert-trigger.steps.content.trigger-details.alert-definition.rule.controls.elastic-search-query-results-count')
+<!-- ElasticSearch search queries -->
+@include('configuration.alert-trigger.steps.content.trigger-details.alert-definition.rule.controls.elastic-search-multiple-queries-comparison-search-queries')
+<!-- ElasticSearch search multiple queries result counts -->
+@include('configuration.alert-trigger.steps.content.trigger-details.alert-definition.rule.controls.elastic-search-multiple-queries-comparison-results-count')
 <!-- time slots -->
 @include('configuration.alert-trigger.steps.content.trigger-details.alert-definition.rule.controls.time-slot')
 
