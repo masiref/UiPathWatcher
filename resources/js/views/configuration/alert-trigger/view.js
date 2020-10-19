@@ -146,14 +146,14 @@ export const initDateTimeField = (alertDefinitionItem, ruleItem) => {
     if (endTime) {
         endTime = endTime.split(':');
     }
-    /*let effectiveStartTime = ruleItem.querySelector(calendarSelector).dataset.effectiveStartTime;
+    let effectiveStartTime = ruleItem.querySelector(calendarSelector).dataset.effectiveStartTime;
     if (effectiveStartTime) {
         startTime = effectiveStartTime.split(':');
     }
     let effectiveEndTime = ruleItem.querySelector(calendarSelector).dataset.effectiveEndTndTime;
-    if (endTime) {
+    if (effectiveEndTime) {
         endTime = effectiveEndTime.split(':');
-    }*/
+    }
     if (!ruleItem.querySelector(selectors.details.alertDefinition.rule.timeSlotInput).bulmaCalendar) {
         bulmaCalendar.attach(calendarSelector, {
             type: 'time',

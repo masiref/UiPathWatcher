@@ -996,13 +996,15 @@ const validateAlertTriggerElasticSearchQueryRule = (rule, ruleItem) => {
         const searchQueryInputValid = searchQueryInput.value.trim() !== '' && _base.isValidLuceneString(`'${searchQueryInput.value.trim()}'`);
         _base.toggleSuccessDangerState(searchQueryInput, searchQueryInputValid);
 
-        const lowerCountInputValid = lowerCountInput.value.trim() !== '' && _base.isNormalInteger(lowerCountInput.value);
+        const lowerCountInputValid = lowerCountInput.value.trim() !== '' && _base.isNormalInteger(lowerCountInput.value) || (
+            higherCountInput.value.trim() !== '' && _base.isNormalInteger(higherCountInput.value) && (parseInt(higherCountInput.value) > 0)
+        );
         _base.toggleSuccessDangerState(lowerCountInput, lowerCountInputValid);
 
-        const higherCountInputValid = higherCountInput.value.trim() === '' || (
-            higherCountInput.value.trim() !== '' && _base.isNormalInteger(higherCountInput.value)
-            && lowerCountInputValid && (parseInt(lowerCountInput.value) + 1) < parseInt(higherCountInput.value)
-        );
+        const higherCountInputValid = higherCountInput.value.trim() === '' ||
+            (higherCountInput.value.trim() !== '' && _base.isNormalInteger(higherCountInput.value)
+            && lowerCountInputValid && parseInt(higherCountInput.value) > (parseInt(lowerCountInput.value) + 1)) ||
+            (higherCountInput.value.trim() !== '' && _base.isNormalInteger(higherCountInput.value));
         _base.toggleSuccessDangerState(higherCountInput, higherCountInputValid);
         
         if (lowerCountInputValid && higherCountInputValid) {

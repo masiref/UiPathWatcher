@@ -14,10 +14,10 @@
         </div>
         <div class="field">
             <p class="control is-expanded has-icons-left has-tooltip-bottom"
-                data-tooltip="Must be a positive integer value greater than Lower count + 1.">
+                data-tooltip="Must be a positive integer value. It should be greater than Lower count + 1, if filled in.">
                 <input class="input is-danger trigger-details--alert-definition--rule--parameter
                 trigger-details--alert-definition--elastic-search-query-rule--higher-count-input"
-                type="text" value="{{ ($alertTriggerRule ?? false) ? $alertTriggerRule->parameters['higherCount'] : '' }}" placeholder="Optional higher count">
+                type="text" value="{{ ($alertTriggerRule ?? false) ? $alertTriggerRule->parameters['higherCount'] : '' }}" placeholder="Higher count">
                 <span class="icon is-small is-left">
                     <i class="fas fa-less-than-equal"></i>
                 </span>

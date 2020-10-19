@@ -120,6 +120,41 @@ class WatchedAutomatedProcessController extends Controller
     public function update(Request $request, WatchedAutomatedProcess $watchedAutomatedProcess, UiPathOrchestratorService $orchestratorService)
     {
         if ($watchedAutomatedProcess->update($request->all())) {
+
+            $timeFrom = Carbon::createFromTimeString($watchedAutomatedProcess->running_period_time_from);
+            $timeUntil = Carbon::createFromTimeString($watchedAutomatedProcess->running_period_time_until);
+            $runningPeriodMonday = $watchedAutomatedProcess->running_period_monday;
+            $runningPeriodTuesday = $watchedAutomatedProcess->running_period_tuesday;
+            $runningPeriodWednesday = $watchedAutomatedProcess->running_period_wednesday;
+            $runningPeriodThursday = $watchedAutomatedProcess->running_period_thursday;
+            $runningPeriodFriday = $watchedAutomatedProcess->running_period_friday;
+            $runningPeriodSaturday = $watchedAutomatedProcess->running_period_saturday;
+            $runningPeriodSunday = $watchedAutomatedProcess->running_period_sunday;
+
+            $alertTriggers = AlertTrigger::all()->where('watchedAutomatedProcess', $watchedAutomatedProcess);
+            foreach ($alertTriggers as $alertTrigger) {
+                foreach ($alertTrigger->definitions as $definition) {
+                    foreach ($definition->rules as $rule) {
+                        $rule->is_triggered_on_monday = $rule->is_triggered_on_monday && $runningPeriodMonday;
+                        $rule->is_triggered_on_tuesday = $rule->is_triggered_on_tuesday && $runningPeriodTuesday;
+                        $rule->is_triggered_on_wednesday = $rule->is_triggered_on_wednesday && $runningPeriodWednesday;
+                        $rule->is_triggered_on_thursday = $rule->is_triggered_on_thursday && $runningPeriodThursday;
+                        $rule->is_triggered_on_friday = $rule->is_triggered_on_friday && $runningPeriodFriday;
+                        $rule->is_triggered_on_saturday = $rule->is_triggered_on_saturday && $runningPeriodSaturday;
+                        $rule->is_triggered_on_sunday = $rule->is_triggered_on_sunday && $runningPeriodSunday;
+                        $timeSlotFrom = Carbon::createFromTimeString($rule->time_slot_from);
+                        if ($timeFrom->gt($timeSlotFrom)) {
+                            $rule->time_slot_from = $watchedAutomatedProcess->running_period_time_from;
+                        }
+                        $timeSlotUntil = Carbon::createFromTimeString($rule->time_slot_until);
+                        if ($timeUntil->lt($timeSlotUntil)) {
+                            $rule->time_slot_until = $watchedAutomatedProcess->running_period_time_until;
+                        }
+                        $rule->save();
+                    }
+                }
+            }
+
             $processes = $request->get('involved_processes');
             $robots = $request->get('involved_robots');
             $queues = $request->get('involved_queues');

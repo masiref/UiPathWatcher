@@ -20,6 +20,7 @@ use App\Notifications\AlertTriggered;
 use App\User;
 use App\Client;
 use App\UiPathRobot;
+use App\WatchedAutomatedProcess;
 
 class AppController extends Controller
 {
@@ -63,10 +64,26 @@ class AppController extends Controller
 
     public function debug(ElasticSearchService $elasticSearchService)
     {
-        $until = Carbon::now();
-        $from = $until->copy()->subMinutes(15);
-        $result = $elasticSearchService->search(Client::find(3), "machineName: 'DK968005' OR robotName: 'DK968005'", $from, $until);
-
+        $rule = AlertTriggerRule::find(5);
+        $watchedAutomatedProcess = WatchedAutomatedProcess::find(1);
+        $timeFrom = Carbon::createFromTimeString($watchedAutomatedProcess->running_period_time_from);
+        $timeUntil = Carbon::createFromTimeString($watchedAutomatedProcess->running_period_time_until);
+        $timeSlotFrom = Carbon::createFromTimeString($rule->time_slot_from);
+        if ($timeFrom->gt($timeSlotFrom)) {
+            dd('tf > tsf');
+            $rule->time_slot_from = $watchedAutomatedProcess->running_period_time_from;
+        }
+        $timeSlotUntil = Carbon::createFromTimeString($rule->time_slot_until);
+        if ($timeUntil->lt($timeSlotUntil)) {
+            dd('tu < tsu');
+            $rule->time_slot_until = $watchedAutomatedProcess->running_period_time_until;
+        }
+        $result = [
+            'tf' => $timeFrom,
+            'tu' => $timeUntil,
+            'tsf' => $timeSlotFrom,
+            'tsu' => $timeSlotUntil
+        ];
         return $result;
     }
 
