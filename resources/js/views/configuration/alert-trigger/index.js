@@ -309,6 +309,7 @@ const initEditForm = () => {
                 }).then(result => {
                     if (result.value) {
                         details.currentAlertTrigger.remove().then(reponse => {
+                            details.currentAlertTrigger = new AlertTrigger();
                             loadAddForm(e);
                             updateTable();
                             layoutController.update(configuration.layout);
