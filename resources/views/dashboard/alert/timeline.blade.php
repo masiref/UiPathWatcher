@@ -63,7 +63,7 @@
                         </div>
                         <div class="level-item">
                             @include('layouts.title', [
-                                'title' => 'Reviewed by ' . $alert->reviewer->name,
+                                'title' => ($alert->closed ? 'Reviewed' : 'Under revision') . ' by ' . ($alert->reviewer->id === Auth::user()->id ? 'you' : $alert->reviewer->name),
                                 'titleSize' => '5',
                                 'icon' => 'user',
                                 'iconSize' => 'small',

@@ -142,6 +142,20 @@ export default class Alert {
         }
     }
 
+    async clean() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.put(`/alerts/${this.id}`, {
+                        action: 'clean'
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async ignore(from_, fromTime, to, toTime, description, categories) {
         try {
             return new Promise((resolve, reject) => {

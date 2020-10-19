@@ -67,6 +67,13 @@ class AlertController extends Controller
                     // return error: not closed
                 }
                 break;
+            case 'clean':
+                if ($alert->clean()) {
+                    return $alert;
+                } else {
+                    // return error: not cleaned
+                }
+                break;
             case 'ignore':
                 $from = $data['from_'];
                 $fromTime = $data['fromTime'];

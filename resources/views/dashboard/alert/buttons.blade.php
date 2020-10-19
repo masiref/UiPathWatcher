@@ -27,6 +27,14 @@
                         <i class="fas fa-fire-extinguisher"></i>
                     </span>
                 </button>
+                <button
+                    class="button is-success has-tooltip-bottom clean-btn {{ $small ?? '' ? 'is-small' : '' }}"
+                    data-tooltip="Clean"
+                    data-id="{{ $alert->id }}">
+                    <span class="icon is-large">
+                        <i class="fas fa-broom"></i>
+                    </span>
+                </button>
                 <button class="button is-light has-tooltip-bottom ignore-btn {{ $small ?? '' ? 'is-small' : '' }}"
                     data-tooltip="Ignore trigger"
                     data-id="{{ $alert->id }}">

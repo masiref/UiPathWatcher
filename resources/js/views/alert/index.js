@@ -37,6 +37,12 @@ export const init = async (dashboard, target) => {
             close(dashboard, id);
         }
 
+        // Handle clean button
+        if (target.matches(`${base.selectors.cleanButton}, ${base.selectors.cleanButtonChildren}`)) {
+            const id = target.closest(base.selectors.cleanButton).dataset.id;
+            clean(dashboard, id);
+        }
+
         // Handle ignore button
         if (target.matches(`${base.selectors.ignoreButton}, ${base.selectors.ignoreButtonChildren}`)) {
             const id = target.closest(base.selectors.ignoreButton).dataset.id;
@@ -197,6 +203,23 @@ export const commitClose = async(dashboard, alert, keywordsList) => {
         toastr.error(`Alert closing not committed due to application exception: ${error}`, null, {
             positionClass: 'toast-bottom-left'
         });
+    }
+};
+
+export const clean = async(dashboard, id) => {    
+    try {
+        const alert = new Alert(id);
+        view.renderLoaders(id);
+        alert.clean().then(res => {
+            dashboardController.update().then(res => {
+                view.clearLoaders(alert.id);
+            });
+        });
+    } catch (error) {
+        toastr.error(`Alert not cleaned due to application exception: ${error}`, null, {
+            positionClass: 'toast-bottom-left'
+        });
+        view.clearLoaders(id);
     }
 };
 

@@ -22,6 +22,8 @@ export const selectors = {
     cancelButtonChildren: '.cancel-btn *',
     closeButton: '.close-btn',
     closeButtonChildren: '.close-btn *',
+    cleanButton: '.clean-btn',
+    cleanButtonChildren: '.clean-btn *',
     ignoreButton: '.ignore-btn',
     ignoreButtonChildren: '.ignore-btn *',
     closingFalsePositiveCheckbox: '#closing-false-positive',

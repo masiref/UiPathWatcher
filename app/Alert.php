@@ -17,7 +17,7 @@ class Alert extends Model
     protected $fillable = [
         'parent_id', 'alert_trigger_id', 'alert_trigger_definition_id', 'watched_automated_process_id',
         'reviewer_id', 'under_revision', 'revision_started_at', 'closed', 'closed_at', 'closing_description',
-        'messages', 'auto_closed'
+        'messages', 'auto_closed', 'cleaned'
     ];
 
     protected $casts = [
@@ -125,6 +125,20 @@ class Alert extends Model
 
         $alertCategories = AlertCategory::find($categories);
         $this->categories()->attach($alertCategories);
+        
+        return $this->save();
+     }
+
+    /**
+     * Clean alert
+     */
+     public function clean()
+     {
+        $this->closed_at = Carbon::now();
+        $this->under_revision = false;
+        $this->closed = true;
+        $this->cleaned = true;
+        $this->closing_description = 'Alert cleaned because not relevant anymore';
         
         return $this->save();
      }
