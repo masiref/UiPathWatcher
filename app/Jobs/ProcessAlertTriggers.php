@@ -143,12 +143,12 @@ class ProcessAlertTriggers implements ShouldQueue
                             break;
                         } else {
                             // if existing opened alert not alive for more than 5 minutes close it
-                            if ($existingAlert && $existingAlert->definition->level === $definition->level) {
+                            if ($existingAlert) {
                                 $date = Carbon::createFromFormat('Y-m-d H:i:s', $existingAlert->latest_heartbeat_at ?? $existingAlert->created_at);
                                 $delay = $date->diffInMinutes(Carbon::now());
 
-                                if ($delay > 5) {
-                                    $alert->update([
+                                if ($delay > 5 && !$existingAlert->alive) {
+                                    $existingAlert->update([
                                         'closed' => true,
                                         'closed_at' => Carbon::now(),
                                         'closing_description' => 'There is no applicable definition anymore after 5 minutes',

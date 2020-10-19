@@ -155,7 +155,7 @@ export const initDateTimeField = (alertDefinitionItem, ruleItem) => {
     if (effectiveStartTime) {
         startTime = effectiveStartTime.split(':');
     }
-    let effectiveEndTime = ruleItem.querySelector(calendarSelector).dataset.effectiveEndTndTime;
+    let effectiveEndTime = ruleItem.querySelector(calendarSelector).dataset.effectiveEndTime;
     if (effectiveEndTime) {
         endTime = effectiveEndTime.split(':');
     }

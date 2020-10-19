@@ -64,25 +64,14 @@ class AppController extends Controller
 
     public function debug(ElasticSearchService $elasticSearchService)
     {
-        $rule = AlertTriggerRule::find(5);
-        $watchedAutomatedProcess = WatchedAutomatedProcess::find(1);
-        $timeFrom = Carbon::createFromTimeString($watchedAutomatedProcess->running_period_time_from);
-        $timeUntil = Carbon::createFromTimeString($watchedAutomatedProcess->running_period_time_until);
-        $timeSlotFrom = Carbon::createFromTimeString($rule->time_slot_from);
-        if ($timeFrom->gt($timeSlotFrom)) {
-            dd('tf > tsf');
-            $rule->time_slot_from = $watchedAutomatedProcess->running_period_time_from;
-        }
-        $timeSlotUntil = Carbon::createFromTimeString($rule->time_slot_until);
-        if ($timeUntil->lt($timeSlotUntil)) {
-            dd('tu < tsu');
-            $rule->time_slot_until = $watchedAutomatedProcess->running_period_time_until;
-        }
+        // get existing opened alert attached to trigger
+        $existingAlert = AlertTrigger::find(1)->openedAlerts()->first();
+        $date = Carbon::createFromFormat('Y-m-d H:i:s', $existingAlert->latest_heartbeat_at ?? $existingAlert->created_at);
+        $delay = $date->diffInMinutes(Carbon::now());
+
         $result = [
-            'tf' => $timeFrom,
-            'tu' => $timeUntil,
-            'tsf' => $timeSlotFrom,
-            'tsu' => $timeSlotUntil
+            'alert' => $existingAlert,
+            'delay' => $delay
         ];
         return $result;
     }

@@ -77,6 +77,7 @@ export default class AlertTrigger {
                     const definitionId = definition.id;
                     const definitionRank = definition.rank;
                     const level = definition.level;
+                    const description = definition.description;
                     let rules = [];
                     definition.rules.forEach(rule => {
                         if (!rule.deleted) {
@@ -112,7 +113,7 @@ export default class AlertTrigger {
                             rules.push(alertTriggerRule);
                         }
                     });
-                    const alertTriggerDefinition = new AlertTriggerDefinition(definitionId, definitionRank, level, rules);
+                    const alertTriggerDefinition = new AlertTriggerDefinition(definitionId, definitionRank, level, rules, description);
                     definitions.push(alertTriggerDefinition);
                 }
             });
