@@ -31,6 +31,7 @@ export const selectors = {
             addButtonChildren: 'button.trigger-details--alert-definition--add-button *',
             deleteButton: 'button.trigger-details--alert-definition--delete-button',
             deleteButtonChildren: 'button.trigger-details--alert-definition--delete-button *',
+            descriptionInput: 'input.trigger-details--alert-definition--description-input',
             levelSelect: 'select.trigger-details--alert-definition--level-select',
             rule: {
                 list: '.rules-list',

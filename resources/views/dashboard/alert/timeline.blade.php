@@ -90,6 +90,7 @@
                         <p class="p-b-sm has-text-{{ $alert->definition->level }}">
                             <span class="icon"><i class="fas fa-dragon"></i></span>
                             Definition #<span class="has-text-weight-semibold">{{ str_pad($alert->definition->id, 4, '0', STR_PAD_LEFT) }}</span>
+                            {{ $alert->definition->description ? ' / ' . $alert->definition->description : '' }}
                         </p>
                         <table class="table is-bordered is-striped is-hoverable is-fullwidth">
                             <tbody>

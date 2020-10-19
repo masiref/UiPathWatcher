@@ -155,7 +155,8 @@ class ConfigurationAlertTriggerController extends Controller
         foreach ($definitions as $definition) {
             $alertTriggerDefinition = new AlertTriggerDefinition([
                 'rank' => $definition['rank'],
-                'level' => $definition['level']
+                'level' => $definition['level'],
+                'description' => $definition['description']
             ]);
 
             foreach ($definition['rules'] as $rule) {

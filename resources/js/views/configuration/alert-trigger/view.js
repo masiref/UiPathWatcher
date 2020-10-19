@@ -72,6 +72,11 @@ export const details = {
             }
         });
     },
+    updateDefinitionDescription: (alertDefinitionItem, description) => {
+        const descriptionInput = alertDefinitionItem.querySelector(selectors.details.alertDefinition.descriptionInput);
+        const valid = descriptionInput.value.trim() !== '';
+        _base.toggleSuccessDangerState(descriptionInput, valid);
+    },
     updateDefinitionLevel: (alertDefinitionItem, level) => {
         let state = `is-${level}`;
         let textState = `has-text-${level}`;

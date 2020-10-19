@@ -41,7 +41,8 @@ class AlertTriggerController extends Controller
         $alertTriggerDefinition = AlertTriggerDefinition::create([
             'alert_trigger_id' => $alertTrigger->id,
             'level' => $data['level'],
-            'rank' => $data['rank']
+            'rank' => $data['rank'],
+            'description' => $data['description']
         ]);
         $rules = $data['rules'];
         foreach ($rules as $rule) {
@@ -55,7 +56,8 @@ class AlertTriggerController extends Controller
         $alertTriggerDefinition = AlertTriggerDefinition::find($data['id']);
         $alertTriggerDefinition->update([
             'level' => $data['level'],
-            'rank' => $data['rank']
+            'rank' => $data['rank'],
+            'description' => $data['description']
         ]);
 
         $newRules = array();

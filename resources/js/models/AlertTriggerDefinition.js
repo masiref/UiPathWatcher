@@ -1,9 +1,10 @@
 export default class AlertTriggerDefinition {
-    constructor(id, rank, level = 'info', rules = []) {
+    constructor(id, rank, level = 'info', rules = [], description) {
         this.id = id;
         this.rank = rank;
         this.level = level;
         this.rules = rules;
+        this.description = description;
         this.changed = false;
     }
 
@@ -33,7 +34,7 @@ export default class AlertTriggerDefinition {
     }
 
     isValid() {
-        let valid = this.rules.length > 0;
+        let valid = this.rules.length > 0 && this.description && this.description !== '';
         this.rules.forEach(rule => {
             valid = valid && rule.valid;
         });

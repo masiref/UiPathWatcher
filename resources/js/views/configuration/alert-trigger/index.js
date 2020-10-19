@@ -505,6 +505,16 @@ const initAlertTriggerDetails = () => {
         form.querySelector(base.selectors.details.alertDefinition.section).addEventListener('keyup', (e) => {
             const target = e.target;
 
+            if (target.matches(base.selectors.details.alertDefinition.descriptionInput)) {
+                const description = target.value;
+                const item = target.closest(base.selectors.details.alertDefinition.item);
+                const rank = parseInt(item.dataset.rank);
+                view.details.updateDefinitionDescription(item, description);
+                let alertDefinition = details.currentAlertTrigger.findDefinition(rank);
+                alertDefinition.description = description;
+                view.details.updateDefinitionValidity(item, details.currentAlertTrigger.findDefinition(rank).isValid());
+            }
+
             if (target.matches(base.selectors.details.alertDefinition.rule.parameter)) {
                 const alertDefinitionItem = target.closest(base.selectors.details.alertDefinition.item);
                 const alertDefinitionRank = parseInt(alertDefinitionItem.dataset.rank);

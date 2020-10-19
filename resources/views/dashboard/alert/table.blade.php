@@ -6,6 +6,7 @@
             <th>Customer</th>
             <th><abbr title="Automated process">A. Pr.</abbr></th>
             <th>Title</th>
+            <th>Description</th>
             @if ($options['closed'])
                 <th>Closed at</th>
                 <th>False positive?</th>

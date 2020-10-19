@@ -14,6 +14,7 @@
         {{ $alert->watchedAutomatedProcess->code }}
     </td>
     <td>{{ $alert->trigger->title }}</td>
+    <td>{{ $alert->definition->description }}</td>
     @if ($options['closed'])
         <td data-order="{{ $alert->closedAtTimestamp() }}">
             {{ $alert->closedAt() }}

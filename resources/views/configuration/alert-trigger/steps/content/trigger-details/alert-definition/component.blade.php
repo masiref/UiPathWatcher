@@ -10,6 +10,9 @@
                 'iconRightColor' => $valid ? 'success' : 'danger'
             ])
 
+            <!-- definition description -->
+            @include('configuration.alert-trigger.steps.content.trigger-details.alert-definition.description')
+
             <!-- alert level -->
             @include('configuration.alert-trigger.steps.content.trigger-details.alert-definition.level')
 

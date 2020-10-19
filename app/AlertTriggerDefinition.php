@@ -12,7 +12,7 @@ class AlertTriggerDefinition extends Model
      * @var array
      */
     protected $fillable = [
-        'alert_trigger_id', 'level', 'rank', 'deleted',
+        'alert_trigger_id', 'description', 'level', 'rank', 'deleted',
         'deleted_at'
     ];
     /**
