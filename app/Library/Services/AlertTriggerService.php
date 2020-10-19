@@ -101,6 +101,7 @@ class AlertTriggerService {
                     foreach ($jobs as $job) {
                         $startTime = Carbon::parse($job['StartTime']);
                         $endTime = Carbon::parse($job['EndTime']);
+                        $jobKey = $job['Key'];
                         $duration = $startTime->diffInMinutes($endTime);
                         
                         // if there is at least one job with duration <= rule.duration
@@ -117,7 +118,7 @@ class AlertTriggerService {
                             } else {
                                 $minimalDuration = "$minimalDuration minute";
                             }
-                            array_push($messages, "Duration of $process on $robot is $duration. A minimal duration of $minimalDuration is expected.");
+                            array_push($messages, "Duration of job $jobKey with $process on $robot is $duration. A minimal duration of $minimalDuration is expected.");
                         }
                     }
                 }
@@ -166,6 +167,7 @@ class AlertTriggerService {
                     foreach ($jobs as $job) {
                         $startTime = Carbon::parse($job['StartTime']);
                         $endTime = Carbon::parse($job['EndTime']);
+                        $jobKey = $job['Key'];
                         $duration = $startTime->diffInMinutes($endTime);
                         
                         // if there is at least one job with duration >= rule.duration
@@ -182,7 +184,8 @@ class AlertTriggerService {
                             } else {
                                 $maximalDuration = "$maximalDuration minute";
                             }
-                            array_push($messages, "Duration of $process on $robot is $duration. A maximal duration of $maximalDuration is expected.");
+                            array_push($messages, "Duration of job $jobKey with $process on $robot is $duration. A maximal duration of $maximalDuration is expected.");
+                            break;
                         }
                     }
                 }
