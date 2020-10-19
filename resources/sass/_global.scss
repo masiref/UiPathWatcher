@@ -215,3 +215,13 @@ footer.footer {
 .tags-input.is-danger {
   border-color: $danger;
 }
+
+.level.title-level .level-left {
+  min-width: 0;
+  word-break: break-word;
+  flex-basis: 100%;
+}
+
+.level.title-level .level-left .title-item {
+  flex-shrink: 1;
+}

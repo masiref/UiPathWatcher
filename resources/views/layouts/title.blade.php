@@ -1,11 +1,11 @@
 <div class="level title-level {{ ($underlined ?? true) ? 'underlined' : '' }}" id="{{ $titleId ?? '' }}">
     <div class="level-left">
-        <div class="level-item">
+        <div class="level-item icon-item">
             <span class="icon is-{{ $iconSize ?? 'medium' }} has-text-{{ $color }}">
                 <i class="{{ $iconType ?? false ? $iconType : 'fas' }} {{ ($iconSize ?? 'medium') === 'medium' ? 'fa-2x' : '' }} fa-{{ $icon }}"></i>
             </span>
         </div>
-        <div class="level-item">
+        <div class="level-item title-item">
             <p class="title has-text-{{ $color }} is-{{ $titleSize ?? '2' }}">{!! $title !!}</p>
         </div>
     </div>
