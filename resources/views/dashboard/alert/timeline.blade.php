@@ -67,11 +67,26 @@
                                 'titleSize' => '5',
                                 'icon' => 'user',
                                 'iconSize' => 'small',
-                                'color' => 'info',
+                                'color' => $level,
                                 'underlined' => false
                             ])
                         </div>
                     @endif
+                    <div class="level-item">
+                        <span class="icon has-text-link">
+                            <i class="fas fa-chevron-circle-right"></i>
+                        </span>
+                    </div>
+                    <div class="level-item">
+                        @include('layouts.title', [
+                            'title' => 'Latest heartbeat ' . $alert->latest_heartbeat_at ? $alert->latestHeartbeatAtDiffForHumans() : $alert->createdAtDiffForHumans(),
+                            'titleSize' => '5',
+                            'icon' =>  $alert->alive ? 'heartbeat' : 'heart-broken',
+                            'iconSize' => 'small',
+                            'color' => $alert->alive ? 'success' : 'grey-light',
+                            'underlined' => false
+                        ])
+                    </div>
                 </div>
             </div>
             <div class="timeline is-centered">
@@ -93,13 +108,31 @@
                             {{ $alert->definition->description ? ' / ' . $alert->definition->description : '' }}
                         </p>
                         <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+                            <thead>
+                                <th>Date</th>
+                                <th>Event</th>
+                            </thead>
                             <tbody>
                                 @if ($alert->closed)
-                                    <tr class="is-selected"><td>Closed at {{ $alert->closedAt() }}: {{ $alert->closing_description }}</td></tr>
+                                    <tr class="is-selected">
+                                        @php
+                                            $date = $alert->closedAt();
+                                        @endphp
+                                        <td>{{ $date }}</td>
+                                        <td>Alert closed: {{ $alert->closing_description }}</td>
+                                    </tr>
                                 @endif
-                                @foreach (array_slice($alert->messages, 0, 10) as $message)
-                                    <tr><td>{{ $message }}</td></tr>
-                                @endforeach
+                                @php
+                                    $messages = $alert->messages;
+                                @endphp
+                                @if ($messages)
+                                    @foreach (array_slice($messages, 0, 10) as $event)
+                                        <tr>
+                                            <td>{{ is_array($event) && array_key_exists('date', $event) ? $event['date'] : '' }}</td>
+                                            <td>{{ is_array($event) ? (array_key_exists('message', $event) ? $event['message'] : $event[0]) : $event }}</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -116,10 +149,22 @@
                                 Definition #<span class="has-text-weight-semibold">{{ str_pad($ancestor->definition->id, 4, '0', STR_PAD_LEFT) }}</span>
                             </p>
                             <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+                                <thead>
+                                    <th>Date</th>
+                                    <th>Event</th>
+                                </thead>
                                 <tbody>
-                                    @foreach ($ancestor->messages as $message)
-                                        <tr><td>{{ $message }}</td></tr>
-                                    @endforeach
+                                    @php
+                                        $messages = $ancestor->messages;
+                                    @endphp
+                                    @if ($messages)
+                                        @foreach (array_slice($messages, 0, 10) as $event)
+                                            <tr>
+                                                <td>{{ is_array($event) && array_key_exists('date', $event) ? $event['date'] : '' }}</td>
+                                                <td>{{ is_array($event) ? (array_key_exists('message', $event) ? $event['message'] : $event[0]) : $event }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -133,10 +178,10 @@
                 </div>
             </div>
         </section>
-        <footer class="modal-card-foot">
+        <footer class="modal-card-foot has-background-{{ $level }}">
             <div class="field is-grouped has-addons">
                 <div class="control">
-                    <button class="button is-dark is-outlined cancel">
+                    <button class="button is-dark is-outlined is-inverted cancel">
                         <span class="icon is-small">
                             <i class="fas fa-times"></i>
                         </span>

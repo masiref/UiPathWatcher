@@ -22,10 +22,10 @@ export const markup = () => {
                         </div>
                     </form>
                 </section>
-                <footer class="modal-card-foot">
+                <footer class="modal-card-foot has-background-danger">
                     <div class="field is-grouped has-addons">
                         <div class="control">
-                            <button class="button is-danger validate">
+                            <button class="button is-danger is-inverted is-outlined validate">
                                 <span class="icon is-small">
                                     <i class="fas fa-power-off"></i>
                                 </span>
@@ -33,7 +33,7 @@ export const markup = () => {
                             </button>
                         </div>
                         <div class="control">
-                            <button class="button is-danger is-outlined cancel">
+                            <button class="button is-dark is-inverted is-outlined cancel">
                                 <span class="icon is-small">
                                     <i class="fas fa-window-close"></i>
                                 </span>

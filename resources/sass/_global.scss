@@ -15,18 +15,18 @@ html, body {
 }
 
 .hero.welcome.is-info {
-  background: #182B3A;
-  background: -webkit-linear-gradient(bottom right, #182B3A, #20A4F3);
-  background: -moz-linear-gradient(bottom right, #182B3A, #20A4F3);
-  background: -o-linear-gradient(bottom right, #182B3A, #20A4F3);
-  background: linear-gradient(to top left, #182B3A, #20A4F3);
+  background: #509FC5;
+  background: -webkit-linear-gradient(bottom right, #509FC5, $primary);
+  background: -moz-linear-gradient(bottom right, #509FC5, $primary);
+  background: -o-linear-gradient(bottom right, #509FC5, $primary);
+  background: linear-gradient(to top left, #509FC5, $primary);
 }
 .hero.welcome.is-dark {
-  background: #12100E;
-  background: -webkit-linear-gradient(bottom right, #12100E, #2B4162);
-  background: -moz-linear-gradient(bottom right, #12100E, #2B4162);
-  background: -o-linear-gradient(bottom right, #12100E, #2B4162);
-  background: linear-gradient(to top left, #12100E, #2B4162);
+  background: #08090D;
+  background: -webkit-linear-gradient(bottom right, #08090D, #1A1E26);
+  background: -moz-linear-gradient(bottom right, #08090D, #1A1E26);
+  background: -o-linear-gradient(bottom right, #08090D, #1A1E26);
+  background: linear-gradient(to top left, #08090D, #1A1E26);
 }
 .hero.welcome.is-info .title, .hero.welcome.is-info .subtitle {
   color: $white-bis;
@@ -45,22 +45,22 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, 
 }
 
 .menu-label {
-  color: #8F99A3;
+  color: $grey-dark;
   letter-spacing: 1.3;
   font-weight: 700;
 }
 .menu-list a {
-  color: #0F1D38;
+  color: $dark;
   font-size: 14px;
   font-weight: 700;
 }
 .menu-list a:hover {
   background-color: transparent;
-  color: #276cda;
+  color: $info;
 }
 .menu-list a.is-active {
   background-color: transparent;
-  color: #276cda;
+  color: $info;
   font-weight: 700;
 }
 
@@ -142,28 +142,28 @@ article.watched-automated-process-box .media-content {
 
 .info-tiles .notification.is-purple {
   color: $white;
-  background-color: #a4508b;
-  background-image: -webkit-linear-gradient(bottom right, #a4508b 0%, #5f0a87 74%);
-  background-image: -moz-linear-gradient(bottom right, #a4508b 0%, #5f0a87 74%);
-  background-image: -o-linear-gradient(bottom right, #a4508b 0%, #5f0a87 74%);
-  background-image: linear-gradient(to top left, #a4508b 0%, #5f0a87 74%);
+  background-color: $purple;
+  background-image: -webkit-linear-gradient(bottom right, $purple 0%, #150034 74%);
+  background-image: -moz-linear-gradient(bottom right, $purple 0%, #150034 74%);
+  background-image: -o-linear-gradient(bottom right, $purple 0%, #150034 74%);
+  background-image: linear-gradient(to top left, $purple 0%, #150034 74%);
 }
 
 .info-tiles .notification.is-grey {
-  background-color: #d9d9d9;
-  background-image: -webkit-linear-gradient(bottom right, #d9d9d9 0%, #f6f2f2 74%);
-  background-image: -moz-linear-gradient(bottom right, #d9d9d9 0%, #f6f2f2 74%);
-  background-image: -o-linear-gradient(bottom right, #d9d9d9 0%, #f6f2f2 74%);
-  background-image: linear-gradient(to top left, #d9d9d9 0%, #f6f2f2 74%);
+  background-color: $grey-light;
+  background-image: -webkit-linear-gradient(bottom right, $grey-light 0%, $grey-lighter 74%);
+  background-image: -moz-linear-gradient(bottom right, $grey-light 0%, $grey-lighter 74%);
+  background-image: -o-linear-gradient(bottom right, $grey-light 0%, $grey-lighter 74%);
+  background-image: linear-gradient(to top left, $grey-light 0%, $grey-lighter 74%);
 }
 
 .info-tiles .notification.is-blue {
   color: $white;
   background: #007EA7;
-  background: -webkit-linear-gradient(bottom right, #007EA7, #80CED7);
-  background: -moz-linear-gradient(bottom right, #007EA7, #80CED7);
-  background: -o-linear-gradient(bottom right, #007EA7, #80CED7);
-  background: linear-gradient(to top left, #007EA7, #80CED7);
+  background: -webkit-linear-gradient(bottom right, #007EA7, $primary);
+  background: -moz-linear-gradient(bottom right, #007EA7, $primary);
+  background: -o-linear-gradient(bottom right, #007EA7, $primary);
+  background: linear-gradient(to top left, #007EA7, $primary);
 }
 
 .level.title-level.underlined {
@@ -207,8 +207,8 @@ article.watched-automated-process-box .media-content {
 
 footer.footer {
   margin-top: 3rem;
-  box-shadow: 0 -2px 0 0 whitesmoke;
-  background-color: white;
+  box-shadow: 0 -2px 0 0 $white-bis;
+  background-color: $white;
   padding: 6rem 1.5rem 6rem;
 }
 

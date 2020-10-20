@@ -153,7 +153,7 @@ class ProcessAlertTriggers implements ShouldQueue
                                 $date = Carbon::createFromFormat('Y-m-d H:i:s', $existingAlert->latest_heartbeat_at ?? $existingAlert->created_at);
                                 $delay = $date->diffInMinutes(Carbon::now());
 
-                                if ($delay > 5 && !$existingAlert->alive) {
+                                if ($delay > env('APP_ALERT_LIFETTIME_WHEN_SILENT') && !$existingAlert->alive) {
                                     $existingAlert->update([
                                         'closed' => true,
                                         'closed_at' => Carbon::now(),
@@ -172,16 +172,21 @@ class ProcessAlertTriggers implements ShouldQueue
                     }
                 } else {
                     // running period is over
-                    $existingMessages = $existingAlert->messages;
-                    $heartbeat = Carbon::now();
-                    $messages  = array_merge([
-                        "{$now->format('d/m/Y H:i:s')}: automated watched process running period is over"
-                    ], $existingMessages);
-                    $existingAlert->update([
-                        'messages' => $messages,
-                        'alive' => false,
-                        'latest_heartbeat_at' => $heartbeat
-                    ]);
+                    foreach ($trigger->alerts as $alert) {
+                        $existingMessages = $alert->messages;
+                        $heartbeat = Carbon::now();
+                        $messages  = array_merge([
+                            [
+                                "{$now->format('d/m/Y H:i:s')}",
+                                "automated watched process running period is now over, bye"
+                            ]
+                        ], $existingMessages ?? array());
+                        $alert->update([
+                            'messages' => $messages,
+                            'alive' => false,
+                            'latest_heartbeat_at' => $heartbeat
+                        ]);
+                    }
                 }
             }
         }

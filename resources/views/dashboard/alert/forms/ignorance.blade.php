@@ -1,7 +1,7 @@
 <div id="alert-ignorance-modal" class="modal">
     <div class="modal-background"></div>
     <div class="modal-card modal-content">
-        <header class="modal-card-head has-background-{{ $alert->definition->level }}">
+        <header class="modal-card-head has-background-dark">
             <p class="modal-card-title has-text-light">
                 <span class="icon"><i class="fas fa-burn"></i></span> Alert trigger ignorance
             </p>
@@ -29,6 +29,15 @@
                                 <input class="input is-static" type="text" value="{{ $alert->createdAt() }}" readonly>
                             </div>
                         </div>
+                        <div class="field">
+                            <label class="label">
+                                <span class="icon"><i class="fas fa-signal"></i></span>
+                                <span>Level</span>
+                            </label>
+                            <div class="control">
+                                <span class="tag is-info is-{{ $alert->definition->level }}">{{ ucfirst($alert->definition->level) }}</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="column">
                         <div class="field">
@@ -49,9 +58,21 @@
                                 <input class="input is-static" type="text" value="{{ $alert->trigger->title }}" readonly>
                             </div>
                         </div>
+                        <div class="field">
+                            <label class="label">
+                                <span class="icon"><i class="fas fa-procedures"></i></span>
+                                <span>Condition</span>
+                            </label>
+                            <div class="control">
+                                <span class="icon {{ $alert->alive ? 'heartbeat has-text-success' : 'heart-broken has-text-grey-light' }}">
+                                    <i class="fas fa-heartbeat"></i>
+                                </span>
+                                {{ $alert->latest_heartbeat_at ? $alert->latestHeartbeatAtDiffForHumans() : $alert->createdAtDiffForHumans() }}
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <article class="message is-info is-small">
+                <article class="message is-{{ $alert->definition->level }} is-small">
                     <div class="message-body">
                         Revision started on {{ $alert->revisionStartedAt() }}
                         <small>
@@ -76,7 +97,7 @@
                         </select>
                     </div>
                     <div class="control">
-                        <button id="ignorance-add-keyword" class="button is-info" disabled>
+                        <button id="ignorance-add-keyword" class="button is-primary" disabled>
                             <span class="icon is-small">
                                 <i class="fas fa-plus-circle"></i>
                             </span>
@@ -95,10 +116,10 @@
                 </div>
             </form>
         </section>
-        <footer class="modal-card-foot">
+        <footer class="modal-card-foot has-background-dark">
             <div class="field is-grouped has-addons">
                 <div class="control">
-                    <button class="button is-success validate">
+                    <button class="button is-success is-outlined is-inverted validate">
                         <span class="icon is-small">
                             <i class="fas fa-eye-slash"></i>
                         </span>
@@ -106,7 +127,7 @@
                     </button>
                 </div>
                 <div class="control">
-                    <button class="button is-danger is-outlined cancel">
+                    <button class="button is-dark is-outlined is-inverted cancel">
                         <span class="icon is-small">
                             <i class="fas fa-window-close"></i>
                         </span>

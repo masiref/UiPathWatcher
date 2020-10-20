@@ -35,7 +35,7 @@
                         <i class="fas fa-broom"></i>
                     </span>
                 </button>
-                <button class="button is-light has-tooltip-bottom ignore-btn {{ $small ?? '' ? 'is-small' : '' }}"
+                <button class="button is-dark has-tooltip-bottom ignore-btn {{ $small ?? '' ? 'is-small' : '' }}"
                     data-tooltip="Ignore trigger"
                     data-id="{{ $alert->id }}">
                     <span class="icon is-large">

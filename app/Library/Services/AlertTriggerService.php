@@ -118,7 +118,10 @@ class AlertTriggerService {
                             } else {
                                 $minimalDuration = "$minimalDuration minute";
                             }
-                            array_push($messages, "{$date->format('d/m/Y H:i:s')}: duration of job $jobKey with $process on $robot is $duration. A minimal duration of $minimalDuration is expected.");
+                            array_push($messages, [
+                                "{$date->format('d/m/Y H:i:s')}",
+                                "duration of job $jobKey with $process on $robot is $duration. A minimal duration of $minimalDuration is expected."
+                            ]);
                         }
                     }
                 }
@@ -184,7 +187,10 @@ class AlertTriggerService {
                             } else {
                                 $maximalDuration = "$maximalDuration minute";
                             }
-                            array_push($messages, "{$date->format('d/m/Y H:i:s')}: duration of job $jobKey with $process on $robot is $duration. A maximal duration of $maximalDuration is expected.");
+                            array_push($messages, [
+                                "{$date->format('d/m/Y H:i:s')}",
+                                "duration of job $jobKey with $process on $robot is $duration. A maximal duration of $maximalDuration is expected."
+                            ]);
                             break;
                         }
                     }
@@ -248,7 +254,10 @@ class AlertTriggerService {
                             $percentage = number_format(count($faultedJobs) / count($allJobs) * 100);
                             if ($percentage >= $rule->parameters['maximalPercentage']) {
                                 $verified = true;
-                                array_push($messages, "{$date->format('d/m/Y H:i:s')}: faulted jobs percentage of $process on $robot is $percentage%. A maximum of {$rule->parameters['maximalPercentage']}% is expected.");
+                                array_push($messages, [
+                                    "{$date->format('d/m/Y H:i:s')}",
+                                    "faulted jobs percentage of $process on $robot is $percentage%. A maximum of {$rule->parameters['maximalPercentage']}% is expected."
+                                ]);
                             }
                         }
                     }
@@ -311,7 +320,10 @@ class AlertTriggerService {
                         $percentage = number_format(count($failedQueueItems) / count($allQueueItems) * 100);
                         if ($percentage >= $rule->parameters['maximalPercentage']) {
                             $verified = true;
-                            array_push($messages, "{$date->format('d/m/Y H:i:s')}: failed queue items percentage of $queue is $percentage%. A maximum of {$rule->parameters['maximalPercentage']}% is expected.");
+                            array_push($messages, [
+                                "{$date->format('d/m/Y H:i:s')}",
+                                "failed queue items percentage of $queue is $percentage%. A maximum of {$rule->parameters['maximalPercentage']}% is expected."
+                            ]);
                         }
                     }
                 }
@@ -362,15 +374,24 @@ class AlertTriggerService {
                     $count = $result['count'];
                     if ($rule->parameters['lowerCount'] === 0 && $rule->parameters['lowerCount'] === $count && !$rule->parameters['higherCount']) {
                         $verified = true;
-                        array_push($messages, "{$date->format('d/m/Y H:i:s')}: number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is equal to 0 as expected");
+                        array_push($messages, [
+                            "{$date->format('d/m/Y H:i:s')}",
+                            "number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is equal to 0 as expected"
+                        ]);
                     }
                     if ($rule->parameters['lowerCount'] > 0 && $count <= $rule->parameters['lowerCount']) {
                         $verified = true;
-                        array_push($messages, "{$date->format('d/m/Y H:i:s')}: number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is less than or equal to expected value [$count <= {$rule->parameters['lowerCount']}]");
+                        array_push($messages, [
+                            "{$date->format('d/m/Y H:i:s')}",
+                            "number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is less than or equal to expected value [$count <= {$rule->parameters['lowerCount']}]"
+                        ]);
                     }
                     if ($rule->parameters['higherCount'] && $count >= $rule->parameters['higherCount']) {
                         $verified = true;
-                        array_push($messages, "{$date->format('d/m/Y H:i:s')}: number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is greater than or equal to expected value [$count >= {$rule->parameters['higherCount']}]");
+                        array_push($messages, [
+                            "{$date->format('d/m/Y H:i:s')}",
+                            "number of messages returned for process $process on robot $robot with query {$rule->parameters['searchQuery']} is greater than or equal to expected value [$count >= {$rule->parameters['higherCount']}]"
+                        ]);
                     }
                 }
             }
@@ -425,28 +446,40 @@ class AlertTriggerService {
 
                     if ($comparisonOperator === 'not-equal' && leftCount != $rightCount) {
                         $verified = true;
-                        array_push($messages,
-                            "{$date->format('d/m/Y H:i:s')}: number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is not equal to that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount != $rightCount]");
+                        array_push($messages, [
+                            "{$date->format('d/m/Y H:i:s')}",
+                            "number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is not equal to that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount != $rightCount]"
+                        ]);
                     } elseif ($comparisonOperator === 'less' && $leftCount < $rightCount) {
                         $verified = true;
-                        array_push($messages,
-                            "{$date->format('d/m/Y H:i:s')}: number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is less than that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount < $rightCount]");
+                        array_push($messages, [
+                            "{$date->format('d/m/Y H:i:s')}",
+                            "number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is less than that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount < $rightCount]"
+                        ]);
                     } elseif ($comparisonOperator === 'less-equal' && $leftCount <= $rightCount) {
                         $verified = true;
-                        array_push($messages,
-                            "{$date->format('d/m/Y H:i:s')}: number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is less than or equal to that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount <= $rightCount]");
+                        array_push($messages, [
+                            "{$date->format('d/m/Y H:i:s')}",
+                            "number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is less than or equal to that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount <= $rightCount]"
+                        ]);
                     } elseif ($comparisonOperator === 'equal' && $leftCount == $rightCount) {
                         $verified = true;
-                        array_push($messages,
-                            "{$date->format('d/m/Y H:i:s')}: number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is equal to that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount == $rightCount]");
+                        array_push($messages, [
+                            "{$date->format('d/m/Y H:i:s')}",
+                            "number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is equal to that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount == $rightCount]"
+                        ]);
                     } elseif ($comparisonOperator === 'greater-equal' && $leftCount >= $rightCount) {
                         $verified = true;
-                        array_push($messages,
-                            "{$date->format('d/m/Y H:i:s')}: number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is greater than or equal to that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount >= $rightCount]");
+                        array_push($messages, [
+                            "{$date->format('d/m/Y H:i:s')}",
+                            "number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is greater than or equal to that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount >= $rightCount]"
+                        ]);
                     } elseif ($comparisonOperator === 'greater' && $leftCount > $rightCount) {
                         $verified = true;
-                        array_push($messages,
-                            "{$date->format('d/m/Y H:i:s')}: number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is greater than that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount > $rightCount]");
+                        array_push($messages, [
+                            "{$date->format('d/m/Y H:i:s')}",
+                            "number of messages returned for process $process on robot $robot with query {$rule->parameters['leftSearchQuery']} is greater than that for query {$rule->parameters['rightSearchQuery']} as expected [$leftCount > $rightCount]"
+                        ]);
                     }
                 }
             }
