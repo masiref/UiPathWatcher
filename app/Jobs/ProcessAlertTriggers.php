@@ -96,7 +96,6 @@ class ProcessAlertTriggers implements ShouldQueue
                             if (!$existingAlert) {
                                 // if there is no existing alert
                                 // creation of a new alert
-                                // TODO if the last alert was closed within 15 minutes do not create a new alert
                                 $latestClosedAlert = $trigger->closedAlerts()->last();
                                 if (!$latestClosedAlert || ($latestClosedAlert && Carbon::createFromFormat('Y-m-d H:i:s', $latestClosedAlert->closed_at)->diffInMinutes(Carbon::now()) > 10)) {
                                     $alert = Alert::create([
@@ -164,12 +163,25 @@ class ProcessAlertTriggers implements ShouldQueue
                                     ]);
                                 } else {
                                     $existingAlert->update([
-                                        'alive' => false
+                                        'alive' => false,
+                                        'latest_heartbeat_at' => Carbon::now()
                                     ]);
                                 }
                             }
                         }
                     }
+                } else {
+                    // running period is over
+                    $existingMessages = $existingAlert->messages;
+                    $heartbeat = Carbon::now();
+                    $messages  = array_merge([
+                        "{$now->format('d/m/Y H:i:s')}: automated watched process running period is over"
+                    ], $existingMessages);
+                    $existingAlert->update([
+                        'messages' => $messages,
+                        'alive' => false,
+                        'latest_heartbeat_at' => $heartbeat
+                    ]);
                 }
             }
         }
