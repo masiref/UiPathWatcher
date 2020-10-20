@@ -95,7 +95,7 @@
                         <table class="table is-bordered is-striped is-hoverable is-fullwidth">
                             <tbody>
                                 @if ($alert->closed)
-                                    <tr class="is-selected"><td>{{ $alert->closing_description }}</td></tr>
+                                    <tr class="is-selected"><td>Closed at {{ $alert->closedAt() }}: {{ $alert->closing_description }}</td></tr>
                                 @endif
                                 @foreach ($alert->messages as $message)
                                     <tr><td>{{ $message }}</td></tr>
