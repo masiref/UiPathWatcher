@@ -129,7 +129,10 @@ class ProcessAlertTriggers implements ShouldQueue
                                 ]);
                             } else {
                                 // alert of same definition level => update heartbeat
+                                $existingMessages = $existingAlert->messages;
+                                $messages  = array_merge($messages, $existingMessages);
                                 $existingAlert->update([
+                                    'messages' => $messages,
                                     'alive' => true,
                                     'latest_heartbeat_at' => Carbon::now()
                                 ]);

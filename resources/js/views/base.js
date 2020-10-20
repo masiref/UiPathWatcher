@@ -104,7 +104,7 @@ export const isDashboardRelatedURL = url => {
 };
 
 export const getClientIDFromURL = url => {
-    let isRelated = /.*\/client\/(\d)+$/;
+    let isRelated = /.*\/client\/(\d+)$/;
     if (isRelated.test(url)) {
         return url.match(isRelated)[1];
     }
