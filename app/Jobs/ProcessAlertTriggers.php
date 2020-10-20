@@ -173,19 +173,21 @@ class ProcessAlertTriggers implements ShouldQueue
                 } else {
                     // running period is over
                     foreach ($trigger->alerts as $alert) {
-                        $existingMessages = $alert->messages;
-                        $heartbeat = Carbon::now();
-                        $messages  = array_merge([
-                            [
-                                "{$now->format('d/m/Y H:i:s')}",
-                                "Automated watched process running period is now over, bye"
-                            ]
-                        ], $existingMessages ?? array());
-                        $alert->update([
-                            'messages' => $messages,
-                            'alive' => false,
-                            'latest_heartbeat_at' => $heartbeat
-                        ]);
+                        if ($alert->alive) {
+                            $existingMessages = $alert->messages;
+                            $heartbeat = Carbon::now();
+                            $messages  = array_merge([
+                                [
+                                    "{$now->format('d/m/Y H:i:s')}",
+                                    "Automated watched process running period is now over, bye"
+                                ]
+                            ], $existingMessages ?? array());
+                            $alert->update([
+                                'messages' => $messages,
+                                'alive' => false,
+                                'latest_heartbeat_at' => $heartbeat
+                            ]);
+                        }
                     }
                 }
             }
