@@ -97,7 +97,7 @@
                                 @if ($alert->closed)
                                     <tr class="is-selected"><td>Closed at {{ $alert->closedAt() }}: {{ $alert->closing_description }}</td></tr>
                                 @endif
-                                @foreach ($alert->messages as $message)
+                                @foreach (array_slice($alert->messages, 10) as $message)
                                     <tr><td>{{ $message }}</td></tr>
                                 @endforeach
                             </tbody>
