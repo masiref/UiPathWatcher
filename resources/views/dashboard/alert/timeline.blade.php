@@ -128,7 +128,7 @@
                                 @if ($messages)
                                     @foreach (array_slice($messages, 0, 10) as $event)
                                         <tr>
-                                            <td>{{ is_array($event) ? $event[0] : ($event ?? '') }}</td>
+                                            <td>{{ is_array($event) ? $event[0] : '' }}</td>
                                             <td>{{ is_array($event) ? $event[1] : $event }}</td>
                                         </tr>
                                     @endforeach
@@ -160,7 +160,7 @@
                                     @if ($messages)
                                         @foreach (array_slice($messages, 0, 10) as $event)
                                             <tr>
-                                                <td>{{ is_array($event) ? $event[0] : ($event ?? '') }}</td>
+                                                <td>{{ is_array($event) ? $event[0] : '' }}</td>
                                                 <td>{{ is_array($event) ? $event[1] : $event }}</td>
                                             </tr>
                                         @endforeach
