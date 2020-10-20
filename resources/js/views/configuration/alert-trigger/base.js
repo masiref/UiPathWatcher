@@ -26,7 +26,7 @@ export const selectors = {
             title: '.alert-definition-item .title-level p.title',
             titleIcon: '.alert-definition-item .title-level span.icon',
             titleRank: 'span.trigger-details--alert-definition--rank',
-            validityIcon: '.alert-definition-item .title-level .level-right span.icon',
+            validityIcon: '.alert-definition-item .title-level .right-icon-item span.icon',
             addButton: 'button.trigger-details--alert-definition--add-button',
             addButtonChildren: 'button.trigger-details--alert-definition--add-button *',
             deleteButton: 'button.trigger-details--alert-definition--delete-button',

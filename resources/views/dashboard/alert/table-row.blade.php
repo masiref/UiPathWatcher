@@ -1,8 +1,14 @@
 <tr id="alert-row-{{ $alert->id }}">
-    <td data-order="{{ $alert->levelOrder() }}">
+    <td class="has-tooltip-right" data-order="{{ $alert->levelOrder() }}"
+        data-tooltip="Latest heartbeat {{ $alert->latest_heartbeat_at ? $alert->latestHeartbeatAtDiffForHumans() : $alert->createdAtDiffForHumans() }}">
         <span class="icon has-text-{{ $alert->definition->level }}">
             <i class="fas fa-burn"></i>
         </span>
+        @if (!$alert->closed)
+            <span class="icon heartbeat has-text-{{ $alert->alive ? 'success' : 'grey-light' }}">
+                <i class="fas fa-heartbeat"></i>
+            </span>
+        @endif
     </td>
     <td>#{{ str_pad($alert->id, 4, '0', STR_PAD_LEFT) }}</td>
     <td class="has-tooltip-right"

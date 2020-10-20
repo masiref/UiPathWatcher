@@ -29,6 +29,7 @@
 @import '~@fortawesome/fontawesome-free/scss/brands';
 
 // Custom styles
-@import './_global.scss';
+@import './_animations';
+@import './_global';
 @import './_nav.css';
 @import './_spacing';

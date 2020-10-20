@@ -263,6 +263,39 @@ class Alert extends Model
         return 0;
     }
 
+     public function latestHeartbeatAt()
+    {
+        if ($this->latest_heartbeat_at) {
+            $date = Carbon::createFromFormat('Y-m-d H:i:s', $this->latest_heartbeat_at);
+            return $date->format('d/m/Y H:i:s');
+        }
+        return '';
+    }
+
+    /**
+     * Get alert's closing date difference from now for humans (eg: 1 hour ago)
+     */
+    public function latestHeartbeatAtDiffForHumans()
+    {
+        if ($this->latest_heartbeat_at) {
+            $date = Carbon::createFromFormat('Y-m-d H:i:s', $this->latest_heartbeat_at);
+            return $date->diffForHumans(Carbon::now());
+        }
+        return '';
+    }
+
+    /**
+     * Get alert's revision start date as a timestamp
+     */
+    public function latestHeartbeatAtTimestamp()
+    {
+        if ($this->latest_heartbeat_at) {
+            $date = Carbon::createFromFormat('Y-m-d H:i:s', $this->latest_heartbeat_at);
+            return $date->getTimestamp();
+        }
+        return 0;
+    }
+
     /**
      * Get alert's related client
      */

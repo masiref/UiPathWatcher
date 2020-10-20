@@ -225,3 +225,9 @@ footer.footer {
 .level.title-level .level-left .title-item {
   flex-shrink: 1;
 }
+
+.heartbeat {
+  animation-name: heartbeat;
+  animation-iteration-count: infinite;
+  animation-duration: 2s;
+}

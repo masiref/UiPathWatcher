@@ -8,14 +8,14 @@
         <div class="level-item title-item">
             <p class="title has-text-{{ $color }} is-{{ $titleSize ?? '2' }}">{!! $title !!}</p>
         </div>
+            @if ($iconRight ?? false)
+                <div class="level-item right-icon-item">
+                    <span class="icon is-{{ $iconRightSize ?? 'medium' }} has-text-{{ $iconRightColor }}">
+                        <i class="{{ $iconRightType ?? false ? $iconRightType : 'fas' }} {{ ($iconRightSize ?? 'medium') === 'medium' ? 'fa-2x' : '' }} fa-{{ $iconRight }}"></i>
+                    </span>
+                </div>
+            @endif
     </div>
-    @if ($iconRight ?? false)
-        <div class="level-right">
-            <span class="icon is-{{ $iconRightSize ?? 'medium' }} has-text-{{ $iconRightColor }}">
-                <i class="{{ $iconRightType ?? false ? $iconRightType : 'fas' }} {{ ($iconRightSize ?? 'medium') === 'medium' ? 'fa-2x' : '' }} fa-{{ $iconRight }}"></i>
-            </span>
-        </div>
-    @endif
 </div>
 @if ($subtitle ?? false)
     <p
