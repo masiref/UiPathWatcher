@@ -8,7 +8,7 @@
                 <span class="icon is-medium has-text-{{ $watchedAutomatedProcess->higherAlertLevel() }}">
                     <i class="fas fa-binoculars"></i>
                 </span>
-                <strong>{{ $watchedAutomatedProcess->name }}</strong>
+                <strong>{{ $watchedAutomatedProcess->code }} | {{ $watchedAutomatedProcess->name }}</strong>
             </p>
 
             <div class="is-divider" data-content="General information"></div>
