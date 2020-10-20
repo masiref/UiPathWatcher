@@ -53,6 +53,14 @@ class AlertTrigger extends Model
     }
 
     /**
+     * The closed alerts that belong to the trigger
+     */
+    public function closedAlerts()
+    {
+        return $this->alerts()->get()->where('closed', true)->where('parent', null)->sortBy('closed_at');
+    }
+
+    /**
      * Get the watched automated process that owns the alert trigger.
      */
     public function watchedAutomatedProcess()

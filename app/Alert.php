@@ -252,7 +252,7 @@ class Alert extends Model
     }
 
     /**
-     * Get alert's revision start date as a timestamp
+     * Get alert's closed date as a timestamp
      */
     public function closedAtTimestamp()
     {
@@ -263,6 +263,9 @@ class Alert extends Model
         return 0;
     }
 
+    /**
+     * Get alert's latest heartbeat date as a string
+     */
      public function latestHeartbeatAt()
     {
         if ($this->latest_heartbeat_at) {
@@ -273,7 +276,7 @@ class Alert extends Model
     }
 
     /**
-     * Get alert's closing date difference from now for humans (eg: 1 hour ago)
+     * Get alert's latest heartbeat date difference from now for humans (eg: 1 hour ago)
      */
     public function latestHeartbeatAtDiffForHumans()
     {
@@ -285,7 +288,7 @@ class Alert extends Model
     }
 
     /**
-     * Get alert's revision start date as a timestamp
+     * Get alert's latest heartbeat  date as a timestamp
      */
     public function latestHeartbeatAtTimestamp()
     {

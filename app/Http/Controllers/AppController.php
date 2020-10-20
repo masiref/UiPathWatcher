@@ -64,16 +64,7 @@ class AppController extends Controller
 
     public function debug(ElasticSearchService $elasticSearchService)
     {
-        // get existing opened alert attached to trigger
-        $existingAlert = AlertTrigger::find(1)->openedAlerts()->first();
-        $date = Carbon::createFromFormat('Y-m-d H:i:s', $existingAlert->latest_heartbeat_at ?? $existingAlert->created_at);
-        $delay = $date->diffInMinutes(Carbon::now());
-
-        $result = [
-            'alert' => $existingAlert,
-            'delay' => $delay
-        ];
-        return $result;
+        return "debug!";
     }
 
     public function debugRule($id = 1, AlertTriggerService $service)
