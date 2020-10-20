@@ -17,7 +17,7 @@ class Alert extends Model
     protected $fillable = [
         'parent_id', 'alert_trigger_id', 'alert_trigger_definition_id', 'watched_automated_process_id',
         'reviewer_id', 'under_revision', 'revision_started_at', 'closed', 'closed_at', 'closing_description',
-        'messages', 'auto_closed', 'alive', 'cleaned'
+        'messages', 'auto_closed', 'alive', 'cleaned', 'latest_heartbeat_at'
     ];
 
     protected $casts = [
