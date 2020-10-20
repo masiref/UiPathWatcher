@@ -128,8 +128,8 @@
                                 @if ($messages)
                                     @foreach (array_slice($messages, 0, 10) as $event)
                                         <tr>
-                                            <td>{{ is_array($event) && array_key_exists('date', $event) ? $event['date'] : '' }}</td>
-                                            <td>{{ is_array($event) ? (array_key_exists('message', $event) ? $event['message'] : $event[0]) : $event }}</td>
+                                            <td>{{ is_array($event) ? $event[0] : ($event ?? '') }}</td>
+                                            <td>{{ is_array($event) ? $event[1] : $event }}</td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -160,8 +160,8 @@
                                     @if ($messages)
                                         @foreach (array_slice($messages, 0, 10) as $event)
                                             <tr>
-                                                <td>{{ is_array($event) && array_key_exists('date', $event) ? $event['date'] : '' }}</td>
-                                                <td>{{ is_array($event) ? (array_key_exists('message', $event) ? $event['message'] : $event[0]) : $event }}</td>
+                                                <td>{{ is_array($event) ? $event[0] : ($event ?? '') }}</td>
+                                                <td>{{ is_array($event) ? $event[1] : $event }}</td>
                                             </tr>
                                         @endforeach
                                     @endif

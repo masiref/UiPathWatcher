@@ -125,7 +125,7 @@ class ProcessAlertTriggers implements ShouldQueue
                                 $existingAlert->update([
                                     'closed' => true,
                                     'closed_at' => $alert->created_at,
-                                    'closing_description' => 'Parent alert created',
+                                    'closing_description' => 'parent alert created',
                                     'auto_closed' => true,
                                     'under_revision' => false,
                                     'parent_id' => $alert->id
@@ -157,7 +157,7 @@ class ProcessAlertTriggers implements ShouldQueue
                                     $existingAlert->update([
                                         'closed' => true,
                                         'closed_at' => Carbon::now(),
-                                        'closing_description' => 'There is no applicable definition anymore after 5 minutes',
+                                        'closing_description' => 'there is no applicable definition anymore after 5 minutes',
                                         'auto_closed' => true,
                                         'under_revision' => false
                                     ]);
@@ -178,7 +178,7 @@ class ProcessAlertTriggers implements ShouldQueue
                         $messages  = array_merge([
                             [
                                 "{$now->format('d/m/Y H:i:s')}",
-                                "automated watched process running period is now over, bye"
+                                "Automated watched process running period is now over, bye"
                             ]
                         ], $existingMessages ?? array());
                         $alert->update([
