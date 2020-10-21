@@ -138,7 +138,7 @@ class Alert extends Model
         $this->under_revision = false;
         $this->closed = true;
         $this->cleaned = true;
-        $this->closing_description = 'Alert cleaned because not relevant anymore';
+        $this->closing_description = 'alert cleaned because not relevant anymore';
         
         return $this->save();
      }
