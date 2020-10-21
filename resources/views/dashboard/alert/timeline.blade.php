@@ -79,7 +79,7 @@
                     </div>
                     <div class="level-item">
                         @include('layouts.title', [
-                            'title' => 'Latest heartbeat ' . $alert->latest_heartbeat_at ? $alert->latestHeartbeatAtDiffForHumans() : $alert->createdAtDiffForHumans(),
+                            'title' => 'Latest heartbeat ' . ($alert->latest_heartbeat_at ? $alert->latestHeartbeatAtDiffForHumans() : $alert->createdAtDiffForHumans()),
                             'titleSize' => '5',
                             'icon' =>  $alert->alive ? 'heartbeat' : 'heart-broken',
                             'iconSize' => 'small',
