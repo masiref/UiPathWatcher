@@ -22,11 +22,6 @@
     <td>{{ $alert->trigger->title }}</td>
     <td>{{ $alert->definition->description }}</td>
     @if ($options['closed'])
-        <td data-order="{{ $alert->closedAtTimestamp() }}">
-            {{ $alert->closedAt() }}
-        </td>
-        <td>{{ $alert->false_positive ? 'Yes' : 'No' }}</td>
-        <td>{{ $alert->ignored ? 'Yes' : 'No' }}</td>
         <td>{{ $alert->categories->pluck('label')->join(', ') }}</td>
     @endif
     <td>

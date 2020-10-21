@@ -2,15 +2,12 @@
     <thead>
         <tr>
             <th>Level</th>
-            <th>#</th>
+            <th>#ID</th>
             <th>Customer</th>
-            <th><abbr title="Automated process">A. Pr.</abbr></th>
+            <th><abbr title="Watched utomated process">Process</abbr></th>
             <th>Title</th>
             <th>Description</th>
             @if ($options['closed'])
-                <th>Closed at</th>
-                <th>False positive?</th>
-                <th>Ignored?</th>
                 <th>Categories</th>
             @endif
             <th>Actions</th>
