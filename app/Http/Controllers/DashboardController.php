@@ -116,7 +116,7 @@ class DashboardController extends Controller
                 break;
 
                 case 'alerts-under-revision':
-                $value = $alerts->where->('closed', true)->where('under_revision', true)->count();
+                $value = $alerts->where('closed', false)->where('under_revision', true)->count();
                 $parameter = 'underRevisionAlertsCount';
                 break;
 

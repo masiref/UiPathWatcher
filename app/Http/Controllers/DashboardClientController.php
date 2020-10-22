@@ -37,7 +37,7 @@ class DashboardClientController extends Controller
         $underRevisionAlerts = Alert::whereHas('watchedAutomatedProcess', function($query) use($client) {
             $query->where('client_id', $client->id);
         })->where(function ($query) {
-            $query->where('under_revision', true);
+            $query->where('closed', false)->where('under_revision', true);
         })->get();
         $closedAlerts = Alert::whereHas('watchedAutomatedProcess', function($query) use($client) {
             $query->where('client_id', $client->id);
