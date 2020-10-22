@@ -148,13 +148,14 @@ class Alert extends Model
       **/
     public function ignore($from, $fromTime, $to, $toTime, $description, $categories)
     {
+        $now = Carbon::now();
         $this->closed_at = Carbon::now();
         $this->under_revision = false;
         $this->trigger->ignored_from = Carbon::createFromFormat('Y-m-d H:i:s', "$from $fromTime");
         if ($to !== null && $toTime !== null) {
             $this->trigger->ignored_until = Carbon::createFromFormat('Y-m-d H:i:s', "$to $toTime");
         }
-        $this->trigger->ignored = true;
+        $this->trigger->ignored = $this->trigger->ignored_from->gt($now);
         $this->ignored = true;
         $this->closed = true;
         $this->closing_description = $description;

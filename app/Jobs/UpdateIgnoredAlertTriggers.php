@@ -30,12 +30,11 @@ class UpdateIgnoredAlertTriggers implements ShouldQueue
      * @return void
      */
     public function handle()
-    {   
-        // retrieve all ignored triggers
-        $triggers = AlertTrigger::all()->where('ignored', true)->where('deleted', false)->whereNotNull('ignored_until');
-
+    {
         $now = Carbon::now();
 
+        // retrieve all ignored triggers
+        $triggers = AlertTrigger::all()->where('ignored', true)->where('deleted', false)->whereNotNull('ignored_until');
         foreach ($triggers as $trigger) {
             if ($now->gt(Carbon::createFromFormat('Y-m-d H:i:s', $trigger->ignored_until))) {
                 $trigger->update([
@@ -43,6 +42,16 @@ class UpdateIgnoredAlertTriggers implements ShouldQueue
                     'ignorance_description' => null,
                     'ignored_from' => null,
                     'ignored_until' => null
+                ]);
+            }
+        }
+
+        // retrieve all not ignored triggers with an ignored_from date
+        $triggers = AlertTrigger::all()->where('ignored', false)->where('deleted', false)->whereNotNull('ignored_from');
+        foreach ($triggers as $trigger) {
+            if ($now->gt(Carbon::createFromFormat('Y-m-d H:i:s', $trigger->ignored_from))) {
+                $trigger->update([
+                    'ignored' => 1
                 ]);
             }
         }
