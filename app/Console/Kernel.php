@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Jobs\ProcessAlertTriggers;
 use App\Jobs\UpdateUiPathRobotsStatuses;
 use App\Jobs\MarkTooOldNotificationsAsRead;
+use App\Jobs\UpdateIgnoredAlertTriggers;
 
 class Kernel extends ConsoleKernel
 {
@@ -31,11 +32,13 @@ class Kernel extends ConsoleKernel
         $schedule->job(new ProcessAlertTriggers)->everyMinute()->environments(['local']);
         $schedule->job(new UpdateUiPathRobotsStatuses)->everyMinute()->environments(['local']);
         $schedule->job(new MarkTooOldNotificationsAsRead)->everyMinute()->environments(['local']);
+        $schedule->job(new UpdateIgnoredAlertTriggers)->everyMinute()->environments(['local']);
 
         // staging & production
         $schedule->job(new ProcessAlertTriggers)->everyFiveMinutes()->environments(['staging', 'production']);
         $schedule->job(new UpdateUiPathRobotsStatuses)->everyFifteenMinutes()->environments(['staging', 'production']);
         $schedule->job(new MarkTooOldNotificationsAsRead)->everyFifteenMinutes()->environments(['staging', 'production']);
+        $schedule->job(new UpdateIgnoredAlertTriggers)->everyFifteenMinutes()->environments(['staging', 'production']);
     }
 
     /**

@@ -223,6 +223,11 @@ class AlertTriggerController extends Controller
                 'active' => $request->get('active')
             ]);
         }
+        if ($request->filled('ignored')) {
+            $alertTrigger->update([
+                'ignored' => $request->get('ignored')
+            ]);
+        }
 
         if ($request->get('definitions')) {
             $definitions = $request->get('definitions');

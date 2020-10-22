@@ -95,9 +95,11 @@ class ProcessAlertTriggers implements ShouldQueue
 
                             if (!$existingAlert) {
                                 // if there is no existing alert
-                                // creation of a new alert
+                                // creation of a new alert when latest closed alert (if present) was within defined duration
                                 $latestClosedAlert = $trigger->closedAlerts()->last();
-                                if (!$latestClosedAlert || ($latestClosedAlert && Carbon::createFromFormat('Y-m-d H:i:s', $latestClosedAlert->closed_at)->diffInMinutes(Carbon::now()) > 10)) {
+                                if (!$latestClosedAlert ||
+                                    ($latestClosedAlert && Carbon::createFromFormat('Y-m-d H:i:s', $latestClosedAlert->closed_at)->diffInMinutes(Carbon::now()) > env('APP_ALERT_DELAY_TO_TRIGGER_AFTER_CLOSING'))
+                                ) {
                                     $alert = Alert::create([
                                         'alert_trigger_id' => $trigger->id,
                                         'alert_trigger_definition_id' => $definition->id,
