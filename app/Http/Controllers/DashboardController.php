@@ -49,7 +49,7 @@ class DashboardController extends Controller
             'robotsCount' => UiPathRobot::all()->count(),
             'alertTriggersCount' => AlertTrigger::all()->where('deleted', false)->count(),
             'openedAlertsCount' => Alert::where('closed', false)->count(),
-            'underRevisionAlertsCount' => Alert::where('under_revision', true)->count(),
+            'underRevisionAlertsCount' => Alert::where('closed', false)->where('under_revision', true)->count(),
             'closedAlertsCount' => $closedAlerts->count()
         ]);
     }
