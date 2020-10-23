@@ -3,8 +3,8 @@
         <i class="fas fa-burn"></i>
     </span>
     <span class="has-tooltip-right" data-tooltip="Latest heartbeat {{ $alert->latest_heartbeat_at ? $alert->latestHeartbeatAtDiffForHumans() : $alert->createdAtDiffForHumans() }}">
-        <span class="icon {{ $alert->alive ? 'heartbeat has-text-success' : 'heart-broken has-text-grey-light' }}">
-            <i class="fas fa-heartbeat"></i>
+        <span class="icon {{ $alert->alive ? 'has-text-success' : 'has-text-grey-light' }}">
+            <i class="fas fa-{{ $alert->alive ? 'heartbeat : 'heart-broken' }}"></i>
         </span>
     </span>
     <strong>#{{ str_pad($alert->id, 4, '0', STR_PAD_LEFT) }}</strong> | {{ $alert->trigger->title }}

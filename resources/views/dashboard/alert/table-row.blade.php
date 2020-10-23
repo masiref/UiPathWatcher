@@ -6,7 +6,7 @@
         </span>
         @if (!$alert->closed)
             <span class="icon heartbeat has-text-{{ $alert->alive ? 'success' : 'grey-light' }}">
-                <i class="fas fa-heartbeat"></i>
+                <i class="fas fa-{{ $alert->alive ? 'heartbeat : 'heart-broken' }}"></i>
             </span>
         @endif
     </td>
