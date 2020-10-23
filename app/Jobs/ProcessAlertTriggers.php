@@ -165,8 +165,7 @@ class ProcessAlertTriggers implements ShouldQueue
                                     ]);
                                 } else {
                                     $existingAlert->update([
-                                        'alive' => false,
-                                        'latest_heartbeat_at' => Carbon::now()
+                                        'alive' => false
                                     ]);
                                 }
                             }
@@ -185,8 +184,7 @@ class ProcessAlertTriggers implements ShouldQueue
                         ], $existingMessages ?? array());
                         $alert->update([
                             'messages' => $messages,
-                            'alive' => false,
-                            'latest_heartbeat_at' => $heartbeat
+                            'alive' => false
                         ]);
                     }
                 }
