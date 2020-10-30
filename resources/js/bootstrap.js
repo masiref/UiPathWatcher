@@ -5,6 +5,7 @@ import './dataTables.bulma.min';
 import './dataTables.select.min';
 import './dataTables.responsive.min';
 import bulmaCollapsible from '@creativebulma/bulma-collapsible';
+import './UiPathRobot';
 
 window.jQuery = jquery;
 window.$ = jquery;

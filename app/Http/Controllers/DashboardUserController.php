@@ -8,6 +8,7 @@ use App\Client;
 use App\UiPathOrchestrator;
 use App\WatchedAutomatedProcess;
 use App\AlertTrigger;
+use App\UiPathRobotTool;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardUserController extends Controller
@@ -33,6 +34,7 @@ class DashboardUserController extends Controller
         $pendingAlerts = $alerts->where('closed', false);
         $closedAlerts = $alerts->where('closed', true)->where('parent', null);
         $clients = Client::all();
+        $robotTools = UiPathRobotTool::all();
 
         return view('dashboard.user.index', [
             'page' => 'dashboard.user.index',
@@ -45,7 +47,8 @@ class DashboardUserController extends Controller
             'alertTriggersCount' => AlertTrigger::all()->where('deleted', false)->count(),
             'openedAlertsCount' => $pendingAlerts->count(),
             'underRevisionAlertsCount' => $pendingAlerts->where('under_revision', true)->count(),
-            'closedAlertsCount' => $closedAlerts->count()
+            'closedAlertsCount' => $closedAlerts->count(),
+            'robotToolsCount' => $robotTools->count()
         ]);
     }
 

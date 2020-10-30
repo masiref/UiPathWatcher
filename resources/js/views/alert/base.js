@@ -34,6 +34,7 @@ export const selectors = {
     ignoranceKeywordsList: '#ignorance-keywords',
     ignoranceAddKeywordButton: 'button#ignorance-add-keyword',
     ignoranceDescriptionTextarea: '#ignorance-description',
+    uiPathRobotTools: '#uipath-robot-tools',
     table: '#alerts-table',
     pendingTable: '#pending-alerts-table',
     closedTable: '#closed-alerts-table'

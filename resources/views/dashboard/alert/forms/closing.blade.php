@@ -114,6 +114,7 @@
                             required></textarea>
                     </div>
                 </div>
+                @include('dashboard.alert.ui-path-robot-tools')
             </form>
         </section>
         <footer class="modal-card-foot has-background-success">

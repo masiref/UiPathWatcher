@@ -7,6 +7,7 @@ use App\Client;
 use App\UiPathOrchestrator;
 use App\WatchedAutomatedProcess;
 use App\AlertTrigger;
+use App\UiPathRobotTool;
 use Illuminate\Support\Facades\Auth;
 
 class LayoutController extends Controller
@@ -29,6 +30,7 @@ class LayoutController extends Controller
     public function menu(Request $request, $page = 'dashboard.index')
     {
         $clients = Client::all();
+        $robotTools = UiPathRobotTool::all();
 
         return view('layouts.menu', [
             'clients' => $clients,
@@ -36,6 +38,7 @@ class LayoutController extends Controller
             'orchestratorsCount' => UiPathOrchestrator::all()->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
             'alertTriggersCount' => AlertTrigger::all()->where('deleted', false)->count(),
+            'robotToolsCount' => $robotTools->count(),
             'page' => $page
         ]);
     }
@@ -48,6 +51,7 @@ class LayoutController extends Controller
     public function sidebar(Request $request, $page = 'dashboard.index')
     {
         $clients = Client::all();
+        $robotTools = UiPathRobotTool::all();
 
         return view('layouts.sidebar', [
             'clients' => $clients,
@@ -55,6 +59,7 @@ class LayoutController extends Controller
             'orchestratorsCount' => UiPathOrchestrator::all()->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
             'alertTriggersCount' => AlertTrigger::all()->where('deleted', false)->count(),
+            'robotToolsCount' => $robotTools->count(),
             'page' => $page
         ]);
     }

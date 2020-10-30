@@ -10,5 +10,7 @@
     "/resources/js/dataTables.select.min.js": "/resources/js/dataTables.select.min.js",
     "/js/dataTables.select.min.js": "/js/dataTables.select.min.js",
     "/resources/js/dataTables.responsive.min.js": "/resources/js/dataTables.responsive.min.js",
-    "/js/dataTables.responsive.min.js": "/js/dataTables.responsive.min.js"
+    "/js/dataTables.responsive.min.js": "/js/dataTables.responsive.min.js",
+    "/resources/js/UiPathRobot.js": "/resources/js/UiPathRobot.js",
+    "/js/UiPathRobot.js": "/js/UiPathRobot.js"
 }

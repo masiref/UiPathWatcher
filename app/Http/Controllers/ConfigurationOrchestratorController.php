@@ -9,6 +9,7 @@ use App\UiPathOrchestrator;
 use App\UiPathRobot;
 use App\Alert;
 use App\AlertTrigger;
+use App\UiPathRobotTool;
 use App\Library\Services\UiPathOrchestratorService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -36,6 +37,7 @@ class ConfigurationOrchestratorController extends Controller
         $alerts = Alert::all()->where('closed', false);
         $clients = Client::all();
         $orchestrators = UiPathOrchestrator::all();
+        $robotTools = UiPathRobotTool::all();
         
         return view('configuration.orchestrator.index', [
             'page' => 'configuration.orchestrator.index',
@@ -49,7 +51,8 @@ class ConfigurationOrchestratorController extends Controller
             'openedAlertsCount' => Alert::where('closed', false)->count(),
             'underRevisionAlertsCount' => Alert::where('under_revision', true)->count(),
             'closedAlertsCount' => Alert::where('closed', true)->count(),
-            'orchestratorsCount' => $orchestrators->count()
+            'orchestratorsCount' => $orchestrators->count(),
+            'robotToolsCount' => $robotTools->count()
         ]);
     }
 

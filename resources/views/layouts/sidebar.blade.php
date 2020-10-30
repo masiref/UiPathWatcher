@@ -92,6 +92,18 @@
                 </span>
             </a>
         </li>
+        @role('admin')
+            <li>
+                <a class="{{ $page === 'configuration.robot-tool.index' ? 'is-active' : '' }}"
+                    href="{{ route('configuration.robot-tool') }}">
+                    <span class="icon"><i class="fas fa-tools"></i></span>
+                    <span>
+                        Extensions
+                        &nbsp;<span class="tag is-primary">{{ $robotToolsCount }}</span>
+                    </span>
+                </a>
+            </li>
+        @endrole
     </ul>
 
     @role('admin')

@@ -136,6 +136,11 @@ export const isConfigurationAlertTriggerRelatedURL = url => {
     return isRelated.test(url);
 };
 
+export const isConfigurationRobotToolRelatedURL = url => {
+    let isRelated = /.*\/configuration\/extension$/;
+    return isRelated.test(url);
+};
+
 export const validURL = str => {
     const pattern = new RegExp('^(https?:\\/\\/)'); // protocol
         /*
@@ -203,4 +208,41 @@ export const isValidLuceneString = str => {
     } catch (error) {}
 
     return valid;
+};
+
+export const runUipathProcess = async (name, parameters) => {
+    const title = 'UiPath Robot tool execution summary';
+    const confirmButtonText = '<span class="icon"><i class="fas fa-check-circle"></i></span><span>OK</span>';
+    let result = null;
+    try {
+        const robot = UiPathRobot.init();
+        const processes = await robot.getProcesses();
+        let process_ = processes.find(p => p.name === name || p.name.startsWith(name));
+        if (process_) {
+            result = await process_.start(parameters);
+            swalWithBulmaButtons.fire({
+                title: title,
+                text: 'Execution finished successfully!',
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonText: confirmButtonText
+            });
+        } else {
+            swalWithBulmaButtons.fire({
+                title: title,
+                text: `Process ${name} does not exist on your machine!`,
+                icon: 'error',
+                showCancelButton: false,
+                confirmButtonText: confirmButtonText
+            });
+        }
+    } catch (error) {
+        swalWithBulmaButtons.fire({
+            title: title,
+            text: error.InnerException.Message,
+            icon: 'error',
+            showCancelButton: false,
+            confirmButtonText: confirmButtonText
+        });
+    }
 };

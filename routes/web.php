@@ -105,10 +105,15 @@ Route::get(
     'ConfigurationAlertTriggerController@table'
 )->name('configuration.alert-trigger.table');
 
+Route::get('/configuration/extension', 'ConfigurationRobotToolController@index')->name('configuration.robot-tool');
+Route::get('/configuration/extension/edit/{robotTool}', 'ConfigurationRobotToolController@edit')->name('configuration.robot-tool.edit')->middleware('role:admin');
+Route::get('/configuration/extension/table', 'ConfigurationRobotToolController@table')->name('configuration.robot-tool.table')->middleware('role:admin');
+
 Route::resources([
     'alerts' => 'Entity\AlertController',
     'clients' => 'Entity\ClientController',
     'watched-automated-processes' => 'Entity\WatchedAutomatedProcessController',
     'ui-path-orchestrators' => 'Entity\UiPathOrchestratorController',
-    'alert-triggers' => 'Entity\AlertTriggerController'
+    'alert-triggers' => 'Entity\AlertTriggerController',
+    'ui-path-robot-tools' => 'Entity\UiPathRobotToolController'
 ]);

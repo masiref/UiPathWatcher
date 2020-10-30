@@ -13,6 +13,7 @@ use App\Alert;
 use App\AlertTrigger;
 use App\AlertTriggerDefinition;
 use App\AlertTriggerRule;
+use App\UiPathRobotTool;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -38,6 +39,7 @@ class ConfigurationAlertTriggerController extends Controller
         $alerts = Alert::all()->where('closed', false);
         $clients = Client::all();
         $alertTriggers = AlertTrigger::all()->where('deleted', false);
+        $robotTools = UiPathRobotTool::all();
         
         return view('configuration.alert-trigger.index', [
             'page' => 'configuration.alert-trigger.index',
@@ -51,7 +53,8 @@ class ConfigurationAlertTriggerController extends Controller
             'openedAlertsCount' => Alert::where('closed', false)->count(),
             'underRevisionAlertsCount' => Alert::where('under_revision', true)->count(),
             'closedAlertsCount' => Alert::where('closed', true)->count(),
-            'orchestratorsCount' => UiPathOrchestrator::all()->count()
+            'orchestratorsCount' => UiPathOrchestrator::all()->count(),
+            'robotToolsCount' => $robotTools->count()
         ]);
     }
 

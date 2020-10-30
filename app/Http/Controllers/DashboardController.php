@@ -10,6 +10,7 @@ use App\UiPathRobot;
 use App\Alert;
 use App\AlertTrigger;
 use App\AlertCategory;
+use App\UiPathRobotTool;
 use App\Library\Services\UiPathOrchestratorService;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client as Guzzle;
@@ -37,6 +38,7 @@ class DashboardController extends Controller
         $pendingAlerts = Alert::all()->where('closed', false);
         $closedAlerts = Alert::all()->where('closed', true)->where('parent', null);
         $clients = Client::all();
+        $robotTools = UiPathRobotTool::all();
 
         return view('dashboard.index', [
             'page' => 'dashboard.index',
@@ -50,7 +52,8 @@ class DashboardController extends Controller
             'alertTriggersCount' => AlertTrigger::all()->where('deleted', false)->count(),
             'openedAlertsCount' => Alert::where('closed', false)->count(),
             'underRevisionAlertsCount' => Alert::where('closed', false)->where('under_revision', true)->count(),
-            'closedAlertsCount' => $closedAlerts->count()
+            'closedAlertsCount' => $closedAlerts->count(),
+            'robotToolsCount' => $robotTools->count()
         ]);
     }
 
@@ -191,7 +194,8 @@ class DashboardController extends Controller
     public function alertClosingFormModal(Request $request, Alert $alert)
     {
         $categories = AlertCategory::all();
-        return view('dashboard.alert.forms.closing')->with('alert', $alert)->with('categories', $categories);
+        $robotTools = UiPathRobotTool::all();
+        return view('dashboard.alert.forms.closing')->with('alert', $alert)->with('categories', $categories)->with('robotTools', $robotTools);
     }
 
     /**

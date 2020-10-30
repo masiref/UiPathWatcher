@@ -63,6 +63,20 @@ export default class Configuration {
         }
     }
 
+    async updateRobotToolsTable() {
+        try {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    axios.get('/configuration/extension/table').then(response => {
+                        this.robotToolsTable = response.data;
+                    })
+                );
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async getAlertTriggersDefaultDetails(watchedAutomatedProcessId) {
         try {
             return new Promise((resolve, reject) => {

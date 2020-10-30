@@ -143,6 +143,36 @@ export const close = async(dashboard, id) => {
                     commitClose(dashboard, alert, keywordsList);
                 }
             });
+            const uiPathRobotTools = modal.querySelector(base.selectors.uiPathRobotTools);
+            uiPathRobotTools.addEventListener('click', async (e) => {
+                if (e.target.matches('.button, .button *')) {
+                    const button = e.target.closest('.button');
+                    _base.renderLoader(button);
+                    const result = await _base.runUipathProcess(button.dataset.uipathProcess, {
+                        'id': uiPathRobotTools.dataset.id,
+                        'keywords': JSON.stringify(keywordsList.items.map(keyword => { return keyword.text; })),
+                        'resolutionDescription': document.querySelector(base.selectors.closingDescriptionTextarea).value.trim(),
+                        'createdAt': uiPathRobotTools.dataset.createdAt,
+                        'revisionStartedAt': uiPathRobotTools.dataset.revisionStartedAt,
+                        'messages': uiPathRobotTools.dataset.messages,
+                        'triggerId': uiPathRobotTools.dataset.triggerId,
+                        'triggerTitle': uiPathRobotTools.dataset.triggerTitle,
+                        'definitionId': uiPathRobotTools.dataset.triggerDefinitionId,
+                        'definitionLevel': uiPathRobotTools.dataset.triggerDefinitionLevel,
+                        'definitionDescription': uiPathRobotTools.dataset.triggerDefinitionDescription,
+                        'watchedAutomatedProcessId': uiPathRobotTools.dataset.watchedAutomatedProcessId,
+                        'watchedAutomatedProcessCode': uiPathRobotTools.dataset.watchedAutomatedProcessCode,
+                        'watchedAutomatedProcessName': uiPathRobotTools.dataset.watchedAutomatedProcessName,
+                        'watchedAutomatedProcessOperationalHandbookPageURL': uiPathRobotTools.dataset.watchedAutomatedProcessOperationalHandbookPageURL,
+                        'watchedAutomatedProcessKibanaDashboardURL': uiPathRobotTools.dataset.watchedAutomatedProcessKibanaDashboardURL,
+                        'watchedAutomatedProcessAdditionalInformation': uiPathRobotTools.dataset.watchedAutomatedProcessAdditionalInformation,
+                        'customerId': uiPathRobotTools.dataset.clientId,
+                        'customerName': uiPathRobotTools.dataset.clientName,
+                        'customerCode': uiPathRobotTools.dataset.clientCode,
+                    });
+                    _base.clearLoader(button);
+                }
+            });
             view.clearLoaders(id);
         });
     } catch (error) {
@@ -157,8 +187,6 @@ export const commitClose = async(dashboard, alert, keywordsList) => {
     try {
         const descriptionTextarea = document.querySelector(base.selectors.closingDescriptionTextarea);
         const falsePositiveCheckbox = document.querySelector(base.selectors.closingFalsePositiveCheckbox);
-        //var keywordsListInput = document.querySelector(`#${base.strings.closingFormModalID} ${base.selectors.closingKeywordsList}`);
-        //const keywordsList = keywordsListInput.BulmaTagsInput();
 
         let valid = false;
         if (keywordsList.items.length === 0) {

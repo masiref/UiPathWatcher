@@ -9,6 +9,7 @@ use App\UiPathOrchestrator;
 use App\UiPathRobot;
 use App\Alert;
 use App\AlertTrigger;
+use App\UiPathRobotTool;
 
 class DashboardClientController extends Controller
 {
@@ -45,6 +46,7 @@ class DashboardClientController extends Controller
             $query->where('closed', true)->where('parent_id', null);
         })->get();
         $clients = Client::all();
+        $robotTools = UiPathRobotTool::all();
 
         return view('dashboard.client.index', [
             'page' => 'dashboard.client.index.' . $client->id,
@@ -63,7 +65,8 @@ class DashboardClientController extends Controller
             })->where('deleted', false)->count(),
             'openedAlertsCount' => $pendingAlerts->count(),
             'underRevisionAlertsCount' => $underRevisionAlerts->count(),
-            'closedAlertsCount' => $closedAlerts->count()
+            'closedAlertsCount' => $closedAlerts->count(),
+            'robotToolsCount' => $robotTools->count()
         ]);
     }
 

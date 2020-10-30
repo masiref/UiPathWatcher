@@ -13,6 +13,7 @@ import * as orchestratorConfigurationController from './views/configuration/orch
 import * as clientConfigurationController from './views/configuration/client/index';
 import * as watchedAutomatedProcessConfigurationController from './views/configuration/watched-automated-process/index';
 import * as alertTriggerConfigurationController from './views/configuration/alert-trigger/index';
+import * as robotToolConfigurationController from './views/configuration/robot-tool/index';
 import * as layoutController from './views/layout/index';
 
 const url = window.location.href;
@@ -26,6 +27,8 @@ if (base.isDashboardRelatedURL(url)) {
     watchedAutomatedProcessConfigurationController.init();
 } else if (base.isConfigurationAlertTriggerRelatedURL(url)) {
     alertTriggerConfigurationController.init();
+} else if (base.isConfigurationRobotToolRelatedURL(url)) {
+    robotToolConfigurationController.init();
 }
 
 const app = new App();

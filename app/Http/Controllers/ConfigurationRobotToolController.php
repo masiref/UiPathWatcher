@@ -12,7 +12,7 @@ use App\AlertTrigger;
 use App\UiPathRobotTool;
 use Illuminate\Support\Facades\Auth;
 
-class ConfigurationClientController extends Controller
+class ConfigurationRobotToolController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -25,21 +25,20 @@ class ConfigurationClientController extends Controller
     }
 
     /**
-     * Show the client configuration page.
+     * Show the orchestrator configuration page.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $alerts = Alert::all()->where('closed', false);
-        $clients = Client::all();
         $robotTools = UiPathRobotTool::all();
+        $clients = Client::all();
+        $orchestrators = UiPathOrchestrator::all();
         
-        return view('configuration.client.index', [
-            'page' => 'configuration.client.index',
-            'alerts' => $alerts,
-            'clients' => $clients->sortBy('name'),
-            'orchestrators' => UiPathOrchestrator::orderBy('name')->get(),
+        return view('configuration.robot-tool.index', [
+            'page' => 'configuration.robot-tool.index',
+            'robotTools' => $robotTools,
+            'clients' => $clients,
             'clientsCount' => $clients->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
             'robotsCount' => UiPathRobot::all()->count(),
@@ -47,7 +46,7 @@ class ConfigurationClientController extends Controller
             'openedAlertsCount' => Alert::where('closed', false)->count(),
             'underRevisionAlertsCount' => Alert::where('under_revision', true)->count(),
             'closedAlertsCount' => Alert::where('closed', true)->count(),
-            'orchestratorsCount' => UiPathOrchestrator::all()->count(),
+            'orchestratorsCount' => $orchestrators->count(),
             'robotToolsCount' => $robotTools->count()
         ]);
     }
@@ -57,23 +56,21 @@ class ConfigurationClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Client $client)
+    public function edit(Request $request, UiPathRobotTool $robotTool)
     {
-        return view('configuration.client.form.edit', [
-            'client' => $client,
-            'orchestrators' => UiPathOrchestrator::all()
-        ]);
+        return view('configuration.robot-tool.form.edit')
+            ->with('robotTool', $robotTool);
     }
 
     /**
-     * Show the clients as table.
+     * Show the robot tools as table.
      *
      * @return \Illuminate\Http\Response
      */
     public function table(Request $request)
     {
-        $clients = Client::all();
-        return view('configuration.client.table')
-            ->with('clients', $clients);
+        $robotTools = UiPathRobotTool::all();
+        return view('configuration.robot-tool.table')
+            ->with('robotTools', $robotTools);
     }
 }
