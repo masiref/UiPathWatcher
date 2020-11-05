@@ -5,7 +5,6 @@
             <p class="modal-card-title has-text-light">
                 <span class="icon"><i class="fas fa-burn"></i></span> Alert trigger ignorance
             </p>
-            <button class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
             <form class="alert-ignorance-form" method="POST">
@@ -14,7 +13,7 @@
                         <div class="field">
                             <label class="label">
                                 <span class="icon"><i class="fas fa-building"></i></span>
-                                <span>Client</span>
+                                <span>Customer</span>
                             </label>
                             <div class="control">
                                 <input class="input is-static" type="text" value="{{ $alert->watchedAutomatedProcess->client }}" readonly>

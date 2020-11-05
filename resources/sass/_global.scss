@@ -231,3 +231,7 @@ footer.footer {
   animation-iteration-count: infinite;
   animation-duration: 2s;
 }
+
+.modal-content.is-loading {
+  opacity: 0.9;
+}

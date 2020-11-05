@@ -18,7 +18,7 @@
     data-client-name="{{ $alert->watchedAutomatedProcess->client->name }}"
     data-client-code="{{ $alert->watchedAutomatedProcess->client->code }}">
     @foreach($robotTools as $robotTool)
-        <a class="button is-{{ $robotTool->color }}" data-uipath-process="{{ $robotTool->process_name }}">
+        <a class="button is-{{ $robotTool->color }}" data-uipath-process="{{ $robotTool->process_name }}" data-uipath-process-label="{{ $robotTool->label }}">
             <span class="icon">
                 <i class="fas fa-play-circle"></i>
             </span>

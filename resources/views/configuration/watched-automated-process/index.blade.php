@@ -6,7 +6,7 @@
 @section('content')
     @php
         $watchedAutomatedProcessSubtitle = '
-            In order to watch an automated processcreated with UiPath solution, you\'ll need to give information on it
+            In order to watch an automated process created with UiPath solution, you\'ll need to give information on it
             (eg: a name, a code, an execution time slot, etc.) but also identify the UiPath
             <span class="has-text-weight-medium"><span class="icon"><i class="fas fa-sitemap"></i></span> Processes</span>,
             <span class="has-text-weight-medium"><span class="icon"><i class="fab fa-android"></i></span> Robots</span> and

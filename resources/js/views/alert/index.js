@@ -147,7 +147,10 @@ export const close = async(dashboard, id) => {
             uiPathRobotTools.addEventListener('click', async (e) => {
                 if (e.target.matches('.button, .button *')) {
                     const button = e.target.closest('.button');
+                    const descriptionTextarea = document.querySelector(base.selectors.closingDescriptionTextarea);
+                    const modalContent = document.querySelector(`#${base.strings.closingFormModalID} .modal-content`);
                     _base.renderLoader(button);
+                    _base.renderLoader(modalContent);
                     const result = await _base.runUipathProcess(button.dataset.uipathProcess, {
                         'id': uiPathRobotTools.dataset.id,
                         'keywords': JSON.stringify(keywordsList.items.map(keyword => { return keyword.text; })),
@@ -170,7 +173,17 @@ export const close = async(dashboard, id) => {
                         'customerName': uiPathRobotTools.dataset.clientName,
                         'customerCode': uiPathRobotTools.dataset.clientCode,
                     });
+                    if (result.output) {
+                        let description = descriptionTextarea.value.trim();
+                        description += `\n\n### Execution of ${button.dataset.uipathProcessLabel} on ${(new Date()).toLocaleString('en')}`
+                        for (const [key, value] of Object.entries(result.output)) {
+                            description += `\n${key}: ${value}`
+                        }
+                        description += `\n#####`;
+                        descriptionTextarea.value = description;
+                    }
                     _base.clearLoader(button);
+                    _base.clearLoader(modalContent);
                 }
             });
             view.clearLoaders(id);

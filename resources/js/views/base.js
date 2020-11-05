@@ -17,6 +17,8 @@ export const selectors = {
     closeModalTriggers: '.modal button.delete, .modal button.cancel, .modal button.cancel *',
     validateModalButton: '.modal button.validate',
     validateModalButtonChildren: '.modal button.validate *',
+    cancelModalButton: '.modal button.cancel',
+    cancelModalButtonChildren: '.modal button.cancel *',
     tableDataTablesWrapper: '.dataTables_wrapper',
     dateTimeCalendarWrapper: '.datetimepicker-dummy',
     dateTimeCalendarFromInput: 'input.datetimepicker-dummy-input[placeholder="From"]',
@@ -227,6 +229,7 @@ export const runUipathProcess = async (name, parameters) => {
                 showCancelButton: false,
                 confirmButtonText: confirmButtonText
             });
+            return result;
         } else {
             swalWithBulmaButtons.fire({
                 title: title,
