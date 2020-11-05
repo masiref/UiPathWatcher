@@ -87,7 +87,9 @@ Here are the values you may need to update according to your installation:
 #### 2.2. Application deployment
 After configuring environment variables you'll have to execute some php commands to deploy the application:
 
-`php artisan migrate --seed --force`
+`php artisan migrate --force`
+
+`php artisan db:seed --force`
 
 `php artisan passport:install`
 
