@@ -75,6 +75,7 @@ This project has been tested on Mozilla Firefox, Google Chrome & Microsoft Edge.
 ### 2. Configuration
 #### 2.1. Environment file
 A default environment file comes with the web application: .env.example.ini. Copy this file or rename it to .env.
+
 `cp .env.example.ini .env`
 
 Here are the values you may need to update according to your installation:
@@ -85,15 +86,18 @@ Here are the values you may need to update according to your installation:
 
 #### 2.2. Application deployment
 After configuring environment variables you'll have to execute some php commands to deploy the application:
+
 `php artisan migrate --seed --force`
+
 `php artisan passport:install`
+
 `php artisan key:generate`
 
 That's it, you're UiPath Watcher instance is installed.
 
 ## Use UiPath Watcher
 
-A user guide is available inside the project files. You'll find it here: https://....
+A user guide is available inside the project files. You'll find it here: [https://github.com/masiref/UiPathWatcher/blob/main/UiPath%20Watcher%20-%20User%20guide.pdf]https://github.com/masiref/UiPathWatcher/blob/main/UiPath%20Watcher%20-%20User%20guide.pdf.
 
 ## Support
 Github: [https://github.com/masiref/UiPathWatcher](https://github.com/masiref/UiPathWatcher)
