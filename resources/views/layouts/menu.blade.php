@@ -87,6 +87,16 @@
                                     &nbsp;<span class="tag is-primary">{{ $alertTriggersCount }}</span>
                                 </span>
                             </a>
+                            @role('admin')
+                                <a class="navbar-item {{ $page === 'configuration.robot-tool.index' ? 'is-active' : '' }}"
+                                    href="{{ route('configuration.robot-tool') }}">
+                                    <span class="icon"><i class="fas fa-tools"></i></span>
+                                    <span>
+                                        &nbsp;Extensions
+                                        &nbsp;<span class="tag is-primary">{{ $robotToolsCount }}</span>
+                                    </span>
+                                </a>
+                            @endrole
                         </div>
                     </div>
 

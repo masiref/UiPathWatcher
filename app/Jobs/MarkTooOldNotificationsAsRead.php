@@ -36,7 +36,7 @@ class MarkTooOldNotificationsAsRead implements ShouldQueue
         foreach ($users as $user) {
             foreach ($user->unreadNotifications as $notification) {
                 $date = Carbon::createFromFormat('Y-m-d H:i:s', $notification->created_at);
-                if ($now->diffInMinutes($date) >= 15) {
+                if ($now->diffInMinutes($date) >= env('APP_NOTIFICATION_LIFETTIME')) {
                     $notification->markAsRead();
                 }
             }

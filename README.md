@@ -5,11 +5,20 @@ It’s easy to use, open-source & created by an automation specialist for automa
 
 ## Install UiPath Watcher
 
-### 1. Requirements
-#### 1.1. Apache version
+### 1. Hardware requirements
+UiPath Watcher was developed & tested on a machine with following capabilities:
+- CPU: 2 CPUs
+- Memory: 4 GB RAM
+- Hard drive disk: 50 GB
+
+### 2. Software requirements
+#### 2.1. Operating system
+This project has been developed on a Red Hat Enterprise Linux Server release 7.4. Any Linux distribution may be compatible.
+
+#### 2.2. Apache version
 This project has been developed using Apache 2.4.38+ web server.
 
-#### 1.2. PHP version
+#### 2.3. PHP version
 This project has been developed using PHP 7.3.3+.
 Following PHP extensions needs to be installed:
 - bcmath
@@ -65,15 +74,15 @@ Following PHP extensions needs to be installed:
 - xsl
 - zip
 
-#### 1.3. MariaDB version
+#### 2.4. MariaDB version
 This project has been developed using MariaDB 10.2.22+ as database.
 You need to create an empty database named uipath_watcher.
 
-#### 1.4. Compatible WEB browsers
-This project has been tested on Mozilla Firefox, Google Chrome & Microsoft Edge.
+#### 2.5. Compatible WEB browsers
+This project has been tested on Mozilla Firefox, Google Chrome.
 
-### 2. Configuration
-#### 2.1. Environment file
+### 3. Configuration
+#### 3.1. Environment file
 A default environment file comes with the web application: .env.example.ini. Copy this file or rename it to .env.
 
 `cp .env.example.ini .env`
@@ -84,7 +93,7 @@ Here are the values you may need to update according to your installation:
 - ASSET_URL, same as APP_URL
 - DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME & DB_PASSWORD are regarding database configuration, put the values according to your MariaDB installation
 
-#### 2.2. Application deployment
+#### 3.2. Application deployment
 After configuring environment variables you'll have to execute some php commands to deploy the application:
 
 `php artisan migrate --force`
@@ -95,11 +104,16 @@ After configuring environment variables you'll have to execute some php commands
 
 `php artisan key:generate`
 
+You'll also need to add a cron entry to execute all scheduled tasks (alert scanning), here are the details:
+
+`* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1`
+
 That's it, you're UiPath Watcher instance is installed.
 
 ## Use UiPath Watcher
 
-A user guide is available inside the project files. You'll find it here: https://github.com/masiref/UiPathWatcher/blob/main/UiPath%20Watcher%20-%20User%20guide.pdf.
+A user guide is available inside the project files. You'll find it [here](public/files/UiPath Watcher - User guide.pdf).
+Also, a developer guide for UiPath Watcher Extension is available [here](public/files/UiPath Watcher Extension - Developer guide.pdf).
 
 ## Support
 Github: [https://github.com/masiref/UiPathWatcher](https://github.com/masiref/UiPathWatcher)
