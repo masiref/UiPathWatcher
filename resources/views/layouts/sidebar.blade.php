@@ -92,7 +92,7 @@
                 </span>
             </a>
         </li>
-        @role('admin')
+        @level(3)
             <li>
                 <a class="{{ $page === 'configuration.robot-tool.index' ? 'is-active' : '' }}"
                     href="{{ route('configuration.robot-tool') }}">
@@ -103,7 +103,7 @@
                     </span>
                 </a>
             </li>
-        @endrole
+        @endlevel
     </ul>
 
     @role('admin')

@@ -213,7 +213,7 @@ export const isValidLuceneString = str => {
 };
 
 export const runUipathProcess = async (name, parameters) => {
-    const title = 'UiPath Robot tool execution summary';
+    const title = 'UiPath Watcher Extension execution summary';
     const confirmButtonText = '<span class="icon"><i class="fas fa-check-circle"></i></span><span>OK</span>';
     let result = null;
     try {
