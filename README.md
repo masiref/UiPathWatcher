@@ -112,8 +112,9 @@ That's it, you're UiPath Watcher instance is installed.
 
 ## Use UiPath Watcher
 
-A user guide is available inside the project files. You'll find it [here](./public/files/UiPath Watcher - User guide.pdf).
-Also, a developer guide for UiPath Watcher Extension is available [here](./public/files/UiPath Watcher Extension - Developer guide.pdf).
+A user guide is available inside the project files. You'll find it [here](./public/files/UiPath%20Watcher%20-%20User%20guide.pdf).
+
+Also, a developer guide for UiPath Watcher Extension is available [here](./public/files/UiPath%20Watcher%20Extension%20-%20Developer%20guide.pdf).
 
 ## Support
 Github: [https://github.com/masiref/UiPathWatcher](https://github.com/masiref/UiPathWatcher)
