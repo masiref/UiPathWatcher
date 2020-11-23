@@ -40,8 +40,7 @@ class Schema extends SchemaProvider
             'ignorance-description' => $resource->ignorance_description,
             'deleted' => $resource->deleted,
             'deleted-at' => $resource->deleted_at,
-            'created-at' => $resource->created_at->toAtomString(),
-            'updated-at' => $resource->updated_at->toAtomString(),
+            'created-at' => $resource->created_at->toAtomString()
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\JsonApi\Alerts;
+namespace App\JsonApi\AlertCategories;
 
 use CloudCreativity\LaravelJsonApi\Eloquent\AbstractAdapter;
 use CloudCreativity\LaravelJsonApi\Pagination\StandardStrategy;
@@ -31,7 +31,7 @@ class Adapter extends AbstractAdapter
      */
     public function __construct(StandardStrategy $paging)
     {
-        parent::__construct(new \App\Alert(), $paging);
+        parent::__construct(new \App\AlertCategory(), $paging);
     }
 
     /**
@@ -42,11 +42,6 @@ class Adapter extends AbstractAdapter
     protected function filter($query, Collection $filters)
     {
         $this->filterWithScopes($query, $filters);
-    }
-
-    protected function categories()
-    {
-        return $this->hasMany();
     }
 
 }

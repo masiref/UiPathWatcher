@@ -18,11 +18,12 @@ Route::middleware('api')->get('/user', function (Request $request) {
 });
 
 JsonApi::register('default')->routes(function ($api) {
-    $api->resource('alerts');
-    $api->resource('alert-triggers');
-    $api->resource('alert-trigger-definitions');
-    $api->resource('watched-automated-processes');
-    $api->resource('clients');
-    $api->resource('orchestrators');
-    $api->resource('users');
+    $api->resource('alerts')->only('index', 'read');
+    $api->resource('alert-categories')->only('index', 'read');
+    $api->resource('alert-triggers')->only('index', 'read');
+    $api->resource('alert-trigger-definitions')->only('index', 'read');
+    $api->resource('watched-automated-processes')->only('index', 'read');
+    $api->resource('clients')->only('index', 'read');
+    $api->resource('orchestrators')->only('index', 'read');
+    $api->resource('users')->only('index', 'read');
 });

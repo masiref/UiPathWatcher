@@ -1,6 +1,6 @@
 <?php
 
-namespace App\JsonApi\AlertTriggerDefinitions;
+namespace App\JsonApi\AlertCategories;
 
 use Neomerx\JsonApi\Schema\SchemaProvider;
 
@@ -10,7 +10,7 @@ class Schema extends SchemaProvider
     /**
      * @var string
      */
-    protected $resourceType = 'alert-trigger-definitions';
+    protected $resourceType = 'alert-categories';
 
     /**
      * @param $resource
@@ -31,12 +31,8 @@ class Schema extends SchemaProvider
     {
         return [
             'id_' => $resource->id,
-            'alert-trigger-id' => $resource->alert_trigger_id,
-            'level' => $resource->level,
-            'rank' => $resource->rank,
-            'deleted' => $resource->deleted,
-            'deleted_at' => $resource->deleted_at,
-            'description' => $resource->description,
+            'label' => $resource->label,
+            'alerts' => $resource->alerts->pluck('id'),
             'created-at' => $resource->created_at->toAtomString()
         ];
     }

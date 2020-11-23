@@ -48,8 +48,7 @@ class Schema extends SchemaProvider
             'closed-at' => $resource->closed_at,
             'latest-heartbeat-at' => $resource->latest_heartbeat_at,
             'top-ancestor-created-at' => $resource->top_ancestor_created_at,
-            'created-at' => $resource->created_at->toAtomString(),
-            'updated-at' => $resource->updated_at->toAtomString(),
+            'created-at' => $resource->created_at->toAtomString()
         ];
     }
 }

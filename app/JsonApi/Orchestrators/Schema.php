@@ -34,8 +34,7 @@ class Schema extends SchemaProvider
             'name' => $resource->name,
             'code' => $resource->code,
             'url' => $resource->url,
-            'created-at' => $resource->created_at->toAtomString(),
-            'updated-at' => $resource->updated_at->toAtomString(),
+            'created-at' => $resource->created_at->toAtomString()
         ];
     }
 }

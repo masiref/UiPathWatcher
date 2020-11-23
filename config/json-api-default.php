@@ -54,6 +54,7 @@ return [
     */
     'resources' => [
         'alerts' => \App\Alert::class,
+        'alert-categories' => \App\AlertCategory::class,
         'alert-triggers' => \App\AlertTrigger::class,
         'alert-trigger-definitions' => \App\AlertTriggerDefinition::class,
         'watched-automated-processes' => \App\WatchedAutomatedProcess::class,

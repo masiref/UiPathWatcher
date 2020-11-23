@@ -37,8 +37,7 @@ class Schema extends SchemaProvider
             'ui-path-orchestrator-tenant' => $resource->ui_path_orchestrator_tenant,
             'elastic-search-url' => $resource->elastic_search_url,
             'elastic-search-index' => $resource->elastic_search_index,
-            'created-at' => $resource->created_at->toAtomString(),
-            'updated-at' => $resource->updated_at->toAtomString(),
+            'created-at' => $resource->created_at->toAtomString()
         ];
     }
 }
