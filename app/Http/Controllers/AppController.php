@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\AlertTriggerShutdown;
 use App\Library\Services\AlertTriggerService;
 use App\Library\Services\UiPathOrchestratorService;
@@ -24,6 +25,15 @@ use App\WatchedAutomatedProcess;
 
 class AppController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function shutdownAlertTriggers(Request $request, AlertTriggerService $service)
     {
@@ -60,6 +70,11 @@ class AppController extends Controller
             return $notifications;
         }
         return array();
+    }
+
+    public function powerbi(Request $request)
+    {
+        return User::all();
     }
 
     public function debug(ElasticSearchService $elasticSearchService)

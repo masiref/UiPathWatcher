@@ -43,7 +43,7 @@ class DashboardClientController extends Controller
         $closedAlerts = Alert::whereHas('watchedAutomatedProcess', function($query) use($client) {
             $query->where('client_id', $client->id);
         })->where(function ($query) {
-            $query->where('closed', true)->where('parent_id', null);
+            $query->where('closed', true)->where('parent_id', null)->orderByDesc('created_at');
         })->get();
         $clients = Client::all();
         $robotTools = UiPathRobotTool::all();
@@ -52,7 +52,7 @@ class DashboardClientController extends Controller
             'page' => 'dashboard.client.index.' . $client->id,
             'client' => $client,
             'pendingAlerts' => $pendingAlerts,
-            'closedAlerts' => $closedAlerts,
+            'closedAlerts' => $closedAlerts->take(env('APP_CLOSED_ALERTS_LIMIT', 100)),
             'orchestratorsCount' => UiPathOrchestrator::all()->count(),
             'clients' => $clients,
             'clientsCount' => $clients->count(),
@@ -82,7 +82,7 @@ class DashboardClientController extends Controller
         })->where(function ($query) use($closed) {
             $query->where('closed', $closed);
             if ($closed) {
-                $query->where('parent_id', null);
+                $query->where('parent_id', null)->orderByDesc('created_at')->take(env('APP_CLOSED_ALERTS_LIMIT', 100));
             }
         })->get();
         return view('dashboard.alert.table')

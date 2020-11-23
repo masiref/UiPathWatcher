@@ -36,7 +36,7 @@ class DashboardController extends Controller
     public function index()
     {
         $pendingAlerts = Alert::all()->where('closed', false);
-        $closedAlerts = Alert::all()->where('closed', true)->where('parent', null);
+        $closedAlerts = Alert::all()->where('closed', true)->where('parent', null)->sortByDesc('created_at');
         $clients = Client::all();
         $robotTools = UiPathRobotTool::all();
 
@@ -44,7 +44,7 @@ class DashboardController extends Controller
             'page' => 'dashboard.index',
             'orchestratorsCount' => UiPathOrchestrator::all()->count(),
             'pendingAlerts' => $pendingAlerts,
-            'closedAlerts' => $closedAlerts,
+            'closedAlerts' => $closedAlerts->take(env('APP_CLOSED_ALERTS_LIMIT', 100)),
             'clients' => $clients,
             'clientsCount' => $clients->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
@@ -166,9 +166,9 @@ class DashboardController extends Controller
      */
     public function alertTable(Request $request, $closed, $id)
     {
-        $alerts = Alert::all()->where('closed', $closed);
+        $alerts = Alert::all()->where('closed', $closed)->sortByDesc('created_at');
         if ($closed) {
-            $alerts = $alerts->where('parent', null);
+            $alerts = $alerts->where('parent', null)->take(env('APP_CLOSED_ALERTS_LIMIT', 100));
         }
         return view('dashboard.alert.table')
             ->with('alerts', $alerts)
