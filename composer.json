@@ -13,6 +13,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "cloudcreativity/laravel-json-api": "1.7.0",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^2.0",
@@ -21,7 +22,7 @@
         "jeremykenedy/laravel-users": "^4.2",
         "laravel-frontend-presets/bulma": "^3.0",
         "laravel/framework": "^6.2",
-        "laravel/passport": "^8.4",
+        "laravel/passport": "8.4.0",
         "laravel/tinker": "^2.0",
         "nesbot/carbon": "^2.30"
     },

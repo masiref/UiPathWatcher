@@ -133,30 +133,23 @@ class CovertTest extends TestCase
                 'SERVER_NAME' => 'dunglas.fr',
                 'SERVER_PORT' => null,
                 'HTTP_X_SYMFONY' => '2.8',
-                'REQUEST_URI' => '/testCreateRequest?foo=1&bar%5Bbaz%5D=42',
-                'QUERY_STRING' => 'foo=1&bar%5Bbaz%5D=42',
+                'REQUEST_URI' => '/testCreateRequest?bar[baz]=42&foo=1',
+                'QUERY_STRING' => 'foo=1&bar[baz]=42',
             ],
             'Content'
         );
 
-        $psr7Requests = [
-            (new Psr7Request('POST', 'http://tnyholm.se/foo/?bar=biz'))
-                ->withQueryParams(['bar' => 'biz']),
-            new Psr7Request('GET', 'https://hey-octave.com/'),
-            new Psr7Request('GET', 'https://hey-octave.com:443/'),
-            new Psr7Request('GET', 'https://hey-octave.com:4242/'),
-            new Psr7Request('GET', 'http://hey-octave.com:80/'),
-        ];
+        $psr7Request = (new Psr7Request('POST', 'http://tnyholm.se/foo/?bar=biz'))
+            ->withQueryParams(['bar' => 'biz']);
 
         $nyholmFactory = new Psr17Factory();
         $psr17Factory = new PsrHttpFactory($nyholmFactory, $nyholmFactory, $nyholmFactory, $nyholmFactory);
         $symfonyFactory = new HttpFoundationFactory();
 
-        return array_merge([
+        return [
             [$sfRequest, $psr17Factory, $symfonyFactory],
-        ], array_map(function ($psr7Request) use ($symfonyFactory, $psr17Factory) {
-            return [$psr7Request, $symfonyFactory, $psr17Factory];
-        }, $psr7Requests));
+            [$psr7Request, $symfonyFactory, $psr17Factory],
+        ];
     }
 
     /**

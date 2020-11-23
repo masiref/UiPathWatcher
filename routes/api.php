@@ -17,3 +17,12 @@ Route::middleware('api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+JsonApi::register('default')->routes(function ($api) {
+    $api->resource('alerts');
+    $api->resource('alert-triggers');
+    $api->resource('alert-trigger-definitions');
+    $api->resource('watched-automated-processes');
+    $api->resource('clients');
+    $api->resource('orchestrators');
+    $api->resource('users');
+});

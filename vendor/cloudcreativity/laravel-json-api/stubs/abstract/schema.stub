@@ -1,0 +1,34 @@
+<?php
+
+namespace DummyNamespace;
+
+use Neomerx\JsonApi\Schema\SchemaProvider;
+
+class DummyClass extends SchemaProvider
+{
+
+    /**
+     * @var string
+     */
+    protected $resourceType = 'dummyResourceType';
+
+    /**
+     * @param $resource
+     *      the domain record being serialized.
+     * @return string
+     */
+    public function getId($resource)
+    {
+        // TODO
+    }
+
+    /**
+     * @param $resource
+     *      the domain record being serialized.
+     * @return array
+     */
+    public function getAttributes($resource)
+    {
+        // TODO
+    }
+}

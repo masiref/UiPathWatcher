@@ -117,11 +117,9 @@ class Token extends Model
     {
         $parts = explode(':', $scope);
 
-        $partsCount = count($parts);
-
         $scopes = [];
 
-        for ($i = 1; $i <= $partsCount; $i++) {
+        for ($i = 0; $i <= count($parts); $i++) {
             $scopes[] = implode(':', array_slice($parts, 0, $i));
         }
 

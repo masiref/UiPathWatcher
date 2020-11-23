@@ -2,17 +2,46 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.4.1 - 2020-09-03
+## 2.5.0 - 2020-11-18
 
+### Added
+
+- [#46](https://github.com/laminas/laminas-diactoros/pull/46) adds the class `Laminas\Diactoros\Exception\RuntimeException`.
+
+- [#46](https://github.com/laminas/laminas-diactoros/pull/46) adds support for PHP 8.
+
+### Changed
+
+- [#46](https://github.com/laminas/laminas-diactoros/pull/46) changes the exception thrown by `Laminas\Diactoros\Stream::setStream()` when an error occurs opening a stream resource. Previously, it would throw a `Laminas\Diactoros\Exception\InvalidArgumentException`; it now throws `Laminas\Diactoros\Exception\RuntimeException`. This was done to comply with PSR-7 integration test suites, which test behavior of PSR-7 implementations against the specification.
+
+### Removed
+
+- [#46](https://github.com/laminas/laminas-diactoros/pull/46) removes support for PHP versions prior to 7.3.
 
 
 -----
 
+### Release Notes for [2.5.0](https://github.com/laminas/laminas-diactoros/milestone/5)
+
+Feature release (minor)
+
+### 2.5.0
+
+- Total issues resolved: **0**
+- Total pull requests resolved: **2**
+- Total contributors: **2**
+
+#### Documentation,Enhancement,hacktoberfest-accepted
+
+ - [56: Update documentation example about ServerRequestFactory::fromGlobals().](https://github.com/laminas/laminas-diactoros/pull/56) thanks to @maurobonfietti
+
+#### Enhancement
+
+ - [46: Allow installation on PHP 8.](https://github.com/laminas/laminas-diactoros/pull/46) thanks to @ADmad
+
+## 2.4.1 - 2020-09-03
+
 ### Release Notes for [2.4.1](https://github.com/laminas/laminas-diactoros/milestone/6)
-
-2.4.x bugfix release (patch)
-
-### 2.4.1
 
 - Total issues resolved: **0**
 - Total pull requests resolved: **1**
@@ -21,28 +50,23 @@ All notable changes to this project will be documented in this file, in reverse 
 #### Bug
 
  - [50: gd is used by test suite](https://github.com/laminas/laminas-diactoros/pull/50) thanks to @remicollet
+ 
 ## 2.4.0 - 2020-09-02
-
------
 
 ### Release Notes for [2.4.0](https://github.com/laminas/laminas-diactoros/milestone/1)
 
 Feature release (minor)
 
-### 2.4.0
-
 - Total issues resolved: **0**
 - Total pull requests resolved: **2**
 - Total contributors: **2**
-
-
-
 
  - [49: Merge release 2.3.2 into 2.4.x](https://github.com/laminas/laminas-diactoros/pull/49) thanks to @github-actions[bot]
 
 #### Enhancement
 
  - [45: Allow Streams to be instantiated using GD resources](https://github.com/laminas/laminas-diactoros/pull/45) thanks to @settermjd
+ 
 ## 2.3.2 - 2020-09-02
 
 ### Added
