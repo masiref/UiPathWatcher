@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class AlertTrigger extends Model
 {
@@ -20,13 +21,16 @@ class AlertTrigger extends Model
     public function setDeleted($deleted = true)
     {
         $this->deleted = $deleted;
+        $this->deleted_at = Carbon::now();
         if ($deleted) {
             $this->active = false;
         }
         foreach ($this->definitions as $definition) {
             $definition->deleted = $deleted;
+            $definition->deleted_at = Carbon::now();
             foreach ($definition->rules as $rule) {
                 $rule->deleted = $deleted;
+                $rule->deleted_at = Carbon::now();
                 $rule->save();
             }
             $definition->save();

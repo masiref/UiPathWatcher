@@ -35,7 +35,7 @@ class Schema extends SchemaProvider
             'level' => $resource->level,
             'rank' => $resource->rank,
             'deleted' => $resource->deleted,
-            'deleted_at' => $resource->deleted_at,
+            'deleted-at' => $resource->deleted_at,
             'description' => $resource->description,
             'created-at' => $resource->created_at->toAtomString()
         ];
