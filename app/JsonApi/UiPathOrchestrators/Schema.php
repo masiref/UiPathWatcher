@@ -1,6 +1,6 @@
 <?php
 
-namespace App\JsonApi\Orchestrators;
+namespace App\JsonApi\UiPathOrchestrators;
 
 use Neomerx\JsonApi\Schema\SchemaProvider;
 
@@ -10,7 +10,7 @@ class Schema extends SchemaProvider
     /**
      * @var string
      */
-    protected $resourceType = 'orchestrators';
+    protected $resourceType = 'ui-path-orchestrators';
 
     /**
      * @param $resource

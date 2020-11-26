@@ -1,6 +1,6 @@
 <?php
 
-namespace App\JsonApi\Orchestrators;
+namespace App\JsonApi\UiPathOrchestrators;
 
 use CloudCreativity\LaravelJsonApi\Eloquent\AbstractAdapter;
 use CloudCreativity\LaravelJsonApi\Pagination\StandardStrategy;

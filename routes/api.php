@@ -22,8 +22,12 @@ JsonApi::register('default')->routes(function ($api) {
     $api->resource('alert-categories')->only('index', 'read');
     $api->resource('alert-triggers')->only('index', 'read');
     $api->resource('alert-trigger-definitions')->only('index', 'read');
+    $api->resource('alert-trigger-rules')->only('index', 'read');
     $api->resource('watched-automated-processes')->only('index', 'read');
     $api->resource('clients')->only('index', 'read');
-    $api->resource('orchestrators')->only('index', 'read');
+    $api->resource('ui-path-orchestrators')->only('index', 'read');
+    $api->resource('ui-path-robots')->only('index', 'read');
+    $api->resource('ui-path-processes')->only('index', 'read');
+    $api->resource('ui-path-queues')->only('index', 'read');
     $api->resource('users')->only('index', 'read');
 });
