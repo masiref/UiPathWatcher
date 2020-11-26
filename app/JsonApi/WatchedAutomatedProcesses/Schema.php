@@ -46,6 +46,9 @@ class Schema extends SchemaProvider
             'running-period-sunday' => $resource->running_period_sunday,
             'running-period-time-from' => $resource->running_period_time_from,
             'running-period-time-until' => $resource->running_period_time_until,
+            'robots' => $resource->robots->pluck('id'),
+            'processes' => $resource->processes->pluck('id'),
+            'queues' => $resource->queues->pluck('id'),
             'created-at' => $resource->created_at->toAtomString()
         ];
     }
