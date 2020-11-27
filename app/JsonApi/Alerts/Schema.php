@@ -44,6 +44,7 @@ class Schema extends SchemaProvider
             'auto-closed' => $resource->auto_closed,
             'alive' => $resource->alive,
             'cleaned' => $resource->cleaned,
+            'messages' => $resource->messages,
             'revision-started-at' => $resource->revision_started_at,
             'closed-at' => $resource->closed_at,
             'latest-heartbeat-at' => $resource->latest_heartbeat_at,
