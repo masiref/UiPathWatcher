@@ -44,7 +44,7 @@ class Schema extends SchemaProvider
             'auto-closed' => $resource->auto_closed,
             'alive' => $resource->alive,
             'cleaned' => $resource->cleaned,
-            'messages' => is_array($resource->messages) ? $resource->messages : null,
+            'messages' => is_array($resource->messages) && count($resource->messages) > 0 ? $resource->messages[0] : null,
             'revision-started-at' => $resource->revision_started_at,
             'closed-at' => $resource->closed_at,
             'latest-heartbeat-at' => $resource->latest_heartbeat_at,
