@@ -14,6 +14,7 @@ use App\AlertTrigger;
 use App\Alert;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class ProcessAlertTriggers implements ShouldQueue
 {
@@ -46,7 +47,12 @@ class ProcessAlertTriggers implements ShouldQueue
             // get current date
             $now = Carbon::now();
 
+            Log::info('Starting processing of alert triggers');
+
             foreach ($triggers as $trigger) {
+                
+                Log::info("Processing alert trigger {$trigger->id}");
+
                 // get watched automated process attached to trigger
                 $wap = $trigger->watchedAutomatedProcess;
 
@@ -90,6 +96,8 @@ class ProcessAlertTriggers implements ShouldQueue
 
                         // if all rules are verified
                         if ($verified) {
+                            
+                            Log::info("All rules are verified for definition {$definition->id}");
 
                             $alertCreated = false;
 
@@ -100,6 +108,9 @@ class ProcessAlertTriggers implements ShouldQueue
                                 if (!$latestClosedAlert ||
                                     ($latestClosedAlert && Carbon::createFromFormat('Y-m-d H:i:s', $latestClosedAlert->closed_at)->diffInMinutes(Carbon::now()) > env('APP_ALERT_DELAY_TO_TRIGGER_AFTER_CLOSING'))
                                 ) {
+                                    
+                                    Log::info("Creation of a new alert for definition {$definition->id} of trigger {$trigger->id}");
+
                                     $alert = Alert::create([
                                         'alert_trigger_id' => $trigger->id,
                                         'alert_trigger_definition_id' => $definition->id,
@@ -109,6 +120,9 @@ class ProcessAlertTriggers implements ShouldQueue
                                     $alertCreated = true;
                                 }
                             } elseif ($existingAlert->definition->level !== $definition->level) {
+                                
+                                Log::info("Creation of a new alert and closing ancestor {$existingAlert->id} for definition {$definition->id} of trigger {$trigger->id}");
+
                                 // if existing alert has not same definition level
                                 // creation of a new alert with existing one information
                                 $alert = Alert::create([
@@ -133,6 +147,9 @@ class ProcessAlertTriggers implements ShouldQueue
                                     'parent_id' => $alert->id
                                 ]);
                             } else {
+                                    
+                                Log::info("Updating alert {$existingAlert->id} heartbeat");
+                                
                                 // alert of same definition level => update heartbeat
                                 $existingMessages = $existingAlert->messages;
                                 $messages  = array_merge($messages, $existingMessages);
@@ -150,20 +167,30 @@ class ProcessAlertTriggers implements ShouldQueue
                             // no need to check other definitions
                             break;
                         } else {
+                                    
+                            Log::info("At least one rule is not verified for definition {$definition->id}");
+
                             // if existing opened alert not alive for more than 5 minutes close it
                             if ($existingAlert) {
                                 $date = Carbon::createFromFormat('Y-m-d H:i:s', $existingAlert->latest_heartbeat_at ?? $existingAlert->created_at);
                                 $delay = $date->diffInMinutes(Carbon::now());
+                                $delayWhenAlertSilent = env('APP_ALERT_LIFETTIME_WHEN_SILENT');
 
                                 if ($delay > env('APP_ALERT_LIFETTIME_WHEN_SILENT') && !$existingAlert->alive) {
+                                    
+                                    Log::info("Closing alert {$existingAlert->id} because of no applicable definition");
+                                    
                                     $existingAlert->update([
                                         'closed' => true,
                                         'closed_at' => Carbon::now(),
-                                        'closing_description' => 'there is no applicable definition anymore after 5 minutes',
+                                        'closing_description' => "there is no applicable definition anymore after {$delayWhenAlertSilent} minutes",
                                         'auto_closed' => true,
                                         'under_revision' => false
                                     ]);
                                 } else {
+                                    
+                                    Log::info("Killing alert {$existingAlert->id} because not alive anymore");
+
                                     $existingAlert->update([
                                         'alive' => false
                                     ]);
@@ -172,6 +199,9 @@ class ProcessAlertTriggers implements ShouldQueue
                         }
                     }
                 } else {
+                                    
+                    Log::info("Closing alert {$alert->id} because running period is over");
+
                     // running period is over
                     foreach ($trigger->alerts->where('closed', false)->where('parent', null)->where('alive', true) as $alert) {
                         $existingMessages = $alert->messages;
@@ -189,6 +219,8 @@ class ProcessAlertTriggers implements ShouldQueue
                     }
                 }
             }
+            
+            Log::info('End processing of alert triggers');
         }
     }
 }
