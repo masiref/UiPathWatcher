@@ -28,17 +28,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // local
-        $schedule->job(new ProcessAlertTriggers)->everyMinute()->environments(['local']);
-        $schedule->job(new UpdateUiPathRobotsStatuses)->everyMinute()->environments(['local']);
-        $schedule->job(new MarkTooOldNotificationsAsRead)->everyMinute()->environments(['local']);
-        $schedule->job(new UpdateIgnoredAlertTriggers)->everyMinute()->environments(['local']);
-
-        // staging & production
-        $schedule->job(new ProcessAlertTriggers)->everyFiveMinutes()->environments(['staging', 'production']);
-        $schedule->job(new UpdateUiPathRobotsStatuses)->everyFifteenMinutes()->environments(['staging', 'production']);
-        $schedule->job(new MarkTooOldNotificationsAsRead)->everyFifteenMinutes()->environments(['staging', 'production']);
-        $schedule->job(new UpdateIgnoredAlertTriggers)->everyFifteenMinutes()->environments(['staging', 'production']);
+        if (env('APP_SCHEDULER', 'internal') === 'external') {
+            $schedule->job(new ProcessAlertTriggers)->everyMinute()->withoutOverlapping();
+            $schedule->job(new UpdateUiPathRobotsStatuses)->everyMinute()->withoutOverlapping();
+            $schedule->job(new MarkTooOldNotificationsAsRead)->everyMinute()->withoutOverlapping();
+            $schedule->job(new UpdateIgnoredAlertTriggers)->everyMinute()->withoutOverlapping();
+        } else {
+            $schedule->job(new ProcessAlertTriggers)->everyFiveMinutes()->withoutOverlapping();
+            $schedule->job(new UpdateUiPathRobotsStatuses)->everyFiveMinutes()->withoutOverlapping();
+            $schedule->job(new MarkTooOldNotificationsAsRead)->everyFiveMinutes()->withoutOverlapping();
+            $schedule->job(new UpdateIgnoredAlertTriggers)->everyFiveMinutes()->withoutOverlapping();
+        }
     }
 
     /**

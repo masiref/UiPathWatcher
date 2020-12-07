@@ -199,11 +199,11 @@ class ProcessAlertTriggers implements ShouldQueue
                         }
                     }
                 } else {
-                                    
-                    Log::info("Closing alert {$alert->id} because running period is over");
-
                     // running period is over
                     foreach ($trigger->alerts->where('closed', false)->where('parent', null)->where('alive', true) as $alert) {
+
+                        Log::info("Closing alert {$alert->id} because running period is over");
+
                         $existingMessages = $alert->messages;
                         $heartbeat = Carbon::now();
                         $messages  = array_merge([
