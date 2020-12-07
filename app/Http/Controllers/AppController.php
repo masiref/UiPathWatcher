@@ -72,14 +72,11 @@ class AppController extends Controller
         return array();
     }
 
-    public function powerbi(Request $request)
-    {
-        return User::all();
-    }
-
     public function debug(ElasticSearchService $elasticSearchService)
     {
-        return "debug!";
+        $now = Carbon::now();
+        $date = Carbon::createFromFormat('Y-m-d H:i:s', '2020-11-30 08:00:00');
+        return $now->diffInMinutes($date);
     }
 
     public function debugRule($id = 1, AlertTriggerService $service)

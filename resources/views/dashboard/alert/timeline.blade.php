@@ -147,6 +147,7 @@
                             <p class="p-b-sm has-text-{{ $ancestor->definition->level }}">
                                 <span class="icon"><i class="fas fa-dragon"></i></span>
                                 Definition #<span class="has-text-weight-semibold">{{ str_pad($ancestor->definition->id, 4, '0', STR_PAD_LEFT) }}</span>
+                                {{ $ancestor->definition->description ? ' / ' . $ancestor->definition->description : '' }}
                             </p>
                             <table class="table is-bordered is-striped is-hoverable is-fullwidth">
                                 <thead>

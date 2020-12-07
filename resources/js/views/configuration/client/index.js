@@ -159,7 +159,7 @@ const checkForm = e => {
     const orchestratorApiUserUsernameInputValid = !(orchestratorApiUserUsernameInput.value.trim() === '');
     _base.toggleSuccessDangerState(orchestratorApiUserUsernameInput, orchestratorApiUserUsernameInputValid);
 
-    const orchestratorApiUserPasswordInputValid = !(orchestratorApiUserPasswordInput.value.trim() === '');
+    const orchestratorApiUserPasswordInputValid = !(orchestratorApiUserPasswordInput.value.trim() === '') || currentMode === 'edit';
     _base.toggleSuccessDangerState(orchestratorApiUserPasswordInput, orchestratorApiUserPasswordInputValid);
 
     const elasticSearchUrlInputValid = !(elasticSearchUrlInput.value.trim() === '' || !_base.validURL(elasticSearchUrlInput.value));
@@ -168,8 +168,15 @@ const checkForm = e => {
     const elasticSearchIndexInputValid = !(elasticSearchIndexInput.value.trim() === '');
     _base.toggleSuccessDangerState(elasticSearchIndexInput, elasticSearchIndexInputValid);
 
-    _base.toggleSuccessDangerState(elasticSearchApiUserUsernameInput, true);
-    _base.toggleSuccessDangerState(elasticSearchApiUserPasswordInput, true);
+    _base.toggleSuccessDangerState(elasticSearchApiUserUsernameInput,
+        elasticSearchApiUserPasswordInput.value.trim() === ''
+        || !(elasticSearchApiUserUsernameInput.value.trim() === '') && !(elasticSearchApiUserPasswordInput.value.trim() === '')
+    );
+    _base.toggleSuccessDangerState(elasticSearchApiUserPasswordInput,
+        elasticSearchApiUserUsernameInput.value.trim() === ''
+        || !(elasticSearchApiUserUsernameInput.value.trim() === '') && !(elasticSearchApiUserPasswordInput.value.trim() === '')
+        || currentMode === 'edit'
+    );
     
     const formValid = nameInputValid && codeInputValid && orchestratorSelectValid
          && orchestratorTenantInputValid && orchestratorApiUserUsernameInputValid

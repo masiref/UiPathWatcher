@@ -68,7 +68,7 @@
         <div class="field">
             <p class="control is-expanded has-icons-left">
                 <input class="input orchestrator-api-user-password" type="password" placeholder="Password"
-                    value="{{ ($client ?? false) ? $client->ui_path_orchestrator_api_user_password : '' }}">
+                    value="">
                 <span class="icon is-small is-left">
                     <i class="fas fa-key"></i>
                 </span>
@@ -113,7 +113,7 @@
         <div class="field">
             <p class="control is-expanded has-icons-left">
                 <input class="input elastic-search-api-user-password" type="password" placeholder="Password"
-                    value="{{ ($client ?? false) ? $client->elastic_search_api_user_password : '' }}">
+                    value="">
                 <span class="icon is-small is-left">
                     <i class="fas fa-key"></i>
                 </span>

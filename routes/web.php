@@ -27,7 +27,6 @@ Route::get('/debug/rule/{rule?}', 'AppController@debugRule')->name('debugRule');
 Route::post('/app/shutdown-alert-triggers', 'AppController@shutdownAlertTriggers')->name('app.shutdown-alert-triggers');
 Route::post('/app/reactivate-alert-triggers', 'AppController@reactivateAlertTriggers')->name('app.reactivate-alert-triggers');
 Route::get('/app/notifications', 'AppController@notifications')->name('app.notifications');
-//Route::get('/app/datasources/powerbi', 'AppController@powerbi')->name('app.datasources.powerbi');
 
 // Home
 Route::get('/', 'DashboardController@index')->name('dashboard');

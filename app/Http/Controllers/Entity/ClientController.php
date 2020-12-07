@@ -44,7 +44,19 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        if ($client->update($request->all())) {
+        $exceptions = array();
+        $orchestratorApiUserPassword = $request->get('ui_path_orchestrator_api_user_password');
+        if (!$orchestratorApiUserPassword) {
+            array_push($exceptions, 'ui_path_orchestrator_api_user_password');
+        }
+        $elasticSearchApiUserUsername = $request->get('elastic_search_api_user_username');
+        if ($elasticSearchApiUserUsername) {
+            $elasticSearchApiUserPassword = $request->get('elastic_search_api_user_password');
+            if (!$elasticSearchApiUserPassword) {
+                array_push($exceptions, 'elastic_search_api_user_password');
+            }
+        }
+        if ($client->update($request->except($exceptions))) {
             return $client;
         }
         return null;
