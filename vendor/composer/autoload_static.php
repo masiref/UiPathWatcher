@@ -49,6 +49,7 @@ class ComposerStaticInit3c0e239473bc1657e0f76557629aa2be
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         'b6ec61354e97f32c0ae683041c78392a' => __DIR__ . '/..' . '/scrivo/highlight.php/HighlightUtilities/functions.php',
+        '80b57af2753a8810f57757282c27fe94' => __DIR__ . '/..' . '/alkhachatryan/laravel-web-console/helpers.php',
         '7c2aa1c225ac1b68f2a3196e894faa92' => __DIR__ . '/..' . '/cloudcreativity/laravel-json-api/helpers.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
     );
@@ -203,6 +204,7 @@ class ComposerStaticInit3c0e239473bc1657e0f76557629aa2be
         array (
             'Asm89\\Stack\\' => 12,
             'App\\' => 4,
+            'Alkhachatryan\\LaravelWebConsole\\' => 32,
         ),
     );
 
@@ -570,6 +572,10 @@ class ComposerStaticInit3c0e239473bc1657e0f76557629aa2be
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+        'Alkhachatryan\\LaravelWebConsole\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/alkhachatryan/laravel-web-console/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -594,6 +600,10 @@ class ComposerStaticInit3c0e239473bc1657e0f76557629aa2be
     );
 
     public static $classMap = array (
+        'Alkhachatryan\\LaravelWebConsole\\BaseJsonRpcServer' => __DIR__ . '/..' . '/alkhachatryan/laravel-web-console/src/BaseJsonRpcServer.php',
+        'Alkhachatryan\\LaravelWebConsole\\LaravelWebConsole' => __DIR__ . '/..' . '/alkhachatryan/laravel-web-console/src/LaravelWebConsole.php',
+        'Alkhachatryan\\LaravelWebConsole\\LaravelWebConsoleServiceProvider' => __DIR__ . '/..' . '/alkhachatryan/laravel-web-console/src/LaravelWebConsoleServiceProvider.php',
+        'Alkhachatryan\\LaravelWebConsole\\WebConsoleRPCServer' => __DIR__ . '/..' . '/alkhachatryan/laravel-web-console/src/WebConsoleRPCServer.php',
         'App\\Alert' => __DIR__ . '/../..' . '/app/Alert.php',
         'App\\AlertCategory' => __DIR__ . '/../..' . '/app/AlertCategory.php',
         'App\\AlertTrigger' => __DIR__ . '/../..' . '/app/AlertTrigger.php',
@@ -638,6 +648,30 @@ class ComposerStaticInit3c0e239473bc1657e0f76557629aa2be
         'App\\Jobs\\ProcessAlertTriggers' => __DIR__ . '/../..' . '/app/Jobs/ProcessAlertTriggers.php',
         'App\\Jobs\\UpdateIgnoredAlertTriggers' => __DIR__ . '/../..' . '/app/Jobs/UpdateIgnoredAlertTriggers.php',
         'App\\Jobs\\UpdateUiPathRobotsStatuses' => __DIR__ . '/../..' . '/app/Jobs/UpdateUiPathRobotsStatuses.php',
+        'App\\JsonApi\\AlertCategories\\Adapter' => __DIR__ . '/../..' . '/app/JsonApi/AlertCategories/Adapter.php',
+        'App\\JsonApi\\AlertCategories\\Schema' => __DIR__ . '/../..' . '/app/JsonApi/AlertCategories/Schema.php',
+        'App\\JsonApi\\AlertTriggerDefinitions\\Adapter' => __DIR__ . '/../..' . '/app/JsonApi/AlertTriggerDefinitions/Adapter.php',
+        'App\\JsonApi\\AlertTriggerDefinitions\\Schema' => __DIR__ . '/../..' . '/app/JsonApi/AlertTriggerDefinitions/Schema.php',
+        'App\\JsonApi\\AlertTriggerRules\\Adapter' => __DIR__ . '/../..' . '/app/JsonApi/AlertTriggerRules/Adapter.php',
+        'App\\JsonApi\\AlertTriggerRules\\Schema' => __DIR__ . '/../..' . '/app/JsonApi/AlertTriggerRules/Schema.php',
+        'App\\JsonApi\\AlertTriggers\\Adapter' => __DIR__ . '/../..' . '/app/JsonApi/AlertTriggers/Adapter.php',
+        'App\\JsonApi\\AlertTriggers\\Schema' => __DIR__ . '/../..' . '/app/JsonApi/AlertTriggers/Schema.php',
+        'App\\JsonApi\\Alerts\\Adapter' => __DIR__ . '/../..' . '/app/JsonApi/Alerts/Adapter.php',
+        'App\\JsonApi\\Alerts\\Schema' => __DIR__ . '/../..' . '/app/JsonApi/Alerts/Schema.php',
+        'App\\JsonApi\\Clients\\Adapter' => __DIR__ . '/../..' . '/app/JsonApi/Clients/Adapter.php',
+        'App\\JsonApi\\Clients\\Schema' => __DIR__ . '/../..' . '/app/JsonApi/Clients/Schema.php',
+        'App\\JsonApi\\UiPathOrchestrators\\Adapter' => __DIR__ . '/../..' . '/app/JsonApi/UiPathOrchestrators/Adapter.php',
+        'App\\JsonApi\\UiPathOrchestrators\\Schema' => __DIR__ . '/../..' . '/app/JsonApi/UiPathOrchestrators/Schema.php',
+        'App\\JsonApi\\UiPathProcesses\\Adapter' => __DIR__ . '/../..' . '/app/JsonApi/UiPathProcesses/Adapter.php',
+        'App\\JsonApi\\UiPathProcesses\\Schema' => __DIR__ . '/../..' . '/app/JsonApi/UiPathProcesses/Schema.php',
+        'App\\JsonApi\\UiPathQueues\\Adapter' => __DIR__ . '/../..' . '/app/JsonApi/UiPathQueues/Adapter.php',
+        'App\\JsonApi\\UiPathQueues\\Schema' => __DIR__ . '/../..' . '/app/JsonApi/UiPathQueues/Schema.php',
+        'App\\JsonApi\\UiPathRobots\\Adapter' => __DIR__ . '/../..' . '/app/JsonApi/UiPathRobots/Adapter.php',
+        'App\\JsonApi\\UiPathRobots\\Schema' => __DIR__ . '/../..' . '/app/JsonApi/UiPathRobots/Schema.php',
+        'App\\JsonApi\\Users\\Adapter' => __DIR__ . '/../..' . '/app/JsonApi/Users/Adapter.php',
+        'App\\JsonApi\\Users\\Schema' => __DIR__ . '/../..' . '/app/JsonApi/Users/Schema.php',
+        'App\\JsonApi\\WatchedAutomatedProcesses\\Adapter' => __DIR__ . '/../..' . '/app/JsonApi/WatchedAutomatedProcesses/Adapter.php',
+        'App\\JsonApi\\WatchedAutomatedProcesses\\Schema' => __DIR__ . '/../..' . '/app/JsonApi/WatchedAutomatedProcesses/Schema.php',
         'App\\Library\\Services\\AlertTriggerService' => __DIR__ . '/../..' . '/app/Library/Services/AlertTriggerService.php',
         'App\\Library\\Services\\ElasticSearchService' => __DIR__ . '/../..' . '/app/Library/Services/ElasticSearchService.php',
         'App\\Library\\Services\\UiPathOrchestratorService' => __DIR__ . '/../..' . '/app/Library/Services/UiPathOrchestratorService.php',

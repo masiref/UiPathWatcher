@@ -48,6 +48,7 @@ return array(
     '6124b4c8570aa390c21fafd04a26c69f' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
     'decc78cc4436b1292c6c0d151b19445c' => $vendorDir . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
     'b6ec61354e97f32c0ae683041c78392a' => $vendorDir . '/scrivo/highlight.php/HighlightUtilities/functions.php',
+    '80b57af2753a8810f57757282c27fe94' => $vendorDir . '/alkhachatryan/laravel-web-console/helpers.php',
     '7c2aa1c225ac1b68f2a3196e894faa92' => $vendorDir . '/cloudcreativity/laravel-json-api/helpers.php',
     'ed962a97bd972bc82007176b647d4e36' => $vendorDir . '/facade/ignition/src/helpers.php',
 );

@@ -96,4 +96,5 @@ return array(
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Asm89\\Stack\\' => array($vendorDir . '/asm89/stack-cors/src'),
     'App\\' => array($baseDir . '/app'),
+    'Alkhachatryan\\LaravelWebConsole\\' => array($vendorDir . '/alkhachatryan/laravel-web-console/src'),
 );

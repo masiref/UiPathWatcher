@@ -13,6 +13,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "alkhachatryan/laravel-web-console": "^3.3",
         "cloudcreativity/laravel-json-api": "1.7.0",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",

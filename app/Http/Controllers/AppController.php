@@ -22,6 +22,7 @@ use App\User;
 use App\Client;
 use App\UiPathRobot;
 use App\WatchedAutomatedProcess;
+use Alkhachatryan\LaravelWebConsole\LaravelWebConsole;
 
 class AppController extends Controller
 {
@@ -87,5 +88,10 @@ class AppController extends Controller
         );
 
         return $alert;
+    }
+
+    public function debugConsole()
+    {
+        return LaravelWebConsole::show();
     }
 }

@@ -1,5 +1,64 @@
 [
     {
+        "name": "alkhachatryan/laravel-web-console",
+        "version": "3.3",
+        "version_normalized": "3.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/alkhachatryan/laravel-web-console.git",
+            "reference": "838fb1a0d92e3ffd5a4671517cf687b308a9db43"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://artifactory.mycloud.intranatixis.com/artifactory/api/composer/composer/vcs-dists/zip/alkhachatryan/laravel-web-console/838fb1a0d92e3ffd5a4671517cf687b308a9db43",
+            "reference": "838fb1a0d92e3ffd5a4671517cf687b308a9db43",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "~5.7.0|~5.8.0|^6.0|^7.0|^8.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "^1.1",
+            "orchestra/testbench": "~3.0",
+            "phpunit/phpunit": "~7.0|~8.0|~9.0",
+            "sempro/phpunit-pretty-print": "^1.0"
+        },
+        "time": "2020-10-23T23:53:06+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Alkhachatryan\\LaravelWebConsole\\LaravelWebConsoleServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "helpers.php"
+            ],
+            "psr-4": {
+                "Alkhachatryan\\LaravelWebConsole\\": "src/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Alexey Khachatryan",
+                "email": "info@khachatryan.org",
+                "homepage": "https://khachatryan.org"
+            }
+        ],
+        "description": "Web console for your Laravel application",
+        "homepage": "https://github.com/alkhachatryan/laravel-web-console",
+        "keywords": [
+            "LaravelWebConsole",
+            "laravel"
+        ]
+    },
+    {
         "name": "asm89/stack-cors",
         "version": "v2.0.1",
         "version_normalized": "2.0.1.0",
