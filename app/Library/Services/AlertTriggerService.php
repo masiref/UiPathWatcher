@@ -444,7 +444,7 @@ class AlertTriggerService {
                     $rightCount = $rightResult['count'];
                     $comparisonOperator = $rule->parameters['comparisonOperator'];
 
-                    if ($comparisonOperator === 'not-equal' && leftCount != $rightCount) {
+                    if ($comparisonOperator === 'not-equal' && $leftCount != $rightCount) {
                         $verified = true;
                         array_push($messages, [
                             "{$date->format('d/m/Y H:i:s')}",
