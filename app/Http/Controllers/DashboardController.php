@@ -106,7 +106,9 @@ class DashboardController extends Controller
 
                 case 'robots':
                 if ($client) {
-                    $value = UiPathRobot::where('ui_path_orchestrator_id', $client->orchestrator->id)->count();
+                    $value = UiPathRobot::whereHas('watchedAutomatedProcesses', function($query) use ($client) {
+                        $query->where('client_id', $client->id);
+                    })->get()->count();
                 } else {
                     $value = UiPathRobot::all()->count();
                 }

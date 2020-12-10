@@ -45,6 +45,9 @@ class DashboardClientController extends Controller
         })->where(function ($query) {
             $query->where('closed', true)->where('parent_id', null)->orderByDesc('created_at');
         })->get();
+        $robots = UiPathRobot::whereHas('watchedAutomatedProcesses', function($query) use ($client) {
+            $query->where('client_id', $client->id);
+        })->get();
         $clients = Client::all();
         $robotTools = UiPathRobotTool::all();
 
@@ -58,7 +61,7 @@ class DashboardClientController extends Controller
             'clientsCount' => $clients->count(),
             'watchedAutomatedProcessesCount' => WatchedAutomatedProcess::all()->count(),
             'clientWatchedAutomatedProcessesCount' => WatchedAutomatedProcess::where('client_id', $client->id)->count(),
-            'robotsCount' => UiPathRobot::where('ui_path_orchestrator_id', $client->orchestrator->id)->count(),
+            'robotsCount' => $robots->count(),
             'alertTriggersCount' => AlertTrigger::all()->where('deleted', false)->count(),
             'clientAlertTriggersCount' => AlertTrigger::whereHas('watchedAutomatedProcess', function($query) use($client) {
                 $query->where('client_id', $client->id);
