@@ -1,6 +1,7 @@
 import toastr from 'toastr';
 import bulmaSteps from 'bulma-steps';
 import bulmaCalendar from 'bulma-calendar';
+import bulmaCollapsible from '@creativebulma/bulma-collapsible';
 
 import Configuration from '../../../models/Configuration';
 import Client from '../../../models/Client';
@@ -327,6 +328,7 @@ const initEditForm = () => {
             }
         });
 
+        bulmaCollapsible.attach(formSection.querySelectorAll('.is-collapsible'));
         view.showEditForm();
 
         _base.clearLoader(document.querySelector(base.selectors.table));

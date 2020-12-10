@@ -44,7 +44,7 @@
             <div class="is-divider" data-content="DETAILED VIEW"></div>
             <div class="columns is-multiline">
                 @foreach($clients as $client)
-                    <div class="column is-12">
+                    <div class="column is-6">
                         @include('dashboard.client.element')
                     </div>
                 @endforeach

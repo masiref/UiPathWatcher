@@ -1,6 +1,7 @@
 import { strings, elements, selectors } from './base';
 import * as _base from '../../base';
 import bulmaCalendar from 'bulma-calendar';
+import bulmaCollapsible from '@creativebulma/bulma-collapsible';
 
 export const updateTable = markup => {
     const table = _base.update(
@@ -50,9 +51,11 @@ export const details = {
         form.querySelector(selectors.details.alertDefinition.count).innerHTML = count;
     },
     addDefinition: (form, markup) => {
-        form.querySelector(selectors.details.alertDefinition.list).appendChild(
-            _base.htmlToElement(markup)
-        );
+        var element = _base.htmlToElement(markup);
+        form.querySelector(selectors.details.alertDefinition.list).appendChild(element);
+        var collapsible = element.querySelector('.is-collapsible');
+        bulmaCollapsible.attach(collapsible);
+        collapsible.bulmaCollapsible('expand');
     },
     deleteDefinition: (form, alertDefinitionItem) => {
         const rank = parseInt(alertDefinitionItem.dataset.rank);
@@ -83,11 +86,7 @@ export const details = {
         const title = alertDefinitionItem.querySelector(selectors.details.alertDefinition.title);
         const titleIcon = alertDefinitionItem.querySelector(selectors.details.alertDefinition.titleIcon);
         _base.removeStates(alertDefinitionItem);
-        _base.removeStates(title);
-        _base.removeStates(titleIcon);
         alertDefinitionItem.classList.add(state);
-        title.classList.add(textState);
-        titleIcon.classList.add(textState);
     },
     updateDefinitionValidity: (alertDefinitionItem, valid) => {
         const titleIconRight = alertDefinitionItem.querySelector(selectors.details.alertDefinition.validityIcon);
@@ -99,8 +98,6 @@ export const details = {
             icon.classList.remove('fa-check-circle');
             icon.classList.add('fa-exclamation-circle');
         }
-        _base.removeStates(titleIconRight);
-        _base.toggleSuccessDangerState(titleIconRight, valid, true);
     },
     addRule: (alertDefinitionItem, markup) => {
         const ruleItem = alertDefinitionItem.querySelector(selectors.details.alertDefinition.rule.list).appendChild(
