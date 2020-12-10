@@ -55,7 +55,7 @@ export const details = {
         form.querySelector(selectors.details.alertDefinition.list).appendChild(element);
         var collapsible = element.querySelector('.is-collapsible');
         bulmaCollapsible.attach(collapsible);
-        collapsible.bulmaCollapsible('expand');
+        //collapsible.bulmaCollapsible('expand');
     },
     deleteDefinition: (form, alertDefinitionItem) => {
         const rank = parseInt(alertDefinitionItem.dataset.rank);
