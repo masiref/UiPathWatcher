@@ -190,7 +190,7 @@ class UiPathOrchestratorService {
             )['value'][0];
         } catch (\Exception $e) {
             $message = $e->getMessage();
-            $result = $this->getErrorResult("impossible to get state for $robot from $orchestrator: $message");
+            $result = $this->getErrorResult("impossible to get state for $robot from $robot->$orchestrator: $message");
         }
 
         return $result;
