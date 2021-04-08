@@ -28,10 +28,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->job(new ProcessAlertTriggers)->everyFiveMinutes();
-        $schedule->job(new UpdateUiPathRobotsStatuses)->everyFiveMinutes();
-        $schedule->job(new MarkTooOldNotificationsAsRead)->everyFiveMinutes();
-        $schedule->job(new UpdateIgnoredAlertTriggers)->everyFiveMinutes();
+        $schedule->job(new ProcessAlertTriggers)->everyMinute();
+        $schedule->job(new UpdateUiPathRobotsStatuses)->everyMinute();
+        $schedule->job(new MarkTooOldNotificationsAsRead)->everyMinute();
+        $schedule->job(new UpdateIgnoredAlertTriggers)->everyMinute();
     }
 
     /**
